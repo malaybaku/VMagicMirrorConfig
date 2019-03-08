@@ -1,4 +1,6 @@
-﻿namespace Baku.VMagicMirrorConfig
+﻿using System;
+
+namespace Baku.VMagicMirrorConfig
 {
     class UdpMessage
     {
@@ -27,6 +29,17 @@
         private UdpMessageFactory() { }
 
 
+        public UdpMessage Key(System.Windows.Forms.Keys key)
+            => new UdpMessage(nameof(Key), key.ToString());
+
+        public UdpMessage KeyDown(string keyName)
+            => new UdpMessage(nameof(KeyDown), keyName);
+
+        public UdpMessage MouseButton(string info)
+            => new UdpMessage(nameof(MouseButton), info);
+
+        public UdpMessage MouseMoved(int x, int y)
+            => new UdpMessage(nameof(MouseMoved), $"{x},{y}");
 
         public UdpMessage OpenVrmPreview(string filePath)
             => new UdpMessage(nameof(OpenVrmPreview), filePath);

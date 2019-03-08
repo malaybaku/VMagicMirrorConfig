@@ -1,12 +1,16 @@
-﻿using System.IO;
+﻿using System;
+using System.ComponentModel;
+using System.IO;
 using System.Windows;
 using Microsoft.Win32;
 
 namespace Baku.VMagicMirrorConfig
 {
-    public class MainWindowViewModel : ViewModelBase
+    public class MainWindowViewModel : ViewModelBase, IWindowViewModel
     {
-        internal UdpSender UdpSender { get; } = new UdpSender();
+        internal ModelInitializer Initializer { get; } = new ModelInitializer();
+        internal UdpSender UdpSender => Initializer.UdpSender;
+        internal InputChecker InputChecker => Initializer.InputChecker;
 
         //とりあえず設定ファイルとか無視して常にGBでスタートしましょう
         private ColorSelectViewModel _colorSelection { get; } = new ColorSelectViewModel(0, 255, 0);
@@ -22,6 +26,7 @@ namespace Baku.VMagicMirrorConfig
         private ActionCommand _openAboutWindowCommand;
         public ActionCommand OpenAboutWindowCommand
             => _openAboutWindowCommand ?? (_openAboutWindowCommand = new ActionCommand(OpenAboutWindow));
+
 
         private void LoadVrm()
         {
@@ -74,5 +79,23 @@ namespace Baku.VMagicMirrorConfig
         private void OpenAboutWindow()
             => new AboutWindow().ShowDialog();
 
+        public void Initialize()
+        {
+            if (Application.Current.MainWindow != null &&
+                !DesignerProperties.GetIsInDesignMode(Application.Current.MainWindow))
+            {
+                Initializer.Initialize();
+            }
+        }
+
+        public void Dispose()
+        {
+            Initializer.Dispose();
+        }
+    }
+
+    public interface IWindowViewModel : IDisposable
+    {
+        void Initialize();
     }
 }
