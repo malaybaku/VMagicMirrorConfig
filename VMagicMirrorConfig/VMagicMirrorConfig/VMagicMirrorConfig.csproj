@@ -57,6 +57,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Common\LineParseUtils.cs" />
     <Compile Include="Common\NotifiableBase.cs" />
     <Compile Include="Model\InputChecker.cs" />
     <Compile Include="Model\InputObserver\KeyboardHook.cs" />
@@ -65,16 +66,25 @@
     <Compile Include="Model\InputObserver\WindowsApiDef.cs" />
     <Compile Include="Model\ModelInitializer.cs" />
     <Compile Include="Model\UdpMessages.cs" />
-    <Compile Include="ViewModel\ColorSelectViewModel.cs" />
+    <Compile Include="ViewModel\BGSettingViewModel.cs" />
     <Compile Include="ViewModel\Infrastructure\ActionCommand.cs" />
+    <Compile Include="ViewModel\LayoutSettingViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\Infrastructure\ViewModelBase.cs" />
     <Compile Include="Model\UdpSender.cs" />
+    <Compile Include="ViewModel\StartupSettingViewModel.cs" />
+    <Compile Include="View\StartupSettingWindow.xaml.cs">
+      <DependentUpon>StartupSettingWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="View\AboutWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ColorPickerWindow.xaml">
+    <Page Include="View\BGSettingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\LayoutSettingWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -89,13 +99,20 @@
     <Compile Include="View\AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ColorPickerWindow.xaml.cs">
-      <DependentUpon>ColorPickerWindow.xaml</DependentUpon>
+    <Compile Include="View\BGSettingWindow.xaml.cs">
+      <DependentUpon>BGSettingWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\LayoutSettingWindow.xaml.cs">
+      <DependentUpon>LayoutSettingWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\StartupSettingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

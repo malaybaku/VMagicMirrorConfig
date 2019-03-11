@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vmm="clr-namespace:Baku.VMagicMirrorConfig"
         mc:Ignorable="d"
-        Title="VMagicMirror" Height="100" Width="400">
+        WindowStartupLocation="CenterScreen"
+        Title="VMagicMirror" Height="100" Width="500"
+        ResizeMode="NoResize">
     <Window.DataContext>
         <vmm:MainWindowViewModel/>
     </Window.DataContext>
@@ -20,16 +22,25 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Button Grid.Column="0"
-                Content="Load VRM" 
+                Content="VRMロード" 
                 Command="{Binding LoadVrmCommand}"
                 />
         <Button Grid.Column="1"
-                Content="BG Color" 
-                Command="{Binding SelectBGColorCommand}"
+                Content="背景色と光" 
+                Command="{Binding OpenBGSettingCommand}"
+                />
+        <Button Grid.Column="2"
+                Content="レイアウト" 
+                Command="{Binding OpenLayoutSettingCommand}"
                 />
         <Button Grid.Column="3"
+                Content="スタート時設定" 
+                Command="{Binding OpenStartupSettingCommand}"
+                />
+        <Button Grid.Column="4"
                 Content="About"
                 Command="{Binding OpenAboutWindowCommand}"
                 />

@@ -5,9 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Baku.VMagicMirrorConfig"
         mc:Ignorable="d"
-        Title="About VMagicMirror" Height="450" Width="600">
-    <ScrollViewer VerticalScrollBarVisibility="Auto" 
-                  HorizontalScrollBarVisibility="Disabled">
-        <!-- TODO: なんか書く or ライセンス文書を読み込んで表示する -->
-    </ScrollViewer>
+        WindowStartupLocation="CenterOwner"
+        Title="About VMagicMirror"
+        Height="100" Width="200"
+        ResizeMode="NoResize"
+        >
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Margin" Value="0,2"/>
+        </Style>
+    </Window.Resources>
+    <StackPanel HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+
+        <TextBlock Text="VMagicMirror ver0.1"/>
+        <TextBlock Text="Copyright (c) 2019 獏星(ばくすたー)"/>
+        <TextBlock ToolTip="https://github.com/malaybaku/VMagicMirror">
+            <Hyperlink Click="OnClickHyperLinkToGitHub">Source (GitHub)</Hyperlink> 
+        </TextBlock>
+
+    </StackPanel>
 </Window>
