@@ -39,17 +39,24 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Margin" Value="5"/>
         </Style>
+
+        <Style TargetType="CheckBox">
+            <Setter Property="Margin" Value="20,0"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
     </Window.Resources>
     <ScrollViewer VerticalScrollBarVisibility="Auto"
                   HorizontalScrollBarVisibility="Disabled"
                   >
         <StackPanel>
-            <TextBlock Text="キャラクターの体型"
+            <TextBlock Text="キャラクターの動き"
                        Style="{StaticResource HeaderText}"
                        />
     
-            <Grid Height="70" Margin="20,0">
+            <Grid Height="105" Margin="20,0">
                 <Grid.RowDefinitions>
+                    <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
@@ -83,6 +90,13 @@
                          Text="{Binding Value, ElementName=sliderWristToPalm}"
                          />
 
+                <CheckBox Grid.Row="2" Grid.Column="0"
+                          Grid.ColumnSpan="2"
+                          IsChecked="{Binding EnableTouchTyping}">
+                    <CheckBox.Content>
+                        <TextBlock Text="タッチタイピング風に視線を動かす"/>
+                    </CheckBox.Content>
+                </CheckBox>
             </Grid>
 
             <TextBlock Text="カメラの配置"
@@ -196,6 +210,7 @@
                     </CheckBox.Content>
                    
                 </CheckBox>
+
             </Grid>
 
             <Button Content="既定値にリセット"

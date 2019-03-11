@@ -1,4 +1,6 @@
-﻿namespace Baku.VMagicMirrorConfig
+﻿using System;
+
+namespace Baku.VMagicMirrorConfig
 {
     class UdpMessage
     {
@@ -67,11 +69,20 @@
 
         #region Layout Setting
 
+        #region キャラの動き方
+
         public UdpMessage LengthFromWristToTip(int lengthFromWristToTip)
             => new UdpMessage(nameof(LengthFromWristToTip), lengthFromWristToTip.ToString());
 
         public UdpMessage LengthFromWristToPalm(int lengthFromWristToPalm)
             => new UdpMessage(nameof(LengthFromWristToPalm), lengthFromWristToPalm.ToString());
+
+        public UdpMessage EnableTouchTyping(bool enableTouchTyping)
+            => new UdpMessage(nameof(EnableTouchTyping), enableTouchTyping.ToString());
+
+        #endregion
+
+        #region カメラの配置
 
         public UdpMessage CameraHeight(int height)
             => new UdpMessage(nameof(CameraHeight), height.ToString());
@@ -82,6 +93,10 @@
         public UdpMessage CameraVerticalAngle(int angle)
             => new UdpMessage(nameof(CameraVerticalAngle), angle.ToString());
 
+        #endregion
+
+        #region キーボードとマウスパッドの配置
+
         public UdpMessage HidHeight(int height)
             => new UdpMessage(nameof(HidHeight), height.ToString());
 
@@ -90,6 +105,8 @@
 
         public UdpMessage HidVisibility(bool visible)
             => new UdpMessage(nameof(HidVisibility), visible.ToString());
+
+        #endregion
 
         #endregion
 

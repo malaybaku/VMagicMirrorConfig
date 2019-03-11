@@ -87,6 +87,7 @@ namespace Baku.VMagicMirrorConfig
         {
             new BGSettingWindow()
             {
+                Owner = Application.Current.MainWindow,
                 DataContext = _bgSetting
             }.ShowDialog();
         }
@@ -95,6 +96,7 @@ namespace Baku.VMagicMirrorConfig
         {
             new LayoutSettingWindow()
             {
+                Owner = Application.Current.MainWindow,
                 DataContext = _layoutSetting
             }.ShowDialog();
         }
@@ -103,12 +105,19 @@ namespace Baku.VMagicMirrorConfig
         {
             new StartupSettingWindow()
             {
+                Owner = Application.Current.MainWindow,
                 DataContext = _startupSetting
             }.ShowDialog();
         }
 
         private void OpenAboutWindow()
-            => new AboutWindow().ShowDialog();
+        {
+            new AboutWindow()
+            {
+                Owner = Application.Current.MainWindow,
+            }.ShowDialog();
+
+        }
 
         public void Initialize()
         {

@@ -46,6 +46,19 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
+        private bool _enableTouchTyping = true;
+        public bool EnableTouchTyping
+        {
+            get => _enableTouchTyping;
+            set
+            {
+                if (SetValue(ref _enableTouchTyping, value))
+                {
+                    _sender.SendMessage(UdpMessageFactory.Instance.EnableTouchTyping(EnableTouchTyping));
+                }
+            }
+        }
+
         private int _cameraHeight = 120;
         /// <summary> Unit: [cm] </summary>
         public int CameraHeight
@@ -182,6 +195,7 @@ namespace Baku.VMagicMirrorConfig
             {
                 $"{nameof(LengthFromWristToTip)}:{LengthFromWristToTip}",
                 $"{nameof(LengthFromWristToPalm)}:{LengthFromWristToPalm}",
+                $"{nameof(EnableTouchTyping)}:{EnableTouchTyping}",
                 $"{nameof(CameraHeight)}:{CameraHeight}",
                 $"{nameof(CameraDistance)}:{CameraDistance}",
                 $"{nameof(CameraVerticalAngle)}:{CameraVerticalAngle}",
@@ -221,6 +235,7 @@ namespace Baku.VMagicMirrorConfig
                     var _ =
                         TryReadIntParam(line, nameof(LengthFromWristToTip), v => LengthFromWristToTip = v) ||
                         TryReadIntParam(line, nameof(LengthFromWristToPalm), v => LengthFromWristToPalm = v) ||
+                        TryReadBoolParam(line, nameof(EnableTouchTyping), v => EnableTouchTyping = v) ||
 
                         TryReadIntParam(line, nameof(CameraHeight), v => CameraHeight = v) ||
                         TryReadIntParam(line, nameof(CameraDistance), v => CameraDistance = v) ||
