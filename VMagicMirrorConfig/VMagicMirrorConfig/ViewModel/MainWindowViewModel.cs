@@ -13,43 +13,22 @@ namespace Baku.VMagicMirrorConfig
         internal UdpSender UdpSender => Initializer.UdpSender;
         internal InputChecker InputChecker => Initializer.InputChecker;
 
-        //とりあえず設定ファイルとか無視して常にGBでスタートしましょう
-        private readonly BGSettingViewModel _bgSetting;
-        private readonly LayoutSettingViewModel _layoutSetting;
-        private readonly StartupSettingViewModel _startupSetting;
+        public BGSettingViewModel BackgroundSetting { get; private set; }
+        public LayoutSettingViewModel LayoutSetting { get; private set; }
+        public StartupSettingViewModel StartupSetting { get; private set; }
 
         private string _lastVrmLoadFilePath = "";
 
         public MainWindowViewModel()
         {
-            _bgSetting = new BGSettingViewModel(UdpSender);
-            _layoutSetting = new LayoutSettingViewModel(UdpSender);
-            _startupSetting = new StartupSettingViewModel();
+            BackgroundSetting = new BGSettingViewModel(UdpSender);
+            LayoutSetting = new LayoutSettingViewModel(UdpSender);
+            StartupSetting = new StartupSettingViewModel();
         }
-
-        #region Command
 
         private ActionCommand _loadVrmCommand;
         public ActionCommand LoadVrmCommand
             => _loadVrmCommand ?? (_loadVrmCommand = new ActionCommand(LoadVrm));
-
-        private ActionCommand _openBGSettingCommand;
-        public ActionCommand OpenBGSettingCommand
-            => _openBGSettingCommand ?? (_openBGSettingCommand = new ActionCommand(OpenBGSetting));
-
-        private ActionCommand _openLayoutSettingCommand;
-        public ActionCommand OpenLayoutSettingCommand
-            => _openLayoutSettingCommand ?? (_openLayoutSettingCommand = new ActionCommand(OpenLayoutSetting));
-
-        private ActionCommand _openStartupSettingCommand;
-        public ActionCommand OpenStartupSettingCommand
-            => _openStartupSettingCommand ?? (_openStartupSettingCommand = new ActionCommand(OpenStartupSetting));
-
-        private ActionCommand _openAboutWindowCommand;
-        public ActionCommand OpenAboutWindowCommand
-            => _openAboutWindowCommand ?? (_openAboutWindowCommand = new ActionCommand(OpenAboutWindow));
-
-        #endregion
 
         private void LoadVrm()
         {
@@ -83,42 +62,6 @@ namespace Baku.VMagicMirrorConfig
             _lastVrmLoadFilePath = dialog.FileName;
         }
 
-        private void OpenBGSetting()
-        {
-            new BGSettingWindow()
-            {
-                Owner = Application.Current.MainWindow,
-                DataContext = _bgSetting
-            }.ShowDialog();
-        }
-
-        private void OpenLayoutSetting()
-        {
-            new LayoutSettingWindow()
-            {
-                Owner = Application.Current.MainWindow,
-                DataContext = _layoutSetting
-            }.ShowDialog();
-        }
-
-        private void OpenStartupSetting()
-        {
-            new StartupSettingWindow()
-            {
-                Owner = Application.Current.MainWindow,
-                DataContext = _startupSetting
-            }.ShowDialog();
-        }
-
-        private void OpenAboutWindow()
-        {
-            new AboutWindow()
-            {
-                Owner = Application.Current.MainWindow,
-            }.ShowDialog();
-
-        }
-
         public void Initialize()
         {
             if (Application.Current.MainWindow != null &&
@@ -143,28 +86,28 @@ namespace Baku.VMagicMirrorConfig
                 _lastVrmLoadFilePath
                 );
 
-            _bgSetting.SaveSetting(GetFilePath(SpecialFileNames.Background));
-            _layoutSetting.SaveSetting(GetFilePath(SpecialFileNames.Layout));
-            _startupSetting.SaveSetting(GetFilePath(SpecialFileNames.Startup));
+            BackgroundSetting.SaveSetting(GetFilePath(SpecialFileNames.Background));
+            LayoutSetting.SaveSetting(GetFilePath(SpecialFileNames.Layout));
+            StartupSetting.SaveSetting(GetFilePath(SpecialFileNames.Startup));
         }
 
         private void LoadCurrentParameters()
         {
-            _startupSetting.LoadSetting(GetFilePath(SpecialFileNames.Startup));
+            StartupSetting.LoadSetting(GetFilePath(SpecialFileNames.Startup));
 
-            if (_startupSetting.LoadVrm)
+            if (StartupSetting.LoadVrm)
             {
                 LoadLastLoadedVrm();
             }
 
-            if (_startupSetting.LoadBackgroundSetting)
+            if (StartupSetting.LoadBackgroundSetting)
             {
-                _bgSetting.LoadSetting(GetFilePath(SpecialFileNames.Background));
+                BackgroundSetting.LoadSetting(GetFilePath(SpecialFileNames.Background));
             }
 
-            if (_startupSetting.LoadLayoutSetting)
+            if (StartupSetting.LoadLayoutSetting)
             {
-                _layoutSetting.LoadSetting(GetFilePath(SpecialFileNames.Layout));
+                LayoutSetting.LoadSetting(GetFilePath(SpecialFileNames.Layout));
             }
         }
 

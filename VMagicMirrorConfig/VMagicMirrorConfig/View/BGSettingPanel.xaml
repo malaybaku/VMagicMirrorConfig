@@ -1,55 +1,47 @@
-﻿<Window x:Class="Baku.VMagicMirrorConfig.BGSettingWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:vmm="clr-namespace:Baku.VMagicMirrorConfig"
-        mc:Ignorable="d"
-        d:DataContext="{x:Type vmm:BGSettingViewModel}"
-        WindowStartupLocation="CenterOwner"
-        Title="Background Setting"
-        Height="390" Width="400"
-        ResizeMode="NoResize"
-        >
-    <Window.Resources>
-        <Style TargetType="Button">
-            <Setter Property="Width" Value="100"/>
-            <Setter Property="Height" Value="30"/>
-            <Setter Property="Margin" Value="10,5"/>
-        </Style>
-        <Style TargetType="Slider">
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Margin" Value="5"/>
-            <Setter Property="Minimum" Value="0"/>
-            <Setter Property="Maximum" Value="255"/>
-            <Setter Property="IsSnapToTickEnabled" Value="True"/>
-            <Setter Property="TickFrequency" Value="1"/>
-        </Style>
-        <Style TargetType="TextBlock">
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Margin" Value="5"/>
-            <Setter Property="FontSize"  Value="16"/>
-        </Style>
-        <Style x:Key="HeaderText" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="TextDecorations" Value="Underline"/>
-            <Setter Property="Margin" Value="10,15,10,0"/>
-        </Style>
-        <Style TargetType="TextBox">
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Margin" Value="5"/>
-        </Style>
-    </Window.Resources>
+﻿<UserControl x:Class="Baku.VMagicMirrorConfig.BGSettingPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vmm="clr-namespace:Baku.VMagicMirrorConfig"
+             mc:Ignorable="d"
+             d:DataContext="{x:Type vmm:BGSettingViewModel}"
+             >
     <ScrollViewer VerticalScrollBarVisibility="Auto"
                   HorizontalScrollBarVisibility="Disabled"
                   >
         <StackPanel>
-            
-            <TextBlock Text="背景の色"
-                       Style="{StaticResource HeaderText}"
-                       />
+
+            <StackPanel Orientation="Horizontal">
+
+                <TextBlock Text="背景の色"
+                           VerticalAlignment="Top"
+                           Margin="10"
+                           Style="{StaticResource HeaderText}"
+                           />
+
+                <Border Margin="20,5"
+                        Width="30" Height="30"
+                        BorderBrush="Black"
+                        BorderThickness="1"
+                        Background="White"
+                        Padding="2"
+                        >
+                    <Rectangle>
+                        <Rectangle.Fill>
+                            <SolidColorBrush Color="{Binding Color}"/>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                </Border>
+
+            </StackPanel>
 
             <Grid>
+                <Grid.Resources>
+                    <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                        <Setter Property="TextAlignment" Value="Center"/>
+                    </Style>
+                </Grid.Resources>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -92,20 +84,6 @@
                          />
             </Grid>
 
-            <Border Margin="20,5"
-                    Height="20"
-                    BorderBrush="Black"
-                    BorderThickness="1"
-                    Background="White"
-                    Padding="2"
-                    >
-                <Rectangle>
-                    <Rectangle.Fill>
-                        <SolidColorBrush Color="{Binding Color}"/>
-                    </Rectangle.Fill>
-                </Rectangle>
-            </Border>
-
             <TextBlock Text="光の強さ[%]"
                        Style="{StaticResource HeaderText}"
                        />
@@ -127,10 +105,12 @@
                          />
             </Grid>
 
-            <Button Content="既定値にリセット"
-                    Margin="20"
+            <Button Margin="20"
+                    Width="140"
+                    Content="既定値にリセット"
                     HorizontalAlignment="Left"
-                    Command="{Binding ResetToDefaultCommand}" />
+                    Command="{Binding ResetToDefaultCommand}">
+            </Button>
 
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center"
@@ -140,10 +120,8 @@
                         Command="{Binding SaveSettingCommand}" />
                 <Button Content="設定をロード"
                         Command="{Binding LoadSettingCommand}" />
-                <Button Content="OK"
-                        Click="OnClickOk" />
             </StackPanel>
         </StackPanel>
     </ScrollViewer>
 
-</Window>
+</UserControl>

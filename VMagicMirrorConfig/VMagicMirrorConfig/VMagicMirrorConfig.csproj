@@ -35,6 +35,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MaterialDesignColors, Version=1.0.0.14576, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignColors.1.1.1\lib\net45\MaterialDesignColors.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=2.5.0.1205, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.2.5.0.1205\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -74,18 +80,14 @@
     <Compile Include="ViewModel\Infrastructure\ViewModelBase.cs" />
     <Compile Include="Model\UdpSender.cs" />
     <Compile Include="ViewModel\StartupSettingViewModel.cs" />
-    <Compile Include="View\StartupSettingWindow.xaml.cs">
-      <DependentUpon>StartupSettingWindow.xaml</DependentUpon>
+    <Compile Include="View\StartupSettingPanel.xaml.cs">
+      <DependentUpon>StartupSettingPanel.xaml</DependentUpon>
     </Compile>
-    <Page Include="View\AboutWindow.xaml">
+    <Page Include="View\BGSettingPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\BGSettingWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\LayoutSettingWindow.xaml">
+    <Page Include="View\LayoutSettingPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -97,20 +99,17 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="View\AboutWindow.xaml.cs">
-      <DependentUpon>AboutWindow.xaml</DependentUpon>
+    <Compile Include="View\BGSettingPanel.xaml.cs">
+      <DependentUpon>BGSettingPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\BGSettingWindow.xaml.cs">
-      <DependentUpon>BGSettingWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\LayoutSettingWindow.xaml.cs">
-      <DependentUpon>LayoutSettingWindow.xaml</DependentUpon>
+    <Compile Include="View\LayoutSettingPanel.xaml.cs">
+      <DependentUpon>LayoutSettingPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\StartupSettingWindow.xaml">
+    <Page Include="View\StartupSettingPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -133,6 +132,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

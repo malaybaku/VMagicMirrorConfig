@@ -4,19 +4,125 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vmm="clr-namespace:Baku.VMagicMirrorConfig"
+        xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
+        d:DataContext="{x:Type vmm:MainWindowViewModel}"
         WindowStartupLocation="CenterScreen"
-        Title="VMagicMirror" Height="100" Width="500"
-        ResizeMode="NoResize">
+        Title="VMagicMirror" 
+        Height="400" Width="400"
+        MinHeight="200" MinWidth="200"
+        >
     <Window.DataContext>
         <vmm:MainWindowViewModel/>
     </Window.DataContext>
     <Window.Resources>
-        <Style TargetType="Button">
-            <Setter Property="Margin" Value="10"/>
+        <Style x:Key="HeaderButton" TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Padding" Value="3"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="Background" Value="{DynamicResource PrimaryHueDarkBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource PrimaryHueDarkForegroundBrush}"/>
         </Style>
     </Window.Resources>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <md:Card>
+            <Grid Grid.Row="0"
+              Margin="0"
+              Background="{DynamicResource PrimaryHueDarkBrush}"
+              >
+                <Grid.Resources>
+                    <Style TargetType="Button" BasedOn="{StaticResource HeaderButton}"/>
+                    <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                        <Setter Property="FontSize" Value="12"/>
+                    </Style>
+                </Grid.Resources>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0"
+                    Click="OnClickHomeButton">
+                    <Button.Content>
+                        <TextBlock Text="ホーム" />
+                    </Button.Content>
+                </Button>
+                <Button Grid.Column="1"
+                    Click="OnClickBGSettingButton">
+                    <Button.Content>
+                        <TextBlock Text="背景と光" />
+                    </Button.Content>
+                </Button>
+                <Button Grid.Column="2"
+                    Click="OnClickLayoutButton">
+                    <Button.Content>
+                        <TextBlock Text="レイアウト" FontSize="12"/>
+                    </Button.Content>
+                </Button>
+                <Button Grid.Column="3"
+                    Click="OnClickStartupButton">
+                    <Button.Content>
+                        <TextBlock Text="スタートアップ" FontSize="12"/>
+                    </Button.Content>
+                </Button>
+            </Grid>
+        </md:Card>
+
+        <Grid x:Name="homeTab"
+              Grid.Row="1">
+            <Button Content="VRMロード" 
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Margin="10"
+                    Command="{Binding LoadVrmCommand}"
+                    />
+
+            <StackPanel VerticalAlignment="Bottom"
+                        HorizontalAlignment="Left"
+                        Margin="10">
+                <StackPanel.Resources>
+                    <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                        <Setter Property="Margin" Value="2"/>
+                    </Style>
+                </StackPanel.Resources>
+                <TextBlock Text="VMagicMirror ver0.1"/>
+                <TextBlock Text="Copyright (c) 2019 獏星(ばくすたー)"/>
+                <TextBlock ToolTip="https://github.com/malaybaku/VMagicMirror">
+                    <Hyperlink Click="OnClickHyperLinkToGitHub">Source (GitHub)</Hyperlink>
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+
+        <vmm:BGSettingPanel 
+            x:Name="backgroundTab"
+            Grid.Row="1"
+            Visibility="Collapsed"
+            DataContext="{Binding BackgroundSetting}"
+            />
+
+        <vmm:LayoutSettingPanel 
+            x:Name="layoutTab"
+            Grid.Row="1"
+            Visibility="Collapsed"
+            DataContext="{Binding LayoutSetting}"
+            />
+
+        <vmm:StartupSettingPanel 
+            x:Name="startupTab"
+            Grid.Row="1"
+            Visibility="Collapsed"
+            DataContext="{Binding StartupSetting}"
+            />
+
+    </Grid>
+    
+    <!--<Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -44,5 +150,5 @@
                 Content="About"
                 Command="{Binding OpenAboutWindowCommand}"
                 />
-    </Grid>
+    </Grid>-->
 </Window>
