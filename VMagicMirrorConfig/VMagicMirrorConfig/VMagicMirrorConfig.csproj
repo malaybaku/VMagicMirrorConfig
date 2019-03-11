@@ -80,6 +80,9 @@
     <Compile Include="ViewModel\Infrastructure\ViewModelBase.cs" />
     <Compile Include="Model\UdpSender.cs" />
     <Compile Include="ViewModel\StartupSettingViewModel.cs" />
+    <Compile Include="View\LicenseWindow.xaml.cs">
+      <DependentUpon>LicenseWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\StartupSettingPanel.xaml.cs">
       <DependentUpon>StartupSettingPanel.xaml</DependentUpon>
     </Compile>
@@ -88,6 +91,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\LayoutSettingPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\LicenseWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -9,7 +9,7 @@
         d:DataContext="{x:Type vmm:MainWindowViewModel}"
         WindowStartupLocation="CenterScreen"
         Title="VMagicMirror" 
-        Height="400" Width="400"
+        Height="600" Width="350"
         MinHeight="200" MinWidth="200"
         >
     <Window.DataContext>
@@ -96,6 +96,11 @@
                 <TextBlock ToolTip="https://github.com/malaybaku/VMagicMirror">
                     <Hyperlink Click="OnClickHyperLinkToGitHub">Source (GitHub)</Hyperlink>
                 </TextBlock>
+
+                <Button Content="OSS License" 
+                        HorizontalAlignment="Left"
+                        Click="OnShowLicenseClick"
+                        />
             </StackPanel>
         </Grid>
 

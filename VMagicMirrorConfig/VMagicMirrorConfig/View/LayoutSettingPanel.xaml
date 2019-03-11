@@ -7,7 +7,7 @@
              mc:Ignorable="d"
              d:DataContext="{x:Type vmm:LayoutSettingViewModel}"
              d:DesignWidth="400"
-             d:DesignHeight="700"
+             d:DesignHeight="550"
              >
     <ScrollViewer VerticalScrollBarVisibility="Auto"
                   HorizontalScrollBarVisibility="Disabled"
