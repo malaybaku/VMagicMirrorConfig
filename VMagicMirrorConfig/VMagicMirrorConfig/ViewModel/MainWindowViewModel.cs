@@ -58,8 +58,12 @@ namespace Baku.VMagicMirrorConfig
             if (res == MessageBoxResult.OK)
             {
                 UdpSender.SendMessage(UdpMessageFactory.Instance.OpenVrm(dialog.FileName));
+                _lastVrmLoadFilePath = dialog.FileName;
             }
-            _lastVrmLoadFilePath = dialog.FileName;
+            else
+            {
+                UdpSender.SendMessage(UdpMessageFactory.Instance.CancelLoadVrm());
+            }
         }
 
         public void Initialize()

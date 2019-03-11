@@ -53,6 +53,9 @@ namespace Baku.VMagicMirrorConfig
         public UdpMessage OpenVrm(string filePath)
             => new UdpMessage(nameof(OpenVrm), filePath);
 
+        internal UdpMessage CancelLoadVrm()
+            => new UdpMessage(nameof(CancelLoadVrm));
+
         #endregion
 
         #region BG (Background) Setting
