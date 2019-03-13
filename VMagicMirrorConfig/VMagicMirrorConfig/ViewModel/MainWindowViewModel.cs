@@ -13,16 +13,18 @@ namespace Baku.VMagicMirrorConfig
         internal UdpSender UdpSender => Initializer.UdpSender;
         internal InputChecker InputChecker => Initializer.InputChecker;
 
-        public BGSettingViewModel BackgroundSetting { get; private set; }
+        public WindowSettingViewModel BackgroundSetting { get; private set; }
         public LayoutSettingViewModel LayoutSetting { get; private set; }
+        public LightSettingViewModel LightSetting { get; private set; }
         public StartupSettingViewModel StartupSetting { get; private set; }
 
         private string _lastVrmLoadFilePath = "";
 
         public MainWindowViewModel()
         {
-            BackgroundSetting = new BGSettingViewModel(UdpSender);
+            BackgroundSetting = new WindowSettingViewModel(UdpSender);
             LayoutSetting = new LayoutSettingViewModel(UdpSender);
+            LightSetting = new LightSettingViewModel(UdpSender);
             StartupSetting = new StartupSettingViewModel();
         }
 
@@ -92,6 +94,7 @@ namespace Baku.VMagicMirrorConfig
 
             BackgroundSetting.SaveSetting(GetFilePath(SpecialFileNames.Background));
             LayoutSetting.SaveSetting(GetFilePath(SpecialFileNames.Layout));
+            LightSetting.SaveSetting(GetFilePath(SpecialFileNames.Light));
             StartupSetting.SaveSetting(GetFilePath(SpecialFileNames.Startup));
         }
 
@@ -112,6 +115,11 @@ namespace Baku.VMagicMirrorConfig
             if (StartupSetting.LoadLayoutSetting)
             {
                 LayoutSetting.LoadSetting(GetFilePath(SpecialFileNames.Layout));
+            }
+
+            if (StartupSetting.LoadLightSetting)
+            {
+                LightSetting.LoadSetting(GetFilePath(SpecialFileNames.Light));
             }
         }
 
@@ -149,9 +157,9 @@ namespace Baku.VMagicMirrorConfig
         public static readonly string LastVrmLoadedFile = "_currentVrm";
         public static readonly string Background = "_currentBackground";
         public static readonly string Layout = "_currentLayout";
+        public static readonly string Light = "_light";
         public static readonly string Startup = "_startup";
     }
-
 
     public interface IWindowViewModel : IDisposable
     {

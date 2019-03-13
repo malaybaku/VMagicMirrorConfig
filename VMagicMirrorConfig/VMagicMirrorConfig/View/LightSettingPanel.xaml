@@ -1,0 +1,222 @@
+﻿<UserControl x:Class="Baku.VMagicMirrorConfig.LightSettingPanel"
+           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:vmm="clr-namespace:Baku.VMagicMirrorConfig"
+             mc:Ignorable="d"
+             d:DesignHeight="550"
+             d:DataContext="{x:Type vmm:WindowSettingViewModel}"
+             >
+    <UserControl.Resources>
+        <Style TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}">
+            <Setter Property="Margin" Value="20,5"/>
+        </Style>
+    </UserControl.Resources>
+    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                  HorizontalScrollBarVisibility="Disabled"
+                  >
+        <StackPanel>
+
+            <md:Card>
+                <StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+
+                        <TextBlock Text="ライト"
+                                   Margin="5"
+                                   Style="{StaticResource HeaderText}"
+                                   />
+
+                        <md:Card Style="{StaticResource ColorIndicatorCard}">
+                            <Rectangle>
+                                <Rectangle.Fill>
+                                    <SolidColorBrush Color="{Binding LightColor}"/>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </md:Card>
+
+                    </StackPanel>
+
+                    <Grid Margin="5">
+                        <Grid.Resources>
+                            <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                                <Setter Property="TextAlignment" Value="Center"/>
+                            </Style>
+                        </Grid.Resources>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition Height="15"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0"
+                                   Text="R"/>
+                        <Slider Grid.Row="0" Grid.Column="1"
+                                x:Name="sliderLightR"
+                                Value="{Binding LightR, Mode=TwoWay}"
+                                />
+                        <TextBox Grid.Row="0" Grid.Column="2"
+                                 Text="{Binding Value, ElementName=sliderLightR}"
+                                 />
+
+                        <TextBlock Grid.Row="1" Grid.Column="0"
+                                   Text="G"/>
+                        <Slider Grid.Row="1" Grid.Column="1"
+                                x:Name="sliderLightG"
+                                Value="{Binding LightG, Mode=TwoWay}"
+                                />
+                        <TextBox Grid.Row="1" Grid.Column="2"
+                         Text="{Binding Value, ElementName=sliderLightG}"
+                         />
+
+                        <TextBlock Grid.Row="2" Grid.Column="0"
+                                   Text="B"/>
+                        <Slider Grid.Row="2" Grid.Column="1"
+                                x:Name="sliderLightB"
+                                Value="{Binding LightB, Mode=TwoWay}"
+                                />
+                        <TextBox Grid.Row="2" Grid.Column="2"
+                                 Text="{Binding Value, ElementName=sliderLightB}"
+                                 />
+
+                        <TextBlock Grid.Row="4" Grid.Column="0"
+                                   Text="明るさ[%]" />
+                        <Slider Grid.Row="4" Grid.Column="1"
+                                x:Name="sliderLightIntensity"
+                                Minimum="0"
+                                Maximum="500"
+                                Value="{Binding LightIntensity, Mode=TwoWay}"
+                                />
+                        <TextBox Grid.Row="4" Grid.Column="2"
+                                 Text="{Binding Value, ElementName=sliderLightIntensity}"
+                                 />
+                    </Grid>
+                </StackPanel>
+            </md:Card>
+
+            <md:Card>
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+
+                        <TextBlock Text="Bloom"
+                                   Margin="5"
+                                   Style="{StaticResource HeaderText}"
+                                   />
+                        
+                        <md:Card Style="{StaticResource ColorIndicatorCard}">
+                            <Rectangle>
+                                <Rectangle.Fill>
+                                    <SolidColorBrush Color="{Binding BloomColor}"/>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </md:Card>
+
+                    </StackPanel>
+
+                    <Grid Margin="5">
+                        <Grid.Resources>
+                            <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                                <Setter Property="TextAlignment" Value="Center"/>
+                            </Style>
+                        </Grid.Resources>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition Height="15"/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0"
+                                   Text="R"/>
+                        <Slider Grid.Row="0" Grid.Column="1"
+                                x:Name="sliderBloomR"
+                                Value="{Binding BloomR, Mode=TwoWay}"
+                                />
+                        <TextBox Grid.Row="0" Grid.Column="2"
+                                 Text="{Binding Value, ElementName=sliderBloomR}"
+                                 />
+
+                        <TextBlock Grid.Row="1" Grid.Column="0"
+                                   Text="G"/>
+                        <Slider Grid.Row="1" Grid.Column="1"
+                                x:Name="sliderBloomG"
+                                Value="{Binding BloomG, Mode=TwoWay}"
+                                />
+                        <TextBox Grid.Row="1" Grid.Column="2"
+                                 Text="{Binding Value, ElementName=sliderBloomG}"
+                                 />
+
+                        <TextBlock Grid.Row="2" Grid.Column="0"
+                                   Text="B"/>
+                        <Slider Grid.Row="2" Grid.Column="1"
+                                x:Name="sliderBloomB"
+                                Value="{Binding BloomB, Mode=TwoWay}"
+                                />
+                        <TextBox Grid.Row="2" Grid.Column="2"
+                                 Text="{Binding Value, ElementName=sliderBloomB}"
+                                 />
+
+                        <TextBlock Grid.Row="4" Grid.Column="0"
+                                   Text="強さ[%]" />
+                        <Slider Grid.Row="4" Grid.Column="1"
+                                x:Name="sliderBloomIntensity"
+                                Minimum="0"
+                                Maximum="500"
+                                Value="{Binding BloomIntensity, Mode=TwoWay}"
+                                />
+                        <TextBox Grid.Row="4" Grid.Column="2"
+                                 Text="{Binding Value, ElementName=sliderBloomIntensity}"
+                                 />
+
+                        <TextBlock Grid.Row="5" Grid.Column="0"
+                               Text="しきい値[%]"
+                               />
+                        <Slider Grid.Row="5" Grid.Column="1"
+                                x:Name="sliderBloomThreshold"
+                                Minimum="0"
+                                Maximum="500"
+                                Value="{Binding BloomThreshold, Mode=TwoWay}"
+                                />
+                        <TextBox Grid.Row="5" Grid.Column="2"
+                                 Text="{Binding Value, ElementName=sliderBloomThreshold}"
+                                 />
+                    </Grid>
+
+                </StackPanel>
+                
+            </md:Card>
+            
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        Margin="20,10">
+                <Button Content="リセット"
+                        Command="{Binding ResetToDefaultCommand}" />
+                <Button Content="保存"
+                        Command="{Binding SaveSettingCommand}" />
+                <Button Content="ロード"
+                        Command="{Binding LoadSettingCommand}" />
+            </StackPanel>
+
+
+
+        </StackPanel>
+    </ScrollViewer>
+
+</UserControl>
+

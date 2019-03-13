@@ -9,8 +9,8 @@
         d:DataContext="{x:Type vmm:MainWindowViewModel}"
         WindowStartupLocation="CenterScreen"
         Title="VMagicMirror" 
-        Height="600" Width="350"
-        MinHeight="200" MinWidth="200"
+        Height="600" Width="380"
+        MinHeight="200" MinWidth="380"
         >
     <Window.DataContext>
         <vmm:MainWindowViewModel/>
@@ -30,7 +30,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <md:Card>
+        <md:Card Margin="0" Padding="0">
             <Grid Grid.Row="0"
               Margin="0"
               Background="{DynamicResource PrimaryHueDarkBrush}"
@@ -38,7 +38,7 @@
                 <Grid.Resources>
                     <Style TargetType="Button" BasedOn="{StaticResource HeaderButton}"/>
                     <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
-                        <Setter Property="FontSize" Value="12"/>
+                        <Setter Property="FontSize" Value="11"/>
                     </Style>
                 </Grid.Resources>
                 <Grid.ColumnDefinitions>
@@ -46,29 +46,36 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
+                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Button Grid.Column="0"
-                    Click="OnClickHomeButton">
+                        Click="OnClickHomeButton">
                     <Button.Content>
                         <TextBlock Text="ホーム" />
                     </Button.Content>
                 </Button>
                 <Button Grid.Column="1"
-                    Click="OnClickBGSettingButton">
+                        Click="OnClickBGSettingButton">
                     <Button.Content>
-                        <TextBlock Text="背景と光" />
+                        <TextBlock Text="ウィンドウ" />
                     </Button.Content>
                 </Button>
                 <Button Grid.Column="2"
-                    Click="OnClickLayoutButton">
+                        Click="OnClickLayoutButton">
                     <Button.Content>
-                        <TextBlock Text="レイアウト" FontSize="12"/>
+                        <TextBlock Text="レイアウト" />
                     </Button.Content>
                 </Button>
                 <Button Grid.Column="3"
-                    Click="OnClickStartupButton">
+                        Click="OnClickLightButton">
                     <Button.Content>
-                        <TextBlock Text="スタートアップ" FontSize="12"/>
+                        <TextBlock Text="ライト" />
+                    </Button.Content>
+                </Button>
+                <Button Grid.Column="4"
+                        Click="OnClickStartupButton">
+                    <Button.Content>
+                        <TextBlock Text="スタートアップ" />
                     </Button.Content>
                 </Button>
             </Grid>
@@ -79,6 +86,7 @@
             <Button Content="VRMロード" 
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
+                    Width="120"
                     Margin="10"
                     Command="{Binding LoadVrmCommand}"
                     />
@@ -99,12 +107,13 @@
 
                 <Button Content="OSS License" 
                         HorizontalAlignment="Left"
+                        Width="120"
                         Click="OnShowLicenseClick"
                         />
             </StackPanel>
         </Grid>
 
-        <vmm:BGSettingPanel 
+        <vmm:WindowSettingPanel 
             x:Name="backgroundTab"
             Grid.Row="1"
             Visibility="Collapsed"
@@ -116,6 +125,13 @@
             Grid.Row="1"
             Visibility="Collapsed"
             DataContext="{Binding LayoutSetting}"
+            />
+
+        <vmm:LightSettingPanel 
+            x:Name="lightTab"
+            Grid.Row="1"
+            Visibility="Collapsed"
+            DataContext="{Binding LightSetting}"
             />
 
         <vmm:StartupSettingPanel 

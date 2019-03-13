@@ -20,7 +20,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\..\..\Bin\ConfigApp\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -73,20 +73,25 @@
     <Compile Include="Model\InputObserver\WindowsApiDef.cs" />
     <Compile Include="Model\ModelInitializer.cs" />
     <Compile Include="Model\UdpMessages.cs" />
-    <Compile Include="ViewModel\BGSettingViewModel.cs" />
+    <Compile Include="ViewModel\WindowSettingViewModel.cs" />
     <Compile Include="ViewModel\Infrastructure\ActionCommand.cs" />
     <Compile Include="ViewModel\LayoutSettingViewModel.cs" />
+    <Compile Include="ViewModel\LightSettingViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\Infrastructure\ViewModelBase.cs" />
     <Compile Include="Model\UdpSender.cs" />
+    <Compile Include="ViewModel\SettingViewModelBase.cs" />
     <Compile Include="ViewModel\StartupSettingViewModel.cs" />
     <Compile Include="View\LicenseWindow.xaml.cs">
       <DependentUpon>LicenseWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\LightSettingPanel.xaml.cs">
+      <DependentUpon>LightSettingPanel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\StartupSettingPanel.xaml.cs">
       <DependentUpon>StartupSettingPanel.xaml</DependentUpon>
     </Compile>
-    <Page Include="View\BGSettingPanel.xaml">
+    <Page Include="View\WindowSettingPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -98,6 +103,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\LightSettingPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -106,8 +115,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="View\BGSettingPanel.xaml.cs">
-      <DependentUpon>BGSettingPanel.xaml</DependentUpon>
+    <Compile Include="View\WindowSettingPanel.xaml.cs">
+      <DependentUpon>WindowSettingPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\LayoutSettingPanel.xaml.cs">
       <DependentUpon>LayoutSettingPanel.xaml</DependentUpon>

@@ -24,11 +24,14 @@
         <CheckBox Content="VRM"
                   IsChecked="{Binding LoadVrm}"
                   />
-        <CheckBox Content="背景色と光"
+        <CheckBox Content="ウィンドウ"
                   IsChecked="{Binding LoadBackgroundSetting}"
                   />
         <CheckBox Content="レイアウト"
                   IsChecked="{Binding LoadLayoutSetting}"
+                  />
+        <CheckBox Content="ライト"
+                  IsChecked="{Binding LoadLightSetting}"
                   />
     </StackPanel>
 </UserControl>

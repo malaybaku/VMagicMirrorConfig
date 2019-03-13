@@ -53,20 +53,27 @@ namespace Baku.VMagicMirrorConfig
         public UdpMessage OpenVrm(string filePath)
             => new UdpMessage(nameof(OpenVrm), filePath);
 
-        internal UdpMessage CancelLoadVrm()
+        public UdpMessage CancelLoadVrm()
             => new UdpMessage(nameof(CancelLoadVrm));
 
         #endregion
 
-        #region BG (Background) Setting
-
-        //NOTE: 汎用形式っぽくしてるが透過処理はほかと比べて特殊な点に注意
+        #region Window Setting
 
         public UdpMessage Chromakey(int a, int r, int g, int b)
             => new UdpMessage(nameof(Chromakey), $"{a},{r},{g},{b}");
 
-        public UdpMessage LightIntensity(int lightIntensity)
-            => new UdpMessage(nameof(LightIntensity), lightIntensity.ToString());
+        public UdpMessage WindowFrameVisibility(bool v)
+            => new UdpMessage(nameof(WindowFrameVisibility), v.ToString());
+
+        public UdpMessage IgnoreMouse(bool v)
+            => new UdpMessage(nameof(IgnoreMouse), v.ToString());
+
+        public UdpMessage TopMost(bool v)
+            => new UdpMessage(nameof(TopMost), v.ToString());
+
+        public UdpMessage WindowDraggable(bool windowDraggable)
+            => new UdpMessage(nameof(WindowDraggable), windowDraggable.ToString());
 
         #endregion
 
@@ -110,6 +117,25 @@ namespace Baku.VMagicMirrorConfig
             => new UdpMessage(nameof(HidVisibility), visible.ToString());
 
         #endregion
+
+        #endregion
+
+        #region Light Setting
+
+        public UdpMessage LightColor(int r, int g, int b)
+            => new UdpMessage(nameof(LightColor), $"{r},{g},{b}");
+
+        public UdpMessage LightIntensity(int lightIntensity)
+            => new UdpMessage(nameof(LightIntensity), lightIntensity.ToString());
+
+        public UdpMessage BloomColor(int r, int g, int b)
+            => new UdpMessage(nameof(BloomColor), $"{r},{g},{b}");
+
+        public UdpMessage BloomIntensity(int intensity)
+            => new UdpMessage(nameof(BloomIntensity), intensity.ToString());
+
+        public UdpMessage BloomThreshold(int threshold)
+            => new UdpMessage(nameof(BloomThreshold), threshold.ToString());
 
         #endregion
 

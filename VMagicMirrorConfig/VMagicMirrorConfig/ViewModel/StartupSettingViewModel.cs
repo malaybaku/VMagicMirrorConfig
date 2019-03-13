@@ -29,6 +29,13 @@ namespace Baku.VMagicMirrorConfig
             set => SetValue(ref _loadLayoutSetting, value);
         }
 
+        private bool _loadLightSetting = false;
+        public bool LoadLightSetting
+        {
+            get => _loadLightSetting;
+            set => SetValue(ref _loadLightSetting, value);
+        }
+
         internal void SaveSetting(string path)
         {
             File.WriteAllLines(path, new string[]
@@ -36,6 +43,7 @@ namespace Baku.VMagicMirrorConfig
                 $"{nameof(LoadVrm)}:{LoadVrm}",
                 $"{nameof(LoadBackgroundSetting)}:{LoadBackgroundSetting}",
                 $"{nameof(LoadLayoutSetting)}:{LoadLayoutSetting}",
+                $"{nameof(LoadLightSetting)}:{LoadLightSetting}",
             });
         }
 
@@ -55,7 +63,8 @@ namespace Baku.VMagicMirrorConfig
                     var _ =
                         TryReadBoolParam(line, nameof(LoadVrm), b => LoadVrm = b) ||
                         TryReadBoolParam(line, nameof(LoadBackgroundSetting), b => LoadBackgroundSetting = b) ||
-                        TryReadBoolParam(line, nameof(LoadLayoutSetting), b => LoadLayoutSetting = b);
+                        TryReadBoolParam(line, nameof(LoadLayoutSetting), b => LoadLayoutSetting = b) ||
+                        TryReadBoolParam(line, nameof(LoadLightSetting), b => LoadLightSetting = b);
                 }
             }
             catch (Exception ex)

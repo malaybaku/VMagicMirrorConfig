@@ -7,14 +7,11 @@ namespace Baku.VMagicMirrorConfig
 {
     using static LineParseUtils;
 
-    public class LayoutSettingViewModel : ViewModelBase
+    public class LayoutSettingViewModel : SettingViewModelBase
     {
-        internal LayoutSettingViewModel(UdpSender sender)
+        internal LayoutSettingViewModel(UdpSender sender) : base(sender)
         {
-            _sender = sender;
         }
-
-        private readonly UdpSender _sender;
 
         #region Properties
 
@@ -27,7 +24,7 @@ namespace Baku.VMagicMirrorConfig
             {
                 if (SetValue(ref _lengthFromWristToTip, value))
                 {
-                    _sender.SendMessage(UdpMessageFactory.Instance.LengthFromWristToTip(LengthFromWristToTip));
+                    SendMessage(UdpMessageFactory.Instance.LengthFromWristToTip(LengthFromWristToTip));
                 }
             }
         }
@@ -41,7 +38,7 @@ namespace Baku.VMagicMirrorConfig
             {
                 if (SetValue(ref _lengthFromWristToPalm, value))
                 {
-                    _sender.SendMessage(UdpMessageFactory.Instance.LengthFromWristToPalm(LengthFromWristToPalm));
+                    SendMessage(UdpMessageFactory.Instance.LengthFromWristToPalm(LengthFromWristToPalm));
                 }
             }
         }
@@ -54,7 +51,7 @@ namespace Baku.VMagicMirrorConfig
             {
                 if (SetValue(ref _enableTouchTyping, value))
                 {
-                    _sender.SendMessage(UdpMessageFactory.Instance.EnableTouchTyping(EnableTouchTyping));
+                    SendMessage(UdpMessageFactory.Instance.EnableTouchTyping(EnableTouchTyping));
                 }
             }
         }
@@ -68,7 +65,7 @@ namespace Baku.VMagicMirrorConfig
             {
                 if (SetValue(ref _cameraHeight, value))
                 {
-                    _sender.SendMessage(UdpMessageFactory.Instance.CameraHeight(CameraHeight));
+                    SendMessage(UdpMessageFactory.Instance.CameraHeight(CameraHeight));
                 }
             }
         }
@@ -82,7 +79,7 @@ namespace Baku.VMagicMirrorConfig
             {
                 if (SetValue(ref _cameraDistance, value))
                 {
-                    _sender.SendMessage(UdpMessageFactory.Instance.CameraDistance(CameraDistance));
+                    SendMessage(UdpMessageFactory.Instance.CameraDistance(CameraDistance));
                 }
             }
         }
@@ -96,7 +93,7 @@ namespace Baku.VMagicMirrorConfig
             {
                 if (SetValue(ref _cameraVerticalAngle, value))
                 {
-                    _sender.SendMessage(UdpMessageFactory.Instance.CameraVerticalAngle(CameraVerticalAngle));
+                    SendMessage(UdpMessageFactory.Instance.CameraVerticalAngle(CameraVerticalAngle));
                 }
             }
         }
@@ -110,7 +107,7 @@ namespace Baku.VMagicMirrorConfig
             {
                 if (SetValue(ref _hidHeight, value))
                 {
-                    _sender.SendMessage(UdpMessageFactory.Instance.HidHeight(HidHeight));
+                    SendMessage(UdpMessageFactory.Instance.HidHeight(HidHeight));
                 }
             }
         }
@@ -124,7 +121,7 @@ namespace Baku.VMagicMirrorConfig
             {
                 if (SetValue(ref _hidHorizontalScale, value))
                 {
-                    _sender.SendMessage(UdpMessageFactory.Instance.HidHorizontalScale(HidHorizontalScale));
+                    SendMessage(UdpMessageFactory.Instance.HidHorizontalScale(HidHorizontalScale));
                 }
             }
         }
@@ -138,18 +135,14 @@ namespace Baku.VMagicMirrorConfig
             {
                 if (SetValue(ref _hidVisibility, value))
                 {
-                    _sender.SendMessage(UdpMessageFactory.Instance.HidVisibility(HidVisibility));
+                    SendMessage(UdpMessageFactory.Instance.HidVisibility(HidVisibility));
                 }
             }
         }
 
         #endregion
 
-        private ActionCommand _resetToDefaultCommand;
-        public ActionCommand ResetToDefaultCommand
-            => _resetToDefaultCommand ?? (_resetToDefaultCommand = new ActionCommand(ResetToDefault));
-
-        private void ResetToDefault()
+        protected override void ResetToDefault()
         {
             LengthFromWristToTip = 18;
             LengthFromWristToPalm = 9;
@@ -163,18 +156,7 @@ namespace Baku.VMagicMirrorConfig
             HidVisibility = true;
         }
 
-
-        private ActionCommand _saveSettingCommand;
-        public ActionCommand SaveSettingCommand
-            => _saveSettingCommand ?? (_saveSettingCommand = new ActionCommand(SaveSetting));
-
-        private ActionCommand _loadSettingCommand;
-        public ActionCommand LoadSettingCommand
-            => _loadSettingCommand ?? (_loadSettingCommand = new ActionCommand(LoadSetting));
-
-        //※ここから下はVMじゃなくてモデルに書くような内容だけど、プログラムが小さいのであえて分けない
-
-        internal void SaveSetting()
+        protected override void SaveSetting()
         {
             var dialog = new SaveFileDialog()
             {
@@ -189,7 +171,21 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        internal void SaveSetting(string path)
+        protected override void LoadSetting()
+        {
+            var dialog = new OpenFileDialog()
+            {
+                Title = "Open Layout Setting File",
+                Filter = "VMagicMirror Layout File(*.vmm_layout)|*.vmm_layout",
+                Multiselect = false,
+            };
+            if (dialog.ShowDialog() == true)
+            {
+                LoadSetting(dialog.FileName);
+            }
+        }
+
+        internal override void SaveSetting(string path)
         {
             File.WriteAllLines(path, new string[]
             {
@@ -205,21 +201,7 @@ namespace Baku.VMagicMirrorConfig
             });
         }
 
-        internal void LoadSetting()
-        {
-            var dialog = new OpenFileDialog()
-            {
-                Title = "Open Layout Setting File",
-                Filter = "VMagicMirror Layout File(*.vmm_layout)|*.vmm_layout",
-                Multiselect = false,
-            };
-            if (dialog.ShowDialog() == true)
-            {
-                LoadSetting(dialog.FileName);
-            }
-        }
-
-        internal void LoadSetting(string path)
+        internal override void LoadSetting(string path)
         {
             if (!File.Exists(path))
             {
