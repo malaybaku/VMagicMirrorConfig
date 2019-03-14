@@ -7,7 +7,6 @@
         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         d:DataContext="{x:Type vmm:MainWindowViewModel}"
-        WindowStartupLocation="CenterScreen"
         Title="VMagicMirror" 
         Height="600" Width="380"
         MinHeight="200" MinWidth="380"
