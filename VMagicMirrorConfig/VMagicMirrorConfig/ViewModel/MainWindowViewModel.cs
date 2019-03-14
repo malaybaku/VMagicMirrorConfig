@@ -51,6 +51,13 @@ namespace Baku.VMagicMirrorConfig
 
             UdpSender.SendMessage(UdpMessageFactory.Instance.OpenVrmPreview(dialog.FileName));
 
+            bool turnOffTopMostTemporary = BackgroundSetting.TopMost;
+
+            if (turnOffTopMostTemporary)
+            {
+                BackgroundSetting.TopMost = false;
+            }
+            
             var res = MessageBox.Show(
                 "ビューアー画面のライセンスを確認してください。読み込みますか？", 
                 "VRMの読み込み", 
@@ -65,6 +72,11 @@ namespace Baku.VMagicMirrorConfig
             else
             {
                 UdpSender.SendMessage(UdpMessageFactory.Instance.CancelLoadVrm());
+            }
+
+            if (turnOffTopMostTemporary)
+            {
+                BackgroundSetting.TopMost = true;
             }
         }
 
