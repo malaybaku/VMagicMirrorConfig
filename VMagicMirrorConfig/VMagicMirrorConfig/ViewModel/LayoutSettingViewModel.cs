@@ -43,6 +43,32 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
+        private int _handYOffsetBasic = 4;
+        public int HandYOffsetBasic
+        {
+            get => _handYOffsetBasic;
+            set
+            {
+                if (SetValue(ref _handYOffsetBasic, value))
+                {
+                    SendMessage(UdpMessageFactory.Instance.HandYOffsetBasic(HandYOffsetBasic));
+                }
+            }
+        }
+
+        private int _handYOffsetAfterKeyDown = 2;
+        public int HandYOffsetAfterKeyDown
+        {
+            get => _handYOffsetAfterKeyDown;
+            set
+            {
+                if (SetValue(ref _handYOffsetAfterKeyDown, value))
+                {
+                    SendMessage(UdpMessageFactory.Instance.HandYOffsetAfterKeyDown(HandYOffsetAfterKeyDown));
+                }
+            }
+        }
+
         private bool _enableTouchTyping = true;
         public bool EnableTouchTyping
         {
@@ -147,6 +173,9 @@ namespace Baku.VMagicMirrorConfig
             LengthFromWristToTip = 18;
             LengthFromWristToPalm = 9;
 
+            HandYOffsetBasic = 4;
+            HandYOffsetAfterKeyDown = 2;
+
             CameraHeight = 120;
             CameraDistance = 100;
             CameraVerticalAngle = 0;
@@ -191,6 +220,8 @@ namespace Baku.VMagicMirrorConfig
             {
                 $"{nameof(LengthFromWristToTip)}:{LengthFromWristToTip}",
                 $"{nameof(LengthFromWristToPalm)}:{LengthFromWristToPalm}",
+                $"{nameof(HandYOffsetBasic)}:{HandYOffsetBasic}",
+                $"{nameof(HandYOffsetAfterKeyDown)}:{HandYOffsetAfterKeyDown}",
                 $"{nameof(EnableTouchTyping)}:{EnableTouchTyping}",
                 $"{nameof(CameraHeight)}:{CameraHeight}",
                 $"{nameof(CameraDistance)}:{CameraDistance}",
@@ -217,6 +248,8 @@ namespace Baku.VMagicMirrorConfig
                     var _ =
                         TryReadIntParam(line, nameof(LengthFromWristToTip), v => LengthFromWristToTip = v) ||
                         TryReadIntParam(line, nameof(LengthFromWristToPalm), v => LengthFromWristToPalm = v) ||
+                        TryReadIntParam(line, nameof(HandYOffsetBasic), v => HandYOffsetBasic = v) || 
+                        TryReadIntParam(line, nameof(HandYOffsetAfterKeyDown), v => HandYOffsetAfterKeyDown = v) ||
                         TryReadBoolParam(line, nameof(EnableTouchTyping), v => EnableTouchTyping = v) ||
 
                         TryReadIntParam(line, nameof(CameraHeight), v => CameraHeight = v) ||

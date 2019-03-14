@@ -28,6 +28,9 @@
                             <RowDefinition/>
                             <RowDefinition/>
                             <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -59,7 +62,31 @@
                                  Text="{Binding Value, ElementName=sliderWristToPalm}"
                                  />
 
-                        <CheckBox Grid.Row="2" Grid.Column="0"
+                        <TextBlock Grid.Row="2" Grid.Column="0"
+                                   Text="手の高さ調整[cm]"/>
+                        <Slider Grid.Row="2" Grid.Column="1"
+                                x:Name="sliderHandYOffsetBasic"
+                                Minimum="0"
+                                Maximum="50"
+                                Value="{Binding HandYOffsetBasic, Mode=TwoWay}"
+                                />
+                        <TextBox Grid.Row="2" Grid.Column="2"
+                                 Text="{Binding Value, ElementName=sliderHandYOffsetBasic}"
+                                 />
+
+                        <TextBlock Grid.Row="3" Grid.Column="0"
+                                   Text="(打鍵後)手の高さ調整[cm]"/>
+                        <Slider Grid.Row="3" Grid.Column="1"
+                                x:Name="sliderHandYOffsetAfterKeyDown"
+                                Minimum="0"
+                                Maximum="50"
+                                Value="{Binding HandYOffsetAfterKeyDown, Mode=TwoWay}"
+                                />
+                        <TextBox Grid.Row="3" Grid.Column="2"
+                                 Text="{Binding Value, ElementName=sliderHandYOffsetAfterKeyDown}"
+                                 />
+
+                        <CheckBox Grid.Row="5" Grid.Column="0"
                                   Grid.ColumnSpan="2"
                                   HorizontalAlignment="Left"
                                   Margin="10,0"

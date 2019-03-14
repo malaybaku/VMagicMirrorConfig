@@ -87,6 +87,12 @@ namespace Baku.VMagicMirrorConfig
         public UdpMessage LengthFromWristToPalm(int lengthFromWristToPalm)
             => new UdpMessage(nameof(LengthFromWristToPalm), lengthFromWristToPalm.ToString());
 
+        public UdpMessage HandYOffsetBasic(int handYOffsetBasic)
+            => new UdpMessage(nameof(HandYOffsetBasic), handYOffsetBasic.ToString());
+
+        public UdpMessage HandYOffsetAfterKeyDown(int handYOffsetAfterKeyDown)
+            => new UdpMessage(nameof(handYOffsetAfterKeyDown), handYOffsetAfterKeyDown.ToString());
+
         public UdpMessage EnableTouchTyping(bool enableTouchTyping)
             => new UdpMessage(nameof(EnableTouchTyping), enableTouchTyping.ToString());
 
