@@ -99,7 +99,7 @@
                         <Setter Property="Margin" Value="2"/>
                     </Style>
                 </StackPanel.Resources>
-                <TextBlock Text="VMagicMirror ver0.1"/>
+                <TextBlock Text="VMagicMirror ver0.11"/>
                 <TextBlock Text="Copyright (c) 2019 獏星(ばくすたー)"/>
                 <TextBlock ToolTip="https://github.com/malaybaku/VMagicMirror">
                     <Hyperlink Click="OnClickHyperLinkToGitHub">Source (GitHub)</Hyperlink>
