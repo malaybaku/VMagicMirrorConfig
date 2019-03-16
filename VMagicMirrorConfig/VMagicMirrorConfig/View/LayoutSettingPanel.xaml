@@ -113,16 +113,14 @@
                             <CheckBox.Content>
                                 <TextBlock Text="{DynamicResource Layout_EnableWaitMotion}"/>
                             </CheckBox.Content>
-
                         </CheckBox>
-
 
                         <TextBlock Grid.Row="1" Grid.Column="0"
                                    Text="{DynamicResource Layout_WaitMotionScale}"/>
                         <Slider Grid.Row="1" Grid.Column="1"
                                 x:Name="sliderWaitMotionScale"
                                 Minimum="1"
-                                Maximum="300"
+                                Maximum="500"
                                 Value="{Binding WaitMotionScale, Mode=TwoWay}"
                                 />
                         <TextBox Grid.Row="1" Grid.Column="2"
