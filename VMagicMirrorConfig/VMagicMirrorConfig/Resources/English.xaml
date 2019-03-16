@@ -40,6 +40,13 @@
     <sys:String x:Key="Layout_HandYOffsetBasic">Adjust height of the hand[cm]</sys:String>
     <sys:String x:Key="Layout_HandYOffsetAfterKeyDown">(After press key) adjust height of the hand[cm]</sys:String>
     <sys:String x:Key="Layout_EnableTouchTyping">Move head like touch typing</sys:String>
+    
+    <sys:String x:Key="Layout_WaitMotion">Wait motion</sys:String>
+    <sys:String x:Key="Layout_EnableWaitMotion">Enable</sys:String>
+    <sys:String x:Key="Layout_WaitMotionScale">Scale [%]</sys:String>
+    <sys:String x:Key="Layout_WaitMotionPeriod">Period [sec]</sys:String>
+    
+    
     <sys:String x:Key="Layout_Camera">Camera</sys:String>
     <sys:String x:Key="Layout_CameraHeight">Height [cm]</sys:String>
     <sys:String x:Key="Layout_CameraDistance">Distance [cm]</sys:String>

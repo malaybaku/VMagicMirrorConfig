@@ -41,6 +41,12 @@
     <sys:String x:Key="Layout_HandYOffsetBasic">手の高さ調整[cm]</sys:String>
     <sys:String x:Key="Layout_HandYOffsetAfterKeyDown">(打鍵後)手の高さ調整[cm]</sys:String>
     <sys:String x:Key="Layout_EnableTouchTyping">タッチタイピング風に視線を動かす</sys:String>
+
+    <sys:String x:Key="Layout_WaitMotion">待機モーション</sys:String>
+    <sys:String x:Key="Layout_EnableWaitMotion">有効にする</sys:String>
+    <sys:String x:Key="Layout_WaitMotionScale">動きの大きさ [%]</sys:String>
+    <sys:String x:Key="Layout_WaitMotionPeriod">周期 [sec]</sys:String>    
+    
     <sys:String x:Key="Layout_Camera">カメラ</sys:String>
     <sys:String x:Key="Layout_CameraHeight">高さ[cm]</sys:String>
     <sys:String x:Key="Layout_CameraDistance">キャラとの距離[cm]</sys:String>
