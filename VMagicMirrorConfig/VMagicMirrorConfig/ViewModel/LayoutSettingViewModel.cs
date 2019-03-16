@@ -69,6 +69,46 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
+        private bool _enableWaitMotion = true;
+        public bool EnableWaitMotion
+        {
+            get => _enableWaitMotion;
+            set
+            {
+                if (SetValue(ref _enableWaitMotion, value))
+                {
+                    SendMessage(UdpMessageFactory.Instance.EnableWaitMotion(EnableWaitMotion));
+                }
+            }
+        }
+
+        private int _waitMotionScale = 100;
+        public int WaitMotionScale
+        {
+            get => _waitMotionScale;
+            set
+            {
+                if (SetValue(ref _waitMotionScale, value))
+                {
+                    SendMessage(UdpMessageFactory.Instance.WaitMotionScale(WaitMotionScale));
+                }
+            }
+        }
+
+        private int _waitMotionPeriod = 10;
+        public int WaitMotionPeriod
+        {
+            get => _waitMotionPeriod;
+            set
+            {
+                if (SetValue(ref _waitMotionPeriod, value))
+                {
+                    SendMessage(UdpMessageFactory.Instance.WaitMotionPeriod(WaitMotionPeriod));
+                }
+            }
+        }
+
+
         private bool _enableTouchTyping = true;
         public bool EnableTouchTyping
         {
@@ -222,7 +262,13 @@ namespace Baku.VMagicMirrorConfig
                 $"{nameof(LengthFromWristToPalm)}:{LengthFromWristToPalm}",
                 $"{nameof(HandYOffsetBasic)}:{HandYOffsetBasic}",
                 $"{nameof(HandYOffsetAfterKeyDown)}:{HandYOffsetAfterKeyDown}",
+
+                $"{nameof(EnableWaitMotion)}:{EnableWaitMotion}",
+                $"{nameof(WaitMotionScale)}:{WaitMotionScale}",
+                $"{nameof(WaitMotionPeriod)}:{WaitMotionPeriod}",
+
                 $"{nameof(EnableTouchTyping)}:{EnableTouchTyping}",
+
                 $"{nameof(CameraHeight)}:{CameraHeight}",
                 $"{nameof(CameraDistance)}:{CameraDistance}",
                 $"{nameof(CameraVerticalAngle)}:{CameraVerticalAngle}",
@@ -250,6 +296,11 @@ namespace Baku.VMagicMirrorConfig
                         TryReadIntParam(line, nameof(LengthFromWristToPalm), v => LengthFromWristToPalm = v) ||
                         TryReadIntParam(line, nameof(HandYOffsetBasic), v => HandYOffsetBasic = v) || 
                         TryReadIntParam(line, nameof(HandYOffsetAfterKeyDown), v => HandYOffsetAfterKeyDown = v) ||
+
+                        TryReadBoolParam(line, nameof(EnableWaitMotion), v => EnableWaitMotion = v) ||
+                        TryReadIntParam(line, nameof(WaitMotionScale), v => WaitMotionScale = v) ||
+                        TryReadIntParam(line, nameof(WaitMotionPeriod), v => WaitMotionPeriod = v) ||
+
                         TryReadBoolParam(line, nameof(EnableTouchTyping), v => EnableTouchTyping = v) ||
 
                         TryReadIntParam(line, nameof(CameraHeight), v => CameraHeight = v) ||

@@ -93,6 +93,15 @@ namespace Baku.VMagicMirrorConfig
         public UdpMessage HandYOffsetAfterKeyDown(int handYOffsetAfterKeyDown)
             => new UdpMessage(nameof(handYOffsetAfterKeyDown), handYOffsetAfterKeyDown.ToString());
 
+        public UdpMessage EnableWaitMotion(bool enable)
+            => new UdpMessage(nameof(EnableWaitMotion), enable.ToString());
+
+        public UdpMessage WaitMotionScale(int scale)
+            => new UdpMessage(nameof(WaitMotionScale), scale.ToString());
+
+        public UdpMessage WaitMotionPeriod(int periodSec)
+            => new UdpMessage(nameof(WaitMotionPeriod), periodSec.ToString());
+
         public UdpMessage EnableTouchTyping(bool enableTouchTyping)
             => new UdpMessage(nameof(EnableTouchTyping), enableTouchTyping.ToString());
 
