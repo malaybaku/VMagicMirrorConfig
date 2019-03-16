@@ -13,6 +13,7 @@
     
     <!-- Home -->
     <sys:String x:Key="Home_LoadVrm">VRMロード</sys:String>
+    <sys:String x:Key="Home_LoadVrmOnNextStartup">次回の起動時にも同じVRMを読み込む</sys:String>
     <sys:String x:Key="Home_OssLicense">OSS License</sys:String>
     
     <!-- Common in Config -->

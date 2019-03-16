@@ -223,6 +223,11 @@
                 </StackPanel>
             </md:Card>
 
+            <CheckBox Content="{DynamicResource ConfigCommon_ApplyToNextStartup}"
+                      Margin="10"
+                      IsChecked="{Binding Startup.LoadLayoutSetting, Mode=TwoWay}"
+                      />
+
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center"
                         Margin="20,10">
