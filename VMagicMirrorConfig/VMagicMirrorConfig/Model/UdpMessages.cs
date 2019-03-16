@@ -143,6 +143,9 @@ namespace Baku.VMagicMirrorConfig
         public UdpMessage BloomThreshold(int threshold)
             => new UdpMessage(nameof(BloomThreshold), threshold.ToString());
 
+        public UdpMessage MoveWindow(int x, int y)
+            => new UdpMessage(nameof(MoveWindow), $"{x},{y}");
+
         #endregion
 
     }

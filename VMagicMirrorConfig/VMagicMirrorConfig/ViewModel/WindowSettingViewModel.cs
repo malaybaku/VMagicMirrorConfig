@@ -11,7 +11,7 @@ namespace Baku.VMagicMirrorConfig
     //モデルが小さいのでVMと完全癒着してる点に注意(VMというよりNotifiableなモデル)
     public class WindowSettingViewModel : SettingViewModelBase
     {
-        internal WindowSettingViewModel(UdpSender sender) : base(sender)
+        internal WindowSettingViewModel(UdpSender sender, StartupSettingViewModel startup) : base(sender, startup)
         {
             UpdateBackgroundColor();
         }
@@ -129,6 +129,50 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
+        //ウィンドウ初期配置周り
+        //ウィンドウは軽率に動かすと怖いので起動時かボタン押したときしか動かさない！
+        private bool _enableWindowInitialPlacement = false;
+        public bool EnableWindowInitialPlacement
+        {
+            get => _enableWindowInitialPlacement;
+            set => SetValue(ref _enableWindowInitialPlacement, value);
+        }
+
+        private int _windowInitialPositionX = 0;
+        public int WindowInitialPositionX
+        {
+            get => _windowInitialPositionX;
+            set => SetValue(ref _windowInitialPositionX, value);
+        }
+
+        private int _windowInitialPositionY = 0;
+        public int WindowInitialPositionY
+        {
+            get => _windowInitialPositionY;
+            set => SetValue(ref _windowInitialPositionY, value);
+        }
+
+        private ActionCommand _fetchUnityWindowPositionCommand;
+        public ActionCommand FetchUnityWindowPositionCommand
+            => _fetchUnityWindowPositionCommand ?? (_fetchUnityWindowPositionCommand = new ActionCommand(FetchUnityWindowPosition));
+        private void FetchUnityWindowPosition()
+        {
+            var pos = UnityWindowChecker.GetUnityWindowPosition();
+            WindowInitialPositionX = pos.X;
+            WindowInitialPositionY = pos.Y;
+        }
+
+        private ActionCommand _moveWindowCommand;
+        public ActionCommand MoveWindowCommand
+            => _moveWindowCommand ?? (_moveWindowCommand = new ActionCommand(MoveWindow));
+
+        internal void MoveWindow()
+            => SendMessage(UdpMessageFactory.Instance.MoveWindow(
+                WindowInitialPositionX,
+                WindowInitialPositionY
+                ));
+
+
         #region privateになったプロパティ
 
         private bool _hideWindowFrame = false;
@@ -210,6 +254,9 @@ namespace Baku.VMagicMirrorConfig
                 $"{nameof(IsTransparent)}:{IsTransparent}",
                 $"{nameof(WindowDraggable)}:{WindowDraggable}",
                 $"{nameof(TopMost)}:{TopMost}",
+                $"{nameof(EnableWindowInitialPlacement)}:{EnableWindowInitialPlacement}",
+                $"{nameof(WindowInitialPositionX)}:{WindowInitialPositionX}",
+                $"{nameof(WindowInitialPositionY)}:{WindowInitialPositionY}"
             });
         }
 
@@ -232,9 +279,10 @@ namespace Baku.VMagicMirrorConfig
                         TryReadIntParam(line, nameof(B), v => B = v) ||
                         TryReadBoolParam(line, nameof(IsTransparent), v => IsTransparent = v) ||
                         TryReadBoolParam(line, nameof(TopMost), v => TopMost = v) ||
-                        TryReadBoolParam(line, nameof(WindowDraggable), v => WindowDraggable = v);
-                //        TryReadBoolParam(line, nameof(HideWindowFrame), v => HideWindowFrame = v) ||
-                //        TryReadBoolParam(line, nameof(IgnoreMouseWhenTransparent), v => IgnoreMouseWhenTransparent = v) ||
+                        TryReadBoolParam(line, nameof(WindowDraggable), v => WindowDraggable = v) ||
+                        TryReadBoolParam(line, nameof(EnableWindowInitialPlacement), v => EnableWindowInitialPlacement = v) ||
+                        TryReadIntParam(line, nameof(WindowInitialPositionX), v => WindowInitialPositionX = v) ||
+                        TryReadIntParam(line, nameof(WindowInitialPositionY), v => WindowInitialPositionY = v);
                 }
             }
             catch (Exception ex)

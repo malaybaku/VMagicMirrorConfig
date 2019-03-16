@@ -13,7 +13,7 @@ namespace Baku.VMagicMirrorConfig
         internal UdpSender UdpSender => Initializer.UdpSender;
         internal InputChecker InputChecker => Initializer.InputChecker;
 
-        public WindowSettingViewModel BackgroundSetting { get; private set; }
+        public WindowSettingViewModel WindowSetting { get; private set; }
         public LayoutSettingViewModel LayoutSetting { get; private set; }
         public LightSettingViewModel LightSetting { get; private set; }
         public StartupSettingViewModel StartupSetting { get; private set; }
@@ -23,10 +23,10 @@ namespace Baku.VMagicMirrorConfig
 
         public MainWindowViewModel()
         {
-            BackgroundSetting = new WindowSettingViewModel(UdpSender);
-            LayoutSetting = new LayoutSettingViewModel(UdpSender);
-            LightSetting = new LightSettingViewModel(UdpSender);
             StartupSetting = new StartupSettingViewModel();
+            WindowSetting = new WindowSettingViewModel(UdpSender, StartupSetting);
+            LayoutSetting = new LayoutSettingViewModel(UdpSender, StartupSetting);
+            LightSetting = new LightSettingViewModel(UdpSender, StartupSetting);
         }
 
         private ActionCommand _loadVrmCommand;
@@ -52,11 +52,11 @@ namespace Baku.VMagicMirrorConfig
 
             UdpSender.SendMessage(UdpMessageFactory.Instance.OpenVrmPreview(dialog.FileName));
 
-            bool turnOffTopMostTemporary = BackgroundSetting.TopMost;
+            bool turnOffTopMostTemporary = WindowSetting.TopMost;
 
             if (turnOffTopMostTemporary)
             {
-                BackgroundSetting.TopMost = false;
+                WindowSetting.TopMost = false;
             }
             
             var res = MessageBox.Show(
@@ -77,7 +77,7 @@ namespace Baku.VMagicMirrorConfig
 
             if (turnOffTopMostTemporary)
             {
-                BackgroundSetting.TopMost = true;
+                WindowSetting.TopMost = true;
             }
         }
 
@@ -89,7 +89,10 @@ namespace Baku.VMagicMirrorConfig
                 Initializer.Initialize();
                 LoadCurrentParameters();
 
-                Application.Current.Exit += OnAppExit;
+                if (WindowSetting.EnableWindowInitialPlacement)
+                {
+                    WindowSetting.MoveWindow();
+                }
             }
         }
 
@@ -104,12 +107,6 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private void OnAppExit(object sender, ExitEventArgs e)
-        {
-            Dispose();
-        }
-
-
         private void SaveCurrentParameters()
         {
             File.WriteAllText(
@@ -117,7 +114,7 @@ namespace Baku.VMagicMirrorConfig
                 _lastVrmLoadFilePath
                 );
 
-            BackgroundSetting.SaveSetting(GetFilePath(SpecialFileNames.Background));
+            WindowSetting.SaveSetting(GetFilePath(SpecialFileNames.Background));
             LayoutSetting.SaveSetting(GetFilePath(SpecialFileNames.Layout));
             LightSetting.SaveSetting(GetFilePath(SpecialFileNames.Light));
             StartupSetting.SaveSetting(GetFilePath(SpecialFileNames.Startup));
@@ -134,7 +131,7 @@ namespace Baku.VMagicMirrorConfig
 
             if (StartupSetting.LoadBackgroundSetting)
             {
-                BackgroundSetting.LoadSetting(GetFilePath(SpecialFileNames.Background));
+                WindowSetting.LoadSetting(GetFilePath(SpecialFileNames.Background));
             }
 
             if (StartupSetting.LoadLayoutSetting)

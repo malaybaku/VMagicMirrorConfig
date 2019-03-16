@@ -9,7 +9,7 @@ namespace Baku.VMagicMirrorConfig
 
     public class LayoutSettingViewModel : SettingViewModelBase
     {
-        internal LayoutSettingViewModel(UdpSender sender) : base(sender)
+        internal LayoutSettingViewModel(UdpSender sender, StartupSettingViewModel startup) : base(sender, startup)
         {
         }
 

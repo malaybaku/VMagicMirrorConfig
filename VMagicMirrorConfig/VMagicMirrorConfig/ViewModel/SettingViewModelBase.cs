@@ -3,12 +3,16 @@
     public abstract class SettingViewModelBase : ViewModelBase
     {
         //NOTE: 本当はprivate protectedがしたいが、そのためだけにC# 7.2使うのもアレなのでinternalで済ます
-        internal SettingViewModelBase(UdpSender sender)
+        internal SettingViewModelBase(UdpSender sender, StartupSettingViewModel startup)
         {
             _sender = sender;
+            Startup = startup;
         }
 
         private readonly UdpSender _sender;
+
+        //NOTE: 他のタブにもスタートアップ時の有効/無効がいじれるチェックボックス置きたいので追加
+        public StartupSettingViewModel Startup { get; }
 
         //NOTE: 本当はprivate protectedがしたいが、そのためだけにC# 7.2使うのもアレなのでinternalでごまかします
         internal void SendMessage(UdpMessage message)

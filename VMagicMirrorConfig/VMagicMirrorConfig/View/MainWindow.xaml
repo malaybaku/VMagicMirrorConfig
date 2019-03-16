@@ -116,7 +116,7 @@
             x:Name="backgroundTab"
             Grid.Row="1"
             Visibility="Collapsed"
-            DataContext="{Binding BackgroundSetting}"
+            DataContext="{Binding WindowSetting}"
             />
 
         <vmm:LayoutSettingPanel 

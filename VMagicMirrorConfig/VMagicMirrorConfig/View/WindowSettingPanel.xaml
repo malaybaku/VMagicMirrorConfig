@@ -102,7 +102,50 @@
                               />
                 </StackPanel>
             </md:Card>
-            
+
+            <md:Card>
+                <StackPanel>
+                    <CheckBox Content="{DynamicResource Window_EnableInitialPlacement}"
+                              IsChecked="{Binding EnableWindowInitialPlacement, Mode=TwoWay}"
+                              />
+                    <Button Width="200"
+                            Content="{DynamicResource Window_FetchUnityWindowPos}"
+                            Command="{Binding FetchUnityWindowPositionCommand}"
+                            />
+                    <Button Width="200"
+                            Content="{DynamicResource Window_MoveWindow}"
+                            Command="{Binding MoveWindowCommand}"
+                            />
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0"
+                                   Text="{DynamicResource Window_InitialPositionX}"
+                                   />
+                        <TextBox Grid.Row="0" Grid.Column="1" 
+                                 Text="{Binding WindowInitialPositionX, Mode=TwoWay}"
+                                 />
+
+                        <TextBlock Grid.Row="1" Grid.Column="0"
+                                   Text="{DynamicResource Window_InitialPositionY}"
+                                   />
+                        <TextBox Grid.Row="1" Grid.Column="1"
+                                 Text="{Binding WindowInitialPositionY, Mode=TwoWay}"
+                                 />
+                    </Grid>
+
+
+                </StackPanel>
+            </md:Card>
+
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center"
                         Margin="20,10">
