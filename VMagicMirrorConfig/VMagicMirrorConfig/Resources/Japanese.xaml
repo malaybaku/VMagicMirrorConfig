@@ -16,6 +16,7 @@
     <sys:String x:Key="Home_OssLicense">OSS License</sys:String>
     
     <!-- Common in Config -->
+    <sys:String x:Key="ConfigCommon_ApplyToNextStartup">この設定を次の起動時にも適用</sys:String>
     <sys:String x:Key="ConfigCommon_Reset">リセット</sys:String>
     <sys:String x:Key="ConfigCommon_Save">保存</sys:String>
     <sys:String x:Key="ConfigCommon_Load">ロード</sys:String>
@@ -25,6 +26,13 @@
     <sys:String x:Key="Window_Transparent">背景を透明にする</sys:String>
     <sys:String x:Key="Window_Draggable">(背景透明時)キャラ付近を掴んでドラッグ移動</sys:String>
     <sys:String x:Key="Window_TopMost">キャラクターをつねに最前面で表示</sys:String>
+    
+    <sys:String x:Key="Window_EnableInitialPlacement">起動時に特定の位置へウィンドウを動かす</sys:String>
+    <sys:String x:Key="Window_InitialPositionX">X(画面左 = 0)</sys:String>
+    <sys:String x:Key="Window_InitialPositionY">Y(画面上 = 0)</sys:String>
+    <sys:String x:Key="Window_FetchUnityWindowPos">いまのウィンドウ位置を記憶</sys:String>
+    <sys:String x:Key="Window_MoveWindow">指定した位置へ移動</sys:String>
+    
     
     <!-- Layout Setting -->
     <sys:String x:Key="Layout_CharacterMotion">キャラクターの動き</sys:String>

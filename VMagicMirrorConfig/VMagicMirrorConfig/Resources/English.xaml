@@ -16,6 +16,7 @@
     <sys:String x:Key="Home_OssLicense">OSS License</sys:String>
     
     <!-- Common in Config -->
+    <sys:String x:Key="ConfigCommon_ApplyToNextStartup">Applu current setting on next startup</sys:String>
     <sys:String x:Key="ConfigCommon_Reset">Reset</sys:String>
     <sys:String x:Key="ConfigCommon_Save">Save</sys:String>
     <sys:String x:Key="ConfigCommon_Load">Load</sys:String>
@@ -26,6 +27,12 @@
     <sys:String x:Key="Window_Draggable">(When Transparent)Drag character to move</sys:String>
     <sys:String x:Key="Window_TopMost">Always Foreground</sys:String>
     
+    <sys:String x:Key="Window_EnableInitialPlacement">Move window to specific position on startup</sys:String>
+    <sys:String x:Key="Window_InitialPositionX">X(Left = 0)</sys:String>
+    <sys:String x:Key="Window_InitialPositionY">Y(Top = 0)</sys:String>
+    <sys:String x:Key="Window_FetchUnityWindowPos">Check current window position</sys:String>
+    <sys:String x:Key="Window_MoveWindow">Move to specified position</sys:String>
+
     <!-- Layout Setting -->
     <sys:String x:Key="Layout_CharacterMotion">Character Motion</sys:String>
     <sys:String x:Key="Layout_WristToHandTip">Length from wrist to hand tip[cm]</sys:String>
