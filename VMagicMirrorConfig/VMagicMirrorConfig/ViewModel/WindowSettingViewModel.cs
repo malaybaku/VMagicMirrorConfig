@@ -223,6 +223,10 @@ namespace Baku.VMagicMirrorConfig
             IsTransparent = false;
             WindowDraggable = true;
             TopMost = false;
+
+            EnableWindowInitialPlacement = false;
+            WindowInitialPositionX = 0;
+            WindowInitialPositionY = 0;
         }
 
         protected override void SaveSetting()
