@@ -50,31 +50,31 @@
                 <Button Grid.Column="0"
                         Click="OnClickHomeButton">
                     <Button.Content>
-                        <TextBlock Text="ホーム" />
+                        <TextBlock Text="{DynamicResource TopBar_Home}" />
                     </Button.Content>
                 </Button>
                 <Button Grid.Column="1"
                         Click="OnClickBGSettingButton">
                     <Button.Content>
-                        <TextBlock Text="ウィンドウ" />
+                        <TextBlock Text="{DynamicResource TopBar_Window}" />
                     </Button.Content>
                 </Button>
                 <Button Grid.Column="2"
                         Click="OnClickLayoutButton">
                     <Button.Content>
-                        <TextBlock Text="レイアウト" />
+                        <TextBlock Text="{DynamicResource TopBar_Layout}" />
                     </Button.Content>
                 </Button>
                 <Button Grid.Column="3"
                         Click="OnClickLightButton">
                     <Button.Content>
-                        <TextBlock Text="ライト" />
+                        <TextBlock Text="{DynamicResource TopBar_Light}" />
                     </Button.Content>
                 </Button>
                 <Button Grid.Column="4"
                         Click="OnClickStartupButton">
                     <Button.Content>
-                        <TextBlock Text="スタートアップ" />
+                        <TextBlock Text="{DynamicResource TopBar_Startup}" />
                     </Button.Content>
                 </Button>
             </Grid>
@@ -82,7 +82,7 @@
 
         <Grid x:Name="homeTab"
               Grid.Row="1">
-            <Button Content="VRMロード" 
+            <Button Content="{DynamicResource Home_LoadVrm}" 
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     Width="120"
@@ -104,7 +104,7 @@
                     <Hyperlink Click="OnClickHyperLinkToGitHub">Source (GitHub)</Hyperlink>
                 </TextBlock>
 
-                <Button Content="OSS License" 
+                <Button Content="{DynamicResource Home_OssLicense}" 
                         HorizontalAlignment="Left"
                         Width="120"
                         Click="OnShowLicenseClick"

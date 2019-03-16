@@ -24,7 +24,7 @@
 
                     <StackPanel Orientation="Horizontal">
 
-                        <TextBlock Text="ライト"
+                        <TextBlock Text="{DynamicResource Light}"
                                    Margin="5"
                                    Style="{StaticResource HeaderText}"
                                    />
@@ -89,7 +89,7 @@
                                  />
 
                         <TextBlock Grid.Row="4" Grid.Column="0"
-                                   Text="明るさ[%]" />
+                                   Text="{DynamicResource Light_Intensity}" />
                         <Slider Grid.Row="4" Grid.Column="1"
                                 x:Name="sliderLightIntensity"
                                 Minimum="0"
@@ -107,7 +107,7 @@
                 <StackPanel>
                     <StackPanel Orientation="Horizontal">
 
-                        <TextBlock Text="Bloom"
+                        <TextBlock Text="{DynamicResource Bloom}"
                                    Margin="5"
                                    Style="{StaticResource HeaderText}"
                                    />
@@ -173,7 +173,7 @@
                                  />
 
                         <TextBlock Grid.Row="4" Grid.Column="0"
-                                   Text="強さ[%]" />
+                                   Text="{DynamicResource Bloom_Intensity}" />
                         <Slider Grid.Row="4" Grid.Column="1"
                                 x:Name="sliderBloomIntensity"
                                 Minimum="0"
@@ -185,7 +185,7 @@
                                  />
 
                         <TextBlock Grid.Row="5" Grid.Column="0"
-                               Text="しきい値[%]"
+                               Text="{DynamicResource Bloom_Threshold}"
                                />
                         <Slider Grid.Row="5" Grid.Column="1"
                                 x:Name="sliderBloomThreshold"
@@ -205,11 +205,11 @@
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center"
                         Margin="20,10">
-                <Button Content="リセット"
+                <Button Content="{DynamicResource ConfigCommon_Reset}"
                         Command="{Binding ResetToDefaultCommand}" />
-                <Button Content="保存"
+                <Button Content="{DynamicResource ConfigCommon_Save}"
                         Command="{Binding SaveSettingCommand}" />
-                <Button Content="ロード"
+                <Button Content="{DynamicResource ConfigCommon_Load}"
                         Command="{Binding LoadSettingCommand}" />
             </StackPanel>
 

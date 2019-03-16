@@ -19,6 +19,7 @@ namespace Baku.VMagicMirrorConfig
         public StartupSettingViewModel StartupSetting { get; private set; }
 
         private string _lastVrmLoadFilePath = "";
+        private bool _isDisposed = false;
 
         public MainWindowViewModel()
         {
@@ -87,15 +88,27 @@ namespace Baku.VMagicMirrorConfig
             {
                 Initializer.Initialize();
                 LoadCurrentParameters();
+
+                Application.Current.Exit += OnAppExit;
             }
         }
 
         public void Dispose()
         {
-            SaveCurrentParameters();
-            Initializer.Dispose();
-            CloseUnityApp.Close();
+            if (!_isDisposed)
+            {
+                _isDisposed = true;
+                SaveCurrentParameters();
+                Initializer.Dispose();
+                CloseUnityApp.Close();
+            }
         }
+
+        private void OnAppExit(object sender, ExitEventArgs e)
+        {
+            Dispose();
+        }
+
 
         private void SaveCurrentParameters()
         {

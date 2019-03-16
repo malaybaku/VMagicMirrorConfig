@@ -18,7 +18,7 @@
             <md:Card>
                 <StackPanel>
                     
-                    <TextBlock Text="キャラクターの動き"
+                    <TextBlock Text="{DynamicResource Layout_CharacterMotion}"
                                Margin="5"
                                Style="{StaticResource HeaderText}"
                                />
@@ -39,7 +39,7 @@
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Grid.Row="0" Grid.Column="0"
-                                   Text="手首から指先までの長さ[cm]"/>
+                                   Text="{DynamicResource Layout_WristToHandTip}"/>
                         <Slider Grid.Row="0" Grid.Column="1"
                                 x:Name="sliderWristToTip"
                                 Minimum="1"
@@ -51,7 +51,7 @@
                                  />
 
                         <TextBlock Grid.Row="1" Grid.Column="0"
-                                   Text="手首から手のひらまでの長さ[cm]"/>
+                                   Text="{DynamicResource Layout_WristToPalm}"/>
                         <Slider Grid.Row="1" Grid.Column="1"
                                 x:Name="sliderWristToPalm"
                                 Minimum="1"
@@ -63,7 +63,7 @@
                                  />
 
                         <TextBlock Grid.Row="2" Grid.Column="0"
-                                   Text="手の高さ調整[cm]"/>
+                                   Text="{DynamicResource Layout_HandYOffsetBasic}"/>
                         <Slider Grid.Row="2" Grid.Column="1"
                                 x:Name="sliderHandYOffsetBasic"
                                 Minimum="0"
@@ -75,7 +75,7 @@
                                  />
 
                         <TextBlock Grid.Row="3" Grid.Column="0"
-                                   Text="(打鍵後)手の高さ調整[cm]"/>
+                                   Text="{DynamicResource Layout_HandYOffsetAfterKeyDown}"/>
                         <Slider Grid.Row="3" Grid.Column="1"
                                 x:Name="sliderHandYOffsetAfterKeyDown"
                                 Minimum="0"
@@ -92,7 +92,7 @@
                                   Margin="10,0"
                                   IsChecked="{Binding EnableTouchTyping}">
                             <CheckBox.Content>
-                                <TextBlock Text="タッチタイピング風に視線を動かす"/>
+                                <TextBlock Text="{DynamicResource Layout_EnableTouchTyping}"/>
                             </CheckBox.Content>
                         </CheckBox>
                     </Grid>
@@ -102,7 +102,7 @@
 
             <md:Card>
                 <StackPanel>
-                    <TextBlock Text="カメラ"
+                    <TextBlock Text="{DynamicResource Layout_Camera}"
                                Margin="5"
                                Style="{StaticResource HeaderText}"
                                />
@@ -120,7 +120,7 @@
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Grid.Row="0" Grid.Column="0"
-                                   Text="高さ[cm]"/>
+                                   Text="{DynamicResource Layout_CameraHeight}"/>
                         <Slider Grid.Row="0" Grid.Column="1"
                                 x:Name="sliderCameraHeight"
                                 Minimum="10"
@@ -132,7 +132,7 @@
                                  />
 
                         <TextBlock Grid.Row="1" Grid.Column="0"
-                                   Text="キャラとの距離[cm]"/>
+                                   Text="{DynamicResource Layout_CameraDistance}"/>
                         <Slider Grid.Row="1" Grid.Column="1"
                                 x:Name="sliderCameraDistance"
                                 Minimum="30"
@@ -144,7 +144,7 @@
                                  />
 
                         <TextBlock Grid.Row="2" Grid.Column="0"
-                                   Text="角度[deg]"/>
+                                   Text="{DynamicResource Layout_CameraAngle}"/>
                         <Slider Grid.Row="2" Grid.Column="1"
                                 x:Name="sliderCameraVerticalAngle"
                                 Minimum="-50"
@@ -161,7 +161,7 @@
 
             <md:Card>
                 <StackPanel>
-                    <TextBlock Text="キーボード・マウスパッド"
+                    <TextBlock Text="{DynamicResource Layout_Hid}"
                                Margin="5"
                                Style="{StaticResource HeaderText}"
                                />
@@ -179,7 +179,7 @@
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Grid.Row="0" Grid.Column="0"
-                                   Text="高さ[cm]"/>
+                                   Text="{DynamicResource Layout_HidHeight}"/>
                         <Slider Grid.Row="0" Grid.Column="1"
                                 x:Name="sliderHidHeight"
                                 Minimum="10"
@@ -191,8 +191,8 @@
                                  />
 
                         <TextBlock Grid.Row="1" Grid.Column="0"
-                                   Text="サイズ[%]"
-                                   ToolTip="キーボードとマウスパッドのサイズを指定します。小さくすると、デバイスが小さくなり、キャラクターに近づきます。"
+                                   Text="{DynamicResource Layout_HidHorizontalScale}"
+                                   ToolTip="{DynamicResource Layout_HidHorizontalScale_Tooltip}"
                                    />
                         <Slider Grid.Row="1" Grid.Column="1"
                                 x:Name="sliderHidHorizontalScale"
@@ -215,7 +215,7 @@
                                   IsChecked="{Binding HidVisibility}"
                                   >
                             <CheckBox.Content>
-                                <TextBlock Text="キーボード・マウスパッドを表示"/>
+                                <TextBlock Text="{DynamicResource Layout_HidVisible}"/>
                             </CheckBox.Content>
 
                         </CheckBox>
@@ -226,11 +226,11 @@
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center"
                         Margin="20,10">
-                <Button Content="リセット"
+                <Button Content="{DynamicResource ConfigCommon_Reset}"
                         Command="{Binding ResetToDefaultCommand}" />
-                <Button Content="保存"
+                <Button Content="{DynamicResource ConfigCommon_Save}"
                         Command="{Binding SaveSettingCommand}" />
-                <Button Content="ロード"
+                <Button Content="{DynamicResource ConfigCommon_Load}"
                         Command="{Binding LoadSettingCommand}" />
             </StackPanel>            
         </StackPanel>

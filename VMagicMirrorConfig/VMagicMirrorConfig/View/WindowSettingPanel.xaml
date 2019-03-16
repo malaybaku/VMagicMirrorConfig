@@ -23,7 +23,7 @@
                 <StackPanel>
                     <StackPanel Orientation="Horizontal">
 
-                        <TextBlock Text="背景色"
+                        <TextBlock Text="{DynamicResource Window_BackgroundColor}"
                                    Margin="5"
                                    Style="{StaticResource HeaderText}"
                                    />
@@ -89,15 +89,15 @@
 
             <md:Card>
                 <StackPanel>
-                    <CheckBox Content="背景を透明にする"
+                    <CheckBox Content="{DynamicResource Window_Transparent}"
                               IsChecked="{Binding IsTransparent, Mode=TwoWay}"
                               />
 
-                    <CheckBox Content="(背景透明時)キャラ付近を掴んでドラッグ移動"
+                    <CheckBox Content="{DynamicResource Window_Draggable}"
                               IsChecked="{Binding WindowDraggable, Mode=TwoWay}"
                               />
 
-                    <CheckBox Content="キャラクターをつねに最前面で表示"
+                    <CheckBox Content="{DynamicResource Window_TopMost}"
                               IsChecked="{Binding TopMost, Mode=TwoWay}"
                               />
                 </StackPanel>
@@ -106,11 +106,11 @@
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center"
                         Margin="20,10">
-                <Button Content="リセット"
+                <Button Content="{DynamicResource ConfigCommon_Reset}"
                         Command="{Binding ResetToDefaultCommand}" />
-                <Button Content="保存"
+                <Button Content="{DynamicResource ConfigCommon_Save}"
                         Command="{Binding SaveSettingCommand}" />
-                <Button Content="ロード"
+                <Button Content="{DynamicResource ConfigCommon_Load}"
                         Command="{Binding LoadSettingCommand}" />
             </StackPanel>
 

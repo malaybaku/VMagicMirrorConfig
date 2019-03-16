@@ -1,0 +1,60 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                    xml:space="preserve"
+                    >
+    
+    <!-- Top Tab -->
+    <sys:String x:Key="TopBar_Home">Home</sys:String>
+    <sys:String x:Key="TopBar_Window">Window</sys:String>
+    <sys:String x:Key="TopBar_Layout">Layout</sys:String>
+    <sys:String x:Key="TopBar_Light">Light</sys:String>
+    <sys:String x:Key="TopBar_Startup">Startup</sys:String>
+    
+    <!-- Home -->
+    <sys:String x:Key="Home_LoadVrm">Load VRM</sys:String>
+    <sys:String x:Key="Home_OssLicense">OSS License</sys:String>
+    
+    <!-- Common in Config -->
+    <sys:String x:Key="ConfigCommon_Reset">Reset</sys:String>
+    <sys:String x:Key="ConfigCommon_Save">Save</sys:String>
+    <sys:String x:Key="ConfigCommon_Load">Load</sys:String>
+    
+    <!-- Window Setting -->
+    <sys:String x:Key="Window_BackgroundColor">Background</sys:String>
+    <sys:String x:Key="Window_Transparent">Transparent Window</sys:String>
+    <sys:String x:Key="Window_Draggable">(When Transparent)Drag character to move</sys:String>
+    <sys:String x:Key="Window_TopMost">Always Foreground</sys:String>
+    
+    <!-- Layout Setting -->
+    <sys:String x:Key="Layout_CharacterMotion">Character Motion</sys:String>
+    <sys:String x:Key="Layout_WristToHandTip">Length from wrist to hand tip[cm]</sys:String>
+    <sys:String x:Key="Layout_WristToPalm">Length from wrist to palm[cm]</sys:String>
+    <sys:String x:Key="Layout_HandYOffsetBasic">Adjust height of the hand[cm]</sys:String>
+    <sys:String x:Key="Layout_HandYOffsetAfterKeyDown">(After press key) adjust height of the hand[cm]</sys:String>
+    <sys:String x:Key="Layout_EnableTouchTyping">Move head like touch typing</sys:String>
+    <sys:String x:Key="Layout_Camera">Camera</sys:String>
+    <sys:String x:Key="Layout_CameraHeight">Height [cm]</sys:String>
+    <sys:String x:Key="Layout_CameraDistance">Distance [cm]</sys:String>
+    <sys:String x:Key="Layout_CameraAngle">Angle [deg]</sys:String>
+    <sys:String x:Key="Layout_Hid">Keyboard &amp; Mouse Pad</sys:String>
+    <sys:String x:Key="Layout_HidHeight">Height [cm]</sys:String>
+    <sys:String x:Key="Layout_HidHorizontalScale">Size [%]</sys:String>
+    <sys:String x:Key="Layout_HidHorizontalScale_Tooltip">Specify the size of keyboard and mouse. When smallen, the devices are close to the character.</sys:String>
+    <sys:String x:Key="Layout_HidVisible">Visible</sys:String>
+
+    <!-- Light Setting -->
+    <sys:String x:Key="Light">Light</sys:String>
+    <sys:String x:Key="Light_Intensity">Intensity [%]</sys:String>
+    <sys:String x:Key="Bloom">Bloom</sys:String>
+    <sys:String x:Key="Bloom_Intensity">Intensity [%]</sys:String>
+    <sys:String x:Key="Bloom_Threshold">Threshold [%]</sys:String>
+    
+    <!-- Startup Setting -->
+    <sys:String x:Key="Startup">Settings to load on next startup</sys:String>
+    <sys:String x:Key="Startup_Vrm">VRM</sys:String>
+    <sys:String x:Key="Startup_Window">Window</sys:String>
+    <sys:String x:Key="Startup_Layout">Layout</sys:String>
+    <sys:String x:Key="Startup_Light">Light</sys:String>
+    
+</ResourceDictionary>

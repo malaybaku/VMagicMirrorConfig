@@ -16,21 +16,21 @@
     </UserControl.Resources>
     <StackPanel Margin="10">
         <TextBlock VerticalAlignment="Center"
-                   Text="次回の起動時に読み込むデータ"
+                   Text="{DynamicResource Startup}"
                    FontSize="14"
                    FontWeight="Bold"
                    TextDecorations="Underline"
                    />
-        <CheckBox Content="VRM"
+        <CheckBox Content="{DynamicResource Startup_Vrm}"
                   IsChecked="{Binding LoadVrm}"
                   />
-        <CheckBox Content="ウィンドウ"
+        <CheckBox Content="{DynamicResource Startup_Window}"
                   IsChecked="{Binding LoadBackgroundSetting}"
                   />
-        <CheckBox Content="レイアウト"
+        <CheckBox Content="{DynamicResource Startup_Layout}"
                   IsChecked="{Binding LoadLayoutSetting}"
                   />
-        <CheckBox Content="ライト"
+        <CheckBox Content="{DynamicResource Startup_Light}"
                   IsChecked="{Binding LoadLightSetting}"
                   />
     </StackPanel>

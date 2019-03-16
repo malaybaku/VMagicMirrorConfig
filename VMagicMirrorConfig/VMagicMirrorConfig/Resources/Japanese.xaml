@@ -1,0 +1,60 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                    xml:space="preserve"
+                    >
+    
+    <!-- Top Tab -->
+    <sys:String x:Key="TopBar_Home">ホーム</sys:String>
+    <sys:String x:Key="TopBar_Window">ウィンドウ</sys:String>
+    <sys:String x:Key="TopBar_Layout">レイアウト</sys:String>
+    <sys:String x:Key="TopBar_Light">ライト</sys:String>
+    <sys:String x:Key="TopBar_Startup">スタートアップ</sys:String>
+    
+    <!-- Home -->
+    <sys:String x:Key="Home_LoadVrm">VRMロード</sys:String>
+    <sys:String x:Key="Home_OssLicense">OSS License</sys:String>
+    
+    <!-- Common in Config -->
+    <sys:String x:Key="ConfigCommon_Reset">リセット</sys:String>
+    <sys:String x:Key="ConfigCommon_Save">保存</sys:String>
+    <sys:String x:Key="ConfigCommon_Load">ロード</sys:String>
+    
+    <!-- Window Setting -->
+    <sys:String x:Key="Window_BackgroundColor">背景色</sys:String>
+    <sys:String x:Key="Window_Transparent">背景を透明にする</sys:String>
+    <sys:String x:Key="Window_Draggable">(背景透明時)キャラ付近を掴んでドラッグ移動</sys:String>
+    <sys:String x:Key="Window_TopMost">キャラクターをつねに最前面で表示</sys:String>
+    
+    <!-- Layout Setting -->
+    <sys:String x:Key="Layout_CharacterMotion">キャラクターの動き</sys:String>
+    <sys:String x:Key="Layout_WristToHandTip">手首から指先までの長さ[cm]</sys:String>
+    <sys:String x:Key="Layout_WristToPalm">手首から手のひらまでの長さ[cm]</sys:String>
+    <sys:String x:Key="Layout_HandYOffsetBasic">手の高さ調整[cm]</sys:String>
+    <sys:String x:Key="Layout_HandYOffsetAfterKeyDown">(打鍵後)手の高さ調整[cm]</sys:String>
+    <sys:String x:Key="Layout_EnableTouchTyping">タッチタイピング風に視線を動かす</sys:String>
+    <sys:String x:Key="Layout_Camera">カメラ</sys:String>
+    <sys:String x:Key="Layout_CameraHeight">高さ[cm]</sys:String>
+    <sys:String x:Key="Layout_CameraDistance">キャラとの距離[cm]</sys:String>
+    <sys:String x:Key="Layout_CameraAngle">角度[deg]</sys:String>
+    <sys:String x:Key="Layout_Hid">キーボード・マウスパッド</sys:String>
+    <sys:String x:Key="Layout_HidHeight">高さ[cm]</sys:String>
+    <sys:String x:Key="Layout_HidHorizontalScale">サイズ[%]</sys:String>
+    <sys:String x:Key="Layout_HidHorizontalScale_Tooltip">キーボードとマウスパッドのサイズを指定します。小さくすると、デバイスが小さくなり、キャラクターに近づきます。</sys:String>
+    <sys:String x:Key="Layout_HidVisible">キーボード・マウスパッドを表示</sys:String>
+
+    <!-- Light Setting -->
+    <sys:String x:Key="Light">ライト</sys:String>
+    <sys:String x:Key="Light_Intensity">明るさ[%]</sys:String>
+    <sys:String x:Key="Bloom">Bloom</sys:String>
+    <sys:String x:Key="Bloom_Intensity">強さ[%]</sys:String>
+    <sys:String x:Key="Bloom_Threshold">しきい値[%]</sys:String>
+    
+    <!-- Startup Setting -->
+    <sys:String x:Key="Startup">次回の起動時に読み込むデータ</sys:String>
+    <sys:String x:Key="Startup_Vrm">VRM</sys:String>
+    <sys:String x:Key="Startup_Window">ウィンドウ</sys:String>
+    <sys:String x:Key="Startup_Layout">レイアウト</sys:String>
+    <sys:String x:Key="Startup_Light">ライト</sys:String>
+    
+</ResourceDictionary>

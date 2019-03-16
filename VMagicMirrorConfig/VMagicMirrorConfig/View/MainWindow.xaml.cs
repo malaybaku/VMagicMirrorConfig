@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows;
 
@@ -19,7 +20,7 @@ namespace Baku.VMagicMirrorConfig
             base.OnClosed(e);
             (DataContext as IDisposable)?.Dispose();
         }
-
+        
         private void OnClickHyperLinkToGitHub(object sender, RoutedEventArgs e) 
             => Process.Start("https://github.com/malaybaku/VMagicMirror");
 
