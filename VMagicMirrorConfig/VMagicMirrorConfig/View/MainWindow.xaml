@@ -160,34 +160,4 @@
             />
 
     </Grid>
-    
-    <!--<Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <Button Grid.Column="0"
-                Content="VRMロード" 
-                Command="{Binding LoadVrmCommand}"
-                />
-        <Button Grid.Column="1"
-                Content="背景色と光" 
-                Command="{Binding OpenBGSettingCommand}"
-                />
-        <Button Grid.Column="2"
-                Content="レイアウト" 
-                Command="{Binding OpenLayoutSettingCommand}"
-                />
-        <Button Grid.Column="3"
-                Content="スタート時設定" 
-                Command="{Binding OpenStartupSettingCommand}"
-                />
-        <Button Grid.Column="4"
-                Content="About"
-                Command="{Binding OpenAboutWindowCommand}"
-                />
-    </Grid>-->
 </Window>
