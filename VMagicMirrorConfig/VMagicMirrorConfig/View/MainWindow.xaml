@@ -3,89 +3,33 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
         xmlns:vmm="clr-namespace:Baku.VMagicMirrorConfig"
-        xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         d:DataContext="{x:Type vmm:MainWindowViewModel}"
         Title="VMagicMirror" 
-        Height="600" Width="380"
-        MinHeight="200" MinWidth="380"
+        Height="600" Width="430"
+        MinHeight="200" MinWidth="430"
         >
     <Window.DataContext>
         <vmm:MainWindowViewModel/>
     </Window.DataContext>
-    <Window.Resources>
-        <Style x:Key="HeaderButton" TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
-            <Setter Property="Margin" Value="0"/>
-            <Setter Property="Padding" Value="3"/>
-            <Setter Property="HorizontalAlignment" Value="Stretch"/>
-            <Setter Property="VerticalAlignment" Value="Stretch"/>
-            <Setter Property="Background" Value="{DynamicResource PrimaryHueDarkBrush}"/>
-            <Setter Property="Foreground" Value="{DynamicResource PrimaryHueDarkForegroundBrush}"/>
-        </Style>
-    </Window.Resources>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <md:Card Margin="0" Padding="0">
-            <Grid Grid.Row="0"
-              Margin="0"
-              Background="{DynamicResource PrimaryHueDarkBrush}"
-              >
-                <Grid.Resources>
-                    <Style TargetType="Button" BasedOn="{StaticResource HeaderButton}"/>
-                    <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
-                        <Setter Property="FontSize" Value="11"/>
-                    </Style>
-                </Grid.Resources>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Button Grid.Column="0"
-                        Click="OnClickHomeButton">
-                    <Button.Content>
-                        <TextBlock Text="{DynamicResource TopBar_Home}" />
-                    </Button.Content>
-                </Button>
-                <Button Grid.Column="1"
-                        Click="OnClickBGSettingButton">
-                    <Button.Content>
-                        <TextBlock Text="{DynamicResource TopBar_Window}" />
-                    </Button.Content>
-                </Button>
-                <Button Grid.Column="2"
-                        Click="OnClickLayoutButton">
-                    <Button.Content>
-                        <TextBlock Text="{DynamicResource TopBar_Layout}" />
-                    </Button.Content>
-                </Button>
-                <Button Grid.Column="3"
-                        Click="OnClickLightButton">
-                    <Button.Content>
-                        <TextBlock Text="{DynamicResource TopBar_Light}" />
-                    </Button.Content>
-                </Button>
-                <Button Grid.Column="4"
-                        Click="OnClickStartupButton">
-                    <Button.Content>
-                        <TextBlock Text="{DynamicResource TopBar_Startup}" />
-                    </Button.Content>
-                </Button>
-            </Grid>
-        </md:Card>
-
-        <Grid x:Name="homeTab"
-              Grid.Row="1">
-            <StackPanel VerticalAlignment="Top"
+    <dragablz:TabablzControl FixedHeaderCount="5">
+        <dragablz:TabablzControl.HeaderItemTemplate>
+            <DataTemplate>
+                <TextBlock FontSize="12"
+                           FontWeight="Bold"
+                           Margin="0"
+                           Text="{Binding}" 
+                           />
+            </DataTemplate>
+        </dragablz:TabablzControl.HeaderItemTemplate>
+        <TabItem Header="{DynamicResource TopBar_Home}">
+            <Grid>
+                <StackPanel VerticalAlignment="Top"
                         HorizontalAlignment="Left">
 
-                <Button Content="{DynamicResource Home_LoadVrm}" 
+                    <Button Content="{DynamicResource Home_LoadVrm}" 
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
                         Width="120"
@@ -93,71 +37,53 @@
                         Command="{Binding LoadVrmCommand}"
                         />
 
-                <CheckBox Content="{DynamicResource Home_LoadVrmOnNextStartup}"
+                    <CheckBox Content="{DynamicResource Home_LoadVrmOnNextStartup}"
                           Margin="10"
                           IsChecked="{Binding StartupSetting.LoadVrm, Mode=TwoWay}"
                           />
 
-                <TextBlock Style="{StaticResource HeaderText}"
+                    <TextBlock Style="{StaticResource HeaderText}"
                            Text="Language"/>
 
-                <ComboBox ItemsSource="{Binding AvailableLanguageNames}"
+                    <ComboBox ItemsSource="{Binding AvailableLanguageNames}"
                           SelectedItem="{Binding LanguageName, Mode=TwoWay}"
                           Margin="10"
                           />
-            </StackPanel>
-            
-            
+                </StackPanel>
 
-            <StackPanel VerticalAlignment="Bottom"
+                <StackPanel VerticalAlignment="Bottom"
                         HorizontalAlignment="Left"
                         Margin="10">
-                <StackPanel.Resources>
-                    <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
-                        <Setter Property="Margin" Value="2"/>
-                    </Style>
-                </StackPanel.Resources>
-                <TextBlock Text="VMagicMirror ver0.12"/>
-                <TextBlock Text="Copyright (c) 2019 獏星(ばくすたー)"/>
-                <TextBlock ToolTip="https://github.com/malaybaku/VMagicMirror">
+                    <StackPanel.Resources>
+                        <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                            <Setter Property="Margin" Value="2"/>
+                        </Style>
+                    </StackPanel.Resources>
+                    <TextBlock Text="VMagicMirror ver0.13"/>
+                    <TextBlock Text="Copyright (c) 2019 獏星(ばくすたー)"/>
+                    <TextBlock ToolTip="https://github.com/malaybaku/VMagicMirror">
                     <Hyperlink Click="OnClickHyperLinkToGitHub">Source (GitHub)</Hyperlink>
-                </TextBlock>
+                    </TextBlock>
 
-                <Button Content="{DynamicResource Home_OssLicense}" 
+                    <Button Content="{DynamicResource Home_OssLicense}" 
                         HorizontalAlignment="Left"
                         Width="120"
                         Click="OnShowLicenseClick"
                         />
-            </StackPanel>
-        </Grid>
-
-        <vmm:WindowSettingPanel 
-            x:Name="backgroundTab"
-            Grid.Row="1"
-            Visibility="Collapsed"
-            DataContext="{Binding WindowSetting}"
-            />
-
-        <vmm:LayoutSettingPanel 
-            x:Name="layoutTab"
-            Grid.Row="1"
-            Visibility="Collapsed"
-            DataContext="{Binding LayoutSetting}"
-            />
-
-        <vmm:LightSettingPanel 
-            x:Name="lightTab"
-            Grid.Row="1"
-            Visibility="Collapsed"
-            DataContext="{Binding LightSetting}"
-            />
-
-        <vmm:StartupSettingPanel 
-            x:Name="startupTab"
-            Grid.Row="1"
-            Visibility="Collapsed"
-            DataContext="{Binding StartupSetting}"
-            />
-
-    </Grid>
+                </StackPanel>
+            </Grid>
+        </TabItem>
+        <TabItem Header="{DynamicResource TopBar_Window}">
+            <vmm:WindowSettingPanel DataContext="{Binding WindowSetting}" />
+        </TabItem>
+        <TabItem Header="{DynamicResource TopBar_Layout}">
+            <vmm:LayoutSettingPanel DataContext="{Binding LayoutSetting}" />
+        </TabItem>
+        <TabItem Header="{DynamicResource TopBar_Light}">
+            <vmm:LightSettingPanel DataContext="{Binding LightSetting}" />
+        </TabItem>
+        <TabItem Header="{DynamicResource TopBar_Startup}">
+            <vmm:StartupSettingPanel DataContext="{Binding StartupSetting}" />
+        </TabItem>
+    </dragablz:TabablzControl>
 </Window>
