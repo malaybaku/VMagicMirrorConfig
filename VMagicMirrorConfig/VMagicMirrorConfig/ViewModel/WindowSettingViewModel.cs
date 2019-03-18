@@ -68,11 +68,11 @@ namespace Baku.VMagicMirrorConfig
 
             if (IsTransparent)
             {
-                SendMessage(UdpMessageFactory.Instance.Chromakey(0, 0, 0, 0));
+                SendMessage(MessageFactory.Instance.Chromakey(0, 0, 0, 0));
             }
             else
             {
-                SendMessage(UdpMessageFactory.Instance.Chromakey(255, R, G, B));
+                SendMessage(MessageFactory.Instance.Chromakey(255, R, G, B));
             }
         }
 
@@ -91,12 +91,12 @@ namespace Baku.VMagicMirrorConfig
                         HideWindowFrame = true;
                         if (IgnoreMouseWhenTransparent)
                         {
-                            SendMessage(UdpMessageFactory.Instance.IgnoreMouse(IgnoreMouseWhenTransparent));
+                            SendMessage(MessageFactory.Instance.IgnoreMouse(IgnoreMouseWhenTransparent));
                         }
                     }
                     else
                     {
-                        SendMessage(UdpMessageFactory.Instance.IgnoreMouse(false));
+                        SendMessage(MessageFactory.Instance.IgnoreMouse(false));
                     }
                 }
             }
@@ -111,7 +111,7 @@ namespace Baku.VMagicMirrorConfig
                 if (SetValue(ref _windowDraggable, value))
                 {
                     IgnoreMouseWhenTransparent = !WindowDraggable;
-                    SendMessage(UdpMessageFactory.Instance.WindowDraggable(WindowDraggable));
+                    SendMessage(MessageFactory.Instance.WindowDraggable(WindowDraggable));
                 }
             }
         }
@@ -124,7 +124,7 @@ namespace Baku.VMagicMirrorConfig
             {
                 if (SetValue(ref _topMost, value))
                 {
-                    SendMessage(UdpMessageFactory.Instance.TopMost(TopMost));
+                    SendMessage(MessageFactory.Instance.TopMost(TopMost));
                 }
             }
         }
@@ -177,7 +177,7 @@ namespace Baku.VMagicMirrorConfig
             => _moveWindowCommand ?? (_moveWindowCommand = new ActionCommand(MoveWindow));
 
         internal void MoveWindow()
-            => SendMessage(UdpMessageFactory.Instance.MoveWindow(
+            => SendMessage(MessageFactory.Instance.MoveWindow(
                 WindowInitialPositionX,
                 WindowInitialPositionY
                 ));
@@ -193,7 +193,7 @@ namespace Baku.VMagicMirrorConfig
             {
                 if (SetValue(ref _hideWindowFrame, value))
                 {
-                    SendMessage(UdpMessageFactory.Instance.WindowFrameVisibility(!HideWindowFrame));
+                    SendMessage(MessageFactory.Instance.WindowFrameVisibility(!HideWindowFrame));
                 }
             }
         }
@@ -208,7 +208,7 @@ namespace Baku.VMagicMirrorConfig
                 if (SetValue(ref _ignoreMouseWhenTransparent, value) &&
                     IsTransparent)
                 {
-                    SendMessage(UdpMessageFactory.Instance.IgnoreMouse(IgnoreMouseWhenTransparent));
+                    SendMessage(MessageFactory.Instance.IgnoreMouse(IgnoreMouseWhenTransparent));
                 }
             }
         }

@@ -64,5 +64,33 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
+        public static bool TryReadStringParam(string line, string name, out string result)
+        {
+            string key = name + ":";
+            if (line.StartsWith(key))
+            {
+                result = line.Substring(key.Length);
+                return true;
+            }
+            else
+            {
+                result = "";
+                return false;
+            }
+        }
+
+        public static bool TryReadStringParam(string line, string name, Action<string> act)
+        {
+            if (TryReadStringParam(line, name, out string result))
+            {
+                act(result);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
     }
 }

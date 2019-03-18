@@ -18,13 +18,13 @@ namespace Baku.VMagicMirrorConfig
 
 
         private void OnKeyDown(object sender, EventArgs e)
-            => UdpSender.SendMessage(UdpMessageFactory.Instance.KeyDown(InputChecker.KeyCode));
+            => UdpSender.SendMessage(MessageFactory.Instance.KeyDown(InputChecker.KeyCode));
 
         private void OnMouseMoved(object sender, EventArgs e) 
-            => UdpSender.SendMessage(UdpMessageFactory.Instance.MouseMoved(InputChecker.X, InputChecker.Y));
+            => UdpSender.SendMessage(MessageFactory.Instance.MouseMoved(InputChecker.X, InputChecker.Y));
 
         private void OnMouseButton(object sender, MouseButtonEventArgs e)
-            => UdpSender.SendMessage(UdpMessageFactory.Instance.MouseButton(e.Info));
+            => UdpSender.SendMessage(MessageFactory.Instance.MouseButton(e.Info));
 
         public void Dispose()
         {

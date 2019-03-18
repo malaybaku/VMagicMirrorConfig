@@ -36,17 +36,16 @@
 
     <!-- Layout Setting -->
     <sys:String x:Key="Layout_CharacterMotion">Character Motion</sys:String>
-    <sys:String x:Key="Layout_WristToHandTip">Length from wrist to hand tip[cm]</sys:String>
-    <sys:String x:Key="Layout_WristToPalm">Length from wrist to palm[cm]</sys:String>
-    <sys:String x:Key="Layout_HandYOffsetBasic">Adjust height of the hand[cm]</sys:String>
-    <sys:String x:Key="Layout_HandYOffsetAfterKeyDown">(After press key) adjust height of the hand[cm]</sys:String>
-    <sys:String x:Key="Layout_EnableTouchTyping">Move head like touch typing</sys:String>
+    <sys:String x:Key="Layout_WristToHandTip">Wrist-Hand tip length [cm]</sys:String>
+    <sys:String x:Key="Layout_WristToPalm">Wrist-Palm length [cm]</sys:String>
+    <sys:String x:Key="Layout_HandYOffsetBasic">Hand height adjust [cm]</sys:String>
+    <sys:String x:Key="Layout_HandYOffsetAfterKeyDown">(Press key)Hand height adjust [cm]</sys:String>
+    <sys:String x:Key="Layout_EnableTouchTyping">Head motion like touch typing</sys:String>
     
     <sys:String x:Key="Layout_WaitMotion">Wait motion</sys:String>
     <sys:String x:Key="Layout_EnableWaitMotion">Enable</sys:String>
     <sys:String x:Key="Layout_WaitMotionScale">Scale [%]</sys:String>
     <sys:String x:Key="Layout_WaitMotionPeriod">Period [sec]</sys:String>
-    
     
     <sys:String x:Key="Layout_Camera">Camera</sys:String>
     <sys:String x:Key="Layout_CameraHeight">Height [cm]</sys:String>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Reflection;
@@ -27,6 +28,8 @@ namespace Baku.VMagicMirrorConfig
             WindowSetting = new WindowSettingViewModel(UdpSender, StartupSetting);
             LayoutSetting = new LayoutSettingViewModel(UdpSender, StartupSetting);
             LightSetting = new LightSettingViewModel(UdpSender, StartupSetting);
+
+            AvailableLanguageNames = new ReadOnlyObservableCollection<string>(_availableLanguageNames);
         }
 
         private ActionCommand _loadVrmCommand;
@@ -50,7 +53,7 @@ namespace Baku.VMagicMirrorConfig
                 return;
             }
 
-            UdpSender.SendMessage(UdpMessageFactory.Instance.OpenVrmPreview(dialog.FileName));
+            UdpSender.SendMessage(MessageFactory.Instance.OpenVrmPreview(dialog.FileName));
 
             bool turnOffTopMostTemporary = WindowSetting.TopMost;
 
@@ -58,21 +61,23 @@ namespace Baku.VMagicMirrorConfig
             {
                 WindowSetting.TopMost = false;
             }
-            
+
+            var indication = MessageIndication.LoadVrmConfirmation(LanguageName);
+
             var res = MessageBox.Show(
-                "ビューアー画面のライセンスを確認してください。読み込みますか？", 
-                "VRMの読み込み", 
+                indication.Content,
+                indication.Title,
                 MessageBoxButton.OKCancel
                 );
 
             if (res == MessageBoxResult.OK)
             {
-                UdpSender.SendMessage(UdpMessageFactory.Instance.OpenVrm(dialog.FileName));
+                UdpSender.SendMessage(MessageFactory.Instance.OpenVrm(dialog.FileName));
                 _lastVrmLoadFilePath = dialog.FileName;
             }
             else
             {
-                UdpSender.SendMessage(UdpMessageFactory.Instance.CancelLoadVrm());
+                UdpSender.SendMessage(MessageFactory.Instance.CancelLoadVrm());
             }
 
             if (turnOffTopMostTemporary)
@@ -92,6 +97,30 @@ namespace Baku.VMagicMirrorConfig
                 if (WindowSetting.EnableWindowInitialPlacement)
                 {
                     WindowSetting.MoveWindow();
+                }
+
+                LanguageSelector.Instance.Initialize(UdpSender);
+                LanguageName = LanguageSelector.Instance.LanguageName;
+            }
+        }
+
+        private readonly ObservableCollection<string> _availableLanguageNames
+            = new ObservableCollection<string>()
+        {
+            "Japanese",
+            "English",
+        };
+        public ReadOnlyObservableCollection<string> AvailableLanguageNames { get; }
+
+        private string _languageName = nameof(Languages.Japanese);
+        public string LanguageName
+        {
+            get => _languageName;
+            set
+            {
+                if (SetValue(ref _languageName, value))
+                {
+                    LanguageSelector.Instance.LanguageName = LanguageName;
                 }
             }
         }
@@ -158,7 +187,7 @@ namespace Baku.VMagicMirrorConfig
                 string vrmPath = File.ReadAllText(settingFilePath);
                 if (File.Exists(vrmPath))
                 {
-                    UdpSender.SendMessage(UdpMessageFactory.Instance.OpenVrm(vrmPath));
+                    UdpSender.SendMessage(MessageFactory.Instance.OpenVrm(vrmPath));
                     _lastVrmLoadFilePath = vrmPath;
                 }
             }
@@ -172,15 +201,6 @@ namespace Baku.VMagicMirrorConfig
                 Path.GetDirectoryName(Assembly.GetEntryAssembly().Location),
                 fileName
                 );
-    }
-
-    public static class SpecialFileNames
-    {
-        public static readonly string LastVrmLoadedFile = "_currentVrm";
-        public static readonly string Background = "_currentBackground";
-        public static readonly string Layout = "_currentLayout";
-        public static readonly string Light = "_light";
-        public static readonly string Startup = "_startup";
     }
 
     public interface IWindowViewModel : IDisposable

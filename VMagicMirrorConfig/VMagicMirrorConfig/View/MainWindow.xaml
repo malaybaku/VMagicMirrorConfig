@@ -98,6 +98,13 @@
                           IsChecked="{Binding StartupSetting.LoadVrm, Mode=TwoWay}"
                           />
 
+                <TextBlock Style="{StaticResource HeaderText}"
+                           Text="Language"/>
+
+                <ComboBox ItemsSource="{Binding AvailableLanguageNames}"
+                          SelectedItem="{Binding LanguageName, Mode=TwoWay}"
+                          Margin="10"
+                          />
             </StackPanel>
             
             

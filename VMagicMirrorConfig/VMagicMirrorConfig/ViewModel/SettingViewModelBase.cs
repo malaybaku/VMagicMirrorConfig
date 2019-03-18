@@ -15,7 +15,7 @@
         public StartupSettingViewModel Startup { get; }
 
         //NOTE: 本当はprivate protectedがしたいが、そのためだけにC# 7.2使うのもアレなのでinternalでごまかします
-        internal void SendMessage(UdpMessage message)
+        internal void SendMessage(Message message)
             => _sender.SendMessage(message);
 
         private ActionCommand _resetToDefaultCommand;

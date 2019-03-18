@@ -27,7 +27,7 @@ namespace Baku.VMagicMirrorConfig
                 if (SetValue(ref _lightIntensity, value))
                 {
                     SendMessage(
-                        UdpMessageFactory.Instance.LightIntensity(LightIntensity)
+                        MessageFactory.Instance.LightIntensity(LightIntensity)
                         );
                 }
             }
@@ -80,7 +80,7 @@ namespace Baku.VMagicMirrorConfig
         private void UpdateLightColor()
         {
             LightColor = Color.FromRgb((byte)LightR, (byte)LightG, (byte)LightB);
-            SendMessage(UdpMessageFactory.Instance.LightColor(LightR, LightG, LightB));
+            SendMessage(MessageFactory.Instance.LightColor(LightR, LightG, LightB));
         }
 
         #endregion
@@ -96,7 +96,7 @@ namespace Baku.VMagicMirrorConfig
                 if (SetValue(ref _bloomIntensity, value))
                 {
                     SendMessage(
-                        UdpMessageFactory.Instance.BloomIntensity(BloomIntensity)
+                        MessageFactory.Instance.BloomIntensity(BloomIntensity)
                         );
                 }
             }
@@ -111,7 +111,7 @@ namespace Baku.VMagicMirrorConfig
                 if (SetValue(ref _bloomThreshold, value))
                 {
                     SendMessage(
-                        UdpMessageFactory.Instance.BloomThreshold(BloomThreshold)
+                        MessageFactory.Instance.BloomThreshold(BloomThreshold)
                         );
                 }
             }
@@ -164,7 +164,7 @@ namespace Baku.VMagicMirrorConfig
         private void UpdateBloomColor()
         {
             BloomColor = Color.FromRgb((byte)BloomR, (byte)BloomG, (byte)BloomB);
-            SendMessage(UdpMessageFactory.Instance.BloomColor(BloomR, BloomG, BloomB));
+            SendMessage(MessageFactory.Instance.BloomColor(BloomR, BloomG, BloomB));
         }
 
         #endregion

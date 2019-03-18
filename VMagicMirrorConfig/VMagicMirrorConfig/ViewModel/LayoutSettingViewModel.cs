@@ -24,7 +24,7 @@ namespace Baku.VMagicMirrorConfig
             {
                 if (SetValue(ref _lengthFromWristToTip, value))
                 {
-                    SendMessage(UdpMessageFactory.Instance.LengthFromWristToTip(LengthFromWristToTip));
+                    SendMessage(MessageFactory.Instance.LengthFromWristToTip(LengthFromWristToTip));
                 }
             }
         }
@@ -38,7 +38,7 @@ namespace Baku.VMagicMirrorConfig
             {
                 if (SetValue(ref _lengthFromWristToPalm, value))
                 {
-                    SendMessage(UdpMessageFactory.Instance.LengthFromWristToPalm(LengthFromWristToPalm));
+                    SendMessage(MessageFactory.Instance.LengthFromWristToPalm(LengthFromWristToPalm));
                 }
             }
         }
@@ -51,7 +51,7 @@ namespace Baku.VMagicMirrorConfig
             {
                 if (SetValue(ref _handYOffsetBasic, value))
                 {
-                    SendMessage(UdpMessageFactory.Instance.HandYOffsetBasic(HandYOffsetBasic));
+                    SendMessage(MessageFactory.Instance.HandYOffsetBasic(HandYOffsetBasic));
                 }
             }
         }
@@ -64,7 +64,7 @@ namespace Baku.VMagicMirrorConfig
             {
                 if (SetValue(ref _handYOffsetAfterKeyDown, value))
                 {
-                    SendMessage(UdpMessageFactory.Instance.HandYOffsetAfterKeyDown(HandYOffsetAfterKeyDown));
+                    SendMessage(MessageFactory.Instance.HandYOffsetAfterKeyDown(HandYOffsetAfterKeyDown));
                 }
             }
         }
@@ -77,7 +77,7 @@ namespace Baku.VMagicMirrorConfig
             {
                 if (SetValue(ref _enableWaitMotion, value))
                 {
-                    SendMessage(UdpMessageFactory.Instance.EnableWaitMotion(EnableWaitMotion));
+                    SendMessage(MessageFactory.Instance.EnableWaitMotion(EnableWaitMotion));
                 }
             }
         }
@@ -90,7 +90,7 @@ namespace Baku.VMagicMirrorConfig
             {
                 if (SetValue(ref _waitMotionScale, value))
                 {
-                    SendMessage(UdpMessageFactory.Instance.WaitMotionScale(WaitMotionScale));
+                    SendMessage(MessageFactory.Instance.WaitMotionScale(WaitMotionScale));
                 }
             }
         }
@@ -103,7 +103,7 @@ namespace Baku.VMagicMirrorConfig
             {
                 if (SetValue(ref _waitMotionPeriod, value))
                 {
-                    SendMessage(UdpMessageFactory.Instance.WaitMotionPeriod(WaitMotionPeriod));
+                    SendMessage(MessageFactory.Instance.WaitMotionPeriod(WaitMotionPeriod));
                 }
             }
         }
@@ -117,7 +117,7 @@ namespace Baku.VMagicMirrorConfig
             {
                 if (SetValue(ref _enableTouchTyping, value))
                 {
-                    SendMessage(UdpMessageFactory.Instance.EnableTouchTyping(EnableTouchTyping));
+                    SendMessage(MessageFactory.Instance.EnableTouchTyping(EnableTouchTyping));
                 }
             }
         }
@@ -131,7 +131,7 @@ namespace Baku.VMagicMirrorConfig
             {
                 if (SetValue(ref _cameraHeight, value))
                 {
-                    SendMessage(UdpMessageFactory.Instance.CameraHeight(CameraHeight));
+                    SendMessage(MessageFactory.Instance.CameraHeight(CameraHeight));
                 }
             }
         }
@@ -145,7 +145,7 @@ namespace Baku.VMagicMirrorConfig
             {
                 if (SetValue(ref _cameraDistance, value))
                 {
-                    SendMessage(UdpMessageFactory.Instance.CameraDistance(CameraDistance));
+                    SendMessage(MessageFactory.Instance.CameraDistance(CameraDistance));
                 }
             }
         }
@@ -159,7 +159,7 @@ namespace Baku.VMagicMirrorConfig
             {
                 if (SetValue(ref _cameraVerticalAngle, value))
                 {
-                    SendMessage(UdpMessageFactory.Instance.CameraVerticalAngle(CameraVerticalAngle));
+                    SendMessage(MessageFactory.Instance.CameraVerticalAngle(CameraVerticalAngle));
                 }
             }
         }
@@ -173,7 +173,7 @@ namespace Baku.VMagicMirrorConfig
             {
                 if (SetValue(ref _hidHeight, value))
                 {
-                    SendMessage(UdpMessageFactory.Instance.HidHeight(HidHeight));
+                    SendMessage(MessageFactory.Instance.HidHeight(HidHeight));
                 }
             }
         }
@@ -187,7 +187,7 @@ namespace Baku.VMagicMirrorConfig
             {
                 if (SetValue(ref _hidHorizontalScale, value))
                 {
-                    SendMessage(UdpMessageFactory.Instance.HidHorizontalScale(HidHorizontalScale));
+                    SendMessage(MessageFactory.Instance.HidHorizontalScale(HidHorizontalScale));
                 }
             }
         }
@@ -201,7 +201,7 @@ namespace Baku.VMagicMirrorConfig
             {
                 if (SetValue(ref _hidVisibility, value))
                 {
-                    SendMessage(UdpMessageFactory.Instance.HidVisibility(HidVisibility));
+                    SendMessage(MessageFactory.Instance.HidVisibility(HidVisibility));
                 }
             }
         }
