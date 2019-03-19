@@ -11,12 +11,15 @@ namespace Baku.VMagicMirrorConfig
         //明示的に参照保持しないとデリゲートがGCされてしまうのでわざわざ参照を持つ(アンマネージ感がすごい)
         private WindowsAPI.HOOKPROC _hookProc;
 
+        public int FilteredX => X + DX;
+        public int FilteredY => Y + DY;
+
         private readonly object _posXLock = new object();
         private int _x = 0;
         public int X
         {
             get { lock (_posXLock) return _x; }
-            set { lock (_posXLock) _x = value; }
+            private set { lock (_posXLock) _x = value; }
         }
 
         private readonly object _posYLock = new object();
@@ -24,7 +27,23 @@ namespace Baku.VMagicMirrorConfig
         public int Y
         {
             get { lock (_posYLock) return _y; }
-            set { lock (_posYLock) _y = value; }
+            private set { lock (_posYLock) _y = value; }
+        }
+
+        private readonly object _posDXLock = new object();
+        private int _dx = 0;
+        public int DX
+        {
+            get { lock (_posDXLock) return _dx; }
+            private set { lock (_posDXLock) _dx = value; }
+        }
+
+        private readonly object _posDYLock = new object();
+        private int _dy = 0;
+        public int DY
+        {
+            get { lock (_posDYLock) return _dy; }
+            private set { lock (_posDYLock) _dy = value; }
         }
 
         private readonly object _mouseMessagesLock = new object();
@@ -84,11 +103,6 @@ namespace Baku.VMagicMirrorConfig
             {
                 try
                 {
-                    var mouseHook = Marshal.PtrToStructure<WindowsAPI.MSLLHOOKSTRUCT>(lParam);
-                    X = mouseHook.pt.x;
-                    Y = mouseHook.pt.y;
-
-
                     int wParamVal = wParam.ToInt32();
 
                     string info =
@@ -100,10 +114,31 @@ namespace Baku.VMagicMirrorConfig
                         (wParamVal == WindowsAPI.MouseMessages.WM_MBUTTONUP) ? "MUp" :
                         "";
 
-                    if (!string.IsNullOrEmpty(info))
+                    var mouseHook = Marshal.PtrToStructure<WindowsAPI.MSLLHOOKSTRUCT>(lParam);
+
+                    if (wParamVal == WindowsAPI.MouseMessages.WM_MOUSEMOVE)
                     {
-                        MouseButton?.Invoke(this, new MouseButtonEventArgs(info));
+                        //ソフトが動かした場合、勝手に動かした分を差分として保存することで
+                        //「手だけで動かしてたらここにマウスがあったはず」という情報が残るようにしたい
+                        if ((mouseHook.flags & WindowsAPI.MouseFlags.LLMHF_INJECTED) != 0)
+                        {
+                            //動きが怪しいのでDX,DYに非ゼロ値が入らないようにしておく
+                            //DX += X - mouseHook.pt.x;
+                            //DY += Y - mouseHook.pt.y;
+                        }
+                        X = mouseHook.pt.x;
+                        Y = mouseHook.pt.y;
                     }
+                    else if (!string.IsNullOrEmpty(info))
+                    {
+                        //クリック時にキャリブすることでほどほどの動きにしとく
+                        MouseButton?.Invoke(this, new MouseButtonEventArgs(info));
+                        DX = 0;
+                        DY = 0;
+                        X = mouseHook.pt.x;
+                        Y = mouseHook.pt.y;
+                    }
+
                 }
                 catch (Exception ex)
                 {

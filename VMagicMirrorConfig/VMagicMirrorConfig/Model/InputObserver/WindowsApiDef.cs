@@ -35,6 +35,8 @@ namespace Baku.VMagicMirrorConfig
         public const int HC_ACTION = 0;
         public static class MouseMessages
         {
+            public const int WM_MOUSEMOVE = 0x0200;
+
             public const int WM_LBUTTONDOWN = 0x0201;
             public const int WM_LBUTTONUP = 0x0202;
 
@@ -43,6 +45,11 @@ namespace Baku.VMagicMirrorConfig
 
             public const int WM_MBUTTONDOWN = 0x0207;
             public const int WM_MBUTTONUP = 0x0208;
+        }
+        public static class MouseFlags
+        {
+            public const int LLMHF_INJECTED = 0x0001;
+            public const int LLMHF_LOWER_IL_INJECTED = 0x0002;
         }
 
 
