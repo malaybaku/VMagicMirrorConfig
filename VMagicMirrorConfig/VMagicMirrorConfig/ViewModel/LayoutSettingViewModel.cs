@@ -108,7 +108,6 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-
         private bool _enableTouchTyping = true;
         public bool EnableTouchTyping
         {
@@ -118,6 +117,19 @@ namespace Baku.VMagicMirrorConfig
                 if (SetValue(ref _enableTouchTyping, value))
                 {
                     SendMessage(MessageFactory.Instance.EnableTouchTyping(EnableTouchTyping));
+                }
+            }
+        }
+
+        private bool _enableLipSync = true;
+        public bool EnableLipSync
+        {
+            get => _enableLipSync;
+            set
+            {
+                if (SetValue(ref _enableLipSync, value))
+                {
+                    SendMessage(MessageFactory.Instance.EnableLipSync(EnableLipSync));
                 }
             }
         }
@@ -216,6 +228,14 @@ namespace Baku.VMagicMirrorConfig
             HandYOffsetBasic = 4;
             HandYOffsetAfterKeyDown = 2;
 
+            EnableWaitMotion = true;
+            WaitMotionScale = 100;
+            WaitMotionPeriod = 10;
+
+            EnableTouchTyping = true;
+            EnableLipSync = true;
+
+
             CameraHeight = 120;
             CameraDistance = 100;
             CameraVerticalAngle = 0;
@@ -268,6 +288,7 @@ namespace Baku.VMagicMirrorConfig
                 $"{nameof(WaitMotionPeriod)}:{WaitMotionPeriod}",
 
                 $"{nameof(EnableTouchTyping)}:{EnableTouchTyping}",
+                $"{nameof(EnableLipSync)}:{EnableLipSync}",
 
                 $"{nameof(CameraHeight)}:{CameraHeight}",
                 $"{nameof(CameraDistance)}:{CameraDistance}",
@@ -302,6 +323,7 @@ namespace Baku.VMagicMirrorConfig
                         TryReadIntParam(line, nameof(WaitMotionPeriod), v => WaitMotionPeriod = v) ||
 
                         TryReadBoolParam(line, nameof(EnableTouchTyping), v => EnableTouchTyping = v) ||
+                        TryReadBoolParam(line, nameof(EnableLipSync), v => EnableLipSync = v) ||
 
                         TryReadIntParam(line, nameof(CameraHeight), v => CameraHeight = v) ||
                         TryReadIntParam(line, nameof(CameraDistance), v => CameraDistance = v) ||

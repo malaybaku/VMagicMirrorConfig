@@ -21,6 +21,7 @@ namespace Baku.VMagicMirrorConfig
     }
 
     //シングルトンにしているのはstaticと書く回数を減らすため
+    //TODO: そろそろシステマチック感を増してもいい頃合い
     class MessageFactory
     {
         private static MessageFactory _instance;
@@ -107,6 +108,9 @@ namespace Baku.VMagicMirrorConfig
 
         public Message EnableTouchTyping(bool enableTouchTyping)
             => new Message(nameof(EnableTouchTyping), enableTouchTyping.ToString());
+
+        public Message EnableLipSync(bool enableLipSync)
+            => new Message(nameof(EnableLipSync), enableLipSync.ToString());
 
         #endregion
 

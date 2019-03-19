@@ -148,7 +148,13 @@
                             <TextBlock Text="{DynamicResource Layout_EnableTouchTyping}"/>
                         </CheckBox.Content>
                     </CheckBox>
-                    
+
+                    <CheckBox Margin="15,0"
+                              IsChecked="{Binding EnableLipSync}">
+                        <CheckBox.Content>
+                            <TextBlock Text="{DynamicResource Layout_EnableLipSync}"/>
+                        </CheckBox.Content>
+                    </CheckBox>
                 </StackPanel>
             </md:Card>
 

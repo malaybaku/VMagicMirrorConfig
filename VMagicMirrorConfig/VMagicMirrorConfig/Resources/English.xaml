@@ -41,6 +41,7 @@
     <sys:String x:Key="Layout_HandYOffsetBasic">Hand height adjust [cm]</sys:String>
     <sys:String x:Key="Layout_HandYOffsetAfterKeyDown">(Press key)Hand height adjust [cm]</sys:String>
     <sys:String x:Key="Layout_EnableTouchTyping">Head motion like touch typing</sys:String>
+    <sys:String x:Key="Layout_EnableLipSync">Enable Lip Sync</sys:String>
     
     <sys:String x:Key="Layout_WaitMotion">Wait motion</sys:String>
     <sys:String x:Key="Layout_EnableWaitMotion">Enable</sys:String>
