@@ -17,7 +17,7 @@
     <sys:String x:Key="Home_OssLicense">OSS License</sys:String>
     
     <!-- Common in Config -->
-    <sys:String x:Key="ConfigCommon_ApplyToNextStartup">Applu current setting on next startup</sys:String>
+    <sys:String x:Key="ConfigCommon_ApplyToNextStartup">Apply current setting on next startup</sys:String>
     <sys:String x:Key="ConfigCommon_Reset">Reset</sys:String>
     <sys:String x:Key="ConfigCommon_Save">Save</sys:String>
     <sys:String x:Key="ConfigCommon_Load">Load</sys:String>
