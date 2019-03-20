@@ -20,26 +20,43 @@
                        />
             <TextBlock Text="https://github.com/dwango/UniVRM" 
                        Margin="5,0,5,15" />
+            
             <TextBlock Text="MaterialDesignInXamlToolkit:"
                        Margin="5" />
             <TextBlock Text="https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit"
                        Margin="5,0,5,15"
                        />
+
             <TextBlock Text="Dragablz:"
                        Margin="5" />
             <TextBlock Text="https://github.com/ButchersBoy/Dragablz"
                        Margin="5,0,5,15"
                        />
+            
             <TextBlock Text="AniLipSync-VRM:"
                        Margin="5" />
             <TextBlock Text="https://github.com/sh-akira/AniLipSync-VRM"
                        Margin="5,0,5,15"
                        />
+            
             <TextBlock Text="OVRLipSync:"
                        Margin="5" />
             <TextBlock Text="https://developer.oculus.com/licenses/audio-3.2.2/"
                        Margin="5,0,5,15"
                        />
+
+            <TextBlock Text="XinputGamePad:"
+                       Margin="5" />
+            <TextBlock Text="https://github.com/kaikikazu/XinputGamePad"
+                       Margin="5,0,5,15"
+                       />
+
+            <TextBlock Text="UniRx:"
+                       Margin="5" />
+            <TextBlock Text="https://github.com/neuecc/UniRx"
+                       Margin="5,0,5,15"
+                       />
+
 
             <TextBlock HorizontalAlignment="Center"
                        FontWeight="Bold"
@@ -225,7 +242,51 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,<L
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE<LineBreak />
 SOFTWARE.                
             </TextBlock>
-            
+
+            <TextBlock Text="XinputGamePad"
+                       FontWeight="Bold"
+                       FontSize="14"
+                       />
+
+            <TextBlock TextWrapping="WrapWithOverflow" Margin="0,10,0,30">
+Copyright 2018 kaiki kazuyoshi
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+            </TextBlock>
+
+            <TextBlock Text="UniRx"
+                       FontWeight="Bold"
+                       FontSize="14"
+                       />
+
+            <TextBlock TextWrapping="WrapWithOverflow" Margin="0,10,0,30">
+The MIT License (MIT)<LineBreak />
+<LineBreak />
+Copyright (c) 2018 Yoshifumi Kawai<LineBreak />
+<LineBreak />
+Permission is hereby granted, free of charge, to any person obtaining a copy<LineBreak />
+of this software and associated documentation files (the "Software"), to deal<LineBreak />
+in the Software without restriction, including without limitation the rights<LineBreak />
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell<LineBreak />
+copies of the Software, and to permit persons to whom the Software is<LineBreak />
+furnished to do so, subject to the following conditions:<LineBreak />
+<LineBreak />
+The above copyright notice and this permission notice shall be included in all<LineBreak />
+copies or substantial portions of the Software.<LineBreak />
+<LineBreak />
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR<LineBreak />
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,<LineBreak />
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE<LineBreak />
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER<LineBreak />
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,<LineBreak />
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE<LineBreak />
+SOFTWARE.                
+            </TextBlock>
+
         </StackPanel>
                    
     </ScrollViewer>
