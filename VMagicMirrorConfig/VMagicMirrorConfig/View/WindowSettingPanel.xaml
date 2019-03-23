@@ -108,11 +108,11 @@
                     <CheckBox Content="{DynamicResource Window_EnableInitialPlacement}"
                               IsChecked="{Binding EnableWindowInitialPlacement, Mode=TwoWay}"
                               />
-                    <Button Width="200"
+                    <Button Width="240"
                             Content="{DynamicResource Window_FetchUnityWindowPos}"
                             Command="{Binding FetchUnityWindowPositionCommand}"
                             />
-                    <Button Width="200"
+                    <Button Width="240"
                             Content="{DynamicResource Window_MoveWindow}"
                             Command="{Binding MoveWindowCommand}"
                             />
