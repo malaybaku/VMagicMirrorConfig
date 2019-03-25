@@ -17,144 +17,153 @@
 
             <md:Card>
                 <StackPanel>
-                    
-                    <TextBlock Text="{DynamicResource Layout_CharacterMotion}"
-                               Margin="5"
-                               Style="{StaticResource HeaderText}"
-                               />
 
-                    <Grid Margin="5,0,0,10">
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="3*" />
-                            <ColumnDefinition Width="1*"/>
-                        </Grid.ColumnDefinitions>
+                    <Expander Header="{DynamicResource Layout_CharacterMotion}">
+                        <Grid Margin="5,0,0,10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="3*" />
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Row="0" Grid.Column="0"
+                            <TextBlock Grid.Row="0" Grid.Column="0"
                                    Text="{DynamicResource Layout_WristToHandTip}"/>
-                        <Slider Grid.Row="0" Grid.Column="1"
+                            <Slider Grid.Row="0" Grid.Column="1"
                                 x:Name="sliderWristToTip"
                                 Minimum="1"
                                 Maximum="50"
                                 Value="{Binding LengthFromWristToTip, Mode=TwoWay}"
                                 />
-                        <TextBox Grid.Row="0" Grid.Column="2"
+                            <TextBox Grid.Row="0" Grid.Column="2"
                                  Text="{Binding Value, ElementName=sliderWristToTip}"
                                  />
 
-                        <TextBlock Grid.Row="1" Grid.Column="0"
+                            <TextBlock Grid.Row="1" Grid.Column="0"
                                    Text="{DynamicResource Layout_WristToPalm}"/>
-                        <Slider Grid.Row="1" Grid.Column="1"
+                            <Slider Grid.Row="1" Grid.Column="1"
                                 x:Name="sliderWristToPalm"
                                 Minimum="1"
                                 Maximum="50"
                                 Value="{Binding LengthFromWristToPalm, Mode=TwoWay}"
                                 />
-                        <TextBox Grid.Row="1" Grid.Column="2"
+                            <TextBox Grid.Row="1" Grid.Column="2"
                                  Text="{Binding Value, ElementName=sliderWristToPalm}"
                                  />
 
-                        <TextBlock Grid.Row="2" Grid.Column="0"
+                            <TextBlock Grid.Row="2" Grid.Column="0"
                                    Text="{DynamicResource Layout_HandYOffsetBasic}"/>
-                        <Slider Grid.Row="2" Grid.Column="1"
+                            <Slider Grid.Row="2" Grid.Column="1"
                                 x:Name="sliderHandYOffsetBasic"
                                 Minimum="0"
                                 Maximum="50"
                                 Value="{Binding HandYOffsetBasic, Mode=TwoWay}"
                                 />
-                        <TextBox Grid.Row="2" Grid.Column="2"
+                            <TextBox Grid.Row="2" Grid.Column="2"
                                  Text="{Binding Value, ElementName=sliderHandYOffsetBasic}"
                                  />
 
-                        <TextBlock Grid.Row="3" Grid.Column="0"
+                            <TextBlock Grid.Row="3" Grid.Column="0"
                                    Text="{DynamicResource Layout_HandYOffsetAfterKeyDown}"/>
-                        <Slider Grid.Row="3" Grid.Column="1"
+                            <Slider Grid.Row="3" Grid.Column="1"
                                 x:Name="sliderHandYOffsetAfterKeyDown"
                                 Minimum="0"
                                 Maximum="50"
                                 Value="{Binding HandYOffsetAfterKeyDown, Mode=TwoWay}"
                                 />
-                        <TextBox Grid.Row="3" Grid.Column="2"
+                            <TextBox Grid.Row="3" Grid.Column="2"
                                  Text="{Binding Value, ElementName=sliderHandYOffsetAfterKeyDown}"
                                  />
 
-                    </Grid>
+                        </Grid>
 
-                    <TextBlock Text="{DynamicResource Layout_WaitMotion}"
+                    </Expander>
+
+                    <!--<TextBlock Text="{DynamicResource Layout_CharacterMotion}"
                                Margin="5"
                                Style="{StaticResource HeaderText}"
-                               />
+                               />-->
 
-                    <Grid Margin="5,0,0,10">
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="3*" />
-                            <ColumnDefinition Width="1*"/>
-                        </Grid.ColumnDefinitions>
+                    <Expander Header="{DynamicResource Layout_WaitMotion}">
+                        <StackPanel>
+                            <Grid Margin="5,0,0,10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="3*" />
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
 
-                        <CheckBox Grid.Row="0" Grid.Column="0"
-                                  Grid.ColumnSpan="2"
-                                  Margin="10,0"
-                                  VerticalAlignment="Center"
-                                  VerticalContentAlignment="Center"
-                                  IsChecked="{Binding EnableWaitMotion}"
-                                  >
-                            <CheckBox.Content>
-                                <TextBlock Text="{DynamicResource Layout_EnableWaitMotion}"/>
-                            </CheckBox.Content>
-                        </CheckBox>
+                                <CheckBox Grid.Row="0" Grid.Column="0"
+                                          Grid.ColumnSpan="2"
+                                          Margin="10,0"
+                                          VerticalAlignment="Center"
+                                          VerticalContentAlignment="Center"
+                                          IsChecked="{Binding EnableWaitMotion}"
+                                          >
+                                    <CheckBox.Content>
+                                        <TextBlock Text="{DynamicResource Layout_EnableWaitMotion}"/>
+                                    </CheckBox.Content>
+                                </CheckBox>
 
-                        <TextBlock Grid.Row="1" Grid.Column="0"
-                                   Text="{DynamicResource Layout_WaitMotionScale}"/>
-                        <Slider Grid.Row="1" Grid.Column="1"
-                                x:Name="sliderWaitMotionScale"
-                                Minimum="1"
-                                Maximum="500"
-                                Value="{Binding WaitMotionScale, Mode=TwoWay}"
-                                />
-                        <TextBox Grid.Row="1" Grid.Column="2"
-                                 Text="{Binding Value, ElementName=sliderWaitMotionScale}"
-                                 />
+                                <TextBlock Grid.Row="1" Grid.Column="0"
+                                           Text="{DynamicResource Layout_WaitMotionScale}"/>
+                                <Slider Grid.Row="1" Grid.Column="1"
+                                        x:Name="sliderWaitMotionScale"
+                                        Minimum="1"
+                                        Maximum="500"
+                                        Value="{Binding WaitMotionScale, Mode=TwoWay}"
+                                        />
+                                <TextBox Grid.Row="1" Grid.Column="2"
+                                         Text="{Binding Value, ElementName=sliderWaitMotionScale}"
+                                         />
 
-                        <TextBlock Grid.Row="2" Grid.Column="0"
-                                   Text="{DynamicResource Layout_WaitMotionPeriod}"
-                                   />
-                        <Slider Grid.Row="2" Grid.Column="1"
-                                x:Name="sliderWaitMotionPeriod"
-                                Minimum="1"
-                                Maximum="30"
-                                Value="{Binding WaitMotionPeriod, Mode=TwoWay}"
-                                />
-                        <TextBox Grid.Row="2" Grid.Column="2"
-                                 Text="{Binding Value, ElementName=sliderWaitMotionPeriod}"
-                                 />
+                                <TextBlock Grid.Row="2" Grid.Column="0"
+                                           Text="{DynamicResource Layout_WaitMotionPeriod}"
+                                           />
+                                <Slider Grid.Row="2" Grid.Column="1"
+                                        x:Name="sliderWaitMotionPeriod"
+                                        Minimum="1"
+                                        Maximum="30"
+                                        Value="{Binding WaitMotionPeriod, Mode=TwoWay}"
+                                        />
+                                <TextBox Grid.Row="2" Grid.Column="2"
+                                         Text="{Binding Value, ElementName=sliderWaitMotionPeriod}"
+                                         />
 
-                    </Grid>
+                            </Grid>
 
-                    <CheckBox Margin="15,0"
-                              IsChecked="{Binding EnableTouchTyping}">
-                        <CheckBox.Content>
-                            <TextBlock Text="{DynamicResource Layout_EnableTouchTyping}"/>
-                        </CheckBox.Content>
-                    </CheckBox>
+                            <CheckBox Margin="15,0"
+                                      IsChecked="{Binding EnableTouchTyping}">
+                                <CheckBox.Content>
+                                    <TextBlock Text="{DynamicResource Layout_EnableTouchTyping}"/>
+                                </CheckBox.Content>
+                            </CheckBox>
 
-                    <CheckBox Margin="15,0"
-                              IsChecked="{Binding EnableLipSync}">
-                        <CheckBox.Content>
-                            <TextBlock Text="{DynamicResource Layout_EnableLipSync}"/>
-                        </CheckBox.Content>
-                    </CheckBox>
+                            <CheckBox Margin="15,0"
+                                      IsChecked="{Binding EnableLipSync}">
+                                <CheckBox.Content>
+                                    <TextBlock Text="{DynamicResource Layout_EnableLipSync}"/>
+                                </CheckBox.Content>
+                            </CheckBox>
+                        </StackPanel>
+
+                    </Expander>
+
+                    <!--<TextBlock Text="{DynamicResource Layout_WaitMotion}"
+                               Margin="5"
+                               Style="{StaticResource HeaderText}"
+                               />-->
+
                 </StackPanel>
             </md:Card>
 
@@ -281,6 +290,101 @@
                 </StackPanel>
             </md:Card>
 
+            <md:Card>
+
+                <Expander Header="{DynamicResource Layout_Gamepad}">
+                    <StackPanel>
+
+                        <Grid Margin="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="3*" />
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Row="0" Grid.Column="0"
+                                Text="{DynamicResource Layout_GamepadHeight}"/>
+                            <Slider Grid.Row="0" Grid.Column="1"
+                            x:Name="sliderGamepadHeight"
+                            Minimum="10"
+                            Maximum="300"
+                            Value="{Binding Gamepad.GamepadHeight, Mode=TwoWay}"
+                            />
+                            <TextBox Grid.Row="0" Grid.Column="2"
+                                Text="{Binding Value, ElementName=sliderGamepadHeight}"
+                                />
+
+                            <TextBlock Grid.Row="1" Grid.Column="0"
+                                Text="{DynamicResource Layout_GamepadHorizontalScale}"
+                                />
+                            <Slider Grid.Row="1" Grid.Column="1"
+                            x:Name="sliderGamepadHorizontalScale"
+                            Minimum="10"
+                            Maximum="300"
+                            Value="{Binding Gamepad.GamepadHorizontalScale, Mode=TwoWay}"
+                            />
+                            <TextBox Grid.Row="1" Grid.Column="2"
+                                Text="{Binding Value, ElementName=sliderGamepadHorizontalScale}"
+                                />
+
+                        </Grid>
+
+                        <CheckBox Margin="20,0"
+                            VerticalAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            IsChecked="{Binding Gamepad.GamepadVisibility}"
+                            >
+                            <CheckBox.Content>
+                                <TextBlock Text="{DynamicResource Layout_GamepadVisible}"/>
+                            </CheckBox.Content>
+                        </CheckBox>
+
+                        <TextBlock Text="{DynamicResource Layout_GamepadLean}"/>
+
+                        <CheckBox Margin="20,0"
+                            VerticalAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            IsChecked="{Binding Gamepad.GamepadLeanNone}"
+                            Content="{DynamicResource Layout_GamepadLean_None}"/>
+                        <CheckBox Margin="20,0"
+                            VerticalAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            IsChecked="{Binding Gamepad.GamepadLeanLeftButtons}"
+                            Content="{DynamicResource Layout_GamepadLean_LeftButtons}"/>
+                        <CheckBox Margin="20,0"
+                            VerticalAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            IsChecked="{Binding Gamepad.GamepadLeanLeftStick}"
+                            Content="{DynamicResource Layout_GamepadLean_LeftStick}"/>
+                        <CheckBox Margin="20,0"
+                            VerticalAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            IsChecked="{Binding Gamepad.GamepadLeanRightStick}"
+                            Content="{DynamicResource Layout_GamepadLean_RightStick}"/>
+
+                        <TextBlock Text="{DynamicResource Layout_GamepadLean_Reverse}"/>
+
+                        <CheckBox Margin="20,0"
+                            VerticalAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            IsChecked="{Binding Gamepad.GamepadLeanReverseHorizontal}"
+                            Content="{DynamicResource Layout_GamepadLean_ReverseHorizontal}"/>
+                        <CheckBox Margin="20,0"
+                            VerticalAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            IsChecked="{Binding Gamepad.GamepadLeanReverseVertical}"
+                            Content="{DynamicResource Layout_GamepadLean_ReverseVertical}"/>
+
+
+                    </StackPanel>
+                </Expander>
+            </md:Card>
+
+
             <CheckBox Content="{DynamicResource ConfigCommon_ApplyToNextStartup}"
                       Margin="10"
                       IsChecked="{Binding Startup.LoadLayoutSetting, Mode=TwoWay}"
@@ -295,7 +399,7 @@
                         Command="{Binding SaveSettingCommand}" />
                 <Button Content="{DynamicResource ConfigCommon_Load}"
                         Command="{Binding LoadSettingCommand}" />
-            </StackPanel>            
+            </StackPanel>
         </StackPanel>
     </ScrollViewer>
 

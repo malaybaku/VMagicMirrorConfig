@@ -53,11 +53,36 @@
     <sys:String x:Key="Layout_CameraHeight">高さ[cm]</sys:String>
     <sys:String x:Key="Layout_CameraDistance">キャラとの距離[cm]</sys:String>
     <sys:String x:Key="Layout_CameraAngle">角度[deg]</sys:String>
+
+    <!-- HID -->
     <sys:String x:Key="Layout_Hid">キーボード・マウスパッド</sys:String>
     <sys:String x:Key="Layout_HidHeight">高さ[cm]</sys:String>
     <sys:String x:Key="Layout_HidHorizontalScale">サイズ[%]</sys:String>
     <sys:String x:Key="Layout_HidHorizontalScale_Tooltip">キーボードとマウスパッドのサイズを指定します。小さくすると、デバイスが小さくなり、キャラクターに近づきます。</sys:String>
     <sys:String x:Key="Layout_HidVisible">キーボード・マウスパッドを表示</sys:String>
+
+    <sys:String x:Key="Layout_HidReactToKeyboard">キーボード操作に反応</sys:String>
+    <sys:String x:Key="Layout_HidReactToMouse">マウス操作に反応</sys:String>
+    
+    <!-- Gamepad -->
+    <sys:String x:Key="Layout_Gamepad">ゲームパッド</sys:String>
+    <sys:String x:Key="Layout_GamepadDeviceNumber">デバイス番号</sys:String>
+    
+    <sys:String x:Key="Layout_GamepadHeight">高さ[cm]</sys:String>
+    <sys:String x:Key="Layout_GamepadHorizontalScale">サイズ[%]</sys:String>
+    <sys:String x:Key="Layout_GamepadVisible">ゲームパッドを表示</sys:String>
+    <sys:String x:Key="Layout_GamepadLean">キャラ傾き入力</sys:String>
+    <sys:String x:Key="Layout_GamepadLean_None">なし</sys:String>
+    <sys:String x:Key="Layout_GamepadLean_LeftButtons">左十字キー</sys:String>
+    <sys:String x:Key="Layout_GamepadLean_LeftStick">左スティック</sys:String>
+    <sys:String x:Key="Layout_GamepadLean_RightStick">右スティック</sys:String>
+
+    <sys:String x:Key="Layout_GamepadLean_Reverse">傾く方向を反転</sys:String>
+    <sys:String x:Key="Layout_GamepadLean_ReverseHorizontal">左右</sys:String>
+    <sys:String x:Key="Layout_GamepadLean_ReverseVertical">前後</sys:String>
+    
+    <sys:String x:Key="Layout_GamepadReact">ゲームパッド操作に反応</sys:String>
+    
 
     <!-- Light Setting -->
     <sys:String x:Key="Light">ライト</sys:String>

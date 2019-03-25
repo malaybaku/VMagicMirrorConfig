@@ -80,6 +80,7 @@
     <Compile Include="Model\SpecialFileNames.cs" />
     <Compile Include="Model\UnityWindowChecker.cs" />
     <Compile Include="Model\Messages.cs" />
+    <Compile Include="ViewModel\GamepadSettingViewModel.cs" />
     <Compile Include="ViewModel\WindowSettingViewModel.cs" />
     <Compile Include="ViewModel\Infrastructure\ActionCommand.cs" />
     <Compile Include="ViewModel\LayoutSettingViewModel.cs" />

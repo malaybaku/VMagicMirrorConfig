@@ -28,6 +28,9 @@ namespace Baku.VMagicMirrorConfig
 
         public static MessageFactory Instance
             => _instance ?? (_instance = new MessageFactory());
+
+
+
         private MessageFactory() { }
 
         public Message Language(string langName)
@@ -38,11 +41,14 @@ namespace Baku.VMagicMirrorConfig
         public Message Key(System.Windows.Forms.Keys key)
             => new Message(nameof(Key), key.ToString());
 
+
+
         public Message KeyDown(string keyName)
             => new Message(nameof(KeyDown), keyName);
 
         public Message MouseButton(string info)
             => new Message(nameof(MouseButton), info);
+
 
         public Message MouseMoved(int x, int y)
             => new Message(nameof(MouseMoved), $"{x},{y}");
@@ -79,6 +85,8 @@ namespace Baku.VMagicMirrorConfig
         public Message WindowDraggable(bool windowDraggable)
             => new Message(nameof(WindowDraggable), windowDraggable.ToString());
 
+
+
         #endregion
 
         #region Layout Setting
@@ -93,6 +101,8 @@ namespace Baku.VMagicMirrorConfig
 
         public Message HandYOffsetBasic(int handYOffsetBasic)
             => new Message(nameof(HandYOffsetBasic), handYOffsetBasic.ToString());
+
+
 
         public Message HandYOffsetAfterKeyDown(int handYOffsetAfterKeyDown)
             => new Message(nameof(handYOffsetAfterKeyDown), handYOffsetAfterKeyDown.ToString());
@@ -139,6 +149,28 @@ namespace Baku.VMagicMirrorConfig
             => new Message(nameof(HidVisibility), visible.ToString());
 
         #endregion
+
+        #endregion
+
+        #region Gamepad Setting
+
+        public Message GamepadHeight(int height)
+            => new Message(nameof(GamepadHeight), height.ToString());
+
+        public Message GamepadHorizontalScale(int scale)
+            => new Message(nameof(GamepadHorizontalScale), scale.ToString());
+
+        public Message GamepadVisibility(bool visibility)
+            => new Message(nameof(GamepadVisibility), visibility.ToString());
+
+        public Message LeanMode(string v)
+            => new Message(nameof(LeanMode), v);
+
+        public Message LeanReverseHorizontal(bool reverse)
+            => new Message(nameof(LeanReverseHorizontal), reverse.ToString());
+
+        public Message LeanReverseVertical(bool reverse)
+            => new Message(nameof(LeanReverseVertical), reverse.ToString());
 
         #endregion
 

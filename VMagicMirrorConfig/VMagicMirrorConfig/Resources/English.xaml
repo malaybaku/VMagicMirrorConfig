@@ -52,12 +52,37 @@
     <sys:String x:Key="Layout_CameraHeight">Height [cm]</sys:String>
     <sys:String x:Key="Layout_CameraDistance">Distance [cm]</sys:String>
     <sys:String x:Key="Layout_CameraAngle">Angle [deg]</sys:String>
+
     <sys:String x:Key="Layout_Hid">Keyboard &amp; Mouse Pad</sys:String>
     <sys:String x:Key="Layout_HidHeight">Height [cm]</sys:String>
     <sys:String x:Key="Layout_HidHorizontalScale">Size [%]</sys:String>
     <sys:String x:Key="Layout_HidHorizontalScale_Tooltip">Specify the size of keyboard and mouse. When smallen, the devices are close to the character.</sys:String>
     <sys:String x:Key="Layout_HidVisible">Visible</sys:String>
 
+    <sys:String x:Key="Layout_HidReactToKeyboard">Enable keyboard motion</sys:String>
+    <sys:String x:Key="Layout_HidReactToMouse">Enable mouse motion</sys:String>
+    
+    <!-- Gamepad -->
+    <sys:String x:Key="Layout_Gamepad">Gamepad</sys:String>
+    <sys:String x:Key="Layout_GamepadDeviceNumber">Device Number</sys:String>
+    
+    <sys:String x:Key="Layout_GamepadHeight">Height [cm]</sys:String>
+    <sys:String x:Key="Layout_GamepadHorizontalScale">Size [%]</sys:String>
+    <sys:String x:Key="Layout_GamepadVisible">Visible</sys:String>
+    <sys:String x:Key="Layout_GamepadLeanMotion">Lean character by directional input</sys:String>
+    <sys:String x:Key="Layout_GamepadLean_None">None</sys:String>
+    <sys:String x:Key="Layout_GamepadLean_LeftButtons">Left Buttons</sys:String>
+    <sys:String x:Key="Layout_GamepadLean_LeftStick">Left Stick</sys:String>
+    <sys:String x:Key="Layout_GamepadLean_RightStick">Right Stick</sys:String>
+
+    <sys:String x:Key="Layout_GamepadLean_Reverse">Reverse direction to lean</sys:String>
+    <sys:String x:Key="Layout_GamepadLean_ReverseHorizontal">Left / Right</sys:String>
+    <sys:String x:Key="Layout_GamepadLean_ReverseVertical">Forward / Backword</sys:String>
+    
+    <sys:String x:Key="Layout_GamepadReact">Enable gamepad motion</sys:String>
+
+    
+    
     <!-- Light Setting -->
     <sys:String x:Key="Light">Light</sys:String>
     <sys:String x:Key="Light_Intensity">Intensity [%]</sys:String>
