@@ -19,7 +19,7 @@ namespace Baku.VMagicMirrorConfig
                 ?.MainWindowHandle
                 ?? IntPtr.Zero;
 
-        public class WindowPosition
+        public struct WindowPosition
         {
             public WindowPosition(int x, int y)
             {

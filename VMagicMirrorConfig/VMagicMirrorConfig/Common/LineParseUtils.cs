@@ -21,6 +21,19 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
+        public static bool TryReadIntParam(string line, string name, Action<int> actOnParsed)
+        {
+            if (TryReadIntParam(line, name, out int result))
+            {
+                actOnParsed(result);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public static bool TryReadBoolParam(string line, string name, out bool result)
         {
             string key = name + ":";
@@ -34,19 +47,6 @@ namespace Baku.VMagicMirrorConfig
             else
             {
                 result = false;
-                return false;
-            }
-        }
-
-        public static bool TryReadIntParam(string line, string name, Action<int> actOnParsed)
-        {
-            if (TryReadIntParam(line, name, out int result))
-            {
-                actOnParsed(result);
-                return true;
-            }
-            else
-            {
                 return false;
             }
         }

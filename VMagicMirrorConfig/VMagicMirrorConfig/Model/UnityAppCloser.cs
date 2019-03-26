@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Baku.VMagicMirrorConfig
 {
-    internal static class CloseUnityApp
+    internal static class UnityAppCloser
     {
         public static void Close()
         {
