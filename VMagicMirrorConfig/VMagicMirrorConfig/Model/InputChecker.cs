@@ -28,8 +28,7 @@ namespace Baku.VMagicMirrorConfig
             _mouseHook.SetHook();
             _keyboardHook.KeyboardHooked += OnKeyboardHookEvent;
 
-            //不要: マウスの位置はUnityが自力で追えそうなのでいったん忘れる?
-            //グローバルフックが欲しいかも…
+            //不要: マウスの位置はUnityが自力で追えそうなのでいったん忘れる
             //Task.Run(async () => await CheckAndRaiseEventsAsync(_cts.Token));
         }
 

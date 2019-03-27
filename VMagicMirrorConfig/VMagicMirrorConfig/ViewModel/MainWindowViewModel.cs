@@ -132,7 +132,7 @@ namespace Baku.VMagicMirrorConfig
                 _isDisposed = true;
                 SaveCurrentParameters();
                 Initializer.Dispose();
-                CloseUnityApp.Close();
+                UnityAppCloser.Close();
             }
         }
 
