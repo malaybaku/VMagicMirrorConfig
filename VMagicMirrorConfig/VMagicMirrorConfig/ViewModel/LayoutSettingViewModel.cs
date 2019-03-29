@@ -5,13 +5,17 @@ using Microsoft.Win32;
 
 namespace Baku.VMagicMirrorConfig
 {
+    using System.Linq;
     using static LineParseUtils;
 
     public class LayoutSettingViewModel : SettingViewModelBase
     {
         internal LayoutSettingViewModel(UdpSender sender, StartupSettingViewModel startup) : base(sender, startup)
         {
+            Gamepad = new GamepadSettingViewModel(sender, startup);
         }
+
+        public GamepadSettingViewModel Gamepad { get; private set; }
 
         #region Properties
 
@@ -222,6 +226,8 @@ namespace Baku.VMagicMirrorConfig
 
         protected override void ResetToDefault()
         {
+            Gamepad.ResetToDefaultCommand?.Execute(null);
+
             LengthFromWristToTip = 18;
             LengthFromWristToPalm = 9;
 
@@ -276,7 +282,7 @@ namespace Baku.VMagicMirrorConfig
 
         internal override void SaveSetting(string path)
         {
-            File.WriteAllLines(path, new string[]
+            var lines = new string[]
             {
                 $"{nameof(LengthFromWristToTip)}:{LengthFromWristToTip}",
                 $"{nameof(LengthFromWristToPalm)}:{LengthFromWristToPalm}",
@@ -296,7 +302,12 @@ namespace Baku.VMagicMirrorConfig
                 $"{nameof(HidHeight)}:{HidHeight}",
                 $"{nameof(HidHorizontalScale)}:{HidHorizontalScale}",
                 $"{nameof(HidVisibility)}:{HidVisibility}",
-            });
+            }
+                .Concat(Gamepad.GetLinesToSave())
+                .ToArray();
+
+
+            File.WriteAllLines(path, lines);
         }
 
         internal override void LoadSetting(string path)
@@ -309,13 +320,13 @@ namespace Baku.VMagicMirrorConfig
             try
             {
                 var lines = File.ReadAllLines(path);
-                foreach(var line in lines)
+                foreach (var line in lines)
                 {
                     //戻り値を拾うのはシンタックス対策
                     var _ =
                         TryReadIntParam(line, nameof(LengthFromWristToTip), v => LengthFromWristToTip = v) ||
                         TryReadIntParam(line, nameof(LengthFromWristToPalm), v => LengthFromWristToPalm = v) ||
-                        TryReadIntParam(line, nameof(HandYOffsetBasic), v => HandYOffsetBasic = v) || 
+                        TryReadIntParam(line, nameof(HandYOffsetBasic), v => HandYOffsetBasic = v) ||
                         TryReadIntParam(line, nameof(HandYOffsetAfterKeyDown), v => HandYOffsetAfterKeyDown = v) ||
 
                         TryReadBoolParam(line, nameof(EnableWaitMotion), v => EnableWaitMotion = v) ||
@@ -333,6 +344,9 @@ namespace Baku.VMagicMirrorConfig
                         TryReadIntParam(line, nameof(HidHorizontalScale), v => HidHorizontalScale = v) ||
                         TryReadBoolParam(line, nameof(HidVisibility), v => HidVisibility = v);
                 }
+
+                Gamepad.ParseLines(lines);
+
             }
             catch (Exception ex)
             {

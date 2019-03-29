@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Runtime.CompilerServices;
 
 namespace Baku.VMagicMirrorConfig
 {
@@ -20,147 +20,109 @@ namespace Baku.VMagicMirrorConfig
         public string Content { get; }
     }
 
-    //シングルトンにしているのはstaticと書く回数を減らすため
-    //TODO: そろそろシステマチック感を増してもいい頃合い
     class MessageFactory
     {
         private static MessageFactory _instance;
-
         public static MessageFactory Instance
             => _instance ?? (_instance = new MessageFactory());
+
+
+
         private MessageFactory() { }
 
-        public Message Language(string langName)
-            => new Message(nameof(Language), langName);
+        //メッセージのCommandには呼び出した関数の名前が入る: もともとnameof(Hoge)のように関数名を入れていたが、その必要が無くなった
+        private static Message NoArg([CallerMemberName]string command = "")
+            => new Message(command);
+
+        private static Message WithArg(string content, [CallerMemberName]string command = "")
+            => new Message(command, content);
+
+        public Message Language(string langName) => WithArg(langName);
 
         #region HID Input
 
-        public Message Key(System.Windows.Forms.Keys key)
-            => new Message(nameof(Key), key.ToString());
-
-        public Message KeyDown(string keyName)
-            => new Message(nameof(KeyDown), keyName);
-
-        public Message MouseButton(string info)
-            => new Message(nameof(MouseButton), info);
-
-        public Message MouseMoved(int x, int y)
-            => new Message(nameof(MouseMoved), $"{x},{y}");
+        public Message KeyDown(string keyName) => WithArg(keyName);
+        public Message MouseButton(string info) => WithArg(info);
+        public Message MouseMoved(int x, int y) => WithArg($"{x},{y}");
 
         #endregion
 
         #region VRM Load
 
-        public Message OpenVrmPreview(string filePath)
-            => new Message(nameof(OpenVrmPreview), filePath);
-
-        public Message OpenVrm(string filePath)
-            => new Message(nameof(OpenVrm), filePath);
-
-        public Message CancelLoadVrm()
-            => new Message(nameof(CancelLoadVrm));
+        public Message OpenVrmPreview(string filePath) => WithArg(filePath);
+        public Message OpenVrm(string filePath) => WithArg(filePath);
+        public Message CancelLoadVrm() => NoArg();
 
         #endregion
 
-        #region Window Setting
+        #region ウィンドウ
 
-        public Message Chromakey(int a, int r, int g, int b)
-            => new Message(nameof(Chromakey), $"{a},{r},{g},{b}");
+        public Message Chromakey(int a, int r, int g, int b) => WithArg($"{a},{r},{g},{b}");
 
-        public Message WindowFrameVisibility(bool v)
-            => new Message(nameof(WindowFrameVisibility), v.ToString());
+        public Message WindowFrameVisibility(bool v) => WithArg($"{v}");
+        public Message IgnoreMouse(bool v) => WithArg($"{v}");
+        public Message TopMost(bool v) => WithArg($"{v}");
+        public Message WindowDraggable(bool v) => WithArg($"{v}");
 
-        public Message IgnoreMouse(bool v)
-            => new Message(nameof(IgnoreMouse), v.ToString());
-
-        public Message TopMost(bool v)
-            => new Message(nameof(TopMost), v.ToString());
-
-        public Message WindowDraggable(bool windowDraggable)
-            => new Message(nameof(WindowDraggable), windowDraggable.ToString());
+        public Message MoveWindow(int x, int y) => WithArg($"{x},{y}");
 
         #endregion
-
-        #region Layout Setting
 
         #region キャラの動き方
 
-        public Message LengthFromWristToTip(int lengthFromWristToTip)
-            => new Message(nameof(LengthFromWristToTip), lengthFromWristToTip.ToString());
+        public Message LengthFromWristToTip(int lengthCentimeter) => WithArg($"{lengthCentimeter}");
+        public Message LengthFromWristToPalm(int lengthCentimeter) => WithArg($"{lengthCentimeter}");
 
-        public Message LengthFromWristToPalm(int lengthFromWristToPalm)
-            => new Message(nameof(LengthFromWristToPalm), lengthFromWristToPalm.ToString());
+        public Message HandYOffsetBasic(int offsetCentimeter) => WithArg($"{offsetCentimeter}");
+        public Message HandYOffsetAfterKeyDown(int offsetCentimeter) => WithArg($"{offsetCentimeter}");
 
-        public Message HandYOffsetBasic(int handYOffsetBasic)
-            => new Message(nameof(HandYOffsetBasic), handYOffsetBasic.ToString());
+        public Message EnableWaitMotion(bool enable) => WithArg($"{enable}");
+        public Message WaitMotionScale(int scalePercent) => WithArg($"{scalePercent}");
+        public Message WaitMotionPeriod(int periodSec) => WithArg($"{periodSec}");
 
-        public Message HandYOffsetAfterKeyDown(int handYOffsetAfterKeyDown)
-            => new Message(nameof(handYOffsetAfterKeyDown), handYOffsetAfterKeyDown.ToString());
-
-        public Message EnableWaitMotion(bool enable)
-            => new Message(nameof(EnableWaitMotion), enable.ToString());
-
-        public Message WaitMotionScale(int scale)
-            => new Message(nameof(WaitMotionScale), scale.ToString());
-
-        public Message WaitMotionPeriod(int periodSec)
-            => new Message(nameof(WaitMotionPeriod), periodSec.ToString());
-
-        public Message EnableTouchTyping(bool enableTouchTyping)
-            => new Message(nameof(EnableTouchTyping), enableTouchTyping.ToString());
-
-        public Message EnableLipSync(bool enableLipSync)
-            => new Message(nameof(EnableLipSync), enableLipSync.ToString());
+        public Message EnableTouchTyping(bool enable) => WithArg($"{enable}");
+        public Message EnableLipSync(bool enable) => WithArg($"{enable}");
 
         #endregion
 
         #region カメラの配置
 
-        public Message CameraHeight(int height)
-            => new Message(nameof(CameraHeight), height.ToString());
-
-        public Message CameraDistance(int distance)
-            => new Message(nameof(CameraDistance), distance.ToString());
-
-        public Message CameraVerticalAngle(int angle)
-            => new Message(nameof(CameraVerticalAngle), angle.ToString());
+        public Message CameraHeight(int heightCentimeter) => WithArg($"{heightCentimeter}");
+        public Message CameraDistance(int distanceCentimeter) => WithArg($"{distanceCentimeter}");
+        public Message CameraVerticalAngle(int angleDegree) => WithArg($"{angleDegree}");
 
         #endregion
 
-        #region キーボードとマウスパッドの配置
+        #region キーボード・マウスパッド
 
-        public Message HidHeight(int height)
-            => new Message(nameof(HidHeight), height.ToString());
-
-        public Message HidHorizontalScale(int scale)
-            => new Message(nameof(HidHorizontalScale), scale.ToString());
-
-        public Message HidVisibility(bool visible)
-            => new Message(nameof(HidVisibility), visible.ToString());
+        public Message HidHeight(int heightCentimeter) => WithArg($"{heightCentimeter}");
+        public Message HidHorizontalScale(int scalePercent) => WithArg($"{scalePercent}");
+        public Message HidVisibility(bool visible) => WithArg($"{visible}");
 
         #endregion
+
+        #region ゲームパッド
+
+        public Message EnableGamepad(bool enable) => WithArg($"{enable}");
+
+        public Message GamepadHeight(int height) => WithArg($"{height}");
+        public Message GamepadHorizontalScale(int scale) => WithArg($"{scale}");
+        public Message GamepadVisibility(bool visibility) => WithArg($"{visibility}");
+
+        public Message GamepadLeanMode(string v) => WithArg(v);
+        public Message GamepadLeanReverseHorizontal(bool reverse) => WithArg($"{reverse}");
+        public Message GamepadLeanReverseVertical(bool reverse) => WithArg($"{reverse}");
 
         #endregion
 
         #region Light Setting
 
-        public Message LightColor(int r, int g, int b)
-            => new Message(nameof(LightColor), $"{r},{g},{b}");
+        public Message LightColor(int r, int g, int b) => WithArg($"{r},{g},{b}");
+        public Message LightIntensity(int intensityPercent) => WithArg($"{intensityPercent}");
 
-        public Message LightIntensity(int lightIntensity)
-            => new Message(nameof(LightIntensity), lightIntensity.ToString());
-
-        public Message BloomColor(int r, int g, int b)
-            => new Message(nameof(BloomColor), $"{r},{g},{b}");
-
-        public Message BloomIntensity(int intensity)
-            => new Message(nameof(BloomIntensity), intensity.ToString());
-
-        public Message BloomThreshold(int threshold)
-            => new Message(nameof(BloomThreshold), threshold.ToString());
-
-        public Message MoveWindow(int x, int y)
-            => new Message(nameof(MoveWindow), $"{x},{y}");
+        public Message BloomColor(int r, int g, int b) => WithArg($"{r},{g},{b}");
+        public Message BloomIntensity(int intensityPercent) => WithArg($"{intensityPercent}");
+        public Message BloomThreshold(int thresholdPercent) => WithArg($"{thresholdPercent}");
 
         #endregion
 

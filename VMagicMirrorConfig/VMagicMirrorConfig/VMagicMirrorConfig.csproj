@@ -68,18 +68,18 @@
     </ApplicationDefinition>
     <Compile Include="Common\LineParseUtils.cs" />
     <Compile Include="Common\NotifiableBase.cs" />
-    <Compile Include="Model\CloseUnityApp.cs" />
+    <Compile Include="Model\UnityAppCloser.cs" />
     <Compile Include="Model\MessageIndication.cs" />
     <Compile Include="Model\InputChecker.cs" />
     <Compile Include="Model\InputObserver\KeyboardHook.cs" />
     <Compile Include="Model\InputObserver\MouseHook.cs" />
-    <Compile Include="Model\InputObserver\MousePositionAndEvent.cs" />
     <Compile Include="Model\InputObserver\WindowsApiDef.cs" />
     <Compile Include="Model\LanguageSelector.cs" />
     <Compile Include="Model\ModelInitializer.cs" />
     <Compile Include="Model\SpecialFileNames.cs" />
     <Compile Include="Model\UnityWindowChecker.cs" />
     <Compile Include="Model\Messages.cs" />
+    <Compile Include="ViewModel\GamepadSettingViewModel.cs" />
     <Compile Include="ViewModel\WindowSettingViewModel.cs" />
     <Compile Include="ViewModel\Infrastructure\ActionCommand.cs" />
     <Compile Include="ViewModel\LayoutSettingViewModel.cs" />

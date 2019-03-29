@@ -131,7 +131,7 @@ namespace Baku.VMagicMirrorConfig
                     }
                     else if (!string.IsNullOrEmpty(info))
                     {
-                        //クリック時にキャリブすることでほどほどの動きにしとく
+                        //クリック時にDXとDYをリセットする = クリック時点で一旦マウスやタッチパッドから手を離したものと扱う
                         MouseButton?.Invoke(this, new MouseButtonEventArgs(info));
                         DX = 0;
                         DY = 0;
