@@ -25,6 +25,9 @@ namespace Baku.VMagicMirrorConfig
         private static MessageFactory _instance;
         public static MessageFactory Instance
             => _instance ?? (_instance = new MessageFactory());
+
+
+
         private MessageFactory() { }
 
         //メッセージのCommandには呼び出した関数の名前が入る: もともとnameof(Hoge)のように関数名を入れていたが、その必要が無くなった
@@ -38,9 +41,7 @@ namespace Baku.VMagicMirrorConfig
 
         #region HID Input
 
-        public Message Key(System.Windows.Forms.Keys key) => WithArg($"{key}");
         public Message KeyDown(string keyName) => WithArg(keyName);
-
         public Message MouseButton(string info) => WithArg(info);
         public Message MouseMoved(int x, int y) => WithArg($"{x},{y}");
 
@@ -92,11 +93,25 @@ namespace Baku.VMagicMirrorConfig
 
         #endregion
 
-        #region キーボードとマウスパッドの配置
+        #region キーボード・マウスパッド
 
         public Message HidHeight(int heightCentimeter) => WithArg($"{heightCentimeter}");
         public Message HidHorizontalScale(int scalePercent) => WithArg($"{scalePercent}");
         public Message HidVisibility(bool visible) => WithArg($"{visible}");
+
+        #endregion
+
+        #region ゲームパッド
+
+        public Message EnableGamepad(bool enable) => WithArg($"{enable}");
+
+        public Message GamepadHeight(int height) => WithArg($"{height}");
+        public Message GamepadHorizontalScale(int scale) => WithArg($"{scale}");
+        public Message GamepadVisibility(bool visibility) => WithArg($"{visibility}");
+
+        public Message GamepadLeanMode(string v) => WithArg(v);
+        public Message GamepadLeanReverseHorizontal(bool reverse) => WithArg($"{reverse}");
+        public Message GamepadLeanReverseVertical(bool reverse) => WithArg($"{reverse}");
 
         #endregion
 
