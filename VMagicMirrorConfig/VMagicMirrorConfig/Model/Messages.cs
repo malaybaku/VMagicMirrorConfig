@@ -41,9 +41,7 @@ namespace Baku.VMagicMirrorConfig
 
         #region HID Input
 
-        public Message Key(System.Windows.Forms.Keys key) => WithArg($"{key}");
         public Message KeyDown(string keyName) => WithArg(keyName);
-
         public Message MouseButton(string info) => WithArg(info);
         public Message MouseMoved(int x, int y) => WithArg($"{x},{y}");
 
@@ -67,8 +65,6 @@ namespace Baku.VMagicMirrorConfig
         public Message WindowDraggable(bool v) => WithArg($"{v}");
 
         public Message MoveWindow(int x, int y) => WithArg($"{x},{y}");
-
-
 
         #endregion
 
@@ -97,7 +93,7 @@ namespace Baku.VMagicMirrorConfig
 
         #endregion
 
-        #region キーボードとマウスパッドの配置
+        #region キーボード・マウスパッド
 
         public Message HidHeight(int heightCentimeter) => WithArg($"{heightCentimeter}");
         public Message HidHorizontalScale(int scalePercent) => WithArg($"{scalePercent}");
@@ -105,25 +101,17 @@ namespace Baku.VMagicMirrorConfig
 
         #endregion
 
-        #region Gamepad Setting
+        #region ゲームパッド
 
-        public Message GamepadHeight(int height)
-            => new Message(nameof(GamepadHeight), height.ToString());
+        public Message EnableGamepad(bool enable) => WithArg($"{enable}");
 
-        public Message GamepadHorizontalScale(int scale)
-            => new Message(nameof(GamepadHorizontalScale), scale.ToString());
+        public Message GamepadHeight(int height) => WithArg($"{height}");
+        public Message GamepadHorizontalScale(int scale) => WithArg($"{scale}");
+        public Message GamepadVisibility(bool visibility) => WithArg($"{visibility}");
 
-        public Message GamepadVisibility(bool visibility)
-            => new Message(nameof(GamepadVisibility), visibility.ToString());
-
-        public Message LeanMode(string v)
-            => new Message(nameof(LeanMode), v);
-
-        public Message LeanReverseHorizontal(bool reverse)
-            => new Message(nameof(LeanReverseHorizontal), reverse.ToString());
-
-        public Message LeanReverseVertical(bool reverse)
-            => new Message(nameof(LeanReverseVertical), reverse.ToString());
+        public Message GamepadLeanMode(string v) => WithArg(v);
+        public Message GamepadLeanReverseHorizontal(bool reverse) => WithArg($"{reverse}");
+        public Message GamepadLeanReverseVertical(bool reverse) => WithArg($"{reverse}");
 
         #endregion
 

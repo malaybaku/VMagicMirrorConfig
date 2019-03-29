@@ -18,6 +18,23 @@ namespace Baku.VMagicMirrorConfig
 
         #region Properties
 
+        private bool _gamepadEnabled = true;
+        public bool GamepadEnabled
+        {
+            get => _gamepadEnabled;
+            set
+            {
+                if (SetValue(ref _gamepadEnabled, value))
+                {
+                    SendMessage(MessageFactory.Instance.EnableGamepad(GamepadEnabled));
+                    if (!value)
+                    {
+                        GamepadVisibility = false;
+                    }
+                }
+            }
+        }
+
         private int _height = 100;
         /// <summary> Unit: [cm] </summary>
         public int GamepadHeight
@@ -61,15 +78,15 @@ namespace Baku.VMagicMirrorConfig
 
         //NOTE: 以下、本来ならEnum値1つで管理する方がよいが、TwoWayバインディングが簡便になるのでbool4つで代用。
 
-        private bool _leanNone = true;
+        private bool _gamepadLeanNone = false;
         public bool GamepadLeanNone
         {
-            get => _leanNone;
+            get => _gamepadLeanNone;
             set
             {
-                if (SetValue(ref _leanNone, value) && value)
+                if (SetValue(ref _gamepadLeanNone, value) && value)
                 {
-                    SendMessage(MessageFactory.Instance.LeanMode(nameof(GamepadLeanNone)));
+                    SendMessage(MessageFactory.Instance.GamepadLeanMode(nameof(GamepadLeanNone)));
                     GamepadLeanLeftButtons = false;
                     GamepadLeanLeftStick = false;
                     GamepadLeanRightStick = false;
@@ -77,15 +94,15 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private bool _leanLeftButtons = false;
+        private bool _gamepadLeanLeftButtons = false;
         public bool GamepadLeanLeftButtons
         {
-            get => _leanLeftButtons;
+            get => _gamepadLeanLeftButtons;
             set
             {
-                if (SetValue(ref _leanLeftButtons, value) && value)
+                if (SetValue(ref _gamepadLeanLeftButtons, value) && value)
                 {
-                    SendMessage(MessageFactory.Instance.LeanMode(nameof(GamepadLeanLeftButtons)));
+                    SendMessage(MessageFactory.Instance.GamepadLeanMode(nameof(GamepadLeanLeftButtons)));
                     GamepadLeanNone = false;
                     GamepadLeanLeftStick = false;
                     GamepadLeanRightStick = false;
@@ -93,15 +110,15 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private bool _leanLeftStick = false;
+        private bool _gamepadLeanLeftStick = true;
         public bool GamepadLeanLeftStick
         {
-            get => _leanLeftStick;
+            get => _gamepadLeanLeftStick;
             set
             {
-                if (SetValue(ref _leanLeftStick, value) && value)
+                if (SetValue(ref _gamepadLeanLeftStick, value) && value)
                 {
-                    SendMessage(MessageFactory.Instance.LeanMode(nameof(GamepadLeanLeftStick)));
+                    SendMessage(MessageFactory.Instance.GamepadLeanMode(nameof(GamepadLeanLeftStick)));
                     GamepadLeanNone = false;
                     GamepadLeanLeftButtons = false;
                     GamepadLeanRightStick = false;
@@ -109,14 +126,15 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private bool _leanRightStick = false;
+        private bool _gamepadLeanRightStick = false;
         public bool GamepadLeanRightStick
         {
-            get => _leanRightStick; set
+            get => _gamepadLeanRightStick;
+            set
             {
-                if (SetValue(ref _leanRightStick, value) && value)
+                if (SetValue(ref _gamepadLeanRightStick, value) && value)
                 {
-                    SendMessage(MessageFactory.Instance.LeanMode(nameof(GamepadLeanRightStick)));
+                    SendMessage(MessageFactory.Instance.GamepadLeanMode(nameof(GamepadLeanRightStick)));
                     GamepadLeanNone = false;
                     GamepadLeanLeftButtons = false;
                     GamepadLeanLeftStick = false;
@@ -124,28 +142,28 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private bool _leanReverseHorizontal;
+        private bool _gamepadLeanReverseHorizontal;
         public bool GamepadLeanReverseHorizontal
         {
-            get => _leanReverseHorizontal;
+            get => _gamepadLeanReverseHorizontal;
             set
             {
-                if (SetValue(ref _leanReverseHorizontal, value))
+                if (SetValue(ref _gamepadLeanReverseHorizontal, value))
                 {
-                    SendMessage(MessageFactory.Instance.LeanReverseHorizontal(GamepadLeanReverseHorizontal));
+                    SendMessage(MessageFactory.Instance.GamepadLeanReverseHorizontal(GamepadLeanReverseHorizontal));
                 }
             }
         }
 
-        private bool _leanReverseVertical;
+        private bool _gamepadLeanReverseVertical;
         public bool GamepadLeanReverseVertical
         {
-            get => _leanReverseVertical;
+            get => _gamepadLeanReverseVertical;
             set
             {
-                if (SetValue(ref _leanReverseVertical, value))
+                if (SetValue(ref _gamepadLeanReverseVertical, value))
                 {
-                    SendMessage(MessageFactory.Instance.LeanReverseVertical(GamepadLeanReverseVertical));
+                    SendMessage(MessageFactory.Instance.GamepadLeanReverseVertical(GamepadLeanReverseVertical));
                 }
             }
         }
@@ -154,18 +172,19 @@ namespace Baku.VMagicMirrorConfig
 
         protected override void ResetToDefault()
         {
+            GamepadEnabled = true;
+
             GamepadHeight = 100;
             GamepadHorizontalScale = 100;
             GamepadVisibility = true;
 
-            GamepadLeanNone = true;
+            GamepadLeanNone = false;
             GamepadLeanLeftButtons = false;
-            GamepadLeanLeftStick = false;
+            GamepadLeanLeftStick = true;
             GamepadLeanRightStick = false;
 
             GamepadLeanReverseHorizontal = false;
             GamepadLeanReverseVertical = false;
-
         }
 
         protected override void SaveSetting()
@@ -225,13 +244,17 @@ namespace Baku.VMagicMirrorConfig
         {
             return new string[]
             {
+                $"{nameof(GamepadEnabled)}:{GamepadEnabled}",
+
                 $"{nameof(GamepadHeight)}:{GamepadHeight}",
                 $"{nameof(GamepadHorizontalScale)}:{GamepadHorizontalScale}",
                 $"{nameof(GamepadVisibility)}:{GamepadVisibility}",
+
                 $"{nameof(GamepadLeanNone)}:{GamepadLeanNone}",
                 $"{nameof(GamepadLeanLeftButtons)}:{GamepadLeanLeftButtons}",
                 $"{nameof(GamepadLeanLeftStick)}:{GamepadLeanLeftStick}",
                 $"{nameof(GamepadLeanRightStick)}:{GamepadLeanRightStick}",
+
                 $"{nameof(GamepadLeanReverseHorizontal)}:{GamepadLeanReverseHorizontal}",
                 $"{nameof(GamepadLeanReverseVertical)}:{GamepadLeanReverseVertical}",
             };
@@ -242,6 +265,8 @@ namespace Baku.VMagicMirrorConfig
             foreach (var line in lines)
             {
                 var _ =
+                    TryReadBoolParam(line, nameof(GamepadEnabled), v => GamepadEnabled = v) ||
+
                     TryReadIntParam(line, nameof(GamepadHeight), v => GamepadHeight = v) ||
                     TryReadIntParam(line, nameof(GamepadHorizontalScale), v => GamepadHorizontalScale = v) ||
                     TryReadBoolParam(line, nameof(GamepadVisibility), v => GamepadVisibility = v) ||
@@ -250,6 +275,7 @@ namespace Baku.VMagicMirrorConfig
                     TryReadBoolParam(line, nameof(GamepadLeanLeftButtons), v => GamepadLeanLeftButtons = v) ||
                     TryReadBoolParam(line, nameof(GamepadLeanLeftStick), v => GamepadLeanLeftStick = v) ||
                     TryReadBoolParam(line, nameof(GamepadLeanRightStick), v => GamepadLeanRightStick = v) ||
+
                     TryReadBoolParam(line, nameof(GamepadLeanReverseHorizontal), v => GamepadLeanReverseHorizontal = v) ||
                     TryReadBoolParam(line, nameof(GamepadLeanReverseVertical), v => GamepadLeanReverseVertical = v);
             }

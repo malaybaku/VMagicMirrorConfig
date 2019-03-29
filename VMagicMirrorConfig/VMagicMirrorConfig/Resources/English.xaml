@@ -35,24 +35,38 @@
     <sys:String x:Key="Window_MoveWindow">Move to specified position</sys:String>
 
     <!-- Layout Setting -->
-    <sys:String x:Key="Layout_CharacterMotion">Character Motion</sys:String>
+    
+    <!-- Layout : Character -->
+    <sys:String x:Key="Layout_Character">Character</sys:String>
+    
+    <!-- Layout : Character : Hand Motion -->
+    <sys:String x:Key="Layout_CharacterMotion">Hand Motion</sys:String>
     <sys:String x:Key="Layout_WristToHandTip">Wrist-Hand tip length [cm]</sys:String>
     <sys:String x:Key="Layout_WristToPalm">Wrist-Palm length [cm]</sys:String>
     <sys:String x:Key="Layout_HandYOffsetBasic">Hand height adjust [cm]</sys:String>
     <sys:String x:Key="Layout_HandYOffsetAfterKeyDown">(Press key)Hand height adjust [cm]</sys:String>
-    <sys:String x:Key="Layout_EnableTouchTyping">Head motion like touch typing</sys:String>
-    <sys:String x:Key="Layout_EnableLipSync">Enable Lip Sync</sys:String>
-    
+
+    <!-- Layout : Character : Wait Motion -->
     <sys:String x:Key="Layout_WaitMotion">Wait motion</sys:String>
     <sys:String x:Key="Layout_EnableWaitMotion">Enable</sys:String>
     <sys:String x:Key="Layout_WaitMotionScale">Scale [%]</sys:String>
     <sys:String x:Key="Layout_WaitMotionPeriod">Period [sec]</sys:String>
-    
+
+    <!-- Layout : Character : Other Motion -->
+    <sys:String x:Key="Layout_OtherMotion">Other motions</sys:String>    
+    <sys:String x:Key="Layout_EnableTouchTyping">Head motion like touch typing</sys:String>
+    <sys:String x:Key="Layout_EnableLipSync">Enable Lip Sync</sys:String>
+
+    <!-- Layout : Camera -->
     <sys:String x:Key="Layout_Camera">Camera</sys:String>
     <sys:String x:Key="Layout_CameraHeight">Height [cm]</sys:String>
     <sys:String x:Key="Layout_CameraDistance">Distance [cm]</sys:String>
     <sys:String x:Key="Layout_CameraAngle">Angle [deg]</sys:String>
 
+    <!-- Layout : Devices -->
+    <sys:String x:Key="Layout_Devices">Input Devices</sys:String>
+    
+    <!-- Layout : Devices : HID (Keyboard / Mouse Pad) -->
     <sys:String x:Key="Layout_Hid">Keyboard &amp; Mouse Pad</sys:String>
     <sys:String x:Key="Layout_HidHeight">Height [cm]</sys:String>
     <sys:String x:Key="Layout_HidHorizontalScale">Size [%]</sys:String>
@@ -62,14 +76,17 @@
     <sys:String x:Key="Layout_HidReactToKeyboard">Enable keyboard motion</sys:String>
     <sys:String x:Key="Layout_HidReactToMouse">Enable mouse motion</sys:String>
     
-    <!-- Gamepad -->
+    <!-- Layout : Devices : Gamepad -->
     <sys:String x:Key="Layout_Gamepad">Gamepad</sys:String>
+    
+    <sys:String x:Key="Layout_GamepadEnable">Enable Input Capture</sys:String>
     <sys:String x:Key="Layout_GamepadDeviceNumber">Device Number</sys:String>
     
     <sys:String x:Key="Layout_GamepadHeight">Height [cm]</sys:String>
     <sys:String x:Key="Layout_GamepadHorizontalScale">Size [%]</sys:String>
     <sys:String x:Key="Layout_GamepadVisible">Visible</sys:String>
     <sys:String x:Key="Layout_GamepadLeanMotion">Lean character by directional input</sys:String>
+
     <sys:String x:Key="Layout_GamepadLean_None">None</sys:String>
     <sys:String x:Key="Layout_GamepadLean_LeftButtons">Left Buttons</sys:String>
     <sys:String x:Key="Layout_GamepadLean_LeftStick">Left Stick</sys:String>
@@ -78,10 +95,7 @@
     <sys:String x:Key="Layout_GamepadLean_Reverse">Reverse direction to lean</sys:String>
     <sys:String x:Key="Layout_GamepadLean_ReverseHorizontal">Left / Right</sys:String>
     <sys:String x:Key="Layout_GamepadLean_ReverseVertical">Forward / Backword</sys:String>
-    
-    <sys:String x:Key="Layout_GamepadReact">Enable gamepad motion</sys:String>
-
-    
+        
     
     <!-- Light Setting -->
     <sys:String x:Key="Light">Light</sys:String>
