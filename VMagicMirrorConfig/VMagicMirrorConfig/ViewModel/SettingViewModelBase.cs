@@ -2,8 +2,7 @@
 {
     public abstract class SettingViewModelBase : ViewModelBase
     {
-        //NOTE: 本当はprivate protectedがしたいが、そのためだけにC# 7.2使うのもアレなのでinternalで済ます
-        internal SettingViewModelBase(IMessageSender sender, StartupSettingViewModel startup)
+        private protected SettingViewModelBase(IMessageSender sender, StartupSettingViewModel startup)
         {
             _sender = sender;
             Startup = startup;
@@ -14,8 +13,7 @@
         //NOTE: 他のタブにもスタートアップ時の有効/無効がいじれるチェックボックス置きたいので追加
         public StartupSettingViewModel Startup { get; }
 
-        //NOTE: 本当はprivate protectedがしたいが、そのためだけにC# 7.2使うのもアレなのでinternalでごまかします
-        internal void SendMessage(Message message)
+        private protected void SendMessage(Message message)
             => _sender.SendMessage(message);
 
         private ActionCommand _resetToDefaultCommand;
