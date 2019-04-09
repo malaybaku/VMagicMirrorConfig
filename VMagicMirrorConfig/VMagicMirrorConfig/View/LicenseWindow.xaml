@@ -15,47 +15,42 @@
                        FontSize="16"
                        Text="OSS URLs"/>
 
-            <TextBlock Text="UniVRM:"
-                       Margin="5"
+            <TextBlock Text="UniVRM: https://github.com/dwango/UniVRM" 
+                       Margin="5,0,5,15"
                        />
-            <TextBlock Text="https://github.com/dwango/UniVRM" 
-                       Margin="5,0,5,15" />
-            
+
             <TextBlock Text="MaterialDesignInXamlToolkit:"
                        Margin="5" />
             <TextBlock Text="https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit"
                        Margin="5,0,5,15"
                        />
 
-            <TextBlock Text="Dragablz:"
-                       Margin="5" />
-            <TextBlock Text="https://github.com/ButchersBoy/Dragablz"
+            <TextBlock Text="Dragablz: https://github.com/ButchersBoy/Dragablz"
                        Margin="5,0,5,15"
                        />
             
-            <TextBlock Text="AniLipSync-VRM:"
-                       Margin="5" />
-            <TextBlock Text="https://github.com/sh-akira/AniLipSync-VRM"
+            <TextBlock Text="AniLipSync-VRM: https://github.com/sh-akira/AniLipSync-VRM"
                        Margin="5,0,5,15"
                        />
             
-            <TextBlock Text="OVRLipSync:"
-                       Margin="5" />
-            <TextBlock Text="https://developer.oculus.com/licenses/audio-3.2.2/"
+            <TextBlock Text="OVRLipSync: https://developer.oculus.com/licenses/audio-3.2.2/"
                        Margin="5,0,5,15"
                        />
 
-            <TextBlock Text="XinputGamePad:"
-                       Margin="5" />
-            <TextBlock Text="https://github.com/kaikikazu/XinputGamePad"
+            <TextBlock Text="XinputGamePad: https://github.com/kaikikazu/XinputGamePad"
                        Margin="5,0,5,15"
                        />
 
-            <TextBlock Text="UniRx:"
-                       Margin="5" />
-            <TextBlock Text="https://github.com/neuecc/UniRx"
+            <TextBlock Text="UniRx: https://github.com/neuecc/UniRx"
                        Margin="5,0,5,15"
                        />
+
+            <TextBlock Text="gRPC: https://github.com/grpc/grpc" 
+                       Margin="5"
+                       />
+            <TextBlock Text="gRPC License (Apache 2.0): https://github.com/grpc/grpc/blob/master/LICENSE"
+                       Margin="5,0,5,15" />
+
 
 
             <TextBlock HorizontalAlignment="Center"
