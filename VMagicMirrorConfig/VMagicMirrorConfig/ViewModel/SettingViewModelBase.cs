@@ -1,22 +1,25 @@
-﻿namespace Baku.VMagicMirrorConfig
+﻿using System.Threading.Tasks;
+
+namespace Baku.VMagicMirrorConfig
 {
     public abstract class SettingViewModelBase : ViewModelBase
     {
-        //NOTE: 本当はprivate protectedがしたいが、そのためだけにC# 7.2使うのもアレなのでinternalで済ます
-        internal SettingViewModelBase(UdpSender sender, StartupSettingViewModel startup)
+        private protected SettingViewModelBase(IMessageSender sender, StartupSettingViewModel startup)
         {
             _sender = sender;
             Startup = startup;
         }
 
-        private readonly UdpSender _sender;
+        private readonly IMessageSender _sender;
 
         //NOTE: 他のタブにもスタートアップ時の有効/無効がいじれるチェックボックス置きたいので追加
         public StartupSettingViewModel Startup { get; }
 
-        //NOTE: 本当はprivate protectedがしたいが、そのためだけにC# 7.2使うのもアレなのでinternalでごまかします
-        internal void SendMessage(Message message)
+        private protected void SendMessage(Message message)
             => _sender.SendMessage(message);
+
+        private protected async Task<string> SendQueryAsync(Message message)
+            => await _sender.QueryMessageAsync(message);
 
         private ActionCommand _resetToDefaultCommand;
         public ActionCommand ResetToDefaultCommand

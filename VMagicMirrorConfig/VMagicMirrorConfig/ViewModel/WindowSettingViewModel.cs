@@ -11,7 +11,7 @@ namespace Baku.VMagicMirrorConfig
     //モデルが小さいのでVMと完全癒着してる点に注意(VMというよりNotifiableなモデル)
     public class WindowSettingViewModel : SettingViewModelBase
     {
-        internal WindowSettingViewModel(UdpSender sender, StartupSettingViewModel startup) : base(sender, startup)
+        internal WindowSettingViewModel(IMessageSender sender, StartupSettingViewModel startup) : base(sender, startup)
         {
             UpdateBackgroundColor();
         }
