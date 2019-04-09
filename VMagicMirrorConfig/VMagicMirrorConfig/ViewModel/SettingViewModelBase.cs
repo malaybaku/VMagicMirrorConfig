@@ -1,4 +1,6 @@
-﻿namespace Baku.VMagicMirrorConfig
+﻿using System.Threading.Tasks;
+
+namespace Baku.VMagicMirrorConfig
 {
     public abstract class SettingViewModelBase : ViewModelBase
     {
@@ -15,6 +17,9 @@
 
         private protected void SendMessage(Message message)
             => _sender.SendMessage(message);
+
+        private protected async Task<string> SendQueryAsync(Message message)
+            => await _sender.QueryMessageAsync(message);
 
         private ActionCommand _resetToDefaultCommand;
         public ActionCommand ResetToDefaultCommand

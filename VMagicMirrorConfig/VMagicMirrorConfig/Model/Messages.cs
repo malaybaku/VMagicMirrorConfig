@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System;
+using System.Runtime.CompilerServices;
 
 namespace Baku.VMagicMirrorConfig
 {
@@ -82,6 +83,9 @@ namespace Baku.VMagicMirrorConfig
 
         public Message EnableTouchTyping(bool enable) => WithArg($"{enable}");
         public Message EnableLipSync(bool enable) => WithArg($"{enable}");
+
+        public Message SetMicrophoneDeviceName(string deviceName) => WithArg(deviceName);
+        public Message MicrophoneDeviceNames() => NoArg();
 
         #endregion
 

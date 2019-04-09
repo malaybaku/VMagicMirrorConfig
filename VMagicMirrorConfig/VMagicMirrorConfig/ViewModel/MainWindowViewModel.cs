@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Windows;
 using Microsoft.Win32;
 
@@ -86,22 +87,26 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        public void Initialize()
+        public async void Initialize()
         {
-            if (Application.Current.MainWindow != null &&
-                !DesignerProperties.GetIsInDesignMode(Application.Current.MainWindow))
+            if (Application.Current.MainWindow == null ||
+                DesignerProperties.GetIsInDesignMode(Application.Current.MainWindow))
             {
-                Initializer.Initialize();
-                LoadCurrentParameters();
-
-                if (WindowSetting.EnableWindowInitialPlacement)
-                {
-                    WindowSetting.MoveWindow();
-                }
-
-                LanguageSelector.Instance.Initialize(MessageSender);
-                LanguageName = LanguageSelector.Instance.LanguageName;
+                return;
             }
+
+            Initializer.Initialize();
+            LoadCurrentParameters();
+
+            if (WindowSetting.EnableWindowInitialPlacement)
+            {
+                WindowSetting.MoveWindow();
+            }
+
+            LanguageSelector.Instance.Initialize(MessageSender);
+            LanguageName = LanguageSelector.Instance.LanguageName;
+
+            await LayoutSetting.InitializeAvailableMicrophoneNamesAsync();
         }
 
         private readonly ObservableCollection<string> _availableLanguageNames

@@ -57,6 +57,7 @@
     <sys:String x:Key="Layout_OtherMotion">その他のモーション</sys:String>    
     <sys:String x:Key="Layout_EnableTouchTyping">タッチタイピング風に視線を動かす</sys:String>
     <sys:String x:Key="Layout_EnableLipSync">リップシンクを有効化</sys:String>
+    <sys:String x:Key="Layout_MicrophoneName">使用するマイク</sys:String>    
 
     <!-- Layout : Camera -->
     <sys:String x:Key="Layout_Camera">カメラ</sys:String>

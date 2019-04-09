@@ -162,6 +162,23 @@
                                     <TextBlock Text="{DynamicResource Layout_EnableLipSync}"/>
                                 </CheckBox.Content>
                             </CheckBox>
+
+                            <Grid Margin="5" 
+                                  IsEnabled="{Binding EnableLipSync}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0"
+                                           Text="{DynamicResource Layout_MicrophoneName}"
+                                           />
+                                <ComboBox Grid.Column="1"
+                                          ItemsSource="{Binding MicrophoneDeviceNames}"
+                                          SelectedItem="{Binding LipSyncMicrophoneDeviceName}"
+                                          Margin="5,0"
+                                          />
+                            </Grid>
+
                         </StackPanel>
                     </Expander>
 

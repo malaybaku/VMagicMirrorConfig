@@ -1,11 +1,13 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using Microsoft.Win32;
 
 namespace Baku.VMagicMirrorConfig
 {
-    using System.Linq;
     using static LineParseUtils;
 
     public class LayoutSettingViewModel : SettingViewModelBase
@@ -16,6 +18,19 @@ namespace Baku.VMagicMirrorConfig
         }
 
         public GamepadSettingViewModel Gamepad { get; private set; }
+
+        public async Task InitializeAvailableMicrophoneNamesAsync()
+        {
+            string result = await SendQueryAsync(MessageFactory.Instance.MicrophoneDeviceNames());
+            Application.Current.MainWindow.Dispatcher.Invoke(() => 
+            {
+                _writableMicrophoneDeviceNames.Clear();
+                foreach (var deviceName in result.Split('\t'))
+                {
+                    _writableMicrophoneDeviceNames.Add(deviceName);
+                }
+            });
+        }
 
         #region Properties
 
@@ -125,7 +140,7 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private bool _enableLipSync = true;
+        private bool _enableLipSync = false;
         public bool EnableLipSync
         {
             get => _enableLipSync;
@@ -137,6 +152,26 @@ namespace Baku.VMagicMirrorConfig
                 }
             }
         }
+
+        private string _lipSyncMicrophoneDeviceName = "";
+        public string LipSyncMicrophoneDeviceName
+        {
+            get => _lipSyncMicrophoneDeviceName;
+            set
+            {
+                if (SetValue(ref _lipSyncMicrophoneDeviceName, value))
+                {
+                    SendMessage(MessageFactory.Instance.SetMicrophoneDeviceName(LipSyncMicrophoneDeviceName));
+                }
+            }
+        }
+
+        private readonly ObservableCollection<string> _writableMicrophoneDeviceNames 
+            = new ObservableCollection<string>();
+        private ReadOnlyObservableCollection<string> _microphoneDeviceNames = null;
+        public ReadOnlyObservableCollection<string> MicrophoneDeviceNames
+            => _microphoneDeviceNames ?? 
+            (_microphoneDeviceNames = new ReadOnlyObservableCollection<string>(_writableMicrophoneDeviceNames));
 
         private int _cameraHeight = 120;
         /// <summary> Unit: [cm] </summary>
@@ -240,7 +275,7 @@ namespace Baku.VMagicMirrorConfig
 
             EnableTouchTyping = true;
             EnableLipSync = true;
-
+            LipSyncMicrophoneDeviceName = "";
 
             CameraHeight = 120;
             CameraDistance = 100;
@@ -295,6 +330,7 @@ namespace Baku.VMagicMirrorConfig
 
                 $"{nameof(EnableTouchTyping)}:{EnableTouchTyping}",
                 $"{nameof(EnableLipSync)}:{EnableLipSync}",
+                $"{nameof(LipSyncMicrophoneDeviceName)}:{LipSyncMicrophoneDeviceName}",
 
                 $"{nameof(CameraHeight)}:{CameraHeight}",
                 $"{nameof(CameraDistance)}:{CameraDistance}",
@@ -335,6 +371,7 @@ namespace Baku.VMagicMirrorConfig
 
                         TryReadBoolParam(line, nameof(EnableTouchTyping), v => EnableTouchTyping = v) ||
                         TryReadBoolParam(line, nameof(EnableLipSync), v => EnableLipSync = v) ||
+                        TryReadStringParam(line, nameof(LipSyncMicrophoneDeviceName), v => LipSyncMicrophoneDeviceName = v) ||
 
                         TryReadIntParam(line, nameof(CameraHeight), v => CameraHeight = v) ||
                         TryReadIntParam(line, nameof(CameraDistance), v => CameraDistance = v) ||

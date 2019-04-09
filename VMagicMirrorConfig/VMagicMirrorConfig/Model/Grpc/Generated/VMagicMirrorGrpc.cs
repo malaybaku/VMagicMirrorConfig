@@ -34,8 +34,7 @@ namespace Baku.VMagicMirror {
             "Vk1hZ2ljTWlycm9yLkdlbmVyaWNDb21tYW5kUmVzcG9uc2UiABJhCgxRdWVy",
             "eUdlbmVyaWMSJi5CYWt1LlZNYWdpY01pcnJvci5HZW5lcmljUXVlcnlSZXF1",
             "ZXN0GicuQmFrdS5WTWFnaWNNaXJyb3IuR2VuZXJpY1F1ZXJ5UmVzcG9uc2Ui",
-            "AEInChVjb20uYmFrdS52bWFnaWNtaXJyb3JCDENvbW11bmljYXRvclABYgZw",
-            "cm90bzM="));
+            "AEIZChVjb20uYmFrdS52bWFnaWNtaXJyb3JQAWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
