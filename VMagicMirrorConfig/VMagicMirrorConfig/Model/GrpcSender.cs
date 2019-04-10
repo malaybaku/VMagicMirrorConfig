@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Diagnostics;
+using System.Threading.Tasks;
 using Grpc.Core;
 
 namespace Baku.VMagicMirrorConfig
@@ -20,22 +22,36 @@ namespace Baku.VMagicMirrorConfig
         public void SendMessage(Message message)
         {
             //NOTE: 前バージョンが投げっぱなし通信だったため、ここでも戻り値はとらない
-            _client.CommandGeneric(new VMagicMirror.GenericCommandRequest()
+            try
             {
-                Command = message.Command,
-                Args = message.Content,
-            });
+                _client.CommandGeneric(new VMagicMirror.GenericCommandRequest()
+                {
+                    Command = message.Command,
+                    Args = message.Content,
+                });
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
         }
 
         public async Task<string> QueryMessageAsync(Message message)
         {
-            var response = await _client.QueryGenericAsync(new VMagicMirror.GenericQueryRequest()
+            try
             {
-                Command = message.Command,
-                Args = message.Content,
-            });
-
-            return response.Result;
+                var response = await _client.QueryGenericAsync(new VMagicMirror.GenericQueryRequest()
+                {
+                    Command = message.Command,
+                    Args = message.Content,
+                });
+                return response.Result;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return "";
+            }
         }
     }
 }

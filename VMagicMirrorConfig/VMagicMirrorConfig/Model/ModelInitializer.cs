@@ -11,11 +11,14 @@ namespace Baku.VMagicMirrorConfig
             InputChecker.MouseMoved += OnMouseMoved;
             InputChecker.MouseButton += OnMouseButton;
             InputChecker.KeyDown += OnKeyDown;
+
+            MessageReceiver.Start();
+            AssignMessageReceivers();
         }
 
         public IMessageSender MessageSender { get; } = new GrpcSender();
+        public IMessageReceiver MessageReceiver { get; } = new GrpcReceiver();
         public InputChecker InputChecker { get; } = new InputChecker();
-
 
         private void OnKeyDown(object sender, EventArgs e)
             => MessageSender.SendMessage(MessageFactory.Instance.KeyDown(InputChecker.KeyCode));
@@ -29,6 +32,12 @@ namespace Baku.VMagicMirrorConfig
         public void Dispose()
         {
             InputChecker.Dispose();
+            MessageReceiver.Stop();
+        }
+
+        private void AssignMessageReceivers()
+        {
+            new AppExitFromUnityMessage().Initialize(MessageReceiver);
         }
     }
 }
