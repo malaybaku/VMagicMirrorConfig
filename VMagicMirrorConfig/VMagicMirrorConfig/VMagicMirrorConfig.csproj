@@ -83,10 +83,16 @@
     </ApplicationDefinition>
     <Compile Include="Common\LineParseUtils.cs" />
     <Compile Include="Common\NotifiableBase.cs" />
+    <Compile Include="Model\AppExitFromUnityMessage.cs" />
+    <Compile Include="Model\GrpcReceiver.cs" />
     <Compile Include="Model\GrpcSender.cs" />
+    <Compile Include="Model\GrpcServerImpl.cs" />
     <Compile Include="Model\Grpc\Generated\VMagicMirrorGrpc.cs" />
     <Compile Include="Model\Grpc\Generated\VMagicMirrorGrpcGrpc.cs" />
+    <Compile Include="Model\IMessageReceiver.cs" />
     <Compile Include="Model\IMessageSender.cs" />
+    <Compile Include="Model\MessageFactory.cs" />
+    <Compile Include="Model\ReceiveMessageNames.cs" />
     <Compile Include="Model\UnityAppCloser.cs" />
     <Compile Include="Model\MessageIndication.cs" />
     <Compile Include="Model\InputChecker.cs" />
