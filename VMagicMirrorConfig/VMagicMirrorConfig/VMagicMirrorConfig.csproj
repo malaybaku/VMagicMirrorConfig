@@ -83,7 +83,6 @@
     </ApplicationDefinition>
     <Compile Include="Common\LineParseUtils.cs" />
     <Compile Include="Common\NotifiableBase.cs" />
-    <Compile Include="Common\UIDispatcher.cs" />
     <Compile Include="Model\AppExitFromUnityMessage.cs" />
     <Compile Include="Model\GrpcReceiver.cs" />
     <Compile Include="Model\GrpcSender.cs" />
