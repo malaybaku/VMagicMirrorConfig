@@ -1,23 +1,24 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
+﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
-using Microsoft.Win32;
+using System.Xml.Serialization;
 
 namespace Baku.VMagicMirrorConfig
 {
-    using static LineParseUtils;
-
     public class LayoutSettingViewModel : SettingViewModelBase
     {
+        public LayoutSettingViewModel() : base() { }
         internal LayoutSettingViewModel(IMessageSender sender, StartupSettingViewModel startup) : base(sender, startup)
         {
             Gamepad = new GamepadSettingViewModel(sender, startup);
         }
 
-        public GamepadSettingViewModel Gamepad { get; private set; }
+        /// <summary>
+        /// </summary>
+        /// <remarks>
+        /// Setterがpublicなのはシリアライザのご機嫌取ってるだけなので普通のコードでは触らない事！
+        /// </remarks>
+        public GamepadSettingViewModel Gamepad { get; set; }
 
         public async Task InitializeAvailableMicrophoneNamesAsync()
         {
@@ -31,6 +32,11 @@ namespace Baku.VMagicMirrorConfig
                 }
             });
         }
+
+        protected override string SaveDialogTitle => "Save Layout Setting File";
+        protected override string LoadDialogTitle => "Open Layout Setting File";
+        protected override string FileIoDialogFilter => "VMagicMirror Layout File(*.vmm_layout)|*.vmm_layout";
+        protected override string FileExt => ".vmm_layout";
 
         #region Properties
 
@@ -169,6 +175,7 @@ namespace Baku.VMagicMirrorConfig
         private readonly ObservableCollection<string> _writableMicrophoneDeviceNames 
             = new ObservableCollection<string>();
         private ReadOnlyObservableCollection<string> _microphoneDeviceNames = null;
+        [XmlIgnore]
         public ReadOnlyObservableCollection<string> MicrophoneDeviceNames
             => _microphoneDeviceNames ?? 
             (_microphoneDeviceNames = new ReadOnlyObservableCollection<string>(_writableMicrophoneDeviceNames));
@@ -285,112 +292,5 @@ namespace Baku.VMagicMirrorConfig
             HidHorizontalScale = 100;
             HidVisibility = true;
         }
-
-        protected override void SaveSetting()
-        {
-            var dialog = new SaveFileDialog()
-            {
-                Title = "Save Layout Setting File",
-                Filter = "VMagicMirror Layout File(*.vmm_layout)|*.vmm_layout",
-                DefaultExt = ".vmm_layout",
-                AddExtension = true,
-            };
-            if (dialog.ShowDialog() == true)
-            {
-                SaveSetting(dialog.FileName);
-            }
-        }
-
-        protected override void LoadSetting()
-        {
-            var dialog = new OpenFileDialog()
-            {
-                Title = "Open Layout Setting File",
-                Filter = "VMagicMirror Layout File(*.vmm_layout)|*.vmm_layout",
-                Multiselect = false,
-            };
-            if (dialog.ShowDialog() == true)
-            {
-                LoadSetting(dialog.FileName);
-            }
-        }
-
-        internal override void SaveSetting(string path)
-        {
-            var lines = new string[]
-            {
-                $"{nameof(LengthFromWristToTip)}:{LengthFromWristToTip}",
-                $"{nameof(LengthFromWristToPalm)}:{LengthFromWristToPalm}",
-                $"{nameof(HandYOffsetBasic)}:{HandYOffsetBasic}",
-                $"{nameof(HandYOffsetAfterKeyDown)}:{HandYOffsetAfterKeyDown}",
-
-                $"{nameof(EnableWaitMotion)}:{EnableWaitMotion}",
-                $"{nameof(WaitMotionScale)}:{WaitMotionScale}",
-                $"{nameof(WaitMotionPeriod)}:{WaitMotionPeriod}",
-
-                $"{nameof(EnableTouchTyping)}:{EnableTouchTyping}",
-                $"{nameof(EnableLipSync)}:{EnableLipSync}",
-                $"{nameof(LipSyncMicrophoneDeviceName)}:{LipSyncMicrophoneDeviceName}",
-
-                $"{nameof(CameraHeight)}:{CameraHeight}",
-                $"{nameof(CameraDistance)}:{CameraDistance}",
-                $"{nameof(CameraVerticalAngle)}:{CameraVerticalAngle}",
-                $"{nameof(HidHeight)}:{HidHeight}",
-                $"{nameof(HidHorizontalScale)}:{HidHorizontalScale}",
-                $"{nameof(HidVisibility)}:{HidVisibility}",
-            }
-                .Concat(Gamepad.GetLinesToSave())
-                .ToArray();
-
-
-            File.WriteAllLines(path, lines);
-        }
-
-        internal override void LoadSetting(string path)
-        {
-            if (!File.Exists(path))
-            {
-                return;
-            }
-
-            try
-            {
-                var lines = File.ReadAllLines(path);
-                foreach (var line in lines)
-                {
-                    //戻り値を拾うのはシンタックス対策
-                    var _ =
-                        TryReadIntParam(line, nameof(LengthFromWristToTip), v => LengthFromWristToTip = v) ||
-                        TryReadIntParam(line, nameof(LengthFromWristToPalm), v => LengthFromWristToPalm = v) ||
-                        TryReadIntParam(line, nameof(HandYOffsetBasic), v => HandYOffsetBasic = v) ||
-                        TryReadIntParam(line, nameof(HandYOffsetAfterKeyDown), v => HandYOffsetAfterKeyDown = v) ||
-
-                        TryReadBoolParam(line, nameof(EnableWaitMotion), v => EnableWaitMotion = v) ||
-                        TryReadIntParam(line, nameof(WaitMotionScale), v => WaitMotionScale = v) ||
-                        TryReadIntParam(line, nameof(WaitMotionPeriod), v => WaitMotionPeriod = v) ||
-
-                        TryReadBoolParam(line, nameof(EnableTouchTyping), v => EnableTouchTyping = v) ||
-                        TryReadBoolParam(line, nameof(EnableLipSync), v => EnableLipSync = v) ||
-                        TryReadStringParam(line, nameof(LipSyncMicrophoneDeviceName), v => LipSyncMicrophoneDeviceName = v) ||
-
-                        TryReadIntParam(line, nameof(CameraHeight), v => CameraHeight = v) ||
-                        TryReadIntParam(line, nameof(CameraDistance), v => CameraDistance = v) ||
-                        TryReadIntParam(line, nameof(CameraVerticalAngle), v => CameraVerticalAngle = v) ||
-
-                        TryReadIntParam(line, nameof(HidHeight), v => HidHeight = v) ||
-                        TryReadIntParam(line, nameof(HidHorizontalScale), v => HidHorizontalScale = v) ||
-                        TryReadBoolParam(line, nameof(HidVisibility), v => HidVisibility = v);
-                }
-
-                Gamepad.ParseLines(lines);
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("レイアウト設定の読み込みに失敗しました: " + ex.Message);
-            }
-
-        }
-
     }
 }

@@ -148,9 +148,9 @@ namespace Baku.VMagicMirrorConfig
                 _lastVrmLoadFilePath
                 );
 
-            WindowSetting.SaveSetting(GetFilePath(SpecialFileNames.Background));
-            LayoutSetting.SaveSetting(GetFilePath(SpecialFileNames.Layout));
-            LightSetting.SaveSetting(GetFilePath(SpecialFileNames.Light));
+            WindowSetting.SaveSettingTo(GetFilePath(SpecialFileNames.Background));
+            LayoutSetting.SaveSettingTo(GetFilePath(SpecialFileNames.Layout));
+            LightSetting.SaveSettingTo(GetFilePath(SpecialFileNames.Light));
             StartupSetting.SaveSetting(GetFilePath(SpecialFileNames.Startup));
         }
 
@@ -165,17 +165,17 @@ namespace Baku.VMagicMirrorConfig
 
             if (StartupSetting.LoadBackgroundSetting)
             {
-                WindowSetting.LoadSetting(GetFilePath(SpecialFileNames.Background));
+                WindowSetting.LoadSettingFrom(GetFilePath(SpecialFileNames.Background));
             }
 
             if (StartupSetting.LoadLayoutSetting)
             {
-                LayoutSetting.LoadSetting(GetFilePath(SpecialFileNames.Layout));
+                LayoutSetting.LoadSettingFrom(GetFilePath(SpecialFileNames.Layout));
             }
 
             if (StartupSetting.LoadLightSetting)
             {
-                LightSetting.LoadSetting(GetFilePath(SpecialFileNames.Light));
+                LightSetting.LoadSettingFrom(GetFilePath(SpecialFileNames.Light));
             }
         }
 

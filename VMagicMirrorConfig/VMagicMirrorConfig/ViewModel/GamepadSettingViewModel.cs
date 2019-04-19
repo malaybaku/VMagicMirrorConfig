@@ -1,16 +1,8 @@
-﻿using System;
-using System.IO;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows;
-using Microsoft.Win32;
-
-namespace Baku.VMagicMirrorConfig
+﻿namespace Baku.VMagicMirrorConfig
 {
-    using static LineParseUtils;
-
     public class GamepadSettingViewModel : SettingViewModelBase
     {
+        public GamepadSettingViewModel() : base() { }
 
         internal GamepadSettingViewModel(IMessageSender sender, StartupSettingViewModel startup) : base(sender, startup)
         {
@@ -185,100 +177,6 @@ namespace Baku.VMagicMirrorConfig
 
             GamepadLeanReverseHorizontal = false;
             GamepadLeanReverseVertical = false;
-        }
-
-        protected override void SaveSetting()
-        {
-            var dialog = new SaveFileDialog()
-            {
-                Title = "Save Gamepad Setting File",
-                Filter = "VMagicMirror Gamepad File(*.vmm_gamepad)|*.vmm_gamepad",
-                DefaultExt = ".vmm_gamepad",
-                AddExtension = true,
-            };
-            if (dialog.ShowDialog() == true)
-            {
-                SaveSetting(dialog.FileName);
-            }
-        }
-
-        protected override void LoadSetting()
-        {
-            var dialog = new OpenFileDialog()
-            {
-                Title = "Open Gamepad Setting File",
-                Filter = "VMagicMirror Gamepad File(*.vmm_gamepad)|*.vmm_gamepad",
-                Multiselect = false,
-            };
-            if (dialog.ShowDialog() == true)
-            {
-                LoadSetting(dialog.FileName);
-            }
-        }
-
-        internal override void SaveSetting(string path)
-        {
-            File.WriteAllLines(path, GetLinesToSave().ToArray());
-        }
-
-        internal override void LoadSetting(string path)
-        {
-            if (!File.Exists(path))
-            {
-                return;
-            }
-
-            try
-            {
-                var lines = File.ReadAllLines(path);
-                ParseLines(lines);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Failed to load gamepad setting: " + ex.Message);
-            }
-
-        }
-
-        internal IEnumerable<string> GetLinesToSave()
-        {
-            return new string[]
-            {
-                $"{nameof(GamepadEnabled)}:{GamepadEnabled}",
-
-                $"{nameof(GamepadHeight)}:{GamepadHeight}",
-                $"{nameof(GamepadHorizontalScale)}:{GamepadHorizontalScale}",
-                $"{nameof(GamepadVisibility)}:{GamepadVisibility}",
-
-                $"{nameof(GamepadLeanNone)}:{GamepadLeanNone}",
-                $"{nameof(GamepadLeanLeftButtons)}:{GamepadLeanLeftButtons}",
-                $"{nameof(GamepadLeanLeftStick)}:{GamepadLeanLeftStick}",
-                $"{nameof(GamepadLeanRightStick)}:{GamepadLeanRightStick}",
-
-                $"{nameof(GamepadLeanReverseHorizontal)}:{GamepadLeanReverseHorizontal}",
-                $"{nameof(GamepadLeanReverseVertical)}:{GamepadLeanReverseVertical}",
-            };
-        }
-
-        internal void ParseLines(IEnumerable<string> lines)
-        {
-            foreach (var line in lines)
-            {
-                var _ =
-                    TryReadBoolParam(line, nameof(GamepadEnabled), v => GamepadEnabled = v) ||
-
-                    TryReadIntParam(line, nameof(GamepadHeight), v => GamepadHeight = v) ||
-                    TryReadIntParam(line, nameof(GamepadHorizontalScale), v => GamepadHorizontalScale = v) ||
-                    TryReadBoolParam(line, nameof(GamepadVisibility), v => GamepadVisibility = v) ||
-
-                    TryReadBoolParam(line, nameof(GamepadLeanNone), v => GamepadLeanNone = v) ||
-                    TryReadBoolParam(line, nameof(GamepadLeanLeftButtons), v => GamepadLeanLeftButtons = v) ||
-                    TryReadBoolParam(line, nameof(GamepadLeanLeftStick), v => GamepadLeanLeftStick = v) ||
-                    TryReadBoolParam(line, nameof(GamepadLeanRightStick), v => GamepadLeanRightStick = v) ||
-
-                    TryReadBoolParam(line, nameof(GamepadLeanReverseHorizontal), v => GamepadLeanReverseHorizontal = v) ||
-                    TryReadBoolParam(line, nameof(GamepadLeanReverseVertical), v => GamepadLeanReverseVertical = v);
-            }
         }
     }
 }

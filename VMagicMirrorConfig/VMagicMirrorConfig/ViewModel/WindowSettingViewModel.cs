@@ -1,20 +1,22 @@
-﻿using System;
-using System.IO;
-using System.Windows;
-using System.Windows.Media;
-using Microsoft.Win32;
+﻿using System.Windows.Media;
+using System.Xml.Serialization;
 
 namespace Baku.VMagicMirrorConfig
 {
-    using static LineParseUtils;
-
     //モデルが小さいのでVMと完全癒着してる点に注意(VMというよりNotifiableなモデル)
     public class WindowSettingViewModel : SettingViewModelBase
     {
+        public WindowSettingViewModel() : base() { }
         internal WindowSettingViewModel(IMessageSender sender, StartupSettingViewModel startup) : base(sender, startup)
         {
             UpdateBackgroundColor();
         }
+
+        protected override string SaveDialogTitle => "Save Background Setting File";
+        protected override string LoadDialogTitle => "Open Background Setting File";
+        protected override string FileIoDialogFilter => "VMagicMirror Background File(*.vmm_background)|*.vmm_background";
+        protected override string FileExt => ".vmm_background";
+
 
         private int _r = 0;
         public int R
@@ -58,6 +60,7 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
+        [XmlIgnore]
         public Color Color { get; private set; }
 
         private void UpdateBackgroundColor()
@@ -228,83 +231,5 @@ namespace Baku.VMagicMirrorConfig
             WindowInitialPositionX = 0;
             WindowInitialPositionY = 0;
         }
-
-        protected override void SaveSetting()
-        {
-            var dialog = new SaveFileDialog()
-            {
-                Title = "Save Background Setting File",
-                Filter = "VMagicMirror Background File(*.vmm_background)|*.vmm_background",
-                DefaultExt = ".vmm_background",
-                AddExtension = true,
-            };
-            if (dialog.ShowDialog() == true)
-            {
-                SaveSetting(dialog.FileName);
-            }
-        }
-
-        protected override void LoadSetting()
-        {
-            var dialog = new OpenFileDialog()
-            {
-                Title = "Open Background Setting File",
-                Filter = "VMagicMirror Background File(*.vmm_background)|*.vmm_background",
-                Multiselect = false,
-            };
-            if (dialog.ShowDialog() == true)
-            {
-                LoadSetting(dialog.FileName);
-            }
-        }
-
-        internal override void SaveSetting(string path)
-        {
-            File.WriteAllLines(path, new string[]
-            {
-                $"{nameof(R)}:{R}",
-                $"{nameof(G)}:{G}",
-                $"{nameof(B)}:{B}",
-                $"{nameof(IsTransparent)}:{IsTransparent}",
-                $"{nameof(WindowDraggable)}:{WindowDraggable}",
-                $"{nameof(TopMost)}:{TopMost}",
-                $"{nameof(EnableWindowInitialPlacement)}:{EnableWindowInitialPlacement}",
-                $"{nameof(WindowInitialPositionX)}:{WindowInitialPositionX}",
-                $"{nameof(WindowInitialPositionY)}:{WindowInitialPositionY}"
-            });
-        }
-
-        internal override void LoadSetting(string path)
-        {
-            if (!File.Exists(path))
-            {
-                return;
-            }
-
-            try
-            {
-                var lines = File.ReadAllLines(path);
-                foreach (var line in lines)
-                {
-                    //戻り値を拾うのはシンタックス対策
-                    var _ =
-                        TryReadIntParam(line, nameof(R), v => R = v) ||
-                        TryReadIntParam(line, nameof(G), v => G = v) ||
-                        TryReadIntParam(line, nameof(B), v => B = v) ||
-                        TryReadBoolParam(line, nameof(IsTransparent), v => IsTransparent = v) ||
-                        TryReadBoolParam(line, nameof(TopMost), v => TopMost = v) ||
-                        TryReadBoolParam(line, nameof(WindowDraggable), v => WindowDraggable = v) ||
-                        TryReadBoolParam(line, nameof(EnableWindowInitialPlacement), v => EnableWindowInitialPlacement = v) ||
-                        TryReadIntParam(line, nameof(WindowInitialPositionX), v => WindowInitialPositionX = v) ||
-                        TryReadIntParam(line, nameof(WindowInitialPositionY), v => WindowInitialPositionY = v);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("設定の読み込みに失敗しました: " + ex.Message);
-            }
-
-        }
-
     }
 }

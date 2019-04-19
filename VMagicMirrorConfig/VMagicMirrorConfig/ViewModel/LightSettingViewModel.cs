@@ -1,13 +1,8 @@
-﻿using System;
-using System.IO;
-using System.Windows;
-using System.Windows.Media;
-using Microsoft.Win32;
+﻿using System.Windows.Media;
+using System.Xml.Serialization;
 
 namespace Baku.VMagicMirrorConfig
 {
-    using static LineParseUtils;
-
     public class LightSettingViewModel : SettingViewModelBase
     {
         internal LightSettingViewModel(IMessageSender sender, StartupSettingViewModel startup) : base(sender, startup)
@@ -15,6 +10,11 @@ namespace Baku.VMagicMirrorConfig
             UpdateLightColor();
             UpdateBloomColor();
         }
+
+        protected override string SaveDialogTitle => "Save Light Setting File";
+        protected override string LoadDialogTitle => "Open Light Setting File";
+        protected override string FileIoDialogFilter => "VMagicMirror Light File(*.vmm_light)|*.vmm_light";
+        protected override string FileExt => ".vmm_light";
 
         #region ライト
 
@@ -75,6 +75,7 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
+        [XmlIgnore]
         public Color LightColor { get; private set; }
 
         private void UpdateLightColor()
@@ -159,6 +160,7 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
+        [XmlIgnore]
         public Color BloomColor { get; private set; }
 
         private void UpdateBloomColor()
@@ -181,85 +183,6 @@ namespace Baku.VMagicMirrorConfig
             BloomB = 255;
             BloomIntensity = 100;
             BloomThreshold = 100;
-        }
-
-        protected override void SaveSetting()
-        {
-            var dialog = new SaveFileDialog()
-            {
-                Title = "Save Light Setting File",
-                Filter = "VMagicMirror Light File(*.vmm_light)|*.vmm_light",
-                DefaultExt = ".vmm_light",
-                AddExtension = true,
-            };
-            if (dialog.ShowDialog() == true)
-            {
-                SaveSetting(dialog.FileName);
-            }
-        }
-
-        protected override void LoadSetting()
-        {
-            var dialog = new OpenFileDialog()
-            {
-                Title = "Open Light Setting File",
-                Filter = "VMagicMirror Light File(*.vmm_light)|*.vmm_light",
-                Multiselect = false,
-            };
-            if (dialog.ShowDialog() == true)
-            {
-                LoadSetting(dialog.FileName);
-            }
-        }
-
-        internal override void SaveSetting(string path)
-        {
-            File.WriteAllLines(path, new string[]
-            {
-                $"{nameof(LightR)}:{LightR}",
-                $"{nameof(LightG)}:{LightG}",
-                $"{nameof(LightB)}:{LightB}",
-                $"{nameof(LightIntensity)}:{LightIntensity}",
-
-                $"{nameof(BloomR)}:{BloomR}",
-                $"{nameof(BloomG)}:{BloomG}",
-                $"{nameof(BloomB)}:{BloomB}",
-                $"{nameof(BloomIntensity)}:{BloomIntensity}",
-                $"{nameof(BloomThreshold)}:{BloomThreshold}",
-            });
-        }
-
-        internal override void LoadSetting(string path)
-        {
-            if (!File.Exists(path))
-            {
-                return;
-            }
-
-            try
-            {
-                var lines = File.ReadAllLines(path);
-                foreach (var line in lines)
-                {
-                    //戻り値を拾うのはシンタックス対策
-                    var _ =
-                        TryReadIntParam(line, nameof(LightR), v => LightR = v) ||
-                        TryReadIntParam(line, nameof(LightG), v => LightG = v) ||
-                        TryReadIntParam(line, nameof(LightB), v => LightB = v) ||
-                        TryReadIntParam(line, nameof(LightIntensity), v => LightIntensity = v) ||
-
-                        TryReadIntParam(line, nameof(BloomR), v => BloomR = v) ||
-                        TryReadIntParam(line, nameof(BloomG), v => BloomG = v) ||
-                        TryReadIntParam(line, nameof(BloomB), v => BloomB = v) ||
-                        TryReadIntParam(line, nameof(BloomIntensity), v => BloomIntensity = v) ||
-                        TryReadIntParam(line, nameof(BloomThreshold), v => BloomThreshold = v);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("設定の読み込みに失敗しました: " + ex.Message);
-            }
-
         }
     }
 }
