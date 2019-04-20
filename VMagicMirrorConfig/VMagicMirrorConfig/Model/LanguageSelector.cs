@@ -22,7 +22,7 @@ namespace Baku.VMagicMirrorConfig
         {
         }
 
-        private UdpSender _sender = null;
+        private IMessageSender _sender = null;
 
         private string _languageName = nameof(Languages.Japanese);
         public string LanguageName
@@ -40,7 +40,7 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        public void Initialize(UdpSender sender)
+        public void Initialize(IMessageSender sender)
         {
             _sender = sender;
 

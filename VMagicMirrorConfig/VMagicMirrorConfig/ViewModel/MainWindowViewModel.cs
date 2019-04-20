@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Windows;
 using Microsoft.Win32;
 
@@ -11,7 +12,7 @@ namespace Baku.VMagicMirrorConfig
     public class MainWindowViewModel : ViewModelBase, IWindowViewModel
     {
         internal ModelInitializer Initializer { get; } = new ModelInitializer();
-        internal UdpSender UdpSender => Initializer.UdpSender;
+        internal IMessageSender MessageSender => Initializer.MessageSender;
         internal InputChecker InputChecker => Initializer.InputChecker;
 
         public WindowSettingViewModel WindowSetting { get; private set; }
@@ -25,9 +26,9 @@ namespace Baku.VMagicMirrorConfig
         public MainWindowViewModel()
         {
             StartupSetting = new StartupSettingViewModel();
-            WindowSetting = new WindowSettingViewModel(UdpSender, StartupSetting);
-            LayoutSetting = new LayoutSettingViewModel(UdpSender, StartupSetting);
-            LightSetting = new LightSettingViewModel(UdpSender, StartupSetting);
+            WindowSetting = new WindowSettingViewModel(MessageSender, StartupSetting);
+            LayoutSetting = new LayoutSettingViewModel(MessageSender, StartupSetting);
+            LightSetting = new LightSettingViewModel(MessageSender, StartupSetting);
 
             AvailableLanguageNames = new ReadOnlyObservableCollection<string>(_availableLanguageNames);
         }
@@ -53,7 +54,7 @@ namespace Baku.VMagicMirrorConfig
                 return;
             }
 
-            UdpSender.SendMessage(MessageFactory.Instance.OpenVrmPreview(dialog.FileName));
+            MessageSender.SendMessage(MessageFactory.Instance.OpenVrmPreview(dialog.FileName));
 
             bool turnOffTopMostTemporary = WindowSetting.TopMost;
 
@@ -72,12 +73,12 @@ namespace Baku.VMagicMirrorConfig
 
             if (res == MessageBoxResult.OK)
             {
-                UdpSender.SendMessage(MessageFactory.Instance.OpenVrm(dialog.FileName));
+                MessageSender.SendMessage(MessageFactory.Instance.OpenVrm(dialog.FileName));
                 _lastVrmLoadFilePath = dialog.FileName;
             }
             else
             {
-                UdpSender.SendMessage(MessageFactory.Instance.CancelLoadVrm());
+                MessageSender.SendMessage(MessageFactory.Instance.CancelLoadVrm());
             }
 
             if (turnOffTopMostTemporary)
@@ -86,22 +87,26 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        public void Initialize()
+        public async void Initialize()
         {
-            if (Application.Current.MainWindow != null &&
-                !DesignerProperties.GetIsInDesignMode(Application.Current.MainWindow))
+            if (Application.Current.MainWindow == null ||
+                DesignerProperties.GetIsInDesignMode(Application.Current.MainWindow))
             {
-                Initializer.Initialize();
-                LoadCurrentParameters();
-
-                if (WindowSetting.EnableWindowInitialPlacement)
-                {
-                    WindowSetting.MoveWindow();
-                }
-
-                LanguageSelector.Instance.Initialize(UdpSender);
-                LanguageName = LanguageSelector.Instance.LanguageName;
+                return;
             }
+
+            Initializer.Initialize();
+            LoadCurrentParameters();
+
+            if (WindowSetting.EnableWindowInitialPlacement)
+            {
+                WindowSetting.MoveWindow();
+            }
+
+            LanguageSelector.Instance.Initialize(MessageSender);
+            LanguageName = LanguageSelector.Instance.LanguageName;
+
+            await LayoutSetting.InitializeAvailableMicrophoneNamesAsync();
         }
 
         private readonly ObservableCollection<string> _availableLanguageNames
@@ -187,7 +192,7 @@ namespace Baku.VMagicMirrorConfig
                 string vrmPath = File.ReadAllText(settingFilePath);
                 if (File.Exists(vrmPath))
                 {
-                    UdpSender.SendMessage(MessageFactory.Instance.OpenVrm(vrmPath));
+                    MessageSender.SendMessage(MessageFactory.Instance.OpenVrm(vrmPath));
                     _lastVrmLoadFilePath = vrmPath;
                 }
             }

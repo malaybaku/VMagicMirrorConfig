@@ -10,7 +10,7 @@ namespace Baku.VMagicMirrorConfig
 
     public class LightSettingViewModel : SettingViewModelBase
     {
-        internal LightSettingViewModel(UdpSender sender, StartupSettingViewModel startup) : base(sender, startup)
+        internal LightSettingViewModel(IMessageSender sender, StartupSettingViewModel startup) : base(sender, startup)
         {
             UpdateLightColor();
             UpdateBloomColor();

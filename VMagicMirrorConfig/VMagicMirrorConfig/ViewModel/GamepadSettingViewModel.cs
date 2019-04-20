@@ -12,7 +12,7 @@ namespace Baku.VMagicMirrorConfig
     public class GamepadSettingViewModel : SettingViewModelBase
     {
 
-        internal GamepadSettingViewModel(UdpSender sender, StartupSettingViewModel startup) : base(sender, startup)
+        internal GamepadSettingViewModel(IMessageSender sender, StartupSettingViewModel startup) : base(sender, startup)
         {
         }
 
