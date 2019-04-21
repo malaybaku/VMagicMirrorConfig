@@ -100,6 +100,18 @@ namespace Baku.VMagicMirrorConfig
                 }
             }
         }
+        private int _presentationArmMotionScale = 30;
+        public int PresentationArmMotionScale
+        {
+            get => _presentationArmMotionScale;
+            set
+            {
+                if (SetValue(ref _presentationArmMotionScale, value))
+                {
+                    SendMessage(MessageFactory.Instance.PresentationArmMotionScale(PresentationArmMotionScale));
+                }
+            }
+        }
 
         private bool _enableWaitMotion = true;
         public bool EnableWaitMotion
@@ -339,6 +351,7 @@ namespace Baku.VMagicMirrorConfig
                 $"{nameof(HandYOffsetBasic)}:{HandYOffsetBasic}",
                 $"{nameof(HandYOffsetAfterKeyDown)}:{HandYOffsetAfterKeyDown}",
                 $"{nameof(EnablePresenterMotion)}:{EnablePresenterMotion}",
+                $"{nameof(PresentationArmMotionScale)}:{PresentationArmMotionScale}",
 
                 $"{nameof(EnableWaitMotion)}:{EnableWaitMotion}",
                 $"{nameof(WaitMotionScale)}:{WaitMotionScale}",
@@ -381,6 +394,7 @@ namespace Baku.VMagicMirrorConfig
                         TryReadIntParam(line, nameof(HandYOffsetBasic), v => HandYOffsetBasic = v) ||
                         TryReadIntParam(line, nameof(HandYOffsetAfterKeyDown), v => HandYOffsetAfterKeyDown = v) ||
                         TryReadBoolParam(line, nameof(EnablePresenterMotion), v => EnablePresenterMotion = v) ||
+                        TryReadIntParam(line, nameof(PresentationArmMotionScale), v => PresentationArmMotionScale = v) ||
 
                         TryReadBoolParam(line, nameof(EnableWaitMotion), v => EnableWaitMotion = v) ||
                         TryReadIntParam(line, nameof(WaitMotionScale), v => WaitMotionScale = v) ||

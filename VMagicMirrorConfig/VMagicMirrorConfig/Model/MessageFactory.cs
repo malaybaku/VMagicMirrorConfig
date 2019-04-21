@@ -57,6 +57,7 @@ namespace Baku.VMagicMirrorConfig
         public Message HandYOffsetBasic(int offsetCentimeter) => WithArg($"{offsetCentimeter}");
         public Message HandYOffsetAfterKeyDown(int offsetCentimeter) => WithArg($"{offsetCentimeter}");
         public Message EnablePresenterMotion(bool enable) => WithArg($"{enable}");
+        public Message PresentationArmMotionScale(int percent) => WithArg($"{percent}");
 
         public Message EnableWaitMotion(bool enable) => WithArg($"{enable}");
         public Message WaitMotionScale(int scalePercent) => WithArg($"{scalePercent}");

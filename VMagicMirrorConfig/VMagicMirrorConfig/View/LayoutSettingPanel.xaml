@@ -33,6 +33,7 @@
                                 <RowDefinition/>
                                 <RowDefinition/>
                                 <RowDefinition/>
+                                <RowDefinition/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -94,6 +95,17 @@
                                       Content="{DynamicResource Layout_EnablePresenterMotion}"
                                       IsChecked="{Binding EnablePresenterMotion}"
                                       />
+                            <TextBlock Grid.Row="5" Grid.Column="0"
+                                   Text="{DynamicResource Layout_PresenterArmMotionScale}"/>
+                            <Slider Grid.Row="5" Grid.Column="1"
+                                x:Name="sliderPresentationArmMotionScale"
+                                Minimum="1"
+                                Maximum="100"
+                                Value="{Binding PresentationArmMotionScale, Mode=TwoWay}"
+                                />
+                            <TextBox Grid.Row="5" Grid.Column="2"
+                                 Text="{Binding Value, ElementName=sliderPresentationArmMotionScale}"
+                                 />
                         </Grid>
 
                     </Expander>

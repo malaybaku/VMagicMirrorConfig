@@ -47,6 +47,7 @@
     <sys:String x:Key="Layout_HandYOffsetBasic">手の高さ調整[cm]</sys:String>
     <sys:String x:Key="Layout_HandYOffsetAfterKeyDown">(打鍵後)手の高さ調整[cm]</sys:String>
     <sys:String x:Key="Layout_EnablePresenterMotion">プレゼン風に右手を動かす</sys:String>
+    <sys:String x:Key="Layout_PresenterArmMotionScale">プレゼン動作の大きさ[%]</sys:String>
 
     <!-- Layout : Character : Wait Motion -->
     <sys:String x:Key="Layout_WaitMotion">待機モーション</sys:String>
