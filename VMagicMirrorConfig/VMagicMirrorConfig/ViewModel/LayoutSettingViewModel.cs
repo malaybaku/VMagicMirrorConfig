@@ -88,6 +88,19 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
+        private bool _enablePresenterMotion = false;
+        public bool EnablePresenterMotion
+        {
+            get => _enablePresenterMotion;
+            set
+            {
+                if (SetValue(ref _enablePresenterMotion, value))
+                {
+                    SendMessage(MessageFactory.Instance.EnablePresenterMotion(EnablePresenterMotion));
+                }
+            }
+        }
+
         private bool _enableWaitMotion = true;
         public bool EnableWaitMotion
         {
@@ -269,6 +282,8 @@ namespace Baku.VMagicMirrorConfig
             HandYOffsetBasic = 4;
             HandYOffsetAfterKeyDown = 2;
 
+            EnablePresenterMotion = false;
+
             EnableWaitMotion = true;
             WaitMotionScale = 100;
             WaitMotionPeriod = 10;
@@ -323,6 +338,7 @@ namespace Baku.VMagicMirrorConfig
                 $"{nameof(LengthFromWristToPalm)}:{LengthFromWristToPalm}",
                 $"{nameof(HandYOffsetBasic)}:{HandYOffsetBasic}",
                 $"{nameof(HandYOffsetAfterKeyDown)}:{HandYOffsetAfterKeyDown}",
+                $"{nameof(EnablePresenterMotion)}:{EnablePresenterMotion}",
 
                 $"{nameof(EnableWaitMotion)}:{EnableWaitMotion}",
                 $"{nameof(WaitMotionScale)}:{WaitMotionScale}",
@@ -364,6 +380,7 @@ namespace Baku.VMagicMirrorConfig
                         TryReadIntParam(line, nameof(LengthFromWristToPalm), v => LengthFromWristToPalm = v) ||
                         TryReadIntParam(line, nameof(HandYOffsetBasic), v => HandYOffsetBasic = v) ||
                         TryReadIntParam(line, nameof(HandYOffsetAfterKeyDown), v => HandYOffsetAfterKeyDown = v) ||
+                        TryReadBoolParam(line, nameof(EnablePresenterMotion), v => EnablePresenterMotion = v) ||
 
                         TryReadBoolParam(line, nameof(EnableWaitMotion), v => EnableWaitMotion = v) ||
                         TryReadIntParam(line, nameof(WaitMotionScale), v => WaitMotionScale = v) ||

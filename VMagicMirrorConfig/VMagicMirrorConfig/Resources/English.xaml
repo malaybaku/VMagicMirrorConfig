@@ -45,6 +45,7 @@
     <sys:String x:Key="Layout_WristToPalm">Wrist-Palm length [cm]</sys:String>
     <sys:String x:Key="Layout_HandYOffsetBasic">Hand height adjust [cm]</sys:String>
     <sys:String x:Key="Layout_HandYOffsetAfterKeyDown">(Press key)Hand height adjust [cm]</sys:String>
+    <sys:String x:Key="Layout_EnablePresenterMotion">Presentation-like hand motion</sys:String>
 
     <!-- Layout : Character : Wait Motion -->
     <sys:String x:Key="Layout_WaitMotion">Wait motion</sys:String>
