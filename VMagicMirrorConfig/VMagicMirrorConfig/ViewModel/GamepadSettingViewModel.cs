@@ -63,7 +63,7 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private bool _visibility = false;
+        private bool _visibility = true;
         public bool GamepadVisibility
         {
             get => _visibility;

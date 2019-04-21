@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System;
+using System.Runtime.CompilerServices;
 
 namespace Baku.VMagicMirrorConfig
 {
@@ -55,6 +56,8 @@ namespace Baku.VMagicMirrorConfig
 
         public Message HandYOffsetBasic(int offsetCentimeter) => WithArg($"{offsetCentimeter}");
         public Message HandYOffsetAfterKeyDown(int offsetCentimeter) => WithArg($"{offsetCentimeter}");
+        public Message EnablePresenterMotion(bool enable) => WithArg($"{enable}");
+        public Message PresentationArmMotionScale(int percent) => WithArg($"{percent}");
 
         public Message EnableWaitMotion(bool enable) => WithArg($"{enable}");
         public Message WaitMotionScale(int scalePercent) => WithArg($"{scalePercent}");
@@ -79,6 +82,7 @@ namespace Baku.VMagicMirrorConfig
         #region キーボード・マウスパッド
 
         public Message HidHeight(int heightCentimeter) => WithArg($"{heightCentimeter}");
+
         public Message HidHorizontalScale(int scalePercent) => WithArg($"{scalePercent}");
         public Message HidVisibility(bool visible) => WithArg($"{visible}");
 
