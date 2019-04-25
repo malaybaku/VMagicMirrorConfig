@@ -65,6 +65,10 @@
     <sys:String x:Key="Layout_CameraDistance">キャラとの距離[cm]</sys:String>
     <sys:String x:Key="Layout_CameraAngle">角度[deg]</sys:String>
 
+    <sys:String x:Key="Layout_EnableCustomCameraPosition">カスタムカメラ位置を使用</sys:String>
+    <sys:String x:Key="Layout_CurrentCameraPosition">カスタムカメラの位置(x, y, z, rx, ry, rz)</sys:String>
+    <sys:String x:Key="Layout_EnableFreeCameraMode">フリーカメラモード</sys:String>
+
     <!-- Layout : Devices -->
     <sys:String x:Key="Layout_Devices">入力デバイス</sys:String>
 

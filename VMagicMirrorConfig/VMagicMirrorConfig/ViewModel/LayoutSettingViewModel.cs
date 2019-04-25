@@ -222,6 +222,63 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
+        private bool _enableCustomCameraPosition = false;
+        public bool EnableCustomCameraPosition
+        {
+            get => _enableCustomCameraPosition;
+            set
+            {
+                if (SetValue(ref _enableCustomCameraPosition, value))
+                {
+                    SendMessage(MessageFactory.Instance.EnableCustomCameraPosition(EnableCustomCameraPosition));
+                }
+            }
+        }
+
+        private bool _enableFreeCameraMode = false;
+        [XmlIgnore]
+        public bool EnableFreeCameraMode
+        {
+            get => _enableFreeCameraMode;
+            set
+            {
+                if (SetValue(ref _enableFreeCameraMode, value))
+                {
+                    //asyncメソッド呼ぶので外に出しておく。
+                    //ややだらしない書き方だが、仮に連打されてもさほど害ないのでコレで行きます。
+                    OnEnableFreeCameraModeChanged(value);
+                }
+            }
+        }
+
+        private string _cameraPosition = "";
+        public string CameraPosition
+        {
+            get => _cameraPosition;
+            set
+            {
+                if (SetValue(ref _cameraPosition, value))
+                {
+                    SendMessage(MessageFactory.Instance.SetCustomCameraPosition(CameraPosition));
+                }
+            }
+        }
+
+        private async void OnEnableFreeCameraModeChanged(bool value)
+        {
+            //トグルさげた場合: とりあえず切った時点のカメラポジションを取得する。
+            SendMessage(MessageFactory.Instance.EnableFreeCameraMode(EnableFreeCameraMode));
+            //フリーレイアウトをする都合でカメラを動かしてた場合、値を適用しないケースもあることに注意！
+            if (!value)
+            {
+                string response = await SendQueryAsync(MessageFactory.Instance.CurrentCameraPosition());
+                if (!string.IsNullOrWhiteSpace(response))
+                {
+                    CameraPosition = response;
+                }
+            }
+        }
+
         private int _hidHeight = 100;
         /// <summary> Unit: [cm] </summary>
         public int HidHeight

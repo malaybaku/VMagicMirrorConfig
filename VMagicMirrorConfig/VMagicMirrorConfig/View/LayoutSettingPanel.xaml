@@ -241,6 +241,16 @@
                                  />
 
                     </Grid>
+
+                    <CheckBox Content="{DynamicResource Layout_EnableCustomCameraPosition}"
+                              IsChecked="{Binding EnableCustomCameraPosition}"
+                              />
+                    <CheckBox Content="{DynamicResource Layout_EnableFreeCameraMode}" 
+                              IsChecked="{Binding EnableFreeCameraMode}"
+                              />
+                    <TextBlock Text="{DynamicResource Layout_CurrentCameraPosition}"/>
+                    <TextBlock Text="{Binding CameraPosition}"/>
+
                 </StackPanel>
             </md:Card>
 

@@ -64,6 +64,10 @@ namespace Baku.VMagicMirrorConfig
         public Message EnableLipSync(bool enable) => WithArg($"{enable}");
 
         public Message SetMicrophoneDeviceName(string deviceName) => WithArg(deviceName);
+        /// <summary>
+        /// Query.
+        /// </summary>
+        /// <returns></returns>
         public Message MicrophoneDeviceNames() => NoArg();
 
         #endregion
@@ -74,6 +78,15 @@ namespace Baku.VMagicMirrorConfig
         public Message CameraDistance(int distanceCentimeter) => WithArg($"{distanceCentimeter}");
         public Message CameraVerticalAngle(int angleDegree) => WithArg($"{angleDegree}");
 
+        public Message EnableCustomCameraPosition(bool enable) => WithArg($"{enable}");
+        public Message SetCustomCameraPosition(string posData) => WithArg($"{posData}");
+        public Message EnableFreeCameraMode(bool enable) => WithArg($"{enable}");
+
+        /// <summary>
+        /// Query.
+        /// </summary>
+        /// <returns></returns>
+        public Message CurrentCameraPosition() => NoArg();
         #endregion
 
         #region キーボード・マウスパッド
