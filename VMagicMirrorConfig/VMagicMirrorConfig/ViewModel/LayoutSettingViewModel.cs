@@ -94,6 +94,31 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
+        private bool _enablePresenterMotion = false;
+        public bool EnablePresenterMotion
+        {
+            get => _enablePresenterMotion;
+            set
+            {
+                if (SetValue(ref _enablePresenterMotion, value))
+                {
+                    SendMessage(MessageFactory.Instance.EnablePresenterMotion(EnablePresenterMotion));
+                }
+            }
+        }
+        private int _presentationArmMotionScale = 30;
+        public int PresentationArmMotionScale
+        {
+            get => _presentationArmMotionScale;
+            set
+            {
+                if (SetValue(ref _presentationArmMotionScale, value))
+                {
+                    SendMessage(MessageFactory.Instance.PresentationArmMotionScale(PresentationArmMotionScale));
+                }
+            }
+        }
+
         private bool _enableWaitMotion = true;
         public bool EnableWaitMotion
         {
@@ -332,6 +357,8 @@ namespace Baku.VMagicMirrorConfig
 
             HandYOffsetBasic = 4;
             HandYOffsetAfterKeyDown = 2;
+
+            EnablePresenterMotion = false;
 
             EnableWaitMotion = true;
             WaitMotionScale = 100;
