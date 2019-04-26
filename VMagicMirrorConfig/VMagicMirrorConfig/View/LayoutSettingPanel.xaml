@@ -34,6 +34,7 @@
                                 <RowDefinition/>
                                 <RowDefinition/>
                                 <RowDefinition/>
+                                <RowDefinition/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -106,6 +107,18 @@
                             <TextBox Grid.Row="5" Grid.Column="2"
                                  Text="{Binding Value, ElementName=sliderPresentationArmMotionScale}"
                                  />
+                            <TextBlock Grid.Row="6" Grid.Column="0"
+                                   Text="{DynamicResource Layout_PresenterArmRadiusMin}"/>
+                            <Slider Grid.Row="6" Grid.Column="1"
+                                x:Name="sliderPresentationArmRadiusMin"
+                                Minimum="1"
+                                Maximum="100"
+                                Value="{Binding PresentationArmRadiusMin, Mode=TwoWay}"
+                                />
+                            <TextBox Grid.Row="6" Grid.Column="2"
+                                 Text="{Binding Value, ElementName=sliderPresentationArmRadiusMin}"
+                                 />
+
                         </Grid>
 
                     </Expander>

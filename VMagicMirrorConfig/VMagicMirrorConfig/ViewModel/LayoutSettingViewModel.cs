@@ -106,6 +106,7 @@ namespace Baku.VMagicMirrorConfig
                 }
             }
         }
+
         private int _presentationArmMotionScale = 30;
         public int PresentationArmMotionScale
         {
@@ -115,6 +116,19 @@ namespace Baku.VMagicMirrorConfig
                 if (SetValue(ref _presentationArmMotionScale, value))
                 {
                     SendMessage(MessageFactory.Instance.PresentationArmMotionScale(PresentationArmMotionScale));
+                }
+            }
+        }
+
+        private int _presentationArmRadiusMin = 40;
+        public int PresentationArmRadiusMin
+        {
+            get => _presentationArmRadiusMin;
+            set
+            {
+                if (SetValue(ref _presentationArmRadiusMin, value))
+                {
+                    SendMessage(MessageFactory.Instance.PresentationArmRadiusMin(PresentationArmRadiusMin));
                 }
             }
         }
@@ -359,6 +373,8 @@ namespace Baku.VMagicMirrorConfig
             HandYOffsetAfterKeyDown = 2;
 
             EnablePresenterMotion = false;
+            PresentationArmMotionScale = 30;
+            PresentationArmRadiusMin = 40;
 
             EnableWaitMotion = true;
             WaitMotionScale = 100;

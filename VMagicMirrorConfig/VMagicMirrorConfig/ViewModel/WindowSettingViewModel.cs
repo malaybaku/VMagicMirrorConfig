@@ -143,7 +143,7 @@ namespace Baku.VMagicMirrorConfig
                 if (SetValue(ref _enableWindowInitialPlacement, value))
                 {
                     //初期設定でウィンドウを動かすには初期設定が有効じゃないとダメなのでスイッチしておく
-                    if (EnableWindowInitialPlacement)
+                    if (EnableWindowInitialPlacement && Startup != null)
                     {
                         Startup.LoadBackgroundSetting = true;
                     }

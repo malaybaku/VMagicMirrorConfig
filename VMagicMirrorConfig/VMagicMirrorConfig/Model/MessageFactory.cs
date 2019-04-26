@@ -58,6 +58,7 @@ namespace Baku.VMagicMirrorConfig
         public Message HandYOffsetAfterKeyDown(int offsetCentimeter) => WithArg($"{offsetCentimeter}");
         public Message EnablePresenterMotion(bool enable) => WithArg($"{enable}");
         public Message PresentationArmMotionScale(int percent) => WithArg($"{percent}");
+        public Message PresentationArmRadiusMin(int radiusMin) => WithArg($"{radiusMin}");
 
         public Message EnableWaitMotion(bool enable) => WithArg($"{enable}");
         public Message WaitMotionScale(int scalePercent) => WithArg($"{scalePercent}");
@@ -110,6 +111,7 @@ namespace Baku.VMagicMirrorConfig
         public Message GamepadVisibility(bool visibility) => WithArg($"{visibility}");
 
         public Message GamepadLeanMode(string v) => WithArg(v);
+
         public Message GamepadLeanReverseHorizontal(bool reverse) => WithArg($"{reverse}");
         public Message GamepadLeanReverseVertical(bool reverse) => WithArg($"{reverse}");
 

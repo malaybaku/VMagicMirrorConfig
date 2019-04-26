@@ -89,10 +89,7 @@ namespace Baku.VMagicMirrorConfig
             };
             if (dialog.ShowDialog() == true)
             {
-                //サブルーチンはジェネリックで作った方が見てくれが良いので
-                typeof(SettingViewModelBase)
-                    .GetMethod(nameof(LoadSettingFrom))
-                    .Invoke(this, new object[] { dialog.FileName });
+                LoadSettingFrom(dialog.FileName);
             }
         }
 
@@ -131,12 +128,12 @@ namespace Baku.VMagicMirrorConfig
         private static void CopyProperties(object src, object dest, Type type)
         {
             foreach (var prop in type
-                       .GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                       .Where(p => 
-                           !typeof(ICommand).IsAssignableFrom(p.PropertyType) && 
-                           p.GetCustomAttribute<XmlIgnoreAttribute>() == null
-                           )
-                       )
+                        .GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                        .Where(p =>
+                            !typeof(ICommand).IsAssignableFrom(p.PropertyType) &&
+                            p.GetCustomAttribute<XmlIgnoreAttribute>() == null
+                            )
+                        )
             {
                 if (typeof(SettingViewModelBase).IsAssignableFrom(prop.PropertyType))
                 {
