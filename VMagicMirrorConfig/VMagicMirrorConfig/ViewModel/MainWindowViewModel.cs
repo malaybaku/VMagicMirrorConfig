@@ -158,11 +158,6 @@ namespace Baku.VMagicMirrorConfig
         {
             StartupSetting.LoadSetting(GetFilePath(SpecialFileNames.Startup));
 
-            if (StartupSetting.LoadVrm)
-            {
-                LoadLastLoadedVrm();
-            }
-
             if (StartupSetting.LoadBackgroundSetting)
             {
                 WindowSetting.LoadSettingFrom(GetFilePath(SpecialFileNames.Background));
@@ -176,6 +171,12 @@ namespace Baku.VMagicMirrorConfig
             if (StartupSetting.LoadLightSetting)
             {
                 LightSetting.LoadSettingFrom(GetFilePath(SpecialFileNames.Light));
+            }
+
+            //NOTE: ここだけ順番大事: ラストでVRMをロードすることで、変なとこに腕が飛ぶケースを減らす
+            if (StartupSetting.LoadVrm)
+            {
+                LoadLastLoadedVrm();
             }
         }
 

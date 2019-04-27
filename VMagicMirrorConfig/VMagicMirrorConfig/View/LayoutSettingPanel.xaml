@@ -23,14 +23,11 @@
                                Style="{StaticResource HeaderText}"
                                />
 
-                    <Expander Header="{DynamicResource Layout_CharacterMotion}"
+                    <Expander Header="{DynamicResource Layout_CharacterHandMotion}"
                               IsExpanded="False"
                               >
                         <Grid Margin="5,0,0,10">
                             <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition/>
                                 <RowDefinition/>
                                 <RowDefinition/>
                                 <RowDefinition/>
@@ -89,33 +86,78 @@
                             <TextBox Grid.Row="3" Grid.Column="2"
                                  Text="{Binding Value, ElementName=sliderHandYOffsetAfterKeyDown}"
                                  />
+                        </Grid>
 
-                            <CheckBox Grid.Row="4" Grid.Column="0"
+                    </Expander>
+
+                    <Expander Header="{DynamicResource Layout_CharacterArmMotion}"
+                              IsExpanded="False"
+                              >
+                        <Grid Margin="5,0,0,10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="3*" />
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Row="0" Grid.Column="0"
+                                       Text="{DynamicResource Layout_WaistWidth}"/>
+                            <Slider Grid.Row="0" Grid.Column="1"
+                                x:Name="sliderSpineWaistWidth"
+                                Minimum="1"
+                                Maximum="100"
+                                Value="{Binding WaistWidth, Mode=TwoWay}"
+                                />
+                            <TextBox Grid.Row="0" Grid.Column="2"
+                                 Text="{Binding Value, ElementName=sliderSpineWaistWidth}"
+                                 />                            
+
+                            <TextBlock Grid.Row="1" Grid.Column="0"
+                                       Text="{DynamicResource Layout_ElbowCloseStrength}"/>
+                            <Slider Grid.Row="1" Grid.Column="1"
+                                x:Name="sliderElbowCloseStrength"
+                                Minimum="0"
+                                Maximum="100"
+                                Value="{Binding ElbowCloseStrength, Mode=TwoWay}"
+                                />
+                            <TextBox Grid.Row="1" Grid.Column="2"
+                                 Text="{Binding Value, ElementName=sliderElbowCloseStrength}"
+                                 />                            
+                            
+
+                            <CheckBox Grid.Row="2" Grid.Column="0"
                                       Grid.ColumnSpan="3"
                                       Margin="5" 
                                       Content="{DynamicResource Layout_EnablePresenterMotion}"
                                       IsChecked="{Binding EnablePresenterMotion}"
                                       />
-                            <TextBlock Grid.Row="5" Grid.Column="0"
+                            <TextBlock Grid.Row="3" Grid.Column="0"
                                    Text="{DynamicResource Layout_PresenterArmMotionScale}"/>
-                            <Slider Grid.Row="5" Grid.Column="1"
+                            <Slider Grid.Row="3" Grid.Column="1"
                                 x:Name="sliderPresentationArmMotionScale"
                                 Minimum="1"
                                 Maximum="100"
                                 Value="{Binding PresentationArmMotionScale, Mode=TwoWay}"
                                 />
-                            <TextBox Grid.Row="5" Grid.Column="2"
+                            <TextBox Grid.Row="3" Grid.Column="2"
                                  Text="{Binding Value, ElementName=sliderPresentationArmMotionScale}"
                                  />
-                            <TextBlock Grid.Row="6" Grid.Column="0"
+                            <TextBlock Grid.Row="4" Grid.Column="0"
                                    Text="{DynamicResource Layout_PresenterArmRadiusMin}"/>
-                            <Slider Grid.Row="6" Grid.Column="1"
+                            <Slider Grid.Row="4" Grid.Column="1"
                                 x:Name="sliderPresentationArmRadiusMin"
                                 Minimum="1"
                                 Maximum="100"
                                 Value="{Binding PresentationArmRadiusMin, Mode=TwoWay}"
                                 />
-                            <TextBox Grid.Row="6" Grid.Column="2"
+                            <TextBox Grid.Row="4" Grid.Column="2"
                                  Text="{Binding Value, ElementName=sliderPresentationArmRadiusMin}"
                                  />
 

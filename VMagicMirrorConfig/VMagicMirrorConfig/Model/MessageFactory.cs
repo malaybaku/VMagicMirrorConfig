@@ -56,9 +56,13 @@ namespace Baku.VMagicMirrorConfig
 
         public Message HandYOffsetBasic(int offsetCentimeter) => WithArg($"{offsetCentimeter}");
         public Message HandYOffsetAfterKeyDown(int offsetCentimeter) => WithArg($"{offsetCentimeter}");
+
+        public Message SetWaistWidth(int waistWidthCentimeter) => WithArg($"{waistWidthCentimeter}");
+        public Message SetElbowCloseStrength(int strengthPercent) => WithArg($"{strengthPercent}");        
+
         public Message EnablePresenterMotion(bool enable) => WithArg($"{enable}");
-        public Message PresentationArmMotionScale(int percent) => WithArg($"{percent}");
-        public Message PresentationArmRadiusMin(int radiusMin) => WithArg($"{radiusMin}");
+        public Message PresentationArmMotionScale(int scalePercent) => WithArg($"{scalePercent}");
+        public Message PresentationArmRadiusMin(int radiusMinCentimeter) => WithArg($"{radiusMinCentimeter}");
 
         public Message EnableWaitMotion(bool enable) => WithArg($"{enable}");
         public Message WaitMotionScale(int scalePercent) => WithArg($"{scalePercent}");
@@ -96,7 +100,6 @@ namespace Baku.VMagicMirrorConfig
         #region キーボード・マウスパッド
 
         public Message HidHeight(int heightCentimeter) => WithArg($"{heightCentimeter}");
-
         public Message HidHorizontalScale(int scalePercent) => WithArg($"{scalePercent}");
         public Message HidVisibility(bool visible) => WithArg($"{visible}");
 

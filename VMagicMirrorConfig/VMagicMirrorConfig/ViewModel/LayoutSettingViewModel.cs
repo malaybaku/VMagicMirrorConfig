@@ -40,6 +40,8 @@ namespace Baku.VMagicMirrorConfig
 
         #region Properties
 
+        #region Hand Motion
+
         private int _lengthFromWristToTip = 18;
         /// <summary> Unit: [cm] </summary>
         public int LengthFromWristToTip
@@ -94,6 +96,36 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
+        #endregion
+
+        #region Arm Motion
+
+        private int _waistWidth = 30;
+        public int WaistWidth
+        {
+            get => _waistWidth;
+            set
+            {
+                if (SetValue(ref _waistWidth, value))
+                {
+                    SendMessage(MessageFactory.Instance.SetWaistWidth(WaistWidth));
+                }
+            }
+        }
+
+        private int _elbowCloseStrength = 20;
+        public int ElbowCloseStrength
+        {
+            get => _elbowCloseStrength;
+            set
+            {
+                if (SetValue(ref _elbowCloseStrength, value))
+                {
+                    SendMessage(MessageFactory.Instance.SetElbowCloseStrength(ElbowCloseStrength));
+                }
+            }
+        }
+
         private bool _enablePresenterMotion = false;
         public bool EnablePresenterMotion
         {
@@ -132,6 +164,10 @@ namespace Baku.VMagicMirrorConfig
                 }
             }
         }
+
+        #endregion
+
+        #region Other Motion
 
         private bool _enableWaitMotion = true;
         public bool EnableWaitMotion
@@ -218,6 +254,8 @@ namespace Baku.VMagicMirrorConfig
         public ReadOnlyObservableCollection<string> MicrophoneDeviceNames
             => _microphoneDeviceNames ?? 
             (_microphoneDeviceNames = new ReadOnlyObservableCollection<string>(_writableMicrophoneDeviceNames));
+
+        #endregion
 
         private int _cameraHeight = 120;
         /// <summary> Unit: [cm] </summary>
@@ -371,6 +409,9 @@ namespace Baku.VMagicMirrorConfig
 
             HandYOffsetBasic = 4;
             HandYOffsetAfterKeyDown = 2;
+
+            WaistWidth = 30;
+            ElbowCloseStrength = 20;
 
             EnablePresenterMotion = false;
             PresentationArmMotionScale = 30;
