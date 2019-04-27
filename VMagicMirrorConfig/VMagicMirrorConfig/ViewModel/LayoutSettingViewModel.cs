@@ -113,7 +113,7 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private int _elbowCloseStrength = 20;
+        private int _elbowCloseStrength = 30;
         public int ElbowCloseStrength
         {
             get => _elbowCloseStrength;
@@ -152,7 +152,7 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private int _presentationArmRadiusMin = 40;
+        private int _presentationArmRadiusMin = 20;
         public int PresentationArmRadiusMin
         {
             get => _presentationArmRadiusMin;
@@ -411,11 +411,11 @@ namespace Baku.VMagicMirrorConfig
             HandYOffsetAfterKeyDown = 2;
 
             WaistWidth = 30;
-            ElbowCloseStrength = 20;
+            ElbowCloseStrength = 30;
 
             EnablePresenterMotion = false;
             PresentationArmMotionScale = 30;
-            PresentationArmRadiusMin = 40;
+            PresentationArmRadiusMin = 20;
 
             EnableWaitMotion = true;
             WaitMotionScale = 100;
