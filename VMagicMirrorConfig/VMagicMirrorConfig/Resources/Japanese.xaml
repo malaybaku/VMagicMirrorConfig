@@ -41,15 +41,20 @@
     <sys:String x:Key="Layout_Character">キャラクター</sys:String>
     
     <!-- Layout : Character : Hand Motion -->
-    <sys:String x:Key="Layout_CharacterMotion">手の動き</sys:String>
+    <sys:String x:Key="Layout_CharacterHandMotion">手の動き</sys:String>
     <sys:String x:Key="Layout_WristToHandTip">手首から指先までの長さ[cm]</sys:String>
     <sys:String x:Key="Layout_WristToPalm">手首から手のひらまでの長さ[cm]</sys:String>
     <sys:String x:Key="Layout_HandYOffsetBasic">手の高さ調整[cm]</sys:String>
     <sys:String x:Key="Layout_HandYOffsetAfterKeyDown">(打鍵後)手の高さ調整[cm]</sys:String>
+
+    <!-- Layout : Character : Arm Motion -->
+    <sys:String x:Key="Layout_CharacterArmMotion">腕の動き</sys:String>    
+    <sys:String x:Key="Layout_WaistWidth">正面から見たお腹の幅 [cm]</sys:String>
+    <sys:String x:Key="Layout_ElbowCloseStrength">脇をしめる強さ [%]</sys:String>
     <sys:String x:Key="Layout_EnablePresenterMotion">プレゼン風に右手を動かす</sys:String>
     <sys:String x:Key="Layout_PresenterArmMotionScale">プレゼン動作の大きさ[%]</sys:String>
-    <sys:String x:Key="Layout_PresenterArmRadiusMin">プレゼン動作の手の最小半径 [cm]</sys:String>
-
+    <sys:String x:Key="Layout_PresenterArmRadiusMin">プレゼン動作の手の最小半径 [cm]</sys:String>    
+    
     <!-- Layout : Character : Wait Motion -->
     <sys:String x:Key="Layout_WaitMotion">待機モーション</sys:String>
     <sys:String x:Key="Layout_EnableWaitMotion">有効にする</sys:String>

@@ -40,11 +40,16 @@
     <sys:String x:Key="Layout_Character">Character</sys:String>
     
     <!-- Layout : Character : Hand Motion -->
-    <sys:String x:Key="Layout_CharacterMotion">Hand Motion</sys:String>
+    <sys:String x:Key="Layout_CharacterHandMotion">Hand Motion</sys:String>
     <sys:String x:Key="Layout_WristToHandTip">Wrist-Hand tip length [cm]</sys:String>
     <sys:String x:Key="Layout_WristToPalm">Wrist-Palm length [cm]</sys:String>
     <sys:String x:Key="Layout_HandYOffsetBasic">Hand height adjust [cm]</sys:String>
     <sys:String x:Key="Layout_HandYOffsetAfterKeyDown">(Press key)Hand height adjust [cm]</sys:String>
+
+    <!-- Layout : Character : Arm Motion -->
+    <sys:String x:Key="Layout_CharacterArmMotion">Arm Motion</sys:String>
+    <sys:String x:Key="Layout_WaistWidth">Waist width [cm]</sys:String>
+    <sys:String x:Key="Layout_ElbowCloseStrength">Strength to keep upper arm to body [%]</sys:String>
     <sys:String x:Key="Layout_EnablePresenterMotion">Presentation-like hand motion</sys:String>
     <sys:String x:Key="Layout_PresenterArmMotionScale">Presentation-like motion scale [%]</sys:String>
     <sys:String x:Key="Layout_PresenterArmRadiusMin">Arm position radius min [cm]</sys:String>
