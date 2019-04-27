@@ -47,6 +47,7 @@
     <sys:String x:Key="Layout_HandYOffsetAfterKeyDown">(Press key)Hand height adjust [cm]</sys:String>
     <sys:String x:Key="Layout_EnablePresenterMotion">Presentation-like hand motion</sys:String>
     <sys:String x:Key="Layout_PresenterArmMotionScale">Presentation-like motion scale [%]</sys:String>
+    <sys:String x:Key="Layout_PresenterArmRadiusMin">Arm position radius min [cm]</sys:String>
 
     <!-- Layout : Character : Wait Motion -->
     <sys:String x:Key="Layout_WaitMotion">Wait motion</sys:String>
@@ -65,6 +66,11 @@
     <sys:String x:Key="Layout_CameraHeight">Height [cm]</sys:String>
     <sys:String x:Key="Layout_CameraDistance">Distance [cm]</sys:String>
     <sys:String x:Key="Layout_CameraAngle">Angle [deg]</sys:String>
+
+    <sys:String x:Key="Layout_EnableCustomCameraPosition">Use Custom Camera Position</sys:String>
+    <sys:String x:Key="Layout_CurrentCameraPosition">Camera Position (x, y, z, rx, ry, rz)</sys:String>
+    <sys:String x:Key="Layout_EnableFreeCameraMode">Enable Free Camera Mode</sys:String>
+    
 
     <!-- Layout : Devices -->
     <sys:String x:Key="Layout_Devices">Input Devices</sys:String>

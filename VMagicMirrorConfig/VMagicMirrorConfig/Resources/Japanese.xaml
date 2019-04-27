@@ -48,6 +48,7 @@
     <sys:String x:Key="Layout_HandYOffsetAfterKeyDown">(打鍵後)手の高さ調整[cm]</sys:String>
     <sys:String x:Key="Layout_EnablePresenterMotion">プレゼン風に右手を動かす</sys:String>
     <sys:String x:Key="Layout_PresenterArmMotionScale">プレゼン動作の大きさ[%]</sys:String>
+    <sys:String x:Key="Layout_PresenterArmRadiusMin">プレゼン動作の手の最小半径 [cm]</sys:String>
 
     <!-- Layout : Character : Wait Motion -->
     <sys:String x:Key="Layout_WaitMotion">待機モーション</sys:String>
@@ -66,6 +67,10 @@
     <sys:String x:Key="Layout_CameraHeight">高さ[cm]</sys:String>
     <sys:String x:Key="Layout_CameraDistance">キャラとの距離[cm]</sys:String>
     <sys:String x:Key="Layout_CameraAngle">角度[deg]</sys:String>
+
+    <sys:String x:Key="Layout_EnableCustomCameraPosition">カスタムカメラ位置を使用</sys:String>
+    <sys:String x:Key="Layout_CurrentCameraPosition">カスタムカメラの位置(x, y, z, rx, ry, rz)</sys:String>
+    <sys:String x:Key="Layout_EnableFreeCameraMode">フリーカメラモード</sys:String>
 
     <!-- Layout : Devices -->
     <sys:String x:Key="Layout_Devices">入力デバイス</sys:String>

@@ -58,6 +58,7 @@ namespace Baku.VMagicMirrorConfig
         public Message HandYOffsetAfterKeyDown(int offsetCentimeter) => WithArg($"{offsetCentimeter}");
         public Message EnablePresenterMotion(bool enable) => WithArg($"{enable}");
         public Message PresentationArmMotionScale(int percent) => WithArg($"{percent}");
+        public Message PresentationArmRadiusMin(int radiusMin) => WithArg($"{radiusMin}");
 
         public Message EnableWaitMotion(bool enable) => WithArg($"{enable}");
         public Message WaitMotionScale(int scalePercent) => WithArg($"{scalePercent}");
@@ -67,6 +68,10 @@ namespace Baku.VMagicMirrorConfig
         public Message EnableLipSync(bool enable) => WithArg($"{enable}");
 
         public Message SetMicrophoneDeviceName(string deviceName) => WithArg(deviceName);
+        /// <summary>
+        /// Query.
+        /// </summary>
+        /// <returns></returns>
         public Message MicrophoneDeviceNames() => NoArg();
 
         #endregion
@@ -77,6 +82,15 @@ namespace Baku.VMagicMirrorConfig
         public Message CameraDistance(int distanceCentimeter) => WithArg($"{distanceCentimeter}");
         public Message CameraVerticalAngle(int angleDegree) => WithArg($"{angleDegree}");
 
+        public Message EnableCustomCameraPosition(bool enable) => WithArg($"{enable}");
+        public Message SetCustomCameraPosition(string posData) => WithArg($"{posData}");
+        public Message EnableFreeCameraMode(bool enable) => WithArg($"{enable}");
+
+        /// <summary>
+        /// Query.
+        /// </summary>
+        /// <returns></returns>
+        public Message CurrentCameraPosition() => NoArg();
         #endregion
 
         #region キーボード・マウスパッド
@@ -97,6 +111,7 @@ namespace Baku.VMagicMirrorConfig
         public Message GamepadVisibility(bool visibility) => WithArg($"{visibility}");
 
         public Message GamepadLeanMode(string v) => WithArg(v);
+
         public Message GamepadLeanReverseHorizontal(bool reverse) => WithArg($"{reverse}");
         public Message GamepadLeanReverseVertical(bool reverse) => WithArg($"{reverse}");
 
