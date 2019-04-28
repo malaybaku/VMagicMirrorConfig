@@ -148,9 +148,9 @@ namespace Baku.VMagicMirrorConfig
                 _lastVrmLoadFilePath
                 );
 
-            WindowSetting.SaveSetting(GetFilePath(SpecialFileNames.Background));
-            LayoutSetting.SaveSetting(GetFilePath(SpecialFileNames.Layout));
-            LightSetting.SaveSetting(GetFilePath(SpecialFileNames.Light));
+            WindowSetting.SaveSettingTo(GetFilePath(SpecialFileNames.Background));
+            LayoutSetting.SaveSettingTo(GetFilePath(SpecialFileNames.Layout));
+            LightSetting.SaveSettingTo(GetFilePath(SpecialFileNames.Light));
             StartupSetting.SaveSetting(GetFilePath(SpecialFileNames.Startup));
         }
 
@@ -158,24 +158,25 @@ namespace Baku.VMagicMirrorConfig
         {
             StartupSetting.LoadSetting(GetFilePath(SpecialFileNames.Startup));
 
-            if (StartupSetting.LoadVrm)
-            {
-                LoadLastLoadedVrm();
-            }
-
             if (StartupSetting.LoadBackgroundSetting)
             {
-                WindowSetting.LoadSetting(GetFilePath(SpecialFileNames.Background));
+                WindowSetting.LoadSettingFrom(GetFilePath(SpecialFileNames.Background));
             }
 
             if (StartupSetting.LoadLayoutSetting)
             {
-                LayoutSetting.LoadSetting(GetFilePath(SpecialFileNames.Layout));
+                LayoutSetting.LoadSettingFrom(GetFilePath(SpecialFileNames.Layout));
             }
 
             if (StartupSetting.LoadLightSetting)
             {
-                LightSetting.LoadSetting(GetFilePath(SpecialFileNames.Light));
+                LightSetting.LoadSettingFrom(GetFilePath(SpecialFileNames.Light));
+            }
+
+            //NOTE: ここだけ順番大事: ラストでVRMをロードすることで、変なとこに腕が飛ぶケースを減らす
+            if (StartupSetting.LoadVrm)
+            {
+                LoadLastLoadedVrm();
             }
         }
 

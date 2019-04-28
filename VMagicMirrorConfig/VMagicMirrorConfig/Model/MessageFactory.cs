@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System;
+using System.Runtime.CompilerServices;
 
 namespace Baku.VMagicMirrorConfig
 {
@@ -56,6 +57,13 @@ namespace Baku.VMagicMirrorConfig
         public Message HandYOffsetBasic(int offsetCentimeter) => WithArg($"{offsetCentimeter}");
         public Message HandYOffsetAfterKeyDown(int offsetCentimeter) => WithArg($"{offsetCentimeter}");
 
+        public Message SetWaistWidth(int waistWidthCentimeter) => WithArg($"{waistWidthCentimeter}");
+        public Message SetElbowCloseStrength(int strengthPercent) => WithArg($"{strengthPercent}");        
+
+        public Message EnablePresenterMotion(bool enable) => WithArg($"{enable}");
+        public Message PresentationArmMotionScale(int scalePercent) => WithArg($"{scalePercent}");
+        public Message PresentationArmRadiusMin(int radiusMinCentimeter) => WithArg($"{radiusMinCentimeter}");
+
         public Message EnableWaitMotion(bool enable) => WithArg($"{enable}");
         public Message WaitMotionScale(int scalePercent) => WithArg($"{scalePercent}");
         public Message WaitMotionPeriod(int periodSec) => WithArg($"{periodSec}");
@@ -64,6 +72,10 @@ namespace Baku.VMagicMirrorConfig
         public Message EnableLipSync(bool enable) => WithArg($"{enable}");
 
         public Message SetMicrophoneDeviceName(string deviceName) => WithArg(deviceName);
+        /// <summary>
+        /// Query.
+        /// </summary>
+        /// <returns></returns>
         public Message MicrophoneDeviceNames() => NoArg();
 
         #endregion
@@ -74,6 +86,15 @@ namespace Baku.VMagicMirrorConfig
         public Message CameraDistance(int distanceCentimeter) => WithArg($"{distanceCentimeter}");
         public Message CameraVerticalAngle(int angleDegree) => WithArg($"{angleDegree}");
 
+        public Message EnableCustomCameraPosition(bool enable) => WithArg($"{enable}");
+        public Message SetCustomCameraPosition(string posData) => WithArg($"{posData}");
+        public Message EnableFreeCameraMode(bool enable) => WithArg($"{enable}");
+
+        /// <summary>
+        /// Query.
+        /// </summary>
+        /// <returns></returns>
+        public Message CurrentCameraPosition() => NoArg();
         #endregion
 
         #region キーボード・マウスパッド
@@ -93,6 +114,7 @@ namespace Baku.VMagicMirrorConfig
         public Message GamepadVisibility(bool visibility) => WithArg($"{visibility}");
 
         public Message GamepadLeanMode(string v) => WithArg(v);
+
         public Message GamepadLeanReverseHorizontal(bool reverse) => WithArg($"{reverse}");
         public Message GamepadLeanReverseVertical(bool reverse) => WithArg($"{reverse}");
 
