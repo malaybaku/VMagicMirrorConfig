@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DataContext="{x:Type vmm:MainWindowViewModel}"
              d:DesignWidth="350"
-             d:DesignHeight="500"
+             d:DesignHeight="550"
              >
     <UserControl.Resources>
         <Style TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}">
@@ -70,7 +70,7 @@
                                   Margin="0,0,5,0"
                                 ItemsSource="{Binding MotionSetting.MicrophoneDeviceNames}"
                                 SelectedItem="{Binding MotionSetting.LipSyncMicrophoneDeviceName}"
-                                md:HintAssist.Hint="Choose Microphone"
+                                md:HintAssist.Hint="Microphone"
                                 />
 
                         <CheckBox Grid.Row="1" Grid.Column="0"
@@ -86,7 +86,7 @@
                                   Margin="0,0,5,0"
                                   ItemsSource="{Binding MotionSetting.CameraDeviceNames}"
                                   SelectedItem="{Binding MotionSetting.CameraDeviceName}"
-                                  md:HintAssist.Hint="Choose Camera"
+                                  md:HintAssist.Hint="Camera"
                                   />
                     </Grid>
 
@@ -94,7 +94,7 @@
                             HorizontalAlignment="Left"
                             Margin="10,8,0,0"
                             Width="160"
-                            Command="{Binding MotionSetting.CalibrateCameraPositionCommand}"
+                            Command="{Binding MotionSetting.CalibrateFaceCommand}"
                             />
 
                     <TextBlock Text="{DynamicResource Motion_Eye_LookAtPoint}"
@@ -125,7 +125,29 @@
                     </Grid>
                 </StackPanel>
             </md:Card>
-            
+
+            <md:Card>
+                <StackPanel>
+                    <TextBlock Text="{DynamicResource Layout_Camera}"
+                               Margin="5"
+                               Style="{StaticResource HeaderText}"
+                               />
+
+                    <CheckBox Content="{DynamicResource Layout_EnableFreeCameraMode}" 
+                              IsChecked="{Binding LayoutSetting.EnableFreeCameraMode}"
+                              Margin="10,5"
+                              />
+
+                    <Button Content="{DynamicResource Layout_Camera_ResetPosition}"
+                            HorizontalAlignment="Left"
+                            Width="150"
+                            Command="{Binding LayoutSetting.ResetCameraPositionCommand}"
+                            />
+
+                </StackPanel>
+            </md:Card>
+
+
             <md:Card>
                 <StackPanel>
                     <TextBlock Text="{DynamicResource Streaming_Motion}"

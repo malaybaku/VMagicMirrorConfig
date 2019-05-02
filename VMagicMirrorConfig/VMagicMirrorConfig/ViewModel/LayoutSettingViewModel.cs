@@ -17,8 +17,7 @@ namespace Baku.VMagicMirrorConfig
         /// </remarks>
         public GamepadSettingViewModel Gamepad { get; set; }
 
-        #region Properties
-
+      
         private bool _enableFreeCameraMode = false;
         [XmlIgnore]
         public bool EnableFreeCameraMode
@@ -48,6 +47,14 @@ namespace Baku.VMagicMirrorConfig
                 }
             }
         }
+
+        private ActionCommand _resetCameraPositionCommand;
+        public ActionCommand ResetCameraPositionCommand
+            => _resetCameraPositionCommand ?? (_resetCameraPositionCommand = new ActionCommand(ResetCameraPosition));
+
+        private void ResetCameraPosition()
+            => SendMessage(MessageFactory.Instance.ResetCameraPosition());
+
 
         private async void OnEnableFreeCameraModeChanged(bool value)
         {
@@ -108,7 +115,7 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        #endregion
+
 
         public override void ResetToDefault()
         {

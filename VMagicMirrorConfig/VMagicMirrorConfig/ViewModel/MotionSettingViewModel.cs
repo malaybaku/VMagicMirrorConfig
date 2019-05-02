@@ -8,8 +8,17 @@ namespace Baku.VMagicMirrorConfig
     public class MotionSettingViewModel : SettingViewModelBase
     {
         public MotionSettingViewModel() : base() { }
-        internal MotionSettingViewModel(IMessageSender sender) : base(sender)
+        internal MotionSettingViewModel(IMessageSender sender, IMessageReceiver receiver) : base(sender)
         {
+            receiver.ReceivedCommand += OnReceivedCommand;
+        }
+
+        private void OnReceivedCommand(object sender, CommandReceivedEventArgs e)
+        {
+            if (e.Command == ReceiveMessageNames.SetCalibrationFaceData)
+            {
+                CalibrateFaceData = e.Args;
+            }
         }
 
         public async Task InitializeDeviceNamesAsync()
@@ -70,6 +79,35 @@ namespace Baku.VMagicMirrorConfig
         public ReadOnlyObservableCollection<string> CameraDeviceNames
             => _cameraDeviceNames ??
             (_cameraDeviceNames = new ReadOnlyObservableCollection<string>(_writableCameraDeviceNames));
+
+        private ActionCommand _calibrateFaceCommand;
+        public ActionCommand CalibrateFaceCommand
+            => _calibrateFaceCommand ?? (_calibrateFaceCommand = new ActionCommand(CalibrateFace));
+        
+        private void CalibrateFace()
+        {
+            SendMessage(MessageFactory.Instance.CalibrateFace());
+        }
+
+        private string _calibrateFaceData = "";
+        /// <summary>
+        /// NOTE: この値はUIに出す必要はないが、起動時に空でなければ送り、Unityからデータが来たら受け取り、終了時にはセーブする。
+        /// </summary>
+        public string CalibrateFaceData
+        {
+            get => _calibrateFaceData;
+            set => SetValue(ref _calibrateFaceData, value);
+        }
+
+        public void SendCalibrateFaceData()
+        {
+            if (string.IsNullOrWhiteSpace(CalibrateFaceData))
+            {
+                return;
+            }
+
+            SendMessage(MessageFactory.Instance.SetCalibrateFaceData(CalibrateFaceData));
+        }
 
         #endregion
 

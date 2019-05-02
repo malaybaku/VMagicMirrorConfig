@@ -25,7 +25,7 @@
 
                 <CheckBox Content="{DynamicResource Home_LoadVrmOnNextStartup}"
                           Margin="15,5"
-                          IsChecked="{Binding StartupSetting.LoadVrm, Mode=TwoWay}"
+                          IsChecked="{Binding AutoLoadLastLoadedVrm, Mode=TwoWay}"
                           />
 
                 <TextBlock Style="{StaticResource HeaderText}"

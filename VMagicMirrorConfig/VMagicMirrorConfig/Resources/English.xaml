@@ -53,7 +53,7 @@
     <sys:String x:Key="Motion_Face">Face</sys:String>
     <sys:String x:Key="Motion_Face_EnableFaceTracking">Track Face</sys:String>
     <sys:String x:Key="Motion_Face_CameraName">Camera</sys:String>    
-    <sys:String x:Key="Motion_Face_Calibration">Calibrate Center</sys:String>    
+    <sys:String x:Key="Motion_Face_Calibration">Calibrate position</sys:String>    
     
     <!-- Motion : Eye -->
     <sys:String x:Key="Motion_Eye">Eye</sys:String>

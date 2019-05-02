@@ -26,7 +26,7 @@ namespace Baku.VMagicMirrorConfig
         public MainWindowViewModel()
         {
             WindowSetting = new WindowSettingViewModel(MessageSender);
-            MotionSetting = new MotionSettingViewModel(MessageSender);
+            MotionSetting = new MotionSettingViewModel(MessageSender, Initializer.MessageReceiver);
             LayoutSetting = new LayoutSettingViewModel(MessageSender);
             LightSetting = new LightSettingViewModel(MessageSender);
 
@@ -311,6 +311,9 @@ namespace Baku.VMagicMirrorConfig
                     MotionSetting.CopyFrom(saveData.MotionSetting);
                     LayoutSetting.CopyFrom(saveData.LayoutSetting);
                     LightSetting.CopyFrom(saveData.LightSetting);
+
+                    //顔キャリブデータはファイル読み込み時だけ送る特殊なデータなのでここに書いてます
+                    MotionSetting.SendCalibrateFaceData();
                 }
 
             }
