@@ -4,7 +4,7 @@
     {
         public GamepadSettingViewModel() : base() { }
 
-        internal GamepadSettingViewModel(IMessageSender sender, StartupSettingViewModel startup) : base(sender, startup)
+        internal GamepadSettingViewModel(IMessageSender sender) : base(sender)
         {
         }
 
@@ -162,7 +162,7 @@
 
         #endregion
 
-        protected override void ResetToDefault()
+        public override void ResetToDefault()
         {
             GamepadEnabled = true;
 

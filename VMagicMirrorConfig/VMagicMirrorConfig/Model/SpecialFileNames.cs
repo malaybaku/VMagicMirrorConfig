@@ -2,11 +2,7 @@
 {
     public static class SpecialFileNames
     {
-        public static readonly string Culture = "_culture";
-        public static readonly string LastVrmLoadedFile = "_currentVrm";
-        public static readonly string Background = "_currentBackground";
-        public static readonly string Layout = "_currentLayout";
-        public static readonly string Light = "_light";
-        public static readonly string Startup = "_startup";
+        //拡張子.vmmを付けるのを期待したファイルだが、付けちゃうとユーザーの誤操作で上書きする懸念があるので、つけない。
+        public static readonly string AutoSaveSettingFileName = "_autosave";
     }
 }

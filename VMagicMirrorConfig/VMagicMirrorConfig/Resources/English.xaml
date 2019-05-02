@@ -6,23 +6,36 @@
     
     <!-- Top Tab -->
     <sys:String x:Key="TopBar_Home">Home</sys:String>
-    <sys:String x:Key="TopBar_Window">Window</sys:String>
-    <sys:String x:Key="TopBar_Layout">Layout</sys:String>
-    <sys:String x:Key="TopBar_Light">Light</sys:String>
-    <sys:String x:Key="TopBar_Startup">Startup</sys:String>
-    
+    <sys:String x:Key="TopBar_Streaming">Streaming</sys:String>
+
+    <!-- Top Tab In Setting -->
+    <sys:String x:Key="TopBar_Setting_Window">Window</sys:String>
+    <sys:String x:Key="TopBar_Setting_Motion">Motion</sys:String>
+    <sys:String x:Key="TopBar_Setting_Layout">Layout</sys:String>
+    <sys:String x:Key="TopBar_Setting_Light">Light</sys:String>
+        
     <!-- Home -->
     <sys:String x:Key="Home_LoadVrm">Load VRM</sys:String>
     <sys:String x:Key="Home_LoadVrmOnNextStartup">Load current VRM on next startup</sys:String>
+    
+    <sys:String x:Key="Home_SettingFileIo">Setting</sys:String>    
+    <sys:String x:Key="Home_OpenSetting">Open Setting Window</sys:String>
+    <sys:String x:Key="Home_LoadSettingFile">Load</sys:String>
+    <sys:String x:Key="Home_SaveSettingFile">Save</sys:String>
+
+    <sys:String x:Key="Home_ResetSettingToDefault">Reset setting to default</sys:String>
+    <sys:String x:Key="Home_Reset">Reset</sys:String>
+
     <sys:String x:Key="Home_OssLicense">OSS License</sys:String>
     
-    <!-- Common in Config -->
-    <sys:String x:Key="ConfigCommon_ApplyToNextStartup">Apply current setting on next startup</sys:String>
-    <sys:String x:Key="ConfigCommon_Reset">Reset</sys:String>
-    <sys:String x:Key="ConfigCommon_Save">Save</sys:String>
-    <sys:String x:Key="ConfigCommon_Load">Load</sys:String>
     
-    <!-- Window Setting -->
+    <!-- Streaming -->
+    <sys:String x:Key="Streaming_Window">Window</sys:String>
+    <sys:String x:Key="Streaming_Face">Face</sys:String>
+    <sys:String x:Key="Streaming_Motion">Motion</sys:String>       
+    
+    
+    <!-- Window -->
     <sys:String x:Key="Window_BackgroundColor">Background</sys:String>
     <sys:String x:Key="Window_Transparent">Transparent Window</sys:String>
     <sys:String x:Key="Window_Draggable">(When Transparent)Drag character to move</sys:String>
@@ -34,53 +47,58 @@
     <sys:String x:Key="Window_FetchUnityWindowPos">Check current window position</sys:String>
     <sys:String x:Key="Window_MoveWindow">Move to specified position</sys:String>
 
+    <!-- Motion -->
+    
+    <!-- Motion : Face -->
+    <sys:String x:Key="Motion_Face">Face</sys:String>
+    <sys:String x:Key="Motion_Face_EnableFaceTracking">Track Face</sys:String>
+    <sys:String x:Key="Motion_Face_CameraName">Camera</sys:String>    
+    <sys:String x:Key="Motion_Face_Calibration">Calibrate Center</sys:String>    
+    
+    <!-- Motion : Eye -->
+    <sys:String x:Key="Motion_Eye">Eye</sys:String>
+    <sys:String x:Key="Motion_Eye_LookAtPoint">Eye Look Target</sys:String>
+    <sys:String x:Key="Motion_Eye_LookAtPoint_None">None</sys:String>
+    <sys:String x:Key="Motion_Eye_LookAtPoint_MousePointer">Mouse Pointer</sys:String>
+    <sys:String x:Key="Motion_Eye_LookAtPoint_MainCamera">User</sys:String>
+    
+    <!-- Motion : Mouth -->
+    <sys:String x:Key="Motion_Mouth">Mouth</sys:String>
+    <sys:String x:Key="Motion_Mouth_EnableLipSync">LipSync</sys:String>
+    <sys:String x:Key="Motion_Mouth_MicrophoneName">Microphone</sys:String>    
+    
+    <!-- Motion : Arm -->
+    <sys:String x:Key="Motion_Arm">Arm</sys:String>
+    <sys:String x:Key="Motion_Arm_WaistWidth">Waist width [cm]</sys:String>
+    <sys:String x:Key="Motion_Arm_ElbowCloseStrength">Strength to keep upper arm to body [%]</sys:String>
+    <sys:String x:Key="Motion_Arm_EnablePresenterMotion">Presentation-like hand motion</sys:String>
+    <sys:String x:Key="Motion_Arm_PresenterArmMotionScale">Presentation-like motion scale [%]</sys:String>
+    <sys:String x:Key="Motion_Arm_PresenterArmRadiusMin">Arm position radius min [cm]</sys:String>
+
+    <!-- Motion : Hand -->
+    <sys:String x:Key="Motion_Hand">Hand</sys:String>
+    <sys:String x:Key="Motion_Hand_CharacterHandMotion">Hand Motion</sys:String>
+    <sys:String x:Key="Motion_Hand_WristToHandTip">Wrist-Hand tip length [cm]</sys:String>
+    <sys:String x:Key="Motion_Hand_WristToPalm">Wrist-Palm length [cm]</sys:String>
+    <sys:String x:Key="Motion_Hand_HandYOffsetBasic">Hand height adjust [cm]</sys:String>
+    <sys:String x:Key="Motion_Hand_HandYOffsetAfterKeyDown">(Press key)Hand height adjust [cm]</sys:String>
+
+    <!-- Motion : Wait -->
+    <sys:String x:Key="Motion_Wait">Wait motion</sys:String>
+    <sys:String x:Key="Motion_Wait_EnableWaitMotion">Enable</sys:String>
+    <sys:String x:Key="Motion_Wait_WaitMotionScale">Scale [%]</sys:String>
+    <sys:String x:Key="Motion_Wait_WaitMotionPeriod">Period [sec]</sys:String>    
+    
     <!-- Layout Setting -->
-    
-    <!-- Layout : Character -->
-    <sys:String x:Key="Layout_Character">Character</sys:String>
-    
-    <!-- Layout : Character : Hand Motion -->
-    <sys:String x:Key="Layout_CharacterHandMotion">Hand Motion</sys:String>
-    <sys:String x:Key="Layout_WristToHandTip">Wrist-Hand tip length [cm]</sys:String>
-    <sys:String x:Key="Layout_WristToPalm">Wrist-Palm length [cm]</sys:String>
-    <sys:String x:Key="Layout_HandYOffsetBasic">Hand height adjust [cm]</sys:String>
-    <sys:String x:Key="Layout_HandYOffsetAfterKeyDown">(Press key)Hand height adjust [cm]</sys:String>
-
-    <!-- Layout : Character : Arm Motion -->
-    <sys:String x:Key="Layout_CharacterArmMotion">Arm Motion</sys:String>
-    <sys:String x:Key="Layout_WaistWidth">Waist width [cm]</sys:String>
-    <sys:String x:Key="Layout_ElbowCloseStrength">Strength to keep upper arm to body [%]</sys:String>
-    <sys:String x:Key="Layout_EnablePresenterMotion">Presentation-like hand motion</sys:String>
-    <sys:String x:Key="Layout_PresenterArmMotionScale">Presentation-like motion scale [%]</sys:String>
-    <sys:String x:Key="Layout_PresenterArmRadiusMin">Arm position radius min [cm]</sys:String>
-
-    <!-- Layout : Character : Wait Motion -->
-    <sys:String x:Key="Layout_WaitMotion">Wait motion</sys:String>
-    <sys:String x:Key="Layout_EnableWaitMotion">Enable</sys:String>
-    <sys:String x:Key="Layout_WaitMotionScale">Scale [%]</sys:String>
-    <sys:String x:Key="Layout_WaitMotionPeriod">Period [sec]</sys:String>
-
-    <!-- Layout : Character : Other Motion -->
-    <sys:String x:Key="Layout_OtherMotion">Other motions</sys:String>    
-    <sys:String x:Key="Layout_EnableTouchTyping">Head motion like touch typing</sys:String>
-    <sys:String x:Key="Layout_EnableLipSync">Enable Lip Sync</sys:String>
-    <sys:String x:Key="Layout_MicrophoneName">Microphone Name</sys:String>    
-
+   
     <!-- Layout : Camera -->
     <sys:String x:Key="Layout_Camera">Camera</sys:String>
-    <sys:String x:Key="Layout_CameraHeight">Height [cm]</sys:String>
-    <sys:String x:Key="Layout_CameraDistance">Distance [cm]</sys:String>
-    <sys:String x:Key="Layout_CameraAngle">Angle [deg]</sys:String>
-
-    <sys:String x:Key="Layout_EnableCustomCameraPosition">Use Custom Camera Position</sys:String>
-    <sys:String x:Key="Layout_CurrentCameraPosition">Camera Position (x, y, z, rx, ry, rz)</sys:String>
     <sys:String x:Key="Layout_EnableFreeCameraMode">Enable Free Camera Mode</sys:String>
-    
+    <sys:String x:Key="Layout_CurrentCameraPosition">Camera Position (x, y, z, rx, ry, rz)</sys:String>
+    <sys:String x:Key="Layout_Camera_ResetPosition">Reset Position</sys:String>
 
-    <!-- Layout : Devices -->
-    <sys:String x:Key="Layout_Devices">Input Devices</sys:String>
-    
-    <!-- Layout : Devices : HID (Keyboard / Mouse Pad) -->
+
+    <!-- Layout : Keyboard / Mouse Pad -->
     <sys:String x:Key="Layout_Hid">Keyboard &amp; Mouse Pad</sys:String>
     <sys:String x:Key="Layout_HidHeight">Height [cm]</sys:String>
     <sys:String x:Key="Layout_HidHorizontalScale">Size [%]</sys:String>
@@ -90,7 +108,7 @@
     <sys:String x:Key="Layout_HidReactToKeyboard">Enable keyboard motion</sys:String>
     <sys:String x:Key="Layout_HidReactToMouse">Enable mouse motion</sys:String>
     
-    <!-- Layout : Devices : Gamepad -->
+    <!-- Layout : Gamepad -->
     <sys:String x:Key="Layout_Gamepad">Gamepad</sys:String>
     
     <sys:String x:Key="Layout_GamepadEnable">Enable Input Capture</sys:String>
@@ -101,6 +119,7 @@
     <sys:String x:Key="Layout_GamepadVisible">Visible</sys:String>
     <sys:String x:Key="Layout_GamepadLeanMotion">Lean character by directional input</sys:String>
 
+    <sys:String x:Key="Layout_GamepadLean">Lean by Stick</sys:String>
     <sys:String x:Key="Layout_GamepadLean_None">None</sys:String>
     <sys:String x:Key="Layout_GamepadLean_LeftButtons">Left Buttons</sys:String>
     <sys:String x:Key="Layout_GamepadLean_LeftStick">Left Stick</sys:String>

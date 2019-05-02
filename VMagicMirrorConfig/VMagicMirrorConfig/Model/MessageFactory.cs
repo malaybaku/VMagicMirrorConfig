@@ -68,6 +68,14 @@ namespace Baku.VMagicMirrorConfig
         public Message WaitMotionScale(int scalePercent) => WithArg($"{scalePercent}");
         public Message WaitMotionPeriod(int periodSec) => WithArg($"{periodSec}");
 
+        public Message EnableFaceTracking(bool enable) => WithArg($"{enable}");
+        public Message SetCameraDeviceName(string deviceName) => WithArg(deviceName);
+        /// <summary>
+        /// Query.
+        /// </summary>
+        /// <returns></returns>
+        public Message CameraDeviceNames() => NoArg();
+
         public Message EnableTouchTyping(bool enable) => WithArg($"{enable}");
         public Message EnableLipSync(bool enable) => WithArg($"{enable}");
 
@@ -77,6 +85,8 @@ namespace Baku.VMagicMirrorConfig
         /// </summary>
         /// <returns></returns>
         public Message MicrophoneDeviceNames() => NoArg();
+
+        public Message LookAtStyle(string v) => WithArg(v);
 
         #endregion
 

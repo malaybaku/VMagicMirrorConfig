@@ -20,11 +20,5 @@ namespace Baku.VMagicMirrorConfig
             (DataContext as IDisposable)?.Dispose();
         }
         
-        private void OnClickHyperLinkToGitHub(object sender, RoutedEventArgs e) 
-            => Process.Start("https://github.com/malaybaku/VMagicMirror");
-
-        private void OnShowLicenseClick(object sender, RoutedEventArgs e)
-            => new LicenseWindow().ShowDialog();
-
     }
 }

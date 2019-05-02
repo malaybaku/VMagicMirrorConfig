@@ -6,26 +6,37 @@
     
     <!-- Top Tab -->
     <sys:String x:Key="TopBar_Home">ホーム</sys:String>
-    <sys:String x:Key="TopBar_Window">ウィンドウ</sys:String>
-    <sys:String x:Key="TopBar_Layout">レイアウト</sys:String>
-    <sys:String x:Key="TopBar_Light">ライト</sys:String>
-    <sys:String x:Key="TopBar_Startup">スタートアップ</sys:String>
+    <sys:String x:Key="TopBar_Streaming">配信</sys:String>
+    
+    <!-- Top Tab in Setting Window -->
+    <sys:String x:Key="TopBar_Setting_Window">ウィンドウ</sys:String>
+    <sys:String x:Key="TopBar_Setting_Motion">モーション</sys:String>
+    <sys:String x:Key="TopBar_Setting_Layout">レイアウト</sys:String>
+    <sys:String x:Key="TopBar_Setting_Light">ライト</sys:String>
     
     <!-- Home -->
     <sys:String x:Key="Home_LoadVrm">VRMロード</sys:String>
     <sys:String x:Key="Home_LoadVrmOnNextStartup">次回の起動時にも同じVRMを読み込む</sys:String>
+    
+    <sys:String x:Key="Home_SettingFileIo">詳細設定</sys:String>    
+    <sys:String x:Key="Home_OpenSetting">設定ウィンドウを開く</sys:String>
+    <sys:String x:Key="Home_SaveSettingFile">セーブ</sys:String>
+    <sys:String x:Key="Home_LoadSettingFile">ロード</sys:String>
+
+    <sys:String x:Key="Home_ResetSettingToDefault">設定を初期状態にリセット</sys:String>
+    <sys:String x:Key="Home_Reset">リセット</sys:String>
+        
     <sys:String x:Key="Home_OssLicense">OSS License</sys:String>
-    
-    <!-- Common in Config -->
-    <sys:String x:Key="ConfigCommon_ApplyToNextStartup">この設定を次の起動時にも適用</sys:String>
-    <sys:String x:Key="ConfigCommon_Reset">リセット</sys:String>
-    <sys:String x:Key="ConfigCommon_Save">保存</sys:String>
-    <sys:String x:Key="ConfigCommon_Load">ロード</sys:String>
-    
-    <!-- Window Setting -->
+
+    <!-- Streaming -->
+    <sys:String x:Key="Streaming_Window">ウィンドウ</sys:String>
+    <sys:String x:Key="Streaming_Face">顔・表情</sys:String>
+    <sys:String x:Key="Streaming_Motion">モーション</sys:String>
+       
+    <!-- Window -->
     <sys:String x:Key="Window_BackgroundColor">背景色</sys:String>
-    <sys:String x:Key="Window_Transparent">背景を透明にする</sys:String>
-    <sys:String x:Key="Window_Draggable">(背景透明時)キャラ付近を掴んでドラッグ移動</sys:String>
+    <sys:String x:Key="Window_Transparent">背景を透過</sys:String>
+    <sys:String x:Key="Window_Draggable">(透過中)キャラ付近を掴んでドラッグ</sys:String>
     <sys:String x:Key="Window_TopMost">キャラクターをつねに最前面で表示</sys:String>
     
     <sys:String x:Key="Window_EnableInitialPlacement">起動時に特定の位置へウィンドウを動かす</sys:String>
@@ -35,52 +46,57 @@
     <sys:String x:Key="Window_MoveWindow">指定した位置へ移動</sys:String>
     
     
-    <!-- Layout Setting -->
+    <!-- Motion -->
     
-    <!-- Layout : Character -->
-    <sys:String x:Key="Layout_Character">キャラクター</sys:String>
+    <!-- Motion : Face -->
+    <sys:String x:Key="Motion_Face">顔・表情</sys:String>
+    <sys:String x:Key="Motion_Face_EnableFaceTracking">顔をトラッキング</sys:String>
+    <sys:String x:Key="Motion_Face_CameraName">カメラ</sys:String>    
+    <sys:String x:Key="Motion_Face_Calibration">中央位置を補正</sys:String>    
     
-    <!-- Layout : Character : Hand Motion -->
-    <sys:String x:Key="Layout_CharacterHandMotion">手の動き</sys:String>
-    <sys:String x:Key="Layout_WristToHandTip">手首から指先までの長さ[cm]</sys:String>
-    <sys:String x:Key="Layout_WristToPalm">手首から手のひらまでの長さ[cm]</sys:String>
-    <sys:String x:Key="Layout_HandYOffsetBasic">手の高さ調整[cm]</sys:String>
-    <sys:String x:Key="Layout_HandYOffsetAfterKeyDown">(打鍵後)手の高さ調整[cm]</sys:String>
+    <!-- Motion : Eye -->
+    <sys:String x:Key="Motion_Eye">目・視線</sys:String>
+    <sys:String x:Key="Motion_Eye_LookAtPoint">視線の動き</sys:String>
+    <sys:String x:Key="Motion_Eye_LookAtPoint_None">固定</sys:String>
+    <sys:String x:Key="Motion_Eye_LookAtPoint_MousePointer">マウス</sys:String>
+    <sys:String x:Key="Motion_Eye_LookAtPoint_MainCamera">ユーザー</sys:String>
+    
+    <!-- Motion : Mouth -->
+    <sys:String x:Key="Motion_Mouth">口・リップシンク</sys:String>
+    <sys:String x:Key="Motion_Mouth_EnableLipSync">リップシンク</sys:String>
+    <sys:String x:Key="Motion_Mouth_MicrophoneName">マイク</sys:String>    
+    
+    <!-- Motion : Arm -->
+    <sys:String x:Key="Motion_Arm">腕・ひじ</sys:String>
+    <sys:String x:Key="Motion_Arm_WaistWidth">脇をしめる幅 [cm]</sys:String>
+    <sys:String x:Key="Motion_Arm_ElbowCloseStrength">脇をしめる強さ [%]</sys:String>
+    <sys:String x:Key="Motion_Arm_EnablePresenterMotion">プレゼン風に右手を動かす</sys:String>
+    <sys:String x:Key="Motion_Arm_PresenterArmMotionScale">プレゼン動作サイズ[%]</sys:String>
+    <sys:String x:Key="Motion_Arm_PresenterArmRadiusMin">プレゼン動作の最小半径 [cm]</sys:String>    
 
-    <!-- Layout : Character : Arm Motion -->
-    <sys:String x:Key="Layout_CharacterArmMotion">腕の動き</sys:String>    
-    <sys:String x:Key="Layout_WaistWidth">正面から見たお腹の幅 [cm]</sys:String>
-    <sys:String x:Key="Layout_ElbowCloseStrength">脇をしめる強さ [%]</sys:String>
-    <sys:String x:Key="Layout_EnablePresenterMotion">プレゼン風に右手を動かす</sys:String>
-    <sys:String x:Key="Layout_PresenterArmMotionScale">プレゼン動作の大きさ[%]</sys:String>
-    <sys:String x:Key="Layout_PresenterArmRadiusMin">プレゼン動作の手の最小半径 [cm]</sys:String>    
+    <!-- Motion : Hand -->
+    <sys:String x:Key="Motion_Hand">手・指</sys:String>
+    <sys:String x:Key="Motion_Hand_CharacterHandMotion">手の動き</sys:String>
+    <sys:String x:Key="Motion_Hand_WristToHandTip">手首から指先までの長さ[cm]</sys:String>
+    <sys:String x:Key="Motion_Hand_WristToPalm">手首から手のひらまでの長さ[cm]</sys:String>
+    <sys:String x:Key="Motion_Hand_HandYOffsetBasic">手の高さ調整[cm]</sys:String>
+    <sys:String x:Key="Motion_Hand_HandYOffsetAfterKeyDown">(打鍵後)手の高さ調整[cm]</sys:String>
     
-    <!-- Layout : Character : Wait Motion -->
-    <sys:String x:Key="Layout_WaitMotion">待機モーション</sys:String>
-    <sys:String x:Key="Layout_EnableWaitMotion">有効にする</sys:String>
-    <sys:String x:Key="Layout_WaitMotionScale">動きの大きさ [%]</sys:String>
-    <sys:String x:Key="Layout_WaitMotionPeriod">周期 [sec]</sys:String>    
+    <!-- Motion : Wait -->
+    <sys:String x:Key="Motion_Wait">待機モーション</sys:String>
+    <sys:String x:Key="Motion_Wait_EnableWaitMotion">待機モーションを有効化</sys:String>
+    <sys:String x:Key="Motion_Wait_WaitMotionScale">動きの大きさ [%]</sys:String>
+    <sys:String x:Key="Motion_Wait_WaitMotionPeriod">周期 [sec]</sys:String>    
     
-    <!-- Layout : Character : Other Motion -->
-    <sys:String x:Key="Layout_OtherMotion">その他のモーション</sys:String>    
-    <sys:String x:Key="Layout_EnableTouchTyping">タッチタイピング風に視線を動かす</sys:String>
-    <sys:String x:Key="Layout_EnableLipSync">リップシンクを有効化</sys:String>
-    <sys:String x:Key="Layout_MicrophoneName">使用するマイク</sys:String>    
+    <!-- Layout Setting -->
 
     <!-- Layout : Camera -->
     <sys:String x:Key="Layout_Camera">カメラ</sys:String>
-    <sys:String x:Key="Layout_CameraHeight">高さ[cm]</sys:String>
-    <sys:String x:Key="Layout_CameraDistance">キャラとの距離[cm]</sys:String>
-    <sys:String x:Key="Layout_CameraAngle">角度[deg]</sys:String>
-
-    <sys:String x:Key="Layout_EnableCustomCameraPosition">カスタムカメラ位置を使用</sys:String>
-    <sys:String x:Key="Layout_CurrentCameraPosition">カスタムカメラの位置(x, y, z, rx, ry, rz)</sys:String>
     <sys:String x:Key="Layout_EnableFreeCameraMode">フリーカメラモード</sys:String>
+    <sys:String x:Key="Layout_CurrentCameraPosition">カメラの位置(x, y, z, rx, ry, rz)</sys:String>
+    <sys:String x:Key="Layout_Camera_ResetPosition">位置をリセット</sys:String>
 
-    <!-- Layout : Devices -->
-    <sys:String x:Key="Layout_Devices">入力デバイス</sys:String>
-
-    <!-- Layout : Devices : HID (Keyboard / Mouse Pad) -->
+    <!-- Layout : Keyboard / Mouse Pad -->
     <sys:String x:Key="Layout_Hid">キーボード・マウスパッド</sys:String>
     <sys:String x:Key="Layout_HidHeight">高さ[cm]</sys:String>
     <sys:String x:Key="Layout_HidHorizontalScale">サイズ[%]</sys:String>
@@ -90,7 +106,7 @@
     <sys:String x:Key="Layout_HidReactToKeyboard">キーボード操作に反応</sys:String>
     <sys:String x:Key="Layout_HidReactToMouse">マウス操作に反応</sys:String>
     
-    <!-- Layout : Devices : Gamepad -->
+    <!-- Layout : Gamepad -->
     <sys:String x:Key="Layout_Gamepad">ゲームパッド</sys:String>
     
     <sys:String x:Key="Layout_GamepadEnable">ゲームパッド入力のキャプチャを有効化</sys:String>
