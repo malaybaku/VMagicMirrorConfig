@@ -23,7 +23,7 @@
     <sys:String x:Key="Home_LoadSettingFile">Load</sys:String>
     <sys:String x:Key="Home_SaveSettingFile">Save</sys:String>
 
-    <sys:String x:Key="Home_ResetSettingToDefault">Reset setting to default</sys:String>
+    <sys:String x:Key="Home_SettingManagement">Setting Management</sys:String>
     <sys:String x:Key="Home_Reset">Reset</sys:String>
 
     <sys:String x:Key="Home_OssLicense">OSS License</sys:String>
@@ -33,12 +33,13 @@
     <sys:String x:Key="Streaming_Window">Window</sys:String>
     <sys:String x:Key="Streaming_Face">Face</sys:String>
     <sys:String x:Key="Streaming_Motion">Motion</sys:String>       
+    <sys:String x:Key="Streaming_View">View</sys:String>
     
     
     <!-- Window -->
     <sys:String x:Key="Window_BackgroundColor">Background</sys:String>
     <sys:String x:Key="Window_Transparent">Transparent Window</sys:String>
-    <sys:String x:Key="Window_Draggable">(When Transparent)Drag character to move</sys:String>
+    <sys:String x:Key="Window_Draggable">(When Transparent)Drag character</sys:String>
     <sys:String x:Key="Window_TopMost">Always Foreground</sys:String>
     
     <sys:String x:Key="Window_EnableInitialPlacement">Move window to specific position on startup</sys:String>
@@ -71,7 +72,7 @@
     <sys:String x:Key="Motion_Arm">Arm</sys:String>
     <sys:String x:Key="Motion_Arm_WaistWidth">Waist width [cm]</sys:String>
     <sys:String x:Key="Motion_Arm_ElbowCloseStrength">Strength to keep upper arm to body [%]</sys:String>
-    <sys:String x:Key="Motion_Arm_EnablePresenterMotion">Presentation-like hand motion</sys:String>
+    <sys:String x:Key="Motion_Arm_EnablePresenterMotion">Presentation-like hand</sys:String>
     <sys:String x:Key="Motion_Arm_PresenterArmMotionScale">Presentation-like motion scale [%]</sys:String>
     <sys:String x:Key="Motion_Arm_PresenterArmRadiusMin">Arm position radius min [cm]</sys:String>
 
@@ -93,13 +94,13 @@
    
     <!-- Layout : Camera -->
     <sys:String x:Key="Layout_Camera">Camera</sys:String>
-    <sys:String x:Key="Layout_EnableFreeCameraMode">Enable Free Camera Mode</sys:String>
+    <sys:String x:Key="Layout_EnableFreeCameraMode">Free Camera Mode</sys:String>
     <sys:String x:Key="Layout_CurrentCameraPosition">Camera Position (x, y, z, rx, ry, rz)</sys:String>
     <sys:String x:Key="Layout_Camera_ResetPosition">Reset Position</sys:String>
 
 
     <!-- Layout : Keyboard / Mouse Pad -->
-    <sys:String x:Key="Layout_Hid">Keyboard &amp; Mouse Pad</sys:String>
+    <sys:String x:Key="Layout_Hid">Keyboard</sys:String>
     <sys:String x:Key="Layout_HidHeight">Height [cm]</sys:String>
     <sys:String x:Key="Layout_HidHorizontalScale">Size [%]</sys:String>
     <sys:String x:Key="Layout_HidHorizontalScale_Tooltip">Specify the size of keyboard and mouse. When smallen, the devices are close to the character.</sys:String>

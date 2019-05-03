@@ -93,6 +93,12 @@ namespace Baku.VMagicMirrorConfig
 
         private void LoadVrm()
         {
+            bool turnOffTopMostTemporary = WindowSetting.TopMost;
+            if (turnOffTopMostTemporary)
+            {
+                WindowSetting.TopMost = false;
+            }
+
             var dialog = new OpenFileDialog()
             {
                 Title = "Open VRM file",
@@ -105,21 +111,20 @@ namespace Baku.VMagicMirrorConfig
                 File.Exists(dialog.FileName)
                 ))
             {
+                if (turnOffTopMostTemporary)
+                {
+                    WindowSetting.TopMost = true;
+                }
                 return;
             }
 
             MessageSender.SendMessage(MessageFactory.Instance.OpenVrmPreview(dialog.FileName));
 
-            bool turnOffTopMostTemporary = WindowSetting.TopMost;
-
-            if (turnOffTopMostTemporary)
-            {
-                WindowSetting.TopMost = false;
-            }
 
             var indication = MessageIndication.LoadVrmConfirmation(LanguageName);
 
             var res = MessageBox.Show(
+                Application.Current.MainWindow,
                 indication.Content,
                 indication.Title,
                 MessageBoxButton.OKCancel
@@ -186,6 +191,7 @@ namespace Baku.VMagicMirrorConfig
             var indication = MessageIndication.ResetSettingConfirmation(LanguageName);
 
             var res = MessageBox.Show(
+                Application.Current.MainWindow,
                 indication.Content,
                 indication.Title,
                 MessageBoxButton.OKCancel
@@ -213,6 +219,7 @@ namespace Baku.VMagicMirrorConfig
             }
 
             Initializer.Initialize();
+
             LoadSetting(GetFilePath(SpecialFileNames.AutoSaveSettingFileName), true);
             if (AutoLoadLastLoadedVrm)
             {
@@ -231,7 +238,11 @@ namespace Baku.VMagicMirrorConfig
             LanguageName = LanguageSelector.Instance.LanguageName;
 
             await MotionSetting.InitializeDeviceNamesAsync();
-            //await LayoutSetting.InitializeDeviceNamesAsync();
+
+            Initializer.CameraPositionChecker.Start(
+                2000,
+                data => LayoutSetting.CameraPosition = data
+                );
         }
 
         public void Dispose()

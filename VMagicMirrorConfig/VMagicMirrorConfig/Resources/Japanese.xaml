@@ -23,7 +23,7 @@
     <sys:String x:Key="Home_SaveSettingFile">セーブ</sys:String>
     <sys:String x:Key="Home_LoadSettingFile">ロード</sys:String>
 
-    <sys:String x:Key="Home_ResetSettingToDefault">設定を初期状態にリセット</sys:String>
+    <sys:String x:Key="Home_SettingManagement">設定の管理</sys:String>
     <sys:String x:Key="Home_Reset">リセット</sys:String>
         
     <sys:String x:Key="Home_OssLicense">OSS License</sys:String>
@@ -32,6 +32,7 @@
     <sys:String x:Key="Streaming_Window">ウィンドウ</sys:String>
     <sys:String x:Key="Streaming_Face">顔・表情</sys:String>
     <sys:String x:Key="Streaming_Motion">モーション</sys:String>
+    <sys:String x:Key="Streaming_View">表示</sys:String>
        
     <!-- Window -->
     <sys:String x:Key="Window_BackgroundColor">背景色</sys:String>

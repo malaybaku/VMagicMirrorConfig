@@ -113,7 +113,7 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private bool _topMost = false;
+        private bool _topMost = true;
         public bool TopMost
         {
             get => _topMost;
@@ -209,7 +209,7 @@ namespace Baku.VMagicMirrorConfig
             B = 0;
             IsTransparent = false;
             WindowDraggable = true;
-            TopMost = false;
+            TopMost = true;
 
             EnableWindowInitialPlacement = false;
             WindowInitialPositionX = 0;

@@ -73,7 +73,7 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private int _hidHeight = 100;
+        private int _hidHeight = 90;
         /// <summary> Unit: [cm] </summary>
         public int HidHeight
         {
@@ -87,7 +87,7 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private int _hidHorizontalScale = 100;
+        private int _hidHorizontalScale = 70;
         /// <summary> Unit: [%] </summary>
         public int HidHorizontalScale
         {
@@ -121,8 +121,8 @@ namespace Baku.VMagicMirrorConfig
         {
             Gamepad.ResetToDefault();
 
-            HidHeight = 100;
-            HidHorizontalScale = 100;
+            HidHeight = 90;
+            HidHorizontalScale = 70;
             HidVisibility = true;
         }
     }

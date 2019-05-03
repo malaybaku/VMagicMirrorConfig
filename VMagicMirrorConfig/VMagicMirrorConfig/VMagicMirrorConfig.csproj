@@ -84,6 +84,7 @@
     <Compile Include="Common\LineParseUtils.cs" />
     <Compile Include="Common\NotifiableBase.cs" />
     <Compile Include="Model\AppExitFromUnityMessage.cs" />
+    <Compile Include="Model\CameraPositionChecker.cs" />
     <Compile Include="Model\GrpcReceiver.cs" />
     <Compile Include="Model\GrpcSender.cs" />
     <Compile Include="Model\GrpcServerImpl.cs" />

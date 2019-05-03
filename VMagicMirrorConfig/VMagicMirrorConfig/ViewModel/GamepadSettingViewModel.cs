@@ -27,7 +27,7 @@
             }
         }
 
-        private int _height = 100;
+        private int _height = 90;
         /// <summary> Unit: [cm] </summary>
         public int GamepadHeight
         {
@@ -166,7 +166,7 @@
         {
             GamepadEnabled = true;
 
-            GamepadHeight = 100;
+            GamepadHeight = 90;
             GamepadHorizontalScale = 100;
             GamepadVisibility = true;
 

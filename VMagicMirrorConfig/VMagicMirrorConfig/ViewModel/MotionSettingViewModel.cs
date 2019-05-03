@@ -269,7 +269,7 @@ namespace Baku.VMagicMirrorConfig
 
         #region Hand
 
-        private int _lengthFromWristToTip = 18;
+        private int _lengthFromWristToTip = 12;
         /// <summary> Unit: [cm] </summary>
         public int LengthFromWristToTip
         {
@@ -283,7 +283,7 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private int _lengthFromWristToPalm = 9;
+        private int _lengthFromWristToPalm = 6;
         /// <summary> Unit: [cm] </summary>
         public int LengthFromWristToPalm
         {
@@ -297,7 +297,7 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private int _handYOffsetBasic = 4;
+        private int _handYOffsetBasic = 3;
         public int HandYOffsetBasic
         {
             get => _handYOffsetBasic;
@@ -386,9 +386,9 @@ namespace Baku.VMagicMirrorConfig
             PresentationArmMotionScale = 30;
             PresentationArmRadiusMin = 20;
 
-            LengthFromWristToTip = 18;
-            LengthFromWristToPalm = 9;
-            HandYOffsetBasic = 4;
+            LengthFromWristToTip = 12;
+            LengthFromWristToPalm = 6;
+            HandYOffsetBasic = 3;
             HandYOffsetAfterKeyDown = 2;
 
             EnableWaitMotion = true;
