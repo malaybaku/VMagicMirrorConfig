@@ -100,6 +100,30 @@
                                   IsChecked="{Binding UseLookAtPointNone}"
                                   Content="{DynamicResource Motion_Eye_LookAtPoint_None}"/>
                     </Grid>
+
+                    <Grid Margin="5,0,0,10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0"
+                                    Text="{DynamicResource Motion_Face_DefaultFun}"/>
+                        <Slider Grid.Row="0" Grid.Column="1"
+                                x:Name="sliderFaceDefaultFun"
+                                Minimum="0"
+                                Maximum="100"
+                                Value="{Binding FaceDefaultFun, Mode=TwoWay}"
+                                />
+                        <TextBox Grid.Row="0" Grid.Column="2"
+                                 Text="{Binding Value, ElementName=sliderFaceDefaultFun}"
+                                 />
+
+                    </Grid>
                 </StackPanel>
             </md:Card>
 

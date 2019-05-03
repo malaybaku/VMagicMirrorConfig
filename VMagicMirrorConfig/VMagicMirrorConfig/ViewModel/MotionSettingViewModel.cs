@@ -109,6 +109,20 @@ namespace Baku.VMagicMirrorConfig
             SendMessage(MessageFactory.Instance.SetCalibrateFaceData(CalibrateFaceData));
         }
 
+        private int _faceDefaultFun = 20;
+        public int FaceDefaultFun
+        {
+            get => _faceDefaultFun;
+            set
+            {
+                if (SetValue(ref _faceDefaultFun, value))
+                {
+                    SendMessage(MessageFactory.Instance.FaceDefaultFun(FaceDefaultFun));
+                }
+            }
+        }
+        
+
         #endregion
 
         #region Eye
@@ -379,6 +393,8 @@ namespace Baku.VMagicMirrorConfig
             UseLookAtPointNone = false;
             UseLookAtPointMousePointer = true;
             UseLookAtPointMainCamera = false;
+
+            FaceDefaultFun = 20;
 
             WaistWidth = 30;
             ElbowCloseStrength = 30;

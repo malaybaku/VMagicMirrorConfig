@@ -55,7 +55,8 @@
     <sys:String x:Key="Motion_Face_EnableFaceTracking">Track Face</sys:String>
     <sys:String x:Key="Motion_Face_CameraName">Camera</sys:String>    
     <sys:String x:Key="Motion_Face_Calibration">Calibrate position</sys:String>    
-    
+    <sys:String x:Key="Motion_Face_DefaultFun">Default Fun Blend Value [%]</sys:String>    
+
     <!-- Motion : Eye -->
     <sys:String x:Key="Motion_Eye">Eye</sys:String>
     <sys:String x:Key="Motion_Eye_LookAtPoint">Eye Look Target</sys:String>
