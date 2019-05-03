@@ -55,7 +55,7 @@
             }
         }
 
-        private bool _visibility = true;
+        private bool _visibility = false;
         public bool GamepadVisibility
         {
             get => _visibility;
@@ -168,7 +168,7 @@
 
             GamepadHeight = 90;
             GamepadHorizontalScale = 100;
-            GamepadVisibility = true;
+            GamepadVisibility = false;
 
             GamepadLeanNone = false;
             GamepadLeanLeftButtons = false;

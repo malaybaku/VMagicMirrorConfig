@@ -8,6 +8,7 @@
         mc:Ignorable="d"
         d:DataContext="{x:Type vmm:MainWindowViewModel}"
         Title="VMagicMirror" 
+        ResizeMode="CanMinimize"
         Height="470" Width="530"
         MinHeight="470" MinWidth="530"
         >

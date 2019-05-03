@@ -21,8 +21,7 @@
                                Style="{StaticResource HeaderText}"
                                />
 
-                    <Grid Margin="5" 
-                          IsEnabled="{Binding EnableFaceTracking}">
+                    <Grid Margin="5">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition/>

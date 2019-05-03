@@ -162,7 +162,7 @@ namespace Baku.VMagicMirrorConfig
 
         #region Mouth
 
-        private bool _enableLipSync = false;
+        private bool _enableLipSync = true;
         public bool EnableLipSync
         {
             get => _enableLipSync;
