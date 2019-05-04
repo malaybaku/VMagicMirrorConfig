@@ -49,9 +49,10 @@ namespace Baku.VMagicMirrorConfig
 
         #endregion
 
-        #region キャラの動き方
+        #region モーション
 
         public Message LengthFromWristToTip(int lengthCentimeter) => WithArg($"{lengthCentimeter}");
+
         public Message LengthFromWristToPalm(int lengthCentimeter) => WithArg($"{lengthCentimeter}");
 
         public Message HandYOffsetBasic(int offsetCentimeter) => WithArg($"{offsetCentimeter}");
@@ -68,6 +69,20 @@ namespace Baku.VMagicMirrorConfig
         public Message WaitMotionScale(int scalePercent) => WithArg($"{scalePercent}");
         public Message WaitMotionPeriod(int periodSec) => WithArg($"{periodSec}");
 
+        public Message CalibrateFace() => NoArg();
+        public Message SetCalibrateFaceData(string data) => WithArg(data);
+
+        public Message EnableFaceTracking(bool enable) => WithArg($"{enable}");
+        public Message SetCameraDeviceName(string deviceName) => WithArg(deviceName);
+
+        public Message FaceDefaultFun(int percentage) => WithArg($"{percentage}");
+
+        /// <summary>
+        /// Query.
+        /// </summary>
+        /// <returns></returns>
+        public Message CameraDeviceNames() => NoArg();
+
         public Message EnableTouchTyping(bool enable) => WithArg($"{enable}");
         public Message EnableLipSync(bool enable) => WithArg($"{enable}");
 
@@ -78,17 +93,15 @@ namespace Baku.VMagicMirrorConfig
         /// <returns></returns>
         public Message MicrophoneDeviceNames() => NoArg();
 
+        public Message LookAtStyle(string v) => WithArg(v);
+
         #endregion
 
         #region カメラの配置
 
-        public Message CameraHeight(int heightCentimeter) => WithArg($"{heightCentimeter}");
-        public Message CameraDistance(int distanceCentimeter) => WithArg($"{distanceCentimeter}");
-        public Message CameraVerticalAngle(int angleDegree) => WithArg($"{angleDegree}");
-
-        public Message EnableCustomCameraPosition(bool enable) => WithArg($"{enable}");
         public Message SetCustomCameraPosition(string posData) => WithArg($"{posData}");
         public Message EnableFreeCameraMode(bool enable) => WithArg($"{enable}");
+        public Message ResetCameraPosition() => NoArg();
 
         /// <summary>
         /// Query.

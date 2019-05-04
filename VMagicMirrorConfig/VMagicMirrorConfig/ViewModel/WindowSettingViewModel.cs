@@ -7,16 +7,10 @@ namespace Baku.VMagicMirrorConfig
     public class WindowSettingViewModel : SettingViewModelBase
     {
         public WindowSettingViewModel() : base() { }
-        internal WindowSettingViewModel(IMessageSender sender, StartupSettingViewModel startup) : base(sender, startup)
+        internal WindowSettingViewModel(IMessageSender sender) : base(sender)
         {
             UpdateBackgroundColor();
         }
-
-        protected override string SaveDialogTitle => "Save Background Setting File";
-        protected override string LoadDialogTitle => "Open Background Setting File";
-        protected override string FileIoDialogFilter => "VMagicMirror Background File(*.vmm_background)|*.vmm_background";
-        protected override string FileExt => ".vmm_background";
-
 
         private int _r = 0;
         public int R
@@ -119,7 +113,7 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private bool _topMost = false;
+        private bool _topMost = true;
         public bool TopMost
         {
             get => _topMost;
@@ -138,17 +132,7 @@ namespace Baku.VMagicMirrorConfig
         public bool EnableWindowInitialPlacement
         {
             get => _enableWindowInitialPlacement;
-            set
-            {
-                if (SetValue(ref _enableWindowInitialPlacement, value))
-                {
-                    //初期設定でウィンドウを動かすには初期設定が有効じゃないとダメなのでスイッチしておく
-                    if (EnableWindowInitialPlacement && Startup != null)
-                    {
-                        Startup.LoadBackgroundSetting = true;
-                    }
-                }
-            }
+            set => SetValue(ref _enableWindowInitialPlacement, value);
         }
 
         private int _windowInitialPositionX = 0;
@@ -218,14 +202,14 @@ namespace Baku.VMagicMirrorConfig
 
         #endregion
 
-        protected override void ResetToDefault()
+        public override void ResetToDefault()
         {
             R = 0;
             G = 255;
             B = 0;
             IsTransparent = false;
             WindowDraggable = true;
-            TopMost = false;
+            TopMost = true;
 
             EnableWindowInitialPlacement = false;
             WindowInitialPositionX = 0;

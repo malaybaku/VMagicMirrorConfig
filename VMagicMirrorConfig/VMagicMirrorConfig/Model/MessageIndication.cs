@@ -16,6 +16,9 @@
         public static MessageIndication LoadVrmConfirmation(string languageName)
             => LoadVrmConfirmation(LanguageSelector.StringToLanguage(languageName));
 
+        public static MessageIndication ResetSettingConfirmation(string languageName)
+            => ResetSettingConfirmation(LanguageSelector.StringToLanguage(languageName));
+
         public static MessageIndication LoadVrmConfirmation(Languages lang)
         {
             switch (lang)
@@ -30,6 +33,24 @@
                     return new MessageIndication(
                         "Load VRM",
                         "Please confirm the license in viewer window. Do you load the character?"
+                        );
+            }
+        }
+
+        public static MessageIndication ResetSettingConfirmation(Languages lang)
+        {
+            switch (lang)
+            {
+                case Languages.Japanese:
+                    return new MessageIndication(
+                        "設定のリセット",
+                        "リセットを実行すると全ての設定が初期状態に戻ります。リセットしますか？"
+                        );
+                case Languages.English:
+                default:
+                    return new MessageIndication(
+                        "Reset Setting",
+                        "Are you sure you want to reset all settings in VMagicMirror?"
                         );
             }
         }

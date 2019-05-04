@@ -1,22 +1,14 @@
 ﻿using System;
 using System.Globalization;
-using System.IO;
-using System.Reflection;
 using System.Windows;
 
 namespace Baku.VMagicMirrorConfig
 {
-    using static LineParseUtils;
-
     class LanguageSelector
     {
         private static LanguageSelector _instance;
         public static LanguageSelector Instance
             => _instance ?? (_instance = new LanguageSelector());
-
-        private static string _settingFilePath = null;
-        private static string SettingFilePath
-            => _settingFilePath ?? (_settingFilePath = GetSettingFilePath());
 
         private LanguageSelector()
         {
@@ -40,13 +32,14 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        public void Initialize(IMessageSender sender)
+        public void Initialize(IMessageSender sender, string preferredLanguageName)
         {
             _sender = sender;
 
-            if (TryLoadSetting())
+            if (preferredLanguageName == "Japanese" || 
+                preferredLanguageName == "English")
             {
-                //ファイルから読めたのでOK
+                LanguageName = preferredLanguageName;
             }
             else
             {
@@ -71,8 +64,6 @@ namespace Baku.VMagicMirrorConfig
 
         private void SetLanguage(string languageName)
         {
-            SaveSetting();
-
             Application.Current.Resources.MergedDictionaries[0] = new ResourceDictionary()
             {
                 Source = new Uri(
@@ -82,37 +73,6 @@ namespace Baku.VMagicMirrorConfig
             };
             _sender?.SendMessage(MessageFactory.Instance.Language(languageName));
         }
-
-        private void SaveSetting()
-        {
-            File.WriteAllLines(
-                SettingFilePath,
-                new string[]
-                {
-                    $"{nameof(LanguageName)}:{LanguageName}",
-                });
-        }
-
-        private bool TryLoadSetting()
-        {
-            if (!File.Exists(SettingFilePath))
-            {
-                return false;
-            }
-
-            bool couldRead = false;
-            foreach (var line in File.ReadAllLines(SettingFilePath))
-            {
-                couldRead = couldRead || TryReadStringParam(line, nameof(LanguageName), v => LanguageName = v);
-            }
-            return couldRead;
-        }
-
-        private static string GetSettingFilePath()
-            => Path.Combine(
-                Path.GetDirectoryName(Assembly.GetEntryAssembly().Location),
-                SpecialFileNames.Culture
-                );
     }
 
     enum Languages

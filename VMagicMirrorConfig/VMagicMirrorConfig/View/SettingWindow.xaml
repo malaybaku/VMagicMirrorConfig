@@ -1,4 +1,4 @@
-﻿<Window x:Class="Baku.VMagicMirrorConfig.MainWindow"
+﻿<Window x:Class="Baku.VMagicMirrorConfig.SettingWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,14 +7,10 @@
         xmlns:vmm="clr-namespace:Baku.VMagicMirrorConfig"
         mc:Ignorable="d"
         d:DataContext="{x:Type vmm:MainWindowViewModel}"
-        Title="VMagicMirror v0.8.0" 
-        ResizeMode="CanMinimize"
-        Height="470" Width="530"
-        MinHeight="470" MinWidth="530"
+        Title="VMagicMirror Settings" 
+        Height="650" Width="500"
+        MinHeight="200" MinWidth="430"
         >
-    <Window.DataContext>
-        <vmm:MainWindowViewModel/>
-    </Window.DataContext>
     <dragablz:TabablzControl FixedHeaderCount="5">
         <dragablz:TabablzControl.HeaderItemTemplate>
             <DataTemplate>
@@ -25,14 +21,17 @@
                            />
             </DataTemplate>
         </dragablz:TabablzControl.HeaderItemTemplate>
-        <TabItem Header="{DynamicResource TopBar_Home}">
-            <vmm:HomePanel />
+        <TabItem Header="{DynamicResource TopBar_Setting_Window}">
+            <vmm:WindowSettingPanel DataContext="{Binding WindowSetting}" />
         </TabItem>
-        <TabItem Header="{DynamicResource TopBar_Streaming}">
-            <vmm:StreamingPanel />
+        <TabItem Header="{DynamicResource TopBar_Setting_Motion}">
+            <vmm:MotionSettingPanel DataContext="{Binding MotionSetting}" />
         </TabItem>
-        <TabItem Header="About">
-            <vmm:AboutPanel />
+        <TabItem Header="{DynamicResource TopBar_Setting_Layout}">
+            <vmm:LayoutSettingPanel DataContext="{Binding LayoutSetting}" />
+        </TabItem>
+        <TabItem Header="{DynamicResource TopBar_Setting_Light}">
+            <vmm:LightSettingPanel DataContext="{Binding LightSetting}" />
         </TabItem>
     </dragablz:TabablzControl>
 </Window>

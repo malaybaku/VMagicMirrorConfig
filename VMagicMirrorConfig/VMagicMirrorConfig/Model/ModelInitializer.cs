@@ -14,11 +14,14 @@ namespace Baku.VMagicMirrorConfig
 
             MessageReceiver.Start();
             AssignMessageReceivers();
+
+            CameraPositionChecker = new CameraPositionChecker(MessageSender);
         }
 
         public IMessageSender MessageSender { get; } = new GrpcSender();
         public IMessageReceiver MessageReceiver { get; } = new GrpcReceiver();
         public InputChecker InputChecker { get; } = new InputChecker();
+        public CameraPositionChecker CameraPositionChecker { get; private set; } = null;
 
         private void OnKeyDown(object sender, EventArgs e)
             => MessageSender.SendMessage(MessageFactory.Instance.KeyDown(InputChecker.KeyCode));
@@ -33,6 +36,7 @@ namespace Baku.VMagicMirrorConfig
         {
             InputChecker.Dispose();
             MessageReceiver.Stop();
+            CameraPositionChecker?.Stop();
         }
 
         private void AssignMessageReceivers()
