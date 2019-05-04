@@ -7,6 +7,7 @@
              xmlns:vmm="clr-namespace:Baku.VMagicMirrorConfig"
              mc:Ignorable="d"
              d:DesignHeight="550"
+             d:DesignWidth="350"
              d:DataContext="{x:Type vmm:WindowSettingViewModel}"
              >
     <UserControl.Resources>
@@ -199,24 +200,6 @@
                     </Grid>
                 </StackPanel>
             </md:Card>
-
-            <CheckBox Content="{DynamicResource ConfigCommon_ApplyToNextStartup}"
-                      Margin="10"
-                      IsChecked="{Binding Startup.LoadLightSetting, Mode=TwoWay}"
-                      />
-
-            <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Center"
-                        Margin="20,10">
-                <Button Content="{DynamicResource ConfigCommon_Reset}"
-                        Command="{Binding ResetToDefaultCommand}" />
-                <Button Content="{DynamicResource ConfigCommon_Save}"
-                        Command="{Binding SaveSettingCommand}" />
-                <Button Content="{DynamicResource ConfigCommon_Load}"
-                        Command="{Binding LoadSettingCommand}" />
-            </StackPanel>
-
-
 
         </StackPanel>
     </ScrollViewer>
