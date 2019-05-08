@@ -102,9 +102,6 @@
                     </Grid>
 
                     <Grid Margin="5,0,0,10">
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="3*" />
@@ -124,6 +121,113 @@
                                  />
 
                     </Grid>
+
+                    <Expander Header="{DynamicResource Motion_Face_Eyebrow}">
+                        <Grid Margin="5,0,0,10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="3*" />
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Row="0" Grid.Column="0"
+                                       Text="{DynamicResource Motion_Face_Eyebrow_LeftUp}"/>
+
+                            <ComboBox Grid.Row="0" Grid.Column="1"
+                                      HorizontalAlignment="Left"
+                                      Margin="5,0"
+                                      Width="200"
+                                      ItemsSource="{Binding AvailableBlendShapeNames}"
+                                      SelectedItem="{Binding EyebrowLeftUpKey}"
+                                      md:HintAssist.Hint="Left Up Key"
+                                      />
+
+                            <TextBlock Grid.Row="1" Grid.Column="0"
+                                       Text="{DynamicResource Motion_Face_Eyebrow_LeftDown}"/>
+
+                            <ComboBox Grid.Row="1" Grid.Column="1"
+                                      HorizontalAlignment="Left"
+                                      Margin="5,0"
+                                      Width="200"
+                                      ItemsSource="{Binding AvailableBlendShapeNames}"
+                                      SelectedItem="{Binding EyebrowLeftDownKey}"
+                                      md:HintAssist.Hint="Left Down Key"
+                                      />
+
+                            <CheckBox Grid.Row="2" Grid.Column="0"
+                                      Grid.ColumnSpan="3"
+                                      Content="{DynamicResource Motion_Face_Eyebrow_UseSeparatedKey}"
+                                      IsChecked="{Binding UseSeparatedKeyForEyebrow}"
+                                      />
+
+                            <TextBlock Grid.Row="3" Grid.Column="0"
+                                       Text="{DynamicResource Motion_Face_Eyebrow_RightUp}"/>
+
+                            <ComboBox Grid.Row="3" Grid.Column="1"
+                                      HorizontalAlignment="Left"
+                                      Margin="5,0"
+                                      Width="200"
+                                      ItemsSource="{Binding AvailableBlendShapeNames}"
+                                      SelectedItem="{Binding EyebrowRightUpKey}"
+                                      md:HintAssist.Hint="Right Up Key"
+                                      IsEnabled="{Binding UseSeparatedKeyForEyebrow}"
+                                      />
+
+                            <TextBlock Grid.Row="4" Grid.Column="0"
+                                       Text="{DynamicResource Motion_Face_Eyebrow_RightDown}"/>
+
+                            <ComboBox Grid.Row="4" Grid.Column="1"
+                                      HorizontalAlignment="Left"
+                                      Margin="5,0"
+                                      Width="200"
+                                      ItemsSource="{Binding AvailableBlendShapeNames}"
+                                      SelectedItem="{Binding EyebrowRightDownKey}"
+                                      IsEnabled="{Binding UseSeparatedKeyForEyebrow}"
+                                      md:HintAssist.Hint="Right Down Key"
+                                      />
+
+
+
+                            <TextBlock Grid.Row="5" Grid.Column="0"
+                                    Text="{DynamicResource Motion_Face_Eyebrow_UpScale}"/>
+                            <Slider Grid.Row="5" Grid.Column="1"
+                                x:Name="sliderEyebrowUpScale"
+                                Minimum="10"
+                                Maximum="500"
+                                Value="{Binding EyebrowUpScale, Mode=TwoWay}"
+                                />
+                            <TextBox Grid.Row="5" Grid.Column="2"
+                                 Text="{Binding Value, ElementName=sliderEyebrowUpScale}"
+                                 />
+                            <TextBlock Grid.Row="6" Grid.Column="0"
+                                    Text="{DynamicResource Motion_Face_Eyebrow_DownScale}"/>
+                            <Slider Grid.Row="6" Grid.Column="1"
+                                x:Name="sliderEyebrowDownScale"
+                                Minimum="10"
+                                Maximum="500"
+                                Value="{Binding EyebrowDownScale, Mode=TwoWay}"
+                                />
+                            <TextBox Grid.Row="6" Grid.Column="2"
+                                 Text="{Binding Value, ElementName=sliderEyebrowDownScale}"
+                                 />
+
+                        </Grid>
+
+                    </Expander>
+                    
+                    <TextBlock Text="{DynamicResource Motion_Eye_LookAtPoint}"
+                               Margin="10,20,5,5"
+                               />
+
                 </StackPanel>
             </md:Card>
 

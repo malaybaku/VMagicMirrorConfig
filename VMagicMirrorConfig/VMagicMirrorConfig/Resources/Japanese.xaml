@@ -56,6 +56,15 @@
     <sys:String x:Key="Motion_Face_Calibration">姿勢・表情を補正</sys:String>    
     <sys:String x:Key="Motion_Face_DefaultFun">Funブレンドのデフォルト値[%]</sys:String>
     
+    <sys:String x:Key="Motion_Face_Eyebrow">眉毛 (開いてカスタマイズ)</sys:String>    
+    <sys:String x:Key="Motion_Face_Eyebrow_LeftUp">左眉上げ</sys:String>    
+    <sys:String x:Key="Motion_Face_Eyebrow_LeftDown">左眉下げ</sys:String>    
+    <sys:String x:Key="Motion_Face_Eyebrow_UseSeparatedKey">左右で別々のキーを使う</sys:String>    
+    <sys:String x:Key="Motion_Face_Eyebrow_RightUp">右眉上げ</sys:String>    
+    <sys:String x:Key="Motion_Face_Eyebrow_RightDown">右眉下げ</sys:String>    
+    <sys:String x:Key="Motion_Face_Eyebrow_UpScale">眉上げスケール [%]</sys:String>    
+    <sys:String x:Key="Motion_Face_Eyebrow_DownScale">眉下げスケール [%]</sys:String>    
+    
     <!-- Motion : Eye -->
     <sys:String x:Key="Motion_Eye">目・視線</sys:String>
     <sys:String x:Key="Motion_Eye_LookAtPoint">視線の動き</sys:String>

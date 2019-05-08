@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Xml.Serialization;
@@ -7,6 +8,12 @@ namespace Baku.VMagicMirrorConfig
 {
     public class MotionSettingViewModel : SettingViewModelBase
     {
+        static class EyebrowBlendShapeNames
+        {
+            public const string VRoid_Ver0_6_3_Up = "Face.M_F00_000_00_Fcl_BRW_Surprised";
+            public const string VRoid_Ver0_6_3_Down = "Face.M_F00_000_00_Fcl_BRW_Angry";
+        }
+
         public MotionSettingViewModel() : base() { }
         internal MotionSettingViewModel(IMessageSender sender, IMessageReceiver receiver) : base(sender)
         {
@@ -15,9 +22,13 @@ namespace Baku.VMagicMirrorConfig
 
         private void OnReceivedCommand(object sender, CommandReceivedEventArgs e)
         {
-            if (e.Command == ReceiveMessageNames.SetCalibrationFaceData)
+            switch(e.Command)
             {
-                CalibrateFaceData = e.Args;
+                case ReceiveMessageNames.SetCalibrationFaceData:
+                    CalibrateFaceData = e.Args;
+                    break;
+                default:
+                    break;
             }
         }
 
@@ -42,6 +53,27 @@ namespace Baku.VMagicMirrorConfig
                     _writableCameraDeviceNames.Add(deviceName);
                 }
             });
+        }
+
+        public async Task RefreshBlendShapeNamesAsync()
+        {
+            try
+            {
+                string blendShapeNames = await SendQueryAsync(MessageFactory.Instance.GetBlendShapeNames());
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    _writableBlendShapeNames.Clear();
+                    _writableBlendShapeNames.Add("");
+                    foreach (var name in blendShapeNames.Split('\t'))
+                    {
+                        _writableBlendShapeNames.Add(name);
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
         #region Face
@@ -121,7 +153,109 @@ namespace Baku.VMagicMirrorConfig
                 }
             }
         }
-        
+
+        #region Eyebrow
+
+        private readonly ObservableCollection<string> _writableBlendShapeNames
+          = new ObservableCollection<string>();
+        private ReadOnlyObservableCollection<string> _availableBlendShapeNames = null;
+        [XmlIgnore]
+        public ReadOnlyObservableCollection<string> AvailableBlendShapeNames
+            => _availableBlendShapeNames ??
+            (_availableBlendShapeNames = new ReadOnlyObservableCollection<string>(_writableBlendShapeNames));
+
+        private string _eyebrowLeftUpKey = EyebrowBlendShapeNames.VRoid_Ver0_6_3_Up;
+        public string EyebrowLeftUpKey
+        {
+            get => _eyebrowLeftUpKey;
+            set
+            {
+                if (SetValue(ref _eyebrowLeftUpKey, value))
+                {
+                    SendMessage(MessageFactory.Instance.EyebrowLeftUpKey(EyebrowLeftUpKey));
+                }
+            }
+        }
+
+        private string _eyebrowLeftDownKey = EyebrowBlendShapeNames.VRoid_Ver0_6_3_Down;
+        public string EyebrowLeftDownKey
+        {
+            get => _eyebrowLeftDownKey;
+            set
+            {
+                if (SetValue(ref _eyebrowLeftDownKey, value))
+                {
+                    SendMessage(MessageFactory.Instance.EyebrowLeftDownKey(EyebrowLeftDownKey));
+                }
+            }
+        }
+
+        private bool _useSeparatedKeyForEyebrow = false;
+        public bool UseSeparatedKeyForEyebrow
+        {
+            get => _useSeparatedKeyForEyebrow;
+            set
+            {
+                if (SetValue(ref _useSeparatedKeyForEyebrow, value))
+                {
+                    SendMessage(MessageFactory.Instance.UseSeparatedKeyForEyebrow(UseSeparatedKeyForEyebrow));
+                }
+            }
+        }
+
+        private string _eyebrowRightUpKey = "";
+        public string EyebrowRightUpKey
+        {
+            get => _eyebrowRightUpKey;
+            set
+            {
+                if (SetValue(ref _eyebrowRightUpKey, value))
+                {
+                    SendMessage(MessageFactory.Instance.EyebrowRightUpKey(EyebrowRightUpKey));
+                }
+            }
+        }
+
+        private string _eyebrowRightDownKey = "";
+        public string EyebrowRightDownKey
+        {
+            get => _eyebrowRightDownKey;
+            set
+            {
+                if (SetValue(ref _eyebrowRightDownKey, value))
+                {
+                    SendMessage(MessageFactory.Instance.EyebrowRightDownKey(EyebrowRightDownKey));
+                }
+            }
+        }
+
+        private int _eyebrowUpScale = 100;
+        public int EyebrowUpScale
+        {
+            get => _eyebrowUpScale;
+            set
+            {
+                if (SetValue(ref _eyebrowUpScale, value))
+                {
+                    SendMessage(MessageFactory.Instance.EyebrowUpScale(EyebrowUpScale));
+                }
+            }
+        }
+
+        private int _eyebrowDownScale = 100;
+        public int EyebrowDownScale
+        {
+            get => _eyebrowDownScale;
+            set
+            {
+                if (SetValue(ref _eyebrowDownScale, value))
+                {
+                    SendMessage(MessageFactory.Instance.EyebrowDownScale(EyebrowDownScale));
+                }
+            }
+        }
+
+        #endregion
 
         #endregion
 
@@ -395,6 +529,14 @@ namespace Baku.VMagicMirrorConfig
             UseLookAtPointMainCamera = false;
 
             FaceDefaultFun = 20;
+
+            EyebrowLeftUpKey = EyebrowBlendShapeNames.VRoid_Ver0_6_3_Up;
+            EyebrowLeftDownKey = EyebrowBlendShapeNames.VRoid_Ver0_6_3_Down;
+            UseSeparatedKeyForEyebrow = false;
+            EyebrowRightUpKey = "";
+            EyebrowRightDownKey = "";
+            EyebrowUpScale = 100;
+            EyebrowDownScale = 100;
 
             WaistWidth = 30;
             ElbowCloseStrength = 30;

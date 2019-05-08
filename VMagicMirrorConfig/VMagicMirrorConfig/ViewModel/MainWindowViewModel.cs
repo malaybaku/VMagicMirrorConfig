@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Xml.Serialization;
 using Microsoft.Win32;
@@ -134,6 +135,7 @@ namespace Baku.VMagicMirrorConfig
             {
                 MessageSender.SendMessage(MessageFactory.Instance.OpenVrm(dialog.FileName));
                 _lastVrmLoadFilePath = dialog.FileName;
+                Task.Run(async () => await MotionSetting.RefreshBlendShapeNamesAsync());
             }
             else
             {
@@ -263,6 +265,7 @@ namespace Baku.VMagicMirrorConfig
                 if (File.Exists(_lastVrmLoadFilePath))
                 {
                     MessageSender.SendMessage(MessageFactory.Instance.OpenVrm(_lastVrmLoadFilePath));
+                    Task.Run(async () => await MotionSetting.RefreshBlendShapeNamesAsync());
                 }
             }
             catch (Exception ex)

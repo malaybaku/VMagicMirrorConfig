@@ -57,6 +57,15 @@
     <sys:String x:Key="Motion_Face_Calibration">Calibrate position</sys:String>    
     <sys:String x:Key="Motion_Face_DefaultFun">Default Fun Blend Value [%]</sys:String>    
 
+    <sys:String x:Key="Motion_Face_EyeBrow">Eyebrow</sys:String>    
+    <sys:String x:Key="Motion_Face_EyeBrow_LeftUp">Left Up Key</sys:String>    
+    <sys:String x:Key="Motion_Face_EyeBrow_LeftDown">Left Down Key</sys:String>    
+    <sys:String x:Key="Motion_Face_EyeBrow_UseSeparatedKey">Use Different Key for Right Eyebrow</sys:String>    
+    <sys:String x:Key="Motion_Face_EyeBrow_RightUp">Right Up Key</sys:String>    
+    <sys:String x:Key="Motion_Face_EyeBrow_RightDown">Riht Down Key</sys:String>    
+    <sys:String x:Key="Motion_Face_EyeBrow_UpScale">Up Scale [%]</sys:String>    
+    <sys:String x:Key="Motion_Face_EyeBrow_DownScale">Down Scale [%]</sys:String>    
+    
     <!-- Motion : Eye -->
     <sys:String x:Key="Motion_Eye">Eye</sys:String>
     <sys:String x:Key="Motion_Eye_LookAtPoint">Eye Look Target</sys:String>
