@@ -5,12 +5,18 @@ using System.Runtime.InteropServices;
 
 namespace Baku.VMagicMirrorConfig
 {
-    public static class UnityWindowChecker
+    public static class WindowPositionUtil
     {
         public static WindowPosition GetUnityWindowPosition()
         {
             GetWindowRect(GetUnityWindowHandle(), out RECT rect);
             return new WindowPosition(rect.left, rect.top);
+        }
+
+        public static WindowPosition GetThisWindowRightTopPosition()
+        {
+            GetWindowRect(Process.GetCurrentProcess().MainWindowHandle, out RECT rect);
+            return new WindowPosition(rect.right, rect.top);
         }
 
         private static IntPtr GetUnityWindowHandle()

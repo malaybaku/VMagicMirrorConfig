@@ -56,6 +56,9 @@
     <Reference Include="MaterialDesignThemes.Wpf, Version=2.5.0.1205, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignThemes.2.5.0.1205\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -84,6 +87,7 @@
     <Compile Include="Common\LineParseUtils.cs" />
     <Compile Include="Common\NotifiableBase.cs" />
     <Compile Include="Model\AppExitFromUnityMessage.cs" />
+    <Compile Include="Model\AutoAdjustParameters.cs" />
     <Compile Include="Model\CameraPositionChecker.cs" />
     <Compile Include="Model\GrpcReceiver.cs" />
     <Compile Include="Model\GrpcSender.cs" />
@@ -103,7 +107,7 @@
     <Compile Include="Model\LanguageSelector.cs" />
     <Compile Include="Model\ModelInitializer.cs" />
     <Compile Include="Model\SpecialFileNames.cs" />
-    <Compile Include="Model\UnityWindowChecker.cs" />
+    <Compile Include="Model\WindowPositionUtil.cs" />
     <Compile Include="Model\Messages.cs" />
     <Compile Include="ViewModel\GamepadSettingViewModel.cs" />
     <Compile Include="ViewModel\MotionSettingViewModel.cs" />

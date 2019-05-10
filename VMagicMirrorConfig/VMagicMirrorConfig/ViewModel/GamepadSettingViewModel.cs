@@ -1,12 +1,58 @@
-﻿namespace Baku.VMagicMirrorConfig
+﻿using Newtonsoft.Json;
+using System;
+
+namespace Baku.VMagicMirrorConfig
 {
     public class GamepadSettingViewModel : SettingViewModelBase
     {
         public GamepadSettingViewModel() : base() { }
 
-        internal GamepadSettingViewModel(IMessageSender sender) : base(sender)
+        internal GamepadSettingViewModel(IMessageSender sender, IMessageReceiver receiver) : base(sender)
         {
+            receiver.ReceivedCommand += OnReceivedCommand;
         }
+
+        private void OnReceivedCommand(object sender, CommandReceivedEventArgs e)
+        {
+            switch (e.Command)
+            {
+                case ReceiveMessageNames.AutoAdjustResults:
+                    SetAutoAdjustResults(e.Args);
+                    break;
+                default:
+                    break;
+            }
+
+        }
+
+        private bool _silentPropertySetter = false;
+        private protected override void SendMessage(Message message)
+        {
+            if (!_silentPropertySetter)
+            {
+                base.SendMessage(message);
+            }
+        }
+
+        private void SetAutoAdjustResults(string args)
+        {
+            try
+            {
+                var parameters = JsonConvert.DeserializeObject<AutoAdjustParameters>(args);
+                _silentPropertySetter = true;
+                GamepadHeight = parameters.GamepadHeight;
+                GamepadHorizontalScale = parameters.GamepadHorizontalScale;
+            }
+            catch(Exception)
+            {
+                //諦める
+            }
+            finally
+            {
+                _silentPropertySetter = false;
+            }
+        }
+
 
         #region Properties
 

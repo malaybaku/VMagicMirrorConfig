@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,12 +21,25 @@ namespace Baku.VMagicMirrorConfig
             receiver.ReceivedCommand += OnReceivedCommand;
         }
 
+        //フラグが立っている間はプロパティが変わってもメッセージを投げない。これはUnityから指定されたパラメタの適用中に
+        private bool _silentPropertySetter = false;
+        private protected override void SendMessage(Message message)
+        {
+            if (!_silentPropertySetter)
+            {
+                base.SendMessage(message);
+            }
+        }
+
         private void OnReceivedCommand(object sender, CommandReceivedEventArgs e)
         {
             switch(e.Command)
             {
                 case ReceiveMessageNames.SetCalibrationFaceData:
                     CalibrateFaceData = e.Args;
+                    break;
+                case ReceiveMessageNames.AutoAdjustResults:
+                    SetAutoAdjustResults(e.Args);
                     break;
                 default:
                     break;
@@ -73,6 +87,35 @@ namespace Baku.VMagicMirrorConfig
             catch (Exception ex)
             {
                 throw;
+            }
+        }
+
+        private void SetAutoAdjustResults(string data)
+        {
+            try
+            {
+                var parameters = JsonConvert.DeserializeObject<AutoAdjustParameters>(data);
+                _silentPropertySetter = true;
+
+                EyebrowLeftUpKey = parameters.EyebrowLeftUpKey;
+                EyebrowLeftDownKey = parameters.EyebrowLeftDownKey;
+                UseSeparatedKeyForEyebrow = parameters.UseSeparatedKeyForEyebrow;
+                EyebrowRightUpKey = parameters.EyebrowRightUpKey;
+                EyebrowRightDownKey = parameters.EyebrowRightDownKey;
+                EyebrowUpScale = parameters.EyebrowUpScale;
+                EyebrowDownScale = parameters.EyebrowDownScale;
+
+                LengthFromWristToPalm = parameters.LengthFromWristToPalm;
+                LengthFromWristToTip = parameters.LengthFromWristToTip;
+
+            }
+            catch (Exception)
+            {
+                //何もしない: データ形式が悪いので諦める
+            }
+            finally
+            {
+                _silentPropertySetter = false;
             }
         }
 

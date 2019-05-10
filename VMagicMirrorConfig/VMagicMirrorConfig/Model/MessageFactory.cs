@@ -32,7 +32,9 @@ namespace Baku.VMagicMirrorConfig
 
         public Message OpenVrmPreview(string filePath) => WithArg(filePath);
         public Message OpenVrm(string filePath) => WithArg(filePath);
+        public Message AccessToVRoidHub() => NoArg();
         public Message CancelLoadVrm() => NoArg();
+        public Message RequestAutoAdjust() => NoArg();
 
         #endregion
 
@@ -141,6 +143,7 @@ namespace Baku.VMagicMirrorConfig
 
         public Message GamepadHeight(int height) => WithArg($"{height}");
         public Message GamepadHorizontalScale(int scale) => WithArg($"{scale}");
+
         public Message GamepadVisibility(bool visibility) => WithArg($"{visibility}");
 
         public Message GamepadLeanMode(string v) => WithArg(v);

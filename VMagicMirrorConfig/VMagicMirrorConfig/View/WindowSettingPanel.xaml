@@ -100,10 +100,15 @@
                     <CheckBox Content="{DynamicResource Window_TopMost}"
                               IsChecked="{Binding TopMost, Mode=TwoWay}"
                               />
+
+                    <Button Width="220"
+                            Content="{DynamicResource Window_ResetPosition}"
+                            Command="{Binding ResetWindowPositionCommand}"
+                            />
                 </StackPanel>
             </md:Card>
 
-            <md:Card>
+            <!--<md:Card>
                 <StackPanel>
                     <CheckBox Content="{DynamicResource Window_EnableInitialPlacement}"
                               IsChecked="{Binding EnableWindowInitialPlacement, Mode=TwoWay}"
@@ -144,7 +149,7 @@
 
 
                 </StackPanel>
-            </md:Card>
+            </md:Card>-->
 
         </StackPanel>
     </ScrollViewer>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -28,7 +29,7 @@ namespace Baku.VMagicMirrorConfig
         {
             WindowSetting = new WindowSettingViewModel(MessageSender);
             MotionSetting = new MotionSettingViewModel(MessageSender, Initializer.MessageReceiver);
-            LayoutSetting = new LayoutSettingViewModel(MessageSender);
+            LayoutSetting = new LayoutSettingViewModel(MessageSender, Initializer.MessageReceiver);
             LightSetting = new LightSettingViewModel(MessageSender);
 
             AvailableLanguageNames = new ReadOnlyObservableCollection<string>(_availableLanguageNames);
@@ -72,6 +73,14 @@ namespace Baku.VMagicMirrorConfig
         public ActionCommand LoadVrmCommand
             => _loadVrmCommand ?? (_loadVrmCommand = new ActionCommand(LoadVrm));
 
+        private ActionCommand _openVRoidHubCommand;
+        public ActionCommand OpenVRoidHubCommand
+            => _openVRoidHubCommand ?? (_openVRoidHubCommand = new ActionCommand(OpenVRoidHub));
+
+        private ActionCommand _autoAdjustCommand;
+        public ActionCommand AutoAdjustCommand
+            => _autoAdjustCommand ?? (_autoAdjustCommand = new ActionCommand(AutoAdjust));
+
         private ActionCommand _openSettingWindowCommand;
         public ActionCommand OpenSettingWindowCommand
             => _openSettingWindowCommand ?? (_openSettingWindowCommand = new ActionCommand(OpenSettingWindow));
@@ -108,7 +117,7 @@ namespace Baku.VMagicMirrorConfig
             };
 
             if (!(
-                dialog.ShowDialog() == true && 
+                dialog.ShowDialog() == true &&
                 File.Exists(dialog.FileName)
                 ))
             {
@@ -147,6 +156,14 @@ namespace Baku.VMagicMirrorConfig
                 WindowSetting.TopMost = true;
             }
         }
+
+        private void OpenVRoidHub()
+        {
+            //=> MessageSender.SendMessage(MessageFactory.Instance.AccessToVRoidHub());
+            Process.Start("https://hub.vroid.com/");
+        }
+
+        private void AutoAdjust() => MessageSender.SendMessage(MessageFactory.Instance.RequestAutoAdjust());
 
         private void OpenSettingWindow()
         {
@@ -227,11 +244,7 @@ namespace Baku.VMagicMirrorConfig
             {
                 LoadLastLoadedVrm();
             }
-
-            if (WindowSetting.EnableWindowInitialPlacement)
-            {
-                WindowSetting.MoveWindow();
-            }
+            WindowSetting.MoveWindow();
 
             //LoadCurrentParametersの時点で(もし前回保存した)言語名があればLanguageNameに入っているので、それを渡す。
             LanguageSelector.Instance.Initialize(MessageSender, LanguageName);
@@ -252,6 +265,8 @@ namespace Baku.VMagicMirrorConfig
             if (!_isDisposed)
             {
                 _isDisposed = true;
+                //Unity側閉じたときはこのタイミングだとちょっと怪しいかも(基本起こらないが)
+                WindowSetting.FetchUnityWindowPosition();
                 SaveSetting(GetFilePath(SpecialFileNames.AutoSaveSettingFileName), true);
                 Initializer.Dispose();
                 UnityAppCloser.Close();
@@ -315,7 +330,7 @@ namespace Baku.VMagicMirrorConfig
                     {
                         _lastVrmLoadFilePath = saveData.LastLoadedVrmFilePath;
                         AutoLoadLastLoadedVrm = saveData.AutoLoadLastLoadedVrm;
-                        LanguageName = 
+                        LanguageName =
                             AvailableLanguageNames.Contains(saveData.PreferredLanguageName) ?
                             saveData.PreferredLanguageName :
                             "";
