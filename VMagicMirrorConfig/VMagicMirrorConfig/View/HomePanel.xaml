@@ -9,6 +9,9 @@
              d:DesignWidth="600"
              d:DesignHeight="400"
              >
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </UserControl.Resources>
     <ScrollViewer VerticalScrollBarVisibility="Auto"
                   HorizontalScrollBarVisibility="Disabled"
                   >
@@ -64,6 +67,17 @@
                               HorizontalAlignment="Left"
                               Width="200"
                               />
+
+                    <CheckBox Margin="15,15,15,5"
+                              Content="{DynamicResource Home_ActivateOnStartupHeader}"
+                              IsChecked="{Binding ActivateOnStartup}"
+                              />
+                    <TextBlock Margin="25,5,15,5"
+                               Text="{DynamicResource Home_ActivateOnStartup_OtherVerRegistered}"
+                               Visibility="{Binding OtherVersionRegisteredOnStartup, 
+                                                    Converter={StaticResource BooleanToVisibilityConverter}}"
+                               TextWrapping="Wrap"
+                               />
 
                 </StackPanel>
 

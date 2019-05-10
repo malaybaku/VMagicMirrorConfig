@@ -22,6 +22,30 @@ namespace Baku.VMagicMirrorConfig
         public LayoutSettingViewModel LayoutSetting { get; private set; }
         public LightSettingViewModel LightSetting { get; private set; }
 
+        private bool _activateOnStartup = false;
+        public bool ActivateOnStartup
+        {
+            get => _activateOnStartup;
+            set
+            {
+                if (SetValue(ref _activateOnStartup, value))
+                {
+                    new StartupRegistrySetting().SetThisVersionRegister(value);
+                    if (value)
+                    {
+                        OtherVersionRegisteredOnStartup = false;
+                    }
+                }
+            }
+        }
+
+        private bool _otherVersionRegisteredOnStartup = false;
+        public bool OtherVersionRegisteredOnStartup
+        {
+            get => _otherVersionRegisteredOnStartup;
+            private set => SetValue(ref _otherVersionRegisteredOnStartup, value);
+        }
+
         private string _lastVrmLoadFilePath = "";
         private bool _isDisposed = false;
 
@@ -258,6 +282,14 @@ namespace Baku.VMagicMirrorConfig
                 2000,
                 data => LayoutSetting.CameraPosition = data
                 );
+
+            var regSetting = new StartupRegistrySetting();
+            _activateOnStartup = regSetting.CheckThisVersionRegistered();
+            if (_activateOnStartup)
+            {
+                RaisePropertyChanged(nameof(ActivateOnStartup));
+            }
+            OtherVersionRegisteredOnStartup = regSetting.CheckOtherVersionRegistered();
         }
 
         public void Dispose()
