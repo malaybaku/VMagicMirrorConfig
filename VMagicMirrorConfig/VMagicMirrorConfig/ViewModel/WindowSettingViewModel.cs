@@ -126,27 +126,37 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        //ウィンドウ初期配置周り
-        //ウィンドウは軽率に動かすと怖いので起動時かボタン押したときしか動かさない！
-        private const bool _enableWindowInitialPlacement = true;
-        //public bool EnableWindowInitialPlacement
-        //{
-        //    get => _enableWindowInitialPlacement;
-        //    set => SetValue(ref _enableWindowInitialPlacement, value);
-        //}
+        private bool _hasValidWindowInitialPosition = false;
+        public bool HasValidWindowInitialPosition
+        {
+            get => _hasValidWindowInitialPosition;
+            set => SetValue(ref _hasValidWindowInitialPosition, value);
+        }
 
         private int _windowInitialPositionX = 0;
         public int WindowInitialPositionX
         {
             get => _windowInitialPositionX;
-            set => SetValue(ref _windowInitialPositionX, value);
+            set
+            {
+                if (SetValue(ref _windowInitialPositionX, value))
+                {
+                    HasValidWindowInitialPosition = true;
+                }
+            }
         }
 
         private int _windowInitialPositionY = 0;
         public int WindowInitialPositionY
         {
             get => _windowInitialPositionY;
-            set => SetValue(ref _windowInitialPositionY, value);
+            set
+            {
+                if (SetValue(ref _windowInitialPositionY, value))
+                {
+                    HasValidWindowInitialPosition = true;
+                }
+            }
         }
 
         private ActionCommand _resetWindowPositionCommand;
@@ -162,9 +172,6 @@ namespace Baku.VMagicMirrorConfig
             MoveWindow();
         }
 
-        //private ActionCommand _fetchUnityWindowPositionCommand;
-        //public ActionCommand FetchUnityWindowPositionCommand
-        //    => _fetchUnityWindowPositionCommand ?? (_fetchUnityWindowPositionCommand = new ActionCommand(FetchUnityWindowPosition));
         internal void FetchUnityWindowPosition()
         {
             var pos = WindowPositionUtil.GetUnityWindowPosition();
@@ -172,16 +179,16 @@ namespace Baku.VMagicMirrorConfig
             WindowInitialPositionY = pos.Y;
         }
 
-        //private ActionCommand _moveWindowCommand;
-        //public ActionCommand MoveWindowCommand
-        //    => _moveWindowCommand ?? (_moveWindowCommand = new ActionCommand(MoveWindow));
-
         internal void MoveWindow()
-            => SendMessage(MessageFactory.Instance.MoveWindow(
-                WindowInitialPositionX,
-                WindowInitialPositionY
-                ));
-
+        {
+            if (HasValidWindowInitialPosition)
+            {
+                SendMessage(MessageFactory.Instance.MoveWindow(
+                    WindowInitialPositionX,
+                    WindowInitialPositionY
+                    ));
+            }
+        }
 
         #region privateになったプロパティ
 
