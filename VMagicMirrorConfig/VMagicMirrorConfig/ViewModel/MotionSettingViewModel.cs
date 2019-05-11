@@ -1,20 +1,14 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 namespace Baku.VMagicMirrorConfig
 {
     public class MotionSettingViewModel : SettingViewModelBase
     {
-        static class EyebrowBlendShapeNames
-        {
-            public const string VRoid_Ver0_6_3_Up = "Face.M_F00_000_00_Fcl_BRW_Surprised";
-            public const string VRoid_Ver0_6_3_Down = "Face.M_F00_000_00_Fcl_BRW_Angry";
-        }
-
         public MotionSettingViewModel() : base() { }
         internal MotionSettingViewModel(IMessageSender sender, IMessageReceiver receiver) : base(sender)
         {
@@ -41,9 +35,28 @@ namespace Baku.VMagicMirrorConfig
                 case ReceiveMessageNames.AutoAdjustResults:
                     SetAutoAdjustResults(e.Args);
                     break;
+                case ReceiveMessageNames.AutoAdjustEyebrowResults:
+                    SetAutoAdjustResults(e.Args, true);
+                    break;
+                case ReceiveMessageNames.SetBlendShapeNames:
+                    SetBlendShapeNames(e.Args);
+                    break;
                 default:
                     break;
             }
+        }
+
+        private void SetBlendShapeNames(string args)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                _writableBlendShapeNames.Clear();
+                _writableBlendShapeNames.Add("");
+                foreach (var name in args.Split('\t'))
+                {
+                    _writableBlendShapeNames.Add(name);
+                }
+            });
         }
 
         public async Task InitializeDeviceNamesAsync()
@@ -69,45 +82,31 @@ namespace Baku.VMagicMirrorConfig
             });
         }
 
-        public async Task RefreshBlendShapeNamesAsync()
-        {
-            try
-            {
-                string blendShapeNames = await SendQueryAsync(MessageFactory.Instance.GetBlendShapeNames());
-                Application.Current.Dispatcher.Invoke(() =>
-                {
-                    _writableBlendShapeNames.Clear();
-                    _writableBlendShapeNames.Add("");
-                    foreach (var name in blendShapeNames.Split('\t'))
-                    {
-                        _writableBlendShapeNames.Add(name);
-                    }
-                });
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-        }
+        private void SetAutoAdjustResults(string data) => SetAutoAdjustResults(data, false);
 
-        private void SetAutoAdjustResults(string data)
+        private void SetAutoAdjustResults(string data, bool onlyEyebrow)
         {
             try
             {
                 var parameters = JsonConvert.DeserializeObject<AutoAdjustParameters>(data);
                 _silentPropertySetter = true;
 
-                EyebrowLeftUpKey = parameters.EyebrowLeftUpKey;
-                EyebrowLeftDownKey = parameters.EyebrowLeftDownKey;
-                UseSeparatedKeyForEyebrow = parameters.UseSeparatedKeyForEyebrow;
-                EyebrowRightUpKey = parameters.EyebrowRightUpKey;
-                EyebrowRightDownKey = parameters.EyebrowRightDownKey;
-                EyebrowUpScale = parameters.EyebrowUpScale;
-                EyebrowDownScale = parameters.EyebrowDownScale;
+                if (parameters.EyebrowIsValidPreset)
+                {
+                    EyebrowLeftUpKey = parameters.EyebrowLeftUpKey;
+                    EyebrowLeftDownKey = parameters.EyebrowLeftDownKey;
+                    UseSeparatedKeyForEyebrow = parameters.UseSeparatedKeyForEyebrow;
+                    EyebrowRightUpKey = parameters.EyebrowRightUpKey;
+                    EyebrowRightDownKey = parameters.EyebrowRightDownKey;
+                    EyebrowUpScale = parameters.EyebrowUpScale;
+                    EyebrowDownScale = parameters.EyebrowDownScale;
+                }
 
-                LengthFromWristToPalm = parameters.LengthFromWristToPalm;
-                LengthFromWristToTip = parameters.LengthFromWristToTip;
-
+                if (!onlyEyebrow)
+                {
+                    LengthFromWristToPalm = parameters.LengthFromWristToPalm;
+                    LengthFromWristToTip = parameters.LengthFromWristToTip;
+                }
             }
             catch (Exception)
             {
@@ -207,7 +206,7 @@ namespace Baku.VMagicMirrorConfig
             => _availableBlendShapeNames ??
             (_availableBlendShapeNames = new ReadOnlyObservableCollection<string>(_writableBlendShapeNames));
 
-        private string _eyebrowLeftUpKey = EyebrowBlendShapeNames.VRoid_Ver0_6_3_Up;
+        private string _eyebrowLeftUpKey = "";
         public string EyebrowLeftUpKey
         {
             get => _eyebrowLeftUpKey;
@@ -220,7 +219,7 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private string _eyebrowLeftDownKey = EyebrowBlendShapeNames.VRoid_Ver0_6_3_Down;
+        private string _eyebrowLeftDownKey = "";
         public string EyebrowLeftDownKey
         {
             get => _eyebrowLeftDownKey;
@@ -573,8 +572,8 @@ namespace Baku.VMagicMirrorConfig
 
             FaceDefaultFun = 20;
 
-            EyebrowLeftUpKey = EyebrowBlendShapeNames.VRoid_Ver0_6_3_Up;
-            EyebrowLeftDownKey = EyebrowBlendShapeNames.VRoid_Ver0_6_3_Down;
+            EyebrowLeftUpKey = ""; 
+            EyebrowLeftDownKey = "";
             UseSeparatedKeyForEyebrow = false;
             EyebrowRightUpKey = "";
             EyebrowRightDownKey = "";

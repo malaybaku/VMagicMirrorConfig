@@ -6,7 +6,7 @@
              xmlns:vmm="clr-namespace:Baku.VMagicMirrorConfig"
              mc:Ignorable="d"
              d:DataContext="{x:Type vmm:MainWindowViewModel}"
-             d:DesignWidth="600"
+             d:DesignWidth="530"
              d:DesignHeight="400"
              >
     <UserControl.Resources>
@@ -36,8 +36,13 @@
                             />
 
                     <CheckBox Content="{DynamicResource Home_LoadVrmOnNextStartup}"
-                              Margin="15,10"
+                              Margin="15,10,15,5"
                               IsChecked="{Binding AutoLoadLastLoadedVrm, Mode=TwoWay}"
+                              />
+
+                    <CheckBox Content="{DynamicResource Home_AutoAdjustFaceParameterOnLoad}"
+                              IsChecked="{Binding AutoAdjustEyebrowOnLoaded}"
+                              Margin="15,5,15,10"                              
                               />
 
                     <Button Content="{DynamicResource Home_AutoAdjust}" 
@@ -112,13 +117,21 @@
                             Command="{Binding LoadSettingFromFileCommand}"
                             />
 
+                    <Button Content="{DynamicResource Home_LoadPrevSetting}" 
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Width="180"
+                            Margin="15,10"
+                            Command="{Binding LoadPrevSettingCommand}"
+                            />
+
                     <Button Content="{DynamicResource Home_Reset}" 
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        Width="100"
-                        Margin="15,10"
-                        Command="{Binding ResetToDefaultCommand}"
-                        />
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Width="100"
+                            Margin="15,10"
+                            Command="{Binding ResetToDefaultCommand}"
+                            />
                 </StackPanel>
             </Grid>
         </StackPanel>

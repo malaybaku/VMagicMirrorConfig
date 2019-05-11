@@ -158,7 +158,7 @@ namespace Baku.VMagicMirrorConfig
                 }
             }
         }
-
+        
         private ActionCommand _resetWindowPositionCommand;
         public ActionCommand ResetWindowPositionCommand
             => _resetWindowPositionCommand ?? (_resetWindowPositionCommand = new ActionCommand(ResetWindowPosition));
@@ -169,25 +169,34 @@ namespace Baku.VMagicMirrorConfig
             var pos = WindowPositionUtil.GetThisWindowRightTopPosition();
             WindowInitialPositionX = pos.X;
             WindowInitialPositionY = pos.Y;
-            MoveWindow();
+            //Unity側が初期解像度として800 x 600にしているので合わせる。ウィンドウを小さくし過ぎた場合に復帰してほしいので、それもかねて。
+            MoveWindow(800, 600);
         }
 
         internal void FetchUnityWindowPosition()
         {
-            var pos = WindowPositionUtil.GetUnityWindowPosition();
-            WindowInitialPositionX = pos.X;
-            WindowInitialPositionY = pos.Y;
+            var rect = WindowPositionUtil.GetUnityWindowRect();
+            WindowInitialPositionX = rect.X;
+            WindowInitialPositionY = rect.Y;
         }
 
         internal void MoveWindow()
         {
             if (HasValidWindowInitialPosition)
             {
-                SendMessage(MessageFactory.Instance.MoveWindow(
-                    WindowInitialPositionX,
-                    WindowInitialPositionY
-                    ));
+                var rect = WindowPositionUtil.GetUnityWindowRect();
+                MoveWindow(rect.Width, rect.Height);
             }
+        }
+
+        private void MoveWindow(int width, int height)
+        {
+            WindowPositionUtil.SetUnityWindowRect(
+                WindowInitialPositionX,
+                WindowInitialPositionY,
+                width,
+                height
+                );
         }
 
         #region privateになったプロパティ
@@ -231,10 +240,7 @@ namespace Baku.VMagicMirrorConfig
             WindowDraggable = true;
             TopMost = true;
 
-            //EnableWindowInitialPlacement = false;
-            //WindowInitialPositionX = 0;
-            //WindowInitialPositionY = 0;
-            //このリセットは定数的じゃないことに注意！
+            //このリセットはあまり定数的ではないことに注意！
             ResetWindowPosition();
         }
     }

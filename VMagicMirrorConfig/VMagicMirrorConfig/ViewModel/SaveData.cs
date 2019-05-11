@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Baku.VMagicMirrorConfig
+﻿namespace Baku.VMagicMirrorConfig
 {
     /// <summary>シリアライザで保存する設定ファイル</summary>
     /// <remarks>
@@ -20,6 +14,8 @@ namespace Baku.VMagicMirrorConfig
         public bool AutoLoadLastLoadedVrm { get; set; } = false;
 
         public string PreferredLanguageName { get; set; } = "";
+
+        public bool AdjustEyebrowOnLoaded { get; set; } = true;
 
         public WindowSettingViewModel WindowSetting { get; set; }
 

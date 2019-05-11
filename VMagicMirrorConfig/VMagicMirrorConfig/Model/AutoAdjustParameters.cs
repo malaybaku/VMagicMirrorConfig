@@ -3,6 +3,7 @@
     //NOTE: このクラスはUnityとWPFで同じメンバ構成にすること
     public class AutoAdjustParameters
     {
+        public bool EyebrowIsValidPreset { get; set; } = false;
         public string EyebrowLeftUpKey { get; set; } = "";
         public string EyebrowLeftDownKey { get; set; } = "";
         public bool UseSeparatedKeyForEyebrow { get; set; } = false;

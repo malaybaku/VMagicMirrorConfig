@@ -20,6 +20,7 @@
     <sys:String x:Key="Home_AutoAdjust">キャラ体格で補正</sys:String>
     <sys:String x:Key="Home_RecommendVRoidHub">※キャラクターのダウンロードがまだの場合: </sys:String>
     <sys:String x:Key="Home_OpenVRoidHub">VRoid Hubを開く</sys:String>
+    <sys:String x:Key="Home_AutoAdjustFaceParameterOnLoad">モデルロード時に表情を調整</sys:String>
     
     <sys:String x:Key="Home_SettingFileIo">詳細設定</sys:String>    
     <sys:String x:Key="Home_OpenSetting">設定ウィンドウを開く</sys:String>
@@ -28,6 +29,7 @@
 
     <sys:String x:Key="Home_SettingManagement">設定の管理</sys:String>
     <sys:String x:Key="Home_Reset">リセット</sys:String>
+    <sys:String x:Key="Home_LoadPrevSetting">旧バージョンの設定をロード</sys:String>
         
     <sys:String x:Key="Home_OssLicense">OSS License</sys:String>
     
