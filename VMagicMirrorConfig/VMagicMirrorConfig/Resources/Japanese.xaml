@@ -33,7 +33,7 @@
         
     <sys:String x:Key="Home_OssLicense">OSS License</sys:String>
     
-    <sys:String x:Key="Home_ActivateOnStartupHeader">Windowsの起動後にVMagicMirrorを起動</sys:String>
+    <sys:String x:Key="Home_ActivateOnStartupHeader">Windowsの起動後にスタート</sys:String>
     <sys:String x:Key="Home_ActivateOnStartup_OtherVerRegistered">※他バージョンのVMagicMirrorが自動で起動するように登録されています。チェックをオンにすると、このバージョンを起動するよう設定を上書きします。</sys:String>
 
     <!-- Streaming -->

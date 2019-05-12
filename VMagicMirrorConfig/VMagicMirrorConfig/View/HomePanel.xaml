@@ -6,8 +6,8 @@
              xmlns:vmm="clr-namespace:Baku.VMagicMirrorConfig"
              mc:Ignorable="d"
              d:DataContext="{x:Type vmm:MainWindowViewModel}"
-             d:DesignWidth="530"
-             d:DesignHeight="400"
+             d:DesignWidth="550"
+             d:DesignHeight="360"
              >
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
@@ -18,7 +18,7 @@
         <StackPanel Margin="0">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0">
@@ -42,18 +42,18 @@
 
                     <CheckBox Content="{DynamicResource Home_AutoAdjustFaceParameterOnLoad}"
                               IsChecked="{Binding AutoAdjustEyebrowOnLoaded}"
-                              Margin="15,5,15,10"                              
+                              Margin="15,0,15,10"                              
                               />
 
                     <Button Content="{DynamicResource Home_AutoAdjust}" 
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
                             Width="150"
-                            Margin="15"
+                            Margin="15,10"
                             Command="{Binding AutoAdjustCommand}"
                             />
 
-                    <TextBlock Margin="10">
+                    <TextBlock Margin="10,5">
                         <Run Text="{DynamicResource Home_RecommendVRoidHub}"/>
                         <LineBreak/>
                         <Hyperlink Command="{Binding OpenVRoidHubCommand}"
@@ -77,12 +77,12 @@
                               Content="{DynamicResource Home_ActivateOnStartupHeader}"
                               IsChecked="{Binding ActivateOnStartup}"
                               />
-                    <TextBlock Margin="25,5,15,5"
+                    <!--<TextBlock Margin="25,5,15,5"
                                Text="{DynamicResource Home_ActivateOnStartup_OtherVerRegistered}"
                                Visibility="{Binding OtherVersionRegisteredOnStartup, 
                                                     Converter={StaticResource BooleanToVisibilityConverter}}"
                                TextWrapping="Wrap"
-                               />
+                               />-->
 
                 </StackPanel>
 
@@ -100,27 +100,32 @@
 
                     <TextBlock Style="{StaticResource HeaderText}"
                            Text="{DynamicResource Home_SettingManagement}"
-                           Margin="10,20,10,5"
+                           Margin="10,35,10,5"
                            />
 
-                    <Button Content="{DynamicResource Home_SaveSettingFile}" 
+                    <StackPanel Orientation="Horizontal"
+                                Margin="15,10"
+                                >
+                        <Button Content="{DynamicResource Home_SaveSettingFile}" 
                             HorizontalAlignment="Left"
                             Width="100"
-                            Margin="15,10"
+                            Margin="0"
                             Command="{Binding SaveSettingToFileCommand}"
                             />
 
-                    <Button Content="{DynamicResource Home_LoadSettingFile}" 
+                        <Button Content="{DynamicResource Home_LoadSettingFile}" 
                             HorizontalAlignment="Left"
                             Width="100"
-                            Margin="15,10"
+                            Margin="15,0,0,0"
                             Command="{Binding LoadSettingFromFileCommand}"
                             />
+
+                    </StackPanel>
 
                     <Button Content="{DynamicResource Home_LoadPrevSetting}" 
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
-                            Width="180"
+                            Width="215"
                             Margin="15,10"
                             Command="{Binding LoadPrevSettingCommand}"
                             />

@@ -9,8 +9,8 @@
         d:DataContext="{x:Type vmm:MainWindowViewModel}"
         Title="VMagicMirror v0.8.1" 
         ResizeMode="CanMinimize"
-        Height="470" Width="530"
-        MinHeight="470" MinWidth="530"
+        Height="470" Width="550"
+        MinHeight="470" MinWidth="550"
         >
     <Window.DataContext>
         <vmm:MainWindowViewModel/>
