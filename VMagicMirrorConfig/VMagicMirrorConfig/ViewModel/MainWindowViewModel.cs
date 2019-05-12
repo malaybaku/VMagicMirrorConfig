@@ -313,10 +313,6 @@ namespace Baku.VMagicMirrorConfig
             Initializer.Initialize();
 
             LoadSetting(GetFilePath(SpecialFileNames.AutoSaveSettingFileName), true);
-            if (AutoLoadLastLoadedVrm)
-            {
-                LoadLastLoadedVrm();
-            }
             WindowSetting.MoveWindow();
 
             //LoadCurrentParametersの時点で(もし前回保存した)言語名があればLanguageNameに入っているので、それを渡す。
@@ -339,6 +335,11 @@ namespace Baku.VMagicMirrorConfig
                 RaisePropertyChanged(nameof(ActivateOnStartup));
             }
             OtherVersionRegisteredOnStartup = regSetting.CheckOtherVersionRegistered();
+
+            if (AutoLoadLastLoadedVrm)
+            {
+                LoadLastLoadedVrm();
+            }
         }
 
         public void Dispose()
