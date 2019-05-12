@@ -285,8 +285,12 @@ namespace Baku.VMagicMirrorConfig
                     );
 
                 LoadSetting(savePath, true);
+                if (AutoLoadLastLoadedVrm)
+                {
+                    LoadLastLoadedVrm();
+                }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 var indication = MessageIndication.ErrorLoadSetting(LanguageName);
                 MessageBox.Show(
