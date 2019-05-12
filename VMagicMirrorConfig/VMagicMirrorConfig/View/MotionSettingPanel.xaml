@@ -223,10 +223,6 @@
                         </Grid>
 
                     </Expander>
-                    
-                    <TextBlock Text="{DynamicResource Motion_Eye_LookAtPoint}"
-                               Margin="10,20,5,5"
-                               />
 
                 </StackPanel>
             </md:Card>
