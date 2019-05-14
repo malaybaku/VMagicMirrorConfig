@@ -313,7 +313,6 @@ namespace Baku.VMagicMirrorConfig
             Initializer.Initialize();
 
             LoadSetting(GetFilePath(SpecialFileNames.AutoSaveSettingFileName), true);
-            WindowSetting.MoveUnityWindowToInitialPosition();
 
             //LoadCurrentParametersの時点で(もし前回保存した)言語名があればLanguageNameに入っているので、それを渡す。
             LanguageSelector.Instance.Initialize(MessageSender, LanguageName);
@@ -347,8 +346,6 @@ namespace Baku.VMagicMirrorConfig
             if (!_isDisposed)
             {
                 _isDisposed = true;
-                //Unity側閉じたときはこのタイミングだとちょっと怪しいかも(基本起こらないが)
-                WindowSetting.FetchUnityWindowPosition();
                 SaveSetting(GetFilePath(SpecialFileNames.AutoSaveSettingFileName), true);
                 Initializer.Dispose();
                 UnityAppCloser.Close();

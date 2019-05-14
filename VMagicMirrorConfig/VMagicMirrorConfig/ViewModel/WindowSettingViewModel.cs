@@ -1,4 +1,7 @@
-﻿using System.Windows.Media;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Media;
 using System.Xml.Serialization;
 
 namespace Baku.VMagicMirrorConfig
@@ -126,39 +129,6 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private bool _hasValidWindowInitialPosition = false;
-        public bool HasValidWindowInitialPosition
-        {
-            get => _hasValidWindowInitialPosition;
-            set => SetValue(ref _hasValidWindowInitialPosition, value);
-        }
-
-        private int _windowInitialPositionX = 0;
-        public int WindowInitialPositionX
-        {
-            get => _windowInitialPositionX;
-            set
-            {
-                if (SetValue(ref _windowInitialPositionX, value))
-                {
-                    HasValidWindowInitialPosition = true;
-                }
-            }
-        }
-
-        private int _windowInitialPositionY = 0;
-        public int WindowInitialPositionY
-        {
-            get => _windowInitialPositionY;
-            set
-            {
-                if (SetValue(ref _windowInitialPositionY, value))
-                {
-                    HasValidWindowInitialPosition = true;
-                }
-            }
-        }
-        
         private ActionCommand _resetWindowPositionCommand;
         public ActionCommand ResetWindowPositionCommand
             => _resetWindowPositionCommand ?? (_resetWindowPositionCommand = new ActionCommand(ResetWindowPosition));
@@ -167,28 +137,8 @@ namespace Baku.VMagicMirrorConfig
         {
             //NOTE: ウィンドウが被ると困るのを踏まえ、すぐ上ではなく右わきに寄せる点にご注目
             var pos = WindowPositionUtil.GetThisWindowRightTopPosition();
-            WindowInitialPositionX = pos.X;
-            WindowInitialPositionY = pos.Y;
-            MoveUnityWindowToInitialPosition();
+            SendMessage(MessageFactory.Instance.MoveWindow(pos.X, pos.Y));
             SendMessage(MessageFactory.Instance.ResetWindowSize());
-        }
-
-        internal void FetchUnityWindowPosition()
-        {
-            var rect = WindowPositionUtil.GetUnityWindowRect();
-            WindowInitialPositionX = rect.X;
-            WindowInitialPositionY = rect.Y;
-        }
-
-        internal void MoveUnityWindowToInitialPosition()
-        {
-            if (HasValidWindowInitialPosition)
-            {
-                SendMessage(MessageFactory.Instance.MoveWindow(
-                    WindowInitialPositionX,
-                    WindowInitialPositionY
-                    ));
-            }
         }
 
         #region privateになったプロパティ
