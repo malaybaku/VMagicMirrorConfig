@@ -19,15 +19,6 @@ namespace Baku.VMagicMirrorConfig
             return new WindowPosition(rect.right, rect.top);
         }
 
-        public static void SetUnityWindowRect(int x, int y, int width, int height)
-        {
-            //念のため: WidthもHeightも普通は非ゼロ値が入る
-            if (width > 0 && height > 0)
-            {
-                MoveWindow(GetUnityWindowHandle(), x, y, width, height, false);
-            }
-        }
-
         private static IntPtr GetUnityWindowHandle()
             => Process.GetProcesses()
                 .FirstOrDefault(p => p.ProcessName == "VMagicMirror")

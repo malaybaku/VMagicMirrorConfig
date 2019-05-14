@@ -169,8 +169,8 @@ namespace Baku.VMagicMirrorConfig
             var pos = WindowPositionUtil.GetThisWindowRightTopPosition();
             WindowInitialPositionX = pos.X;
             WindowInitialPositionY = pos.Y;
-            //Unity側が初期解像度として800 x 600にしているので合わせる。ウィンドウを小さくし過ぎた場合に復帰してほしいので、それもかねて。
-            MoveWindow(800, 600);
+            MoveUnityWindowToInitialPosition();
+            SendMessage(MessageFactory.Instance.ResetWindowSize());
         }
 
         internal void FetchUnityWindowPosition()
@@ -180,23 +180,15 @@ namespace Baku.VMagicMirrorConfig
             WindowInitialPositionY = rect.Y;
         }
 
-        internal void MoveWindow()
+        internal void MoveUnityWindowToInitialPosition()
         {
             if (HasValidWindowInitialPosition)
             {
-                var rect = WindowPositionUtil.GetUnityWindowRect();
-                MoveWindow(rect.Width, rect.Height);
+                SendMessage(MessageFactory.Instance.MoveWindow(
+                    WindowInitialPositionX,
+                    WindowInitialPositionY
+                    ));
             }
-        }
-
-        private void MoveWindow(int width, int height)
-        {
-            WindowPositionUtil.SetUnityWindowRect(
-                WindowInitialPositionX,
-                WindowInitialPositionY,
-                width,
-                height
-                );
         }
 
         #region privateになったプロパティ

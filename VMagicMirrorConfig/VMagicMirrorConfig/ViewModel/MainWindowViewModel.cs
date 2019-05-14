@@ -313,7 +313,7 @@ namespace Baku.VMagicMirrorConfig
             Initializer.Initialize();
 
             LoadSetting(GetFilePath(SpecialFileNames.AutoSaveSettingFileName), true);
-            WindowSetting.MoveWindow();
+            WindowSetting.MoveUnityWindowToInitialPosition();
 
             //LoadCurrentParametersの時点で(もし前回保存した)言語名があればLanguageNameに入っているので、それを渡す。
             LanguageSelector.Instance.Initialize(MessageSender, LanguageName);

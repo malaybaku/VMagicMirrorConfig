@@ -49,7 +49,8 @@ namespace Baku.VMagicMirrorConfig
         public Message WindowDraggable(bool v) => WithArg($"{v}");
 
         public Message MoveWindow(int x, int y) => WithArg($"{x},{y}");
-
+        public Message ResetWindowSize() => NoArg();
+        
         #endregion
 
         #region モーション
