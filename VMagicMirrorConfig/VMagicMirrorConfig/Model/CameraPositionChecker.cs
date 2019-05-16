@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -38,7 +37,7 @@ namespace Baku.VMagicMirrorConfig
                     }
                     catch(Exception ex)
                     {
-                        Debug.WriteLine(ex.Message);
+                        LogOutput.Instance.Write(ex);
                     }
                 }
             });

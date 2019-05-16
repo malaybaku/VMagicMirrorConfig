@@ -142,6 +142,7 @@ namespace Baku.VMagicMirrorConfig
                 }
                 catch (Exception ex)
                 {
+                    //ここはLogOutputに流さない: キーボード叩くたびにファイルI/Oは流石にまずい
                     Debug.Write(ex.Message);
                 }
             }

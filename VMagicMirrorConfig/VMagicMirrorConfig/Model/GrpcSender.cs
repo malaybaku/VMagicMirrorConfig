@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using Grpc.Core;
 
@@ -32,7 +31,7 @@ namespace Baku.VMagicMirrorConfig
             }
             catch(Exception ex)
             {
-                Debug.WriteLine(ex.Message);
+                LogOutput.Instance.Write(ex);
             }
         }
 
@@ -49,7 +48,7 @@ namespace Baku.VMagicMirrorConfig
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.Message);
+                LogOutput.Instance.Write(ex);
                 return "";
             }
         }
