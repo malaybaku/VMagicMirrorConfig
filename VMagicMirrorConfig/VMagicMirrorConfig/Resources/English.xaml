@@ -115,6 +115,7 @@
     <sys:String x:Key="Layout_EnableFreeCameraMode">Free Camera Mode</sys:String>
     <sys:String x:Key="Layout_CurrentCameraPosition">Camera Position (x, y, z, rx, ry, rz)</sys:String>
     <sys:String x:Key="Layout_Camera_ResetPosition">Reset Position</sys:String>
+    <sys:String x:Key="Layout_Camera_Fov">FOV [deg]</sys:String>
 
 
     <!-- Layout : Keyboard / Mouse Pad -->

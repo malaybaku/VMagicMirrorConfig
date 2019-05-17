@@ -31,6 +31,28 @@
                                Margin="15,5"
                                />
 
+                    <Grid Margin="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0"
+                                   Text="{DynamicResource Layout_Camera_Fov}"
+                                   />
+                        <Slider Grid.Column="1"
+                                x:Name="sliderCameraFov"
+                                Minimum="1"
+                                Maximum="179"
+                                Value="{Binding CameraFov, Mode=TwoWay}"
+                                />
+                        <TextBox Grid.Column="2"
+                                 Text="{Binding Value, ElementName=sliderCameraFov}"
+                                 />
+                    </Grid>
+
+
                     <Button Content="{DynamicResource Layout_Camera_ResetPosition}"
                             HorizontalAlignment="Left"
                             Width="150"

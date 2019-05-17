@@ -29,7 +29,23 @@ namespace Baku.VMagicMirrorConfig
         /// Setterがpublicなのはシリアライザのご機嫌取ってるだけなので普通のコードでは触らない事！
         /// </remarks>
         public GamepadSettingViewModel Gamepad { get; set; }
-      
+
+        private int _cameraFov = 60;
+        public int CameraFov
+        {
+            get => _cameraFov;
+            set
+            {
+                if (SetValue(ref _cameraFov, value))
+                {
+                    {
+                        SendMessage(MessageFactory.Instance.CameraFov(CameraFov));
+                    }
+                }
+            }
+        }
+
+
         private bool _enableFreeCameraMode = false;
         [XmlIgnore]
         public bool EnableFreeCameraMode
@@ -66,7 +82,6 @@ namespace Baku.VMagicMirrorConfig
 
         private void ResetCameraPosition()
             => SendMessage(MessageFactory.Instance.ResetCameraPosition());
-
 
         private async void OnEnableFreeCameraModeChanged(bool value)
         {
@@ -165,6 +180,7 @@ namespace Baku.VMagicMirrorConfig
             HidHeight = 90;
             HidHorizontalScale = 70;
             HidVisibility = true;
+            CameraFov = 60;
 
             //カメラ位置については、Unity側がカメラの基準位置を持っているのに任せる
             ResetCameraPosition();

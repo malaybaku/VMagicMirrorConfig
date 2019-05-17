@@ -34,6 +34,7 @@ namespace Baku.VMagicMirrorConfig
         public Message OpenVrm(string filePath) => WithArg(filePath);
         public Message AccessToVRoidHub() => NoArg();
         public Message CancelLoadVrm() => NoArg();
+
         public Message RequestAutoAdjust() => NoArg();
         public Message RequestAutoAdjustEyebrow() => NoArg();
 
@@ -120,6 +121,7 @@ namespace Baku.VMagicMirrorConfig
 
         #region カメラの配置
 
+        public Message CameraFov(int cameraFov) => WithArg($"{cameraFov}");
         public Message SetCustomCameraPosition(string posData) => WithArg($"{posData}");
         public Message EnableFreeCameraMode(bool enable) => WithArg($"{enable}");
         public Message ResetCameraPosition() => NoArg();
