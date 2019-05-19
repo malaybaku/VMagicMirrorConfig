@@ -429,7 +429,7 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private int _presentationArmMotionScale = 30;
+        private int _presentationArmMotionScale = 50;
         public int PresentationArmMotionScale
         {
             get => _presentationArmMotionScale;
