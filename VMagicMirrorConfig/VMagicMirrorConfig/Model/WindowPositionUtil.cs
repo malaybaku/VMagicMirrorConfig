@@ -5,12 +5,18 @@ using System.Runtime.InteropServices;
 
 namespace Baku.VMagicMirrorConfig
 {
-    public static class UnityWindowChecker
+    public static class WindowPositionUtil
     {
-        public static WindowPosition GetUnityWindowPosition()
+        public static WindowRect GetUnityWindowRect()
         {
             GetWindowRect(GetUnityWindowHandle(), out RECT rect);
-            return new WindowPosition(rect.left, rect.top);
+            return new WindowRect(rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top);
+        }
+
+        public static WindowPosition GetThisWindowRightTopPosition()
+        {
+            GetWindowRect(Process.GetCurrentProcess().MainWindowHandle, out RECT rect);
+            return new WindowPosition(rect.right, rect.top);
         }
 
         private static IntPtr GetUnityWindowHandle()
@@ -30,8 +36,27 @@ namespace Baku.VMagicMirrorConfig
             public int Y { get; }
         }
 
+        public struct WindowRect
+        {
+            public WindowRect(int x, int y, int width, int height)
+            {
+                X = x;
+                Y = y;
+                Width = width;
+                Height = height;
+            }
+            public int X { get; }
+            public int Y { get; }
+            public int Width { get; }
+            public int Height { get; }
+
+        }
+
         [DllImport("user32.dll")]
         private static extern bool GetWindowRect(IntPtr hWnd, out RECT rect);
+
+        [DllImport("user32.dll")]
+        private static extern bool MoveWindow(IntPtr hWnd, int x, int y, int nWidth, int nHeight, bool repaint);
 
         [StructLayout(LayoutKind.Sequential)]
         struct RECT

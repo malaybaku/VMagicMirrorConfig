@@ -56,6 +56,9 @@
     <Reference Include="MaterialDesignThemes.Wpf, Version=2.5.0.1205, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignThemes.2.5.0.1205\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -82,8 +85,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Common\LineParseUtils.cs" />
+    <Compile Include="Common\LogOutput.cs" />
     <Compile Include="Common\NotifiableBase.cs" />
     <Compile Include="Model\AppExitFromUnityMessage.cs" />
+    <Compile Include="Model\AutoAdjustParameters.cs" />
+    <Compile Include="Model\CameraPositionChecker.cs" />
     <Compile Include="Model\GrpcReceiver.cs" />
     <Compile Include="Model\GrpcSender.cs" />
     <Compile Include="Model\GrpcServerImpl.cs" />
@@ -93,6 +99,7 @@
     <Compile Include="Model\IMessageSender.cs" />
     <Compile Include="Model\MessageFactory.cs" />
     <Compile Include="Model\ReceiveMessageNames.cs" />
+    <Compile Include="Model\StartupRegistrySetting.cs" />
     <Compile Include="Model\UnityAppCloser.cs" />
     <Compile Include="Model\MessageIndication.cs" />
     <Compile Include="Model\InputChecker.cs" />
@@ -102,9 +109,11 @@
     <Compile Include="Model\LanguageSelector.cs" />
     <Compile Include="Model\ModelInitializer.cs" />
     <Compile Include="Model\SpecialFileNames.cs" />
-    <Compile Include="Model\UnityWindowChecker.cs" />
+    <Compile Include="Model\WindowPositionUtil.cs" />
     <Compile Include="Model\Messages.cs" />
     <Compile Include="ViewModel\GamepadSettingViewModel.cs" />
+    <Compile Include="ViewModel\MotionSettingViewModel.cs" />
+    <Compile Include="ViewModel\SaveData.cs" />
     <Compile Include="ViewModel\WindowSettingViewModel.cs" />
     <Compile Include="ViewModel\Infrastructure\ActionCommand.cs" />
     <Compile Include="ViewModel\LayoutSettingViewModel.cs" />
@@ -113,15 +122,23 @@
     <Compile Include="ViewModel\Infrastructure\ViewModelBase.cs" />
     <Compile Include="Model\UdpSender.cs" />
     <Compile Include="ViewModel\SettingViewModelBase.cs" />
-    <Compile Include="ViewModel\StartupSettingViewModel.cs" />
+    <Compile Include="View\AboutPanel.xaml.cs">
+      <DependentUpon>AboutPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\HomePanel.xaml.cs">
+      <DependentUpon>HomePanel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\LicenseWindow.xaml.cs">
       <DependentUpon>LicenseWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\LightSettingPanel.xaml.cs">
       <DependentUpon>LightSettingPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\StartupSettingPanel.xaml.cs">
-      <DependentUpon>StartupSettingPanel.xaml</DependentUpon>
+    <Compile Include="View\MotionSettingPanel.xaml.cs">
+      <DependentUpon>MotionSettingPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SettingWindow.xaml.cs">
+      <DependentUpon>SettingWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Resources\English.xaml">
       <SubType>Designer</SubType>
@@ -132,6 +149,26 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\LicenseTextResource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AboutPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\HomePanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MotionSettingPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SettingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\StreamingPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -159,6 +196,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="View\StreamingPanel.xaml.cs">
+      <DependentUpon>StreamingPanel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\WindowSettingPanel.xaml.cs">
       <DependentUpon>WindowSettingPanel.xaml</DependentUpon>
     </Compile>
@@ -169,10 +209,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\StartupSettingPanel.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

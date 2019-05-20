@@ -1,12 +1,58 @@
-﻿namespace Baku.VMagicMirrorConfig
+﻿using Newtonsoft.Json;
+using System;
+
+namespace Baku.VMagicMirrorConfig
 {
     public class GamepadSettingViewModel : SettingViewModelBase
     {
         public GamepadSettingViewModel() : base() { }
 
-        internal GamepadSettingViewModel(IMessageSender sender, StartupSettingViewModel startup) : base(sender, startup)
+        internal GamepadSettingViewModel(IMessageSender sender, IMessageReceiver receiver) : base(sender)
         {
+            receiver.ReceivedCommand += OnReceivedCommand;
         }
+
+        private void OnReceivedCommand(object sender, CommandReceivedEventArgs e)
+        {
+            switch (e.Command)
+            {
+                case ReceiveMessageNames.AutoAdjustResults:
+                    SetAutoAdjustResults(e.Args);
+                    break;
+                default:
+                    break;
+            }
+
+        }
+
+        private bool _silentPropertySetter = false;
+        private protected override void SendMessage(Message message)
+        {
+            if (!_silentPropertySetter)
+            {
+                base.SendMessage(message);
+            }
+        }
+
+        private void SetAutoAdjustResults(string args)
+        {
+            try
+            {
+                var parameters = JsonConvert.DeserializeObject<AutoAdjustParameters>(args);
+                _silentPropertySetter = true;
+                GamepadHeight = parameters.GamepadHeight;
+                GamepadHorizontalScale = parameters.GamepadHorizontalScale;
+            }
+            catch(Exception)
+            {
+                //諦める
+            }
+            finally
+            {
+                _silentPropertySetter = false;
+            }
+        }
+
 
         #region Properties
 
@@ -27,7 +73,7 @@
             }
         }
 
-        private int _height = 100;
+        private int _height = 90;
         /// <summary> Unit: [cm] </summary>
         public int GamepadHeight
         {
@@ -55,7 +101,7 @@
             }
         }
 
-        private bool _visibility = true;
+        private bool _visibility = false;
         public bool GamepadVisibility
         {
             get => _visibility;
@@ -162,13 +208,13 @@
 
         #endregion
 
-        protected override void ResetToDefault()
+        public override void ResetToDefault()
         {
             GamepadEnabled = true;
 
-            GamepadHeight = 100;
+            GamepadHeight = 90;
             GamepadHorizontalScale = 100;
-            GamepadVisibility = true;
+            GamepadVisibility = false;
 
             GamepadLeanNone = false;
             GamepadLeanLeftButtons = false;

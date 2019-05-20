@@ -11,16 +11,11 @@ namespace Baku.VMagicMirrorConfig
             UpdateBloomColor();
         }
 
-        internal LightSettingViewModel(IMessageSender sender, StartupSettingViewModel startup) : base(sender, startup)
+        internal LightSettingViewModel(IMessageSender sender) : base(sender)
         {
             UpdateLightColor();
             UpdateBloomColor();
         }
-
-        protected override string SaveDialogTitle => "Save Light Setting File";
-        protected override string LoadDialogTitle => "Open Light Setting File";
-        protected override string FileIoDialogFilter => "VMagicMirror Light File(*.vmm_light)|*.vmm_light";
-        protected override string FileExt => ".vmm_light";
 
         #region ライト
 
@@ -177,7 +172,7 @@ namespace Baku.VMagicMirrorConfig
 
         #endregion
 
-        protected override void ResetToDefault()
+        public override void ResetToDefault()
         {
             LightR = 255;
             LightG = 244;

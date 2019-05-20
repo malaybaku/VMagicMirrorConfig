@@ -100,10 +100,15 @@
                     <CheckBox Content="{DynamicResource Window_TopMost}"
                               IsChecked="{Binding TopMost, Mode=TwoWay}"
                               />
+
+                    <Button Width="220"
+                            Content="{DynamicResource Window_ResetPosition}"
+                            Command="{Binding ResetWindowPositionCommand}"
+                            />
                 </StackPanel>
             </md:Card>
 
-            <md:Card>
+            <!--<md:Card>
                 <StackPanel>
                     <CheckBox Content="{DynamicResource Window_EnableInitialPlacement}"
                               IsChecked="{Binding EnableWindowInitialPlacement, Mode=TwoWay}"
@@ -144,25 +149,8 @@
 
 
                 </StackPanel>
-            </md:Card>
-
-            <CheckBox Content="{DynamicResource ConfigCommon_ApplyToNextStartup}"
-                      Margin="10"
-                      IsChecked="{Binding Startup.LoadBackgroundSetting, Mode=TwoWay}"
-                      />
-
-            <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Center"
-                        Margin="20,10">
-                <Button Content="{DynamicResource ConfigCommon_Reset}"
-                        Command="{Binding ResetToDefaultCommand}" />
-                <Button Content="{DynamicResource ConfigCommon_Save}"
-                        Command="{Binding SaveSettingCommand}" />
-                <Button Content="{DynamicResource ConfigCommon_Load}"
-                        Command="{Binding LoadSettingCommand}" />
-            </StackPanel>
+            </md:Card>-->
 
         </StackPanel>
     </ScrollViewer>
-
 </UserControl>

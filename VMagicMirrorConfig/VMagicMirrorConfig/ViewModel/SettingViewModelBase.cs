@@ -1,12 +1,9 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 using System.Xml.Serialization;
-using Microsoft.Win32;
 
 namespace Baku.VMagicMirrorConfig
 {
@@ -27,22 +24,16 @@ namespace Baku.VMagicMirrorConfig
         protected SettingViewModelBase()
         {
             _sender = null;
-            Startup = null;
         }
 
-        private protected SettingViewModelBase(IMessageSender sender, StartupSettingViewModel startup)
+        private protected SettingViewModelBase(IMessageSender sender)
         {
             _sender = sender;
-            Startup = startup;
         }
 
         private readonly IMessageSender _sender;
 
-        //NOTE: 他のタブにもスタートアップ時の有効/無効がいじれるチェックボックス置きたいので追加
-        [XmlIgnore]
-        public StartupSettingViewModel Startup { get; }
-
-        private protected void SendMessage(Message message)
+        private protected virtual void SendMessage(Message message)
             => _sender?.SendMessage(message);
 
         private protected async Task<string> SendQueryAsync(Message message) 
@@ -50,90 +41,23 @@ namespace Baku.VMagicMirrorConfig
             await _sender.QueryMessageAsync(message) : 
             "";
 
-        private ActionCommand _resetToDefaultCommand;
-        public ActionCommand ResetToDefaultCommand
-            => _resetToDefaultCommand ?? (_resetToDefaultCommand = new ActionCommand(ResetToDefault));
+        public abstract void ResetToDefault();
 
-        private ActionCommand _saveSettingCommand;
-        public ActionCommand SaveSettingCommand
-            => _saveSettingCommand ?? (_saveSettingCommand = new ActionCommand(SaveSetting));
-
-        private ActionCommand _loadSettingCommand;
-        public ActionCommand LoadSettingCommand
-            => _loadSettingCommand ?? (_loadSettingCommand = new ActionCommand(LoadSetting));
-
-        protected abstract void ResetToDefault();
-
-        private void SaveSetting()
+        public void CopyFrom<T>(T source)
+            where T : SettingViewModelBase
         {
-            var dialog = new SaveFileDialog()
-            {
-                Title = SaveDialogTitle,
-                Filter = FileIoDialogFilter,
-                DefaultExt = FileExt,
-                AddExtension = true,
-            };
-            if (dialog.ShowDialog() == true)
-            {
-                SaveSettingTo(dialog.FileName);
-            }
-        }
-
-        private void LoadSetting()
-        {
-            var dialog = new OpenFileDialog()
-            {
-                Title = LoadDialogTitle,
-                Filter = FileIoDialogFilter,
-                Multiselect = false,
-            };
-            if (dialog.ShowDialog() == true)
-            {
-                LoadSettingFrom(dialog.FileName);
-            }
-        }
-
-        protected virtual string SaveDialogTitle => "";
-        protected virtual string LoadDialogTitle => "";
-        protected virtual string FileIoDialogFilter => "";
-        protected virtual string FileExt => "";
-
-        #region シリアライズ周り
-
-        internal void SaveSettingTo(string path)
-        {
-            using (var sw = new StreamWriter(path))
-            {
-                new XmlSerializer(GetType()).Serialize(sw, this);
-            }
-        }
-
-        internal void LoadSettingFrom(string path)
-        {
-            try
-            {
-                var type = GetType();
-                using (var sr = new StreamReader(path))
-                {
-                    object src = new XmlSerializer(type).Deserialize(sr);
-                    CopyProperties(src, this, type);
-                }
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show($"Failed to load setting file {path} : {ex.Message}");
-            }
+            CopyProperties(source, this, typeof(T));
         }
 
         private static void CopyProperties(object src, object dest, Type type)
         {
             foreach (var prop in type
-                        .GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                        .Where(p =>
-                            !typeof(ICommand).IsAssignableFrom(p.PropertyType) &&
-                            p.GetCustomAttribute<XmlIgnoreAttribute>() == null
-                            )
-                        )
+                .GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .Where(p =>
+                    !typeof(ICommand).IsAssignableFrom(p.PropertyType) &&
+                    p.GetCustomAttribute<XmlIgnoreAttribute>() == null
+                    )
+                )
             {
                 if (typeof(SettingViewModelBase).IsAssignableFrom(prop.PropertyType))
                 {
@@ -151,7 +75,5 @@ namespace Baku.VMagicMirrorConfig
                 }
             }
         }
-
-        #endregion
     }
 }
