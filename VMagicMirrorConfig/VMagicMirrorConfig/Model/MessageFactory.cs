@@ -32,7 +32,11 @@ namespace Baku.VMagicMirrorConfig
 
         public Message OpenVrmPreview(string filePath) => WithArg(filePath);
         public Message OpenVrm(string filePath) => WithArg(filePath);
+        public Message AccessToVRoidHub() => NoArg();
         public Message CancelLoadVrm() => NoArg();
+
+        public Message RequestAutoAdjust() => NoArg();
+        public Message RequestAutoAdjustEyebrow() => NoArg();
 
         #endregion
 
@@ -46,7 +50,8 @@ namespace Baku.VMagicMirrorConfig
         public Message WindowDraggable(bool v) => WithArg($"{v}");
 
         public Message MoveWindow(int x, int y) => WithArg($"{x},{y}");
-
+        public Message ResetWindowSize() => NoArg();
+        
         #endregion
 
         #region モーション
@@ -95,10 +100,28 @@ namespace Baku.VMagicMirrorConfig
 
         public Message LookAtStyle(string v) => WithArg(v);
 
+        /// <summary>
+        /// Query.
+        /// </summary>
+        /// <returns></returns>
+        public Message GetBlendShapeNames() => NoArg();
+
+
+        //眉毛関係
+
+        public Message EyebrowLeftUpKey(string key) => WithArg(key);
+        public Message EyebrowLeftDownKey(string key) => WithArg(key);
+        public Message UseSeparatedKeyForEyebrow(bool separate) => WithArg($"{separate}");
+        public Message EyebrowRightUpKey(string key) => WithArg(key);
+        public Message EyebrowRightDownKey(string key) => WithArg(key);
+        public Message EyebrowUpScale(int percentage) => WithArg($"{percentage}");
+        public Message EyebrowDownScale(int percentage) => WithArg($"{percentage}");
+
         #endregion
 
         #region カメラの配置
 
+        public Message CameraFov(int cameraFov) => WithArg($"{cameraFov}");
         public Message SetCustomCameraPosition(string posData) => WithArg($"{posData}");
         public Message EnableFreeCameraMode(bool enable) => WithArg($"{enable}");
         public Message ResetCameraPosition() => NoArg();
@@ -124,6 +147,7 @@ namespace Baku.VMagicMirrorConfig
 
         public Message GamepadHeight(int height) => WithArg($"{height}");
         public Message GamepadHorizontalScale(int scale) => WithArg($"{scale}");
+
         public Message GamepadVisibility(bool visibility) => WithArg($"{visibility}");
 
         public Message GamepadLeanMode(string v) => WithArg(v);

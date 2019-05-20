@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Windows;
@@ -20,6 +21,30 @@ namespace Baku.VMagicMirrorConfig
         public LayoutSettingViewModel LayoutSetting { get; private set; }
         public LightSettingViewModel LightSetting { get; private set; }
 
+        private bool _activateOnStartup = false;
+        public bool ActivateOnStartup
+        {
+            get => _activateOnStartup;
+            set
+            {
+                if (SetValue(ref _activateOnStartup, value))
+                {
+                    new StartupRegistrySetting().SetThisVersionRegister(value);
+                    if (value)
+                    {
+                        OtherVersionRegisteredOnStartup = false;
+                    }
+                }
+            }
+        }
+
+        private bool _otherVersionRegisteredOnStartup = false;
+        public bool OtherVersionRegisteredOnStartup
+        {
+            get => _otherVersionRegisteredOnStartup;
+            private set => SetValue(ref _otherVersionRegisteredOnStartup, value);
+        }
+
         private string _lastVrmLoadFilePath = "";
         private bool _isDisposed = false;
 
@@ -27,7 +52,7 @@ namespace Baku.VMagicMirrorConfig
         {
             WindowSetting = new WindowSettingViewModel(MessageSender);
             MotionSetting = new MotionSettingViewModel(MessageSender, Initializer.MessageReceiver);
-            LayoutSetting = new LayoutSettingViewModel(MessageSender);
+            LayoutSetting = new LayoutSettingViewModel(MessageSender, Initializer.MessageReceiver);
             LightSetting = new LightSettingViewModel(MessageSender);
 
             AvailableLanguageNames = new ReadOnlyObservableCollection<string>(_availableLanguageNames);
@@ -63,6 +88,13 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
+        private bool _autoAdjustEyebrowOnLoaded = true;
+        public bool AutoAdjustEyebrowOnLoaded
+        {
+            get => _autoAdjustEyebrowOnLoaded;
+            set => SetValue(ref _autoAdjustEyebrowOnLoaded, value);
+        }
+
         #endregion
 
         #region Commands
@@ -70,6 +102,14 @@ namespace Baku.VMagicMirrorConfig
         private ActionCommand _loadVrmCommand;
         public ActionCommand LoadVrmCommand
             => _loadVrmCommand ?? (_loadVrmCommand = new ActionCommand(LoadVrm));
+
+        private ActionCommand _openVRoidHubCommand;
+        public ActionCommand OpenVRoidHubCommand
+            => _openVRoidHubCommand ?? (_openVRoidHubCommand = new ActionCommand(OpenVRoidHub));
+
+        private ActionCommand _autoAdjustCommand;
+        public ActionCommand AutoAdjustCommand
+            => _autoAdjustCommand ?? (_autoAdjustCommand = new ActionCommand(AutoAdjust));
 
         private ActionCommand _openSettingWindowCommand;
         public ActionCommand OpenSettingWindowCommand
@@ -86,6 +126,10 @@ namespace Baku.VMagicMirrorConfig
         private ActionCommand _loadSettingFromFileCommand;
         public ActionCommand LoadSettingFromFileCommand
             => _loadSettingFromFileCommand ?? (_loadSettingFromFileCommand = new ActionCommand(LoadSettingFromFile));
+
+        private ActionCommand _loadPrevSettingCommand;
+        public ActionCommand LoadPrevSettingCommand
+            => _loadPrevSettingCommand ?? (_loadPrevSettingCommand = new ActionCommand(LoadPrevSetting));
 
         #endregion
 
@@ -107,7 +151,7 @@ namespace Baku.VMagicMirrorConfig
             };
 
             if (!(
-                dialog.ShowDialog() == true && 
+                dialog.ShowDialog() == true &&
                 File.Exists(dialog.FileName)
                 ))
             {
@@ -134,6 +178,10 @@ namespace Baku.VMagicMirrorConfig
             {
                 MessageSender.SendMessage(MessageFactory.Instance.OpenVrm(dialog.FileName));
                 _lastVrmLoadFilePath = dialog.FileName;
+                if (AutoAdjustEyebrowOnLoaded)
+                {
+                    MessageSender.SendMessage(MessageFactory.Instance.RequestAutoAdjustEyebrow());
+                }
             }
             else
             {
@@ -145,6 +193,14 @@ namespace Baku.VMagicMirrorConfig
                 WindowSetting.TopMost = true;
             }
         }
+
+        private void OpenVRoidHub()
+        {
+            //=> MessageSender.SendMessage(MessageFactory.Instance.AccessToVRoidHub());
+            Process.Start("https://hub.vroid.com/");
+        }
+
+        private void AutoAdjust() => MessageSender.SendMessage(MessageFactory.Instance.RequestAutoAdjust());
 
         private void OpenSettingWindow()
         {
@@ -185,7 +241,6 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-
         private void ResetToDefault()
         {
             var indication = MessageIndication.ResetSettingConfirmation(LanguageName);
@@ -208,6 +263,43 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
+        private void LoadPrevSetting()
+        {
+            var dialog = new OpenFileDialog()
+            {
+                Title = "Select Previous Version VMagicMirror.exe",
+                Filter = "VMagicMirror.exe|VMagicMirror.exe",
+                Multiselect = false,
+            };
+            if (dialog.ShowDialog() != true)
+            {
+                return;
+            }
+
+            try
+            {
+                string savePath = Path.Combine(
+                    Path.GetDirectoryName(dialog.FileName),
+                    "ConfigApp",
+                    "_autosave"
+                    );
+
+                LoadSetting(savePath, true);
+                if (AutoLoadLastLoadedVrm)
+                {
+                    LoadLastLoadedVrm();
+                }
+            }
+            catch (Exception ex)
+            {
+                var indication = MessageIndication.ErrorLoadSetting(LanguageName);
+                MessageBox.Show(
+                    indication.Title,
+                    indication.Content + ex.Message
+                    );
+            }
+        }
+
         #endregion
 
         public async void Initialize()
@@ -221,15 +313,6 @@ namespace Baku.VMagicMirrorConfig
             Initializer.Initialize();
 
             LoadSetting(GetFilePath(SpecialFileNames.AutoSaveSettingFileName), true);
-            if (AutoLoadLastLoadedVrm)
-            {
-                LoadLastLoadedVrm();
-            }
-
-            if (WindowSetting.EnableWindowInitialPlacement)
-            {
-                WindowSetting.MoveWindow();
-            }
 
             //LoadCurrentParametersの時点で(もし前回保存した)言語名があればLanguageNameに入っているので、それを渡す。
             LanguageSelector.Instance.Initialize(MessageSender, LanguageName);
@@ -243,6 +326,19 @@ namespace Baku.VMagicMirrorConfig
                 2000,
                 data => LayoutSetting.CameraPosition = data
                 );
+
+            var regSetting = new StartupRegistrySetting();
+            _activateOnStartup = regSetting.CheckThisVersionRegistered();
+            if (_activateOnStartup)
+            {
+                RaisePropertyChanged(nameof(ActivateOnStartup));
+            }
+            OtherVersionRegisteredOnStartup = regSetting.CheckOtherVersionRegistered();
+
+            if (AutoLoadLastLoadedVrm)
+            {
+                LoadLastLoadedVrm();
+            }
         }
 
         public void Dispose()
@@ -263,6 +359,10 @@ namespace Baku.VMagicMirrorConfig
                 if (File.Exists(_lastVrmLoadFilePath))
                 {
                     MessageSender.SendMessage(MessageFactory.Instance.OpenVrm(_lastVrmLoadFilePath));
+                    if (AutoAdjustEyebrowOnLoaded)
+                    {
+                        MessageSender.SendMessage(MessageFactory.Instance.RequestAutoAdjustEyebrow());
+                    }
                 }
             }
             catch (Exception ex)
@@ -286,6 +386,7 @@ namespace Baku.VMagicMirrorConfig
                     LastLoadedVrmFilePath = isInternalFile ? _lastVrmLoadFilePath : "",
                     AutoLoadLastLoadedVrm = isInternalFile ? AutoLoadLastLoadedVrm : false,
                     PreferredLanguageName = isInternalFile ? LanguageName : "",
+                    AdjustEyebrowOnLoaded = AutoAdjustEyebrowOnLoaded,
                     WindowSetting = this.WindowSetting,
                     MotionSetting = this.MotionSetting,
                     LayoutSetting = this.LayoutSetting,
@@ -312,11 +413,13 @@ namespace Baku.VMagicMirrorConfig
                     {
                         _lastVrmLoadFilePath = saveData.LastLoadedVrmFilePath;
                         AutoLoadLastLoadedVrm = saveData.AutoLoadLastLoadedVrm;
-                        LanguageName = 
+                        LanguageName =
                             AvailableLanguageNames.Contains(saveData.PreferredLanguageName) ?
                             saveData.PreferredLanguageName :
                             "";
                     }
+
+                    AutoAdjustEyebrowOnLoaded = saveData.AdjustEyebrowOnLoaded;
 
                     WindowSetting.CopyFrom(saveData.WindowSetting);
                     MotionSetting.CopyFrom(saveData.MotionSetting);

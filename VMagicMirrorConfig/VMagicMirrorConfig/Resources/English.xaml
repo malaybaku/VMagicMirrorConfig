@@ -17,6 +17,10 @@
     <!-- Home -->
     <sys:String x:Key="Home_LoadVrm">Load VRM</sys:String>
     <sys:String x:Key="Home_LoadVrmOnNextStartup">Load current VRM on next startup</sys:String>
+    <sys:String x:Key="Home_AutoAdjust">Adjust Size by VRM</sys:String>
+    <sys:String x:Key="Home_RecommendVRoidHub">*If you do not have VRM on your PC yet: </sys:String>
+    <sys:String x:Key="Home_OpenVRoidHub">Open VRoid Hub</sys:String>    
+    <sys:String x:Key="Home_AutoAdjustFaceParameterOnLoad">Adjust face settings after loading VRM</sys:String>
     
     <sys:String x:Key="Home_SettingFileIo">Setting</sys:String>    
     <sys:String x:Key="Home_OpenSetting">Open Setting Window</sys:String>
@@ -25,9 +29,12 @@
 
     <sys:String x:Key="Home_SettingManagement">Setting Management</sys:String>
     <sys:String x:Key="Home_Reset">Reset</sys:String>
+    <sys:String x:Key="Home_LoadPrevSetting">Load from Prev ver.</sys:String>
 
     <sys:String x:Key="Home_OssLicense">OSS License</sys:String>
     
+    <sys:String x:Key="Home_ActivateOnStartupHeader">Start on Windows startup</sys:String>
+    <sys:String x:Key="Home_ActivateOnStartup_OtherVerRegistered">*Other version VMagicMirror is already registered. If you check it, setting will be overwritten to start this version.</sys:String>
     
     <!-- Streaming -->
     <sys:String x:Key="Streaming_Window">Window</sys:String>
@@ -41,6 +48,7 @@
     <sys:String x:Key="Window_Transparent">Transparent Window</sys:String>
     <sys:String x:Key="Window_Draggable">(When Transparent)Drag character</sys:String>
     <sys:String x:Key="Window_TopMost">Always Foreground</sys:String>
+    <sys:String x:Key="Window_ResetPosition">Reset Character Position</sys:String>
     
     <sys:String x:Key="Window_EnableInitialPlacement">Move window to specific position on startup</sys:String>
     <sys:String x:Key="Window_InitialPositionX">X(Left = 0)</sys:String>
@@ -57,6 +65,15 @@
     <sys:String x:Key="Motion_Face_Calibration">Calibrate position</sys:String>    
     <sys:String x:Key="Motion_Face_DefaultFun">Default Fun Blend Value [%]</sys:String>    
 
+    <sys:String x:Key="Motion_Face_Eyebrow">Eyebrow (Open to Customize)</sys:String>    
+    <sys:String x:Key="Motion_Face_EyeBrow_LeftUp">Left Up Key</sys:String>    
+    <sys:String x:Key="Motion_Face_EyeBrow_LeftDown">Left Down Key</sys:String>    
+    <sys:String x:Key="Motion_Face_EyeBrow_UseSeparatedKey">Use Different Key for Right Eyebrow</sys:String>    
+    <sys:String x:Key="Motion_Face_EyeBrow_RightUp">Right Up Key</sys:String>    
+    <sys:String x:Key="Motion_Face_EyeBrow_RightDown">Riht Down Key</sys:String>    
+    <sys:String x:Key="Motion_Face_EyeBrow_UpScale">Up Scale [%]</sys:String>    
+    <sys:String x:Key="Motion_Face_EyeBrow_DownScale">Down Scale [%]</sys:String>    
+    
     <!-- Motion : Eye -->
     <sys:String x:Key="Motion_Eye">Eye</sys:String>
     <sys:String x:Key="Motion_Eye_LookAtPoint">Eye Look Target</sys:String>
@@ -98,6 +115,7 @@
     <sys:String x:Key="Layout_EnableFreeCameraMode">Free Camera Mode</sys:String>
     <sys:String x:Key="Layout_CurrentCameraPosition">Camera Position (x, y, z, rx, ry, rz)</sys:String>
     <sys:String x:Key="Layout_Camera_ResetPosition">Reset Position</sys:String>
+    <sys:String x:Key="Layout_Camera_Fov">FOV [deg]</sys:String>
 
 
     <!-- Layout : Keyboard / Mouse Pad -->

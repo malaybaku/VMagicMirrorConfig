@@ -1,4 +1,7 @@
-﻿using System.Windows.Media;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Media;
 using System.Xml.Serialization;
 
 namespace Baku.VMagicMirrorConfig
@@ -126,49 +129,17 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        //ウィンドウ初期配置周り
-        //ウィンドウは軽率に動かすと怖いので起動時かボタン押したときしか動かさない！
-        private bool _enableWindowInitialPlacement = false;
-        public bool EnableWindowInitialPlacement
+        private ActionCommand _resetWindowPositionCommand;
+        public ActionCommand ResetWindowPositionCommand
+            => _resetWindowPositionCommand ?? (_resetWindowPositionCommand = new ActionCommand(ResetWindowPosition));
+
+        private void ResetWindowPosition()
         {
-            get => _enableWindowInitialPlacement;
-            set => SetValue(ref _enableWindowInitialPlacement, value);
+            //NOTE: ウィンドウが被ると困るのを踏まえ、すぐ上ではなく右わきに寄せる点にご注目
+            var pos = WindowPositionUtil.GetThisWindowRightTopPosition();
+            SendMessage(MessageFactory.Instance.MoveWindow(pos.X, pos.Y));
+            SendMessage(MessageFactory.Instance.ResetWindowSize());
         }
-
-        private int _windowInitialPositionX = 0;
-        public int WindowInitialPositionX
-        {
-            get => _windowInitialPositionX;
-            set => SetValue(ref _windowInitialPositionX, value);
-        }
-
-        private int _windowInitialPositionY = 0;
-        public int WindowInitialPositionY
-        {
-            get => _windowInitialPositionY;
-            set => SetValue(ref _windowInitialPositionY, value);
-        }
-
-        private ActionCommand _fetchUnityWindowPositionCommand;
-        public ActionCommand FetchUnityWindowPositionCommand
-            => _fetchUnityWindowPositionCommand ?? (_fetchUnityWindowPositionCommand = new ActionCommand(FetchUnityWindowPosition));
-        private void FetchUnityWindowPosition()
-        {
-            var pos = UnityWindowChecker.GetUnityWindowPosition();
-            WindowInitialPositionX = pos.X;
-            WindowInitialPositionY = pos.Y;
-        }
-
-        private ActionCommand _moveWindowCommand;
-        public ActionCommand MoveWindowCommand
-            => _moveWindowCommand ?? (_moveWindowCommand = new ActionCommand(MoveWindow));
-
-        internal void MoveWindow()
-            => SendMessage(MessageFactory.Instance.MoveWindow(
-                WindowInitialPositionX,
-                WindowInitialPositionY
-                ));
-
 
         #region privateになったプロパティ
 
@@ -211,9 +182,8 @@ namespace Baku.VMagicMirrorConfig
             WindowDraggable = true;
             TopMost = true;
 
-            EnableWindowInitialPlacement = false;
-            WindowInitialPositionX = 0;
-            WindowInitialPositionY = 0;
+            //このリセットはあまり定数的ではないことに注意！
+            ResetWindowPosition();
         }
     }
 }

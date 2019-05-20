@@ -1,14 +1,27 @@
-﻿using System.Xml.Serialization;
+﻿using Newtonsoft.Json;
+using System;
+using System.Xml.Serialization;
 
 namespace Baku.VMagicMirrorConfig
 {
     public class LayoutSettingViewModel : SettingViewModelBase
     {
         public LayoutSettingViewModel() : base() { }
-        internal LayoutSettingViewModel(IMessageSender sender) : base(sender)
+        internal LayoutSettingViewModel(IMessageSender sender, IMessageReceiver receiver) : base(sender)
         {
-            Gamepad = new GamepadSettingViewModel(sender);
+            Gamepad = new GamepadSettingViewModel(sender, receiver);
+            receiver.ReceivedCommand += OnReceiveCommand;
         }
+
+        private bool _silentPropertySetter = false;
+        private protected override void SendMessage(Message message)
+        {
+            if (!_silentPropertySetter)
+            {
+                base.SendMessage(message);
+            }
+        }
+
 
         /// <summary>
         /// </summary>
@@ -17,7 +30,22 @@ namespace Baku.VMagicMirrorConfig
         /// </remarks>
         public GamepadSettingViewModel Gamepad { get; set; }
 
-      
+        private int _cameraFov = 60;
+        public int CameraFov
+        {
+            get => _cameraFov;
+            set
+            {
+                if (SetValue(ref _cameraFov, value))
+                {
+                    {
+                        SendMessage(MessageFactory.Instance.CameraFov(CameraFov));
+                    }
+                }
+            }
+        }
+
+
         private bool _enableFreeCameraMode = false;
         [XmlIgnore]
         public bool EnableFreeCameraMode
@@ -54,7 +82,6 @@ namespace Baku.VMagicMirrorConfig
 
         private void ResetCameraPosition()
             => SendMessage(MessageFactory.Instance.ResetCameraPosition());
-
 
         private async void OnEnableFreeCameraModeChanged(bool value)
         {
@@ -115,7 +142,36 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
+        private void OnReceiveCommand(object sender, CommandReceivedEventArgs e)
+        {
+            switch (e.Command)
+            {
+                case ReceiveMessageNames.AutoAdjustResults:
+                    SetAutoAdjustResults(e.Args);
+                    break;
+                default:
+                    break;
+            }
+        }
 
+        private void SetAutoAdjustResults(string args)
+        {
+            try
+            {
+                var parameters = JsonConvert.DeserializeObject<AutoAdjustParameters>(args);
+                _silentPropertySetter = true;
+                HidHeight = parameters.HidHeight;
+                HidHorizontalScale = parameters.HidHorizontalScale;
+            }
+            catch (Exception)
+            {
+                //諦める
+            }
+            finally
+            {
+                _silentPropertySetter = false;
+            }
+        }
 
         public override void ResetToDefault()
         {
@@ -124,6 +180,10 @@ namespace Baku.VMagicMirrorConfig
             HidHeight = 90;
             HidHorizontalScale = 70;
             HidVisibility = true;
+            CameraFov = 60;
+
+            //カメラ位置については、Unity側がカメラの基準位置を持っているのに任せる
+            ResetCameraPosition();
         }
     }
 }

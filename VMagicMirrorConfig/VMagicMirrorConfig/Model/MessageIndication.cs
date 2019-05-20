@@ -19,6 +19,9 @@
         public static MessageIndication ResetSettingConfirmation(string languageName)
             => ResetSettingConfirmation(LanguageSelector.StringToLanguage(languageName));
 
+        public static MessageIndication ErrorLoadSetting(string languageName)
+            => ErrorLoadSetting(LanguageSelector.StringToLanguage(languageName));
+
         public static MessageIndication LoadVrmConfirmation(Languages lang)
         {
             switch (lang)
@@ -51,6 +54,24 @@
                     return new MessageIndication(
                         "Reset Setting",
                         "Are you sure you want to reset all settings in VMagicMirror?"
+                        );
+            }
+        }
+
+        public static MessageIndication ErrorLoadSetting(Languages lang)
+        {
+            switch (lang)
+            {
+                case Languages.Japanese:
+                    return new MessageIndication(
+                        "ロード失敗",
+                        "設定ファイルのロードに失敗しました。エラー: "
+                        );
+                case Languages.English:
+                default:
+                    return new MessageIndication(
+                        "Load failed",
+                        "Failed to load setting file. Error: "
                         );
             }
         }

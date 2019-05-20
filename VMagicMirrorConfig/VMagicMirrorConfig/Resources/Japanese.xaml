@@ -17,6 +17,10 @@
     <!-- Home -->
     <sys:String x:Key="Home_LoadVrm">VRMロード</sys:String>
     <sys:String x:Key="Home_LoadVrmOnNextStartup">次回の起動時にも同じVRMを読み込む</sys:String>
+    <sys:String x:Key="Home_AutoAdjust">キャラ体格で補正</sys:String>
+    <sys:String x:Key="Home_RecommendVRoidHub">※キャラクターのダウンロードがまだの場合: </sys:String>
+    <sys:String x:Key="Home_OpenVRoidHub">VRoid Hubを開く</sys:String>
+    <sys:String x:Key="Home_AutoAdjustFaceParameterOnLoad">モデルロード時に表情を調整</sys:String>
     
     <sys:String x:Key="Home_SettingFileIo">詳細設定</sys:String>    
     <sys:String x:Key="Home_OpenSetting">設定ウィンドウを開く</sys:String>
@@ -25,8 +29,12 @@
 
     <sys:String x:Key="Home_SettingManagement">設定の管理</sys:String>
     <sys:String x:Key="Home_Reset">リセット</sys:String>
+    <sys:String x:Key="Home_LoadPrevSetting">旧バージョンの設定をロード</sys:String>
         
     <sys:String x:Key="Home_OssLicense">OSS License</sys:String>
+    
+    <sys:String x:Key="Home_ActivateOnStartupHeader">Windowsの起動後にスタート</sys:String>
+    <sys:String x:Key="Home_ActivateOnStartup_OtherVerRegistered">※他バージョンのVMagicMirrorが自動で起動するように登録されています。チェックをオンにすると、このバージョンを起動するよう設定を上書きします。</sys:String>
 
     <!-- Streaming -->
     <sys:String x:Key="Streaming_Window">ウィンドウ</sys:String>
@@ -39,6 +47,7 @@
     <sys:String x:Key="Window_Transparent">背景を透過</sys:String>
     <sys:String x:Key="Window_Draggable">(透過中)キャラ付近を掴んでドラッグ</sys:String>
     <sys:String x:Key="Window_TopMost">キャラクターをつねに最前面で表示</sys:String>
+    <sys:String x:Key="Window_ResetPosition">キャラクター位置のリセット</sys:String>
     
     <sys:String x:Key="Window_EnableInitialPlacement">起動時に特定の位置へウィンドウを動かす</sys:String>
     <sys:String x:Key="Window_InitialPositionX">X(画面左 = 0)</sys:String>
@@ -55,6 +64,15 @@
     <sys:String x:Key="Motion_Face_CameraName">カメラ</sys:String>    
     <sys:String x:Key="Motion_Face_Calibration">姿勢・表情を補正</sys:String>    
     <sys:String x:Key="Motion_Face_DefaultFun">Funブレンドのデフォルト値[%]</sys:String>
+    
+    <sys:String x:Key="Motion_Face_Eyebrow">眉毛 (開いてカスタマイズ)</sys:String>    
+    <sys:String x:Key="Motion_Face_Eyebrow_LeftUp">左眉上げ</sys:String>    
+    <sys:String x:Key="Motion_Face_Eyebrow_LeftDown">左眉下げ</sys:String>    
+    <sys:String x:Key="Motion_Face_Eyebrow_UseSeparatedKey">左右で別々のキーを使う</sys:String>    
+    <sys:String x:Key="Motion_Face_Eyebrow_RightUp">右眉上げ</sys:String>    
+    <sys:String x:Key="Motion_Face_Eyebrow_RightDown">右眉下げ</sys:String>    
+    <sys:String x:Key="Motion_Face_Eyebrow_UpScale">眉上げスケール [%]</sys:String>    
+    <sys:String x:Key="Motion_Face_Eyebrow_DownScale">眉下げスケール [%]</sys:String>    
     
     <!-- Motion : Eye -->
     <sys:String x:Key="Motion_Eye">目・視線</sys:String>
@@ -97,6 +115,7 @@
     <sys:String x:Key="Layout_EnableFreeCameraMode">フリーカメラモード</sys:String>
     <sys:String x:Key="Layout_CurrentCameraPosition">カメラの位置(x, y, z, rx, ry, rz)</sys:String>
     <sys:String x:Key="Layout_Camera_ResetPosition">位置をリセット</sys:String>
+    <sys:String x:Key="Layout_Camera_Fov">視野角 [deg]</sys:String>
 
     <!-- Layout : Keyboard / Mouse Pad -->
     <sys:String x:Key="Layout_Hid">キーボード・マウスパッド</sys:String>

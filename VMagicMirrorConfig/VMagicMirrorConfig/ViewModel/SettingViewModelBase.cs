@@ -33,7 +33,7 @@ namespace Baku.VMagicMirrorConfig
 
         private readonly IMessageSender _sender;
 
-        private protected void SendMessage(Message message)
+        private protected virtual void SendMessage(Message message)
             => _sender?.SendMessage(message);
 
         private protected async Task<string> SendQueryAsync(Message message) 
