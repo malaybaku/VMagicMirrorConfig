@@ -107,6 +107,10 @@ namespace Baku.VMagicMirrorConfig
         public ActionCommand OpenVRoidHubCommand
             => _openVRoidHubCommand ?? (_openVRoidHubCommand = new ActionCommand(OpenVRoidHub));
 
+        private ActionCommand _openManualUrlCommand;
+        public ActionCommand OpenManualUrlCommand
+            => _openManualUrlCommand ?? (_openManualUrlCommand = new ActionCommand(OpenManualUrl));
+
         private ActionCommand _autoAdjustCommand;
         public ActionCommand AutoAdjustCommand
             => _autoAdjustCommand ?? (_autoAdjustCommand = new ActionCommand(AutoAdjust));
@@ -198,6 +202,16 @@ namespace Baku.VMagicMirrorConfig
         {
             //=> MessageSender.SendMessage(MessageFactory.Instance.AccessToVRoidHub());
             Process.Start("https://hub.vroid.com/");
+        }
+
+        private void OpenManualUrl()
+        {
+            string url =
+                (LanguageName == "Japanese") ?
+                "https://malaybaku.github.io/VMagicMirrorManual/index.html" :
+                "https://malaybaku.github.io/VMagicMirrorManual/en_index.html";
+
+            Process.Start(url);
         }
 
         private void AutoAdjust() => MessageSender.SendMessage(MessageFactory.Instance.RequestAutoAdjust());
