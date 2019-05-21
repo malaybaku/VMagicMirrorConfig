@@ -21,7 +21,10 @@
     <sys:String x:Key="Home_RecommendVRoidHub">※キャラクターのダウンロードがまだの場合: </sys:String>
     <sys:String x:Key="Home_OpenVRoidHub">VRoid Hubを開く</sys:String>
     <sys:String x:Key="Home_AutoAdjustFaceParameterOnLoad">モデルロード時に表情を調整</sys:String>
-    
+
+    <sys:String x:Key="Home_Manual_Header">使い方</sys:String>
+    <sys:String x:Key="Home_Manual_Open">マニュアルのURLにアクセス</sys:String>
+
     <sys:String x:Key="Home_SettingFileIo">詳細設定</sys:String>    
     <sys:String x:Key="Home_OpenSetting">設定ウィンドウを開く</sys:String>
     <sys:String x:Key="Home_SaveSettingFile">セーブ</sys:String>

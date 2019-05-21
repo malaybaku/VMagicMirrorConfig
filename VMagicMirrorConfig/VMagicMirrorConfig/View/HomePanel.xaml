@@ -87,9 +87,22 @@
                 </StackPanel>
 
                 <StackPanel Grid.Column="1">
+
+                    <TextBlock Style="{StaticResource HeaderText}"
+                               Text="{DynamicResource Home_Manual_Header}"
+                               Margin="10,10,10,5"
+                               />
+
+                    <TextBlock Margin="10,5">
+                        <Hyperlink Command="{Binding OpenManualUrlCommand}"
+                                   ToolTip="https://malaybaku.github.io/VMagicMirrorManual/">
+                            <Run Text="{DynamicResource Home_Manual_Open}"/>
+                        </Hyperlink>
+                    </TextBlock>
+
                     <TextBlock Style="{StaticResource HeaderText}"
                                Text="{DynamicResource Home_SettingFileIo}"
-                               Margin="10,10,10,5"
+                               Margin="10,20,10,5"
                                />
                     <Button Content="{DynamicResource Home_OpenSetting}" 
                             HorizontalAlignment="Left"
@@ -100,7 +113,7 @@
 
                     <TextBlock Style="{StaticResource HeaderText}"
                            Text="{DynamicResource Home_SettingManagement}"
-                           Margin="10,35,10,5"
+                           Margin="10,20,10,5"
                            />
 
                     <StackPanel Orientation="Horizontal"
