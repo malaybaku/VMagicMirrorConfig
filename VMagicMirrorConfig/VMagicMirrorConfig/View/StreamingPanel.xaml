@@ -25,7 +25,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0">
-                    <md:Card Margin="5">
+                    <md:Card Margin="5" Height="118">
                         <StackPanel>
 
                             <TextBlock Text="{DynamicResource Streaming_Window}"
@@ -139,17 +139,17 @@
                                        Style="{StaticResource HeaderText}"
                                        />
 
-                            <CheckBox Grid.Row="2" Grid.Column="0"
-                                      Grid.ColumnSpan="3"
-                                      Margin="10,3" 
+                            <CheckBox Margin="10,3" 
                                       Content="{DynamicResource Layout_Hid}"
                                       IsChecked="{Binding LayoutSetting.HidVisibility}"
                                       />
-                            <CheckBox Grid.Row="2" Grid.Column="0"
-                                      Grid.ColumnSpan="3"
-                                      Margin="10,3" 
+                            <CheckBox Margin="10,3" 
                                       Content="{DynamicResource Layout_Gamepad}"
                                       IsChecked="{Binding LayoutSetting.Gamepad.GamepadVisibility}"
+                                      />
+                            <CheckBox Margin="10,3" 
+                                      Content="{DynamicResource Shadow_Enable_Streaming}"
+                                      IsChecked="{Binding LightSetting.EnableShadow}"
                                       />
                         </StackPanel>
                     </md:Card>

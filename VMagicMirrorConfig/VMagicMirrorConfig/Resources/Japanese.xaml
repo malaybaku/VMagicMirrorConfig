@@ -153,6 +153,17 @@
     <!-- Light Setting -->
     <sys:String x:Key="Light">ライト</sys:String>
     <sys:String x:Key="Light_Intensity">明るさ[%]</sys:String>
+    <sys:String x:Key="Light_Yaw">向き(横)[deg]</sys:String>
+    <sys:String x:Key="Light_Pitch">向き(上下)[deg]</sys:String>
+
+    <sys:String x:Key="Shadow">影</sys:String>
+    <sys:String x:Key="Shadow_Enable">影を有効化</sys:String>
+    <sys:String x:Key="Shadow_Enable_Streaming">キャラの影</sys:String>
+    <sys:String x:Key="Shadow_Intensity">濃さ[%]</sys:String>
+    <sys:String x:Key="Shadow_Yaw">向き(横)[deg]</sys:String>
+    <sys:String x:Key="Shadow_Pitch">向き(上下)[deg]</sys:String>
+    <sys:String x:Key="Shadow_DepthOffset">奥行きの調整 [cm]</sys:String>
+
     <sys:String x:Key="Bloom">Bloom</sys:String>
     <sys:String x:Key="Bloom_Intensity">強さ[%]</sys:String>
     <sys:String x:Key="Bloom_Threshold">しきい値[%]</sys:String>
