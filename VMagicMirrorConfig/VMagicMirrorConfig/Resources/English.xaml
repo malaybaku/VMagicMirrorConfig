@@ -156,6 +156,17 @@
     <!-- Light Setting -->
     <sys:String x:Key="Light">Light</sys:String>
     <sys:String x:Key="Light_Intensity">Intensity [%]</sys:String>
+    <sys:String x:Key="Light_Yaw">Yaw Angle [deg]</sys:String>
+    <sys:String x:Key="Light_Pitch">Pitch Angle [deg]</sys:String>
+
+    <sys:String x:Key="Shadow">Shadow</sys:String>
+    <sys:String x:Key="Shadow_Enable">Enable Shadow</sys:String>
+    <sys:String x:Key="Shadow_Enable_Streaming">Avatar's Shadow</sys:String>
+    <sys:String x:Key="Shadow_Intensity">Intensity [%]</sys:String>
+    <sys:String x:Key="Shadow_Yaw">Yaw Angle [deg]</sys:String>
+    <sys:String x:Key="Shadow_Pitch">Pitch Angle [deg]</sys:String>
+    <sys:String x:Key="Shadow_DepthOffset">Depth Offset [cm]</sys:String>
+    
     <sys:String x:Key="Bloom">Bloom</sys:String>
     <sys:String x:Key="Bloom_Intensity">Intensity [%]</sys:String>
     <sys:String x:Key="Bloom_Threshold">Threshold [%]</sys:String>

@@ -17,7 +17,7 @@ namespace Baku.VMagicMirrorConfig
             UpdateBloomColor();
         }
 
-        #region ライト
+        #region Light
 
         private int _lightIntensity = 100;
         public int LightIntensity
@@ -29,6 +29,36 @@ namespace Baku.VMagicMirrorConfig
                 {
                     SendMessage(
                         MessageFactory.Instance.LightIntensity(LightIntensity)
+                        );
+                }
+            }
+        }
+
+        private int _lightYaw = 50;
+        public int LightYaw
+        {
+            get => _lightYaw;
+            set
+            {
+                if (SetValue(ref _lightYaw, value))
+                {
+                    SendMessage(
+                        MessageFactory.Instance.LightYaw(LightYaw)
+                        );
+                }
+            }
+        }
+
+        private int _lightPitch = -30;
+        public int LightPitch
+        {
+            get => _lightPitch;
+            set
+            {
+                if (SetValue(ref _lightPitch, value))
+                {
+                    SendMessage(
+                        MessageFactory.Instance.LightPitch(LightPitch)
                         );
                 }
             }
@@ -83,6 +113,85 @@ namespace Baku.VMagicMirrorConfig
         {
             LightColor = Color.FromRgb((byte)LightR, (byte)LightG, (byte)LightB);
             SendMessage(MessageFactory.Instance.LightColor(LightR, LightG, LightB));
+        }
+
+        #endregion
+
+        #region Shadow
+
+        private bool _enableShadow = true;
+        public bool EnableShadow
+        {
+            get => _enableShadow;
+            set
+            {
+                if (SetValue(ref _enableShadow, value))
+                {
+                    SendMessage(
+                        MessageFactory.Instance.ShadowEnable(EnableShadow)
+                        );
+                }
+            }
+        }
+
+        private int _shadowIntensity = 60;
+        public int ShadowIntensity
+        {
+            get => _shadowIntensity;
+            set
+            {
+                if (SetValue(ref _shadowIntensity, value))
+                {
+                    SendMessage(
+                        MessageFactory.Instance.ShadowIntensity(ShadowIntensity)
+                        );
+                }
+            }
+        }
+
+        private int _shadowYaw = 8;
+        public int ShadowYaw
+        {
+            get => _shadowYaw;
+            set
+            {
+                if (SetValue(ref _shadowYaw, value))
+                {
+                    SendMessage(
+                        MessageFactory.Instance.ShadowYaw(ShadowYaw)
+                        );
+                }
+            }
+        }
+
+        private int _shadowPitch = -20;
+        public int ShadowPitch
+        {
+            get => _shadowPitch;
+            set
+            {
+                if (SetValue(ref _shadowPitch, value))
+                {
+                    SendMessage(
+                        MessageFactory.Instance.ShadowPitch(ShadowPitch)
+                        );
+                }
+            }
+        }
+
+        private int _shadowDepthOffset = 40;
+        public int ShadowDepthOffset
+        {
+            get => _shadowDepthOffset;
+            set
+            {
+                if (SetValue(ref _shadowDepthOffset, value))
+                {
+                    SendMessage(
+                        MessageFactory.Instance.ShadowDepthOffset(ShadowDepthOffset)
+                        );
+                }
+            }
         }
 
         #endregion
@@ -178,6 +287,13 @@ namespace Baku.VMagicMirrorConfig
             LightG = 244;
             LightB = 214;
             LightIntensity = 100;
+            LightYaw = 50;
+            LightPitch = -30;
+
+            EnableShadow = true;
+            ShadowIntensity = 50;
+            ShadowYaw = 15;
+            ShadowPitch = -30;
 
             BloomR = 255;
             BloomG = 255;
