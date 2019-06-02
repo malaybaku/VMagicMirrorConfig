@@ -30,7 +30,7 @@ namespace Baku.VMagicMirrorConfig
         /// </remarks>
         public GamepadSettingViewModel Gamepad { get; set; }
 
-        private int _cameraFov = 60;
+        private int _cameraFov = 40;
         public int CameraFov
         {
             get => _cameraFov;
@@ -180,7 +180,7 @@ namespace Baku.VMagicMirrorConfig
             HidHeight = 90;
             HidHorizontalScale = 70;
             HidVisibility = true;
-            CameraFov = 60;
+            CameraFov = 40;
 
             //カメラ位置については、Unity側がカメラの基準位置を持っているのに任せる
             ResetCameraPosition();
