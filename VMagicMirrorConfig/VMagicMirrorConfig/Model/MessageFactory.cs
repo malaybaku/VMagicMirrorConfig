@@ -161,6 +161,14 @@ namespace Baku.VMagicMirrorConfig
 
         public Message LightColor(int r, int g, int b) => WithArg($"{r},{g},{b}");
         public Message LightIntensity(int intensityPercent) => WithArg($"{intensityPercent}");
+        public Message LightYaw(int angleDeg) => WithArg($"{angleDeg}");
+        public Message LightPitch(int angleDeg) => WithArg($"{angleDeg}");
+
+        public Message ShadowEnable(bool enable) => WithArg($"{enable}");
+        public Message ShadowIntensity(int intensityPercent) => WithArg($"{intensityPercent}");
+        public Message ShadowYaw(int angleDeg) => WithArg($"{angleDeg}");
+        public Message ShadowPitch(int angleDeg) => WithArg($"{angleDeg}");
+        public Message ShadowDepthOffset(int depthCentimeter) => WithArg($"{depthCentimeter}");
 
         public Message BloomColor(int r, int g, int b) => WithArg($"{r},{g},{b}");
         public Message BloomIntensity(int intensityPercent) => WithArg($"{intensityPercent}");
