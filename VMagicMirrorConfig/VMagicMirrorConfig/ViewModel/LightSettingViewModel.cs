@@ -34,7 +34,7 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private int _lightYaw = 50;
+        private int _lightYaw = -30;
         public int LightYaw
         {
             get => _lightYaw;
@@ -49,7 +49,7 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private int _lightPitch = -30;
+        private int _lightPitch = 50;
         public int LightPitch
         {
             get => _lightPitch;
@@ -149,7 +149,7 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private int _shadowYaw = 8;
+        private int _shadowYaw = -20;
         public int ShadowYaw
         {
             get => _shadowYaw;
@@ -164,7 +164,7 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private int _shadowPitch = -20;
+        private int _shadowPitch = 8;
         public int ShadowPitch
         {
             get => _shadowPitch;
@@ -287,13 +287,13 @@ namespace Baku.VMagicMirrorConfig
             LightG = 244;
             LightB = 214;
             LightIntensity = 100;
-            LightYaw = 50;
-            LightPitch = -30;
+            LightYaw = -30;
+            LightPitch = 50;
 
             EnableShadow = true;
             ShadowIntensity = 50;
-            ShadowYaw = 15;
-            ShadowPitch = -30;
+            ShadowYaw = -20;
+            ShadowPitch = 8;
 
             BloomR = 255;
             BloomG = 255;
