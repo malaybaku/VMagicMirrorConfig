@@ -19,7 +19,7 @@ namespace Baku.VMagicMirrorConfig
 
         #region Light
 
-        private int _lightIntensity = 100;
+        private int _lightIntensity = 55;
         public int LightIntensity
         {
             get => _lightIntensity;
@@ -134,7 +134,7 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private int _shadowIntensity = 60;
+        private int _shadowIntensity = 65;
         public int ShadowIntensity
         {
             get => _shadowIntensity;
@@ -198,7 +198,7 @@ namespace Baku.VMagicMirrorConfig
 
         #region Bloom
 
-        private int _bloomIntensity = 100;
+        private int _bloomIntensity = 50;
         public int BloomIntensity
         {
             get => _bloomIntensity;
@@ -286,19 +286,19 @@ namespace Baku.VMagicMirrorConfig
             LightR = 255;
             LightG = 244;
             LightB = 214;
-            LightIntensity = 100;
+            LightIntensity = 55;
             LightYaw = -30;
             LightPitch = 50;
 
             EnableShadow = true;
-            ShadowIntensity = 50;
+            ShadowIntensity = 65;
             ShadowYaw = -20;
             ShadowPitch = 8;
 
             BloomR = 255;
             BloomG = 255;
             BloomB = 255;
-            BloomIntensity = 100;
+            BloomIntensity = 50;
             BloomThreshold = 100;
         }
     }
