@@ -19,7 +19,7 @@ namespace Baku.VMagicMirrorConfig
 
         #region Light
 
-        private int _lightIntensity = 55;
+        private int _lightIntensity = 100;
         public int LightIntensity
         {
             get => _lightIntensity;
@@ -286,7 +286,7 @@ namespace Baku.VMagicMirrorConfig
             LightR = 255;
             LightG = 244;
             LightB = 214;
-            LightIntensity = 55;
+            LightIntensity = 100;
             LightYaw = -30;
             LightPitch = 50;
 
