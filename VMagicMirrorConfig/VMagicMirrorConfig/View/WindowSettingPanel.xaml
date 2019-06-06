@@ -23,12 +23,17 @@
                 <StackPanel>
                     <StackPanel Orientation="Horizontal">
 
+                        <md:PackIcon Kind="ColorLens"
+                                     Style="{StaticResource SettingHeaderPackIcon}"
+                                     />
+
                         <TextBlock Text="{DynamicResource Window_BackgroundColor}"
                                    Margin="5"
                                    Style="{StaticResource HeaderText}"
                                    />
 
-                        <md:Card Style="{StaticResource ColorIndicatorCard}">
+                        <md:Card Style="{StaticResource ColorIndicatorCard}"
+                                 Margin="10,5,5,0">
                             <Rectangle>
                                 <Rectangle.Fill>
                                     <SolidColorBrush Color="{Binding Color}"/>
@@ -102,9 +107,13 @@
                               />
 
                     <Button Width="220"
-                            Content="{DynamicResource Window_ResetPosition}"
                             Command="{Binding ResetWindowPositionCommand}"
-                            />
+                            ContentTemplate="{StaticResource IconTextButtonContent}"
+                            >
+                        <vmm:TabHeaderIconText Text="{DynamicResource Window_ResetPosition}"
+                                      IconKind="Reload"
+                                      />
+                    </Button>
                 </StackPanel>
             </md:Card>
 
