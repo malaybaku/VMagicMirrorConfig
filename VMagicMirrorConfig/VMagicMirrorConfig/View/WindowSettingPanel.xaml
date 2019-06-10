@@ -108,11 +108,15 @@
 
                     <Button Width="220"
                             Command="{Binding ResetWindowPositionCommand}"
-                            ContentTemplate="{StaticResource IconTextButtonContent}"
                             >
-                        <vmm:TabHeaderIconText Text="{DynamicResource Window_ResetPosition}"
-                                      IconKind="Reload"
-                                      />
+                        <StackPanel Style="{StaticResource IconTextSetStackPanel}">
+                            <md:PackIcon Style="{StaticResource IconTextSetIcon}"
+                                         Kind="Reload"
+                                         />
+                            <TextBlock Style="{StaticResource IconSetSetText}"
+                                       Text="{DynamicResource Window_ResetPosition}"
+                                       />
+                        </StackPanel>                        
                     </Button>
                 </StackPanel>
             </md:Card>

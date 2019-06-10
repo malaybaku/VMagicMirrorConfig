@@ -17,24 +17,6 @@
             <DataTemplate>
                 <ContentControl Content="{Binding}"/>
             </DataTemplate>
-            <!--<DataTemplate DataType="{x:Type vmm:IconText}">
-                <StackPanel Orientation="Horizontal" Margin="0">
-
-                    <md:PackIcon Kind="{Binding IconKind}" 
-                                 VerticalAlignment="Center"
-                                 Margin="5,0,3,0"
-                                 Width="22"
-                                 Height="22"
-                                 />
-                    <TextBlock FontSize="12"
-                               FontWeight="Bold"
-                               VerticalAlignment="Center"
-                               Margin="0,0,5,0"
-                               Text="{Binding Text}" 
-                               />
-
-                </StackPanel>
-            </DataTemplate>-->
         </dragablz:TabablzControl.HeaderItemTemplate>
         <TabItem>
             <TabItem.Header>
