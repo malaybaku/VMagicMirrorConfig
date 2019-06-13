@@ -14,7 +14,21 @@
         <Style TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}">
             <Setter Property="Margin" Value="5"/>
         </Style>
+        <Style TargetType="md:PackIcon" x:Key="HeaderPackIcon">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Width" Value="20"/>
+            <Setter Property="Height" Value="20"/>
+        </Style>
+        <Style TargetType="ToggleButton" x:Key="ViewOnOffToggleButton"
+               BasedOn="{StaticResource MaterialDesignFlatPrimaryToggleButton}"
+               >
+            <Setter Property="Width" Value="20"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="md:ShadowAssist.ShadowDepth" Value="Depth1"/>
+        </Style>
     </UserControl.Resources>
+    
     <ScrollViewer VerticalScrollBarVisibility="Auto"
                   HorizontalScrollBarVisibility="Disabled"
                   >
@@ -28,10 +42,14 @@
                     <md:Card Margin="5" Height="118">
                         <StackPanel>
 
-                            <TextBlock Text="{DynamicResource Streaming_Window}"
-                                       Margin="5"
-                                       Style="{StaticResource HeaderText}"
-                                       />
+                            <StackPanel Orientation="Horizontal">
+                                <md:PackIcon Style="{StaticResource HeaderPackIcon}"
+                                             Kind="WindowRestore"/>
+                                <TextBlock Text="{DynamicResource Streaming_Window}"
+                                           Margin="5"
+                                           Style="{StaticResource HeaderText}"
+                                           />
+                            </StackPanel>
 
                             <CheckBox Content="{DynamicResource Window_Transparent}"
                                       IsChecked="{Binding WindowSetting.IsTransparent, Mode=TwoWay}"
@@ -47,38 +65,63 @@
 
                     <md:Card Margin="5">
                         <StackPanel>
-                            <TextBlock Text="{DynamicResource Streaming_Face}"
-                                       Margin="5"
-                                       Style="{StaticResource HeaderText}"
-                                       />
 
-                            <Grid Margin="0">
+                            <StackPanel Orientation="Horizontal">
+                                <md:PackIcon Style="{StaticResource HeaderPackIcon}"
+                                             Kind="Face"
+                                             />
+                                <TextBlock Text="{DynamicResource Streaming_Face}"
+                                           Margin="5"
+                                           Style="{StaticResource HeaderText}"
+                                           />
+                            </StackPanel>
+
+                            <Grid Margin="5">
                                 <Grid.RowDefinitions>
                                     <RowDefinition/>
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="30"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
 
-                                <CheckBox Grid.Row="0" Grid.Column="0"
-                                          Margin="5,2"
+                                <md:PackIcon Grid.Row="0" Grid.Column="0"
+                                             VerticalAlignment="Center"
+                                             HorizontalAlignment="Center"
+                                             Width="25"
+                                             Height="25"
+                                             Kind="Microphone"
+                                             />
+
+                                <CheckBox Grid.Row="0" Grid.Column="1"
+                                          Margin="5"
                                           IsChecked="{Binding MotionSetting.EnableLipSync}">
                                     <CheckBox.Content>
                                         <TextBlock Text="{DynamicResource Motion_Mouth_EnableLipSync}"/>
                                     </CheckBox.Content>
                                 </CheckBox>
 
-                                <ComboBox Grid.Row="0" Grid.Column="1"
-                                          Margin="0,0,5,0"
+                                <ComboBox Grid.Row="0" Grid.Column="2"
+                                          HorizontalAlignment="Stretch"
+                                          Margin="5,0"
+                                          IsEnabled="{Binding MtoionSetting.EnableLipSync}"
                                           ItemsSource="{Binding MotionSetting.MicrophoneDeviceNames}"
                                           SelectedItem="{Binding MotionSetting.LipSyncMicrophoneDeviceName}"
                                           md:HintAssist.Hint="Microphone"
                                           />
 
-                                <CheckBox Grid.Row="1" Grid.Column="0"
-                                          Margin="5,2"
+                                <md:PackIcon Grid.Row="1" Grid.Column="0"
+                                             VerticalAlignment="Center"
+                                             HorizontalAlignment="Center"
+                                             Width="25"
+                                             Height="25"
+                                             Kind="Webcam"
+                                             />
+
+                                <CheckBox Grid.Row="1" Grid.Column="1"
+                                          Margin="5"
                                           IsChecked="{Binding MotionSetting.EnableFaceTracking}"
                                           >
                                     <CheckBox.Content>
@@ -87,19 +130,29 @@
                                 </CheckBox>
 
                                 <ComboBox Grid.Row="1" Grid.Column="2"
-                                          Margin="0,0,5,0"
+                                          HorizontalAlignment="Stretch"
+                                          Margin="5,0"
+                                          IsEnabled="{Binding MotionSetting.EnableFaceTracking}"
                                           ItemsSource="{Binding MotionSetting.CameraDeviceNames}"
                                           SelectedItem="{Binding MotionSetting.CameraDeviceName}"
                                           md:HintAssist.Hint="Camera"
                                           />
                             </Grid>
 
-                            <Button Content="{DynamicResource Motion_Face_Calibration}"
-                                    HorizontalAlignment="Left"
+                            <Button HorizontalAlignment="Left"
                                     Margin="10,8,0,0"
                                     Width="160"
                                     Command="{Binding MotionSetting.CalibrateFaceCommand}"
-                                    />
+                                    >
+                                <StackPanel Style="{StaticResource IconTextSetStackPanel}">
+                                    <md:PackIcon Style="{StaticResource IconTextSetIcon}"
+                                                 Kind="Reload"
+                                                 />
+                                    <TextBlock Style="{StaticResource IconSetSetText}"
+                                               Text="{DynamicResource Motion_Face_Calibration}"
+                                               />
+                                </StackPanel>
+                            </Button>
 
                             <TextBlock Text="{DynamicResource Motion_Eye_LookAtPoint}"
                                        Margin="10,15,5,5"
@@ -134,10 +187,15 @@
                 <StackPanel Grid.Column="1">
                     <md:Card Margin="5">
                         <StackPanel>
-                            <TextBlock Text="{DynamicResource Streaming_View}"
-                                       Margin="5"
-                                       Style="{StaticResource HeaderText}"
-                                       />
+
+                            <StackPanel Orientation="Horizontal">
+                                <md:PackIcon Style="{StaticResource HeaderPackIcon}" 
+                                             Kind="Eye"/>
+                                <TextBlock Text="{DynamicResource Streaming_View}"
+                                           Margin="5"
+                                           Style="{StaticResource HeaderText}"
+                                           />
+                            </StackPanel>
 
                             <CheckBox Margin="10,3" 
                                       Content="{DynamicResource Layout_Hid}"
@@ -156,32 +214,55 @@
 
                     <md:Card Margin="5">
                         <StackPanel>
-                            <TextBlock Text="{DynamicResource Layout_Camera}"
-                                       Margin="5"
-                                       Style="{StaticResource HeaderText}"
-                                       />
 
+                            <StackPanel Orientation="Horizontal">
+
+                                <md:PackIcon Style="{StaticResource HeaderPackIcon}"
+                                             Kind="Videocam"
+                                             />
+
+                                <TextBlock Text="{DynamicResource Layout_Camera}"
+                                           Margin="5"
+                                           Style="{StaticResource HeaderText}"
+                                           />
+                            </StackPanel>
+                            
                             <CheckBox Content="{DynamicResource Layout_EnableFreeCameraMode}" 
                                       IsChecked="{Binding LayoutSetting.EnableFreeCameraMode}"
                                       Margin="10,5"
                                       />
 
-                            <Button Content="{DynamicResource Layout_Camera_ResetPosition}"
-                                    HorizontalAlignment="Left"
+                            <Button HorizontalAlignment="Left"
                                     Width="150"
                                     Margin="10"
                                     Command="{Binding LayoutSetting.ResetCameraPositionCommand}"
-                                    />
+                                    >
+                                <StackPanel Style="{StaticResource IconTextSetStackPanel}">
+                                    <md:PackIcon Style="{StaticResource IconTextSetIcon}"
+                                                 Kind="Reload"
+                                                 />
+                                    <TextBlock Style="{StaticResource IconSetSetText}"
+                                               Text="{DynamicResource Layout_Camera_ResetPosition}"
+                                               />
+                                </StackPanel>
+                            </Button>
 
                         </StackPanel>
                     </md:Card>
 
                     <md:Card Margin="5">
                         <StackPanel>
-                            <TextBlock Text="{DynamicResource Streaming_Motion}"
-                                       Margin="5"
-                                       Style="{StaticResource HeaderText}"
-                                       />
+                            <StackPanel Orientation="Horizontal">
+
+                                <md:PackIcon Style="{StaticResource HeaderPackIcon}"
+                                             Kind="HumanHandsup"
+                                             />
+
+                                <TextBlock Text="{DynamicResource Streaming_Motion}"
+                                           Margin="5"
+                                           Style="{StaticResource HeaderText}"
+                                           />
+                            </StackPanel>
 
                             <CheckBox Grid.Row="2" Grid.Column="0"
                                       Grid.ColumnSpan="3"

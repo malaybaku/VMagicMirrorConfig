@@ -125,6 +125,9 @@
     <Compile Include="View\AboutPanel.xaml.cs">
       <DependentUpon>AboutPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Code\TabHeaderIconText.xaml.cs">
+      <DependentUpon>TabHeaderIconText.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\HomePanel.xaml.cs">
       <DependentUpon>HomePanel.xaml</DependentUpon>
     </Compile>
@@ -153,6 +156,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AboutPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Code\TabHeaderIconText.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

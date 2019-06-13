@@ -16,10 +16,18 @@
         <StackPanel Margin="0,5">
             <md:Card>
                 <StackPanel>
-                    <TextBlock Text="{DynamicResource Motion_Face}"
-                               Margin="5"
-                               Style="{StaticResource HeaderText}"
-                               />
+
+                    <StackPanel Orientation="Horizontal"
+                                Margin="5"
+                                >
+                        <md:PackIcon Kind="Face"
+                                     Style="{StaticResource SettingHeaderPackIcon}"
+                                     />
+                        <TextBlock Text="{DynamicResource Motion_Face}"
+                                   Style="{StaticResource HeaderText}"
+                                   Margin="5"
+                                   />
+                    </StackPanel>
 
                     <Grid Margin="5">
                         <Grid.RowDefinitions>
@@ -27,11 +35,21 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="35"/>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
-                        <CheckBox Grid.Row="0" Grid.Column="0"
+                        <md:PackIcon Grid.Row="0" Grid.Column="0"
+                                     VerticalAlignment="Center"
+                                     HorizontalAlignment="Center"
+                                     Margin="5,0,0,0"
+                                     Width="25"
+                                     Height="25"
+                                     Kind="Microphone"
+                                     />
+                        
+                        <CheckBox Grid.Row="0" Grid.Column="1"
                                   Margin="5"
                                   IsChecked="{Binding EnableLipSync}">
                             <CheckBox.Content>
@@ -39,16 +57,26 @@
                             </CheckBox.Content>
                         </CheckBox>
 
-                        <ComboBox Grid.Row="0" Grid.Column="1"
-                                HorizontalAlignment="Left"
-                                Margin="5,0"
-                                Width="200"
-                                ItemsSource="{Binding MicrophoneDeviceNames}"
-                                SelectedItem="{Binding LipSyncMicrophoneDeviceName}"
-                                md:HintAssist.Hint="Microphone"
-                                />
+                        <ComboBox Grid.Row="0" Grid.Column="2"
+                                  HorizontalAlignment="Left"
+                                  Margin="5,0"
+                                  Width="200"
+                                  IsEnabled="{Binding EnableLipSync}"
+                                  ItemsSource="{Binding MicrophoneDeviceNames}"
+                                  SelectedItem="{Binding LipSyncMicrophoneDeviceName}"
+                                  md:HintAssist.Hint="Microphone"
+                                  />
 
-                        <CheckBox Grid.Row="1" Grid.Column="0"
+                        <md:PackIcon Grid.Row="1" Grid.Column="0"
+                                     VerticalAlignment="Center"
+                                     HorizontalAlignment="Center"
+                                     Width="25"
+                                     Height="25"
+                                     Margin="5,0,0,0"
+                                     Kind="Webcam"
+                                     />
+
+                        <CheckBox Grid.Row="1" Grid.Column="1"
                                   Margin="5"
                                   IsChecked="{Binding EnableFaceTracking}"
                                   >
@@ -61,18 +89,31 @@
                                   HorizontalAlignment="Left"
                                   Margin="5,0"
                                   Width="200"
+                                  IsEnabled="{Binding EnableFaceTracking}"
                                   ItemsSource="{Binding CameraDeviceNames}"
                                   SelectedItem="{Binding CameraDeviceName}"
                                   md:HintAssist.Hint="Camera"
                                   />
                     </Grid>
 
-                    <Button Content="{DynamicResource Motion_Face_Calibration}"
-                            HorizontalAlignment="Left"
+                    <Button HorizontalAlignment="Left"
                             Margin="15,5"
                             Width="160"
                             Command="{Binding CalibrateFaceCommand}"
-                            />
+                            >
+                        <StackPanel Style="{StaticResource IconTextSetStackPanel}">
+                            <md:PackIcon Style="{StaticResource IconTextSetIcon}"
+                                         Kind="Reload"
+                                         />
+                            <TextBlock Style="{StaticResource IconSetSetText}"
+                                       Text="{DynamicResource Motion_Face_Calibration}"
+                                       />
+                        </StackPanel>
+
+                        <!--<vmm:IconText Text="{DynamicResource Motion_Face_Calibration}"
+                                      IconKind="Reload"
+                                      />-->
+                    </Button>
 
                     <TextBlock Text="{DynamicResource Motion_Eye_LookAtPoint}"
                                Margin="10,20,5,5"
@@ -229,10 +270,20 @@
 
             <md:Card>
                 <StackPanel>
-                    <TextBlock Text="{DynamicResource Motion_Arm}"
-                               Margin="5"
-                               Style="{StaticResource HeaderText}"
-                               />
+
+                    <StackPanel Orientation="Horizontal"
+                                Margin="5"
+                                >
+
+                        <md:PackIcon Kind="HumanGreeting"
+                                     Style="{StaticResource SettingHeaderPackIcon}"
+                                     />
+
+                        <TextBlock Text="{DynamicResource Motion_Arm}"
+                                   Style="{StaticResource HeaderText}"
+                                   Margin="5"
+                                   />
+                    </StackPanel>
 
                     <Grid Margin="5,0,0,10">
                         <Grid.RowDefinitions>
@@ -308,11 +359,19 @@
 
             <md:Card>
                 <StackPanel>
-                    <TextBlock Text="{DynamicResource Motion_Hand}"
-                               Margin="5"
-                               Style="{StaticResource HeaderText}"
-                               />
 
+                    <StackPanel Orientation="Horizontal"
+                                Margin="5"
+                                >
+                        <md:PackIcon Kind="Hand"
+                                     Style="{StaticResource SettingHeaderPackIcon}"
+                                     />
+                        <TextBlock Text="{DynamicResource Motion_Hand}"
+                                   Margin="5"
+                                   Style="{StaticResource HeaderText}"
+                                   />
+                    </StackPanel>
+                    
                     <Grid Margin="5,0,0,10">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
@@ -379,10 +438,18 @@
 
             <md:Card>
                 <StackPanel>
-                    <TextBlock Text="{DynamicResource Motion_Wait}"
-                               Margin="5"
-                               Style="{StaticResource HeaderText}"
-                               />
+
+                    <StackPanel Orientation="Horizontal"
+                                Margin="5">
+
+                        <md:PackIcon Kind="TimerSand" 
+                                     Style="{StaticResource SettingHeaderPackIcon}"
+                                     />
+                        <TextBlock Text="{DynamicResource Motion_Wait}"
+                                   Style="{StaticResource HeaderText}"
+                                   Margin="5"
+                                   />
+                    </StackPanel>
 
                     <Grid Margin="5,0,0,10">
                         <Grid.RowDefinitions>

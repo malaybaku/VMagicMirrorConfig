@@ -2,12 +2,13 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vmm="clr-namespace:Baku.VMagicMirrorConfig"
              mc:Ignorable="d"
              d:DataContext="{x:Type vmm:MainWindowViewModel}"
              d:DesignWidth="550"
-             d:DesignHeight="360"
+             d:DesignHeight="400"
              >
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
@@ -27,13 +28,22 @@
                                Margin="10,10,10,5"
                                />
 
-                    <Button Content="{DynamicResource Home_LoadVrm}" 
-                            HorizontalAlignment="Left"
+                    <Button HorizontalAlignment="Left"
                             VerticalAlignment="Top"
-                            Width="150"
+                            Width="180"
+                            Height="40"
                             Margin="15,10,15,5"
                             Command="{Binding LoadVrmCommand}"
-                            />
+                            >
+                        <StackPanel Style="{StaticResource IconTextSetStackPanel}">
+                            <md:PackIcon Style="{StaticResource IconTextSetIcon}"
+                                         Kind="Human"
+                                         />
+                            <TextBlock Style="{StaticResource IconSetSetText}"
+                                       Text="{DynamicResource Home_LoadVrm}"
+                                       />
+                        </StackPanel>
+                    </Button>
 
                     <CheckBox Content="{DynamicResource Home_LoadVrmOnNextStartup}"
                               Margin="15,10,15,5"
@@ -45,13 +55,21 @@
                               Margin="15,0,15,10"                              
                               />
 
-                    <Button Content="{DynamicResource Home_AutoAdjust}" 
-                            HorizontalAlignment="Left"
+                    <Button HorizontalAlignment="Left"
                             VerticalAlignment="Top"
-                            Width="150"
+                            Width="180"
                             Margin="15,10"
                             Command="{Binding AutoAdjustCommand}"
-                            />
+                            >
+                        <StackPanel Style="{StaticResource IconTextSetStackPanel}">
+                            <md:PackIcon Style="{StaticResource IconTextSetIcon}"
+                                         Kind="AutoFix"
+                                         />
+                            <TextBlock Style="{StaticResource IconSetSetText}"
+                                       Text="{DynamicResource Home_AutoAdjust}"
+                                       />
+                        </StackPanel>
+                    </Button>
 
                     <TextBlock Margin="10,5">
                         <Run Text="{DynamicResource Home_RecommendVRoidHub}"/>
@@ -66,12 +84,19 @@
                                Margin="10,20,10,5"
                                Text="Language"/>
 
-                    <ComboBox ItemsSource="{Binding AvailableLanguageNames}"
-                              SelectedItem="{Binding LanguageName, Mode=TwoWay}"
-                              Margin="15,5"
-                              HorizontalAlignment="Left"
-                              Width="200"
-                              />
+                    <StackPanel Orientation="Horizontal" Margin="15,5">
+
+                        <md:PackIcon Kind="Language"
+                                     VerticalAlignment="Center"
+                                     Width="18" Height="18"
+                                     />
+                        <ComboBox ItemsSource="{Binding AvailableLanguageNames}"
+                                  SelectedItem="{Binding LanguageName, Mode=TwoWay}"
+                                  Margin="10,5,5,5"
+                                  HorizontalAlignment="Left"
+                                  Width="200"
+                                  />
+                    </StackPanel>
 
                     <CheckBox Margin="15,15,15,5"
                               Content="{DynamicResource Home_ActivateOnStartupHeader}"
@@ -104,12 +129,20 @@
                                Text="{DynamicResource Home_SettingFileIo}"
                                Margin="10,20,10,5"
                                />
-                    <Button Content="{DynamicResource Home_OpenSetting}" 
-                            HorizontalAlignment="Left"
-                            Width="170"
+                    <Button HorizontalAlignment="Left"
+                            Width="215"
                             Margin="15,10"
                             Command="{Binding OpenSettingWindowCommand}"
-                            />
+                            >
+                        <StackPanel Style="{StaticResource IconTextSetStackPanel}">
+                            <md:PackIcon Style="{StaticResource IconTextSetIcon}"
+                                         Kind="Settings"
+                                         />
+                            <TextBlock Style="{StaticResource IconSetSetText}"
+                                       Text="{DynamicResource Home_OpenSetting}"
+                                       />
+                        </StackPanel>
+                    </Button>
 
                     <TextBlock Style="{StaticResource HeaderText}"
                            Text="{DynamicResource Home_SettingManagement}"
@@ -120,11 +153,11 @@
                                 Margin="15,10"
                                 >
                         <Button Content="{DynamicResource Home_SaveSettingFile}" 
-                            HorizontalAlignment="Left"
-                            Width="100"
-                            Margin="0"
-                            Command="{Binding SaveSettingToFileCommand}"
-                            />
+                                HorizontalAlignment="Left"
+                                Width="100"
+                                Margin="0"
+                                Command="{Binding SaveSettingToFileCommand}"
+                                />
 
                         <Button Content="{DynamicResource Home_LoadSettingFile}" 
                             HorizontalAlignment="Left"
