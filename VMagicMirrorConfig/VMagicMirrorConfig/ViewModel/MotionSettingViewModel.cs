@@ -530,7 +530,7 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private int _waitMotionScale = 100;
+        private int _waitMotionScale = 125;
         public int WaitMotionScale
         {
             get => _waitMotionScale;
@@ -592,7 +592,7 @@ namespace Baku.VMagicMirrorConfig
             HandYOffsetAfterKeyDown = 2;
 
             EnableWaitMotion = true;
-            WaitMotionScale = 100;
+            WaitMotionScale = 125;
             WaitMotionPeriod = 10;
         }
     }
