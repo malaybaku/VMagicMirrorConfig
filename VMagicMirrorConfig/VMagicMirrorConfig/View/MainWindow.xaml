@@ -3,11 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
         xmlns:vmm="clr-namespace:Baku.VMagicMirrorConfig"
         mc:Ignorable="d"
         d:DataContext="{x:Type vmm:MainWindowViewModel}"
-        Title="VMagicMirror v0.8.4" 
+        Title="VMagicMirror v0.8.5" 
         ResizeMode="CanMinimize"
         Height="520" Width="550"
         MinHeight="520" MinWidth="550"
@@ -18,20 +19,48 @@
     <dragablz:TabablzControl FixedHeaderCount="5">
         <dragablz:TabablzControl.HeaderItemTemplate>
             <DataTemplate>
-                <TextBlock FontSize="12"
-                           FontWeight="Bold"
-                           Margin="0"
-                           Text="{Binding}" 
-                           />
+                <ContentControl Content="{Binding}"/>
+                <!--DataType="{x:Type vmm:IconText}">-->
+                <!--<StackPanel Orientation="Horizontal" Margin="0">
+
+                    <md:PackIcon Kind="{Binding IconKind}" 
+                                 VerticalAlignment="Center"
+                                 Margin="5,0,3,0"
+                                 Width="22"
+                                 Height="22"
+                                 />
+                    <TextBlock FontSize="12"
+                               FontWeight="Bold"
+                               VerticalAlignment="Center"
+                               Margin="0,0,5,0"
+                               Text="{Binding Text}" 
+                               />
+
+                </StackPanel>-->
             </DataTemplate>
         </dragablz:TabablzControl.HeaderItemTemplate>
-        <TabItem Header="{DynamicResource TopBar_Home}">
+        <TabItem>
+            <TabItem.Header>
+                <vmm:TabHeaderIconText Text="{DynamicResource TopBar_Home}"
+                                       IconKind="Home"
+                                       />
+            </TabItem.Header>
             <vmm:HomePanel />
         </TabItem>
-        <TabItem Header="{DynamicResource TopBar_Streaming}">
+        <TabItem>
+            <TabItem.Header>
+                <vmm:TabHeaderIconText Text="{DynamicResource TopBar_Streaming}"
+                                       IconKind="Videocam"
+                                       />
+            </TabItem.Header>
             <vmm:StreamingPanel />
         </TabItem>
-        <TabItem Header="About">
+        <TabItem>
+            <TabItem.Header>
+                <vmm:TabHeaderIconText Text="About"
+                                       IconKind="HelpOutline"
+                                       />
+            </TabItem.Header>
             <vmm:AboutPanel />
         </TabItem>
     </dragablz:TabablzControl>

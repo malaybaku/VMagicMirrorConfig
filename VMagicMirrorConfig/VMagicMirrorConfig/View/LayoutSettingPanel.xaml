@@ -17,10 +17,19 @@
 
             <md:Card>
                 <StackPanel>
-                    <TextBlock Text="{DynamicResource Layout_Camera}"
-                               Margin="5"
-                               Style="{StaticResource HeaderText}"
-                               />
+
+                    <StackPanel Orientation="Horizontal" Margin="5">
+
+                        <md:PackIcon Kind="Videocam"
+                                     Style="{StaticResource SettingHeaderPackIcon}"
+                                     />
+                        <TextBlock Text="{DynamicResource Layout_Camera}"
+                                   Style="{StaticResource HeaderText}"
+                                   VerticalAlignment="Center"
+                                   Margin="5"
+                                   />
+                    </StackPanel>
+                    
 
                     <CheckBox Content="{DynamicResource Layout_EnableFreeCameraMode}" 
                               IsChecked="{Binding EnableFreeCameraMode}"
@@ -53,11 +62,19 @@
                     </Grid>
 
 
-                    <Button Content="{DynamicResource Layout_Camera_ResetPosition}"
-                            HorizontalAlignment="Left"
+                    <Button HorizontalAlignment="Left"
                             Width="150"
                             Command="{Binding ResetCameraPositionCommand}"
-                            />
+                            >
+                        <StackPanel Style="{StaticResource IconTextSetStackPanel}">
+                            <md:PackIcon Style="{StaticResource IconTextSetIcon}"
+                                         Kind="Reload"
+                                         />
+                            <TextBlock Style="{StaticResource IconSetSetText}"
+                                       Text="{DynamicResource Layout_Camera_ResetPosition}"
+                                       />
+                        </StackPanel>
+                    </Button>
 
                 </StackPanel>
             </md:Card>
@@ -65,11 +82,19 @@
             <md:Card>
                 <StackPanel>
 
-                    <TextBlock Text="{DynamicResource Layout_Hid}"
-                               Margin="5"
-                               Style="{StaticResource HeaderText}"
-                               />
+                    <StackPanel Orientation="Horizontal"
+                                Margin="5"
+                                >
+                        <md:PackIcon Kind="Keyboard"
+                                     Style="{StaticResource SettingHeaderPackIcon}"
+                                     />
 
+                        <TextBlock Text="{DynamicResource Layout_Hid}"
+                                   Style="{StaticResource HeaderText}"
+                                   Margin="5"
+                                   />
+                    </StackPanel>
+                                
                     <Grid Margin="5">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -127,10 +152,19 @@
             <md:Card>
                 <StackPanel>
 
-                    <TextBlock Text="{DynamicResource Layout_Gamepad}"
-                               Margin="5"
-                               Style="{StaticResource HeaderText}"
-                               />
+                    <StackPanel Orientation="Horizontal"
+                                Margin="5"
+                                >
+
+                        <md:PackIcon Kind="GamepadVariant"
+                                     Style="{StaticResource SettingHeaderPackIcon}"
+                                     />
+                        <TextBlock Text="{DynamicResource Layout_Gamepad}"
+                                   Style="{StaticResource HeaderText}"
+                                   Margin="5"
+                                   />
+                    </StackPanel>
+                    
 
                     <StackPanel>
 

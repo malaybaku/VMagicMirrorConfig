@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
         xmlns:vmm="clr-namespace:Baku.VMagicMirrorConfig"
         mc:Ignorable="d"
@@ -14,23 +15,39 @@
     <dragablz:TabablzControl FixedHeaderCount="5">
         <dragablz:TabablzControl.HeaderItemTemplate>
             <DataTemplate>
-                <TextBlock FontSize="12"
-                           FontWeight="Bold"
-                           Margin="0"
-                           Text="{Binding}" 
-                           />
+                <ContentControl Content="{Binding}"/>
             </DataTemplate>
         </dragablz:TabablzControl.HeaderItemTemplate>
-        <TabItem Header="{DynamicResource TopBar_Setting_Window}">
+        <TabItem>
+            <TabItem.Header>
+                <vmm:TabHeaderIconText Text="{DynamicResource TopBar_Setting_Window}"
+                                       IconKind="WindowRestore"
+                                       />
+            </TabItem.Header>
             <vmm:WindowSettingPanel DataContext="{Binding WindowSetting}" />
         </TabItem>
-        <TabItem Header="{DynamicResource TopBar_Setting_Motion}">
+        <TabItem>
+            <TabItem.Header>
+                <vmm:TabHeaderIconText Text="{DynamicResource TopBar_Setting_Motion}"
+                                       IconKind="HumanHandsup"
+                                       />
+            </TabItem.Header>
             <vmm:MotionSettingPanel DataContext="{Binding MotionSetting}" />
         </TabItem>
-        <TabItem Header="{DynamicResource TopBar_Setting_Layout}">
+        <TabItem>
+            <TabItem.Header>
+                <vmm:TabHeaderIconText Text="{DynamicResource TopBar_Setting_Layout}"
+                                       IconKind="ViewDashboard"
+                                       />
+            </TabItem.Header>
             <vmm:LayoutSettingPanel DataContext="{Binding LayoutSetting}" />
         </TabItem>
-        <TabItem Header="{DynamicResource TopBar_Setting_Light}">
+        <TabItem>
+            <TabItem.Header>
+                <vmm:TabHeaderIconText Text="{DynamicResource TopBar_Setting_Light}"
+                                       IconKind="Lightbulb"
+                                       />
+            </TabItem.Header>
             <vmm:LightSettingPanel DataContext="{Binding LightSetting}" />
         </TabItem>
     </dragablz:TabablzControl>

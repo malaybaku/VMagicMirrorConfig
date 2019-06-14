@@ -25,6 +25,10 @@
 
                     <StackPanel Orientation="Horizontal">
 
+                        <md:PackIcon Style="{StaticResource SettingHeaderPackIcon}"
+                                     Kind="LightbulbOn"
+                                     />
+
                         <TextBlock Text="{DynamicResource Light}"
                                    Margin="5"
                                    Style="{StaticResource HeaderText}"
@@ -133,10 +137,19 @@
 
             <md:Card>
                 <StackPanel>
-                    <TextBlock Text="{DynamicResource Shadow}"
-                               Margin="5"
-                               Style="{StaticResource HeaderText}"
-                               />
+
+                    <StackPanel Orientation="Horizontal"
+                                Margin="5">
+
+                        <md:PackIcon Kind="BoxShadow"
+                                     Style="{StaticResource SettingHeaderPackIcon}"
+                                     />
+
+                        <TextBlock Text="{DynamicResource Shadow}"
+                                   Style="{StaticResource HeaderText}"
+                                   Margin="5"
+                                   />
+                    </StackPanel>
 
                     <CheckBox Margin="10,5,10,15"
                               Content="{DynamicResource Shadow_Enable}"
@@ -219,6 +232,10 @@
             <md:Card>
                 <StackPanel>
                     <StackPanel Orientation="Horizontal">
+
+                        <md:PackIcon Kind="WhiteBalanceIridescent"
+                                     Style="{StaticResource SettingHeaderPackIcon}"
+                                     />
 
                         <TextBlock Text="{DynamicResource Bloom}"
                                    Margin="5"

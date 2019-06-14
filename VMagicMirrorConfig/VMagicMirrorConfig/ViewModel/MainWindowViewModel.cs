@@ -216,15 +216,8 @@ namespace Baku.VMagicMirrorConfig
 
         private void AutoAdjust() => MessageSender.SendMessage(MessageFactory.Instance.RequestAutoAdjust());
 
-        private void OpenSettingWindow()
-        {
-            new SettingWindow()
-            {
-                Owner = Application.Current.MainWindow,
-                WindowStartupLocation = WindowStartupLocation.CenterOwner,
-                DataContext = this,
-            }.Show();
-        }
+        private void OpenSettingWindow() 
+            => SettingWindow.OpenOrActivateExistingWindow(this);
 
         private void SaveSettingToFile()
         {
