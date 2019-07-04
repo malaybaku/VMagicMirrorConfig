@@ -59,6 +59,17 @@
     <sys:String x:Key="Window_FetchUnityWindowPos">Check current window position</sys:String>
     <sys:String x:Key="Window_MoveWindow">Move to specified position</sys:String>
 
+    <sys:String x:Key="Window_TransparencySupport">Character Transparency Support</sys:String>
+    <sys:String x:Key="Window_TransparencySupport_Level">Character Level</sys:String>
+    <sys:String x:Key="Window_TransparencySupport_Alpha">Alpha when Transparent(32-255)</sys:String>
+
+    <sys:String x:Key="Window_TransparencySupport_Level_0">Level 0: Always NOT transparent.</sys:String>
+    <sys:String x:Key="Window_TransparencySupport_Level_1">Level 1: Transparent if "Drag character" is off, and mouse pointer is close to the character.</sys:String>
+    <sys:String x:Key="Window_TransparencySupport_Level_2">Level 2: Transparent if mouse pointer is close to the character.</sys:String>
+    <sys:String x:Key="Window_TransparencySupport_Level_3">Level 3: Transparent if "Drag character" is off.</sys:String>
+    <sys:String x:Key="Window_TransparencySupport_Level_4">Level 4: Always transparent.</sys:String>
+    
+    
     <!-- Motion -->
     
     <!-- Motion : Face -->

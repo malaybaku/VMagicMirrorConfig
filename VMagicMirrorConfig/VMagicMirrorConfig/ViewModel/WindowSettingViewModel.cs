@@ -141,6 +141,38 @@ namespace Baku.VMagicMirrorConfig
             SendMessage(MessageFactory.Instance.ResetWindowSize());
         }
 
+
+        private int _wholeWindowTransparencyLevel = 2;
+        public int WholeWindowTransparencyLevel
+        {
+            get => _wholeWindowTransparencyLevel;
+            set
+            {
+                if (SetValue(ref _wholeWindowTransparencyLevel, value))
+                {
+                    SendMessage(
+                        MessageFactory.Instance.SetWholeWindowTransparencyLevel(_wholeWindowTransparencyLevel)
+                        );
+                }
+            }
+        }
+
+        private int _alphaValueOnTransparent = 128;
+        public int AlphaValueOnTransparent
+        {
+            get => _alphaValueOnTransparent;
+            set
+            {
+                if (SetValue(ref _alphaValueOnTransparent, value))
+                {
+                    SendMessage(
+                        MessageFactory.Instance.SetAlphaValueOnTransparent(_alphaValueOnTransparent)
+                        );
+                }
+            }
+        }
+
+
         #region privateになったプロパティ
 
         private bool _hideWindowFrame = false;
@@ -181,6 +213,9 @@ namespace Baku.VMagicMirrorConfig
             IsTransparent = false;
             WindowDraggable = true;
             TopMost = true;
+
+            WholeWindowTransparencyLevel = 2;
+            AlphaValueOnTransparent = 128;
 
             //このリセットはあまり定数的ではないことに注意！
             ResetWindowPosition();

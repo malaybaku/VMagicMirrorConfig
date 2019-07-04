@@ -6,6 +6,7 @@
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:vmm="clr-namespace:Baku.VMagicMirrorConfig"
              mc:Ignorable="d"
+             d:DesignWidth="400"
              d:DesignHeight="550"
              d:DataContext="{x:Type vmm:WindowSettingViewModel}"
              >
@@ -120,6 +121,94 @@
                     </Button>
                 </StackPanel>
             </md:Card>
+
+            <md:Card>
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+
+                        <md:PackIcon Kind="LayersClear"
+                                     Style="{StaticResource SettingHeaderPackIcon}"
+                                     />
+
+                        <TextBlock Text="{DynamicResource Window_TransparencySupport}"
+                                   Margin="5"
+                                   Style="{StaticResource HeaderText}"
+                                   />
+                        
+                    </StackPanel>
+                    
+                    <TextBlock Margin="10" Text="{DynamicResource Window_TransparencySupport_Level}"/>
+
+                    <Slider Minimum="0" Maximum="4"
+                            Margin="15,0"
+                            Style="{StaticResource MaterialDesignDiscreteSlider}"
+                            Value="{Binding WholeWindowTransparencyLevel, Mode=TwoWay}"
+                            />
+
+                    <Grid Margin="20,10,20,20">
+                        <Grid.Resources>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="MinHeight" Value="40"/>
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                            </Style>
+                            <vmm:IntegerEqualityToVisibilityConverter x:Key="IntToVisibilityConverter"/>
+                        </Grid.Resources>
+                        <TextBlock Text="{DynamicResource Window_TransparencySupport_Level_0}"
+                                   Visibility="{Binding WholeWindowTransparencyLevel, 
+                                                        Converter={StaticResource IntToVisibilityConverter},
+                                                        ConverterParameter=0
+                                                        }"
+                                   />
+                        <TextBlock Text="{DynamicResource Window_TransparencySupport_Level_1}" 
+                                   Visibility="{Binding WholeWindowTransparencyLevel, 
+                                                        Converter={StaticResource IntToVisibilityConverter},
+                                                        ConverterParameter=1
+                                                        }"
+                                   />
+                        <TextBlock Text="{DynamicResource Window_TransparencySupport_Level_2}" 
+                                   Visibility="{Binding WholeWindowTransparencyLevel, 
+                                                        Converter={StaticResource IntToVisibilityConverter},
+                                                        ConverterParameter=2
+                                                        }"
+                                   />
+                        <TextBlock Text="{DynamicResource Window_TransparencySupport_Level_3}" 
+                                   Visibility="{Binding WholeWindowTransparencyLevel, 
+                                                        Converter={StaticResource IntToVisibilityConverter},
+                                                        ConverterParameter=3
+                                                        }"
+                                   />
+                        <TextBlock Text="{DynamicResource Window_TransparencySupport_Level_4}" 
+                                   Visibility="{Binding WholeWindowTransparencyLevel, 
+                                                        Converter={StaticResource IntToVisibilityConverter},
+                                                        ConverterParameter=4
+                                                        }"
+                                   />
+
+                    </Grid>
+
+                    <TextBlock Margin="10" 
+                               Text="{DynamicResource Window_TransparencySupport_Alpha}"
+                               />
+
+                    <Grid Margin="20,0,20,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Slider Grid.Column="0"                                
+                                x:Name="sliderAlphaWhenTransparent"
+                                Minimum="32" Maximum="255"
+                                Value="{Binding AlphaValueOnTransparent, Mode=TwoWay}"
+                                />
+                        <TextBox Grid.Column="2"
+                                 Text="{Binding Value, ElementName=sliderAlphaWhenTransparent}"
+                                 />
+                    </Grid>
+
+                </StackPanel>
+            </md:Card>
+
 
             <!--<md:Card>
                 <StackPanel>
