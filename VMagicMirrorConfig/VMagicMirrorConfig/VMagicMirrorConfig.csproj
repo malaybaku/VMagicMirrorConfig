@@ -125,6 +125,7 @@
     <Compile Include="View\AboutPanel.xaml.cs">
       <DependentUpon>AboutPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Code\IntegerEqualityToVisibilityConverter.cs" />
     <Compile Include="View\Code\TabHeaderIconText.xaml.cs">
       <DependentUpon>TabHeaderIconText.xaml</DependentUpon>
     </Compile>
