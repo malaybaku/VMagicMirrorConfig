@@ -1,0 +1,30 @@
+﻿<Window x:Class="Baku.VMagicMirrorConfig.LargePointer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"        
+        WindowStyle="None"
+        Background="Transparent"
+        AllowsTransparency="True"
+        Topmost="True"
+        ShowInTaskbar="False"
+        Width="100"
+        Height="100">
+    <Grid x:Name="MainGrid">
+        <Ellipse Margin="12" 
+                 Stroke="#B0FF8000"
+                 StrokeThickness="2"
+                 >
+        </Ellipse>
+
+        <Ellipse Margin="10" 
+                 Stroke="#B0FFB060"
+                 StrokeThickness="6"
+                 >
+            <Ellipse.Effect>
+                <BlurEffect Radius="5" />
+            </Ellipse.Effect>
+        </Ellipse>
+    </Grid>
+</Window>

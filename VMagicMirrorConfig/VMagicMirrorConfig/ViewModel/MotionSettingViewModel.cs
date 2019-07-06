@@ -15,6 +15,8 @@ namespace Baku.VMagicMirrorConfig
             receiver.ReceivedCommand += OnReceivedCommand;
         }
 
+        private readonly LargePointerController _largePointerController = new LargePointerController();
+
         //フラグが立っている間はプロパティが変わってもメッセージを投げない。これはUnityから指定されたパラメタの適用中に
         private bool _silentPropertySetter = false;
         private protected override void SendMessage(Message message)
@@ -81,6 +83,8 @@ namespace Baku.VMagicMirrorConfig
                 }
             });
         }
+
+        public void ClosePointer() => _largePointerController.Close();
 
         private void SetAutoAdjustResults(string data) => SetAutoAdjustResults(data, false);
 
@@ -425,6 +429,14 @@ namespace Baku.VMagicMirrorConfig
                 if (SetValue(ref _enablePresenterMotion, value))
                 {
                     SendMessage(MessageFactory.Instance.EnablePresenterMotion(EnablePresenterMotion));
+                    if (value)
+                    {
+                        _largePointerController.Show();
+                    }
+                    else
+                    {
+                        _largePointerController.Close();
+                    }
                 }
             }
         }
