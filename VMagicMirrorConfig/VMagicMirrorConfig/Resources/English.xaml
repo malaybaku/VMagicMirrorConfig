@@ -105,6 +105,7 @@
     <sys:String x:Key="Motion_Arm_WaistWidth">Waist width [cm]</sys:String>
     <sys:String x:Key="Motion_Arm_ElbowCloseStrength">Strength to keep upper arm to body [%]</sys:String>
     <sys:String x:Key="Motion_Arm_EnablePresenterMotion">Presentation-like hand</sys:String>
+    <sys:String x:Key="Motion_Arm_ShowPresentationPointer">Show Pointer Support</sys:String>
     <sys:String x:Key="Motion_Arm_PresenterArmMotionScale">Presentation-like motion scale [%]</sys:String>
     <sys:String x:Key="Motion_Arm_PresenterArmRadiusMin">Arm position radius min [cm]</sys:String>
 

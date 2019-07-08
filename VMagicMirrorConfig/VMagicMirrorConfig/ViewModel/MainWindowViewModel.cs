@@ -355,6 +355,7 @@ namespace Baku.VMagicMirrorConfig
                 _isDisposed = true;
                 SaveSetting(GetFilePath(SpecialFileNames.AutoSaveSettingFileName), true);
                 Initializer.Dispose();
+                MotionSetting.ClosePointer();
                 UnityAppCloser.Close();
             }
         }
