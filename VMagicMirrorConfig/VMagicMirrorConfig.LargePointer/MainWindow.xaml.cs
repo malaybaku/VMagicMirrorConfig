@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Interop;
+using System.Windows.Media;
 
 namespace Baku.VMagicMirrorConfig.LargePointer
 {
@@ -14,8 +15,16 @@ namespace Baku.VMagicMirrorConfig.LargePointer
     public partial class MainWindow : Window
     {
         private const int MouseTrackIntervalMillisec = 16;
-        private const int MouseStopDisappearTimeMillisec = 5000;
-        private const double OpacityChangeLerpFactor = 0.1;
+        private const int MouseStopDisappearTimeMillisec = 6000;
+        private const double OpacityChangeLerpFactor = 0.2;
+
+        private const int MouseStopScaleResetTimeMillisec = 3000;
+        //Sqrを使っているのは移動値を2乗値で管理しているため
+        private const int ScaleIncreaseMoveDistanceSqr = 10000;
+        private const double ScaleChangeLerpFactor = 0.1;
+        private const double ScaleWhenStop = 0.5;
+        private const double ScaleWhenMoving = 1.0;
+
 
         public MainWindow()
         {
@@ -26,11 +35,19 @@ namespace Baku.VMagicMirrorConfig.LargePointer
         private IntPtr _hWnd = IntPtr.Zero;
         private int _width = 1;
         private int _height = 1;
+        private ScaleTransform _scaleTransform = null;
 
+        //表示・非表示とスケーリングの双方で使う
+        private int _mouseStopTimeMillisec = 0;
         private int _prevMouseX = -1;
         private int _prevMouseY = -1;
+
+        //表示・非表示の制御だけに使う
         private double _prevOpacity = 1.0;
-        private int _mouseStopTimeMillisec = 0;
+
+        //スケーリングだけに使う。Sqrを使うと整数計算で閉じて都合がいいのでそうしている。
+        private double _prevScale = 0.8;
+        private int _mouseMoveDistanceSumSqr = 0;
 
         protected override void OnContentRendered(EventArgs e)
         {
@@ -41,6 +58,7 @@ namespace Baku.VMagicMirrorConfig.LargePointer
             var rect = GetWindowRect(_hWnd);
             _width = rect.right - rect.left;
             _height = rect.bottom - rect.top;
+            _scaleTransform = MainGrid.RenderTransform as ScaleTransform;
 
             StartSyncWindowPositionToMouse();
         }
@@ -96,16 +114,37 @@ namespace Baku.VMagicMirrorConfig.LargePointer
                 _mouseStopTimeMillisec += MouseTrackIntervalMillisec;
             }
 
-            //ずっと止まってるならポインターを消す。そうじゃなければつける。
-            //いずれもパッと変えると違和感あるのでLerpする。
-            double goalOpacity =
-                (_mouseStopTimeMillisec < MouseStopDisappearTimeMillisec) ?
-                1.0 :
-                0.0;
+            //Opacityの更新
+            {
+                //ずっと止まってるならポインターを消す。そうじゃなければつける。
+                //いずれもパッと変えると違和感あるのでLerpする。
+                double goalOpacity =
+                    (_mouseStopTimeMillisec < MouseStopDisappearTimeMillisec) ?
+                    1.0 :
+                    0.0;
 
-            double nextOpacity = Lerp(_prevOpacity, goalOpacity, OpacityChangeLerpFactor);
-            MainGrid.Opacity = nextOpacity;
-            _prevOpacity = nextOpacity;
+                double nextOpacity = Lerp(_prevOpacity, goalOpacity, OpacityChangeLerpFactor);
+                MainGrid.Opacity = nextOpacity;
+                _prevOpacity = nextOpacity;
+            }
+
+            //Scaleの更新
+            {
+                //ユーザーがマウスをグリグリしなくなったと判別
+                if (_mouseStopTimeMillisec > MouseStopScaleResetTimeMillisec)
+                {
+                    _mouseMoveDistanceSumSqr = 0;
+                }
+
+                double goalScale =
+                    (_mouseMoveDistanceSumSqr > ScaleIncreaseMoveDistanceSqr) ?
+                    ScaleWhenMoving :
+                    ScaleWhenStop;
+                double nextScale = Lerp(_prevScale, goalScale, ScaleChangeLerpFactor);
+                _scaleTransform.ScaleX = nextScale;
+                _scaleTransform.ScaleY = nextScale;
+                _prevScale = nextScale;
+            }
         }
 
         private bool CheckAndTrackMousePosition()
@@ -114,8 +153,17 @@ namespace Baku.VMagicMirrorConfig.LargePointer
             if (cursorPos.X != _prevMouseX || cursorPos.Y != _prevMouseY)
             {
                 SetWindowPosition(_hWnd, cursorPos.X - _width / 2, cursorPos.Y - _height / 2);
+
+                if (_mouseMoveDistanceSumSqr < ScaleIncreaseMoveDistanceSqr)
+                {
+                    _mouseMoveDistanceSumSqr += 
+                        (_prevMouseX - cursorPos.X) * (_prevMouseX - cursorPos.X) +
+                        (_prevMouseY - cursorPos.Y) * (_prevMouseY - cursorPos.Y);
+                }
+
                 _prevMouseX = cursorPos.X;
                 _prevMouseY = cursorPos.Y;
+                
                 return true;
             }
             else

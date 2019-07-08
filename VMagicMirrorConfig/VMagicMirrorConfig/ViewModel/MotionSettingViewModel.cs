@@ -15,7 +15,7 @@ namespace Baku.VMagicMirrorConfig
             receiver.ReceivedCommand += OnReceivedCommand;
         }
 
-        private readonly LargePointerController _largePointerController = new LargePointerController();
+        private LargePointerController _largePointerController => LargePointerController.Instance;
 
         //フラグが立っている間はプロパティが変わってもメッセージを投げない。これはUnityから指定されたパラメタの適用中に
         private bool _silentPropertySetter = false;
@@ -29,7 +29,7 @@ namespace Baku.VMagicMirrorConfig
 
         private void OnReceivedCommand(object sender, CommandReceivedEventArgs e)
         {
-            switch(e.Command)
+            switch (e.Command)
             {
                 case ReceiveMessageNames.SetCalibrationFaceData:
                     CalibrateFaceData = e.Args;
@@ -161,7 +161,7 @@ namespace Baku.VMagicMirrorConfig
         private ActionCommand _calibrateFaceCommand;
         public ActionCommand CalibrateFaceCommand
             => _calibrateFaceCommand ?? (_calibrateFaceCommand = new ActionCommand(CalibrateFace));
-        
+
         private void CalibrateFace()
         {
             SendMessage(MessageFactory.Instance.CalibrateFace());
@@ -429,16 +429,29 @@ namespace Baku.VMagicMirrorConfig
                 if (SetValue(ref _enablePresenterMotion, value))
                 {
                     SendMessage(MessageFactory.Instance.EnablePresenterMotion(EnablePresenterMotion));
-                    if (value)
-                    {
-                        _largePointerController.Show();
-                    }
-                    else
-                    {
-                        _largePointerController.Close();
-                    }
+                    UpdatePointerVisibility();
                 }
             }
+        }
+
+        private bool _showPresentationPointer = true;
+        public bool ShowPresentationPointer
+        {
+            get => _showPresentationPointer;
+            set
+            {
+                if (SetValue(ref _showPresentationPointer, value))
+                {
+                    UpdatePointerVisibility();
+                }
+            }
+        }
+
+        private void UpdatePointerVisibility()
+        { 
+            _largePointerController.UpdateVisibility(
+                EnablePresenterMotion && ShowPresentationPointer
+                );
         }
 
         private int _presentationArmMotionScale = 50;
