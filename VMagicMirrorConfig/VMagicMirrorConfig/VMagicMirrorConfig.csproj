@@ -97,7 +97,9 @@
     <Compile Include="Model\Grpc\Generated\VMagicMirrorGrpcGrpc.cs" />
     <Compile Include="Model\IMessageReceiver.cs" />
     <Compile Include="Model\IMessageSender.cs" />
+    <Compile Include="Model\LargePointerController.cs" />
     <Compile Include="Model\MessageFactory.cs" />
+    <Compile Include="Model\NativeMethods.cs" />
     <Compile Include="Model\ReceiveMessageNames.cs" />
     <Compile Include="Model\StartupRegistrySetting.cs" />
     <Compile Include="Model\UnityAppCloser.cs" />
@@ -125,6 +127,7 @@
     <Compile Include="View\AboutPanel.xaml.cs">
       <DependentUpon>AboutPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Code\IntegerEqualityToVisibilityConverter.cs" />
     <Compile Include="View\Code\TabHeaderIconText.xaml.cs">
       <DependentUpon>TabHeaderIconText.xaml</DependentUpon>
     </Compile>
@@ -179,6 +182,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\SubWindow\EmphasizedMousePointer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\WindowSettingPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -205,6 +212,9 @@
     </Compile>
     <Compile Include="View\StreamingPanel.xaml.cs">
       <DependentUpon>StreamingPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SubWindow\EmphasizedMousePointer.xaml.cs">
+      <DependentUpon>EmphasizedMousePointer.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\WindowSettingPanel.xaml.cs">
       <DependentUpon>WindowSettingPanel.xaml</DependentUpon>

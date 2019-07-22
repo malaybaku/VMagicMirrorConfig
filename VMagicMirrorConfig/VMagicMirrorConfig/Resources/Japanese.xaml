@@ -58,6 +58,15 @@
     <sys:String x:Key="Window_FetchUnityWindowPos">いまのウィンドウ位置を記憶</sys:String>
     <sys:String x:Key="Window_MoveWindow">指定した位置へ移動</sys:String>
     
+    <sys:String x:Key="Window_TransparencySupport">キャラ透明化の詳細</sys:String>
+    <sys:String x:Key="Window_TransparencySupport_Level">キャラの透明化レベル</sys:String>
+    <sys:String x:Key="Window_TransparencySupport_Alpha">透明になるときの透明度(32-255)</sys:String>
+    
+    <sys:String x:Key="Window_TransparencySupport_Level_0">レベル0: つねに不透明です。</sys:String>
+    <sys:String x:Key="Window_TransparencySupport_Level_1">レベル1: 「キャラ付近を掴んでドラッグ」がオフで、かつキャラの近くにマウスポインタがあれば、半透明になります。</sys:String>
+    <sys:String x:Key="Window_TransparencySupport_Level_2">レベル2: キャラの近くにマウスポインタがあれば、半透明になります。</sys:String>
+    <sys:String x:Key="Window_TransparencySupport_Level_3">レベル3: 「キャラ付近を掴んでドラッグ」がオフならば、半透明になります。</sys:String>
+    <sys:String x:Key="Window_TransparencySupport_Level_4">レベル4: つねに半透明になります。</sys:String>
     
     <!-- Motion -->
     
@@ -94,6 +103,7 @@
     <sys:String x:Key="Motion_Arm_WaistWidth">脇をしめる幅 [cm]</sys:String>
     <sys:String x:Key="Motion_Arm_ElbowCloseStrength">脇をしめる強さ [%]</sys:String>
     <sys:String x:Key="Motion_Arm_EnablePresenterMotion">プレゼン風に右手を動かす</sys:String>
+    <sys:String x:Key="Motion_Arm_ShowPresentationPointer">補助ポインターを表示</sys:String>    
     <sys:String x:Key="Motion_Arm_PresenterArmMotionScale">プレゼン動作サイズ[%]</sys:String>
     <sys:String x:Key="Motion_Arm_PresenterArmRadiusMin">プレゼン動作の最小半径 [cm]</sys:String>    
 

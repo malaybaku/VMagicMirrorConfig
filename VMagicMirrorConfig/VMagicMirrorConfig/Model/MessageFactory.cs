@@ -51,7 +51,11 @@ namespace Baku.VMagicMirrorConfig
 
         public Message MoveWindow(int x, int y) => WithArg($"{x},{y}");
         public Message ResetWindowSize() => NoArg();
-        
+
+        public Message SetWholeWindowTransparencyLevel(int level) => WithArg($"{level}");
+
+        public Message SetAlphaValueOnTransparent(int alpha) => WithArg($"{alpha}");
+
         #endregion
 
         #region モーション
@@ -113,6 +117,7 @@ namespace Baku.VMagicMirrorConfig
         public Message EyebrowLeftDownKey(string key) => WithArg(key);
         public Message UseSeparatedKeyForEyebrow(bool separate) => WithArg($"{separate}");
         public Message EyebrowRightUpKey(string key) => WithArg(key);
+
         public Message EyebrowRightDownKey(string key) => WithArg(key);
         public Message EyebrowUpScale(int percentage) => WithArg($"{percentage}");
         public Message EyebrowDownScale(int percentage) => WithArg($"{percentage}");
@@ -123,6 +128,7 @@ namespace Baku.VMagicMirrorConfig
 
         public Message CameraFov(int cameraFov) => WithArg($"{cameraFov}");
         public Message SetCustomCameraPosition(string posData) => WithArg($"{posData}");
+
         public Message EnableFreeCameraMode(bool enable) => WithArg($"{enable}");
         public Message ResetCameraPosition() => NoArg();
 
