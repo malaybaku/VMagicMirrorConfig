@@ -60,7 +60,7 @@
     <sys:String x:Key="Window_MoveWindow">Move to specified position</sys:String>
 
     <sys:String x:Key="Window_TransparencySupport">Character Transparency Support</sys:String>
-    <sys:String x:Key="Window_TransparencySupport_Level">Character Level</sys:String>
+    <sys:String x:Key="Window_TransparencySupport_Level">Transparency Level</sys:String>
     <sys:String x:Key="Window_TransparencySupport_Alpha">Alpha when Transparent(32-255)</sys:String>
 
     <sys:String x:Key="Window_TransparencySupport_Level_0">Level 0: Always NOT transparent.</sys:String>
