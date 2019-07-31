@@ -137,6 +137,19 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
+        private bool _autoblinkDuringFaceTracking = false;
+        public bool AutoBlinkDuringFaceTracking
+        {
+            get => _autoblinkDuringFaceTracking;
+            set
+            {
+                if (SetValue(ref _autoblinkDuringFaceTracking, value))
+                {
+                    SendMessage(MessageFactory.Instance.AutoBlinkDuringFaceTracking(AutoBlinkDuringFaceTracking));
+                }
+            }
+        }
+
         private string _cameraDeviceName = "";
         public string CameraDeviceName
         {
@@ -587,6 +600,7 @@ namespace Baku.VMagicMirrorConfig
         {
             EnableFaceTracking = true;
             CameraDeviceName = "";
+            AutoBlinkDuringFaceTracking = false;
 
             EnableLipSync = true;
             LipSyncMicrophoneDeviceName = "";
