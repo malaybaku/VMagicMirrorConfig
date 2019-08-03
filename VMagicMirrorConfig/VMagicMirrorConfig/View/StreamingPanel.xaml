@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DataContext="{x:Type vmm:MainWindowViewModel}"
              d:DesignWidth="520"
-             d:DesignHeight="400"
+             d:DesignHeight="460"
              >
     <UserControl.Resources>
         <Style TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}">
@@ -197,18 +197,47 @@
                                            />
                             </StackPanel>
 
-                            <CheckBox Margin="10,3" 
+                            <CheckBox Margin="10,1" 
                                       Content="{DynamicResource Layout_Hid}"
                                       IsChecked="{Binding LayoutSetting.HidVisibility}"
                                       />
-                            <CheckBox Margin="10,3" 
+                            <CheckBox Margin="10,1" 
                                       Content="{DynamicResource Layout_Gamepad}"
                                       IsChecked="{Binding LayoutSetting.Gamepad.GamepadVisibility}"
                                       />
-                            <CheckBox Margin="10,3" 
+                            <CheckBox Margin="10,1" 
                                       Content="{DynamicResource Shadow_Enable_Streaming}"
                                       IsChecked="{Binding LightSetting.EnableShadow}"
                                       />
+ 
+                            <TextBlock Text="{DynamicResource Layout_Hid_TypingEffect_Header}"/>
+                            <StackPanel Margin="10,0,5,5"
+                                        Orientation="Horizontal">
+                                <RadioButton VerticalContentAlignment="Center"
+                                             Margin="0,0,15,0"
+                                             IsChecked="{Binding LayoutSetting.TypingEffectIsNone, Mode=TwoWay}"
+                                             >
+                                    <md:PackIcon Style="{StaticResource HeaderPackIcon}" 
+                                                 Kind="EyeOff"
+                                                 />
+                                </RadioButton>
+                                <RadioButton VerticalContentAlignment="Center"
+                                             Margin="0,0,15,0"
+                                             IsChecked="{Binding LayoutSetting.TypingEffectIsText, Mode=TwoWay}"
+                                             >
+                                    <md:PackIcon Style="{StaticResource HeaderPackIcon}" 
+                                                 Kind="Abc"
+                                                 />
+                                </RadioButton>
+                                <RadioButton VerticalContentAlignment="Center"
+                                             Margin="0"
+                                             IsChecked="{Binding LayoutSetting.TypingEffectIsLight, Mode=TwoWay}"
+                                             >
+                                    <md:PackIcon Style="{StaticResource HeaderPackIcon}" 
+                                                 Kind="FlashOn"
+                                                 />
+                                </RadioButton>
+                            </StackPanel>
                         </StackPanel>
                     </md:Card>
 
@@ -229,7 +258,7 @@
                             
                             <CheckBox Content="{DynamicResource Layout_EnableFreeCameraMode}" 
                                       IsChecked="{Binding LayoutSetting.EnableFreeCameraMode}"
-                                      Margin="10,5"
+                                      Margin="10,2"
                                       />
 
                             <Button HorizontalAlignment="Left"
@@ -266,7 +295,7 @@
 
                             <CheckBox Grid.Row="2" Grid.Column="0"
                                       Grid.ColumnSpan="3"
-                                      Margin="10,5" 
+                                      Margin="10,2" 
                                       Content="{DynamicResource Motion_Arm_EnablePresenterMotion}"
                                       IsChecked="{Binding MotionSetting.EnablePresenterMotion}"
                                       />

@@ -140,6 +140,11 @@
 
     <sys:String x:Key="Layout_HidReactToKeyboard">キーボード操作に反応</sys:String>
     <sys:String x:Key="Layout_HidReactToMouse">マウス操作に反応</sys:String>
+
+    <sys:String x:Key="Layout_Hid_TypingEffect_Header">タイピング時のエフェクト</sys:String>
+    <sys:String x:Key="Layout_Hid_TypingEffect_None">なし</sys:String>
+    <sys:String x:Key="Layout_Hid_TypingEffect_Text">テキスト</sys:String>
+    <sys:String x:Key="Layout_Hid_TypingEffect_Light">ライト</sys:String>
     
     <!-- Layout : Gamepad -->
     <sys:String x:Key="Layout_Gamepad">ゲームパッド</sys:String>
