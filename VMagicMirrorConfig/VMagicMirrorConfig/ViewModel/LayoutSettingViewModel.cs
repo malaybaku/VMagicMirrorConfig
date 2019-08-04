@@ -146,7 +146,8 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private bool _typingEffectIsNone = false;
+        //NOTE: ラジオボタン表示をザツにやるためにbool値たくさんで代用している(ほんとはあまり良くない)
+        private bool _typingEffectIsNone = true;
         public bool TypingEffectIsNone
         {
             get => _typingEffectIsNone;
@@ -190,7 +191,7 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private bool _typingEffectIsLight = true;
+        private bool _typingEffectIsLight = false;
         public bool TypingEffectIsLight
         {
             get => _typingEffectIsLight;
@@ -252,7 +253,7 @@ namespace Baku.VMagicMirrorConfig
             HidHorizontalScale = 70;
             HidVisibility = true;
             CameraFov = 40;
-            TypingEffectIsLight = true;
+            TypingEffectIsNone = true;
 
             //カメラ位置については、Unity側がカメラの基準位置を持っているのに任せる
             ResetCameraPosition();
