@@ -10,6 +10,13 @@
              d:DesignWidth="400"
              d:DesignHeight="1050"
              >
+    <UserControl.Resources>
+        <Style TargetType="md:PackIcon" x:Key="HeaderPackIcon">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Width" Value="20"/>
+            <Setter Property="Height" Value="20"/>
+        </Style>
+    </UserControl.Resources>
     <ScrollViewer VerticalScrollBarVisibility="Auto"
                   HorizontalScrollBarVisibility="Disabled"
                   >
@@ -94,7 +101,7 @@
                                    Margin="5"
                                    />
                     </StackPanel>
-                                
+
                     <Grid Margin="5">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -119,7 +126,7 @@
                             </CheckBox.Content>
 
                         </CheckBox>
-                        
+
                         <TextBlock Grid.Row="1" Grid.Column="0"
                                        Text="{DynamicResource Layout_HidHeight}"/>
                         <Slider Grid.Row="1" Grid.Column="1"
@@ -145,6 +152,40 @@
                         <TextBox Grid.Row="2" Grid.Column="2"
                                      Text="{Binding Value, ElementName=sliderHidHorizontalScale}"
                                      />
+                    </Grid>
+
+                    <TextBlock Text="{DynamicResource Layout_Hid_TypingEffect_Header}"/>
+                    <Grid Margin="20,5"
+                          HorizontalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <RadioButton Grid.Column="0"
+                                     VerticalContentAlignment="Center"
+                                     IsChecked="{Binding TypingEffectIsNone, Mode=TwoWay}"
+                                     >
+                            <md:PackIcon Style="{StaticResource HeaderPackIcon}" 
+                                         Kind="EyeOff"
+                                         />
+                        </RadioButton>
+                        <RadioButton Grid.Column="1"
+                                     VerticalContentAlignment="Center"
+                                     IsChecked="{Binding TypingEffectIsText, Mode=TwoWay}"
+                                     >
+                            <md:PackIcon Style="{StaticResource HeaderPackIcon}" 
+                                         Kind="Abc"
+                                         />
+                        </RadioButton>
+                        <RadioButton Grid.Column="2"
+                                     VerticalContentAlignment="Center"
+                                     IsChecked="{Binding TypingEffectIsLight, Mode=TwoWay}"
+                                     >
+                            <md:PackIcon Style="{StaticResource HeaderPackIcon}" 
+                                         Kind="FlashOn"
+                                         />
+                        </RadioButton>
                     </Grid>
                 </StackPanel>
             </md:Card>

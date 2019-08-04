@@ -33,6 +33,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="35"/>
@@ -94,6 +95,18 @@
                                   SelectedItem="{Binding CameraDeviceName}"
                                   md:HintAssist.Hint="Camera"
                                   />
+
+                        <CheckBox Grid.Row="2" Grid.Column="1"
+                                  Grid.ColumnSpan="2"
+                                  Margin="15,0,0,0"
+                                  IsEnabled="{Binding EnableFaceTracking}"
+                                  IsChecked="{Binding AutoBlinkDuringFaceTracking}"
+                                  >
+                            <CheckBox.Content>
+                                <TextBlock Text="{DynamicResource Motion_Face_AutoBlinkDuringFaceTracking}"/>
+                            </CheckBox.Content>
+                        </CheckBox>
+
                     </Grid>
 
                     <Button HorizontalAlignment="Left"

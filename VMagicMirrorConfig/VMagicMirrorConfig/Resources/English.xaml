@@ -78,6 +78,7 @@
     <sys:String x:Key="Motion_Face_CameraName">Camera</sys:String>    
     <sys:String x:Key="Motion_Face_Calibration">Calibrate position</sys:String>    
     <sys:String x:Key="Motion_Face_DefaultFun">Default Fun Blend Value [%]</sys:String>    
+    <sys:String x:Key="Motion_Face_AutoBlinkDuringFaceTracking">Auto blink during face tracking</sys:String>
 
     <sys:String x:Key="Motion_Face_Eyebrow">Eyebrow (Open to Customize)</sys:String>    
     <sys:String x:Key="Motion_Face_EyeBrow_LeftUp">Left Up Key</sys:String>    
@@ -142,6 +143,11 @@
 
     <sys:String x:Key="Layout_HidReactToKeyboard">Enable keyboard motion</sys:String>
     <sys:String x:Key="Layout_HidReactToMouse">Enable mouse motion</sys:String>
+
+    <sys:String x:Key="Layout_Hid_TypingEffect_Header">Typing Effect</sys:String>
+    <sys:String x:Key="Layout_Hid_TypingEffect_None">None</sys:String>
+    <sys:String x:Key="Layout_Hid_TypingEffect_Text">Text</sys:String>
+    <sys:String x:Key="Layout_Hid_TypingEffect_Light">Light</sys:String>
     
     <!-- Layout : Gamepad -->
     <sys:String x:Key="Layout_Gamepad">Gamepad</sys:String>

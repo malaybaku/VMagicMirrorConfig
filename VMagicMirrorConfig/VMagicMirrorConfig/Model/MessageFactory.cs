@@ -83,6 +83,7 @@ namespace Baku.VMagicMirrorConfig
 
         public Message EnableFaceTracking(bool enable) => WithArg($"{enable}");
         public Message SetCameraDeviceName(string deviceName) => WithArg(deviceName);
+        public Message AutoBlinkDuringFaceTracking(bool enable) => WithArg($"{enable}");
 
         public Message FaceDefaultFun(int percentage) => WithArg($"{percentage}");
 
@@ -144,6 +145,7 @@ namespace Baku.VMagicMirrorConfig
         public Message HidHeight(int heightCentimeter) => WithArg($"{heightCentimeter}");
         public Message HidHorizontalScale(int scalePercent) => WithArg($"{scalePercent}");
         public Message HidVisibility(bool visible) => WithArg($"{visible}");
+        public Message SetKeyboardTypingEffectType(int typeIndex) => WithArg($"{typeIndex}");
 
         #endregion
 

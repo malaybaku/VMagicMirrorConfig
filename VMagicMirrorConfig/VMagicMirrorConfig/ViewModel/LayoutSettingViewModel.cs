@@ -1,11 +1,15 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 namespace Baku.VMagicMirrorConfig
 {
     public class LayoutSettingViewModel : SettingViewModelBase
     {
+        private const int TypingEffectIndexNone = -1;
+        private const int TypingEffectIndexText = 0;
+        private const int TypingEffectIndexLight = 1;
+
         public LayoutSettingViewModel() : base() { }
         internal LayoutSettingViewModel(IMessageSender sender, IMessageReceiver receiver) : base(sender)
         {
@@ -142,6 +146,74 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
+        //NOTE: ラジオボタン表示をザツにやるためにbool値たくさんで代用している(ほんとはあまり良くない)
+        private bool _typingEffectIsNone = true;
+        public bool TypingEffectIsNone
+        {
+            get => _typingEffectIsNone;
+            set
+            {
+                if (value == _typingEffectIsNone)
+                {
+                    return;
+                }
+
+                if (value)
+                {
+                    TypingEffectIsText = false;
+                    TypingEffectIsLight = false;
+                    SendMessage(MessageFactory.Instance.SetKeyboardTypingEffectType(TypingEffectIndexNone));
+                }
+                _typingEffectIsNone = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private bool _typingEffectIsText = false;
+        public bool TypingEffectIsText
+        {
+            get => _typingEffectIsText;
+            set
+            {
+                if (value == _typingEffectIsText)
+                {
+                    return;
+                }
+
+                if (value)
+                {
+                    TypingEffectIsNone = false;
+                    TypingEffectIsLight = false;
+                    SendMessage(MessageFactory.Instance.SetKeyboardTypingEffectType(TypingEffectIndexText));
+                }
+                _typingEffectIsText = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private bool _typingEffectIsLight = false;
+        public bool TypingEffectIsLight
+        {
+            get => _typingEffectIsLight;
+            set
+            {
+                if (value == _typingEffectIsLight)
+                {
+                    return;
+                }
+
+                if (value)
+                {
+                    TypingEffectIsNone = false;
+                    TypingEffectIsText = false;
+                    SendMessage(MessageFactory.Instance.SetKeyboardTypingEffectType(TypingEffectIndexLight));
+                }
+                _typingEffectIsLight = value;
+                RaisePropertyChanged();
+            }
+        }
+        
+
         private void OnReceiveCommand(object sender, CommandReceivedEventArgs e)
         {
             switch (e.Command)
@@ -181,6 +253,7 @@ namespace Baku.VMagicMirrorConfig
             HidHorizontalScale = 70;
             HidVisibility = true;
             CameraFov = 40;
+            TypingEffectIsNone = true;
 
             //カメラ位置については、Unity側がカメラの基準位置を持っているのに任せる
             ResetCameraPosition();
