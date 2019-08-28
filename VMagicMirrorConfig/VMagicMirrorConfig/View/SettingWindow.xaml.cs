@@ -8,6 +8,8 @@ namespace Baku.VMagicMirrorConfig
         public SettingWindow() => InitializeComponent();
 
         private static SettingWindow _settingWindow = null;
+        /// <summary>現在設定ウィンドウがあればそれを取得し、なければnullを取得します。</summary>
+        public static SettingWindow CurrentWindow => _settingWindow;
 
         public static void OpenOrActivateExistingWindow(object dataContext)
         {

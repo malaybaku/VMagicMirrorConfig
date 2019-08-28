@@ -24,5 +24,7 @@
         public LayoutSettingViewModel LayoutSetting { get; set; }
 
         public LightSettingViewModel LightSetting { get; set; }
+
+        public WordToMotionSettingViewModel WordToMotionSetting { get; set; }
     }
 }

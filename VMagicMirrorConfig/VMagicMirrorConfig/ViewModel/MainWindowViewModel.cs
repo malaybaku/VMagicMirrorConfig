@@ -20,6 +20,7 @@ namespace Baku.VMagicMirrorConfig
         public MotionSettingViewModel MotionSetting { get; private set; }
         public LayoutSettingViewModel LayoutSetting { get; private set; }
         public LightSettingViewModel LightSetting { get; private set; }
+        public WordToMotionSettingViewModel WordToMotionSetting { get; private set; }
 
         private bool _activateOnStartup = false;
         public bool ActivateOnStartup
@@ -54,6 +55,7 @@ namespace Baku.VMagicMirrorConfig
             MotionSetting = new MotionSettingViewModel(MessageSender, Initializer.MessageReceiver);
             LayoutSetting = new LayoutSettingViewModel(MessageSender, Initializer.MessageReceiver);
             LightSetting = new LightSettingViewModel(MessageSender);
+            WordToMotionSetting = new WordToMotionSettingViewModel(MessageSender);
 
             AvailableLanguageNames = new ReadOnlyObservableCollection<string>(_availableLanguageNames);
         }
@@ -265,6 +267,7 @@ namespace Baku.VMagicMirrorConfig
                 MotionSetting.ResetToDefault();
                 LayoutSetting.ResetToDefault();
                 WindowSetting.ResetToDefault();
+                WordToMotionSetting.ResetToDefault();
 
                 _lastVrmLoadFilePath = "";
             }
@@ -388,6 +391,8 @@ namespace Baku.VMagicMirrorConfig
 
             using (var sw = new StreamWriter(path))
             {
+                //note: 動作設定の一覧は(Unityに投げる都合で)JSONになってるのでやや構造がめんどいです。
+                WordToMotionSetting.SaveItems();
                 new XmlSerializer(typeof(SaveData)).Serialize(sw, new SaveData()
                 {
                     IsInternalSaveFile = isInternalFile,
@@ -399,6 +404,7 @@ namespace Baku.VMagicMirrorConfig
                     MotionSetting = this.MotionSetting,
                     LayoutSetting = this.LayoutSetting,
                     LightSetting = this.LightSetting,
+                    WordToMotionSetting = this.WordToMotionSetting,
                 });
             }
         }
@@ -433,6 +439,13 @@ namespace Baku.VMagicMirrorConfig
                     MotionSetting.CopyFrom(saveData.MotionSetting);
                     LayoutSetting.CopyFrom(saveData.LayoutSetting);
                     LightSetting.CopyFrom(saveData.LightSetting);
+                    //コレはv0.9.0で追加したので、それ以前のバージョンのデータを読み込むとnullになってる
+                    if (saveData.WordToMotionSetting != null)
+                    {
+                        WordToMotionSetting.CopyFrom(saveData.WordToMotionSetting);
+                    }
+                    WordToMotionSetting.LoadItems();
+                    WordToMotionSetting.RequestReload();
 
                     //顔キャリブデータはファイル読み込み時だけ送る特殊なデータなのでここに書いてます
                     MotionSetting.SendCalibrateFaceData();
