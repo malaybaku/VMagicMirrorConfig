@@ -102,7 +102,7 @@
                 </DockPanel>
 
 
-                <RadioButton Content="{DynamicResource WordToMotion_MotionType_BvhFile}"
+                <!--<RadioButton Content="{DynamicResource WordToMotion_MotionType_BvhFile}"
                              Margin="0,20,0,5"
                              VerticalContentAlignment="Center"
                              IsChecked="{Binding IsMotionTypeBvhFile}"
@@ -132,7 +132,7 @@
                              md:HintAssist.Hint="{DynamicResource WordToMotion_Motion_BvhFile_Hint}"
                              />
 
-                </DockPanel>
+                </DockPanel>-->
 
             </StackPanel>
         </md:Card>
