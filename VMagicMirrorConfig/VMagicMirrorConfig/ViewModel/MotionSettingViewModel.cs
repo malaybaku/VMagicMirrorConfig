@@ -407,6 +407,19 @@ namespace Baku.VMagicMirrorConfig
 
         #region Arm
 
+        private bool _enableHidArmMotion = true;
+        public bool EnableHidArmMotion
+        {
+            get => _enableHidArmMotion;
+            set
+            {
+                if (SetValue(ref _enableHidArmMotion, value))
+                {
+                    SendMessage(MessageFactory.Instance.EnableHidArmMotion(EnableHidArmMotion));
+                }
+            }
+        }
+
         private int _waistWidth = 30;
         public int WaistWidth
         {
@@ -619,6 +632,7 @@ namespace Baku.VMagicMirrorConfig
             EyebrowUpScale = 100;
             EyebrowDownScale = 100;
 
+            EnableHidArmMotion = true;
             WaistWidth = 30;
             ElbowCloseStrength = 30;
             EnablePresenterMotion = false;

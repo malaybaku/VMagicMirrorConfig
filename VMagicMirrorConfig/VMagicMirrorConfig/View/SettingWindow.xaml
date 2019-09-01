@@ -50,5 +50,33 @@
             </TabItem.Header>
             <vmm:LightSettingPanel DataContext="{Binding LightSetting}" />
         </TabItem>
+        <TabItem>
+            <TabItem.Header>
+                <!-- NOTE: "Word to Motion"が正式名だが、長すぎるのでアイコンにしておく-->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <md:PackIcon Grid.Column="0"
+                                 Width="23" Height="23"
+                                 VerticalAlignment="Center"
+                                 Kind="ABC"/>
+                    <md:PackIcon Grid.Column="1"
+                                 Width="16" Height="16"
+                                 Margin="2,0,0,0"
+                                 VerticalAlignment="Center"                                 
+                                 Kind="ArrowRightBold"/>
+                    <md:PackIcon Grid.Column="2"
+                                 Width="20" Height="20"
+                                 Margin="-2,1,0,0"
+                                 VerticalAlignment="Center"
+                                 Kind="HumanHandsup">
+                    </md:PackIcon>
+                </Grid>
+            </TabItem.Header>
+            <vmm:WordToMotionSettingPanel DataContext="{Binding WordToMotionSetting}" />
+        </TabItem>
     </dragablz:TabablzControl>
 </Window>

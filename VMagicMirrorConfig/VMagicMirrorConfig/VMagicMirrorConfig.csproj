@@ -56,6 +56,9 @@
     <Reference Include="MaterialDesignThemes.Wpf, Version=2.5.0.1205, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignThemes.2.5.0.1205\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Expression.Blend.Sdk.WPF.1.0.1\lib\net45\Microsoft.Expression.Interactions.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -66,6 +69,9 @@
       <HintPath>..\packages\System.Interactive.Async.3.2.0\lib\net46\System.Interactive.Async.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Expression.Blend.Sdk.WPF.1.0.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -99,6 +105,7 @@
     <Compile Include="Model\IMessageSender.cs" />
     <Compile Include="Model\LargePointerController.cs" />
     <Compile Include="Model\MessageFactory.cs" />
+    <Compile Include="Model\MotionRequest.cs" />
     <Compile Include="Model\NativeMethods.cs" />
     <Compile Include="Model\ReceiveMessageNames.cs" />
     <Compile Include="Model\StartupRegistrySetting.cs" />
@@ -113,9 +120,11 @@
     <Compile Include="Model\SpecialFileNames.cs" />
     <Compile Include="Model\WindowPositionUtil.cs" />
     <Compile Include="Model\Messages.cs" />
+    <Compile Include="Model\WordToMotionItemPreviewDataSender.cs" />
     <Compile Include="ViewModel\GamepadSettingViewModel.cs" />
     <Compile Include="ViewModel\MotionSettingViewModel.cs" />
     <Compile Include="ViewModel\SaveData.cs" />
+    <Compile Include="ViewModel\WordToMotionItemViewModel.cs" />
     <Compile Include="ViewModel\WindowSettingViewModel.cs" />
     <Compile Include="ViewModel\Infrastructure\ActionCommand.cs" />
     <Compile Include="ViewModel\LayoutSettingViewModel.cs" />
@@ -127,7 +136,12 @@
     <Compile Include="View\AboutPanel.xaml.cs">
       <DependentUpon>AboutPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\WordToMotionItemEditWindow.xaml.cs">
+      <DependentUpon>WordToMotionItemEditWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Code\BooleanReverseToVisibilityConverter.cs" />
     <Compile Include="View\Code\IntegerEqualityToVisibilityConverter.cs" />
+    <Compile Include="View\Code\SimplePhraseValidationRule.cs" />
     <Compile Include="View\Code\TabHeaderIconText.xaml.cs">
       <DependentUpon>TabHeaderIconText.xaml</DependentUpon>
     </Compile>
@@ -162,6 +176,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\WordToMotionItemEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Code\TabHeaderIconText.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -182,7 +200,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\SubWindow\EmphasizedMousePointer.xaml">
+    <Page Include="View\WordToMotionSettingPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -213,9 +231,10 @@
     <Compile Include="View\StreamingPanel.xaml.cs">
       <DependentUpon>StreamingPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\SubWindow\EmphasizedMousePointer.xaml.cs">
-      <DependentUpon>EmphasizedMousePointer.xaml</DependentUpon>
+    <Compile Include="View\WordToMotionSettingPanel.xaml.cs">
+      <DependentUpon>WordToMotionSettingPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\WordToMotionSettingViewModel.cs" />
     <Compile Include="View\WindowSettingPanel.xaml.cs">
       <DependentUpon>WindowSettingPanel.xaml</DependentUpon>
     </Compile>

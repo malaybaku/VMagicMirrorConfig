@@ -298,6 +298,11 @@
                                    />
                     </StackPanel>
 
+                    <CheckBox Margin="15,5,15,10" 
+                              Content="{DynamicResource Motion_Arm_EnableHidMotion}"
+                              IsChecked="{Binding EnableHidArmMotion}"
+                              />
+
                     <Grid Margin="5,0,0,10">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
