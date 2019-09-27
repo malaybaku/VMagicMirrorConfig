@@ -264,11 +264,9 @@ namespace Baku.VMagicMirrorConfig
 
         private void InitializeBuiltInClipNames()
         {
-            //NOTE: 数が少ないのでハードコーディングで済ます。おじぎ、手を振る、ろくろ回し、グッドポーズ。
-            _availableBuiltInClipNames.Add("Bow");
+            //NOTE: 数が少ないのでハードコーディングで済ます
             _availableBuiltInClipNames.Add("Wave");
             _availableBuiltInClipNames.Add("Rokuro");
-            _availableBuiltInClipNames.Add("Good");
         }
 
         private void InitializeBlendShapeItems()
