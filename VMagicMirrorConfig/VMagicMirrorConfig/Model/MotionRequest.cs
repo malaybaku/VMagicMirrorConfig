@@ -32,6 +32,16 @@ namespace Baku.VMagicMirrorConfig
         public bool UseBlendShape { get; set; }
 
         /// <summary>
+        /// ブレンドシェイプをアニメーション終了後もそのままの値にするかどうか
+        /// </summary>
+        public bool HoldBlendShape { get; set; }
+
+        /// <summary>
+        /// ブレンドシェイプアニメーションを口のリップシンクアニメーションで上書きしてもよいかどうか
+        /// </summary>
+        public bool PreferLipSync { get; set; }
+
+        /// <summary>
         /// NOTE: シリアライズ都合でpublic propertyになってます
         /// </summary>
         public Dictionary<string, int> BlendShapeValues { get; set; } = new Dictionary<string, int>();

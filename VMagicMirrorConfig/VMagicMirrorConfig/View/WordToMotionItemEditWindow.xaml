@@ -8,8 +8,8 @@
         mc:Ignorable="d"
         d:DataContext="{x:Type vmm:WordToMotionItemViewModel}"
         Title="VMagicMirror - Word To Motion" 
-        Height="570" Width="700"
-        MinHeight="570" MinWidth="700"
+        Height="600" Width="700"
+        MinHeight="600" MinWidth="700"
         WindowStartupLocation="CenterOwner"
         >
     <Grid>
@@ -148,6 +148,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
@@ -192,10 +193,15 @@
                
                 </Grid>
 
-
-
-                <ItemsControl Grid.Row="3" 
-                              Margin="0,10"
+                <CheckBox Grid.Row="3"
+                          Margin="5"
+                          Content="{DynamicResource WordToMotion_Face_Hold}"
+                          IsChecked="{Binding HoldBlendShape}"
+                          IsEnabled="{Binding UseBlendShape}"
+                          />
+                
+                <ItemsControl Grid.Row="4" 
+                              Margin="0,5,0,0"
                               ItemsSource="{Binding BlendShapeItems}"
                               IsEnabled="{Binding UseBlendShape}">
                     <ItemsControl.ItemsPanel>
@@ -209,9 +215,9 @@
                         <DataTemplate DataType="{x:Type vmm:BlendShapeItemViewModel}">
                             <Grid Height="35" Margin="0,0,10,0">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="65"/>
+                                    <ColumnDefinition Width="70"/>
                                     <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="40"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" 
                                            VerticalAlignment="Center"
@@ -235,6 +241,7 @@
                   />
 
         <StackPanel Grid.Row="2" Grid.Column="1"
+                    Margin="0,0,5,5"
                     Orientation="Horizontal"
                     HorizontalAlignment="Right"
                     >
