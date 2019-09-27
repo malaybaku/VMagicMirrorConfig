@@ -135,6 +135,14 @@ namespace Baku.VMagicMirrorConfig
             set => SetValue(ref _useBlendShape, value);
         }
 
+        private bool _holdBlendShape = false;
+        public bool HoldBlendShape
+        {
+            get => _holdBlendShape;
+            set => SetValue(ref _holdBlendShape, value);
+        }
+
+
         private float _durationWhenOnlyBlendShape = 3.0f;
         public float DurationWhenOnlyBlendShape
         {
@@ -206,6 +214,7 @@ namespace Baku.VMagicMirrorConfig
             model.BuiltInAnimationClipName = BuiltInClipName;
             model.ExternalBvhFilePath = BvhFilePath;
             model.UseBlendShape = UseBlendShape;
+            model.HoldBlendShape = HoldBlendShape;
 
             model.DurationWhenOnlyBlendShape = DurationWhenOnlyBlendShape;
 
@@ -241,6 +250,7 @@ namespace Baku.VMagicMirrorConfig
             BvhFilePath = model.ExternalBvhFilePath;
 
             UseBlendShape = model.UseBlendShape;
+            HoldBlendShape = model.HoldBlendShape;
             DurationWhenOnlyBlendShape = model.DurationWhenOnlyBlendShape;
             foreach (var blendShapeItem in model.BlendShapeValues)
             {
