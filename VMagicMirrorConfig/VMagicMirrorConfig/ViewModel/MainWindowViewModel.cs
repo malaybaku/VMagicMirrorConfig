@@ -49,8 +49,11 @@ namespace Baku.VMagicMirrorConfig
         private string _lastVrmLoadFilePath = "";
         private bool _isDisposed = false;
 
+        private readonly ScreenshotController _screenshotController;
+
         public MainWindowViewModel()
         {
+            _screenshotController = new ScreenshotController(MessageSender);
             WindowSetting = new WindowSettingViewModel(MessageSender);
             MotionSetting = new MotionSettingViewModel(MessageSender, Initializer.MessageReceiver);
             LayoutSetting = new LayoutSettingViewModel(MessageSender, Initializer.MessageReceiver);
@@ -136,6 +139,14 @@ namespace Baku.VMagicMirrorConfig
         private ActionCommand _loadPrevSettingCommand;
         public ActionCommand LoadPrevSettingCommand
             => _loadPrevSettingCommand ?? (_loadPrevSettingCommand = new ActionCommand(LoadPrevSetting));
+
+        private ActionCommand _takeScreenshotCommand;
+        public ActionCommand TakeScreenshotCommand
+            => _takeScreenshotCommand ?? (_takeScreenshotCommand = new ActionCommand(TakeScreenshot));
+
+        private ActionCommand _openScreenshotFolderCommand;
+        public ActionCommand OpenScreenshotFolderCommand
+            => _openScreenshotFolderCommand ?? (_openScreenshotFolderCommand = new ActionCommand(OpenScreenshotFolder));
 
         #endregion
 
@@ -309,6 +320,12 @@ namespace Baku.VMagicMirrorConfig
                     );
             }
         }
+
+        private void TakeScreenshot() 
+            => _screenshotController.TakeScreenshot();
+
+        private void OpenScreenshotFolder()
+            => _screenshotController.OpenSavedFolder();
 
         #endregion
 

@@ -44,7 +44,10 @@
     <sys:String x:Key="Streaming_Face">顔・表情</sys:String>
     <sys:String x:Key="Streaming_Motion">モーション</sys:String>
     <sys:String x:Key="Streaming_View">表示</sys:String>
-       
+    <sys:String x:Key="Streaming_Screenshot">スクリーンショット</sys:String>
+    <sys:String x:Key="Streaming_Screenshot_Take">撮影</sys:String>
+    <sys:String x:Key="Streaming_Screenshot_OpenSaveFolder">保存フォルダ...</sys:String>
+    
     <!-- Window -->
     <sys:String x:Key="Window_BackgroundColor">背景色</sys:String>
     <sys:String x:Key="Window_Transparent">背景を透過</sys:String>
