@@ -24,8 +24,6 @@ namespace Baku.VMagicMirrorConfig
 
         public float DurationWhenOnlyBlendShape { get; set; } = 3.0f;
 
-        //TODO: ここにHoldBlendShapeとかHoldPoseとかを追加するかも
-
         /// <summary>
         /// NOTE: ブレンドシェイプは「1個も適用しない」か「全部適用する」のいずれかになる点に留意
         /// </summary>
