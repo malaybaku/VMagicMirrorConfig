@@ -8,11 +8,15 @@
              mc:Ignorable="d" 
              d:DataContext="{x:Type vmm:MainWindowViewModel}"
              d:DesignWidth="520"
-             d:DesignHeight="460"
+             d:DesignHeight="410"
              >
     <UserControl.Resources>
         <Style TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}">
             <Setter Property="Margin" Value="5"/>
+        </Style>
+        <Style TargetType="md:Card" BasedOn="{StaticResource {x:Type md:Card}}">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="5"/>
         </Style>
         <Style TargetType="md:PackIcon" x:Key="HeaderPackIcon">
             <Setter Property="VerticalAlignment" Value="Center"/>
@@ -39,7 +43,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0">
-                    <md:Card Margin="5" Height="118">
+                    <md:Card>
                         <StackPanel>
 
                             <StackPanel Orientation="Horizontal">
@@ -63,7 +67,7 @@
                         </StackPanel>
                     </md:Card>
 
-                    <md:Card Margin="5">
+                    <md:Card>
                         <StackPanel>
 
                             <StackPanel Orientation="Horizontal">
@@ -182,10 +186,57 @@
                             </Grid>
                         </StackPanel>
                     </md:Card>
+
+                    <md:Card>
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <md:PackIcon Style="{StaticResource HeaderPackIcon}"
+                                             Kind="Camera"
+                                             />
+                                <TextBlock Text="{DynamicResource Streaming_Screenshot}"
+                                       Margin="5"
+                                       Style="{StaticResource HeaderText}"
+                                       />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal">
+                                <Button Command="{Binding TakeScreenshotCommand}"
+                                        Padding="0"
+                                        >
+                                    <StackPanel Style="{StaticResource IconTextSetStackPanel}">
+                                        <md:PackIcon Style="{StaticResource IconTextSetIcon}"
+                                                 Kind="Camera"
+                                                 />
+                                        <TextBlock Style="{StaticResource IconSetSetText}"
+                                               Text="{DynamicResource Streaming_Screenshot_Take}"
+                                               />
+                                    </StackPanel>
+                                </Button>
+
+                                <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                        Command="{Binding OpenScreenshotFolderCommand}"
+                                        Padding="0"
+                                        >
+                                    <StackPanel Style="{StaticResource IconTextSetStackPanel}">
+                                        <md:PackIcon Style="{StaticResource IconTextSetIcon}"
+                                                 Kind="Folder"
+                                                 />
+                                        <TextBlock Style="{StaticResource IconSetSetText}"
+                                               Text="{DynamicResource Streaming_Screenshot_OpenSaveFolder}"
+                                               />
+                                    </StackPanel>
+                                </Button>
+
+                            </StackPanel>
+
+                        </StackPanel>
+
+
+                    </md:Card>
                 </StackPanel>
 
                 <StackPanel Grid.Column="1">
-                    <md:Card Margin="5">
+                    <md:Card>
                         <StackPanel>
 
                             <StackPanel Orientation="Horizontal">
@@ -241,7 +292,7 @@
                         </StackPanel>
                     </md:Card>
 
-                    <md:Card Margin="5">
+                    <md:Card>
                         <StackPanel>
 
                             <StackPanel Orientation="Horizontal">
@@ -279,7 +330,7 @@
                         </StackPanel>
                     </md:Card>
 
-                    <md:Card Margin="5">
+                    <md:Card>
                         <StackPanel>
                             <StackPanel Orientation="Horizontal">
 

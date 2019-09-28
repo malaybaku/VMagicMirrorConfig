@@ -198,5 +198,12 @@ namespace Baku.VMagicMirrorConfig
 
         #endregion
 
+        #region その他
+
+        public Message TakeScreenshot() => NoArg();
+        public Message OpenScreenshotFolder() => NoArg();
+
+        #endregion
+
     }
 }

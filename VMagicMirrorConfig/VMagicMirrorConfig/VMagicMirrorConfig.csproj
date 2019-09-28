@@ -109,6 +109,7 @@
     <Compile Include="Model\MotionRequest.cs" />
     <Compile Include="Model\NativeMethods.cs" />
     <Compile Include="Model\ReceiveMessageNames.cs" />
+    <Compile Include="Model\ScreenshotController.cs" />
     <Compile Include="Model\StartupRegistrySetting.cs" />
     <Compile Include="Model\UnityAppCloser.cs" />
     <Compile Include="Model\MessageIndication.cs" />
