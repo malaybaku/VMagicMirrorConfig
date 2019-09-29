@@ -119,7 +119,7 @@
     <Compile Include="Model\InputObserver\WindowsApiDef.cs" />
     <Compile Include="Model\LanguageSelector.cs" />
     <Compile Include="Model\ModelInitializer.cs" />
-    <Compile Include="Model\SpecialFileNames.cs" />
+    <Compile Include="Model\SpecialFilePath.cs" />
     <Compile Include="Model\WindowPositionUtil.cs" />
     <Compile Include="Model\Messages.cs" />
     <Compile Include="Model\WordToMotionItemPreviewDataSender.cs" />

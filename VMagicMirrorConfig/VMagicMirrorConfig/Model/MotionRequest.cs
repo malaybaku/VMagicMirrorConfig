@@ -81,10 +81,72 @@ namespace Baku.VMagicMirrorConfig
                 MotionType = MotionTypeNone,
                 Word = "name",
                 UseBlendShape = true,
+                HoldBlendShape = false,
                 DurationWhenOnlyBlendShape = 3.0f,
             };
             result.BlendShapeValues["Joy"] = 100;
 
+            return result;
+        }
+
+        public static MotionRequest[] GetDefaultMotionRequestSet()
+        {
+            var result = new MotionRequest[]
+            {
+                new MotionRequest()
+                {
+                    MotionType = MotionTypeNone,
+                    Word = "reset",
+                    UseBlendShape = true,
+                    HoldBlendShape = false,
+                    DurationWhenOnlyBlendShape = 0.1f,
+                },
+                new MotionRequest()
+                {
+                    MotionType = MotionTypeNone,
+                    Word = "joy",
+                    UseBlendShape = true,
+                    HoldBlendShape = false,
+                    DurationWhenOnlyBlendShape = 3.0f,
+                },
+                new MotionRequest()
+                {
+                    MotionType = MotionTypeNone,
+                    Word = "angry",
+                    UseBlendShape = true,
+                    HoldBlendShape = false,
+                    DurationWhenOnlyBlendShape = 3.0f,
+                },
+                new MotionRequest()
+                {
+                    MotionType = MotionTypeNone,
+                    Word = "sorrow",
+                    UseBlendShape = true,
+                    HoldBlendShape = false,
+                    DurationWhenOnlyBlendShape = 3.0f,
+                },
+                new MotionRequest()
+                {
+                    MotionType = MotionTypeNone,
+                    Word = "fun",
+                    UseBlendShape = true,
+                    HoldBlendShape = false,
+                    DurationWhenOnlyBlendShape = 3.0f,
+                },
+                new MotionRequest()
+                {
+                    MotionType = MotionTypeBuiltInClip,
+                    Word = "wave",
+                    BuiltInAnimationClipName = "Wave",
+                    UseBlendShape = false,
+                    HoldBlendShape = false,
+                    DurationWhenOnlyBlendShape = 3.0f,
+                },
+            };
+            result[1].BlendShapeValues["Joy"] = 100;
+            result[2].BlendShapeValues["Angry"] = 100;
+            result[3].BlendShapeValues["Sorrow"] = 100;
+            result[4].BlendShapeValues["Fun"] = 100;
             return result;
         }
     }
