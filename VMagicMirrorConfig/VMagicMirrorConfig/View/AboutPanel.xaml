@@ -14,7 +14,7 @@
     <StackPanel HorizontalAlignment="Left"
                 Margin="10">
         <TextBlock Style="{StaticResource NoteText}"
-                        Text="VMagicMirror v0.8.7"/>
+                        Text="VMagicMirror v0.9.0"/>
         <TextBlock Style="{StaticResource NoteText}"
                         Text="Copyright (c) 2019 獏星(ばくすたー)"/>
         <TextBlock Style="{StaticResource NoteText}"

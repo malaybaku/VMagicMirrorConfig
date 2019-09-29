@@ -8,10 +8,10 @@
         xmlns:vmm="clr-namespace:Baku.VMagicMirrorConfig"
         mc:Ignorable="d"
         d:DataContext="{x:Type vmm:MainWindowViewModel}"
-        Title="VMagicMirror v0.8.7" 
+        Title="VMagicMirror v0.9.0" 
         ResizeMode="CanMinimize"
-        Height="530" Width="550"
-        MinHeight="530" MinWidth="550"
+        Height="550" Width="550"
+        MinHeight="550" MinWidth="550"
         >
     <Window.DataContext>
         <vmm:MainWindowViewModel/>
@@ -20,23 +20,6 @@
         <dragablz:TabablzControl.HeaderItemTemplate>
             <DataTemplate>
                 <ContentControl Content="{Binding}"/>
-                <!--DataType="{x:Type vmm:IconText}">-->
-                <!--<StackPanel Orientation="Horizontal" Margin="0">
-
-                    <md:PackIcon Kind="{Binding IconKind}" 
-                                 VerticalAlignment="Center"
-                                 Margin="5,0,3,0"
-                                 Width="22"
-                                 Height="22"
-                                 />
-                    <TextBlock FontSize="12"
-                               FontWeight="Bold"
-                               VerticalAlignment="Center"
-                               Margin="0,0,5,0"
-                               Text="{Binding Text}" 
-                               />
-
-                </StackPanel>-->
             </DataTemplate>
         </dragablz:TabablzControl.HeaderItemTemplate>
         <TabItem>

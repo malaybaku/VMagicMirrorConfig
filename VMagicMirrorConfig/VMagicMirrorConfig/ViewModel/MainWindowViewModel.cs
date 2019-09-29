@@ -20,6 +20,7 @@ namespace Baku.VMagicMirrorConfig
         public MotionSettingViewModel MotionSetting { get; private set; }
         public LayoutSettingViewModel LayoutSetting { get; private set; }
         public LightSettingViewModel LightSetting { get; private set; }
+        public WordToMotionSettingViewModel WordToMotionSetting { get; private set; }
 
         private bool _activateOnStartup = false;
         public bool ActivateOnStartup
@@ -48,12 +49,16 @@ namespace Baku.VMagicMirrorConfig
         private string _lastVrmLoadFilePath = "";
         private bool _isDisposed = false;
 
+        private readonly ScreenshotController _screenshotController;
+
         public MainWindowViewModel()
         {
+            _screenshotController = new ScreenshotController(MessageSender);
             WindowSetting = new WindowSettingViewModel(MessageSender);
             MotionSetting = new MotionSettingViewModel(MessageSender, Initializer.MessageReceiver);
             LayoutSetting = new LayoutSettingViewModel(MessageSender, Initializer.MessageReceiver);
             LightSetting = new LightSettingViewModel(MessageSender);
+            WordToMotionSetting = new WordToMotionSettingViewModel(MessageSender);
 
             AvailableLanguageNames = new ReadOnlyObservableCollection<string>(_availableLanguageNames);
         }
@@ -134,6 +139,14 @@ namespace Baku.VMagicMirrorConfig
         private ActionCommand _loadPrevSettingCommand;
         public ActionCommand LoadPrevSettingCommand
             => _loadPrevSettingCommand ?? (_loadPrevSettingCommand = new ActionCommand(LoadPrevSetting));
+
+        private ActionCommand _takeScreenshotCommand;
+        public ActionCommand TakeScreenshotCommand
+            => _takeScreenshotCommand ?? (_takeScreenshotCommand = new ActionCommand(TakeScreenshot));
+
+        private ActionCommand _openScreenshotFolderCommand;
+        public ActionCommand OpenScreenshotFolderCommand
+            => _openScreenshotFolderCommand ?? (_openScreenshotFolderCommand = new ActionCommand(OpenScreenshotFolder));
 
         #endregion
 
@@ -265,6 +278,7 @@ namespace Baku.VMagicMirrorConfig
                 MotionSetting.ResetToDefault();
                 LayoutSetting.ResetToDefault();
                 WindowSetting.ResetToDefault();
+                WordToMotionSetting.ResetToDefault();
 
                 _lastVrmLoadFilePath = "";
             }
@@ -288,7 +302,7 @@ namespace Baku.VMagicMirrorConfig
                 string savePath = Path.Combine(
                     Path.GetDirectoryName(dialog.FileName),
                     "ConfigApp",
-                    "_autosave"
+                    SpecialFilePath.AutoSaveSettingFileName
                     );
 
                 LoadSetting(savePath, true);
@@ -307,6 +321,12 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
+        private void TakeScreenshot() 
+            => _screenshotController.TakeScreenshot();
+
+        private void OpenScreenshotFolder()
+            => _screenshotController.OpenSavedFolder();
+
         #endregion
 
         public async void Initialize()
@@ -319,7 +339,7 @@ namespace Baku.VMagicMirrorConfig
 
             Initializer.Initialize();
 
-            LoadSetting(GetFilePath(SpecialFileNames.AutoSaveSettingFileName), true);
+            LoadSetting(SpecialFilePath.GetSettingFilePath(), true);
 
             //LoadCurrentParametersの時点で(もし前回保存した)言語名があればLanguageNameに入っているので、それを渡す。
             LanguageSelector.Instance.Initialize(MessageSender, LanguageName);
@@ -353,7 +373,7 @@ namespace Baku.VMagicMirrorConfig
             if (!_isDisposed)
             {
                 _isDisposed = true;
-                SaveSetting(GetFilePath(SpecialFileNames.AutoSaveSettingFileName), true);
+                SaveSetting(SpecialFilePath.GetSettingFilePath(), true);
                 Initializer.Dispose();
                 MotionSetting.ClosePointer();
                 UnityAppCloser.Close();
@@ -388,6 +408,8 @@ namespace Baku.VMagicMirrorConfig
 
             using (var sw = new StreamWriter(path))
             {
+                //note: 動作設定の一覧は(Unityに投げる都合で)JSONになってるのでやや構造がめんどいです。
+                WordToMotionSetting.SaveItems();
                 new XmlSerializer(typeof(SaveData)).Serialize(sw, new SaveData()
                 {
                     IsInternalSaveFile = isInternalFile,
@@ -399,6 +421,7 @@ namespace Baku.VMagicMirrorConfig
                     MotionSetting = this.MotionSetting,
                     LayoutSetting = this.LayoutSetting,
                     LightSetting = this.LightSetting,
+                    WordToMotionSetting = this.WordToMotionSetting,
                 });
             }
         }
@@ -433,6 +456,13 @@ namespace Baku.VMagicMirrorConfig
                     MotionSetting.CopyFrom(saveData.MotionSetting);
                     LayoutSetting.CopyFrom(saveData.LayoutSetting);
                     LightSetting.CopyFrom(saveData.LightSetting);
+                    //コレはv0.9.0で追加したので、それ以前のバージョンのデータを読み込むとnullになってる
+                    if (saveData.WordToMotionSetting != null)
+                    {
+                        WordToMotionSetting.CopyFrom(saveData.WordToMotionSetting);
+                    }
+                    WordToMotionSetting.LoadItems();
+                    WordToMotionSetting.RequestReload();
 
                     //顔キャリブデータはファイル読み込み時だけ送る特殊なデータなのでここに書いてます
                     MotionSetting.SendCalibrateFaceData();
@@ -445,7 +475,7 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private string GetFilePath(string fileName)
+        private static string GetFilePath(string fileName)
             => Path.Combine(
                 Path.GetDirectoryName(Assembly.GetEntryAssembly().Location),
                 fileName

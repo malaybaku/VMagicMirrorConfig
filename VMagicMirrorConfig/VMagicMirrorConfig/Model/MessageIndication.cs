@@ -22,6 +22,16 @@
         public static MessageIndication ErrorLoadSetting(string languageName)
             => ErrorLoadSetting(LanguageSelector.StringToLanguage(languageName));
 
+        /// <summary>
+        /// NOTE: Contentのほうがフォーマット文字列なのでstring.Formatで消すアイテムの名前を指定して完成させること！
+        /// string.Format(res.Content, "itemName")
+        /// みたいな。
+        /// </summary>
+        /// <param name="languageName"></param>
+        /// <returns></returns>
+        public static MessageIndication DeleteWordToMotionItem(string languageName)
+            => DeleteWordToMotionItem(LanguageSelector.StringToLanguage(languageName));
+
         public static MessageIndication LoadVrmConfirmation(Languages lang)
         {
             switch (lang)
@@ -58,6 +68,13 @@
             }
         }
 
+        /// <summary>
+        /// NOTE: Contentのほうがフォーマット文字列なのでstring.Formatで消すアイテムの名前を指定して完成させること！
+        /// string.Format(res.Content, "itemName")
+        /// みたいな。
+        /// </summary>
+        /// <param name="languageName"></param>
+        /// <returns></returns>
         public static MessageIndication ErrorLoadSetting(Languages lang)
         {
             switch (lang)
@@ -72,6 +89,24 @@
                     return new MessageIndication(
                         "Load failed",
                         "Failed to load setting file. Error: "
+                        );
+            }
+        }
+
+        public static MessageIndication DeleteWordToMotionItem(Languages lang)
+        {
+            switch (lang)
+            {
+                case Languages.Japanese:
+                    return new MessageIndication(
+                        "モーションの削除",
+                        "このモーション'{0}'を削除しますか？"
+                        );
+                case Languages.English:
+                default:
+                    return new MessageIndication(
+                        "Delete Item",
+                        "Are you sure to delete this item '{0}'?"
                         );
             }
         }

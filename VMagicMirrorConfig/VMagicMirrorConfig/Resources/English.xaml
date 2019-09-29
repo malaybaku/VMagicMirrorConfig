@@ -44,6 +44,9 @@
     <sys:String x:Key="Streaming_Face">Face</sys:String>
     <sys:String x:Key="Streaming_Motion">Motion</sys:String>       
     <sys:String x:Key="Streaming_View">View</sys:String>
+    <sys:String x:Key="Streaming_Screenshot">Screenshot</sys:String>
+    <sys:String x:Key="Streaming_Screenshot_Take">Take</sys:String>
+    <sys:String x:Key="Streaming_Screenshot_OpenSaveFolder">Saved Folder...</sys:String>
     
     
     <!-- Window -->
@@ -93,7 +96,7 @@
     <sys:String x:Key="Motion_Eye">Eye</sys:String>
     <sys:String x:Key="Motion_Eye_LookAtPoint">Eye Look Target</sys:String>
     <sys:String x:Key="Motion_Eye_LookAtPoint_None">None</sys:String>
-    <sys:String x:Key="Motion_Eye_LookAtPoint_MousePointer">Mouse Pointer</sys:String>
+    <sys:String x:Key="Motion_Eye_LookAtPoint_MousePointer">Mouse</sys:String>
     <sys:String x:Key="Motion_Eye_LookAtPoint_MainCamera">User</sys:String>
     
     <!-- Motion : Mouth -->
@@ -102,7 +105,9 @@
     <sys:String x:Key="Motion_Mouth_MicrophoneName">Microphone</sys:String>    
     
     <!-- Motion : Arm -->
-    <sys:String x:Key="Motion_Arm">Arm</sys:String>
+    <sys:String x:Key="Motion_Arm">Arm</sys:String>    
+    <sys:String x:Key="Motion_Arm_EnableHidMotion">Enable Typing / Mouse Motion</sys:String>
+    
     <sys:String x:Key="Motion_Arm_WaistWidth">Waist width [cm]</sys:String>
     <sys:String x:Key="Motion_Arm_ElbowCloseStrength">Strength to keep upper arm to body [%]</sys:String>
     <sys:String x:Key="Motion_Arm_EnablePresenterMotion">Presentation-like hand</sys:String>
@@ -189,11 +194,29 @@
     <sys:String x:Key="Bloom_Intensity">Intensity [%]</sys:String>
     <sys:String x:Key="Bloom_Threshold">Threshold [%]</sys:String>
     
-    <!-- Startup Setting -->
-    <sys:String x:Key="Startup">Settings to load on next startup</sys:String>
-    <sys:String x:Key="Startup_Vrm">VRM</sys:String>
-    <sys:String x:Key="Startup_Window">Window</sys:String>
-    <sys:String x:Key="Startup_Layout">Layout</sys:String>
-    <sys:String x:Key="Startup_Light">Light</sys:String>
-    
+    <!-- Word To Motion -->
+    <sys:String x:Key="WordToMotion_Enable">Enable Word to Motion</sys:String>
+    <sys:String x:Key="WordToMotion_Instruction" xml:space="preserve">This tab is `Word to Motion` tab.
+`Word to Motion` feature supports character motion by your word input.
+Please test by typing "joy".</sys:String>
+
+    <sys:String x:Key="WordToMotion_Word_Header">Word</sys:String>
+    <sys:String x:Key="WordToMotion_Word_Limit">*Lower alphabet, number, and space</sys:String>
+
+    <sys:String x:Key="WordToMotion_BodyMotion_Header">Body Motion</sys:String>
+    <sys:String x:Key="WordToMotion_MotionType_None">None</sys:String>
+    <sys:String x:Key="WordToMotion_MotionType_BuiltIn">Built-In Motion</sys:String>
+    <sys:String x:Key="WordToMotion_MotionType_BvhFile">BVH File</sys:String>
+    <sys:String x:Key="WordToMotion_Motion_BuiltIn_Label">Motion</sys:String>
+    <sys:String x:Key="WordToMotion_Motion_BuiltIn_Hint">Choose Motion</sys:String>
+    <sys:String x:Key="WordToMotion_Motion_BvhFile_Label">File</sys:String>
+    <sys:String x:Key="WordToMotion_Motion_BvhFile_Hint">File Path</sys:String>
+
+    <sys:String x:Key="WordToMotion_Face_Header">Face Expression</sys:String>
+    <sys:String x:Key="WordToMotion_Face_Enable">Enable Face Expression</sys:String>
+    <sys:String x:Key="WordToMotion_Face_Duration">Duration when Body Motion is None [sec]</sys:String>
+    <sys:String x:Key="WordToMotion_Face_Hold">Keep face after motion</sys:String>
+        
+    <sys:String x:Key="WordToMotion_EnablePreview">Enable Preview</sys:String>
+
 </ResourceDictionary>

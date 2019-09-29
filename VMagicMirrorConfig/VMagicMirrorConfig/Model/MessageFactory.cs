@@ -33,6 +33,7 @@ namespace Baku.VMagicMirrorConfig
         public Message OpenVrmPreview(string filePath) => WithArg(filePath);
         public Message OpenVrm(string filePath) => WithArg(filePath);
         public Message AccessToVRoidHub() => NoArg();
+
         public Message CancelLoadVrm() => NoArg();
 
         public Message RequestAutoAdjust() => NoArg();
@@ -67,6 +68,7 @@ namespace Baku.VMagicMirrorConfig
         public Message HandYOffsetBasic(int offsetCentimeter) => WithArg($"{offsetCentimeter}");
         public Message HandYOffsetAfterKeyDown(int offsetCentimeter) => WithArg($"{offsetCentimeter}");
 
+        public Message EnableHidArmMotion(bool enable) => WithArg($"{enable}");
         public Message SetWaistWidth(int waistWidthCentimeter) => WithArg($"{waistWidthCentimeter}");
         public Message SetElbowCloseStrength(int strengthPercent) => WithArg($"{strengthPercent}");        
 
@@ -181,6 +183,25 @@ namespace Baku.VMagicMirrorConfig
         public Message BloomColor(int r, int g, int b) => WithArg($"{r},{g},{b}");
         public Message BloomIntensity(int intensityPercent) => WithArg($"{intensityPercent}");
         public Message BloomThreshold(int thresholdPercent) => WithArg($"{thresholdPercent}");
+
+        #endregion
+
+        #region Word To Motion
+        
+        public Message EnableWordToMotion(bool enable) => WithArg($"{enable}");
+        public Message ReloadMotionRequests(string content) => WithArg(content);
+
+        //NOTE: 以下の3つはユーザーが動作チェックに使う
+        public Message PlayWordToMotionItem(string word) => WithArg(word);
+        public Message EnableWordToMotionPreview(bool enable) => WithArg($"{enable}");
+        public Message SendWordToMotionPreviewInfo(string json) => WithArg(json);
+
+        #endregion
+
+        #region その他
+
+        public Message TakeScreenshot() => NoArg();
+        public Message OpenScreenshotFolder() => NoArg();
 
         #endregion
 
