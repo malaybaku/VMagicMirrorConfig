@@ -73,7 +73,7 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private int _height = 90;
+        private int _height = 100;
         /// <summary> Unit: [cm] </summary>
         public int GamepadHeight
         {
@@ -87,7 +87,7 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private int _horizontalScale = 100;
+        private int _horizontalScale = 80;
         /// <summary> Unit: [%] </summary>
         public int GamepadHorizontalScale
         {
@@ -212,8 +212,8 @@ namespace Baku.VMagicMirrorConfig
         {
             GamepadEnabled = true;
 
-            GamepadHeight = 90;
-            GamepadHorizontalScale = 100;
+            GamepadHeight = 100;
+            GamepadHorizontalScale = 80;
             GamepadVisibility = false;
 
             GamepadLeanNone = false;
