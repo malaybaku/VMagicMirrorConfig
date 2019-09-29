@@ -19,6 +19,8 @@ namespace Baku.VMagicMirrorConfig
             _previewDataSender = new WordToMotionItemPreviewDataSender(sender);
             _previewDataSender.PrepareDataSend += 
                 (_, __) => _dialogItem?.WriteToModel(_previewDataSender.MotionRequest);
+
+            LoadDefaultItemsIfInitialStart();
         }
 
         private readonly WordToMotionItemPreviewDataSender _previewDataSender;
@@ -177,8 +179,27 @@ namespace Baku.VMagicMirrorConfig
 
         public override void ResetToDefault()
         {
-            //とりあえず無視！
-            //本来はアイテム一覧を喜怒哀楽セットにするくらいがちょうどいいか
+            //何もしない: ここは設定がフクザツなのでとりあえずいじらない方針で。
+            //(このパネル単体のリセットUIがちゃんとできたら何か考える)
+            //->autosaveが無い状態で
+        }
+
+        //このマシン上でこのバージョンのVMagicMirrorが初めて実行された可能性が高いとき、
+        //デフォルトのWord To Motion一覧を生成して初期化します。
+        public void LoadDefaultItemsIfInitialStart()
+        {
+            if (SpecialFilePath.SettingFileExists()) 
+            {
+                return;
+            }
+
+            _items.Clear();
+            var models = MotionRequest.GetDefaultMotionRequestSet();
+            for (int i = 0; i < models.Length; i++)
+            {
+                _items.Add(new WordToMotionItemViewModel(this, models[i]));
+            }
+            RequestReload();
         }
 
         public void EditItemByDialog(WordToMotionItemViewModel item)

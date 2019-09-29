@@ -302,7 +302,7 @@ namespace Baku.VMagicMirrorConfig
                 string savePath = Path.Combine(
                     Path.GetDirectoryName(dialog.FileName),
                     "ConfigApp",
-                    "_autosave"
+                    SpecialFilePath.AutoSaveSettingFileName
                     );
 
                 LoadSetting(savePath, true);
@@ -339,7 +339,7 @@ namespace Baku.VMagicMirrorConfig
 
             Initializer.Initialize();
 
-            LoadSetting(GetFilePath(SpecialFileNames.AutoSaveSettingFileName), true);
+            LoadSetting(SpecialFilePath.GetSettingFilePath(), true);
 
             //LoadCurrentParametersの時点で(もし前回保存した)言語名があればLanguageNameに入っているので、それを渡す。
             LanguageSelector.Instance.Initialize(MessageSender, LanguageName);
@@ -373,7 +373,7 @@ namespace Baku.VMagicMirrorConfig
             if (!_isDisposed)
             {
                 _isDisposed = true;
-                SaveSetting(GetFilePath(SpecialFileNames.AutoSaveSettingFileName), true);
+                SaveSetting(SpecialFilePath.GetSettingFilePath(), true);
                 Initializer.Dispose();
                 MotionSetting.ClosePointer();
                 UnityAppCloser.Close();
@@ -475,7 +475,7 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private string GetFilePath(string fileName)
+        private static string GetFilePath(string fileName)
             => Path.Combine(
                 Path.GetDirectoryName(Assembly.GetEntryAssembly().Location),
                 fileName
