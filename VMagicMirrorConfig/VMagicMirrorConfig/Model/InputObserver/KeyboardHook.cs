@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+
 
 //パクｒ…参考元: http://hongliang.seesaa.net/article/7539988.html
 namespace Baku.VMagicMirrorConfig
