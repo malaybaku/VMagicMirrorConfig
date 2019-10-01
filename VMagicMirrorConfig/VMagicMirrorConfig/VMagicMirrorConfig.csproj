@@ -2,14 +2,14 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Baku.VMagicMirrorConfig</RootNamespace>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>net47</TargetFramework>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <AssemblyTitle>VMagicMirrorConfig</AssemblyTitle>
     <Product>VMagicMirrorConfig</Product>
-    <Copyright>Copyright © Baku 2019</Copyright>
+    <UseWpf>true</UseWpf>
     <UseWindowsForms>true</UseWindowsForms>
-    <UseWPF>true</UseWPF>
+    <Copyright>Copyright © Baku 2019</Copyright>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -20,7 +20,7 @@
     <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="%userprofile%\.nuget\packages\grpc.tools\2.24.0\tools\windows_x64\protoc.exe --csharp_out $(ProjectDir)Model\Grpc\Generated --grpc_out $(ProjectDir)Model\Grpc\Generated --plugin=protoc-gen-grpc=%userprofile%\.nuget\packages\Grpc.Tools\2.24.0\tools\windows_x64\grpc_csharp_plugin.exe --proto_path $(ProjectDir)Model\Grpc\Proto VMagicMirrorGrpc.proto" />  
+    <Exec Command="%userprofile%\.nuget\packages\grpc.tools\1.22.1\tools\windows_x64\protoc.exe --csharp_out $(ProjectDir)Model\Grpc\Generated --grpc_out $(ProjectDir)Model\Grpc\Generated --plugin=protoc-gen-grpc=%userprofile%\.nuget\packages\Grpc.Tools\1.22.1\tools\windows_x64\grpc_csharp_plugin.exe --proto_path $(ProjectDir)Model\Grpc\Proto VMagicMirrorGrpc.proto" />  
   </Target>
   <ItemGroup>
     <None Include="Model\Grpc\Proto\VMagicMirrorGrpc.proto" />
@@ -29,9 +29,8 @@
     <PackageReference Include="Dragablz" Version="0.0.3.203" />
     <PackageReference Include="Expression.Blend.Sdk.WPF" Version="1.0.1" />
     <PackageReference Include="Google.Protobuf" Version="3.9.2" />
-    <PackageReference Include="Grpc" Version="2.24.0" />
-    <PackageReference Include="Grpc.Core" Version="2.24.0" />
-    <PackageReference Include="Grpc.Tools" Version="2.24.0">
+    <PackageReference Include="Grpc" Version="1.22.1" />
+    <PackageReference Include="Grpc.Tools" Version="1.22.1">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="MaterialDesignColors" Version="1.2.0" />
@@ -39,6 +38,6 @@
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
   </ItemGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy /E /Y $(ProjectDir)bin\Debug\netcoreapp3.0 $(ProjectDir)..\..\..\Bin\ConfigApp" />
+    <Exec Command="xcopy /E /Y $(ProjectDir)bin\Debug\net47 $(ProjectDir)..\..\..\Bin\ConfigApp" />
   </Target>
 </Project>

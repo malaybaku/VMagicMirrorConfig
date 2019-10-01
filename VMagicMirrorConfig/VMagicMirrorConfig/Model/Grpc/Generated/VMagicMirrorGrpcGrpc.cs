@@ -58,7 +58,7 @@ namespace Baku.VMagicMirror {
     {
       /// <summary>Creates a new client for VmmGrpc</summary>
       /// <param name="channel">The channel to use to make remote calls.</param>
-      public VmmGrpcClient(grpc::ChannelBase channel) : base(channel)
+      public VmmGrpcClient(grpc::Channel channel) : base(channel)
       {
       }
       /// <summary>Creates a new client for VmmGrpc that uses a custom <c>CallInvoker</c>.</summary>
