@@ -1,294 +1,43 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Grpc.Tools.1.19.0\build\Grpc.Tools.props" Condition="Exists('..\packages\Grpc.Tools.1.19.0\build\Grpc.Tools.props')" />
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EFF78192-AECC-4EA1-9E51-2AA1F24061C3}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Baku.VMagicMirrorConfig</RootNamespace>
-    <AssemblyName>VMagicMirrorConfig</AssemblyName>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
+    <TargetFramework>net47</TargetFramework>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <Deterministic>true</Deterministic>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
-    <TargetFrameworkProfile />
+    <AssemblyTitle>VMagicMirrorConfig</AssemblyTitle>
+    <Product>VMagicMirrorConfig</Product>
+    <UseWpf>true</UseWpf>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Copyright>Copyright © Baku 2019</Copyright>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\..\..\Bin\ConfigApp\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <OutputPath>bin\Debug\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="Dragablz, Version=0.0.3.203, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dragablz.0.0.3.203\lib\net45\Dragablz.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.Protobuf, Version=3.7.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Protobuf.3.7.0\lib\net45\Google.Protobuf.dll</HintPath>
-    </Reference>
-    <Reference Include="Grpc.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d754f35622e28bad, processorArchitecture=MSIL">
-      <HintPath>..\packages\Grpc.Core.1.19.0\lib\net45\Grpc.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Grpc.Core.Api, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d754f35622e28bad, processorArchitecture=MSIL">
-      <HintPath>..\packages\Grpc.Core.Api.1.19.0\lib\net45\Grpc.Core.Api.dll</HintPath>
-    </Reference>
-    <Reference Include="MaterialDesignColors, Version=1.0.0.14576, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MaterialDesignColors.1.1.1\lib\net45\MaterialDesignColors.dll</HintPath>
-    </Reference>
-    <Reference Include="MaterialDesignThemes.Wpf, Version=2.5.0.1205, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MaterialDesignThemes.2.5.0.1205\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Expression.Blend.Sdk.WPF.1.0.1\lib\net45\Microsoft.Expression.Interactions.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Interactive.Async, Version=3.2.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Interactive.Async.3.2.0\lib\net46\System.Interactive.Async.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Expression.Blend.Sdk.WPF.1.0.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Xml" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xaml">
-      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
-  </ItemGroup>
-  <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Compile Include="Common\LineParseUtils.cs" />
-    <Compile Include="Common\LogOutput.cs" />
-    <Compile Include="Common\NotifiableBase.cs" />
-    <Compile Include="Model\AppExitFromUnityMessage.cs" />
-    <Compile Include="Model\AutoAdjustParameters.cs" />
-    <Compile Include="Model\CameraPositionChecker.cs" />
-    <Compile Include="Model\GrpcReceiver.cs" />
-    <Compile Include="Model\GrpcSender.cs" />
-    <Compile Include="Model\GrpcServerImpl.cs" />
-    <Compile Include="Model\Grpc\Generated\VMagicMirrorGrpc.cs" />
-    <Compile Include="Model\Grpc\Generated\VMagicMirrorGrpcGrpc.cs" />
-    <Compile Include="Model\IMessageReceiver.cs" />
-    <Compile Include="Model\IMessageSender.cs" />
-    <Compile Include="Model\LargePointerController.cs" />
-    <Compile Include="Model\MessageFactory.cs" />
-    <Compile Include="Model\MotionRequest.cs" />
-    <Compile Include="Model\NativeMethods.cs" />
-    <Compile Include="Model\ReceiveMessageNames.cs" />
-    <Compile Include="Model\ScreenshotController.cs" />
-    <Compile Include="Model\StartupRegistrySetting.cs" />
-    <Compile Include="Model\UnityAppCloser.cs" />
-    <Compile Include="Model\MessageIndication.cs" />
-    <Compile Include="Model\InputChecker.cs" />
-    <Compile Include="Model\InputObserver\KeyboardHook.cs" />
-    <Compile Include="Model\InputObserver\MouseHook.cs" />
-    <Compile Include="Model\InputObserver\WindowsApiDef.cs" />
-    <Compile Include="Model\LanguageSelector.cs" />
-    <Compile Include="Model\ModelInitializer.cs" />
-    <Compile Include="Model\SpecialFilePath.cs" />
-    <Compile Include="Model\WindowPositionUtil.cs" />
-    <Compile Include="Model\Messages.cs" />
-    <Compile Include="Model\WordToMotionItemPreviewDataSender.cs" />
-    <Compile Include="ViewModel\GamepadSettingViewModel.cs" />
-    <Compile Include="ViewModel\MotionSettingViewModel.cs" />
-    <Compile Include="ViewModel\SaveData.cs" />
-    <Compile Include="ViewModel\WordToMotionItemViewModel.cs" />
-    <Compile Include="ViewModel\WindowSettingViewModel.cs" />
-    <Compile Include="ViewModel\Infrastructure\ActionCommand.cs" />
-    <Compile Include="ViewModel\LayoutSettingViewModel.cs" />
-    <Compile Include="ViewModel\LightSettingViewModel.cs" />
-    <Compile Include="ViewModel\MainWindowViewModel.cs" />
-    <Compile Include="ViewModel\Infrastructure\ViewModelBase.cs" />
-    <Compile Include="Model\UdpSender.cs" />
-    <Compile Include="ViewModel\SettingViewModelBase.cs" />
-    <Compile Include="View\AboutPanel.xaml.cs">
-      <DependentUpon>AboutPanel.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\WordToMotionItemEditWindow.xaml.cs">
-      <DependentUpon>WordToMotionItemEditWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Code\BooleanReverseToVisibilityConverter.cs" />
-    <Compile Include="View\Code\IntegerEqualityToVisibilityConverter.cs" />
-    <Compile Include="View\Code\SimplePhraseValidationRule.cs" />
-    <Compile Include="View\Code\TabHeaderIconText.xaml.cs">
-      <DependentUpon>TabHeaderIconText.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\HomePanel.xaml.cs">
-      <DependentUpon>HomePanel.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\LicenseWindow.xaml.cs">
-      <DependentUpon>LicenseWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\LightSettingPanel.xaml.cs">
-      <DependentUpon>LightSettingPanel.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\MotionSettingPanel.xaml.cs">
-      <DependentUpon>MotionSettingPanel.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\SettingWindow.xaml.cs">
-      <DependentUpon>SettingWindow.xaml</DependentUpon>
-    </Compile>
-    <Page Include="Resources\English.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Resources\Japanese.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Resources\LicenseTextResource.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\AboutPanel.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\WordToMotionItemEditWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Code\TabHeaderIconText.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\HomePanel.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\MotionSettingPanel.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\SettingWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\StreamingPanel.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\WordToMotionSettingPanel.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\WindowSettingPanel.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\LayoutSettingPanel.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\LicenseWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\LightSettingPanel.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="View\StreamingPanel.xaml.cs">
-      <DependentUpon>StreamingPanel.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\WordToMotionSettingPanel.xaml.cs">
-      <DependentUpon>WordToMotionSettingPanel.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ViewModel\WordToMotionSettingViewModel.cs" />
-    <Compile Include="View\WindowSettingPanel.xaml.cs">
-      <DependentUpon>WindowSettingPanel.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\LayoutSettingPanel.xaml.cs">
-      <DependentUpon>LayoutSettingPanel.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <None Include="Model\Grpc\Proto\VMagicMirrorGrpc.proto" />
-    <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\Grpc.Core.1.19.0\build\net45\Grpc.Core.targets" Condition="Exists('..\packages\Grpc.Core.1.19.0\build\net45\Grpc.Core.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>このプロジェクトは、このコンピューター上にない NuGet パッケージを参照しています。それらのパッケージをダウンロードするには、[NuGet パッケージの復元] を使用します。詳細については、http://go.microsoft.com/fwlink/?LinkID=322105 を参照してください。見つからないファイルは {0} です。</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Grpc.Core.1.19.0\build\net45\Grpc.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Grpc.Core.1.19.0\build\net45\Grpc.Core.targets'))" />
-    <Error Condition="!Exists('..\packages\Grpc.Tools.1.19.0\build\Grpc.Tools.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Grpc.Tools.1.19.0\build\Grpc.Tools.props'))" />
-    <Error Condition="!Exists('..\packages\Grpc.Tools.1.19.0\build\Grpc.Tools.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Grpc.Tools.1.19.0\build\Grpc.Tools.targets'))" />
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="%userprofile%\.nuget\packages\grpc.tools\1.22.1\tools\windows_x64\protoc.exe --csharp_out $(ProjectDir)Model\Grpc\Generated --grpc_out $(ProjectDir)Model\Grpc\Generated --plugin=protoc-gen-grpc=%userprofile%\.nuget\packages\Grpc.Tools\1.22.1\tools\windows_x64\grpc_csharp_plugin.exe --proto_path $(ProjectDir)Model\Grpc\Proto VMagicMirrorGrpc.proto" />  
   </Target>
-  <Import Project="..\packages\Grpc.Tools.1.19.0\build\Grpc.Tools.targets" Condition="Exists('..\packages\Grpc.Tools.1.19.0\build\Grpc.Tools.targets')" />
-  <PropertyGroup>
-    <PreBuildEvent>$(SolutionDir)packages\Grpc.Tools.1.19.0\tools\windows_x64\protoc.exe --csharp_out $(ProjectDir)Model\Grpc\Generated --grpc_out $(ProjectDir)Model\Grpc\Generated --plugin=protoc-gen-grpc=$(SolutionDir)packages\Grpc.Tools.1.19.0\tools\windows_x64\grpc_csharp_plugin.exe --proto_path $(ProjectDir)Model\Grpc\Proto VMagicMirrorGrpc.proto</PreBuildEvent>
-  </PropertyGroup>
+  <ItemGroup>
+    <None Include="Model\Grpc\Proto\VMagicMirrorGrpc.proto" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Dragablz" Version="0.0.3.203" />
+    <PackageReference Include="Expression.Blend.Sdk.WPF" Version="1.0.1" />
+    <PackageReference Include="Google.Protobuf" Version="3.9.2" />
+    <PackageReference Include="Grpc" Version="1.22.1" />
+    <PackageReference Include="Grpc.Tools" Version="1.22.1">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="MaterialDesignColors" Version="1.2.0" />
+    <PackageReference Include="MaterialDesignThemes" Version="2.6.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+  </ItemGroup>
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy /E /Y $(ProjectDir)bin\Debug\net47 $(ProjectDir)..\..\..\Bin\ConfigApp" />
+  </Target>
 </Project>

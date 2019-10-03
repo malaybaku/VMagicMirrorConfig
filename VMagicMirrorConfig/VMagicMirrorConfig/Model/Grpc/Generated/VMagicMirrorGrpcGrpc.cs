@@ -38,6 +38,7 @@ namespace Baku.VMagicMirror {
     }
 
     /// <summary>Base class for server-side implementations of VmmGrpc</summary>
+    [grpc::BindServiceMethod(typeof(VmmGrpc), "BindService")]
     public abstract partial class VmmGrpcBase
     {
       public virtual global::System.Threading.Tasks.Task<global::Baku.VMagicMirror.GenericCommandResponse> CommandGeneric(global::Baku.VMagicMirror.GenericCommandRequest request, grpc::ServerCallContext context)
