@@ -195,6 +195,7 @@ namespace Baku.VMagicMirrorConfig
         public Message PlayWordToMotionItem(string word) => WithArg(word);
         public Message EnableWordToMotionPreview(bool enable) => WithArg($"{enable}");
         public Message SendWordToMotionPreviewInfo(string json) => WithArg(json);
+        public Message UseGamepadToStartWordToMotion(bool enable) => WithArg($"{enable}");
 
         #endregion
 
