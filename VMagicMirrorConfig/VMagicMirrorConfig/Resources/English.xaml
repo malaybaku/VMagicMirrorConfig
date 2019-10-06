@@ -196,6 +196,7 @@
     
     <!-- Word To Motion -->
     <sys:String x:Key="WordToMotion_Enable">Enable Word to Motion</sys:String>
+    <sys:String x:Key="WordToMotion_UseGamepadForInput">Use gamepad as launcher</sys:String>
     <sys:String x:Key="WordToMotion_Instruction" xml:space="preserve">This tab is `Word to Motion` tab.
 `Word to Motion` feature supports character motion by your word input.
 Please test by typing "joy".</sys:String>

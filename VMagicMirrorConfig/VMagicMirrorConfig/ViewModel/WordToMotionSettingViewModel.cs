@@ -34,10 +34,33 @@ namespace Baku.VMagicMirrorConfig
             {
                 if (SetValue(ref _enableWordToMotion, value))
                 {
+                    RaisePropertyChanged(nameof(GamepadWordToMotionIsActive));
                     SendMessage(MessageFactory.Instance.EnableWordToMotion(EnableWordToMotion));
                 }
             }
         }
+
+        private bool _useGamepadToStartWordToMotion = false;
+        public bool UseGamepadToStartWordToMotion
+        {
+            get => _useGamepadToStartWordToMotion;
+            set
+            {
+                if (SetValue(ref _useGamepadToStartWordToMotion, value))
+                {
+                    RaisePropertyChanged(nameof(GamepadWordToMotionIsActive));
+                    SendMessage(
+                        MessageFactory.Instance.UseGamepadToStartWordToMotion(_useGamepadToStartWordToMotion)
+                        );
+                }
+            }
+        }
+
+        //NOTE: この値に応じてゲームパッドのボタンライクな表示をアクティブ化する。
+        //ほんとはMultiBindingで捌くほうが良いけど、面倒なのでVMで計算してます
+        [XmlIgnore]
+        public bool GamepadWordToMotionIsActive
+            => EnableWordToMotion && UseGamepadToStartWordToMotion;
 
         [XmlIgnore]
         public ReadOnlyObservableCollection<WordToMotionItemViewModel> Items { get; }

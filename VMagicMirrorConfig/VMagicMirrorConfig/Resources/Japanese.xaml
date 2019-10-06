@@ -191,6 +191,7 @@
     
     <!-- Word To Motion -->
     <sys:String x:Key="WordToMotion_Enable">Word to Motionを有効化</sys:String>
+    <sys:String x:Key="WordToMotion_UseGamepadForInput">ゲームパッドのボタンで表情/モーションを実行</sys:String>
     <sys:String x:Key="WordToMotion_Instruction" xml:space="preserve">このタブは `Word to Motion` タブです。
 `Word to Motion`は、単語をタイピングするとキャラクターを動かせる機能です。
 ためしに "joy" とタイピングしてみてください。</sys:String>
