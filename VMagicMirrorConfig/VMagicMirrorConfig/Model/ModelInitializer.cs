@@ -25,8 +25,8 @@ namespace Baku.VMagicMirrorConfig
             CameraPositionChecker = new CameraPositionChecker(MessageSender);
         }
 
-        public IMessageSender MessageSender { get; } //= new GrpcSender();
-        public IMessageReceiver MessageReceiver { get; } //= new GrpcReceiver();
+        public IMessageSender MessageSender { get; } 
+        public IMessageReceiver MessageReceiver { get; } 
         public InputChecker InputChecker { get; } = new InputChecker();
         public CameraPositionChecker CameraPositionChecker { get; private set; } = null;
 
