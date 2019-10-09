@@ -80,6 +80,11 @@ namespace Baku.VMagicMirrorConfig.Mmf
             lock (requestIdLock)
             {
                 requestId++;
+                //クエリのIDは1 ~ (int.MaxValue - 1)の範囲で回るようにしておく
+                if (requestId == int.MaxValue)
+                {
+                    requestId = 1;
+                }
             }
         }
 
@@ -128,8 +133,14 @@ namespace Baku.VMagicMirrorConfig.Mmf
             }
             receiverAccessor = receiver.CreateViewAccessor();
             senderAccessor = sender.CreateViewAccessor();
-            Task.Run(() => ReadThread());
-            Task.Run(() => WriteThread());
+            if (isServer)
+            {
+                //前回実行時のデータが残る可能性があるので、明示的に未書き込み状態にする
+                receiverAccessor.Write(0, (byte)0);
+                senderAccessor.Write(0, (byte)0);
+            }
+            new Thread(() => ReadThread()).Start();
+            new Thread(() => WriteThread()).Start();
             IsConnected = true;
         }
 
@@ -163,7 +174,7 @@ namespace Baku.VMagicMirrorConfig.Mmf
         }
 
         private void SendQueryResponse(string command, int id)
-            => writeMessageQueue.Enqueue(Message.Query(command, id));
+            => writeMessageQueue.Enqueue(Message.Response(command, id));
 
         private void ReadThread()
         {
@@ -222,7 +233,7 @@ namespace Baku.VMagicMirrorConfig.Mmf
         {
             short messageType = receiverAccessor.ReadInt16(2);
             bool isReply = messageType > 0;
-            int id = receiverAccessor.ReadInt16(4);
+            int id = receiverAccessor.ReadInt32(4);
             int bodyLength = receiverAccessor.ReadInt32(8);
 
             receiverAccessor.ReadArray(12, _readBuffer, 0, bodyLength);
