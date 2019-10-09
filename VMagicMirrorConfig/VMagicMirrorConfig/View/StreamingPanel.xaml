@@ -110,7 +110,7 @@
                                 <ComboBox Grid.Row="0" Grid.Column="2"
                                           HorizontalAlignment="Stretch"
                                           Margin="5,0"
-                                          IsEnabled="{Binding MtoionSetting.EnableLipSync}"
+                                          IsEnabled="{Binding MotionSetting.EnableLipSync}"
                                           ItemsSource="{Binding MotionSetting.MicrophoneDeviceNames}"
                                           SelectedItem="{Binding MotionSetting.LipSyncMicrophoneDeviceName}"
                                           md:HintAssist.Hint="Microphone"
