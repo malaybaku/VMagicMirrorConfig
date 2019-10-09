@@ -19,20 +19,9 @@
     <DebugType>pdbonly</DebugType>
     <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
-  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="%userprofile%\.nuget\packages\grpc.tools\1.22.1\tools\windows_x64\protoc.exe --csharp_out $(ProjectDir)Model\Grpc\Generated --grpc_out $(ProjectDir)Model\Grpc\Generated --plugin=protoc-gen-grpc=%userprofile%\.nuget\packages\Grpc.Tools\1.22.1\tools\windows_x64\grpc_csharp_plugin.exe --proto_path $(ProjectDir)Model\Grpc\Proto VMagicMirrorGrpc.proto" />  
-  </Target>
-  <ItemGroup>
-    <None Include="Model\Grpc\Proto\VMagicMirrorGrpc.proto" />
-  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Dragablz" Version="0.0.3.203" />
     <PackageReference Include="Expression.Blend.Sdk.WPF" Version="1.0.1" />
-    <PackageReference Include="Google.Protobuf" Version="3.9.2" />
-    <PackageReference Include="Grpc" Version="1.22.1" />
-    <PackageReference Include="Grpc.Tools" Version="1.22.1">
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
     <PackageReference Include="MaterialDesignColors" Version="1.2.0" />
     <PackageReference Include="MaterialDesignThemes" Version="2.6.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />

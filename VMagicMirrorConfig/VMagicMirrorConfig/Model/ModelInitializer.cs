@@ -4,6 +4,13 @@ namespace Baku.VMagicMirrorConfig
 {
     class ModelInitializer : IDisposable
     {
+        public ModelInitializer()
+        {
+            var mmfClient = new MmfClient();
+            MessageSender = mmfClient;
+            MessageReceiver = mmfClient;
+        }
+
         public void Initialize()
         {
             InputChecker.Start();
@@ -18,8 +25,8 @@ namespace Baku.VMagicMirrorConfig
             CameraPositionChecker = new CameraPositionChecker(MessageSender);
         }
 
-        public IMessageSender MessageSender { get; } = new GrpcSender();
-        public IMessageReceiver MessageReceiver { get; } = new GrpcReceiver();
+        public IMessageSender MessageSender { get; } 
+        public IMessageReceiver MessageReceiver { get; } 
         public InputChecker InputChecker { get; } = new InputChecker();
         public CameraPositionChecker CameraPositionChecker { get; private set; } = null;
 
