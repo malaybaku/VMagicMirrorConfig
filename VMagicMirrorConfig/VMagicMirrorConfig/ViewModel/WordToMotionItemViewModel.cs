@@ -267,6 +267,7 @@ namespace Baku.VMagicMirrorConfig
             //NOTE: 数が少ないのでハードコーディングで済ます
             _availableBuiltInClipNames.Add("Wave");
             _availableBuiltInClipNames.Add("Rokuro");
+            _availableBuiltInClipNames.Add("Good");
         }
 
         private void InitializeBlendShapeItems()
