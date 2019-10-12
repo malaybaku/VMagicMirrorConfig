@@ -66,7 +66,10 @@ namespace Baku.VMagicMirrorConfig
             _client.Stop();
         }
 
+        /// <summary> コマンド受信時に、UIスレッド上で発火する。 </summary>
         public event EventHandler<CommandReceivedEventArgs> ReceivedCommand;
+        
+        /// <summary> クエリ受信時に、UIスレッド上で発火する。 </summary>
         public event EventHandler<QueryReceivedEventArgs> ReceivedQuery;
 
         private void OnReceivedCommand(object sender, ReceiveCommandEventArgs e)
@@ -76,7 +79,9 @@ namespace Baku.VMagicMirrorConfig
             string command = (i == -1) ? content : content.Substring(0, i);
             string args = (i == -1) ? "" : content.Substring(i + 1);
 
-            ReceivedCommand?.Invoke(this, new CommandReceivedEventArgs(command, args));            
+            App.Current.Dispatcher.BeginInvoke(new Action(
+                () => ReceivedCommand?.Invoke(this, new CommandReceivedEventArgs(command, args))
+                ));
         }
 
         private void OnReceivedQuery(object sender, ReceiveQueryEventArgs e)
@@ -87,9 +92,12 @@ namespace Baku.VMagicMirrorConfig
             string args = (i == -1) ? "" : content.Substring(i + 1);
 
             var ea = new QueryReceivedEventArgs(command, args);
-            ReceivedQuery?.Invoke(this, ea);
 
-            e.Query.Reply(string.IsNullOrWhiteSpace(ea.Result) ? "" : ea.Result);
+            App.Current.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                ReceivedQuery?.Invoke(this, ea);
+                e.Query.Reply(string.IsNullOrWhiteSpace(ea.Result) ? "" : ea.Result);
+            }));
         }
 
         //コマンド名と引数名の区切り文字のインデックスを探します。
