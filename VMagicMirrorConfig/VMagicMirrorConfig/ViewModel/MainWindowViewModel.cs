@@ -339,6 +339,10 @@ namespace Baku.VMagicMirrorConfig
 
             Initializer.Initialize();
 
+            //NOTE: ここでコンポジットを開始することで、背景色/ライト/影のメッセージも統一してしまう
+            Initializer.MessageSender.StartCommandComposite();
+            WindowSetting.Initialize();
+            LightSetting.Initialize();
             LoadSetting(SpecialFilePath.GetSettingFilePath(), true);
 
             //LoadCurrentParametersの時点で(もし前回保存した)言語名があればLanguageNameに入っているので、それを渡す。
@@ -426,6 +430,42 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
+        private void LoadSettingSub(string path, bool isInternalFile)
+        {
+            using (var sr = new StreamReader(path))
+            {
+                var serializer = new XmlSerializer(typeof(SaveData));
+                var saveData = (SaveData)serializer.Deserialize(sr);
+
+                if (isInternalFile && saveData.IsInternalSaveFile)
+                {
+                    _lastVrmLoadFilePath = saveData.LastLoadedVrmFilePath;
+                    AutoLoadLastLoadedVrm = saveData.AutoLoadLastLoadedVrm;
+                    LanguageName =
+                        AvailableLanguageNames.Contains(saveData.PreferredLanguageName) ?
+                        saveData.PreferredLanguageName :
+                        "";
+                }
+
+                AutoAdjustEyebrowOnLoaded = saveData.AdjustEyebrowOnLoaded;
+
+                WindowSetting.CopyFrom(saveData.WindowSetting);
+                MotionSetting.CopyFrom(saveData.MotionSetting);
+                LayoutSetting.CopyFrom(saveData.LayoutSetting);
+                LightSetting.CopyFrom(saveData.LightSetting);
+                //コレはv0.9.0で追加したので、それ以前のバージョンのデータを読み込むとnullになってる
+                if (saveData.WordToMotionSetting != null)
+                {
+                    WordToMotionSetting.CopyFrom(saveData.WordToMotionSetting);
+                }
+                WordToMotionSetting.LoadItems();
+                WordToMotionSetting.RequestReload();
+
+                //顔キャリブデータはファイル読み込み時だけ送る特殊なデータなのでここに書いてます
+                MotionSetting.SendCalibrateFaceData();
+            }
+        }
+
         private void LoadSetting(string path, bool isInternalFile)
         {
             if (!File.Exists(path))
@@ -435,51 +475,15 @@ namespace Baku.VMagicMirrorConfig
 
             try
             {
-                using (var sr = new StreamReader(path))
-                {
-                    var serializer = new XmlSerializer(typeof(SaveData));
-                    var saveData = (SaveData)serializer.Deserialize(sr);
-
-                    if (isInternalFile && saveData.IsInternalSaveFile)
-                    {
-                        _lastVrmLoadFilePath = saveData.LastLoadedVrmFilePath;
-                        AutoLoadLastLoadedVrm = saveData.AutoLoadLastLoadedVrm;
-                        LanguageName =
-                            AvailableLanguageNames.Contains(saveData.PreferredLanguageName) ?
-                            saveData.PreferredLanguageName :
-                            "";
-                    }
-
-                    AutoAdjustEyebrowOnLoaded = saveData.AdjustEyebrowOnLoaded;
-
-                    WindowSetting.CopyFrom(saveData.WindowSetting);
-                    MotionSetting.CopyFrom(saveData.MotionSetting);
-                    LayoutSetting.CopyFrom(saveData.LayoutSetting);
-                    LightSetting.CopyFrom(saveData.LightSetting);
-                    //コレはv0.9.0で追加したので、それ以前のバージョンのデータを読み込むとnullになってる
-                    if (saveData.WordToMotionSetting != null)
-                    {
-                        WordToMotionSetting.CopyFrom(saveData.WordToMotionSetting);
-                    }
-                    WordToMotionSetting.LoadItems();
-                    WordToMotionSetting.RequestReload();
-
-                    //顔キャリブデータはファイル読み込み時だけ送る特殊なデータなのでここに書いてます
-                    MotionSetting.SendCalibrateFaceData();
-                }
-
+                Initializer.MessageSender.StartCommandComposite();
+                LoadSettingSub(path, isInternalFile);
+                Initializer.MessageSender.EndCommandComposite();
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Failed to load setting file {path} : {ex.Message}");
             }
         }
-
-        private static string GetFilePath(string fileName)
-            => Path.Combine(
-                Path.GetDirectoryName(Assembly.GetEntryAssembly().Location),
-                fileName
-                );
     }
 
     public interface IWindowViewModel : IDisposable

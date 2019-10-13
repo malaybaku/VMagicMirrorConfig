@@ -13,6 +13,10 @@ namespace Baku.VMagicMirrorConfig
 
         internal LightSettingViewModel(IMessageSender sender) : base(sender)
         {
+        }
+
+        public void Initialize()
+        {
             UpdateLightColor();
             UpdateBloomColor();
         }

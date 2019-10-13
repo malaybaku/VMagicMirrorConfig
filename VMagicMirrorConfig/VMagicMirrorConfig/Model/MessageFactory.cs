@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
 namespace Baku.VMagicMirrorConfig
@@ -203,6 +204,22 @@ namespace Baku.VMagicMirrorConfig
 
         public Message TakeScreenshot() => NoArg();
         public Message OpenScreenshotFolder() => NoArg();
+
+        #endregion
+
+        #region メタメッセージ
+
+        /// <summary>
+        /// クエリでないコマンドをひとまとめにしたコマンド。
+        /// </summary>
+        /// <param name="commands"></param>
+        /// <returns></returns>
+        /// <remarks>
+        /// 狙い: 投げっぱなしのコマンドを集約してひとまとめで送る。
+        /// クエリは個別にawaitしてほしい関係でココに混ぜるのはちょっと難しい
+        /// </remarks>
+        public Message CommandArray(IEnumerable<Message> commands)
+            => WithArg(CommandArrayBuilder.BuildCommandArrayString(commands));
 
         #endregion
 
