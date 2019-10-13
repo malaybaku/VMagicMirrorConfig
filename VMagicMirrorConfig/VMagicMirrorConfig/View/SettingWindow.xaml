@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         d:DataContext="{x:Type vmm:MainWindowViewModel}"
         Title="VMagicMirror Settings" 
-        Height="650" Width="500"
+        Height="660" Width="500"
         MinHeight="200" MinWidth="430"
         >
     <dragablz:TabablzControl FixedHeaderCount="5">
