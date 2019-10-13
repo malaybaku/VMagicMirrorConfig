@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Baku.VMagicMirrorConfig.Mmf;
 
@@ -17,13 +18,23 @@ namespace Baku.VMagicMirrorConfig
 
         private readonly MemoryMappedFileConnectClient _client;
 
+        private bool _isCompositeMode = false;
+        //NOTE: 64というキャパシティはどんぶり勘定です
+        private readonly List<Message> _compositeMessages = new List<Message>(64);
+
         #region IMessageSender
 
         public void SendMessage(Message message)
         {
-            //NOTE: 前バージョンが投げっぱなし通信だったため、ここでも戻り値はとらない
+            if (_isCompositeMode)
+            {
+                _compositeMessages.Add(message);
+                return;
+            }
+
             try
             {
+                //NOTE: 前バージョンが投げっぱなし通信だったため、ここでも戻り値はとらない
                 _client.SendCommand(message.Command + ":" + message.Content);
             }
             catch (Exception ex)
@@ -43,6 +54,21 @@ namespace Baku.VMagicMirrorConfig
             {
                 LogOutput.Instance.Write(ex);
                 return "";
+            }
+        }
+
+        public void StartCommandComposite()
+        {
+            _isCompositeMode = true;
+        }
+
+        public void EndCommandComposite()
+        {
+            _isCompositeMode = false;
+            if (_compositeMessages.Count > 0)
+            {
+                SendMessage(MessageFactory.Instance.CommandArray(_compositeMessages));
+                _compositeMessages.Clear();
             }
         }
 
@@ -112,7 +138,7 @@ namespace Baku.VMagicMirrorConfig
             }
             return -1;
         }
-
+        
         #endregion
 
     }
