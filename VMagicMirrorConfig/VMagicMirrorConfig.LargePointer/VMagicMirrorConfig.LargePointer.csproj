@@ -16,6 +16,6 @@
     <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy /E /Y $(ProjectDir)bin\Debug\net47 $(ProjectDir)..\..\..\Bin\LargePointer" />
+    <Exec Command="del &quot;$(TargetDir)*.pdb&quot;&#xD;&#xA;xcopy /E /Y &quot;$(ProjectDir)bin\Debug\net47&quot; &quot;$(ProjectDir)..\..\..\Bin\LargePointer&quot;" />
   </Target>
 </Project>

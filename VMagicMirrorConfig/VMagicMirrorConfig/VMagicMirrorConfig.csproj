@@ -27,6 +27,6 @@
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
   </ItemGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy /E /Y $(ProjectDir)bin\Debug\net47 $(ProjectDir)..\..\..\Bin\ConfigApp" />
+    <Exec Command="del &quot;$(TargetDir)_autosave&quot;&#xD;&#xA;del &quot;$(TargetDir)*.pdb&quot;&#xD;&#xA;xcopy /E /Y &quot;$(ProjectDir)bin\Debug\net47&quot; &quot;$(ProjectDir)..\..\..\Bin\ConfigApp&quot;" />
   </Target>
 </Project>
