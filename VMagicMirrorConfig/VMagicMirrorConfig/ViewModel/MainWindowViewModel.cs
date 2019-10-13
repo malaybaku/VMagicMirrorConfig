@@ -3,7 +3,6 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
-using System.Reflection;
 using System.Windows;
 using System.Xml.Serialization;
 using Microsoft.Win32;
@@ -344,6 +343,8 @@ namespace Baku.VMagicMirrorConfig
             WindowSetting.Initialize();
             LightSetting.Initialize();
             LoadSetting(SpecialFilePath.GetSettingFilePath(), true);
+            //NOTE: ここのEndCommandCompositeはLoadSettingが(ファイル無いとかで)中断したときの対策
+            Initializer.MessageSender.EndCommandComposite();
 
             //LoadCurrentParametersの時点で(もし前回保存した)言語名があればLanguageNameに入っているので、それを渡す。
             LanguageSelector.Instance.Initialize(MessageSender, LanguageName);
