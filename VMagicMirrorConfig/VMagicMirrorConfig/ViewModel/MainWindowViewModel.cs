@@ -339,6 +339,10 @@ namespace Baku.VMagicMirrorConfig
 
             Initializer.Initialize();
 
+            //NOTE: ここでコンポジットを開始することで、背景色/ライト/影のメッセージも統一してしまう
+            Initializer.MessageSender.StartCommandComposite();
+            WindowSetting.Initialize();
+            LightSetting.Initialize();
             LoadSetting(SpecialFilePath.GetSettingFilePath(), true);
 
             //LoadCurrentParametersの時点で(もし前回保存した)言語名があればLanguageNameに入っているので、それを渡す。

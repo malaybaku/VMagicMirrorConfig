@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Baku.VMagicMirrorConfig.Mmf;
 
@@ -28,6 +29,12 @@ namespace Baku.VMagicMirrorConfig
         {
             if (_isCompositeMode)
             {
+                //同じコマンド名の古いメッセージは削除し、最新値だけ残す
+                //設定更新のコマンドはsetterメソッド的なのでこういう事をしても大丈夫
+                if (_compositeMessages.FirstOrDefault(m => m.Command == message.Command) is Message msg)
+                {
+                    _compositeMessages.Remove(msg);
+                }
                 _compositeMessages.Add(message);
                 return;
             }

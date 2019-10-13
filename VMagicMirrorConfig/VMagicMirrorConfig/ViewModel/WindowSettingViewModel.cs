@@ -12,6 +12,10 @@ namespace Baku.VMagicMirrorConfig
         public WindowSettingViewModel() : base() { }
         internal WindowSettingViewModel(IMessageSender sender) : base(sender)
         {
+        }
+
+        public void Initialize()
+        {
             UpdateBackgroundColor();
         }
 
@@ -59,7 +63,7 @@ namespace Baku.VMagicMirrorConfig
 
         [XmlIgnore]
         public Color Color { get; private set; }
-
+        
         private void UpdateBackgroundColor()
         {
             Color = IsTransparent ?
