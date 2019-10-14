@@ -4,6 +4,13 @@ namespace Baku.VMagicMirrorConfig
 {
     class ModelInitializer : IDisposable
     {
+        public ModelInitializer()
+        {
+            var mmfClient = new MmfClient();
+            MessageSender = mmfClient;
+            MessageReceiver = mmfClient;
+        }
+
         public void Initialize()
         {
             InputChecker.Start();
@@ -12,16 +19,23 @@ namespace Baku.VMagicMirrorConfig
             InputChecker.MouseButton += OnMouseButton;
             InputChecker.KeyDown += OnKeyDown;
 
-            MessageReceiver.Start();
             AssignMessageReceivers();
+            MessageReceiver.Start();
 
             CameraPositionChecker = new CameraPositionChecker(MessageSender);
         }
 
-        public IMessageSender MessageSender { get; } = new GrpcSender();
-        public IMessageReceiver MessageReceiver { get; } = new GrpcReceiver();
+        public IMessageSender MessageSender { get; } 
+        public IMessageReceiver MessageReceiver { get; } 
         public InputChecker InputChecker { get; } = new InputChecker();
         public CameraPositionChecker CameraPositionChecker { get; private set; } = null;
+
+        public void Dispose()
+        {
+            InputChecker.Dispose();
+            MessageReceiver.Stop();
+            CameraPositionChecker?.Stop();
+        }
 
         private void OnKeyDown(object sender, EventArgs e)
             => MessageSender.SendMessage(MessageFactory.Instance.KeyDown(InputChecker.KeyCode));
@@ -31,13 +45,6 @@ namespace Baku.VMagicMirrorConfig
 
         private void OnMouseButton(object sender, MouseButtonEventArgs e)
             => MessageSender.SendMessage(MessageFactory.Instance.MouseButton(e.Info));
-
-        public void Dispose()
-        {
-            InputChecker.Dispose();
-            MessageReceiver.Stop();
-            CameraPositionChecker?.Stop();
-        }
 
         private void AssignMessageReceivers()
         {

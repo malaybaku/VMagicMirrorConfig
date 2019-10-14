@@ -14,9 +14,11 @@
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         <vmm:BooleanReverseToVisibilityConverter x:Key="BooleanReverseToVisibilityConverter"/>
+        <vmm:BooleanToForegroundConverter x:Key="BooleanToForegroundConverter"/>
     </UserControl.Resources>
     <Grid Background="White">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -29,16 +31,85 @@
                    />
 
         <CheckBox Grid.Row="1"
-                  Margin="10"
+                  Margin="5,0"
                   Content="{DynamicResource WordToMotion_Enable}"
                   IsChecked="{Binding EnableWordToMotion}"
                   />
-        <ScrollViewer Grid.Row="2"
+
+        <CheckBox Grid.Row="2"
+                  Margin="15,5"
+                  Content="{DynamicResource WordToMotion_UseGamepadForInput}"
+                  IsEnabled="{Binding EnableWordToMotion}"
+                  IsChecked="{Binding UseGamepadToStartWordToMotion}"
+                  />
+
+        <ScrollViewer Grid.Row="3"
                       VerticalScrollBarVisibility="Auto"
                       HorizontalScrollBarVisibility="Disabled"
+                      IsEnabled="{Binding EnableWordToMotion}"
                       >
             <Grid>
-                <ItemsControl ItemsSource="{Binding Items}"
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0"
+                            Margin="10,0,5,80"
+                            >
+                    <StackPanel.Resources>
+                        <Style TargetType="md:PackIcon">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="Height" Value="20"/>
+                            <Setter Property="Width" Value="20"/>
+                            <Setter Property="Margin" Value="0,10"/>
+                        </Style>
+                    </StackPanel.Resources>
+                    <Grid Height="30" Margin="0,5">
+                        <TextBlock Text="[START]" 
+                                   VerticalAlignment="Center"
+                                   Margin="0"
+                                   FontWeight="Bold"
+                                   Foreground="{Binding GamepadWordToMotionIsActive,
+                                                        Converter={StaticResource BooleanToForegroundConverter}}"
+                                   />
+                    </Grid>
+                    <md:PackIcon Kind="AlphabetACircleOutline"
+                                 Foreground="{Binding GamepadWordToMotionIsActive,
+                                                      Converter={StaticResource BooleanToForegroundConverter}}"
+                                   />
+                    <md:PackIcon Kind="AlphabetBCircleOutline"
+                                 Foreground="{Binding GamepadWordToMotionIsActive,
+                                                      Converter={StaticResource BooleanToForegroundConverter}}"
+                                   />
+                    <md:PackIcon Kind="AlphabetXCircleOutline"
+                                 Foreground="{Binding GamepadWordToMotionIsActive,
+                                                      Converter={StaticResource BooleanToForegroundConverter}}"
+                                   />
+                    <md:PackIcon Kind="AlphabetYCircleOutline"
+                                 Foreground="{Binding GamepadWordToMotionIsActive,
+                                                      Converter={StaticResource BooleanToForegroundConverter}}"
+                                   />
+                    <md:PackIcon Kind="ArrowUpBox"
+                                 Foreground="{Binding GamepadWordToMotionIsActive,
+                                                      Converter={StaticResource BooleanToForegroundConverter}}"
+                                   />
+                    <md:PackIcon Kind="ArrowRightBox"
+                                 Foreground="{Binding GamepadWordToMotionIsActive,
+                                                      Converter={StaticResource BooleanToForegroundConverter}}"
+                                   />
+                    <md:PackIcon Kind="ArrowDownBox"
+                                 Foreground="{Binding GamepadWordToMotionIsActive,
+                                                      Converter={StaticResource BooleanToForegroundConverter}}"
+                                   />
+                    <md:PackIcon Kind="ArrowLeftBox"
+                                 Foreground="{Binding GamepadWordToMotionIsActive,
+                                                      Converter={StaticResource BooleanToForegroundConverter}}"
+                                   />
+                </StackPanel>
+
+                <ItemsControl Grid.Column="1"
+                              ItemsSource="{Binding Items}"
                               IsEnabled="{Binding EnableWordToMotion}"
                               Margin="0,0,0,80"
                               >
@@ -74,8 +145,8 @@
                                         <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
                                                 Width="60" Height="30" Padding="0"
                                                 Command="{Binding EditCommand}">
-                                        <md:PackIcon Kind="Settings" />
-                                    </Button>
+                                            <md:PackIcon Kind="Settings" />
+                                        </Button>
 
                                         <!--このアクションが体の動きを含むかどうかのインジケータ--> 
                                         <md:PackIcon Foreground="LightGray"
@@ -149,7 +220,8 @@
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
-                <Button IsEnabled="{Binding EnableWordToMotion}"
+                <Button Grid.Column="1" 
+                        IsEnabled="{Binding EnableWordToMotion}"
                         Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Bottom"
