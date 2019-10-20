@@ -38,7 +38,6 @@ namespace Baku.VMagicMirrorConfig
             {
                 if (SetValue(ref _enableWordToMotion, value))
                 {
-                    RaisePropertyChanged(nameof(GamepadWordToMotionIsActive));
                     SendMessage(MessageFactory.Instance.EnableWordToMotion(EnableWordToMotion));
                 }
             }
