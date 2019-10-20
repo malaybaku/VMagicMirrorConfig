@@ -254,10 +254,6 @@
                                       IsChecked="{Binding LayoutSetting.HidVisibility}"
                                       />
                             <CheckBox Margin="10,1" 
-                                      Content="{DynamicResource Layout_Gamepad}"
-                                      IsChecked="{Binding LayoutSetting.Gamepad.GamepadVisibility}"
-                                      />
-                            <CheckBox Margin="10,1" 
                                       Content="{DynamicResource Shadow_Enable_Streaming}"
                                       IsChecked="{Binding LightSetting.EnableShadow}"
                                       />
