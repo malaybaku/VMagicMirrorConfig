@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DataContext="{x:Type vmm:MainWindowViewModel}"
              d:DesignWidth="520"
-             d:DesignHeight="410"
+             d:DesignHeight="500"
              >
     <UserControl.Resources>
         <vmm:WhiteSpaceStringToNullConverter x:Key="WhiteSpaceStringToNullConverter"/>
@@ -190,50 +190,75 @@
 
                     <md:Card>
                         <StackPanel>
+
                             <StackPanel Orientation="Horizontal">
-                                <md:PackIcon Style="{StaticResource HeaderPackIcon}"
-                                             Kind="Camera"
-                                             />
-                                <TextBlock Text="{DynamicResource Streaming_Screenshot}"
-                                       Margin="5"
-                                       Style="{StaticResource HeaderText}"
-                                       />
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <md:PackIcon Grid.Column="0"
+                                                 Width="15" Height="15"
+                                                 VerticalAlignment="Center"
+                                                 Kind="ABC"/>
+                                    <md:PackIcon Grid.Column="1"
+                                                 Width="9" Height="9"
+                                                 Margin="2,0,0,0"
+                                                 VerticalAlignment="Center"                                 
+                                                 Kind="ArrowRightBold"/>
+                                    <md:PackIcon Grid.Column="2"
+                                                 Width="13" Height="13"
+                                                 Margin="-2,1,0,0"
+                                                 VerticalAlignment="Center"
+                                                 Kind="HumanHandsup">
+                                    </md:PackIcon>
+                                </Grid>
+
+
+                                <TextBlock Text="{DynamicResource Streaming_WordToMotion}"
+                                           Margin="5"
+                                           Style="{StaticResource HeaderText}"
+                                           />
                             </StackPanel>
 
-                            <StackPanel Orientation="Horizontal">
-                                <Button Command="{Binding TakeScreenshotCommand}"
-                                        Padding="0"
+                            <CheckBox Margin="10,3"
+                                      Content="{DynamicResource WordToMotion_Enable}"
+                                      IsChecked="{Binding WordToMotionSetting.EnableWordToMotion}"
+                                      />
+                            <TextBlock Margin="15,5,5,5" 
+                                       Text="{DynamicResource WordToMotion_AssignDevice}"
+                                       />
+                            <StackPanel Orientation="Horizontal"
+                                        Margin="5,0,5,4"
                                         >
-                                    <StackPanel Style="{StaticResource IconTextSetStackPanel}">
-                                        <md:PackIcon Style="{StaticResource IconTextSetIcon}"
-                                                 Kind="Camera"
-                                                 />
-                                        <TextBlock Style="{StaticResource IconSetSetText}"
-                                               Text="{DynamicResource Streaming_Screenshot_Take}"
-                                               />
-                                    </StackPanel>
-                                </Button>
-
-                                <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                        Command="{Binding OpenScreenshotFolderCommand}"
-                                        Padding="0"
-                                        >
-                                    <StackPanel Style="{StaticResource IconTextSetStackPanel}">
-                                        <md:PackIcon Style="{StaticResource IconTextSetIcon}"
-                                                 Kind="Folder"
-                                                 />
-                                        <TextBlock Style="{StaticResource IconSetSetText}"
-                                               Text="{DynamicResource Streaming_Screenshot_OpenSaveFolder}"
-                                               />
-                                    </StackPanel>
-                                </Button>
-
+                                <RadioButton VerticalAlignment="Center"
+                                             VerticalContentAlignment="Center"
+                                             Margin="10,0"
+                                             Content="{DynamicResource WordToMotion_AssignDevice_None}"
+                                             IsEnabled="{Binding WordToMotionSetting.EnableWordToMotion}"
+                                             IsChecked="{Binding WordToMotionSetting.UseNoDeviceToStartWordToMotion}"                         
+                                             />
+                                <RadioButton VerticalAlignment="Center"
+                                             VerticalContentAlignment="Center"
+                                             Margin="10,0"
+                                             Content="{DynamicResource WordToMotion_AssignDevice_Gamepad}"
+                                             IsEnabled="{Binding WordToMotionSetting.EnableWordToMotion}"
+                                             IsChecked="{Binding WordToMotionSetting.UseGamepadToStartWordToMotion}"                         
+                                             />
+                                <RadioButton VerticalAlignment="Center"
+                                             VerticalContentAlignment="Center"
+                                             Margin="10,0"
+                                             Content="{DynamicResource WordToMotion_AssignDevice_Keyboard_Short}"
+                                             IsEnabled="{Binding WordToMotionSetting.EnableWordToMotion}"
+                                             IsChecked="{Binding WordToMotionSetting.UseKeyboardToStartWordToMotion}"                         
+                                             />                                
                             </StackPanel>
 
                         </StackPanel>
-
-
                     </md:Card>
+
+
                 </StackPanel>
 
                 <StackPanel Grid.Column="1">
@@ -349,6 +374,55 @@
                                       />
                         </StackPanel>
                     </md:Card>
+
+                    <md:Card>
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <md:PackIcon Style="{StaticResource HeaderPackIcon}"
+                                             Kind="Camera"
+                                             />
+                                <TextBlock Text="{DynamicResource Streaming_Screenshot}"
+                                       Margin="5"
+                                       Style="{StaticResource HeaderText}"
+                                       />
+                            </StackPanel>
+
+                            <Button Command="{Binding TakeScreenshotCommand}"
+                                    Padding="0"
+                                    HorizontalAlignment="Left"
+                                    >
+                                <StackPanel Style="{StaticResource IconTextSetStackPanel}">
+                                    <md:PackIcon Style="{StaticResource IconTextSetIcon}"
+                                                Kind="Camera"
+                                                />
+                                    <TextBlock Style="{StaticResource IconSetSetText}"
+                                            Text="{DynamicResource Streaming_Screenshot_Take}"
+                                            />
+                                </StackPanel>
+                            </Button>
+
+                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                    Command="{Binding OpenScreenshotFolderCommand}"
+                                    Padding="0"
+                                    HorizontalAlignment="Left"
+                                    Margin="10,0"
+                                    >
+                                <StackPanel Style="{StaticResource IconTextSetStackPanel}">
+                                    <md:PackIcon Style="{StaticResource IconTextSetIcon}"
+                                                Kind="Folder"
+                                                />
+                                    <TextBlock Style="{StaticResource IconSetSetText}"
+                                            Text="{DynamicResource Streaming_Screenshot_OpenSaveFolder}"
+                                            />
+                                </StackPanel>
+                            </Button>
+
+                        </StackPanel>
+
+
+                    </md:Card>
+
+
                 </StackPanel>
             </Grid>
         </StackPanel>
