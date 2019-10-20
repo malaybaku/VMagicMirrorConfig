@@ -200,14 +200,19 @@ namespace Baku.VMagicMirrorConfig
             SendMessage(MessageFactory.Instance.ReloadMotionRequests(ItemsContentString));
         }
 
+        private ActionCommand _resetByDefaultItemsCommand = null;
+        public ActionCommand ResetByDefaultItemsCommand
+            => _resetByDefaultItemsCommand ?? (_resetByDefaultItemsCommand = new ActionCommand(ResetByDefaultItemsImpl));
+        private void ResetByDefaultItemsImpl()
+            => SettingResetUtils.ResetSingleCategorySetting(LoadDefaultItems);
+
         public override void ResetToDefault()
         {
             //何もしない: ここは設定がフクザツなのでとりあえずいじらない方針で。
             //(このパネル単体のリセットUIがちゃんとできたら何か考える)
-            //->autosaveが無い状態で
         }
 
-        //このマシン上でこのバージョンのVMagicMirrorが初めて実行された可能性が高いとき、
+        //このマシン上でこのバージョンのVMagicMirrorが初めて実行されたと推定できるとき、
         //デフォルトのWord To Motion一覧を生成して初期化します。
         public void LoadDefaultItemsIfInitialStart()
         {
@@ -215,7 +220,11 @@ namespace Baku.VMagicMirrorConfig
             {
                 return;
             }
+            LoadDefaultItems();
+        }
 
+        private void LoadDefaultItems()
+        {
             _items.Clear();
             var models = MotionRequest.GetDefaultMotionRequestSet();
             for (int i = 0; i < models.Length; i++)

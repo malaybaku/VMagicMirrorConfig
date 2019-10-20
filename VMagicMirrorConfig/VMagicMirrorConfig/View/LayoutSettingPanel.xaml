@@ -35,6 +35,10 @@
                                    VerticalAlignment="Center"
                                    Margin="5"
                                    />
+                        <!-- このリセットボタンは他と違って「位置をリセット」と同じ処理で、確認ダイアログは出ない -->
+                        <Button Style="{StaticResource CategorySettingResetButton}"
+                                Command="{Binding ResetCameraPositionCommand}"
+                                />
                     </StackPanel>
                     
 
@@ -42,10 +46,6 @@
                               IsChecked="{Binding EnableFreeCameraMode}"
                               Margin="10,5"
                               />
-                    <TextBlock Text="{DynamicResource Layout_CurrentCameraPosition}"/>
-                    <TextBlock Text="{Binding CameraPosition}"
-                               Margin="15,5"
-                               />
 
                     <Grid Margin="5">
                         <Grid.ColumnDefinitions>
@@ -100,6 +100,10 @@
                                    Style="{StaticResource HeaderText}"
                                    Margin="5"
                                    />
+
+                        <Button Style="{StaticResource CategorySettingResetButton}"
+                                Command="{Binding ResetHidSettingCommand}"
+                                />
                     </StackPanel>
 
                     <Grid Margin="5">
@@ -204,6 +208,9 @@
                                    Style="{StaticResource HeaderText}"
                                    Margin="5"
                                    />
+                        <Button Style="{StaticResource CategorySettingResetButton}"
+                                Command="{Binding Gamepad.ResetSettingCommand}"
+                                />
                     </StackPanel>
                     
 

@@ -10,6 +10,9 @@
              d:DesignWidth="400"
              d:DesignHeight="1050"
              >
+    <UserControl.Resources>
+        <vmm:WhiteSpaceStringToNullConverter x:Key="WhiteSpaceStringToNullConverter"/>
+    </UserControl.Resources>
     <ScrollViewer VerticalScrollBarVisibility="Auto"
                   HorizontalScrollBarVisibility="Disabled"
                   >
@@ -27,6 +30,9 @@
                                    Style="{StaticResource HeaderText}"
                                    Margin="5"
                                    />
+                        <Button Style="{StaticResource CategorySettingResetButton}"
+                                Command="{Binding ResetFaceMotionSettingCommand}"
+                                />
                     </StackPanel>
 
                     <Grid Margin="5">
@@ -64,7 +70,7 @@
                                   Width="200"
                                   IsEnabled="{Binding EnableLipSync}"
                                   ItemsSource="{Binding MicrophoneDeviceNames}"
-                                  SelectedItem="{Binding LipSyncMicrophoneDeviceName}"
+                                  SelectedItem="{Binding LipSyncMicrophoneDeviceName, Converter={StaticResource WhiteSpaceStringToNullConverter}}"
                                   md:HintAssist.Hint="Microphone"
                                   />
 
@@ -92,7 +98,7 @@
                                   Width="200"
                                   IsEnabled="{Binding EnableFaceTracking}"
                                   ItemsSource="{Binding CameraDeviceNames}"
-                                  SelectedItem="{Binding CameraDeviceName}"
+                                  SelectedItem="{Binding CameraDeviceName, Converter={StaticResource WhiteSpaceStringToNullConverter}}"
                                   md:HintAssist.Hint="Camera"
                                   />
 
@@ -296,6 +302,10 @@
                                    Style="{StaticResource HeaderText}"
                                    Margin="5"
                                    />
+
+                        <Button Style="{StaticResource CategorySettingResetButton}"
+                                Command="{Binding ResetArmMotionSettingCommand}"
+                                />
                     </StackPanel>
 
                     <CheckBox Margin="15,5,15,10" 
@@ -404,6 +414,9 @@
                                    Margin="5"
                                    Style="{StaticResource HeaderText}"
                                    />
+                        <Button Style="{StaticResource CategorySettingResetButton}"
+                                Command="{Binding ResetHandMotionSettingCommand}"
+                                />
                     </StackPanel>
                     
                     <Grid Margin="5,0,0,10">
@@ -483,6 +496,11 @@
                                    Style="{StaticResource HeaderText}"
                                    Margin="5"
                                    />
+                    
+                        <Button Style="{StaticResource CategorySettingResetButton}"
+                                Command="{Binding ResetWaitMotionSettingCommand}"
+                                />
+
                     </StackPanel>
 
                     <Grid Margin="5,0,0,10">

@@ -285,7 +285,28 @@ namespace Baku.VMagicMirrorConfig
 
         #endregion
 
-        public override void ResetToDefault()
+        #region Reset API
+
+        private ActionCommand _resetLightSettingCommand = null;
+        public ActionCommand ResetLightSettingCommand
+            => _resetLightSettingCommand ?? (_resetLightSettingCommand = new ActionCommand(ResetLightImpl));
+        private void ResetLightImpl()
+            => SettingResetUtils.ResetSingleCategorySetting(ResetLightSetting);
+
+        private ActionCommand _resetShadowSettingCommand = null;
+        public ActionCommand ResetShadowSettingCommand
+            => _resetShadowSettingCommand ?? (_resetShadowSettingCommand = new ActionCommand(ResetShadowImpl));
+        private void ResetShadowImpl()
+            => SettingResetUtils.ResetSingleCategorySetting(ResetShadowSetting);
+
+        private ActionCommand _resetBloomSettingCommand = null;
+        public ActionCommand ResetBloomSettingCommand
+            => _resetBloomSettingCommand ?? (_resetBloomSettingCommand = new ActionCommand(ResetBloomImpl));
+        private void ResetBloomImpl()
+            => SettingResetUtils.ResetSingleCategorySetting(ResetBloomSetting);
+
+
+        private void ResetLightSetting()
         {
             LightR = 255;
             LightG = 244;
@@ -293,17 +314,34 @@ namespace Baku.VMagicMirrorConfig
             LightIntensity = 100;
             LightYaw = -30;
             LightPitch = 50;
+        }
 
+        private void ResetShadowSetting()
+        {
             EnableShadow = true;
             ShadowIntensity = 65;
             ShadowYaw = -20;
             ShadowPitch = 8;
+            ShadowDepthOffset = 40;
+        }
 
+        private void ResetBloomSetting()
+        {
             BloomR = 255;
             BloomG = 255;
             BloomB = 255;
             BloomIntensity = 50;
             BloomThreshold = 100;
         }
+
+
+        public override void ResetToDefault()
+        {
+            ResetLightSetting();
+            ResetShadowSetting();
+            ResetBloomSetting();
+        }
+
+        #endregion
     }
 }

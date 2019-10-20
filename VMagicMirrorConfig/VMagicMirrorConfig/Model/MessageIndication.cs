@@ -19,6 +19,9 @@
         public static MessageIndication ResetSettingConfirmation(string languageName)
             => ResetSettingConfirmation(LanguageSelector.StringToLanguage(languageName));
 
+        public static MessageIndication ResetSingleCategoryConfirmation(string languageName)
+            => ResetSingleCategoryConfirmation(LanguageSelector.StringToLanguage(languageName));
+
         public static MessageIndication ErrorLoadSetting(string languageName)
             => ErrorLoadSetting(LanguageSelector.StringToLanguage(languageName));
 
@@ -64,6 +67,24 @@
                     return new MessageIndication(
                         "Reset Setting",
                         "Are you sure you want to reset all settings in VMagicMirror?"
+                        );
+            }
+        }
+
+        public static MessageIndication ResetSingleCategoryConfirmation(Languages lang)
+        {
+            switch (lang)
+            {
+                case Languages.Japanese:
+                    return new MessageIndication(
+                        "設定のリセット",
+                        "選択したカテゴリの設定をリセットしますか？"
+                        );
+                case Languages.English:
+                default:
+                    return new MessageIndication(
+                        "Reset Setting",
+                        "Are you sure you want to reset selected category setting?"
                         );
             }
         }

@@ -41,6 +41,10 @@
                                 </Rectangle.Fill>
                             </Rectangle>
                         </md:Card>
+                        
+                        <Button Style="{StaticResource CategorySettingResetButton}"
+                                Command="{Binding ResetLightSettingCommand}"
+                                />
 
                     </StackPanel>
 
@@ -149,6 +153,10 @@
                                    Style="{StaticResource HeaderText}"
                                    Margin="5"
                                    />
+
+                        <Button Style="{StaticResource CategorySettingResetButton}"
+                                Command="{Binding ResetShadowSettingCommand}"
+                                />
                     </StackPanel>
 
                     <CheckBox Margin="10,5,10,15"
@@ -250,6 +258,9 @@
                             </Rectangle>
                         </md:Card>
 
+                        <Button Style="{StaticResource CategorySettingResetButton}"
+                                Command="{Binding ResetBloomSettingCommand}"
+                                />
                     </StackPanel>
 
                     <Grid Margin="5">

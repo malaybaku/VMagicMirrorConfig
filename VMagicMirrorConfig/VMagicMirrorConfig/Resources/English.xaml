@@ -200,6 +200,7 @@
     <sys:String x:Key="WordToMotion_Instruction" xml:space="preserve">This tab is `Word to Motion` tab.
 `Word to Motion` feature supports character motion by your word input.
 Please test by typing "joy".</sys:String>
+    <sys:String x:Key="WordToMotion_LoadDefaultSet">Reset to default items</sys:String>
 
     <sys:String x:Key="WordToMotion_Word_Header">Word</sys:String>
     <sys:String x:Key="WordToMotion_Word_Limit">*Lower alphabet, number, and space</sys:String>

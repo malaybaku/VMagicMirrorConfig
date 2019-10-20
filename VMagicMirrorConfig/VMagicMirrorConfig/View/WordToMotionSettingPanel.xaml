@@ -31,13 +31,13 @@
                    />
 
         <CheckBox Grid.Row="1"
-                  Margin="5,0"
+                  Margin="15,0"
                   Content="{DynamicResource WordToMotion_Enable}"
                   IsChecked="{Binding EnableWordToMotion}"
                   />
 
         <CheckBox Grid.Row="2"
-                  Margin="15,5"
+                  Margin="25,5"
                   Content="{DynamicResource WordToMotion_UseGamepadForInput}"
                   IsEnabled="{Binding EnableWordToMotion}"
                   IsChecked="{Binding UseGamepadToStartWordToMotion}"
@@ -223,13 +223,23 @@
                 <Button Grid.Column="1" 
                         IsEnabled="{Binding EnableWordToMotion}"
                         Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
-                        HorizontalAlignment="Right"
+                        HorizontalAlignment="Left"
                         VerticalAlignment="Bottom"
                         Margin="15"
                         Command="{Binding AddNewItemCommand}"
                         >
                     <md:PackIcon Kind="Plus" Width="26" Height="26"/>
                 </Button>
+
+                <Button Grid.Column="1" 
+                        IsEnabled="{Binding EnableWordToMotion}"
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom"
+                        Margin="15"
+                        Command="{Binding ResetByDefaultItemsCommand}"
+                        Content="{DynamicResource WordToMotion_LoadDefaultSet}"
+                        />
 
             </Grid>
         </ScrollViewer>
