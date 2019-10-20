@@ -208,6 +208,13 @@ namespace Baku.VMagicMirrorConfig
 
         #endregion
 
+        private ActionCommand _resetSettingCommand = null;
+        public ActionCommand ResetSettingCommand
+            => _resetSettingCommand ??
+            (_resetSettingCommand = new ActionCommand(ResetCommandImpl));
+        private void ResetCommandImpl()
+            => SettingResetUtils.ResetSingleCategorySetting(ResetToDefault);
+
         public override void ResetToDefault()
         {
             GamepadEnabled = true;

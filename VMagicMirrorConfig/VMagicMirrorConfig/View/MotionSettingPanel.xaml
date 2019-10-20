@@ -27,6 +27,9 @@
                                    Style="{StaticResource HeaderText}"
                                    Margin="5"
                                    />
+                        <Button Style="{StaticResource CategorySettingResetButton}"
+                                Command="{Binding ResetFaceMotionSettingCommand}"
+                                />
                     </StackPanel>
 
                     <Grid Margin="5">
@@ -296,6 +299,10 @@
                                    Style="{StaticResource HeaderText}"
                                    Margin="5"
                                    />
+
+                        <Button Style="{StaticResource CategorySettingResetButton}"
+                                Command="{Binding ResetArmMotionSettingCommand}"
+                                />
                     </StackPanel>
 
                     <CheckBox Margin="15,5,15,10" 
@@ -404,6 +411,9 @@
                                    Margin="5"
                                    Style="{StaticResource HeaderText}"
                                    />
+                        <Button Style="{StaticResource CategorySettingResetButton}"
+                                Command="{Binding ResetHandMotionSettingCommand}"
+                                />
                     </StackPanel>
                     
                     <Grid Margin="5,0,0,10">
@@ -483,6 +493,11 @@
                                    Style="{StaticResource HeaderText}"
                                    Margin="5"
                                    />
+                    
+                        <Button Style="{StaticResource CategorySettingResetButton}"
+                                Command="{Binding ResetWaitMotionSettingCommand}"
+                                />
+
                     </StackPanel>
 
                     <Grid Margin="5,0,0,10">

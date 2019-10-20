@@ -195,7 +195,8 @@
     <sys:String x:Key="WordToMotion_Instruction" xml:space="preserve">このタブは `Word to Motion` タブです。
 `Word to Motion`は、単語をタイピングするとキャラクターを動かせる機能です。
 ためしに "joy" とタイピングしてみてください。</sys:String>
-
+    <sys:String x:Key="WordToMotion_LoadDefaultSet">デフォルト設定にリセット</sys:String>
+    
     <sys:String x:Key="WordToMotion_Word_Header">Word</sys:String>
     <sys:String x:Key="WordToMotion_Word_Limit">*半角アルファベット、数字、スペースのみ</sys:String>
 
@@ -214,6 +215,5 @@
     <sys:String x:Key="WordToMotion_Face_Hold">アニメーション終了後も表情を維持</sys:String>
     
     <sys:String x:Key="WordToMotion_EnablePreview">現在のキャラクターでプレビュー</sys:String>    
-    
-    
+        
 </ResourceDictionary>

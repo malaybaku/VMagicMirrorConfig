@@ -17,7 +17,7 @@ namespace Baku.VMagicMirrorConfig
 
         private LargePointerController _largePointerController => LargePointerController.Instance;
 
-        //フラグが立っている間はプロパティが変わってもメッセージを投げない。これはUnityから指定されたパラメタの適用中に
+        //フラグが立っている間はプロパティが変わってもメッセージを投げない。これはUnityから指定されたパラメタの適用中に立てる
         private bool _silentPropertySetter = false;
         private protected override void SendMessage(Message message)
         {
@@ -609,7 +609,37 @@ namespace Baku.VMagicMirrorConfig
 
         #endregion
 
-        public override void ResetToDefault()
+        #region Reset API
+
+        private ActionCommand _resetFaceMotionSettingCommand = null;
+        public ActionCommand ResetFaceMotionSettingCommand
+            => _resetFaceMotionSettingCommand ?? 
+            (_resetFaceMotionSettingCommand = new ActionCommand(ResetFaceMotionCommandImpl));
+        private void ResetFaceMotionCommandImpl() 
+            => SettingResetUtils.ResetSingleCategorySetting(ResetFaceSetting);
+
+        private ActionCommand _resetArmMotionSettingCommand = null;
+        public ActionCommand ResetArmMotionSettingCommand
+            => _resetArmMotionSettingCommand ??
+            (_resetArmMotionSettingCommand = new ActionCommand(ResetArmMotionSettingImpl));
+        private void ResetArmMotionSettingImpl()
+            => SettingResetUtils.ResetSingleCategorySetting(ResetArmSetting);
+
+        private ActionCommand _resetHandMotionSettingCommand = null;
+        public ActionCommand ResetHandMotionSettingCommand
+            => _resetHandMotionSettingCommand ??
+            (_resetHandMotionSettingCommand = new ActionCommand(ResetHandMotionSettingImpl));
+        private void ResetHandMotionSettingImpl()
+            => SettingResetUtils.ResetSingleCategorySetting(ResetHandSetting);
+
+        private ActionCommand _resetWaitMotionSettingCommand = null;
+        public ActionCommand ResetWaitMotionSettingCommand
+            => _resetWaitMotionSettingCommand ?? 
+            (_resetWaitMotionSettingCommand = new ActionCommand(ResetWaitMotionSettingImpl));
+        private void ResetWaitMotionSettingImpl()
+            => SettingResetUtils.ResetSingleCategorySetting(ResetWaitMotionSetting);
+
+        private void ResetFaceSetting()
         {
             EnableFaceTracking = true;
             CameraDeviceName = "";
@@ -624,29 +654,48 @@ namespace Baku.VMagicMirrorConfig
 
             FaceDefaultFun = 20;
 
-            EyebrowLeftUpKey = ""; 
+            EyebrowLeftUpKey = "";
             EyebrowLeftDownKey = "";
             UseSeparatedKeyForEyebrow = false;
             EyebrowRightUpKey = "";
             EyebrowRightDownKey = "";
             EyebrowUpScale = 100;
             EyebrowDownScale = 100;
+        }
 
+        private void ResetArmSetting()
+        {
             EnableHidArmMotion = true;
             WaistWidth = 30;
             ElbowCloseStrength = 30;
             EnablePresenterMotion = false;
             PresentationArmMotionScale = 30;
             PresentationArmRadiusMin = 20;
+        }
 
+        private void ResetHandSetting()
+        {
             LengthFromWristToTip = 12;
             LengthFromWristToPalm = 6;
             HandYOffsetBasic = 3;
             HandYOffsetAfterKeyDown = 2;
+        }
 
+        private void ResetWaitMotionSetting()
+        {
             EnableWaitMotion = true;
             WaitMotionScale = 125;
             WaitMotionPeriod = 10;
         }
+
+        public override void ResetToDefault()
+        {
+            ResetFaceSetting();
+            ResetArmSetting();
+            ResetHandSetting();
+            ResetWaitMotionSetting();
+        }
+
+        #endregion
     }
 }

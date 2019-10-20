@@ -245,18 +245,35 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        public override void ResetToDefault()
-        {
-            Gamepad.ResetToDefault();
+        #region Reset API
 
+        private ActionCommand _resetHidSettingCommand = null;
+        public ActionCommand ResetHidSettingCommand
+            => _resetHidSettingCommand ??
+            (_resetHidSettingCommand = new ActionCommand(ResetHidCommandImpl));
+        private void ResetHidCommandImpl()
+            => SettingResetUtils.ResetSingleCategorySetting(ResetHidSetting);
+        
+        private void ResetHidSetting()
+        {
             HidHeight = 90;
             HidHorizontalScale = 70;
             HidVisibility = true;
             CameraFov = 40;
             TypingEffectIsNone = true;
+        }
+
+
+        public override void ResetToDefault()
+        {
+            Gamepad.ResetToDefault();
+ 
+            ResetHidSetting();
 
             //カメラ位置については、Unity側がカメラの基準位置を持っているのに任せる
             ResetCameraPosition();
         }
+
+        #endregion
     }
 }

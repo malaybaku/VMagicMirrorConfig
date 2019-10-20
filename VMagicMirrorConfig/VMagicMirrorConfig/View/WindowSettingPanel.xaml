@@ -7,7 +7,7 @@
              xmlns:vmm="clr-namespace:Baku.VMagicMirrorConfig"
              mc:Ignorable="d"
              d:DesignWidth="400"
-             d:DesignHeight="550"
+             d:DesignHeight="650"
              d:DataContext="{x:Type vmm:WindowSettingViewModel}"
              >
     <UserControl.Resources>
@@ -41,6 +41,10 @@
                                 </Rectangle.Fill>
                             </Rectangle>
                         </md:Card>
+
+                        <Button Style="{StaticResource CategorySettingResetButton}"
+                                Command="{Binding ResetBackgroundColorSettingCommand}"
+                                />
                     </StackPanel>
 
                     <Grid>
@@ -134,7 +138,10 @@
                                    Margin="5"
                                    Style="{StaticResource HeaderText}"
                                    />
-                        
+
+                        <Button Style="{StaticResource CategorySettingResetButton}"
+                                Command="{Binding ResetOpacitySettingCommand}"
+                                />
                     </StackPanel>
                     
                     <TextBlock Margin="10" Text="{DynamicResource Window_TransparencySupport_Level}"/>
