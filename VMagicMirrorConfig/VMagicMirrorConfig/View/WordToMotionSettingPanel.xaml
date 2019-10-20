@@ -16,96 +16,187 @@
         <vmm:BooleanReverseToVisibilityConverter x:Key="BooleanReverseToVisibilityConverter"/>
         <vmm:BooleanToForegroundConverter x:Key="BooleanToForegroundConverter"/>
     </UserControl.Resources>
-    <Grid Background="White">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+    <ScrollViewer Grid.Row="4"
+                  VerticalScrollBarVisibility="Auto"
+                  HorizontalScrollBarVisibility="Disabled"
+                  >
+        <Grid Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0"
-                   Text="{DynamicResource WordToMotion_Instruction}"
-                   TextWrapping="Wrap"
-                   Margin="10"
-                   />
+            <TextBlock Grid.Row="0"
+                        Text="{DynamicResource WordToMotion_Instruction}"
+                        TextWrapping="Wrap"
+                        Margin="10"
+                        />
 
-        <CheckBox Grid.Row="1"
-                  Margin="15,0"
-                  Content="{DynamicResource WordToMotion_Enable}"
-                  IsChecked="{Binding EnableWordToMotion}"
-                  />
+            <CheckBox Grid.Row="1"
+                        Margin="15,0"
+                        Content="{DynamicResource WordToMotion_Enable}"
+                        IsChecked="{Binding EnableWordToMotion}"
+                        />
 
-        <CheckBox Grid.Row="2"
-                  Margin="25,5"
-                  Content="{DynamicResource WordToMotion_UseGamepadForInput}"
-                  IsEnabled="{Binding EnableWordToMotion}"
-                  IsChecked="{Binding UseGamepadToStartWordToMotion}"
-                  />
-
-        <ScrollViewer Grid.Row="3"
-                      VerticalScrollBarVisibility="Auto"
-                      HorizontalScrollBarVisibility="Disabled"
-                      IsEnabled="{Binding EnableWordToMotion}"
-                      >
-            <Grid>
+            <Grid Grid.Row="2" Margin="15,5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="5*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.Column="0"
+                            Grid.ColumnSpan="3"
+                            Text="{DynamicResource WordToMotion_AssignDevice}"
+                            />
+
+                <RadioButton Grid.Row="1" Grid.Column="0"
+                             VerticalAlignment="Center"
+                             VerticalContentAlignment="Center"
+                             Content="{DynamicResource WordToMotion_AssignDevice_None}"
+                             IsEnabled="{Binding EnableWordToMotion}"
+                             IsChecked="{Binding UseNoDeviceToStartWordToMotion}"                         
+                             />
+                <RadioButton Grid.Row="1" Grid.Column="1"
+                             VerticalAlignment="Center"
+                             VerticalContentAlignment="Center"
+                             Content="{DynamicResource WordToMotion_AssignDevice_Gamepad}"
+                             IsEnabled="{Binding EnableWordToMotion}"
+                             IsChecked="{Binding UseGamepadToStartWordToMotion}"                         
+                             />
+                <RadioButton Grid.Row="1" Grid.Column="2"
+                             VerticalAlignment="Center"
+                             VerticalContentAlignment="Center"
+                             Content="{DynamicResource WordToMotion_AssignDevice_Keyboard}"
+                             IsEnabled="{Binding EnableWordToMotion}"
+                             IsChecked="{Binding UseKeyboardToStartWordToMotion}"                         
+                             />
+            </Grid>
+
+            <TextBlock Grid.Row="3"
+                        MinWidth="60"
+                        Margin="5,10,0,0"
+                        HorizontalAlignment="Left"
+                        TextAlignment="Center"
+                        Text="{DynamicResource WordToMotion_KeyAssign}"
+                        />
+
+            <Grid Grid.Row="4">
+                <Grid.Resources>
+                    <Style x:Key="KeyAssignGrid" TargetType="Grid">
+                        <Setter Property="Margin" Value="0,5"/>
+                        <Setter Property="Height" Value="30"/>
+                    </Style>
+                    <Style x:Key="KeyAssignTextBlock" TargetType="TextBlock">
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                        <Setter Property="TextAlignment" Value="Center"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="Margin" Value="0"/>
+                    </Style>
+                    <Style x:Key="KeyAssignIcon" TargetType="md:PackIcon">
+                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                        <Setter Property="Height" Value="20"/>
+                        <Setter Property="Width" Value="20"/>
+                        <Setter Property="Margin" Value="0,10"/>
+                        <Setter Property="Foreground" Value="Black"/>
+                    </Style>
+                </Grid.Resources>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
+                <!-- W2M専用のデバイスが割り当たっていないときのキー割り当て表示 -->
                 <StackPanel Grid.Column="0"
-                            Margin="10,0,5,80"
+                            Margin="0,0,0,80"
+                            Visibility="{Binding UseNoDeviceToStartWordToMotion, 
+                                                    Converter={StaticResource BooleanToVisibilityConverter}}"
                             >
                     <StackPanel.Resources>
-                        <Style TargetType="md:PackIcon">
-                            <Setter Property="HorizontalAlignment" Value="Center"/>
-                            <Setter Property="Height" Value="20"/>
-                            <Setter Property="Width" Value="20"/>
-                            <Setter Property="Margin" Value="0,10"/>
-                        </Style>
+                        <Style TargetType="Grid" BasedOn="{StaticResource KeyAssignGrid}"/>
+                        <Style TargetType="TextBlock" BasedOn="{StaticResource KeyAssignTextBlock}"/>
                     </StackPanel.Resources>
-                    <Grid Height="30" Margin="0,5">
-                        <TextBlock Text="[START]" 
-                                   VerticalAlignment="Center"
-                                   Margin="0"
-                                   FontWeight="Bold"
-                                   Foreground="{Binding GamepadWordToMotionIsActive,
-                                                        Converter={StaticResource BooleanToForegroundConverter}}"
-                                   />
+                    <Grid>
+                        <TextBlock Text="-"/>
                     </Grid>
-                    <md:PackIcon Kind="AlphabetACircleOutline"
-                                 Foreground="{Binding GamepadWordToMotionIsActive,
-                                                      Converter={StaticResource BooleanToForegroundConverter}}"
-                                   />
-                    <md:PackIcon Kind="AlphabetBCircleOutline"
-                                 Foreground="{Binding GamepadWordToMotionIsActive,
-                                                      Converter={StaticResource BooleanToForegroundConverter}}"
-                                   />
-                    <md:PackIcon Kind="AlphabetXCircleOutline"
-                                 Foreground="{Binding GamepadWordToMotionIsActive,
-                                                      Converter={StaticResource BooleanToForegroundConverter}}"
-                                   />
-                    <md:PackIcon Kind="AlphabetYCircleOutline"
-                                 Foreground="{Binding GamepadWordToMotionIsActive,
-                                                      Converter={StaticResource BooleanToForegroundConverter}}"
-                                   />
-                    <md:PackIcon Kind="ArrowUpBox"
-                                 Foreground="{Binding GamepadWordToMotionIsActive,
-                                                      Converter={StaticResource BooleanToForegroundConverter}}"
-                                   />
-                    <md:PackIcon Kind="ArrowRightBox"
-                                 Foreground="{Binding GamepadWordToMotionIsActive,
-                                                      Converter={StaticResource BooleanToForegroundConverter}}"
-                                   />
-                    <md:PackIcon Kind="ArrowDownBox"
-                                 Foreground="{Binding GamepadWordToMotionIsActive,
-                                                      Converter={StaticResource BooleanToForegroundConverter}}"
-                                   />
-                    <md:PackIcon Kind="ArrowLeftBox"
-                                 Foreground="{Binding GamepadWordToMotionIsActive,
-                                                      Converter={StaticResource BooleanToForegroundConverter}}"
-                                   />
+                    <Grid>
+                        <TextBlock Text="-"/>
+                    </Grid>
+                    <Grid>
+                        <TextBlock Text="-"/>
+                    </Grid>
+                    <Grid>
+                        <TextBlock Text="-"/>
+                    </Grid>
+                    <Grid>
+                        <TextBlock Text="-"/>
+                    </Grid>
+                    <Grid>
+                        <TextBlock Text="-"/>
+                    </Grid>
+                    <Grid>
+                        <TextBlock Text="-"/>
+                    </Grid>
+                    <Grid>
+                        <TextBlock Text="-"/>
+                    </Grid>
+                    <Grid>
+                        <TextBlock Text="-"/>
+                    </Grid>
+                </StackPanel>
+
+                <!-- ゲームパッドをW2M専用に使うときのキー割り当て表示 -->
+                <StackPanel Grid.Column="0"
+                            Margin="0,0,0,80"
+                            Visibility="{Binding UseGamepadToStartWordToMotion, 
+                                                    Converter={StaticResource BooleanToVisibilityConverter}}"
+                            >
+                    <StackPanel.Resources>
+                        <Style TargetType="Grid" BasedOn="{StaticResource KeyAssignGrid}"/>
+                        <Style TargetType="TextBlock" BasedOn="{StaticResource KeyAssignTextBlock}"/>
+                        <Style TargetType="md:PackIcon" BasedOn="{StaticResource KeyAssignIcon}"/>
+                    </StackPanel.Resources>
+                    <Grid>
+                        <TextBlock Text="[START]" />
+                    </Grid>
+                    <md:PackIcon Kind="AlphabetACircleOutline" />
+                    <md:PackIcon Kind="AlphabetBCircleOutline" />
+                    <md:PackIcon Kind="AlphabetXCircleOutline" />
+                    <md:PackIcon Kind="AlphabetYCircleOutline" />
+                    <md:PackIcon Kind="ArrowUpBox" />
+                    <md:PackIcon Kind="ArrowRightBox" />
+                    <md:PackIcon Kind="ArrowDownBox" />
+                    <md:PackIcon Kind="ArrowLeftBox" />
+                </StackPanel>
+
+                <!-- キーボードをW2M専用に使うときのキー割り当て -->
+                <StackPanel Grid.Column="0"
+                            HorizontalAlignment="Center"
+                            Margin="0,0,0,80"
+                            Visibility="{Binding UseKeyboardToStartWordToMotion, 
+                                                    Converter={StaticResource BooleanToVisibilityConverter}}" 
+                            >
+                    <StackPanel.Resources>
+                        <Style TargetType="Grid" BasedOn="{StaticResource KeyAssignGrid}"/>
+                        <Style TargetType="TextBlock" BasedOn="{StaticResource KeyAssignTextBlock}"/>
+                        <Style TargetType="md:PackIcon" BasedOn="{StaticResource KeyAssignIcon}"/>
+                    </StackPanel.Resources>
+                    <md:PackIcon Kind="Number0BoxOutline"/>
+                    <md:PackIcon Kind="Number1BoxOutline"/>
+                    <md:PackIcon Kind="Number2BoxOutline"/>
+                    <md:PackIcon Kind="Number3BoxOutline"/>
+                    <md:PackIcon Kind="Number4BoxOutline"/>
+                    <md:PackIcon Kind="Number5BoxOutline"/>
+                    <md:PackIcon Kind="Number6BoxOutline"/>
+                    <md:PackIcon Kind="Number7BoxOutline"/>
+                    <md:PackIcon Kind="Number8BoxOutline"/>
                 </StackPanel>
 
                 <ItemsControl Grid.Column="1"
@@ -115,18 +206,15 @@
                               >
                     <ItemsControl.Template>
                         <ControlTemplate TargetType="{x:Type ItemsControl}">
-                            <ScrollViewer VerticalScrollBarVisibility="Auto" 
-                                          HorizontalScrollBarVisibility="Disabled">
-                                <StackPanel IsItemsHost="True">
-                                    <i:Interaction.Behaviors>
-                                        <ei:FluidMoveBehavior AppliesTo="Children" Duration="0:0:0.3">
-                                            <ei:FluidMoveBehavior.EaseY>
-                                                <CubicEase EasingMode="EaseOut"/>
-                                            </ei:FluidMoveBehavior.EaseY>
-                                        </ei:FluidMoveBehavior>
-                                    </i:Interaction.Behaviors>
-                                </StackPanel>
-                            </ScrollViewer>
+                            <StackPanel IsItemsHost="True">
+                                <i:Interaction.Behaviors>
+                                    <ei:FluidMoveBehavior AppliesTo="Children" Duration="0:0:0.3">
+                                        <ei:FluidMoveBehavior.EaseY>
+                                            <CubicEase EasingMode="EaseOut"/>
+                                        </ei:FluidMoveBehavior.EaseY>
+                                    </ei:FluidMoveBehavior>
+                                </i:Interaction.Behaviors>
+                            </StackPanel>
                         </ControlTemplate>
                     </ItemsControl.Template>
                     <ItemsControl.ItemTemplate>
@@ -139,7 +227,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <md:Card Grid.Column="1"
-                                         Padding="0">
+                                            Padding="0">
                                     <DockPanel LastChildFill="True">
 
                                         <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
@@ -148,46 +236,46 @@
                                             <md:PackIcon Kind="Settings" />
                                         </Button>
 
-                                        <!--このアクションが体の動きを含むかどうかのインジケータ--> 
+                                        <!--このアクションが体の動きを含むかどうかのインジケータ-->
                                         <md:PackIcon Foreground="LightGray"
-                                                     Width="20" Height="20"
-                                                     Margin="8,0,5,0"
-                                                     Kind="HumanHandsup"
-                                                     VerticalAlignment="Center"
-                                                     Visibility="{Binding IsMotionTypeNone,
-                                                                          Converter={StaticResource BooleanToVisibilityConverter}}"
-                                                     />
+                                                        Width="20" Height="20"
+                                                        Margin="8,0,5,0"
+                                                        Kind="HumanHandsup"
+                                                        VerticalAlignment="Center"
+                                                        Visibility="{Binding IsMotionTypeNone,
+                                                                            Converter={StaticResource BooleanToVisibilityConverter}}"
+                                                        />
                                         <md:PackIcon Foreground="Black"
-                                                     Width="20" Height="20"
-                                                     Margin="8,0,5,0"
-                                                     Kind="HumanHandsup"
-                                                     VerticalAlignment="Center"
-                                                     Visibility="{Binding IsMotionTypeNone,
-                                                                          Converter={StaticResource BooleanReverseToVisibilityConverter}}"
-                                                     />
+                                                        Width="20" Height="20"
+                                                        Margin="8,0,5,0"
+                                                        Kind="HumanHandsup"
+                                                        VerticalAlignment="Center"
+                                                        Visibility="{Binding IsMotionTypeNone,
+                                                                            Converter={StaticResource BooleanReverseToVisibilityConverter}}"
+                                                        />
 
-                                        <!--このアクションが表情切り替えを含むかどうかのインジケータ--> 
+                                        <!--このアクションが表情切り替えを含むかどうかのインジケータ-->
                                         <md:PackIcon Foreground="LightGray"
-                                                     Width="16" Height="16"
-                                                     Kind="Face"
-                                                     VerticalAlignment="Center"
-                                                     Visibility="{Binding UseBlendShape,
-                                                                          Converter={StaticResource BooleanReverseToVisibilityConverter}}"
-                                                     />
+                                                        Width="16" Height="16"
+                                                        Kind="Face"
+                                                        VerticalAlignment="Center"
+                                                        Visibility="{Binding UseBlendShape,
+                                                                            Converter={StaticResource BooleanReverseToVisibilityConverter}}"
+                                                        />
                                         <md:PackIcon Foreground="Black"
-                                                     Width="16" Height="16"
-                                                     Kind="Face"
-                                                     VerticalAlignment="Center"
-                                                     Visibility="{Binding UseBlendShape,
-                                                                          Converter={StaticResource BooleanToVisibilityConverter}}"
-                                                     />
+                                                        Width="16" Height="16"
+                                                        Kind="Face"
+                                                        VerticalAlignment="Center"
+                                                        Visibility="{Binding UseBlendShape,
+                                                                            Converter={StaticResource BooleanToVisibilityConverter}}"
+                                                        />
 
                                         <TextBlock Grid.Column="1"
-                                                   Margin="10,0,5,0"
-                                                   FontSize="16"
-                                                   VerticalAlignment="Center"
-                                                   Text="{Binding Word}"
-                                                   />
+                                                    Margin="10,0,5,0"
+                                                    FontSize="16"
+                                                    VerticalAlignment="Center"
+                                                    Text="{Binding Word}"
+                                                    />
 
                                     </DockPanel>
                                 </md:Card>
@@ -230,7 +318,6 @@
                         >
                     <md:PackIcon Kind="Plus" Width="26" Height="26"/>
                 </Button>
-
                 <Button Grid.Column="1" 
                         IsEnabled="{Binding EnableWordToMotion}"
                         Style="{StaticResource MaterialDesignFlatButton}"
@@ -242,6 +329,6 @@
                         />
 
             </Grid>
-        </ScrollViewer>
-    </Grid>
+        </Grid>
+    </ScrollViewer>
 </UserControl>

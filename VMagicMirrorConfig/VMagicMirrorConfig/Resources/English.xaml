@@ -200,6 +200,11 @@
     <sys:String x:Key="WordToMotion_Instruction" xml:space="preserve">This tab is `Word to Motion` tab.
 `Word to Motion` feature supports character motion by your word input.
 Please test by typing "joy".</sys:String>
+    <sys:String x:Key="WordToMotion_AssignDevice">Use device for Word To Motion</sys:String>
+    <sys:String x:Key="WordToMotion_AssignDevice_None">None</sys:String>
+    <sys:String x:Key="WordToMotion_AssignDevice_Gamepad">Gamepad</sys:String>
+    <sys:String x:Key="WordToMotion_AssignDevice_Keyboard">Keyboard (Num0 - Num8)</sys:String>
+    <sys:String x:Key="WordToMotion_KeyAssign">Keys</sys:String>    
     <sys:String x:Key="WordToMotion_LoadDefaultSet">Reset to default items</sys:String>
 
     <sys:String x:Key="WordToMotion_Word_Header">Word</sys:String>
