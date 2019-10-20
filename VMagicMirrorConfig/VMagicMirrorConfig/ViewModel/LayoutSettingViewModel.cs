@@ -253,25 +253,35 @@ namespace Baku.VMagicMirrorConfig
             (_resetHidSettingCommand = new ActionCommand(ResetHidCommandImpl));
         private void ResetHidCommandImpl()
             => SettingResetUtils.ResetSingleCategorySetting(ResetHidSetting);
-        
         private void ResetHidSetting()
         {
             HidHeight = 90;
             HidHorizontalScale = 70;
             HidVisibility = true;
-            CameraFov = 40;
             TypingEffectIsNone = true;
         }
 
+        private ActionCommand _resetCameraSettingCommand = null;
+        public ActionCommand ResetCameraSettingCommand
+            => _resetCameraSettingCommand ??
+            (_resetCameraSettingCommand = new ActionCommand(ResetCameraSettingCommandImpl));
+        private void ResetCameraSettingCommandImpl()
+            => SettingResetUtils.ResetSingleCategorySetting(ResetCameraSetting);
+
+        private void ResetCameraSetting()
+        {
+            //NOTE: フリーカメラモードについては、もともと揮発性の設定にしているのでココでは触らない
+            CameraFov = 40;
+            //カメラ位置については、Unity側がカメラの基準位置を持っているのに任せる
+            ResetCameraPosition();
+        }
 
         public override void ResetToDefault()
         {
             Gamepad.ResetToDefault();
- 
-            ResetHidSetting();
 
-            //カメラ位置については、Unity側がカメラの基準位置を持っているのに任せる
-            ResetCameraPosition();
+            ResetHidSetting();
+            ResetCameraSetting();
         }
 
         #endregion

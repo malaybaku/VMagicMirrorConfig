@@ -37,7 +37,7 @@
                                    />
                         <!-- このリセットボタンは他と違って「位置をリセット」と同じ処理で、確認ダイアログは出ない -->
                         <Button Style="{StaticResource CategorySettingResetButton}"
-                                Command="{Binding ResetCameraPositionCommand}"
+                                Command="{Binding ResetCameraSettingCommand}"
                                 />
                     </StackPanel>
                     
