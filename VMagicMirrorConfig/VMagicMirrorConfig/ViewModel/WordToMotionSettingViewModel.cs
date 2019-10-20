@@ -9,6 +9,10 @@ namespace Baku.VMagicMirrorConfig
 {
     public class WordToMotionSettingViewModel : SettingViewModelBase
     {
+        private const int DeviceTypeNone = 0;
+        private const int DeviceTypeGamepad = 1;
+        private const int DeviceTypeKeyboard = 2;
+
         public WordToMotionSettingViewModel() : base()
         {
             Items = new ReadOnlyObservableCollection<WordToMotionItemViewModel>(_items);
@@ -34,9 +38,32 @@ namespace Baku.VMagicMirrorConfig
             {
                 if (SetValue(ref _enableWordToMotion, value))
                 {
-                    RaisePropertyChanged(nameof(GamepadWordToMotionIsActive));
                     SendMessage(MessageFactory.Instance.EnableWordToMotion(EnableWordToMotion));
                 }
+            }
+        }
+
+        #region デバイスをWord to Motionに割り当てる設定
+
+        private bool _useNoDeviceToStartWordToMotion = true;
+        public bool UseNoDeviceToStartWordToMotion
+        {
+            get => _useNoDeviceToStartWordToMotion;
+            set
+            {
+                if (value == _useNoDeviceToStartWordToMotion)
+                {
+                    return;
+                }
+
+                if (value)
+                {
+                    UseGamepadToStartWordToMotion = false;
+                    UseKeyboardToStartWordToMotion = false;
+                    SendMessage(MessageFactory.Instance.SetDeviceTypeToStartWordToMotion(DeviceTypeNone));
+                }
+                _useNoDeviceToStartWordToMotion = value;
+                RaisePropertyChanged();
             }
         }
 
@@ -46,21 +73,45 @@ namespace Baku.VMagicMirrorConfig
             get => _useGamepadToStartWordToMotion;
             set
             {
-                if (SetValue(ref _useGamepadToStartWordToMotion, value))
+                if (value == _useGamepadToStartWordToMotion)
                 {
-                    RaisePropertyChanged(nameof(GamepadWordToMotionIsActive));
-                    SendMessage(
-                        MessageFactory.Instance.UseGamepadToStartWordToMotion(_useGamepadToStartWordToMotion)
-                        );
+                    return;
                 }
+
+                if (value)
+                {
+                    UseNoDeviceToStartWordToMotion = false;
+                    UseKeyboardToStartWordToMotion = false;                    
+                    SendMessage(MessageFactory.Instance.SetDeviceTypeToStartWordToMotion(DeviceTypeGamepad));
+                }
+                _useGamepadToStartWordToMotion = value;
+                RaisePropertyChanged();
             }
         }
 
-        //NOTE: この値に応じてゲームパッドのボタンライクな表示をアクティブ化する。
-        //ほんとはMultiBindingで捌くほうが良いけど、面倒なのでVMで計算してます
-        [XmlIgnore]
-        public bool GamepadWordToMotionIsActive
-            => EnableWordToMotion && UseGamepadToStartWordToMotion;
+        private bool _useKeyboardToStartWordToMotion = false;
+        public bool UseKeyboardToStartWordToMotion
+        {
+            get => _useKeyboardToStartWordToMotion;
+            set
+            {
+                if (value == _useKeyboardToStartWordToMotion)
+                {
+                    return;
+                }
+
+                if (value)
+                {
+                    UseNoDeviceToStartWordToMotion = false;
+                    UseGamepadToStartWordToMotion = false;
+                    SendMessage(MessageFactory.Instance.SetDeviceTypeToStartWordToMotion(DeviceTypeKeyboard));
+                }
+                _useKeyboardToStartWordToMotion = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        #endregion
 
         [XmlIgnore]
         public ReadOnlyObservableCollection<WordToMotionItemViewModel> Items { get; }

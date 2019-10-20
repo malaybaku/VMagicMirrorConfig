@@ -143,7 +143,7 @@
     <sys:String x:Key="Layout_Hid">Keyboard</sys:String>
     <sys:String x:Key="Layout_HidHeight">Height [cm]</sys:String>
     <sys:String x:Key="Layout_HidHorizontalScale">Size [%]</sys:String>
-    <sys:String x:Key="Layout_HidHorizontalScale_Tooltip">Specify the size of keyboard and mouse. When smallen, the devices are close to the character.</sys:String>
+    <sys:String x:Key="Layout_HidHorizontalScale_Tooltip">Specify the size of keyboard. When smallen, the devices are close to the character.</sys:String>
     <sys:String x:Key="Layout_HidVisible">Visible</sys:String>
 
     <sys:String x:Key="Layout_HidReactToKeyboard">Enable keyboard motion</sys:String>
@@ -200,6 +200,12 @@
     <sys:String x:Key="WordToMotion_Instruction" xml:space="preserve">This tab is `Word to Motion` tab.
 `Word to Motion` feature supports character motion by your word input.
 Please test by typing "joy".</sys:String>
+    <sys:String x:Key="WordToMotion_AssignDevice">Assign device for this function</sys:String>
+    <sys:String x:Key="WordToMotion_AssignDevice_None">None</sys:String>
+    <sys:String x:Key="WordToMotion_AssignDevice_Gamepad">Gamepad</sys:String>
+    <sys:String x:Key="WordToMotion_AssignDevice_Keyboard">Keyboard (Num0 - Num8)</sys:String>
+    <sys:String x:Key="WordToMotion_AssignDevice_Keyboard_Short">Keyboard</sys:String>
+    <sys:String x:Key="WordToMotion_KeyAssign">Keys</sys:String>    
     <sys:String x:Key="WordToMotion_LoadDefaultSet">Reset to default items</sys:String>
 
     <sys:String x:Key="WordToMotion_Word_Header">Word</sys:String>

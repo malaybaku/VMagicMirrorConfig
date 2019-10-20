@@ -224,15 +224,6 @@
                             <TextBlock Text="{DynamicResource Layout_GamepadEnable}"/>
                         </CheckBox>
 
-                        <CheckBox Margin="20,0"
-                                      VerticalAlignment="Center"
-                                      VerticalContentAlignment="Center"
-                                      IsEnabled="{Binding Gamepad.GamepadEnabled}"
-                                      IsChecked="{Binding Gamepad.GamepadVisibility}"
-                                      >
-                            <TextBlock Text="{DynamicResource Layout_GamepadVisible}"/>
-                        </CheckBox>
-
                         <Grid Margin="5">
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
