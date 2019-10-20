@@ -11,6 +11,7 @@
              d:DesignHeight="410"
              >
     <UserControl.Resources>
+        <vmm:WhiteSpaceStringToNullConverter x:Key="WhiteSpaceStringToNullConverter"/>
         <Style TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}">
             <Setter Property="Margin" Value="5"/>
         </Style>
@@ -112,7 +113,7 @@
                                           Margin="5,0"
                                           IsEnabled="{Binding MotionSetting.EnableLipSync}"
                                           ItemsSource="{Binding MotionSetting.MicrophoneDeviceNames}"
-                                          SelectedItem="{Binding MotionSetting.LipSyncMicrophoneDeviceName}"
+                                          SelectedItem="{Binding MotionSetting.LipSyncMicrophoneDeviceName, Converter={StaticResource WhiteSpaceStringToNullConverter}}"
                                           md:HintAssist.Hint="Microphone"
                                           />
 
@@ -138,7 +139,7 @@
                                           Margin="5,0"
                                           IsEnabled="{Binding MotionSetting.EnableFaceTracking}"
                                           ItemsSource="{Binding MotionSetting.CameraDeviceNames}"
-                                          SelectedItem="{Binding MotionSetting.CameraDeviceName}"
+                                          SelectedItem="{Binding MotionSetting.CameraDeviceName, Converter={StaticResource WhiteSpaceStringToNullConverter}}"
                                           md:HintAssist.Hint="Camera"
                                           />
                             </Grid>
