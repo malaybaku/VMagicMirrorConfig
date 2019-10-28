@@ -2,11 +2,11 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Baku.VMagicMirrorConfig.LargePointer</RootNamespace>
-    <TargetFramework>net47</TargetFramework>
-    <UseWPF>true</UseWPF>
-    <Platforms>AnyCPU;x64;x86</Platforms>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <UseWpf>true</UseWpf>
+    <Platforms>AnyCPU;x86</Platforms>
+    <RuntimeIdentifier>win10-x86</RuntimeIdentifier>
+    <PublishSingleFile>true</PublishSingleFile>
+    <PublishTrimmed>true</PublishTrimmed>
   </PropertyGroup>
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="del &quot;$(TargetDir)*.pdb&quot;&#xD;&#xA;xcopy /E /Y &quot;$(ProjectDir)bin\Debug\net47&quot; &quot;$(ProjectDir)..\..\..\Bin\LargePointer&quot;" />
-  </Target>
 </Project>
