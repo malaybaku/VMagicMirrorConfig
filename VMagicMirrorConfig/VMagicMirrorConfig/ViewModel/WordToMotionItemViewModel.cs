@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
+using Microsoft.Win32;
 
 namespace Baku.VMagicMirrorConfig
 {
@@ -159,13 +160,14 @@ namespace Baku.VMagicMirrorConfig
             => _selectBvhFileCommand ?? (_selectBvhFileCommand = new ActionCommand(SelectBvhFile));
         private void SelectBvhFile()
         {
-            var dialog = new System.Windows.Forms.OpenFileDialog()
+
+            var dialog = new OpenFileDialog()
             {
                 Title = "Select Motion File",
                 Filter = "BVH file(*.bvh)|*.bvh",
                 Multiselect = false,
             };
-            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (dialog.ShowDialog() == true)
             {
                 BvhFilePath = System.IO.Path.GetFullPath(dialog.FileName);
             }
