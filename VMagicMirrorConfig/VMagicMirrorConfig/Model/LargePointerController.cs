@@ -1,34 +1,18 @@
-﻿using System;
-using System.IO;
-using System.Reflection;
-using System.Diagnostics;
+﻿using Baku.VMagicMirrorConfig.LargePointer;
 
 namespace Baku.VMagicMirrorConfig
 {
     /// <summary>ポインターを表示したり隠したりするクラス。</summary>
-    /// <remarks>
-    /// クリックスルー処理の都合でポインターは別プロセスになることに注意！
-    /// </remarks>
     class LargePointerController
     {
-        private const string LargePointerProcessName = "VMagicMirrorConfig.LargePointer";
-
-        private static string GetLargePoiterExeFilePath()
-            => Path.Combine(
-                Path.GetDirectoryName(Path.GetDirectoryName(
-                    Assembly.GetEntryAssembly().Location
-                    )),
-                "LargePointer",
-                "VMagicMirrorConfig.LargePointer.exe"
-                );
-
-        //NOTE: シングルトンにしているのはポインター表示プロセスをインスタンス別に管理できるような実装になってないから。
         private LargePointerController() { }
         private static LargePointerController _instance = null;
         internal static LargePointerController Instance
             => _instance ?? (_instance = new LargePointerController());
 
         public bool IsVisible { get; private set; } = false;
+
+        private LargeMousePointerWindow _window = null;
 
         public void UpdateVisibility(bool visible)
         {
@@ -37,6 +21,7 @@ namespace Baku.VMagicMirrorConfig
                 return;
             }
 
+            IsVisible = visible;
             if (visible)
             {
                 Show();
@@ -49,39 +34,23 @@ namespace Baku.VMagicMirrorConfig
 
         public void Show()
         {
-            if (GetActiveLargePointerProcesses().Length > 0)
+            if (_window == null)
             {
-                return;
-            }
-
-            string filePath = GetLargePoiterExeFilePath();
-            if (File.Exists(filePath))
-            {
-                Process.Start(GetLargePoiterExeFilePath());
+                _window = new LargeMousePointerWindow();
+                _window.Show();
             }
             IsVisible = true;
         }
 
         public void Close()
         {
-            var largePointers = GetActiveLargePointerProcesses();
-            for (int i = 0; i < largePointers.Length; i++)
+            if (_window != null)
             {
-                try
-                {
-                    //ただのインジケータなので強引にプロセスキルしても大丈夫
-                    largePointers[i].Kill();
-                }
-                catch(Exception ex)
-                {
-                    LogOutput.Instance.Write(ex);
-                }
+                var window = _window;
+                _window = null;
+                window.Close();
             }
             IsVisible = false;
         }
-
-        private Process[] GetActiveLargePointerProcesses()
-            => Process.GetProcessesByName(LargePointerProcessName);
-
     }
 }

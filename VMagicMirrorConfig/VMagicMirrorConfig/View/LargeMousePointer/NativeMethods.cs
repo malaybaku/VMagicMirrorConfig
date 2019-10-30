@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace Baku.VMagicMirrorConfig.LargePointer
 {
-    public static class NativeMethods
+    internal static class NativeMethods
     {
         [StructLayout(LayoutKind.Sequential)]
         public struct POINT

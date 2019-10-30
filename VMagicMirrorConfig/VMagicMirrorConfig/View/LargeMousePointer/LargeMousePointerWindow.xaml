@@ -1,4 +1,4 @@
-﻿<Window x:Class="Baku.VMagicMirrorConfig.LargePointer.MainWindow"
+﻿<Window x:Class="Baku.VMagicMirrorConfig.LargePointer.LargeMousePointerWindow"        
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -38,7 +38,7 @@
                  StrokeThickness="3"
                  >
         </Ellipse>
-        
+
         <!-- MaterialDesignToolKitのBlue.PrimaryのPrimaryHueDarkBrush相当 -->
         <Ellipse Margin="9" 
                  Stroke="#1976D2"

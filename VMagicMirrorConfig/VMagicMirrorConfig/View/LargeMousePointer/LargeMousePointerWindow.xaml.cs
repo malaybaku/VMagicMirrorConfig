@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,7 +11,7 @@ namespace Baku.VMagicMirrorConfig.LargePointer
     using static NativeMethods;
 
     //NOTE: ウィンドウハンドルをゴリゴリ操作する + コレ以外のコードほぼないのでコードビハインド使う。
-    public partial class MainWindow : Window
+    public partial class LargeMousePointerWindow : Window
     {
         private const int MouseTrackIntervalMillisec = 16;
         private const int MouseStopDisappearTimeMillisec = 6000;
@@ -25,8 +24,7 @@ namespace Baku.VMagicMirrorConfig.LargePointer
         private const double ScaleWhenStop = 0.5;
         private const double ScaleWhenMoving = 1.0;
 
-
-        public MainWindow()
+        public LargeMousePointerWindow()
         {
             InitializeComponent();
         }
@@ -60,20 +58,11 @@ namespace Baku.VMagicMirrorConfig.LargePointer
             _height = rect.bottom - rect.top;
             _scaleTransform = MainGrid.RenderTransform as ScaleTransform;
 
-            StartSyncWindowPositionToMouse();
+            _cts = new CancellationTokenSource();
+            Task.Run(async () => await LoopUpdateWindowPositionAsync(_cts.Token));
         }
 
-        protected override void OnClosing(CancelEventArgs e)
-        {
-            base.OnClosing(e);
-            _cts?.Cancel();
-        }
-
-        protected override void OnActivated(EventArgs e)
-        {
-            //メタファとしてこのプロセスはコンフィグプロセスの子ウィンドウっぽく動くべき = コンフィグプロセスがアクティブになったものと扱う
-            ActivateConfigWindowProcess();
-        }
+        protected override void OnClosing(CancelEventArgs e) => _cts?.Cancel();
 
         private void SetClickThrough(IntPtr hWnd)
         {
@@ -81,16 +70,9 @@ namespace Baku.VMagicMirrorConfig.LargePointer
             SetWindowLong(hWnd, GWL_EXSTYLE, exStyle | WS_EX_TRANSPARENT | WS_EX_TOOLWINDOW);
         }
 
-        private void StartSyncWindowPositionToMouse()
-        {
-            _cts?.Cancel();
-            _cts = new CancellationTokenSource();
-            Task.Run(async () => await LoopUpdateWindowPositionAsync(_cts.Token));
-        }
-
         private async Task LoopUpdateWindowPositionAsync(CancellationToken token)
         {
-            while (!_cts.IsCancellationRequested)
+            while (!token.IsCancellationRequested)
             {
                 Thread.Sleep(MouseTrackIntervalMillisec);
                 //ここでマウス位置をとって移動
@@ -156,14 +138,14 @@ namespace Baku.VMagicMirrorConfig.LargePointer
 
                 if (_mouseMoveDistanceSumSqr < ScaleIncreaseMoveDistanceSqr)
                 {
-                    _mouseMoveDistanceSumSqr += 
+                    _mouseMoveDistanceSumSqr +=
                         (_prevMouseX - cursorPos.X) * (_prevMouseX - cursorPos.X) +
                         (_prevMouseY - cursorPos.Y) * (_prevMouseY - cursorPos.Y);
                 }
 
                 _prevMouseX = cursorPos.X;
                 _prevMouseY = cursorPos.Y;
-                
+
                 return true;
             }
             else
@@ -172,18 +154,7 @@ namespace Baku.VMagicMirrorConfig.LargePointer
             }
         }
 
-        private void ActivateConfigWindowProcess()
-        {
-            var processes = Process.GetProcessesByName("VMagicMirrorConfig");
-            if(processes.Length == 0)
-            {
-                return;
-            }
-            ActivateWindow(processes[0].MainWindowHandle);
-        }
-
         private static double Lerp(double a, double b, double rate)
             => a * (1.0 - rate) + b * rate;
-
     }
 }
