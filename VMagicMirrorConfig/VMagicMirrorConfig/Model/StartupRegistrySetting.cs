@@ -1,31 +1,14 @@
 ﻿using System;
-using System.IO;
-using System.Reflection;
 using Microsoft.Win32;
 
 namespace Baku.VMagicMirrorConfig
 {
     class StartupRegistrySetting
     {
-        const string StartupRegistryKey = @"Software\Microsoft\Windows\CurrentVersion\Run";
-        const string ProductName = @"Baku.VMagicMirror";
+        private const string StartupRegistryKey = @"Software\Microsoft\Windows\CurrentVersion\Run";
+        private const string ProductName = @"Baku.VMagicMirror";
 
-        private static string GetUnityAppPath()
-        {
-            string dir = Path.GetDirectoryName(
-                Path.GetDirectoryName(
-                    Assembly.GetEntryAssembly().Location
-                    )
-                );
-            return Path.Combine(dir, "VMagicMirror.exe");
-        }
-
-        public StartupRegistrySetting()
-        {
-            _unityAppPath = GetUnityAppPath();
-        }
-
-        private readonly string _unityAppPath;
+        private string UnityAppPath => SpecialFilePath.UnityAppPath;
 
         public bool CheckThisVersionRegistered()
         {
@@ -35,7 +18,7 @@ namespace Baku.VMagicMirrorConfig
                 {
                     return (
                         regKey.GetValue(ProductName, "") is string s &&
-                        s == _unityAppPath
+                        s == UnityAppPath
                         );
                 }
             }
@@ -52,8 +35,8 @@ namespace Baku.VMagicMirrorConfig
                 using (var regKey = Registry.CurrentUser.OpenSubKey(StartupRegistryKey, false))
                 {
                     return (
-                        regKey.GetValue(ProductName, _unityAppPath) is string s &&
-                        s != _unityAppPath
+                        regKey.GetValue(ProductName, UnityAppPath) is string s &&
+                        s != UnityAppPath
                         );
                 }
             }
@@ -71,7 +54,7 @@ namespace Baku.VMagicMirrorConfig
                 {
                     if (enable)
                     {
-                        regKey.SetValue(ProductName, _unityAppPath);
+                        regKey.SetValue(ProductName, UnityAppPath);
                     }
                     else
                     {

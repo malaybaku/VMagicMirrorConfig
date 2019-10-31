@@ -342,7 +342,7 @@ namespace Baku.VMagicMirrorConfig
             Initializer.MessageSender.StartCommandComposite();
             WindowSetting.Initialize();
             LightSetting.Initialize();
-            LoadSetting(SpecialFilePath.GetSettingFilePath(), true);
+            LoadSetting(SpecialFilePath.AutoSaveSettingFilePath, true);
             //NOTE: ここのEndCommandCompositeはLoadSettingが(ファイル無いとかで)中断したときの対策
             Initializer.MessageSender.EndCommandComposite();
 
@@ -378,7 +378,7 @@ namespace Baku.VMagicMirrorConfig
             if (!_isDisposed)
             {
                 _isDisposed = true;
-                SaveSetting(SpecialFilePath.GetSettingFilePath(), true);
+                SaveSetting(SpecialFilePath.AutoSaveSettingFilePath, true);
                 Initializer.Dispose();
                 MotionSetting.ClosePointer();
                 UnityAppCloser.Close();
