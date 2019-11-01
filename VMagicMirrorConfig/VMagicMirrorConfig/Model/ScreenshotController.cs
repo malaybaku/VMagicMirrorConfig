@@ -1,7 +1,7 @@
 ﻿namespace Baku.VMagicMirrorConfig
 {
     /// <summary>
-    /// スクリーンショットを撮影するクラス。撮影自体は
+    /// スクリーンショットを撮影するクラス。撮影自体はUnity側が頑張るだけ
     /// </summary>
     class ScreenshotController
     {
