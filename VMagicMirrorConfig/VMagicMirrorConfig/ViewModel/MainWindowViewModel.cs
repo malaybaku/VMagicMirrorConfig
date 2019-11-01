@@ -13,7 +13,6 @@ namespace Baku.VMagicMirrorConfig
     {
         internal ModelInitializer Initializer { get; } = new ModelInitializer();
         internal IMessageSender MessageSender => Initializer.MessageSender;
-        internal InputChecker InputChecker => Initializer.InputChecker;
 
         public WindowSettingViewModel WindowSetting { get; private set; }
         public MotionSettingViewModel MotionSetting { get; private set; }
