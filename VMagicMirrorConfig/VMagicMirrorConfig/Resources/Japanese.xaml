@@ -83,6 +83,10 @@
     <sys:String x:Key="Motion_Face_DefaultFun">Funブレンドのデフォルト値[%]</sys:String>
     <sys:String x:Key="Motion_Face_AutoBlinkDuringFaceTracking">顔トラッキング中も自動でまばたき</sys:String>
     
+    <sys:String x:Key="Motion_Face_CameraResolution">カメラの解像度</sys:String>
+    <sys:String x:Key="Motion_Face_CameraResolution_Description">解像度を上げるとまばたきの検出精度が上がる代わり、PCの負荷が上昇します。
+また、お使いのカメラによっては高解像度を選択しても変化がないことがあります。</sys:String>
+    
     <sys:String x:Key="Motion_Face_Eyebrow">眉毛 (開いてカスタマイズ)</sys:String>    
     <sys:String x:Key="Motion_Face_Eyebrow_LeftUp">左眉上げ</sys:String>    
     <sys:String x:Key="Motion_Face_Eyebrow_LeftDown">左眉下げ</sys:String>    

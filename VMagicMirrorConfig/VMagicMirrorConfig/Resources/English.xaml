@@ -82,6 +82,10 @@
     <sys:String x:Key="Motion_Face_Calibration">Calibrate position</sys:String>    
     <sys:String x:Key="Motion_Face_DefaultFun">Default Fun Blend Value [%]</sys:String>    
     <sys:String x:Key="Motion_Face_AutoBlinkDuringFaceTracking">Auto blink during face tracking</sys:String>
+    
+    <sys:String x:Key="Motion_Face_CameraResolution">Camera Resolution</sys:String>
+    <sys:String x:Key="Motion_Face_CameraResolution_Description">Higher resolution improves face tracking accuracy instead of CPU usage. 
+Some cameras do not supports high resolution.</sys:String>
 
     <sys:String x:Key="Motion_Face_Eyebrow">Eyebrow (Open to Customize)</sys:String>    
     <sys:String x:Key="Motion_Face_EyeBrow_LeftUp">Left Up Key</sys:String>    

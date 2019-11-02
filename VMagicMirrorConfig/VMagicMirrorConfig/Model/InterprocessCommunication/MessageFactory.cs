@@ -86,6 +86,7 @@ namespace Baku.VMagicMirrorConfig
 
         public Message EnableFaceTracking(bool enable) => WithArg($"{enable}");
         public Message SetCameraDeviceName(string deviceName) => WithArg(deviceName);
+        public Message SetCameraResolution(int id) => WithArg($"{id}");
         public Message AutoBlinkDuringFaceTracking(bool enable) => WithArg($"{enable}");
 
         public Message FaceDefaultFun(int percentage) => WithArg($"{percentage}");

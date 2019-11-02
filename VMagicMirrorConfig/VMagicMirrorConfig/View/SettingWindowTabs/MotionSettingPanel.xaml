@@ -65,9 +65,7 @@
                         </CheckBox>
 
                         <ComboBox Grid.Row="0" Grid.Column="2"
-                                  HorizontalAlignment="Left"
                                   Margin="5,0"
-                                  Width="200"
                                   IsEnabled="{Binding EnableLipSync}"
                                   ItemsSource="{Binding MicrophoneDeviceNames}"
                                   SelectedItem="{Binding LipSyncMicrophoneDeviceName, Converter={StaticResource WhiteSpaceStringToNullConverter}}"
@@ -93,9 +91,7 @@
                         </CheckBox>
 
                         <ComboBox Grid.Row="1" Grid.Column="2"
-                                  HorizontalAlignment="Left"
                                   Margin="5,0"
-                                  Width="200"
                                   IsEnabled="{Binding EnableFaceTracking}"
                                   ItemsSource="{Binding CameraDeviceNames}"
                                   SelectedItem="{Binding CameraDeviceName, Converter={StaticResource WhiteSpaceStringToNullConverter}}"
@@ -133,6 +129,25 @@
                                       IconKind="Reload"
                                       />-->
                     </Button>
+
+                    <Grid Margin="15,5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{DynamicResource Motion_Face_CameraResolution}"
+                                   Margin="0"
+                                   />
+                        <ComboBox Grid.Column="1"
+                                  Margin="5,0"
+                                  IsEnabled="{Binding EnableFaceTracking}"
+                                  ItemsSource="{Binding CameraResolutions}"
+                                  SelectedItem="{Binding CameraResolution}"
+                                  DisplayMemberPath="DisplayName"
+                                  md:HintAssist.Hint="Resolution..."
+                                  />
+                    </Grid>
+
 
                     <TextBlock Text="{DynamicResource Motion_Eye_LookAtPoint}"
                                Margin="10,20,5,5"

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Xml.Serialization;
@@ -9,9 +10,13 @@ namespace Baku.VMagicMirrorConfig
 {
     public class MotionSettingViewModel : SettingViewModelBase
     {
-        public MotionSettingViewModel() : base() { }
+        public MotionSettingViewModel() : base() 
+        {
+            CameraResolution = CameraResolutions[0];
+        }
         internal MotionSettingViewModel(IMessageSender sender, IMessageReceiver receiver) : base(sender)
         {
+            CameraResolution = CameraResolutions[0];
             receiver.ReceivedCommand += OnReceivedCommand;
         }
 
@@ -170,6 +175,47 @@ namespace Baku.VMagicMirrorConfig
         public ReadOnlyObservableCollection<string> CameraDeviceNames
             => _cameraDeviceNames ??
             (_cameraDeviceNames = new ReadOnlyObservableCollection<string>(_writableCameraDeviceNames));
+
+        [XmlIgnore]
+        public CameraResolutionSetting[] CameraResolutions { get; } = new CameraResolutionSetting[]
+        {
+            CameraResolutionSetting.LoadSetting(CameraResolutionSetting.ResolutionTypes.Low),
+            CameraResolutionSetting.LoadSetting(CameraResolutionSetting.ResolutionTypes.Mid),
+            CameraResolutionSetting.LoadSetting(CameraResolutionSetting.ResolutionTypes.High),
+            CameraResolutionSetting.LoadSetting(CameraResolutionSetting.ResolutionTypes.Excellent),
+        };
+
+        private CameraResolutionSetting _cameraResolution = null;
+        [XmlIgnore]
+        public CameraResolutionSetting CameraResolution
+        {
+            get => _cameraResolution;
+            set
+            {
+                if (_cameraResolution != value)
+                {
+                    _cameraResolution = value;
+                    SendMessage(MessageFactory.Instance.SetCameraResolution(_cameraResolution.Id));
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        public int CameraResolutionId
+        {
+            get => _cameraResolution?.Id ?? 0;
+            set
+            {
+                //意味: 「有効かつ、今と違うIDが指定された場合」くらい
+                if (CameraResolutions
+                    .FirstOrDefault(r => r.Id == value)
+                    is CameraResolutionSetting resolution && 
+                    resolution.Id != CameraResolutionId)
+                {
+                    CameraResolution = resolution;
+                }
+            }           
+        }
 
         private ActionCommand _calibrateFaceCommand;
         public ActionCommand CalibrateFaceCommand
@@ -644,6 +690,7 @@ namespace Baku.VMagicMirrorConfig
             EnableFaceTracking = true;
             CameraDeviceName = "";
             AutoBlinkDuringFaceTracking = false;
+            CameraResolutionId = 0;
 
             EnableLipSync = true;
             LipSyncMicrophoneDeviceName = "";
