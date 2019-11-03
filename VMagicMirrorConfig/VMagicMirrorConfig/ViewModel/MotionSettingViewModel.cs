@@ -150,6 +150,22 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
+        private bool _disableFaceTrackingHorizontalFlip = false;
+        public bool DisableFaceTrackingHorizontalFlip
+        {
+            get => _disableFaceTrackingHorizontalFlip;
+            set
+            {
+                if (SetValue(ref _disableFaceTrackingHorizontalFlip, value))
+                {
+                    SendMessage(MessageFactory
+                        .Instance
+                        .DisableFaceTrackingHorizontalFlip(_disableFaceTrackingHorizontalFlip)
+                        );
+                }
+            }
+        }
+
         private string _cameraDeviceName = "";
         public string CameraDeviceName
         {
@@ -644,6 +660,7 @@ namespace Baku.VMagicMirrorConfig
             EnableFaceTracking = true;
             CameraDeviceName = "";
             AutoBlinkDuringFaceTracking = false;
+            DisableFaceTrackingHorizontalFlip = false;
 
             EnableLipSync = true;
             LipSyncMicrophoneDeviceName = "";

@@ -8,7 +8,7 @@
              mc:Ignorable="d"
              d:DataContext="{x:Type vmm:MotionSettingViewModel}"
              d:DesignWidth="400"
-             d:DesignHeight="1050"
+             d:DesignHeight="1350"
              >
     <UserControl.Resources>
         <vmm:WhiteSpaceStringToNullConverter x:Key="WhiteSpaceStringToNullConverter"/>
@@ -39,6 +39,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition/>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
@@ -112,6 +113,17 @@
                                 <TextBlock Text="{DynamicResource Motion_Face_AutoBlinkDuringFaceTracking}"/>
                             </CheckBox.Content>
                         </CheckBox>
+                        <CheckBox Grid.Row="3" Grid.Column="1"
+                                  Grid.ColumnSpan="2"
+                                  Margin="15,0,0,0"
+                                  IsEnabled="{Binding EnableFaceTracking}"
+                                  IsChecked="{Binding DisableFaceTrackingHorizontalFlip}"
+                                  >
+                            <CheckBox.Content>
+                                <TextBlock Text="{DynamicResource Motion_Face_DisableFaceTrackingHorizontalFlip}"/>
+                            </CheckBox.Content>
+                        </CheckBox>
+
 
                     </Grid>
 
