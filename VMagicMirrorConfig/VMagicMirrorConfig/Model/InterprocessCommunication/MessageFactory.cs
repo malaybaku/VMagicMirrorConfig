@@ -87,6 +87,8 @@ namespace Baku.VMagicMirrorConfig
         public Message EnableFaceTracking(bool enable) => WithArg($"{enable}");
         public Message SetCameraDeviceName(string deviceName) => WithArg(deviceName);
         public Message AutoBlinkDuringFaceTracking(bool enable) => WithArg($"{enable}");
+        //NOTE: falseのほうが普通だよ、という状態にするため、disable云々というやや面倒な言い方になってる事に注意
+        public Message DisableFaceTrackingHorizontalFlip(bool disable) => WithArg($"{disable}");
 
         public Message FaceDefaultFun(int percentage) => WithArg($"{percentage}");
 
