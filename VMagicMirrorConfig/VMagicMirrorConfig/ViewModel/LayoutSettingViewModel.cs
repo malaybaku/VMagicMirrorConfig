@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
 
@@ -13,10 +14,12 @@ namespace Baku.VMagicMirrorConfig
         public LayoutSettingViewModel() : base() 
         {
             Gamepad = new GamepadSettingViewModel();
+            _typingEffectItem = TypingEffectSelections[0];
         }
         internal LayoutSettingViewModel(IMessageSender sender, IMessageReceiver receiver) : base(sender)
         {
             Gamepad = new GamepadSettingViewModel(sender, receiver);
+            _typingEffectItem = TypingEffectSelections[0];
             receiver.ReceivedCommand += OnReceiveCommand;
         }
 
@@ -150,6 +153,8 @@ namespace Baku.VMagicMirrorConfig
         }
 
         //NOTE: ラジオボタン表示をザツにやるためにbool値たくさんで代用している(ほんとはあまり良くない)
+        //TODO: エフェクトがこれ以上増える可能性が高いので、コンボボックスでの表示を前提にデータ構造を見直すべき
+
         private bool _typingEffectIsNone = true;
         public bool TypingEffectIsNone
         {
@@ -161,13 +166,14 @@ namespace Baku.VMagicMirrorConfig
                     return;
                 }
 
+                _typingEffectIsNone = value;
                 if (value)
                 {
                     TypingEffectIsText = false;
                     TypingEffectIsLight = false;
                     SendMessage(MessageFactory.Instance.SetKeyboardTypingEffectType(TypingEffectIndexNone));
+                    TypingEffectItem = TypingEffectSelections.FirstOrDefault(i => i.Id == TypingEffectIndexNone);
                 }
-                _typingEffectIsNone = value;
                 RaisePropertyChanged();
             }
         }
@@ -183,13 +189,14 @@ namespace Baku.VMagicMirrorConfig
                     return;
                 }
 
+                _typingEffectIsText = value;
                 if (value)
                 {
                     TypingEffectIsNone = false;
                     TypingEffectIsLight = false;
                     SendMessage(MessageFactory.Instance.SetKeyboardTypingEffectType(TypingEffectIndexText));
+                    TypingEffectItem = TypingEffectSelections.FirstOrDefault(i => i.Id == TypingEffectIndexText);
                 }
-                _typingEffectIsText = value;
                 RaisePropertyChanged();
             }
         }
@@ -205,17 +212,54 @@ namespace Baku.VMagicMirrorConfig
                     return;
                 }
 
+                _typingEffectIsLight = value;
                 if (value)
                 {
                     TypingEffectIsNone = false;
                     TypingEffectIsText = false;
                     SendMessage(MessageFactory.Instance.SetKeyboardTypingEffectType(TypingEffectIndexLight));
+                    TypingEffectItem = TypingEffectSelections.FirstOrDefault(i => i.Id == TypingEffectIndexLight);
                 }
-                _typingEffectIsLight = value;
                 RaisePropertyChanged();
             }
         }
-        
+
+        private TypingEffectSelectionItem? _typingEffectItem = null;        
+        [XmlIgnore]
+        public TypingEffectSelectionItem? TypingEffectItem
+        {
+            get => _typingEffectItem;
+            set
+            {
+                if (value == null || _typingEffectItem == value)
+                {
+                    return;
+                }
+
+                _typingEffectItem = value;
+                switch (value.Id)
+                {
+                    case TypingEffectIndexNone:
+                        TypingEffectIsNone = true;
+                        break;
+                    case TypingEffectIndexText:
+                        TypingEffectIsText = true;
+                        break;
+                    case TypingEffectIndexLight:
+                        TypingEffectIsLight = true;
+                        break;
+                }
+                RaisePropertyChanged();
+            }
+        }
+
+        [XmlIgnore]
+        public TypingEffectSelectionItem[] TypingEffectSelections { get; } = new TypingEffectSelectionItem[]
+        {
+            new TypingEffectSelectionItem(TypingEffectIndexNone, "None", MaterialDesignThemes.Wpf.PackIconKind.EyeOff),
+            new TypingEffectSelectionItem(TypingEffectIndexText, "Text", MaterialDesignThemes.Wpf.PackIconKind.Abc),
+            new TypingEffectSelectionItem(TypingEffectIndexLight, "Light", MaterialDesignThemes.Wpf.PackIconKind.FlashOn),
+        };
 
         private void OnReceiveCommand(object? sender, CommandReceivedEventArgs e)
         {
@@ -285,5 +329,19 @@ namespace Baku.VMagicMirrorConfig
         }
 
         #endregion
+
+        public class TypingEffectSelectionItem
+        {
+            public TypingEffectSelectionItem(int id, string name, MaterialDesignThemes.Wpf.PackIconKind iconKind)
+            {
+                Id = id;
+                EffectName = name;
+                IconKind = iconKind;
+            }
+            public int Id { get; }
+            public string EffectName { get; }
+            public MaterialDesignThemes.Wpf.PackIconKind IconKind { get; }
+        }
     }
+
 }

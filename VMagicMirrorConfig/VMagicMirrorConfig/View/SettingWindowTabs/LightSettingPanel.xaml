@@ -6,7 +6,7 @@
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:vmm="clr-namespace:Baku.VMagicMirrorConfig"
              mc:Ignorable="d"
-             d:DesignHeight="750"
+             d:DesignHeight="1350"
              d:DesignWidth="350"
              d:DataContext="{x:Type vmm:WindowSettingViewModel}"
              >
@@ -236,7 +236,6 @@
                 </StackPanel>
             </md:Card>
 
-
             <md:Card>
                 <StackPanel>
                     <StackPanel Orientation="Horizontal">
@@ -337,6 +336,91 @@
                         <TextBox Grid.Row="5" Grid.Column="2"
                                  Text="{Binding Value, ElementName=sliderBloomThreshold}"
                                  />
+                    </Grid>
+                </StackPanel>
+            </md:Card>
+
+            <md:Card>
+                <StackPanel>
+
+                    <StackPanel Orientation="Horizontal"
+                                Margin="5">
+
+                        <md:PackIcon Kind="Fan"
+                                     Style="{StaticResource SettingHeaderPackIcon}"
+                                     />
+
+                        <TextBlock Text="{DynamicResource Wind}"
+                                   Style="{StaticResource HeaderText}"
+                                   Margin="5"
+                                   />
+
+                        <Button Style="{StaticResource CategorySettingResetButton}"
+                                Command="{Binding ResetWindSettingCommand}"
+                                />
+                    </StackPanel>
+
+                    <CheckBox Margin="10,5,10,15"
+                              Content="{DynamicResource Wind_Enable}"
+                              IsChecked="{Binding EnableWind}"
+                              />
+
+                    <Grid Margin="5"
+                          IsEnabled="{Binding EnableWind}"
+                          >
+                        <Grid.Resources>
+                            <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                                <Setter Property="TextAlignment" Value="Center"/>
+                            </Style>
+                        </Grid.Resources>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0"
+                                   Text="{DynamicResource Wind_Strength}" />
+                        <Slider Grid.Row="0" Grid.Column="1"
+                                x:Name="sliderWindStrength"
+                                Minimum="10"
+                                Maximum="300"
+                                Value="{Binding WindStrength, Mode=TwoWay}"
+                                />
+                        <TextBox Grid.Row="0" Grid.Column="2"
+                                 Text="{Binding Value, ElementName=sliderWindStrength}"
+                                 />
+
+                        <TextBlock Grid.Row="1" Grid.Column="0"
+                                   Text="{DynamicResource Wind_Interval}" />
+                        <Slider Grid.Row="1" Grid.Column="1"
+                                x:Name="sliderWindInterval"
+                                Minimum="10"
+                                Maximum="500"
+                                Value="{Binding WindInterval, Mode=TwoWay}"
+                                />
+                        <TextBox Grid.Row="1" Grid.Column="2"
+                                 Text="{Binding Value, ElementName=sliderWindInterval}"
+                                 />
+
+                        <TextBlock Grid.Row="2" Grid.Column="0"
+                                   Text="{DynamicResource Wind_Yaw}" />
+                        <Slider Grid.Row="2" Grid.Column="1"
+                                x:Name="sliderWindYaw"
+                                Minimum="-180"
+                                Maximum="180"
+                                Value="{Binding WindYaw, Mode=TwoWay}"
+                                />
+                        <TextBox Grid.Row="2" Grid.Column="2"
+                                 Text="{Binding Value, ElementName=sliderWindYaw}"
+                                 />
+
                     </Grid>
                 </StackPanel>
             </md:Card>

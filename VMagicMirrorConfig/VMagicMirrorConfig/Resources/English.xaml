@@ -12,7 +12,7 @@
     <sys:String x:Key="TopBar_Setting_Window">Window</sys:String>
     <sys:String x:Key="TopBar_Setting_Motion">Motion</sys:String>
     <sys:String x:Key="TopBar_Setting_Layout">Layout</sys:String>
-    <sys:String x:Key="TopBar_Setting_Light">Light</sys:String>
+    <sys:String x:Key="TopBar_Setting_Effects">Effects</sys:String>
         
     <!-- Home -->
     <sys:String x:Key="Home_LoadVrm">Load VRM</sys:String>
@@ -151,6 +151,7 @@
     <sys:String x:Key="Layout_HidReactToMouse">Enable mouse motion</sys:String>
 
     <sys:String x:Key="Layout_Hid_TypingEffect_Header">Typing Effect</sys:String>
+    <sys:String x:Key="Layout_Hid_TypingEffect_Header_Streaming">Typing Effect</sys:String>
     <sys:String x:Key="Layout_Hid_TypingEffect_None">None</sys:String>
     <sys:String x:Key="Layout_Hid_TypingEffect_Text">Text</sys:String>
     <sys:String x:Key="Layout_Hid_TypingEffect_Light">Light</sys:String>
@@ -194,6 +195,14 @@
     <sys:String x:Key="Bloom">Bloom</sys:String>
     <sys:String x:Key="Bloom_Intensity">Intensity [%]</sys:String>
     <sys:String x:Key="Bloom_Threshold">Threshold [%]</sys:String>
+    
+    <sys:String x:Key="Wind">Wind</sys:String>
+    <sys:String x:Key="Wind_Enable">Enable Wind</sys:String>
+    <sys:String x:Key="Wind_Enable_Streaming">Wind</sys:String>
+    <sys:String x:Key="Wind_Strength">Strength [%]</sys:String>
+    <sys:String x:Key="Wind_Interval">Fineness [%]</sys:String>
+    <sys:String x:Key="Wind_Yaw">Direction [deg]</sys:String>
+        
     
     <!-- Word To Motion -->
     <sys:String x:Key="WordToMotion_Enable">Enable Word to Motion</sys:String>

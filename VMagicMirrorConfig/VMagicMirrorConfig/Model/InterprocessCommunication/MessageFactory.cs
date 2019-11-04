@@ -148,6 +148,7 @@ namespace Baku.VMagicMirrorConfig
 
         public Message HidHeight(int heightCentimeter) => WithArg($"{heightCentimeter}");
         public Message HidHorizontalScale(int scalePercent) => WithArg($"{scalePercent}");
+
         public Message HidVisibility(bool visible) => WithArg($"{visible}");
         public Message SetKeyboardTypingEffectType(int typeIndex) => WithArg($"{typeIndex}");
 
@@ -186,10 +187,15 @@ namespace Baku.VMagicMirrorConfig
         public Message BloomIntensity(int intensityPercent) => WithArg($"{intensityPercent}");
         public Message BloomThreshold(int thresholdPercent) => WithArg($"{thresholdPercent}");
 
+        public Message WindEnable(bool enableWind) => WithArg($"{enableWind}");
+        public Message WindStrength(int strength) => WithArg($"{strength}");
+        public Message WindInterval(int percentage) => WithArg($"{percentage}");
+        public Message WindYaw(int windYaw) => WithArg($"{windYaw}");
+
         #endregion
 
         #region Word To Motion
-        
+
         public Message EnableWordToMotion(bool enable) => WithArg($"{enable}");
         public Message ReloadMotionRequests(string content) => WithArg(content);
 
