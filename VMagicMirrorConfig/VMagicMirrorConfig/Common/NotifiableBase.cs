@@ -22,6 +22,6 @@ namespace Baku.VMagicMirrorConfig
         protected void RaisePropertyChanged([CallerMemberName]string pname = "")
             => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(pname));
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
     }
 }

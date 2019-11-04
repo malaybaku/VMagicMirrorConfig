@@ -7,9 +7,9 @@ namespace Baku.VMagicMirrorConfig
     public class WordToMotionItemViewModel : ViewModelBase
     {
         //NOTE: エディタ用
-        public WordToMotionItemViewModel() : this(null, null) { }
+        public WordToMotionItemViewModel() : this(new WordToMotionSettingViewModel(), null) { }
 
-        public WordToMotionItemViewModel(WordToMotionSettingViewModel parent, MotionRequest model)
+        public WordToMotionItemViewModel(WordToMotionSettingViewModel parent, MotionRequest? model)
         {
             _parent = parent;
             MotionRequest = model;
@@ -26,7 +26,7 @@ namespace Baku.VMagicMirrorConfig
         private readonly WordToMotionSettingViewModel _parent;
 
         /// <summary>ファイルI/Oや通信のベースになるデータを取得します。</summary>
-        public MotionRequest MotionRequest { get; }
+        public MotionRequest? MotionRequest { get; }
 
         //NOTE: ビューは同時に1つまでのItemしか表示しないので、コレだけで
         public bool EnablePreview
@@ -155,12 +155,11 @@ namespace Baku.VMagicMirrorConfig
         private ObservableCollection<BlendShapeItemViewModel> _blendShapeItems
             = new ObservableCollection<BlendShapeItemViewModel>();
 
-        private ActionCommand _selectBvhFileCommand = null;
+        private ActionCommand? _selectBvhFileCommand;
         public ActionCommand SelectBvhFileCommand
-            => _selectBvhFileCommand ?? (_selectBvhFileCommand = new ActionCommand(SelectBvhFile));
+            => _selectBvhFileCommand ??= new ActionCommand(SelectBvhFile);
         private void SelectBvhFile()
         {
-
             var dialog = new OpenFileDialog()
             {
                 Title = "Select Motion File",
@@ -173,30 +172,25 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private ActionCommand _moveUpCommand;
+        private ActionCommand? _moveUpCommand;
         public ActionCommand MoveUpCommand
-            => _moveUpCommand ?? (_moveUpCommand = new ActionCommand(MoveUp));
-        private void MoveUp() => _parent.MoveUpItem(this);
+            => _moveUpCommand ??= new ActionCommand(() => _parent.MoveUpItem(this));
 
-        private ActionCommand _moveDownCommand;
+        private ActionCommand? _moveDownCommand;
         public ActionCommand MoveDownCommand
-            => _moveDownCommand ?? (_moveDownCommand = new ActionCommand(MoveDown));
-        private void MoveDown() => _parent.MoveDownItem(this);
+            => _moveDownCommand ??= new ActionCommand(() => _parent.MoveDownItem(this));
 
-        private ActionCommand _editCommand;
+        private ActionCommand? _editCommand;
         public ActionCommand EditCommand
-            => _editCommand ?? (_editCommand = new ActionCommand(Edit));
-        private void Edit() => _parent.EditItemByDialog(this);
+            => _editCommand ??= new ActionCommand(() => _parent.EditItemByDialog(this));
 
-        private ActionCommand _playCommand;
+        private ActionCommand? _playCommand;
         public ActionCommand PlayCommand
-            => _playCommand ?? (_playCommand = new ActionCommand(Play));
-        private void Play() => _parent.Play(this);
+            => _playCommand ??= new ActionCommand(() => _parent.Play(this));
 
-        private ActionCommand _deleteCommand;
+        private ActionCommand? _deleteCommand;
         public ActionCommand DeleteCommand
-            => _deleteCommand ?? (_deleteCommand = new ActionCommand(Delete));
-        private void Delete() => _parent.DeleteItem(this);
+            => _deleteCommand ??= new ActionCommand(() => _parent.DeleteItem(this));
 
         private ObservableCollection<string> _availableBuiltInClipNames
             = new ObservableCollection<string>();
@@ -208,8 +202,9 @@ namespace Baku.VMagicMirrorConfig
         /// <summary>変更内容を確定し、モデルクラスにデータを書き込みます。</summary>
         public void SaveChanges() => WriteToModel(MotionRequest);
 
-        public void WriteToModel(MotionRequest model)
+        public void WriteToModel(MotionRequest? model)
         {
+            if (model == null) { return; }
             model.Word = Word;
             model.MotionType = MotionType;
 
@@ -228,8 +223,9 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private void LoadFromModel(MotionRequest model)
+        private void LoadFromModel(MotionRequest? model)
         {
+            if (model == null) { return; }
             Word = model.Word;
 
             switch (model.MotionType)

@@ -130,9 +130,9 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private ActionCommand _resetWindowPositionCommand;
+        private ActionCommand? _resetWindowPositionCommand;
         public ActionCommand ResetWindowPositionCommand
-            => _resetWindowPositionCommand ?? (_resetWindowPositionCommand = new ActionCommand(ResetWindowPosition));
+            => _resetWindowPositionCommand ??= new ActionCommand(ResetWindowPosition);
 
         private void ResetWindowPosition()
         {
@@ -208,12 +208,11 @@ namespace Baku.VMagicMirrorConfig
 
         #region Reset API
 
-        private ActionCommand _resetBackgroundColorSettingCommand = null;
+        private ActionCommand? _resetBackgroundColorSettingCommand = null;
         public ActionCommand ResetBackgroundColorSettingCommand
-            => _resetBackgroundColorSettingCommand ??
-            (_resetBackgroundColorSettingCommand = new ActionCommand(ResetBackgroundColorSettingImpl));
-        private void ResetBackgroundColorSettingImpl()
-            => SettingResetUtils.ResetSingleCategorySetting(ResetBackgroundColor);
+            => _resetBackgroundColorSettingCommand ??= new ActionCommand(
+                () => SettingResetUtils.ResetSingleCategorySetting(ResetBackgroundColor)
+                );
 
         private void ResetBackgroundColor()
         {
@@ -222,12 +221,11 @@ namespace Baku.VMagicMirrorConfig
             B = 0;
         }
 
-        private ActionCommand _resetOpacitySettingCommand = null;
+        private ActionCommand? _resetOpacitySettingCommand = null;
         public ActionCommand ResetOpacitySettingCommand
-            => _resetOpacitySettingCommand ??
-            (_resetOpacitySettingCommand = new ActionCommand(ResetOpacitySettingImpl));
-        private void ResetOpacitySettingImpl()
-            => SettingResetUtils.ResetSingleCategorySetting(ResetOpacity);
+            => _resetOpacitySettingCommand ??= new ActionCommand(
+                () => SettingResetUtils.ResetSingleCategorySetting(ResetOpacity)
+                );
 
         private void ResetOpacity()
         {

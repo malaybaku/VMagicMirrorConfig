@@ -18,10 +18,10 @@ namespace Baku.VMagicMirrorConfig
         static SpecialFilePath()
         {
             string exePath = Process.GetCurrentProcess().MainModule.FileName;
-            string exeDir = Path.GetDirectoryName(exePath);
+            string exeDir = Path.GetDirectoryName(exePath) ?? "";
             AutoSaveSettingFilePath = Path.Combine(exeDir, AutoSaveSettingFileName);
 
-            string unityAppDir = Path.GetDirectoryName(exeDir);
+            string unityAppDir = Path.GetDirectoryName(exeDir) ?? "";
             UnityAppPath = Path.Combine(unityAppDir, UnityAppFileName);
             LogFileDir = unityAppDir;
             LogFilePath = File.Exists(UnityAppPath) ?

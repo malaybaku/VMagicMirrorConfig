@@ -12,7 +12,7 @@ namespace Baku.VMagicMirrorConfig
             receiver.ReceivedCommand += OnReceivedCommand;
         }
 
-        private void OnReceivedCommand(object sender, CommandReceivedEventArgs e)
+        private void OnReceivedCommand(object? sender, CommandReceivedEventArgs e)
         {
             switch (e.Command)
             {
@@ -208,12 +208,11 @@ namespace Baku.VMagicMirrorConfig
 
         #endregion
 
-        private ActionCommand _resetSettingCommand = null;
+        private ActionCommand? _resetSettingCommand = null;
         public ActionCommand ResetSettingCommand
-            => _resetSettingCommand ??
-            (_resetSettingCommand = new ActionCommand(ResetCommandImpl));
-        private void ResetCommandImpl()
-            => SettingResetUtils.ResetSingleCategorySetting(ResetToDefault);
+            => _resetSettingCommand ??= new ActionCommand(
+                () => SettingResetUtils.ResetSingleCategorySetting(ResetToDefault)
+                );
 
         public override void ResetToDefault()
         {

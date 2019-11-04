@@ -11,7 +11,7 @@ namespace Baku.VMagicMirrorConfig
             receiver.ReceivedCommand += OnReceivedCommand;
         }
 
-        private void OnReceivedCommand(object sender, CommandReceivedEventArgs e)
+        private void OnReceivedCommand(object? sender, CommandReceivedEventArgs e)
         {
             switch (e.Command)
             {

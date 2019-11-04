@@ -6,15 +6,12 @@ namespace Baku.VMagicMirrorConfig
 {
     class LanguageSelector
     {
-        private static LanguageSelector _instance;
+        private static LanguageSelector? _instance;
         public static LanguageSelector Instance
-            => _instance ?? (_instance = new LanguageSelector());
+            => _instance ??= new LanguageSelector();
+        private LanguageSelector() { }
 
-        private LanguageSelector()
-        {
-        }
-
-        private IMessageSender _sender = null;
+        private IMessageSender? _sender = null;
 
         private string _languageName = nameof(Languages.Japanese);
         public string LanguageName
@@ -50,17 +47,11 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        public static Languages StringToLanguage(string languageName)
+        public static Languages StringToLanguage(string languageName) => languageName switch
         {
-            switch (languageName)
-            {
-                case "Japanese":
-                    return Languages.Japanese;
-                case "English":
-                default:
-                    return Languages.English;
-            }
-        }
+            "Japanese" => Languages.Japanese,
+            _ => Languages.English,
+        };
 
         private void SetLanguage(string languageName)
         {

@@ -23,34 +23,37 @@ namespace Baku.VMagicMirrorConfig
         /// </remarks>
         protected SettingViewModelBase()
         {
-            _sender = null;
+            Sender = new EmptyMessageSender();
         }
 
         private protected SettingViewModelBase(IMessageSender sender)
         {
-            _sender = sender;
+            Sender = sender;
         }
 
-        private readonly IMessageSender _sender;
+        private protected readonly IMessageSender Sender;
 
         private protected virtual void SendMessage(Message message)
-            => _sender?.SendMessage(message);
+            => Sender.SendMessage(message);
 
-        private protected async Task<string> SendQueryAsync(Message message) 
-            => (_sender != null) ? 
-            await _sender.QueryMessageAsync(message) : 
-            "";
+        private protected async Task<string> SendQueryAsync(Message message)
+            => await Sender.QueryMessageAsync(message);
 
         public abstract void ResetToDefault();
 
         public void CopyFrom<T>(T source)
-            where T : SettingViewModelBase
+            where T : SettingViewModelBase?
         {
             CopyProperties(source, this, typeof(T));
         }
 
-        private static void CopyProperties(object src, object dest, Type type)
+        private static void CopyProperties(object? src, object? dest, Type type)
         {
+            if (src == null || dest == null)
+            {
+                return;
+            }
+
             foreach (var prop in type
                 .GetProperties(BindingFlags.Public | BindingFlags.Instance)
                 .Where(p =>

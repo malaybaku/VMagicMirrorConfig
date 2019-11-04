@@ -16,6 +16,7 @@ namespace Baku.VMagicMirrorConfig
         public WordToMotionSettingViewModel() : base()
         {
             Items = new ReadOnlyObservableCollection<WordToMotionItemViewModel>(_items);
+            _previewDataSender = new WordToMotionItemPreviewDataSender(Sender);
         }
         internal WordToMotionSettingViewModel(IMessageSender sender) : base(sender)
         {
@@ -28,7 +29,7 @@ namespace Baku.VMagicMirrorConfig
         }
 
         private readonly WordToMotionItemPreviewDataSender _previewDataSender;
-        private WordToMotionItemViewModel _dialogItem;
+        private WordToMotionItemViewModel? _dialogItem;
         
         private bool _enableWordToMotion = true;
         public bool EnableWordToMotion
@@ -190,22 +191,16 @@ namespace Baku.VMagicMirrorConfig
                 .ToJson();
         }
 
-        private ActionCommand _addNewItemCommand;
-        public ActionCommand AddNewItemCommand
-            => _addNewItemCommand ?? (_addNewItemCommand = new ActionCommand(AddNewItem));
-        private void AddNewItem()
-        {
-            _items.Add(new WordToMotionItemViewModel(this, MotionRequest.GetDefault()));
-            RequestReload();
-        }
-
         public void Play(WordToMotionItemViewModel item)
         {
-            SendMessage(
-                MessageFactory.Instance.PlayWordToMotionItem(
-                    item.MotionRequest.ToJson()
-                    )
-                );
+            if (item.MotionRequest != null)
+            {
+                SendMessage(
+                    MessageFactory.Instance.PlayWordToMotionItem(
+                        item.MotionRequest.ToJson()
+                        )
+                    );
+            }
         }
 
         public void MoveUpItem(WordToMotionItemViewModel item)
@@ -251,11 +246,20 @@ namespace Baku.VMagicMirrorConfig
             SendMessage(MessageFactory.Instance.ReloadMotionRequests(ItemsContentString));
         }
 
-        private ActionCommand _resetByDefaultItemsCommand = null;
+
+        private ActionCommand? _addNewItemCommand;
+        public ActionCommand AddNewItemCommand
+            => _addNewItemCommand ??= new ActionCommand(() =>
+            {
+                _items.Add(new WordToMotionItemViewModel(this, MotionRequest.GetDefault()));
+                RequestReload();
+            });
+
+        private ActionCommand? _resetByDefaultItemsCommand = null;
         public ActionCommand ResetByDefaultItemsCommand
-            => _resetByDefaultItemsCommand ?? (_resetByDefaultItemsCommand = new ActionCommand(ResetByDefaultItemsImpl));
-        private void ResetByDefaultItemsImpl()
-            => SettingResetUtils.ResetSingleCategorySetting(LoadDefaultItems);
+            => _resetByDefaultItemsCommand ??= new ActionCommand(
+                () => SettingResetUtils.ResetSingleCategorySetting(LoadDefaultItems)
+                );
 
         public override void ResetToDefault()
         {

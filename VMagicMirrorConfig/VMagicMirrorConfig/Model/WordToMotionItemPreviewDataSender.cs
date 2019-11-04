@@ -18,15 +18,12 @@ namespace Baku.VMagicMirrorConfig
         //あくまでプレビューが目当てなのでザツに。
         private const int DataSendIntervalMillisec = 500;
         private readonly IMessageSender _sender;
-        private CancellationTokenSource _cts;
+        private readonly CancellationTokenSource _cts = new CancellationTokenSource();
 
-        public event EventHandler PrepareDataSend;
+        public event EventHandler? PrepareDataSend;
 
         public void Start()
         {
-            End();
-
-            _cts = new CancellationTokenSource();
             Task.Run(async () =>
             {
                 while (!_cts.Token.IsCancellationRequested)
@@ -38,19 +35,11 @@ namespace Baku.VMagicMirrorConfig
             });            
         }
 
-        public void End()
-        {
-            _cts?.Cancel();
-            _cts = null;
-        }
+        public void End() => _cts.Cancel();
 
         private void SendData(MotionRequest request)
-        {
-            _sender?.SendMessage(
-                MessageFactory.Instance.SendWordToMotionPreviewInfo(
-                    request.ToJson()
-                    )
-                );
-        }
+            => _sender.SendMessage(
+            MessageFactory.Instance.SendWordToMotionPreviewInfo(request.ToJson())
+            );
     }
 }

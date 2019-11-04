@@ -6,13 +6,13 @@ namespace Baku.VMagicMirrorConfig
     class LargePointerController
     {
         private LargePointerController() { }
-        private static LargePointerController _instance = null;
+        private static LargePointerController? _instance = null;
         internal static LargePointerController Instance
-            => _instance ?? (_instance = new LargePointerController());
+            => _instance ??= new LargePointerController();
 
         public bool IsVisible { get; private set; } = false;
 
-        private LargeMousePointerWindow _window = null;
+        private LargeMousePointerWindow? _window = null;
 
         public void UpdateVisibility(bool visible)
         {

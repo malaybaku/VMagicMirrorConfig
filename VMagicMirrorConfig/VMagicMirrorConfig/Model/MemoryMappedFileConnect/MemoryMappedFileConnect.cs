@@ -89,17 +89,17 @@ namespace Baku.VMagicMirrorConfig.Mmf
         }
 
         private readonly object _receiverLock = new object();
-        private MemoryMappedFile _receiver;
-        private MemoryMappedViewAccessor _receiverAccessor;
+        private MemoryMappedFile? _receiver = null;
+        private MemoryMappedViewAccessor? _receiverAccessor = null;
 
         private readonly object _senderLock = new object();
-        private MemoryMappedFile _sender;
-        private MemoryMappedViewAccessor _senderAccessor;
+        private MemoryMappedFile? _sender = null;
+        private MemoryMappedViewAccessor? _senderAccessor = null;
 
-        private CancellationTokenSource _cts;
+        private CancellationTokenSource? _cts = null;
 
-        public event EventHandler<ReceiveCommandEventArgs> ReceiveCommand;
-        public event EventHandler<ReceiveQueryEventArgs> ReceiveQuery;
+        public event EventHandler<ReceiveCommandEventArgs>? ReceiveCommand;
+        public event EventHandler<ReceiveQueryEventArgs>? ReceiveQuery;
 
         public bool IsConnected { get; private set; } = false;
 
@@ -135,8 +135,8 @@ namespace Baku.VMagicMirrorConfig.Mmf
             }
             _receiverAccessor = _receiver.CreateViewAccessor();
             _senderAccessor = _sender.CreateViewAccessor();
-            new Thread(() => ReadThread()).Start();
-            new Thread(() => WriteThread()).Start();
+            new Thread(() => ReadThread(_cts.Token)).Start();
+            new Thread(() => WriteThread(_cts.Token)).Start();
             IsConnected = true;
         }
 
@@ -180,15 +180,15 @@ namespace Baku.VMagicMirrorConfig.Mmf
         private void SendQueryResponse(string command, int id)
             => _writeMessageQueue.Enqueue(Message.Response(command, id));
 
-        private void ReadThread()
+        private void ReadThread(CancellationToken token)
         {
             try
             {
-                while (!_cts.Token.IsCancellationRequested)
+                while (!token.IsCancellationRequested)
                 {
                     while (!CheckReceivedMessageExists())
                     {
-                        if (_cts.Token.IsCancellationRequested)
+                        if (token.IsCancellationRequested)
                         {
                             return;
                         }
@@ -259,17 +259,17 @@ namespace Baku.VMagicMirrorConfig.Mmf
             }
         }
 
-        private void WriteThread()
+        private void WriteThread(CancellationToken token)
         {
             try
             {
-                while (!_cts.Token.IsCancellationRequested)
+                while (!token.IsCancellationRequested)
                 {
-                    Message msg = null;
+                    Message? msg = null;
                     //送るものが無いうちは待ち
                     while (!_writeMessageQueue.TryDequeue(out msg))
                     {
-                        if (_cts.Token.IsCancellationRequested)
+                        if (token.IsCancellationRequested)
                         {
                             return;
                         }
@@ -285,7 +285,7 @@ namespace Baku.VMagicMirrorConfig.Mmf
                     //書き込みOKになるまで待ち
                     while (!CheckCanWriteMessage())
                     {
-                        if (_cts.Token.IsCancellationRequested)
+                        if (token.IsCancellationRequested)
                         {
                             return;
                         }

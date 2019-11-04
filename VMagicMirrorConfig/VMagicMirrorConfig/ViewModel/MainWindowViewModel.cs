@@ -102,49 +102,49 @@ namespace Baku.VMagicMirrorConfig
 
         #region Commands
 
-        private ActionCommand _loadVrmCommand;
+        private ActionCommand? _loadVrmCommand;
         public ActionCommand LoadVrmCommand
-            => _loadVrmCommand ?? (_loadVrmCommand = new ActionCommand(LoadVrm));
+            => _loadVrmCommand ??= new ActionCommand(LoadVrm);
 
-        private ActionCommand _openVRoidHubCommand;
+        private ActionCommand? _openVRoidHubCommand;
         public ActionCommand OpenVRoidHubCommand
-            => _openVRoidHubCommand ?? (_openVRoidHubCommand = new ActionCommand(OpenVRoidHub));
+            => _openVRoidHubCommand ??= new ActionCommand(OpenVRoidHub);
 
-        private ActionCommand _openManualUrlCommand;
+        private ActionCommand? _openManualUrlCommand;
         public ActionCommand OpenManualUrlCommand
-            => _openManualUrlCommand ?? (_openManualUrlCommand = new ActionCommand(OpenManualUrl));
+            => _openManualUrlCommand ??= new ActionCommand(OpenManualUrl);
 
-        private ActionCommand _autoAdjustCommand;
+        private ActionCommand? _autoAdjustCommand;
         public ActionCommand AutoAdjustCommand
-            => _autoAdjustCommand ?? (_autoAdjustCommand = new ActionCommand(AutoAdjust));
+            => _autoAdjustCommand ??= new ActionCommand(AutoAdjust);
 
-        private ActionCommand _openSettingWindowCommand;
+        private ActionCommand? _openSettingWindowCommand;
         public ActionCommand OpenSettingWindowCommand
-            => _openSettingWindowCommand ?? (_openSettingWindowCommand = new ActionCommand(OpenSettingWindow));
+            => _openSettingWindowCommand ??= new ActionCommand(OpenSettingWindow);
 
-        private ActionCommand _resetToDefaultCommand;
+        private ActionCommand? _resetToDefaultCommand;
         public ActionCommand ResetToDefaultCommand
-            => _resetToDefaultCommand ?? (_resetToDefaultCommand = new ActionCommand(ResetToDefault));
+            => _resetToDefaultCommand ??= new ActionCommand(ResetToDefault);
 
-        private ActionCommand _saveSettingToFileCommand;
+        private ActionCommand? _saveSettingToFileCommand;
         public ActionCommand SaveSettingToFileCommand
-            => _saveSettingToFileCommand ?? (_saveSettingToFileCommand = new ActionCommand(SaveSettingToFile));
+            => _saveSettingToFileCommand ??= new ActionCommand(SaveSettingToFile);
 
-        private ActionCommand _loadSettingFromFileCommand;
+        private ActionCommand? _loadSettingFromFileCommand;
         public ActionCommand LoadSettingFromFileCommand
-            => _loadSettingFromFileCommand ?? (_loadSettingFromFileCommand = new ActionCommand(LoadSettingFromFile));
+            => _loadSettingFromFileCommand ??= new ActionCommand(LoadSettingFromFile);
 
-        private ActionCommand _loadPrevSettingCommand;
+        private ActionCommand? _loadPrevSettingCommand;
         public ActionCommand LoadPrevSettingCommand
-            => _loadPrevSettingCommand ?? (_loadPrevSettingCommand = new ActionCommand(LoadPrevSetting));
+            => _loadPrevSettingCommand ??= new ActionCommand(LoadPrevSetting);
 
-        private ActionCommand _takeScreenshotCommand;
+        private ActionCommand? _takeScreenshotCommand;
         public ActionCommand TakeScreenshotCommand
-            => _takeScreenshotCommand ?? (_takeScreenshotCommand = new ActionCommand(TakeScreenshot));
+            => _takeScreenshotCommand ??= new ActionCommand(TakeScreenshot);
 
-        private ActionCommand _openScreenshotFolderCommand;
+        private ActionCommand? _openScreenshotFolderCommand;
         public ActionCommand OpenScreenshotFolderCommand
-            => _openScreenshotFolderCommand ?? (_openScreenshotFolderCommand = new ActionCommand(OpenScreenshotFolder));
+            => _openScreenshotFolderCommand ??= new ActionCommand(OpenScreenshotFolder);
 
         #endregion
 
@@ -290,7 +290,7 @@ namespace Baku.VMagicMirrorConfig
                 Filter = "VMagicMirror.exe|VMagicMirror.exe",
                 Multiselect = false,
             };
-            if (dialog.ShowDialog() != true)
+            if (dialog.ShowDialog() != true || string.IsNullOrEmpty(dialog.FileName))
             {
                 return;
             }
@@ -298,7 +298,7 @@ namespace Baku.VMagicMirrorConfig
             try
             {
                 string savePath = Path.Combine(
-                    Path.GetDirectoryName(dialog.FileName),
+                    Path.GetDirectoryName(dialog.FileName) ?? "",
                     "ConfigApp",
                     SpecialFilePath.AutoSaveSettingFileName
                     );
@@ -335,7 +335,7 @@ namespace Baku.VMagicMirrorConfig
                 return;
             }
 
-            Initializer.Initialize();
+            Initializer.StartObserveRoutine();
 
             //NOTE: ここでコンポジットを開始することで、背景色/ライト/影のメッセージも統一してしまう
             Initializer.MessageSender.StartCommandComposite();
@@ -436,14 +436,18 @@ namespace Baku.VMagicMirrorConfig
             {
                 var serializer = new XmlSerializer(typeof(SaveData));
                 var saveData = (SaveData)serializer.Deserialize(sr);
+                if (saveData == null)
+                {
+                    return;
+                } 
 
                 if (isInternalFile && saveData.IsInternalSaveFile)
                 {
-                    _lastVrmLoadFilePath = saveData.LastLoadedVrmFilePath;
+                    _lastVrmLoadFilePath = saveData.LastLoadedVrmFilePath ?? "";
                     AutoLoadLastLoadedVrm = saveData.AutoLoadLastLoadedVrm;
                     LanguageName =
-                        AvailableLanguageNames.Contains(saveData.PreferredLanguageName) ?
-                        saveData.PreferredLanguageName :
+                        AvailableLanguageNames.Contains(saveData.PreferredLanguageName ?? "") ?
+                        (saveData.PreferredLanguageName ?? "") :
                         "";
                 }
 

@@ -35,59 +35,41 @@
         public static MessageIndication DeleteWordToMotionItem(string languageName)
             => DeleteWordToMotionItem(LanguageSelector.StringToLanguage(languageName));
 
-        public static MessageIndication LoadVrmConfirmation(Languages lang)
+        public static MessageIndication LoadVrmConfirmation(Languages lang) => lang switch
         {
-            switch (lang)
-            {
-                case Languages.Japanese:
-                    return new MessageIndication(
-                        "VRMの読み込み",
-                        "ビューアー画面のライセンスを確認してください。読み込みますか？"
-                        );
-                case Languages.English:
-                default:
-                    return new MessageIndication(
-                        "Load VRM",
-                        "Please confirm the license in viewer window. Do you load the character?"
-                        );
-            }
-        }
+            Languages.Japanese => new MessageIndication(
+                "VRMの読み込み",
+                "ビューアー画面のライセンスを確認してください。読み込みますか？"
+                ),
+            _ => new MessageIndication(
+                "Load VRM",
+                "Please confirm the license in viewer window. Do you load the character?"
+                ),
+        };
 
-        public static MessageIndication ResetSettingConfirmation(Languages lang)
+        public static MessageIndication ResetSettingConfirmation(Languages lang) => lang switch
         {
-            switch (lang)
-            {
-                case Languages.Japanese:
-                    return new MessageIndication(
-                        "設定のリセット",
-                        "リセットを実行すると全ての設定が初期状態に戻ります。リセットしますか？"
-                        );
-                case Languages.English:
-                default:
-                    return new MessageIndication(
-                        "Reset Setting",
-                        "Are you sure you want to reset all settings in VMagicMirror?"
-                        );
-            }
-        }
+            Languages.Japanese => new MessageIndication(
+                "設定のリセット",
+                "リセットを実行すると全ての設定が初期状態に戻ります。リセットしますか？"
+                ),
+            _ => new MessageIndication(
+                "Reset Setting",
+                "Are you sure you want to reset all settings in VMagicMirror?"
+                ),
+        };
 
-        public static MessageIndication ResetSingleCategoryConfirmation(Languages lang)
+        public static MessageIndication ResetSingleCategoryConfirmation(Languages lang) => lang switch
         {
-            switch (lang)
-            {
-                case Languages.Japanese:
-                    return new MessageIndication(
-                        "設定のリセット",
-                        "選択したカテゴリの設定をリセットしますか？"
-                        );
-                case Languages.English:
-                default:
-                    return new MessageIndication(
-                        "Reset Setting",
-                        "Are you sure you want to reset selected category setting?"
-                        );
-            }
-        }
+            Languages.Japanese => new MessageIndication(
+                "設定のリセット",
+                "選択したカテゴリの設定をリセットしますか？"
+                ),
+            _ => new MessageIndication(
+                "Reset Setting",
+                "Are you sure you want to reset selected category setting?"
+                ),
+        };
 
         /// <summary>
         /// NOTE: Contentのほうがフォーマット文字列なのでstring.Formatで消すアイテムの名前を指定して完成させること！
@@ -96,40 +78,28 @@
         /// </summary>
         /// <param name="languageName"></param>
         /// <returns></returns>
-        public static MessageIndication ErrorLoadSetting(Languages lang)
+        public static MessageIndication ErrorLoadSetting(Languages lang) => lang switch
         {
-            switch (lang)
-            {
-                case Languages.Japanese:
-                    return new MessageIndication(
-                        "ロード失敗",
-                        "設定ファイルのロードに失敗しました。エラー: "
-                        );
-                case Languages.English:
-                default:
-                    return new MessageIndication(
-                        "Load failed",
-                        "Failed to load setting file. Error: "
-                        );
-            }
-        }
+            Languages.Japanese => new MessageIndication(
+                "ロード失敗",
+                "設定ファイルのロードに失敗しました。エラー: "
+                ),
+            _ => new MessageIndication(
+                "Load failed",
+                "Failed to load setting file. Error: "
+                ),
+        };
 
-        public static MessageIndication DeleteWordToMotionItem(Languages lang)
+        public static MessageIndication DeleteWordToMotionItem(Languages lang) => lang switch
         {
-            switch (lang)
-            {
-                case Languages.Japanese:
-                    return new MessageIndication(
-                        "モーションの削除",
-                        "このモーション'{0}'を削除しますか？"
-                        );
-                case Languages.English:
-                default:
-                    return new MessageIndication(
-                        "Delete Item",
-                        "Are you sure to delete this item '{0}'?"
-                        );
-            }
-        }
+            Languages.Japanese => new MessageIndication(
+                "モーションの削除",
+                "このモーション'{0}'を削除しますか？"
+                ),
+            _ => new MessageIndication(
+                "Delete Item",
+                "Are you sure to delete this item '{0}'?"
+                ),
+        };
     }
 }

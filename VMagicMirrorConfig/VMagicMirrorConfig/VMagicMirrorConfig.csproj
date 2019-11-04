@@ -9,6 +9,7 @@
     <PublishTrimmed>true</PublishTrimmed>
     <Platforms>AnyCPU;x64;x86</Platforms>
     <Platform>x86</Platform>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Dragablz" Version="0.0.3.203" />

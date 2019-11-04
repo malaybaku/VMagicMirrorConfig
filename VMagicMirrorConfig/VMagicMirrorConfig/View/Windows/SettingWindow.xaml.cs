@@ -7,35 +7,35 @@ namespace Baku.VMagicMirrorConfig
     {
         public SettingWindow() => InitializeComponent();
 
-        private static SettingWindow _settingWindow = null;
         /// <summary>現在設定ウィンドウがあればそれを取得し、なければnullを取得します。</summary>
-        public static SettingWindow CurrentWindow => _settingWindow;
+        public static SettingWindow? CurrentWindow { get; private set; } = null;
 
         public static void OpenOrActivateExistingWindow(object dataContext)
         {
-            if (_settingWindow == null)
+            if (CurrentWindow == null)
             {
-                _settingWindow = new SettingWindow()
+                CurrentWindow = new SettingWindow()
                 {
                     Owner = Application.Current.MainWindow,
                     WindowStartupLocation = WindowStartupLocation.CenterOwner,
                     DataContext = dataContext,
                 };
-                _settingWindow.Closed += OnSettingWindowClosed;
-                _settingWindow.Show();
+                
+                CurrentWindow.Closed += OnSettingWindowClosed;
+                CurrentWindow.Show();
             }
             else
             {
-                _settingWindow.Activate();
+                CurrentWindow.Activate();
             }
         }
 
-        private static void OnSettingWindowClosed(object sender, EventArgs e)
+        private static void OnSettingWindowClosed(object? sender, EventArgs e)
         {
-            if (_settingWindow != null)
+            if (CurrentWindow != null)
             {
-                _settingWindow.Closed -= OnSettingWindowClosed;
-                _settingWindow = null;
+                CurrentWindow.Closed -= OnSettingWindowClosed;
+                CurrentWindow = null;
             }
         }
     }

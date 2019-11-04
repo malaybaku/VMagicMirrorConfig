@@ -6,15 +6,14 @@ namespace Baku.VMagicMirrorConfig
 {
     public class WhiteSpaceStringToNullConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object? Convert(object value, Type targetType, object parameter, CultureInfo culture)
+            => value switch
         {
-            if (value is string s)
-            {
-                //""をnullに変換するのがポイント:
-                return string.IsNullOrEmpty(s) ? null : s;
-            }
-            return Binding.DoNothing;
-        }
+            //""をnullにするのがポイント
+            string s when string.IsNullOrEmpty(s) => null,
+            string s => s,
+            _ => Binding.DoNothing,
+        };
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
