@@ -6,10 +6,9 @@ namespace Baku.VMagicMirrorConfig
 {
     class MessageFactory
     {
-        private static MessageFactory _instance;
-        public static MessageFactory Instance
-            => _instance ?? (_instance = new MessageFactory());
-
+        private static MessageFactory? _instance;
+        public static MessageFactory Instance 
+            => _instance ??= new MessageFactory();
         private MessageFactory() { }
 
         //メッセージのCommandには呼び出した関数の名前が入る: もともとnameof(Hoge)のように関数名を入れていたが、その必要が無くなった

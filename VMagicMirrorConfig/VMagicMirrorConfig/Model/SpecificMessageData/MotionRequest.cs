@@ -165,12 +165,12 @@ namespace Baku.VMagicMirrorConfig
     /// </summary>
     public class MotionRequestCollection
     {
-        public MotionRequestCollection(MotionRequest[] requests)
+        public MotionRequestCollection(MotionRequest?[] requests)
         {
             Requests = requests;
         }
 
-        public MotionRequest[] Requests { get; }
+        public MotionRequest?[] Requests { get; }
 
         public string ToJson()
         {

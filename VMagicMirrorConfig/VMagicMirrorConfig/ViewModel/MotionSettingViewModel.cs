@@ -27,7 +27,7 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private void OnReceivedCommand(object sender, CommandReceivedEventArgs e)
+        private void OnReceivedCommand(object? sender, CommandReceivedEventArgs e)
         {
             switch (e.Command)
             {
@@ -181,20 +181,16 @@ namespace Baku.VMagicMirrorConfig
 
         private readonly ObservableCollection<string> _writableCameraDeviceNames
             = new ObservableCollection<string>();
-        private ReadOnlyObservableCollection<string> _cameraDeviceNames = null;
+        private ReadOnlyObservableCollection<string>? _cameraDeviceNames = null;
         [XmlIgnore]
         public ReadOnlyObservableCollection<string> CameraDeviceNames
-            => _cameraDeviceNames ??
-            (_cameraDeviceNames = new ReadOnlyObservableCollection<string>(_writableCameraDeviceNames));
+            => _cameraDeviceNames ??= new ReadOnlyObservableCollection<string>(_writableCameraDeviceNames);
 
-        private ActionCommand _calibrateFaceCommand;
+        private ActionCommand? _calibrateFaceCommand;
         public ActionCommand CalibrateFaceCommand
-            => _calibrateFaceCommand ?? (_calibrateFaceCommand = new ActionCommand(CalibrateFace));
-
-        private void CalibrateFace()
-        {
-            SendMessage(MessageFactory.Instance.CalibrateFace());
-        }
+            => _calibrateFaceCommand ??= new ActionCommand(
+                () => SendMessage(MessageFactory.Instance.CalibrateFace())
+                );
 
         private string _calibrateFaceData = "";
         /// <summary>
@@ -233,11 +229,10 @@ namespace Baku.VMagicMirrorConfig
 
         private readonly ObservableCollection<string> _writableBlendShapeNames
           = new ObservableCollection<string>();
-        private ReadOnlyObservableCollection<string> _availableBlendShapeNames = null;
+        private ReadOnlyObservableCollection<string>? _availableBlendShapeNames = null;
         [XmlIgnore]
         public ReadOnlyObservableCollection<string> AvailableBlendShapeNames
-            => _availableBlendShapeNames ??
-            (_availableBlendShapeNames = new ReadOnlyObservableCollection<string>(_writableBlendShapeNames));
+            => _availableBlendShapeNames ??= new ReadOnlyObservableCollection<string>(_writableBlendShapeNames);
 
         private string _eyebrowLeftUpKey = "";
         public string EyebrowLeftUpKey
@@ -413,11 +408,10 @@ namespace Baku.VMagicMirrorConfig
 
         private readonly ObservableCollection<string> _writableMicrophoneDeviceNames
             = new ObservableCollection<string>();
-        private ReadOnlyObservableCollection<string> _microphoneDeviceNames = null;
+        private ReadOnlyObservableCollection<string>? _microphoneDeviceNames = null;
         [XmlIgnore]
         public ReadOnlyObservableCollection<string> MicrophoneDeviceNames
-            => _microphoneDeviceNames ??
-            (_microphoneDeviceNames = new ReadOnlyObservableCollection<string>(_writableMicrophoneDeviceNames));
+            => _microphoneDeviceNames ??= new ReadOnlyObservableCollection<string>(_writableMicrophoneDeviceNames);
 
         #endregion
 
@@ -627,33 +621,29 @@ namespace Baku.VMagicMirrorConfig
 
         #region Reset API
 
-        private ActionCommand _resetFaceMotionSettingCommand = null;
+        private ActionCommand? _resetFaceMotionSettingCommand = null;
         public ActionCommand ResetFaceMotionSettingCommand
-            => _resetFaceMotionSettingCommand ?? 
-            (_resetFaceMotionSettingCommand = new ActionCommand(ResetFaceMotionCommandImpl));
-        private void ResetFaceMotionCommandImpl() 
-            => SettingResetUtils.ResetSingleCategorySetting(ResetFaceSetting);
+            => _resetFaceMotionSettingCommand ??= new ActionCommand(
+                () => SettingResetUtils.ResetSingleCategorySetting(ResetFaceSetting)
+                );
 
-        private ActionCommand _resetArmMotionSettingCommand = null;
+        private ActionCommand? _resetArmMotionSettingCommand = null;
         public ActionCommand ResetArmMotionSettingCommand
-            => _resetArmMotionSettingCommand ??
-            (_resetArmMotionSettingCommand = new ActionCommand(ResetArmMotionSettingImpl));
-        private void ResetArmMotionSettingImpl()
-            => SettingResetUtils.ResetSingleCategorySetting(ResetArmSetting);
+            => _resetArmMotionSettingCommand ??= new ActionCommand(
+                () => SettingResetUtils.ResetSingleCategorySetting(ResetArmSetting)
+                );
 
-        private ActionCommand _resetHandMotionSettingCommand = null;
+        private ActionCommand? _resetHandMotionSettingCommand = null;
         public ActionCommand ResetHandMotionSettingCommand
-            => _resetHandMotionSettingCommand ??
-            (_resetHandMotionSettingCommand = new ActionCommand(ResetHandMotionSettingImpl));
-        private void ResetHandMotionSettingImpl()
-            => SettingResetUtils.ResetSingleCategorySetting(ResetHandSetting);
+            => _resetHandMotionSettingCommand ??= new ActionCommand(
+                () => SettingResetUtils.ResetSingleCategorySetting(ResetHandSetting)
+                );
 
-        private ActionCommand _resetWaitMotionSettingCommand = null;
+        private ActionCommand? _resetWaitMotionSettingCommand = null;
         public ActionCommand ResetWaitMotionSettingCommand
-            => _resetWaitMotionSettingCommand ?? 
-            (_resetWaitMotionSettingCommand = new ActionCommand(ResetWaitMotionSettingImpl));
-        private void ResetWaitMotionSettingImpl()
-            => SettingResetUtils.ResetSingleCategorySetting(ResetWaitMotionSetting);
+            => _resetWaitMotionSettingCommand ??= new ActionCommand(
+                () => SettingResetUtils.ResetSingleCategorySetting(ResetWaitMotionSetting)
+                );
 
         private void ResetFaceSetting()
         {

@@ -10,7 +10,10 @@ namespace Baku.VMagicMirrorConfig
         private const int TypingEffectIndexText = 0;
         private const int TypingEffectIndexLight = 1;
 
-        public LayoutSettingViewModel() : base() { }
+        public LayoutSettingViewModel() : base() 
+        {
+            Gamepad = new GamepadSettingViewModel();
+        }
         internal LayoutSettingViewModel(IMessageSender sender, IMessageReceiver receiver) : base(sender)
         {
             Gamepad = new GamepadSettingViewModel(sender, receiver);
@@ -80,9 +83,9 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private ActionCommand _resetCameraPositionCommand;
+        private ActionCommand? _resetCameraPositionCommand;
         public ActionCommand ResetCameraPositionCommand
-            => _resetCameraPositionCommand ?? (_resetCameraPositionCommand = new ActionCommand(ResetCameraPosition));
+            => _resetCameraPositionCommand ??= new ActionCommand(ResetCameraPosition);
 
         private void ResetCameraPosition()
             => SendMessage(MessageFactory.Instance.ResetCameraPosition());
@@ -214,7 +217,7 @@ namespace Baku.VMagicMirrorConfig
         }
         
 
-        private void OnReceiveCommand(object sender, CommandReceivedEventArgs e)
+        private void OnReceiveCommand(object? sender, CommandReceivedEventArgs e)
         {
             switch (e.Command)
             {
@@ -247,12 +250,11 @@ namespace Baku.VMagicMirrorConfig
 
         #region Reset API
 
-        private ActionCommand _resetHidSettingCommand = null;
+        private ActionCommand? _resetHidSettingCommand = null;
         public ActionCommand ResetHidSettingCommand
-            => _resetHidSettingCommand ??
-            (_resetHidSettingCommand = new ActionCommand(ResetHidCommandImpl));
-        private void ResetHidCommandImpl()
-            => SettingResetUtils.ResetSingleCategorySetting(ResetHidSetting);
+            => _resetHidSettingCommand ??= new ActionCommand(
+                () => SettingResetUtils.ResetSingleCategorySetting(ResetHidSetting)
+                );
         private void ResetHidSetting()
         {
             HidHeight = 90;
@@ -261,13 +263,11 @@ namespace Baku.VMagicMirrorConfig
             TypingEffectIsNone = true;
         }
 
-        private ActionCommand _resetCameraSettingCommand = null;
+        private ActionCommand? _resetCameraSettingCommand = null;
         public ActionCommand ResetCameraSettingCommand
-            => _resetCameraSettingCommand ??
-            (_resetCameraSettingCommand = new ActionCommand(ResetCameraSettingCommandImpl));
-        private void ResetCameraSettingCommandImpl()
-            => SettingResetUtils.ResetSingleCategorySetting(ResetCameraSetting);
-
+            => _resetCameraSettingCommand ??= new ActionCommand(
+                () => SettingResetUtils.ResetSingleCategorySetting(ResetCameraSetting)
+                );
         private void ResetCameraSetting()
         {
             //NOTE: フリーカメラモードについては、もともと揮発性の設定にしているのでココでは触らない

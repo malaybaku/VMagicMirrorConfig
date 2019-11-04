@@ -287,24 +287,23 @@ namespace Baku.VMagicMirrorConfig
 
         #region Reset API
 
-        private ActionCommand _resetLightSettingCommand = null;
+        private ActionCommand? _resetLightSettingCommand = null;
         public ActionCommand ResetLightSettingCommand
-            => _resetLightSettingCommand ?? (_resetLightSettingCommand = new ActionCommand(ResetLightImpl));
-        private void ResetLightImpl()
-            => SettingResetUtils.ResetSingleCategorySetting(ResetLightSetting);
+            => _resetLightSettingCommand ??= new ActionCommand(
+                () => SettingResetUtils.ResetSingleCategorySetting(ResetLightSetting)
+                );
 
-        private ActionCommand _resetShadowSettingCommand = null;
+        private ActionCommand? _resetShadowSettingCommand = null;
         public ActionCommand ResetShadowSettingCommand
-            => _resetShadowSettingCommand ?? (_resetShadowSettingCommand = new ActionCommand(ResetShadowImpl));
-        private void ResetShadowImpl()
-            => SettingResetUtils.ResetSingleCategorySetting(ResetShadowSetting);
+            => _resetShadowSettingCommand ??= new ActionCommand(
+                () => SettingResetUtils.ResetSingleCategorySetting(ResetShadowSetting)
+                );
 
-        private ActionCommand _resetBloomSettingCommand = null;
+        private ActionCommand? _resetBloomSettingCommand = null;
         public ActionCommand ResetBloomSettingCommand
-            => _resetBloomSettingCommand ?? (_resetBloomSettingCommand = new ActionCommand(ResetBloomImpl));
-        private void ResetBloomImpl()
-            => SettingResetUtils.ResetSingleCategorySetting(ResetBloomSetting);
-
+            => _resetBloomSettingCommand ??= new ActionCommand(
+                () => SettingResetUtils.ResetSingleCategorySetting(ResetBloomSetting)
+                );
 
         private void ResetLightSetting()
         {

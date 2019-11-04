@@ -9,8 +9,8 @@ namespace Baku.VMagicMirrorConfig
     {
         void Start();
         void Stop();
-        event EventHandler<CommandReceivedEventArgs> ReceivedCommand;
-        event EventHandler<QueryReceivedEventArgs> ReceivedQuery;
+        event EventHandler<CommandReceivedEventArgs>? ReceivedCommand;
+        event EventHandler<QueryReceivedEventArgs>? ReceivedQuery;
     }
 
     public class CommandReceivedEventArgs : EventArgs

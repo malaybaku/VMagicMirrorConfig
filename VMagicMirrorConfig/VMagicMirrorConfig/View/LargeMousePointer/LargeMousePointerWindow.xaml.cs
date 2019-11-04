@@ -29,11 +29,11 @@ namespace Baku.VMagicMirrorConfig.LargePointer
             InitializeComponent();
         }
 
-        private CancellationTokenSource _cts;
+        private readonly CancellationTokenSource _cts = new CancellationTokenSource();
         private IntPtr _hWnd = IntPtr.Zero;
         private int _width = 1;
         private int _height = 1;
-        private ScaleTransform _scaleTransform = null;
+        private ScaleTransform? _scaleTransform = null;
 
         //表示・非表示とスケーリングの双方で使う
         private int _mouseStopTimeMillisec = 0;
@@ -58,11 +58,10 @@ namespace Baku.VMagicMirrorConfig.LargePointer
             _height = rect.bottom - rect.top;
             _scaleTransform = MainGrid.RenderTransform as ScaleTransform;
 
-            _cts = new CancellationTokenSource();
             Task.Run(async () => await LoopUpdateWindowPositionAsync(_cts.Token));
         }
 
-        protected override void OnClosing(CancelEventArgs e) => _cts?.Cancel();
+        protected override void OnClosing(CancelEventArgs e) => _cts.Cancel();
 
         private void SetClickThrough(IntPtr hWnd)
         {
@@ -123,8 +122,11 @@ namespace Baku.VMagicMirrorConfig.LargePointer
                     ScaleWhenMoving :
                     ScaleWhenStop;
                 double nextScale = Lerp(_prevScale, goalScale, ScaleChangeLerpFactor);
-                _scaleTransform.ScaleX = nextScale;
-                _scaleTransform.ScaleY = nextScale;
+                if (_scaleTransform != null)
+                {
+                    _scaleTransform.ScaleX = nextScale;
+                    _scaleTransform.ScaleY = nextScale;
+                }
                 _prevScale = nextScale;
             }
         }

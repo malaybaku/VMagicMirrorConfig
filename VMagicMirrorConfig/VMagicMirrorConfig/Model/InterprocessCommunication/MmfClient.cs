@@ -100,12 +100,12 @@ namespace Baku.VMagicMirrorConfig
         }
 
         /// <summary> コマンド受信時に、UIスレッド上で発火する。 </summary>
-        public event EventHandler<CommandReceivedEventArgs> ReceivedCommand;
+        public event EventHandler<CommandReceivedEventArgs>? ReceivedCommand;
         
         /// <summary> クエリ受信時に、UIスレッド上で発火する。 </summary>
-        public event EventHandler<QueryReceivedEventArgs> ReceivedQuery;
+        public event EventHandler<QueryReceivedEventArgs>? ReceivedQuery;
 
-        private void OnReceivedCommand(object sender, ReceiveCommandEventArgs e)
+        private void OnReceivedCommand(object? sender, ReceiveCommandEventArgs e)
         {
             string content = e.Command;
             int i = FindColonCharIndex(content);
@@ -117,7 +117,7 @@ namespace Baku.VMagicMirrorConfig
                 ));
         }
 
-        private void OnReceivedQuery(object sender, ReceiveQueryEventArgs e)
+        private void OnReceivedQuery(object? sender, ReceiveQueryEventArgs e)
         {
             string content = e.Query.Query;
             int i = FindColonCharIndex(content);

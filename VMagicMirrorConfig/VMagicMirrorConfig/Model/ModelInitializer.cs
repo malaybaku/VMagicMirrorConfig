@@ -9,13 +9,13 @@ namespace Baku.VMagicMirrorConfig
             var mmfClient = new MmfClient();
             MessageSender = mmfClient;
             MessageReceiver = mmfClient;
+            CameraPositionChecker = new CameraPositionChecker(MessageSender);
         }
 
-        public void Initialize()
+        public void StartObserveRoutine()
         {
             new AppExitFromUnityMessage().Initialize(MessageReceiver);
             MessageReceiver.Start();
-            CameraPositionChecker = new CameraPositionChecker(MessageSender);
         }
 
         public IMessageSender MessageSender { get; } 

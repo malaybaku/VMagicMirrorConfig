@@ -6,15 +6,12 @@ namespace Baku.VMagicMirrorConfig
 {
     class LanguageSelector
     {
-        private static LanguageSelector _instance;
+        private static LanguageSelector? _instance;
         public static LanguageSelector Instance
-            => _instance ?? (_instance = new LanguageSelector());
+            => _instance ??= new LanguageSelector();
+        private LanguageSelector() { }
 
-        private LanguageSelector()
-        {
-        }
-
-        private IMessageSender _sender = null;
+        private IMessageSender? _sender = null;
 
         private string _languageName = nameof(Languages.Japanese);
         public string LanguageName

@@ -16,7 +16,7 @@ namespace Baku.VMagicMirrorConfig
         public void Execute(object parameter) => _act?.Invoke();
 
 #pragma warning disable CS0067
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler? CanExecuteChanged;
 #pragma warning restore CS0067
     }
 }
