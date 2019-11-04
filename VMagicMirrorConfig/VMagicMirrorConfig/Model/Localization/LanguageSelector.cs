@@ -50,17 +50,11 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        public static Languages StringToLanguage(string languageName)
+        public static Languages StringToLanguage(string languageName) => languageName switch
         {
-            switch (languageName)
-            {
-                case "Japanese":
-                    return Languages.Japanese;
-                case "English":
-                default:
-                    return Languages.English;
-            }
-        }
+            "Japanese" => Languages.Japanese,
+            _ => Languages.English,
+        };
 
         private void SetLanguage(string languageName)
         {
