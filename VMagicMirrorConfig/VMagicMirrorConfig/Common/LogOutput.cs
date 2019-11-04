@@ -7,8 +7,7 @@ namespace Baku.VMagicMirrorConfig
     {
         //なんとなくシングルトン
         private static LogOutput? _instance = null;
-        public static LogOutput Instance
-            => _instance ??= new LogOutput();
+        public static LogOutput Instance => _instance ??= new LogOutput();
         private LogOutput()
         {
             if (File.Exists(LogFilePath))
