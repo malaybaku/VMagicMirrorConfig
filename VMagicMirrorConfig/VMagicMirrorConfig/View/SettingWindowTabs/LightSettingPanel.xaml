@@ -390,7 +390,7 @@
                         <Slider Grid.Row="0" Grid.Column="1"
                                 x:Name="sliderWindStrength"
                                 Minimum="10"
-                                Maximum="300"
+                                Maximum="1000"
                                 Value="{Binding WindStrength, Mode=TwoWay}"
                                 />
                         <TextBox Grid.Row="0" Grid.Column="2"

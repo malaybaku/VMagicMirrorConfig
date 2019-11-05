@@ -305,7 +305,7 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private int _windStrengh = 30;
+        private int _windStrengh = 100;
         public int WindStrength
         {
             get => _windStrengh;
@@ -405,7 +405,7 @@ namespace Baku.VMagicMirrorConfig
         private void ResetWindSetting()
         {
             EnableWind = true;
-            WindStrength = 30;
+            WindStrength = 100;
             WindInterval = 100;
             WindYaw = 90;
         }
