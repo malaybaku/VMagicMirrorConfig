@@ -58,12 +58,12 @@
 
                             <CheckBox Content="{DynamicResource Window_Transparent}"
                                       IsChecked="{Binding WindowSetting.IsTransparent, Mode=TwoWay}"
-                                      Margin="10,3"
+                                      Margin="10,1" Height="25"
                                       />
 
                             <CheckBox Content="{DynamicResource Window_Draggable}"
                                       IsChecked="{Binding WindowSetting.WindowDraggable, Mode=TwoWay}"
-                                      Margin="10,3"
+                                      Margin="10,1" Height="25"
                                       />
                         </StackPanel>
                     </md:Card>
@@ -222,7 +222,7 @@
                                            />
                             </StackPanel>
 
-                            <CheckBox Margin="10,3"
+                            <CheckBox Margin="10,3" Height="25"
                                       Content="{DynamicResource WordToMotion_Enable}"
                                       IsChecked="{Binding WordToMotionSetting.EnableWordToMotion}"
                                       />
@@ -274,43 +274,56 @@
                                            />
                             </StackPanel>
 
-                            <CheckBox Margin="10,1" 
+                            <CheckBox Margin="10,1" Height="25"
                                       Content="{DynamicResource Layout_Hid}"
                                       IsChecked="{Binding LayoutSetting.HidVisibility}"
                                       />
-                            <CheckBox Margin="10,1" 
+                            <CheckBox Margin="10,1" Height="25"
                                       Content="{DynamicResource Shadow_Enable_Streaming}"
                                       IsChecked="{Binding LightSetting.EnableShadow}"
                                       />
- 
-                            <TextBlock Text="{DynamicResource Layout_Hid_TypingEffect_Header}"/>
-                            <StackPanel Margin="10,0,5,5"
-                                        Orientation="Horizontal">
-                                <RadioButton VerticalContentAlignment="Center"
-                                             Margin="0,0,15,0"
-                                             IsChecked="{Binding LayoutSetting.TypingEffectIsNone, Mode=TwoWay}"
-                                             >
-                                    <md:PackIcon Style="{StaticResource HeaderPackIcon}" 
-                                                 Kind="EyeOff"
-                                                 />
-                                </RadioButton>
-                                <RadioButton VerticalContentAlignment="Center"
-                                             Margin="0,0,15,0"
-                                             IsChecked="{Binding LayoutSetting.TypingEffectIsText, Mode=TwoWay}"
-                                             >
-                                    <md:PackIcon Style="{StaticResource HeaderPackIcon}" 
-                                                 Kind="Abc"
-                                                 />
-                                </RadioButton>
-                                <RadioButton VerticalContentAlignment="Center"
-                                             Margin="0"
-                                             IsChecked="{Binding LayoutSetting.TypingEffectIsLight, Mode=TwoWay}"
-                                             >
-                                    <md:PackIcon Style="{StaticResource HeaderPackIcon}" 
-                                                 Kind="FlashOn"
-                                                 />
-                                </RadioButton>
-                            </StackPanel>
+                            <CheckBox Margin="10,1" Height="25"
+                                      Content="{DynamicResource Wind_Enable_Streaming}"
+                                      IsChecked="{Binding LightSetting.EnableWind}"
+                                      />
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Margin="5,3"
+                                           Text="{DynamicResource Layout_Hid_TypingEffect_Header_Streaming}"
+                                           />
+                                <ComboBox Grid.Column="1"
+                                          HorizontalAlignment="Stretch"
+                                          Margin="5,0"
+                                          ItemsSource="{Binding LayoutSetting.TypingEffectSelections}"
+                                          SelectedItem="{Binding LayoutSetting.TypingEffectItem}"
+                                          md:HintAssist.Hint="Effect"
+                                          >
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid Height="20" VerticalAlignment="Center">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="20"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <md:PackIcon Grid.Column="0"
+                                                             Width="20" Height="20"
+                                                             Margin="0"
+                                                             Kind="{Binding IconKind, Mode=OneTime}"
+                                                             />
+                                                <TextBlock Grid.Column="1"
+                                                           Margin="5,0,0,0"
+                                                           Text="{Binding EffectName}"
+                                                           />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                            </Grid>
+
                         </StackPanel>
                     </md:Card>
 
@@ -331,7 +344,7 @@
                             
                             <CheckBox Content="{DynamicResource Layout_EnableFreeCameraMode}" 
                                       IsChecked="{Binding LayoutSetting.EnableFreeCameraMode}"
-                                      Margin="10,2"
+                                      Margin="10,0" Height="25"
                                       />
 
                             <Button HorizontalAlignment="Left"

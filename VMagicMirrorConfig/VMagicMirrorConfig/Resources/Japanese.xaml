@@ -12,7 +12,7 @@
     <sys:String x:Key="TopBar_Setting_Window">ウィンドウ</sys:String>
     <sys:String x:Key="TopBar_Setting_Motion">モーション</sys:String>
     <sys:String x:Key="TopBar_Setting_Layout">レイアウト</sys:String>
-    <sys:String x:Key="TopBar_Setting_Light">ライト</sys:String>
+    <sys:String x:Key="TopBar_Setting_Effects">エフェクト</sys:String>
     
     <!-- Home -->
     <sys:String x:Key="Home_LoadVrm">VRMロード</sys:String>
@@ -149,7 +149,8 @@
     <sys:String x:Key="Layout_HidReactToKeyboard">キーボード操作に反応</sys:String>
     <sys:String x:Key="Layout_HidReactToMouse">マウス操作に反応</sys:String>
 
-    <sys:String x:Key="Layout_Hid_TypingEffect_Header">タイピング時のエフェクト</sys:String>
+    <sys:String x:Key="Layout_Hid_TypingEffect_Header">タイピング時の演出</sys:String>
+    <sys:String x:Key="Layout_Hid_TypingEffect_Header_Streaming">タイピング演出</sys:String>
     <sys:String x:Key="Layout_Hid_TypingEffect_None">なし</sys:String>
     <sys:String x:Key="Layout_Hid_TypingEffect_Text">テキスト</sys:String>
     <sys:String x:Key="Layout_Hid_TypingEffect_Light">ライト</sys:String>
@@ -187,10 +188,18 @@
     <sys:String x:Key="Shadow_Yaw">向き(横)[deg]</sys:String>
     <sys:String x:Key="Shadow_Pitch">向き(上下)[deg]</sys:String>
     <sys:String x:Key="Shadow_DepthOffset">奥行きの調整 [cm]</sys:String>
-
+        
     <sys:String x:Key="Bloom">Bloom</sys:String>
     <sys:String x:Key="Bloom_Intensity">強さ[%]</sys:String>
     <sys:String x:Key="Bloom_Threshold">しきい値[%]</sys:String>
+    
+    <sys:String x:Key="Wind">風</sys:String>
+    <sys:String x:Key="Wind_Enable">風を有効化</sys:String>
+    <sys:String x:Key="Wind_Enable_Streaming">風</sys:String>
+    <sys:String x:Key="Wind_Strength">風の強さ[%]</sys:String>
+    <sys:String x:Key="Wind_Interval">風の細かさ[%]</sys:String>
+    <sys:String x:Key="Wind_Yaw">風の向き[deg]</sys:String>
+
     
     <!-- Word To Motion -->
     <sys:String x:Key="WordToMotion_Enable">Word to Motionを有効化</sys:String>

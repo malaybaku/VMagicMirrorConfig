@@ -44,7 +44,7 @@
         </TabItem>
         <TabItem>
             <TabItem.Header>
-                <vmm:TabHeaderIconText Text="{DynamicResource TopBar_Setting_Light}"
+                <vmm:TabHeaderIconText Text="{DynamicResource TopBar_Setting_Effects}"
                                        IconKind="Lightbulb"
                                        />
             </TabItem.Header>
