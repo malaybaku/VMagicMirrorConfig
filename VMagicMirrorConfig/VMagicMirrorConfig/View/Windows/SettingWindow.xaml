@@ -1,0 +1,82 @@
+﻿<Window x:Class="Baku.VMagicMirrorConfig.SettingWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
+        xmlns:vmm="clr-namespace:Baku.VMagicMirrorConfig"
+        mc:Ignorable="d"
+        d:DataContext="{x:Type vmm:MainWindowViewModel}"
+        Title="VMagicMirror Settings" 
+        Height="660" Width="500"
+        MinHeight="200" MinWidth="430"
+        >
+    <dragablz:TabablzControl FixedHeaderCount="5">
+        <dragablz:TabablzControl.HeaderItemTemplate>
+            <DataTemplate>
+                <ContentControl Content="{Binding}"/>
+            </DataTemplate>
+        </dragablz:TabablzControl.HeaderItemTemplate>
+        <TabItem>
+            <TabItem.Header>
+                <vmm:TabHeaderIconText Text="{DynamicResource TopBar_Setting_Window}"
+                                       IconKind="WindowRestore"
+                                       />
+            </TabItem.Header>
+            <vmm:WindowSettingPanel DataContext="{Binding WindowSetting}" />
+        </TabItem>
+        <TabItem>
+            <TabItem.Header>
+                <vmm:TabHeaderIconText Text="{DynamicResource TopBar_Setting_Motion}"
+                                       IconKind="HumanHandsup"
+                                       />
+            </TabItem.Header>
+            <vmm:MotionSettingPanel DataContext="{Binding MotionSetting}" />
+        </TabItem>
+        <TabItem>
+            <TabItem.Header>
+                <vmm:TabHeaderIconText Text="{DynamicResource TopBar_Setting_Layout}"
+                                       IconKind="ViewDashboard"
+                                       />
+            </TabItem.Header>
+            <vmm:LayoutSettingPanel DataContext="{Binding LayoutSetting}" />
+        </TabItem>
+        <TabItem>
+            <TabItem.Header>
+                <vmm:TabHeaderIconText Text="{DynamicResource TopBar_Setting_Effects}"
+                                       IconKind="Lightbulb"
+                                       />
+            </TabItem.Header>
+            <vmm:LightSettingPanel DataContext="{Binding LightSetting}" />
+        </TabItem>
+        <TabItem>
+            <TabItem.Header>
+                <!-- NOTE: "Word to Motion"が正式名だが、長すぎるのでアイコンにしておく-->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <md:PackIcon Grid.Column="0"
+                                 Width="23" Height="23"
+                                 VerticalAlignment="Center"
+                                 Kind="ABC"/>
+                    <md:PackIcon Grid.Column="1"
+                                 Width="16" Height="16"
+                                 Margin="2,0,0,0"
+                                 VerticalAlignment="Center"                                 
+                                 Kind="ArrowRightBold"/>
+                    <md:PackIcon Grid.Column="2"
+                                 Width="20" Height="20"
+                                 Margin="-2,1,0,0"
+                                 VerticalAlignment="Center"
+                                 Kind="HumanHandsup">
+                    </md:PackIcon>
+                </Grid>
+            </TabItem.Header>
+            <vmm:WordToMotionSettingPanel DataContext="{Binding WordToMotionSetting}" />
+        </TabItem>
+    </dragablz:TabablzControl>
+</Window>

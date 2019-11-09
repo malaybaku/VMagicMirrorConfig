@@ -47,14 +47,18 @@ namespace Baku.VMagicMirrorConfig
 
         private static void OnTextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var control = d as TabHeaderIconText;
-            control.textBlock.Text = (string)e.NewValue;
+            if (d is TabHeaderIconText control)
+            {
+                control.textBlock.Text = (string)e.NewValue;
+            }
         }
 
         private static void OnIconChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var control = d as TabHeaderIconText;
-            control.packIcon.Kind = (PackIconKind)e.NewValue;
+            if (d is TabHeaderIconText control)
+            {
+                control.packIcon.Kind = (PackIconKind)e.NewValue;
+            }
         }
     }
 }

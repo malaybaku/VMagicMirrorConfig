@@ -1,45 +1,40 @@
 ﻿using System;
 using System.IO;
-using System.Reflection;
 
 namespace Baku.VMagicMirrorConfig
 {
     public class LogOutput
     {
-        //指針: log.txtというテキストがあれば随時appendする(安全重視で毎回書き込んでファイル閉じる)
-        private const string LogTextName = "log_config.txt";
-
         //なんとなくシングルトン
-        private static LogOutput _instance;
-        public static LogOutput Instance
-            => _instance ?? (_instance = new LogOutput());
+        private static LogOutput? _instance = null;
+        public static LogOutput Instance => _instance ??= new LogOutput();
         private LogOutput()
         {
-            _logFileDir = GetLogFileDir();
-            _logFilePath = GetLogFilePath(_logFileDir);
-            if (File.Exists(_logFilePath))
+            if (File.Exists(LogFilePath))
             {
-                File.Delete(_logFilePath);
+                File.Delete(LogFilePath);
             }
-            if (Directory.Exists(_logFileDir))
+            if (Directory.Exists(LogFileDir))
             {
-                File.WriteAllText(_logFilePath, "");
+                File.WriteAllText(LogFilePath, "");
             }
         }
 
+        private string LogFileDir => SpecialFilePath.LogFileDir;
+        private string LogFilePath => SpecialFilePath.LogFilePath;
+        //指針: log.txtというテキストがあれば随時appendする(安全重視で毎回書き込んでファイル閉じる)
         private readonly object _writeLock = new object();
-        private readonly string _logFileDir;
-        private readonly string _logFilePath;
+
 
         public void Write(string text)
         {
-            if (!File.Exists(_logFilePath)) { return; }
+            if (!File.Exists(LogFilePath)) { return; }
 
             lock (_writeLock)
             {
                 try
                 {
-                    using (var sw = new StreamWriter(_logFilePath, true))
+                    using (var sw = new StreamWriter(LogFilePath, true))
                     {
                         sw.WriteLine(text);
                     }
@@ -49,8 +44,6 @@ namespace Baku.VMagicMirrorConfig
                     //諦める
                 }
             }
-
-
         }
 
         public void Write(Exception ex)
@@ -66,23 +59,5 @@ namespace Baku.VMagicMirrorConfig
 
         }
 
-
-        private string GetLogFileDir()
-        {
-            string logDir = Path.GetDirectoryName(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location));
-            if (File.Exists(Path.Combine(logDir, "VmagicMirror.exe")))
-            {
-                return logDir;
-            }
-            else
-            {
-                return "";
-            }
-        }
-
-        private string GetLogFilePath(string dirPath)
-            => File.Exists(Path.Combine(dirPath, "VmagicMirror.exe")) ?
-            Path.Combine(dirPath, LogTextName) :
-            "";
     }
 }

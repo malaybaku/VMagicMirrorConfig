@@ -3,6 +3,11 @@ using System.Xml.Serialization;
 
 namespace Baku.VMagicMirrorConfig
 {
+    /// <summary>
+    /// ライトと言ってるが、実際にはタイピングエフェクトを除いたエフェクトっぽい色々の設定を持ってるクラス。
+    /// クラス名やメンバー名はヘタに変えると旧バージョンの設定が読めなくなるので、変更時は要注意。
+    /// (たしかクラス名は改変可だが、勢いでSaveDataクラスまでリファクタリングすると後方互換でなくなってしまう)
+    /// </summary>
     public class LightSettingViewModel : SettingViewModelBase
     {
         public LightSettingViewModel() : base()
@@ -285,7 +290,91 @@ namespace Baku.VMagicMirrorConfig
 
         #endregion
 
-        public override void ResetToDefault()
+        #region Wind
+
+        private bool _enableWind = true;
+        public bool EnableWind
+        {
+            get => _enableWind;
+            set
+            {
+                if (SetValue(ref _enableWind, value))
+                {
+                    SendMessage(MessageFactory.Instance.WindEnable(EnableWind));
+                }
+            }
+        }
+
+        private int _windStrengh = 100;
+        public int WindStrength
+        {
+            get => _windStrengh;
+            set
+            {
+                if (SetValue(ref _windStrengh, value))
+                {
+                    SendMessage(MessageFactory.Instance.WindStrength(WindStrength));
+                }
+            }
+        }
+
+        private int _windInterval = 100;
+        public int WindInterval
+        {
+            get => _windInterval;
+            set
+            {
+                if (SetValue(ref _windInterval, value))
+                {
+                    SendMessage(MessageFactory.Instance.WindInterval(WindInterval));
+                }
+            }
+        }
+
+        private int _windYaw = 90;
+        public int WindYaw
+        {
+            get => _windYaw;
+            set
+            {
+                if (SetValue(ref _windYaw, value))
+                {
+                    SendMessage(
+                        MessageFactory.Instance.WindYaw(WindYaw)
+                        );
+                }
+            }
+        }
+
+        #endregion
+
+        #region Reset API
+
+        private ActionCommand? _resetLightSettingCommand = null;
+        public ActionCommand ResetLightSettingCommand
+            => _resetLightSettingCommand ??= new ActionCommand(
+                () => SettingResetUtils.ResetSingleCategorySetting(ResetLightSetting)
+                );
+
+        private ActionCommand? _resetShadowSettingCommand = null;
+        public ActionCommand ResetShadowSettingCommand
+            => _resetShadowSettingCommand ??= new ActionCommand(
+                () => SettingResetUtils.ResetSingleCategorySetting(ResetShadowSetting)
+                );
+
+        private ActionCommand? _resetBloomSettingCommand = null;
+        public ActionCommand ResetBloomSettingCommand
+            => _resetBloomSettingCommand ??= new ActionCommand(
+                () => SettingResetUtils.ResetSingleCategorySetting(ResetBloomSetting)
+                );
+
+        private ActionCommand? _resetWindSettingCommand = null;
+        public ActionCommand ResetWindSettingCommand
+            => _resetWindSettingCommand ??= new ActionCommand(
+                () => SettingResetUtils.ResetSingleCategorySetting(ResetWindSetting)
+                );
+
+        private void ResetLightSetting()
         {
             LightR = 255;
             LightG = 244;
@@ -293,17 +382,41 @@ namespace Baku.VMagicMirrorConfig
             LightIntensity = 100;
             LightYaw = -30;
             LightPitch = 50;
+        }
 
+        private void ResetShadowSetting()
+        {
             EnableShadow = true;
             ShadowIntensity = 65;
             ShadowYaw = -20;
             ShadowPitch = 8;
+            ShadowDepthOffset = 40;
+        }
 
+        private void ResetBloomSetting()
+        {
             BloomR = 255;
             BloomG = 255;
             BloomB = 255;
             BloomIntensity = 50;
             BloomThreshold = 100;
         }
+
+        private void ResetWindSetting()
+        {
+            EnableWind = true;
+            WindStrength = 100;
+            WindInterval = 100;
+            WindYaw = 90;
+        }
+
+        public override void ResetToDefault()
+        {
+            ResetLightSetting();
+            ResetShadowSetting();
+            ResetBloomSetting();
+        }
+
+        #endregion
     }
 }

@@ -9,9 +9,14 @@ namespace Baku.VMagicMirrorConfig
 {
     public class WordToMotionSettingViewModel : SettingViewModelBase
     {
+        private const int DeviceTypeNone = 0;
+        private const int DeviceTypeGamepad = 1;
+        private const int DeviceTypeKeyboard = 2;
+
         public WordToMotionSettingViewModel() : base()
         {
             Items = new ReadOnlyObservableCollection<WordToMotionItemViewModel>(_items);
+            _previewDataSender = new WordToMotionItemPreviewDataSender(Sender);
         }
         internal WordToMotionSettingViewModel(IMessageSender sender) : base(sender)
         {
@@ -24,7 +29,7 @@ namespace Baku.VMagicMirrorConfig
         }
 
         private readonly WordToMotionItemPreviewDataSender _previewDataSender;
-        private WordToMotionItemViewModel _dialogItem;
+        private WordToMotionItemViewModel? _dialogItem;
         
         private bool _enableWordToMotion = true;
         public bool EnableWordToMotion
@@ -34,9 +39,32 @@ namespace Baku.VMagicMirrorConfig
             {
                 if (SetValue(ref _enableWordToMotion, value))
                 {
-                    RaisePropertyChanged(nameof(GamepadWordToMotionIsActive));
                     SendMessage(MessageFactory.Instance.EnableWordToMotion(EnableWordToMotion));
                 }
+            }
+        }
+
+        #region デバイスをWord to Motionに割り当てる設定
+
+        private bool _useNoDeviceToStartWordToMotion = true;
+        public bool UseNoDeviceToStartWordToMotion
+        {
+            get => _useNoDeviceToStartWordToMotion;
+            set
+            {
+                if (value == _useNoDeviceToStartWordToMotion)
+                {
+                    return;
+                }
+
+                if (value)
+                {
+                    UseGamepadToStartWordToMotion = false;
+                    UseKeyboardToStartWordToMotion = false;
+                    SendMessage(MessageFactory.Instance.SetDeviceTypeToStartWordToMotion(DeviceTypeNone));
+                }
+                _useNoDeviceToStartWordToMotion = value;
+                RaisePropertyChanged();
             }
         }
 
@@ -46,21 +74,45 @@ namespace Baku.VMagicMirrorConfig
             get => _useGamepadToStartWordToMotion;
             set
             {
-                if (SetValue(ref _useGamepadToStartWordToMotion, value))
+                if (value == _useGamepadToStartWordToMotion)
                 {
-                    RaisePropertyChanged(nameof(GamepadWordToMotionIsActive));
-                    SendMessage(
-                        MessageFactory.Instance.UseGamepadToStartWordToMotion(_useGamepadToStartWordToMotion)
-                        );
+                    return;
                 }
+
+                if (value)
+                {
+                    UseNoDeviceToStartWordToMotion = false;
+                    UseKeyboardToStartWordToMotion = false;                    
+                    SendMessage(MessageFactory.Instance.SetDeviceTypeToStartWordToMotion(DeviceTypeGamepad));
+                }
+                _useGamepadToStartWordToMotion = value;
+                RaisePropertyChanged();
             }
         }
 
-        //NOTE: この値に応じてゲームパッドのボタンライクな表示をアクティブ化する。
-        //ほんとはMultiBindingで捌くほうが良いけど、面倒なのでVMで計算してます
-        [XmlIgnore]
-        public bool GamepadWordToMotionIsActive
-            => EnableWordToMotion && UseGamepadToStartWordToMotion;
+        private bool _useKeyboardToStartWordToMotion = false;
+        public bool UseKeyboardToStartWordToMotion
+        {
+            get => _useKeyboardToStartWordToMotion;
+            set
+            {
+                if (value == _useKeyboardToStartWordToMotion)
+                {
+                    return;
+                }
+
+                if (value)
+                {
+                    UseNoDeviceToStartWordToMotion = false;
+                    UseGamepadToStartWordToMotion = false;
+                    SendMessage(MessageFactory.Instance.SetDeviceTypeToStartWordToMotion(DeviceTypeKeyboard));
+                }
+                _useKeyboardToStartWordToMotion = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        #endregion
 
         [XmlIgnore]
         public ReadOnlyObservableCollection<WordToMotionItemViewModel> Items { get; }
@@ -139,22 +191,16 @@ namespace Baku.VMagicMirrorConfig
                 .ToJson();
         }
 
-        private ActionCommand _addNewItemCommand;
-        public ActionCommand AddNewItemCommand
-            => _addNewItemCommand ?? (_addNewItemCommand = new ActionCommand(AddNewItem));
-        private void AddNewItem()
-        {
-            _items.Add(new WordToMotionItemViewModel(this, MotionRequest.GetDefault()));
-            RequestReload();
-        }
-
         public void Play(WordToMotionItemViewModel item)
         {
-            SendMessage(
-                MessageFactory.Instance.PlayWordToMotionItem(
-                    item.MotionRequest.ToJson()
-                    )
-                );
+            if (item.MotionRequest != null)
+            {
+                SendMessage(
+                    MessageFactory.Instance.PlayWordToMotionItem(
+                        item.MotionRequest.ToJson()
+                        )
+                    );
+            }
         }
 
         public void MoveUpItem(WordToMotionItemViewModel item)
@@ -200,14 +246,28 @@ namespace Baku.VMagicMirrorConfig
             SendMessage(MessageFactory.Instance.ReloadMotionRequests(ItemsContentString));
         }
 
+
+        private ActionCommand? _addNewItemCommand;
+        public ActionCommand AddNewItemCommand
+            => _addNewItemCommand ??= new ActionCommand(() =>
+            {
+                _items.Add(new WordToMotionItemViewModel(this, MotionRequest.GetDefault()));
+                RequestReload();
+            });
+
+        private ActionCommand? _resetByDefaultItemsCommand = null;
+        public ActionCommand ResetByDefaultItemsCommand
+            => _resetByDefaultItemsCommand ??= new ActionCommand(
+                () => SettingResetUtils.ResetSingleCategorySetting(LoadDefaultItems)
+                );
+
         public override void ResetToDefault()
         {
             //何もしない: ここは設定がフクザツなのでとりあえずいじらない方針で。
             //(このパネル単体のリセットUIがちゃんとできたら何か考える)
-            //->autosaveが無い状態で
         }
 
-        //このマシン上でこのバージョンのVMagicMirrorが初めて実行された可能性が高いとき、
+        //このマシン上でこのバージョンのVMagicMirrorが初めて実行されたと推定できるとき、
         //デフォルトのWord To Motion一覧を生成して初期化します。
         public void LoadDefaultItemsIfInitialStart()
         {
@@ -215,7 +275,11 @@ namespace Baku.VMagicMirrorConfig
             {
                 return;
             }
+            LoadDefaultItems();
+        }
 
+        private void LoadDefaultItems()
+        {
             _items.Clear();
             var models = MotionRequest.GetDefaultMotionRequestSet();
             for (int i = 0; i < models.Length; i++)

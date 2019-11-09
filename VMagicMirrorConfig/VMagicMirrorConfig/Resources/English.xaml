@@ -12,7 +12,7 @@
     <sys:String x:Key="TopBar_Setting_Window">Window</sys:String>
     <sys:String x:Key="TopBar_Setting_Motion">Motion</sys:String>
     <sys:String x:Key="TopBar_Setting_Layout">Layout</sys:String>
-    <sys:String x:Key="TopBar_Setting_Light">Light</sys:String>
+    <sys:String x:Key="TopBar_Setting_Effects">Effects</sys:String>
         
     <!-- Home -->
     <sys:String x:Key="Home_LoadVrm">Load VRM</sys:String>
@@ -82,6 +82,7 @@
     <sys:String x:Key="Motion_Face_Calibration">Calibrate position</sys:String>    
     <sys:String x:Key="Motion_Face_DefaultFun">Default Fun Blend Value [%]</sys:String>    
     <sys:String x:Key="Motion_Face_AutoBlinkDuringFaceTracking">Auto blink during face tracking</sys:String>
+    <sys:String x:Key="Motion_Face_DisableFaceTrackingHorizontalFlip">Disable horizontal flip</sys:String>
 
     <sys:String x:Key="Motion_Face_Eyebrow">Eyebrow (Open to Customize)</sys:String>    
     <sys:String x:Key="Motion_Face_EyeBrow_LeftUp">Left Up Key</sys:String>    
@@ -143,13 +144,14 @@
     <sys:String x:Key="Layout_Hid">Keyboard</sys:String>
     <sys:String x:Key="Layout_HidHeight">Height [cm]</sys:String>
     <sys:String x:Key="Layout_HidHorizontalScale">Size [%]</sys:String>
-    <sys:String x:Key="Layout_HidHorizontalScale_Tooltip">Specify the size of keyboard and mouse. When smallen, the devices are close to the character.</sys:String>
+    <sys:String x:Key="Layout_HidHorizontalScale_Tooltip">Specify the size of keyboard. When smallen, the devices are close to the character.</sys:String>
     <sys:String x:Key="Layout_HidVisible">Visible</sys:String>
 
     <sys:String x:Key="Layout_HidReactToKeyboard">Enable keyboard motion</sys:String>
     <sys:String x:Key="Layout_HidReactToMouse">Enable mouse motion</sys:String>
 
     <sys:String x:Key="Layout_Hid_TypingEffect_Header">Typing Effect</sys:String>
+    <sys:String x:Key="Layout_Hid_TypingEffect_Header_Streaming">Typing Effect</sys:String>
     <sys:String x:Key="Layout_Hid_TypingEffect_None">None</sys:String>
     <sys:String x:Key="Layout_Hid_TypingEffect_Text">Text</sys:String>
     <sys:String x:Key="Layout_Hid_TypingEffect_Light">Light</sys:String>
@@ -194,12 +196,27 @@
     <sys:String x:Key="Bloom_Intensity">Intensity [%]</sys:String>
     <sys:String x:Key="Bloom_Threshold">Threshold [%]</sys:String>
     
+    <sys:String x:Key="Wind">Wind</sys:String>
+    <sys:String x:Key="Wind_Enable">Enable Wind</sys:String>
+    <sys:String x:Key="Wind_Enable_Streaming">Wind</sys:String>
+    <sys:String x:Key="Wind_Strength">Strength [%]</sys:String>
+    <sys:String x:Key="Wind_Interval">Fineness [%]</sys:String>
+    <sys:String x:Key="Wind_Yaw">Direction [deg]</sys:String>
+        
+    
     <!-- Word To Motion -->
     <sys:String x:Key="WordToMotion_Enable">Enable Word to Motion</sys:String>
     <sys:String x:Key="WordToMotion_UseGamepadForInput">Use gamepad as launcher</sys:String>
     <sys:String x:Key="WordToMotion_Instruction" xml:space="preserve">This tab is `Word to Motion` tab.
 `Word to Motion` feature supports character motion by your word input.
 Please test by typing "joy".</sys:String>
+    <sys:String x:Key="WordToMotion_AssignDevice">Assign device for this function</sys:String>
+    <sys:String x:Key="WordToMotion_AssignDevice_None">None</sys:String>
+    <sys:String x:Key="WordToMotion_AssignDevice_Gamepad">Gamepad</sys:String>
+    <sys:String x:Key="WordToMotion_AssignDevice_Keyboard">Keyboard (Num0 - Num8)</sys:String>
+    <sys:String x:Key="WordToMotion_AssignDevice_Keyboard_Short">Keyboard</sys:String>
+    <sys:String x:Key="WordToMotion_KeyAssign">Keys</sys:String>    
+    <sys:String x:Key="WordToMotion_LoadDefaultSet">Reset to default items</sys:String>
 
     <sys:String x:Key="WordToMotion_Word_Header">Word</sys:String>
     <sys:String x:Key="WordToMotion_Word_Limit">*Lower alphabet, number, and space</sys:String>

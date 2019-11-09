@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Media;
+﻿using System.Windows.Media;
 using System.Xml.Serialization;
 
 namespace Baku.VMagicMirrorConfig
@@ -133,9 +130,9 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private ActionCommand _resetWindowPositionCommand;
+        private ActionCommand? _resetWindowPositionCommand;
         public ActionCommand ResetWindowPositionCommand
-            => _resetWindowPositionCommand ?? (_resetWindowPositionCommand = new ActionCommand(ResetWindowPosition));
+            => _resetWindowPositionCommand ??= new ActionCommand(ResetWindowPosition);
 
         private void ResetWindowPosition()
         {
@@ -209,17 +206,45 @@ namespace Baku.VMagicMirrorConfig
 
         #endregion
 
-        public override void ResetToDefault()
+        #region Reset API
+
+        private ActionCommand? _resetBackgroundColorSettingCommand = null;
+        public ActionCommand ResetBackgroundColorSettingCommand
+            => _resetBackgroundColorSettingCommand ??= new ActionCommand(
+                () => SettingResetUtils.ResetSingleCategorySetting(ResetBackgroundColor)
+                );
+
+        private void ResetBackgroundColor()
         {
             R = 0;
             G = 255;
             B = 0;
+        }
+
+        private ActionCommand? _resetOpacitySettingCommand = null;
+        public ActionCommand ResetOpacitySettingCommand
+            => _resetOpacitySettingCommand ??= new ActionCommand(
+                () => SettingResetUtils.ResetSingleCategorySetting(ResetOpacity)
+                );
+
+        private void ResetOpacity()
+        {
+            WholeWindowTransparencyLevel = 2;
+            AlphaValueOnTransparent = 128;
+        }
+
+
+        #endregion
+
+        public override void ResetToDefault()
+        {
+            ResetBackgroundColor();
+
             IsTransparent = false;
             WindowDraggable = true;
             TopMost = true;
 
-            WholeWindowTransparencyLevel = 2;
-            AlphaValueOnTransparent = 128;
+            ResetOpacity();
 
             //このリセットはあまり定数的ではないことに注意！
             ResetWindowPosition();

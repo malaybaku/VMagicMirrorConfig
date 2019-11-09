@@ -1,0 +1,50 @@
+﻿<Window x:Class="Baku.VMagicMirrorConfig.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
+        xmlns:vmm="clr-namespace:Baku.VMagicMirrorConfig"
+        mc:Ignorable="d"
+        d:DataContext="{x:Type vmm:MainWindowViewModel}"
+        Title="VMagicMirror v0.9.3" 
+        ResizeMode="CanMinimize"
+        Height="600" Width="550"
+        MinHeight="600" MinWidth="550"
+        >
+    <Window.DataContext>
+        <vmm:MainWindowViewModel/>
+    </Window.DataContext>
+    <dragablz:TabablzControl FixedHeaderCount="5">
+        <dragablz:TabablzControl.HeaderItemTemplate>
+            <DataTemplate>
+                <ContentControl Content="{Binding}"/>
+            </DataTemplate>
+        </dragablz:TabablzControl.HeaderItemTemplate>
+        <TabItem>
+            <TabItem.Header>
+                <vmm:TabHeaderIconText Text="{DynamicResource TopBar_Home}"
+                                       IconKind="Home"
+                                       />
+            </TabItem.Header>
+            <vmm:HomePanel />
+        </TabItem>
+        <TabItem>
+            <TabItem.Header>
+                <vmm:TabHeaderIconText Text="{DynamicResource TopBar_Streaming}"
+                                       IconKind="Videocam"
+                                       />
+            </TabItem.Header>
+            <vmm:StreamingPanel />
+        </TabItem>
+        <TabItem>
+            <TabItem.Header>
+                <vmm:TabHeaderIconText Text="About"
+                                       IconKind="HelpOutline"
+                                       />
+            </TabItem.Header>
+            <vmm:AboutPanel />
+        </TabItem>
+    </dragablz:TabablzControl>
+</Window>

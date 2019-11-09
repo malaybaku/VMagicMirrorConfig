@@ -17,7 +17,7 @@ namespace Baku.VMagicMirrorConfig
 
         private LargePointerController _largePointerController => LargePointerController.Instance;
 
-        //フラグが立っている間はプロパティが変わってもメッセージを投げない。これはUnityから指定されたパラメタの適用中に
+        //フラグが立っている間はプロパティが変わってもメッセージを投げない。これはUnityから指定されたパラメタの適用中に立てる
         private bool _silentPropertySetter = false;
         private protected override void SendMessage(Message message)
         {
@@ -27,7 +27,7 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private void OnReceivedCommand(object sender, CommandReceivedEventArgs e)
+        private void OnReceivedCommand(object? sender, CommandReceivedEventArgs e)
         {
             switch (e.Command)
             {
@@ -150,6 +150,22 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
+        private bool _disableFaceTrackingHorizontalFlip = false;
+        public bool DisableFaceTrackingHorizontalFlip
+        {
+            get => _disableFaceTrackingHorizontalFlip;
+            set
+            {
+                if (SetValue(ref _disableFaceTrackingHorizontalFlip, value))
+                {
+                    SendMessage(MessageFactory
+                        .Instance
+                        .DisableFaceTrackingHorizontalFlip(_disableFaceTrackingHorizontalFlip)
+                        );
+                }
+            }
+        }
+
         private string _cameraDeviceName = "";
         public string CameraDeviceName
         {
@@ -165,20 +181,16 @@ namespace Baku.VMagicMirrorConfig
 
         private readonly ObservableCollection<string> _writableCameraDeviceNames
             = new ObservableCollection<string>();
-        private ReadOnlyObservableCollection<string> _cameraDeviceNames = null;
+        private ReadOnlyObservableCollection<string>? _cameraDeviceNames = null;
         [XmlIgnore]
         public ReadOnlyObservableCollection<string> CameraDeviceNames
-            => _cameraDeviceNames ??
-            (_cameraDeviceNames = new ReadOnlyObservableCollection<string>(_writableCameraDeviceNames));
+            => _cameraDeviceNames ??= new ReadOnlyObservableCollection<string>(_writableCameraDeviceNames);
 
-        private ActionCommand _calibrateFaceCommand;
+        private ActionCommand? _calibrateFaceCommand;
         public ActionCommand CalibrateFaceCommand
-            => _calibrateFaceCommand ?? (_calibrateFaceCommand = new ActionCommand(CalibrateFace));
-
-        private void CalibrateFace()
-        {
-            SendMessage(MessageFactory.Instance.CalibrateFace());
-        }
+            => _calibrateFaceCommand ??= new ActionCommand(
+                () => SendMessage(MessageFactory.Instance.CalibrateFace())
+                );
 
         private string _calibrateFaceData = "";
         /// <summary>
@@ -217,11 +229,10 @@ namespace Baku.VMagicMirrorConfig
 
         private readonly ObservableCollection<string> _writableBlendShapeNames
           = new ObservableCollection<string>();
-        private ReadOnlyObservableCollection<string> _availableBlendShapeNames = null;
+        private ReadOnlyObservableCollection<string>? _availableBlendShapeNames = null;
         [XmlIgnore]
         public ReadOnlyObservableCollection<string> AvailableBlendShapeNames
-            => _availableBlendShapeNames ??
-            (_availableBlendShapeNames = new ReadOnlyObservableCollection<string>(_writableBlendShapeNames));
+            => _availableBlendShapeNames ??= new ReadOnlyObservableCollection<string>(_writableBlendShapeNames);
 
         private string _eyebrowLeftUpKey = "";
         public string EyebrowLeftUpKey
@@ -397,11 +408,10 @@ namespace Baku.VMagicMirrorConfig
 
         private readonly ObservableCollection<string> _writableMicrophoneDeviceNames
             = new ObservableCollection<string>();
-        private ReadOnlyObservableCollection<string> _microphoneDeviceNames = null;
+        private ReadOnlyObservableCollection<string>? _microphoneDeviceNames = null;
         [XmlIgnore]
         public ReadOnlyObservableCollection<string> MicrophoneDeviceNames
-            => _microphoneDeviceNames ??
-            (_microphoneDeviceNames = new ReadOnlyObservableCollection<string>(_writableMicrophoneDeviceNames));
+            => _microphoneDeviceNames ??= new ReadOnlyObservableCollection<string>(_writableMicrophoneDeviceNames);
 
         #endregion
 
@@ -609,11 +619,38 @@ namespace Baku.VMagicMirrorConfig
 
         #endregion
 
-        public override void ResetToDefault()
+        #region Reset API
+
+        private ActionCommand? _resetFaceMotionSettingCommand = null;
+        public ActionCommand ResetFaceMotionSettingCommand
+            => _resetFaceMotionSettingCommand ??= new ActionCommand(
+                () => SettingResetUtils.ResetSingleCategorySetting(ResetFaceSetting)
+                );
+
+        private ActionCommand? _resetArmMotionSettingCommand = null;
+        public ActionCommand ResetArmMotionSettingCommand
+            => _resetArmMotionSettingCommand ??= new ActionCommand(
+                () => SettingResetUtils.ResetSingleCategorySetting(ResetArmSetting)
+                );
+
+        private ActionCommand? _resetHandMotionSettingCommand = null;
+        public ActionCommand ResetHandMotionSettingCommand
+            => _resetHandMotionSettingCommand ??= new ActionCommand(
+                () => SettingResetUtils.ResetSingleCategorySetting(ResetHandSetting)
+                );
+
+        private ActionCommand? _resetWaitMotionSettingCommand = null;
+        public ActionCommand ResetWaitMotionSettingCommand
+            => _resetWaitMotionSettingCommand ??= new ActionCommand(
+                () => SettingResetUtils.ResetSingleCategorySetting(ResetWaitMotionSetting)
+                );
+
+        private void ResetFaceSetting()
         {
             EnableFaceTracking = true;
             CameraDeviceName = "";
             AutoBlinkDuringFaceTracking = false;
+            DisableFaceTrackingHorizontalFlip = false;
 
             EnableLipSync = true;
             LipSyncMicrophoneDeviceName = "";
@@ -624,29 +661,48 @@ namespace Baku.VMagicMirrorConfig
 
             FaceDefaultFun = 20;
 
-            EyebrowLeftUpKey = ""; 
+            EyebrowLeftUpKey = "";
             EyebrowLeftDownKey = "";
             UseSeparatedKeyForEyebrow = false;
             EyebrowRightUpKey = "";
             EyebrowRightDownKey = "";
             EyebrowUpScale = 100;
             EyebrowDownScale = 100;
+        }
 
+        private void ResetArmSetting()
+        {
             EnableHidArmMotion = true;
             WaistWidth = 30;
             ElbowCloseStrength = 30;
             EnablePresenterMotion = false;
             PresentationArmMotionScale = 30;
             PresentationArmRadiusMin = 20;
+        }
 
+        private void ResetHandSetting()
+        {
             LengthFromWristToTip = 12;
             LengthFromWristToPalm = 6;
             HandYOffsetBasic = 3;
             HandYOffsetAfterKeyDown = 2;
+        }
 
+        private void ResetWaitMotionSetting()
+        {
             EnableWaitMotion = true;
             WaitMotionScale = 125;
             WaitMotionPeriod = 10;
         }
+
+        public override void ResetToDefault()
+        {
+            ResetFaceSetting();
+            ResetArmSetting();
+            ResetHandSetting();
+            ResetWaitMotionSetting();
+        }
+
+        #endregion
     }
 }

@@ -12,7 +12,7 @@
     <sys:String x:Key="TopBar_Setting_Window">ウィンドウ</sys:String>
     <sys:String x:Key="TopBar_Setting_Motion">モーション</sys:String>
     <sys:String x:Key="TopBar_Setting_Layout">レイアウト</sys:String>
-    <sys:String x:Key="TopBar_Setting_Light">ライト</sys:String>
+    <sys:String x:Key="TopBar_Setting_Effects">エフェクト</sys:String>
     
     <!-- Home -->
     <sys:String x:Key="Home_LoadVrm">VRMロード</sys:String>
@@ -44,6 +44,8 @@
     <sys:String x:Key="Streaming_Face">顔・表情</sys:String>
     <sys:String x:Key="Streaming_Motion">モーション</sys:String>
     <sys:String x:Key="Streaming_View">表示</sys:String>
+    <sys:String x:Key="Streaming_WordToMotion">Word To Motion</sys:String>
+    
     <sys:String x:Key="Streaming_Screenshot">スクリーンショット</sys:String>
     <sys:String x:Key="Streaming_Screenshot_Take">撮影</sys:String>
     <sys:String x:Key="Streaming_Screenshot_OpenSaveFolder">保存フォルダ...</sys:String>
@@ -80,6 +82,7 @@
     <sys:String x:Key="Motion_Face_Calibration">姿勢・表情を補正</sys:String>    
     <sys:String x:Key="Motion_Face_DefaultFun">Funブレンドのデフォルト値[%]</sys:String>
     <sys:String x:Key="Motion_Face_AutoBlinkDuringFaceTracking">顔トラッキング中も自動でまばたき</sys:String>
+    <sys:String x:Key="Motion_Face_DisableFaceTrackingHorizontalFlip">左右反転をオフにする</sys:String>
     
     <sys:String x:Key="Motion_Face_Eyebrow">眉毛 (開いてカスタマイズ)</sys:String>    
     <sys:String x:Key="Motion_Face_Eyebrow_LeftUp">左眉上げ</sys:String>    
@@ -137,16 +140,17 @@
     <sys:String x:Key="Layout_Camera_Fov">視野角 [deg]</sys:String>
 
     <!-- Layout : Keyboard / Mouse Pad -->
-    <sys:String x:Key="Layout_Hid">キーボード・マウスパッド</sys:String>
+    <sys:String x:Key="Layout_Hid">キーボード</sys:String>
     <sys:String x:Key="Layout_HidHeight">高さ[cm]</sys:String>
     <sys:String x:Key="Layout_HidHorizontalScale">サイズ[%]</sys:String>
-    <sys:String x:Key="Layout_HidHorizontalScale_Tooltip">キーボードとマウスパッドのサイズを指定します。小さくすると、デバイスが小さくなり、キャラクターに近づきます。</sys:String>
-    <sys:String x:Key="Layout_HidVisible">キーボード・マウスパッドを表示</sys:String>
+    <sys:String x:Key="Layout_HidHorizontalScale_Tooltip">キーボードのサイズを指定します。小さくすると、デバイスが小さくなり、キャラクターに近づきます。</sys:String>
+    <sys:String x:Key="Layout_HidVisible">キーボードを表示</sys:String>
 
     <sys:String x:Key="Layout_HidReactToKeyboard">キーボード操作に反応</sys:String>
     <sys:String x:Key="Layout_HidReactToMouse">マウス操作に反応</sys:String>
 
-    <sys:String x:Key="Layout_Hid_TypingEffect_Header">タイピング時のエフェクト</sys:String>
+    <sys:String x:Key="Layout_Hid_TypingEffect_Header">タイピング時の演出</sys:String>
+    <sys:String x:Key="Layout_Hid_TypingEffect_Header_Streaming">タイピング演出</sys:String>
     <sys:String x:Key="Layout_Hid_TypingEffect_None">なし</sys:String>
     <sys:String x:Key="Layout_Hid_TypingEffect_Text">テキスト</sys:String>
     <sys:String x:Key="Layout_Hid_TypingEffect_Light">ライト</sys:String>
@@ -184,10 +188,18 @@
     <sys:String x:Key="Shadow_Yaw">向き(横)[deg]</sys:String>
     <sys:String x:Key="Shadow_Pitch">向き(上下)[deg]</sys:String>
     <sys:String x:Key="Shadow_DepthOffset">奥行きの調整 [cm]</sys:String>
-
+        
     <sys:String x:Key="Bloom">Bloom</sys:String>
     <sys:String x:Key="Bloom_Intensity">強さ[%]</sys:String>
     <sys:String x:Key="Bloom_Threshold">しきい値[%]</sys:String>
+    
+    <sys:String x:Key="Wind">風</sys:String>
+    <sys:String x:Key="Wind_Enable">風を有効化</sys:String>
+    <sys:String x:Key="Wind_Enable_Streaming">風</sys:String>
+    <sys:String x:Key="Wind_Strength">風の強さ[%]</sys:String>
+    <sys:String x:Key="Wind_Interval">風の細かさ[%]</sys:String>
+    <sys:String x:Key="Wind_Yaw">風の向き[deg]</sys:String>
+
     
     <!-- Word To Motion -->
     <sys:String x:Key="WordToMotion_Enable">Word to Motionを有効化</sys:String>
@@ -195,7 +207,15 @@
     <sys:String x:Key="WordToMotion_Instruction" xml:space="preserve">このタブは `Word to Motion` タブです。
 `Word to Motion`は、単語をタイピングするとキャラクターを動かせる機能です。
 ためしに "joy" とタイピングしてみてください。</sys:String>
-
+    <sys:String x:Key="WordToMotion_AssignDevice">この機能専用にデバイスを割り当て</sys:String>
+    <sys:String x:Key="WordToMotion_AssignDevice_None">なし</sys:String>
+    <sys:String x:Key="WordToMotion_AssignDevice_Gamepad">ゲームパッド</sys:String>
+    <sys:String x:Key="WordToMotion_AssignDevice_Keyboard">キーボード(数字の0-8)</sys:String>
+    <sys:String x:Key="WordToMotion_AssignDevice_Keyboard_Short">キーボード</sys:String>
+    
+    <sys:String x:Key="WordToMotion_KeyAssign">キー割り当て</sys:String>
+    <sys:String x:Key="WordToMotion_LoadDefaultSet">デフォルト設定にリセット</sys:String>
+    
     <sys:String x:Key="WordToMotion_Word_Header">Word</sys:String>
     <sys:String x:Key="WordToMotion_Word_Limit">*半角アルファベット、数字、スペースのみ</sys:String>
 
@@ -214,6 +234,5 @@
     <sys:String x:Key="WordToMotion_Face_Hold">アニメーション終了後も表情を維持</sys:String>
     
     <sys:String x:Key="WordToMotion_EnablePreview">現在のキャラクターでプレビュー</sys:String>    
-    
-    
+        
 </ResourceDictionary>
