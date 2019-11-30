@@ -4,6 +4,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:sys="clr-namespace:System"
              xmlns:vmm="clr-namespace:Baku.VMagicMirrorConfig"
              mc:Ignorable="d"
              d:DataContext="{x:Type vmm:LayoutSettingViewModel}"
@@ -35,6 +36,7 @@
                                    VerticalAlignment="Center"
                                    Margin="5"
                                    />
+
                         <!-- このリセットボタンは他と違って「位置をリセット」と同じ処理で、確認ダイアログは出ない -->
                         <Button Style="{StaticResource CategorySettingResetButton}"
                                 Command="{Binding ResetCameraSettingCommand}"
@@ -68,6 +70,69 @@
                                  />
                     </Grid>
 
+                    <Grid Margin="10,0">
+                        <Grid.Resources>
+                            <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                                <Setter Property="Padding" Value="0"/>
+                                <Setter Property="Width" Value="25"/>
+                                <Setter Property="Height" Value="25"/>
+                                <Setter Property="Margin" Value="2"/>
+                            </Style>
+                        </Grid.Resources>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" 
+                                   Margin="0"
+                                   Text="{DynamicResource Layout_Camera_QuickSave}"/>
+                        <TextBlock Grid.Row="1" Grid.Column="0"
+                                   Margin="0"
+                                   Text="{DynamicResource Layout_Camera_QuickLoad}"/>
+
+                        <Button Grid.Row="0" Grid.Column="1"
+                                Command="{Binding QuickSaveViewPointCommand}"
+                                CommandParameter="1"
+                                Content="1"
+                                />
+                        <Button Grid.Row="0" Grid.Column="2"
+                                Command="{Binding QuickSaveViewPointCommand}"
+                                CommandParameter="2"
+                                Content="2"
+                                />
+                        <Button Grid.Row="0" Grid.Column="3"
+                                Command="{Binding QuickSaveViewPointCommand}"
+                                CommandParameter="3"
+                                Content="3"
+                                />
+
+                        <Button Grid.Row="1" Grid.Column="1"
+                                Command="{Binding QuickLoadViewPointCommand}"
+                                IsEnabled="{Binding HasQuickSaveItem1}"
+                                CommandParameter="1"
+                                Content="1"
+                                />
+                        <Button Grid.Row="1" Grid.Column="2"
+                                Command="{Binding QuickLoadViewPointCommand}"
+                                IsEnabled="{Binding HasQuickSaveItem2}"
+                                CommandParameter="2"
+                                Content="2"
+                                />
+                        <Button Grid.Row="1" Grid.Column="3"
+                                Command="{Binding QuickLoadViewPointCommand}"
+                                IsEnabled="{Binding HasQuickSaveItem3}"
+                                CommandParameter="3"
+                                Content="3"
+                                />
+
+                    </Grid>
 
                     <Button HorizontalAlignment="Left"
                             Width="150"

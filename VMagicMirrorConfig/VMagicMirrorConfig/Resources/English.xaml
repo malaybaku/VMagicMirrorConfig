@@ -140,6 +140,8 @@ VRM File</sys:String>
     <sys:String x:Key="Layout_CurrentCameraPosition">Camera Position (x, y, z, rx, ry, rz)</sys:String>
     <sys:String x:Key="Layout_Camera_ResetPosition">Reset Position</sys:String>
     <sys:String x:Key="Layout_Camera_Fov">FOV [deg]</sys:String>
+    <sys:String x:Key="Layout_Camera_QuickSave">Quick Save</sys:String>
+    <sys:String x:Key="Layout_Camera_QuickLoad">Quick Load</sys:String>
 
 
     <!-- Layout : Keyboard / Mouse Pad -->

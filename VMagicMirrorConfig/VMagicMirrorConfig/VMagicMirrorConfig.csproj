@@ -1,7 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
+    <!--<LangVersion>latest</LangVersion>-->
     <TargetFramework>netcoreapp3.0</TargetFramework>
+    <!--<TargetFramework>net4.8</TargetFramework>-->
     <UseWpf>true</UseWpf>
     <RootNamespace>Baku.VMagicMirrorConfig</RootNamespace>
     <RuntimeIdentifier>win10-x86</RuntimeIdentifier>

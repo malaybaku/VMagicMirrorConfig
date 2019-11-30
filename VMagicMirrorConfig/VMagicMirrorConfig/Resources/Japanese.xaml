@@ -140,6 +140,8 @@
     <sys:String x:Key="Layout_CurrentCameraPosition">カメラの位置(x, y, z, rx, ry, rz)</sys:String>
     <sys:String x:Key="Layout_Camera_ResetPosition">位置をリセット</sys:String>
     <sys:String x:Key="Layout_Camera_Fov">視野角 [deg]</sys:String>
+    <sys:String x:Key="Layout_Camera_QuickSave">クイックセーブ</sys:String>
+    <sys:String x:Key="Layout_Camera_QuickLoad">クイックロード</sys:String>
 
     <!-- Layout : Keyboard / Mouse Pad -->
     <sys:String x:Key="Layout_Hid">キーボード</sys:String>

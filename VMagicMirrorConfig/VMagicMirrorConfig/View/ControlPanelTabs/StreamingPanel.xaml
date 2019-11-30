@@ -37,407 +37,468 @@
     <ScrollViewer VerticalScrollBarVisibility="Auto"
                   HorizontalScrollBarVisibility="Disabled"
                   >
-        <StackPanel Margin="0,5">
-            <Grid Margin="5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="300"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="0">
-                    <md:Card>
-                        <StackPanel>
+        <Grid Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0">
+                <md:Card>
+                    <StackPanel>
 
-                            <StackPanel Orientation="Horizontal">
-                                <md:PackIcon Style="{StaticResource HeaderPackIcon}"
-                                             Kind="WindowRestore"/>
-                                <TextBlock Text="{DynamicResource Streaming_Window}"
-                                           Margin="5"
-                                           Style="{StaticResource HeaderText}"
-                                           />
-                            </StackPanel>
-
-                            <CheckBox Content="{DynamicResource Window_Transparent}"
-                                      IsChecked="{Binding WindowSetting.IsTransparent, Mode=TwoWay}"
-                                      Margin="10,1" Height="25"
-                                      />
-
-                            <CheckBox Content="{DynamicResource Window_Draggable}"
-                                      IsChecked="{Binding WindowSetting.WindowDraggable, Mode=TwoWay}"
-                                      Margin="10,1" Height="25"
-                                      />
+                        <StackPanel Orientation="Horizontal">
+                            <md:PackIcon Style="{StaticResource HeaderPackIcon}"
+                                            Kind="WindowRestore"/>
+                            <TextBlock Text="{DynamicResource Streaming_Window}"
+                                        Margin="5"
+                                        Style="{StaticResource HeaderText}"
+                                        />
                         </StackPanel>
-                    </md:Card>
 
-                    <md:Card>
-                        <StackPanel>
+                        <CheckBox Content="{DynamicResource Window_Transparent}"
+                                    IsChecked="{Binding WindowSetting.IsTransparent, Mode=TwoWay}"
+                                    Margin="10,1" Height="25"
+                                    />
 
-                            <StackPanel Orientation="Horizontal">
-                                <md:PackIcon Style="{StaticResource HeaderPackIcon}"
-                                             Kind="Face"
-                                             />
-                                <TextBlock Text="{DynamicResource Streaming_Face}"
-                                           Margin="5"
-                                           Style="{StaticResource HeaderText}"
-                                           />
-                            </StackPanel>
+                        <CheckBox Content="{DynamicResource Window_Draggable}"
+                                    IsChecked="{Binding WindowSetting.WindowDraggable, Mode=TwoWay}"
+                                    Margin="10,1" Height="25"
+                                    />
+                    </StackPanel>
+                </md:Card>
 
-                            <Grid Margin="5">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="30"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
+                <md:Card>
+                    <StackPanel>
 
-                                <md:PackIcon Grid.Row="0" Grid.Column="0"
-                                             VerticalAlignment="Center"
-                                             HorizontalAlignment="Center"
-                                             Width="25"
-                                             Height="25"
-                                             Kind="Microphone"
-                                             />
-
-                                <CheckBox Grid.Row="0" Grid.Column="1"
-                                          Margin="5"
-                                          IsChecked="{Binding MotionSetting.EnableLipSync}">
-                                    <CheckBox.Content>
-                                        <TextBlock Text="{DynamicResource Motion_Mouth_EnableLipSync}"/>
-                                    </CheckBox.Content>
-                                </CheckBox>
-
-                                <ComboBox Grid.Row="0" Grid.Column="2"
-                                          HorizontalAlignment="Stretch"
-                                          Margin="5,0"
-                                          IsEnabled="{Binding MotionSetting.EnableLipSync}"
-                                          ItemsSource="{Binding MotionSetting.MicrophoneDeviceNames}"
-                                          SelectedItem="{Binding MotionSetting.LipSyncMicrophoneDeviceName, Converter={StaticResource WhiteSpaceStringToNullConverter}}"
-                                          md:HintAssist.Hint="Microphone"
-                                          />
-
-                                <md:PackIcon Grid.Row="1" Grid.Column="0"
-                                             VerticalAlignment="Center"
-                                             HorizontalAlignment="Center"
-                                             Width="25"
-                                             Height="25"
-                                             Kind="Webcam"
-                                             />
-
-                                <CheckBox Grid.Row="1" Grid.Column="1"
-                                          Margin="5"
-                                          IsChecked="{Binding MotionSetting.EnableFaceTracking}"
-                                          >
-                                    <CheckBox.Content>
-                                        <TextBlock Text="{DynamicResource Motion_Face_EnableFaceTracking}"/>
-                                    </CheckBox.Content>
-                                </CheckBox>
-
-                                <ComboBox Grid.Row="1" Grid.Column="2"
-                                          HorizontalAlignment="Stretch"
-                                          Margin="5,0"
-                                          IsEnabled="{Binding MotionSetting.EnableFaceTracking}"
-                                          ItemsSource="{Binding MotionSetting.CameraDeviceNames}"
-                                          SelectedItem="{Binding MotionSetting.CameraDeviceName, Converter={StaticResource WhiteSpaceStringToNullConverter}}"
-                                          md:HintAssist.Hint="Camera"
-                                          />
-                            </Grid>
-
-                            <Button HorizontalAlignment="Left"
-                                    Margin="10,8,0,0"
-                                    Width="160"
-                                    Command="{Binding MotionSetting.CalibrateFaceCommand}"
-                                    >
-                                <StackPanel Style="{StaticResource IconTextSetStackPanel}">
-                                    <md:PackIcon Style="{StaticResource IconTextSetIcon}"
-                                                 Kind="Reload"
-                                                 />
-                                    <TextBlock Style="{StaticResource IconSetSetText}"
-                                               Text="{DynamicResource Motion_Face_Calibration}"
-                                               />
-                                </StackPanel>
-                            </Button>
-
-                            <TextBlock Text="{DynamicResource Motion_Eye_LookAtPoint}"
-                                       Margin="10,15,5,5"
-                                       />
-
-                            <Grid Margin="10,3">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <CheckBox Grid.Column="0"
-                                          HorizontalAlignment="Left"
-                                          Margin="5,0"
-                                          IsChecked="{Binding MotionSetting.UseLookAtPointMousePointer}"
-                                          Content="{DynamicResource Motion_Eye_LookAtPoint_MousePointer}"/>
-                                <CheckBox Grid.Column="1"
-                                          HorizontalAlignment="Left"
-                                          Margin="5,0"
-                                          IsChecked="{Binding MotionSetting.UseLookAtPointMainCamera}"
-                                          Content="{DynamicResource Motion_Eye_LookAtPoint_MainCamera}"/>
-                                <CheckBox Grid.Column="2"
-                                          HorizontalAlignment="Left"
-                                          Margin="5,0"
-                                          IsChecked="{Binding MotionSetting.UseLookAtPointNone}"
-                                          Content="{DynamicResource Motion_Eye_LookAtPoint_None}"/>
-                            </Grid>
+                        <StackPanel Orientation="Horizontal">
+                            <md:PackIcon Style="{StaticResource HeaderPackIcon}"
+                                            Kind="Face"
+                                            />
+                            <TextBlock Text="{DynamicResource Streaming_Face}"
+                                        Margin="5"
+                                        Style="{StaticResource HeaderText}"
+                                        />
                         </StackPanel>
-                    </md:Card>
 
-                    <md:Card>
-                        <StackPanel>
+                        <Grid Margin="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
 
-                            <StackPanel Orientation="Horizontal">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <md:PackIcon Grid.Column="0"
-                                                 Width="15" Height="15"
-                                                 VerticalAlignment="Center"
-                                                 Kind="ABC"/>
-                                    <md:PackIcon Grid.Column="1"
-                                                 Width="9" Height="9"
-                                                 Margin="2,0,0,0"
-                                                 VerticalAlignment="Center"                                 
-                                                 Kind="ArrowRightBold"/>
-                                    <md:PackIcon Grid.Column="2"
-                                                 Width="13" Height="13"
-                                                 Margin="-2,1,0,0"
-                                                 VerticalAlignment="Center"
-                                                 Kind="HumanHandsup">
-                                    </md:PackIcon>
-                                </Grid>
+                            <md:PackIcon Grid.Row="0" Grid.Column="0"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Center"
+                                            Width="25"
+                                            Height="25"
+                                            Kind="Microphone"
+                                            />
 
+                            <CheckBox Grid.Row="0" Grid.Column="1"
+                                        Margin="5"
+                                        IsChecked="{Binding MotionSetting.EnableLipSync}">
+                                <CheckBox.Content>
+                                    <TextBlock Text="{DynamicResource Motion_Mouth_EnableLipSync}"/>
+                                </CheckBox.Content>
+                            </CheckBox>
 
-                                <TextBlock Text="{DynamicResource Streaming_WordToMotion}"
-                                           Margin="5"
-                                           Style="{StaticResource HeaderText}"
-                                           />
-                            </StackPanel>
+                            <ComboBox Grid.Row="0" Grid.Column="2"
+                                        HorizontalAlignment="Stretch"
+                                        Margin="5,0"
+                                        IsEnabled="{Binding MotionSetting.EnableLipSync}"
+                                        ItemsSource="{Binding MotionSetting.MicrophoneDeviceNames}"
+                                        SelectedItem="{Binding MotionSetting.LipSyncMicrophoneDeviceName, Converter={StaticResource WhiteSpaceStringToNullConverter}}"
+                                        md:HintAssist.Hint="Microphone"
+                                        />
 
-                            <CheckBox Margin="10,3" Height="25"
-                                      Content="{DynamicResource WordToMotion_Enable}"
-                                      IsChecked="{Binding WordToMotionSetting.EnableWordToMotion}"
-                                      />
-                            <TextBlock Margin="15,5,5,5" 
-                                       Text="{DynamicResource WordToMotion_AssignDevice}"
-                                       />
-                            <StackPanel Orientation="Horizontal"
-                                        Margin="5,0,5,4"
+                            <md:PackIcon Grid.Row="1" Grid.Column="0"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Center"
+                                            Width="25"
+                                            Height="25"
+                                            Kind="Webcam"
+                                            />
+
+                            <CheckBox Grid.Row="1" Grid.Column="1"
+                                        Margin="5"
+                                        IsChecked="{Binding MotionSetting.EnableFaceTracking}"
                                         >
-                                <RadioButton VerticalAlignment="Center"
-                                             VerticalContentAlignment="Center"
-                                             Margin="10,0"
-                                             Content="{DynamicResource WordToMotion_AssignDevice_None}"
-                                             IsEnabled="{Binding WordToMotionSetting.EnableWordToMotion}"
-                                             IsChecked="{Binding WordToMotionSetting.UseNoDeviceToStartWordToMotion}"                         
-                                             />
-                                <RadioButton VerticalAlignment="Center"
-                                             VerticalContentAlignment="Center"
-                                             Margin="10,0"
-                                             Content="{DynamicResource WordToMotion_AssignDevice_Gamepad}"
-                                             IsEnabled="{Binding WordToMotionSetting.EnableWordToMotion}"
-                                             IsChecked="{Binding WordToMotionSetting.UseGamepadToStartWordToMotion}"                         
-                                             />
-                                <RadioButton VerticalAlignment="Center"
-                                             VerticalContentAlignment="Center"
-                                             Margin="10,0"
-                                             Content="{DynamicResource WordToMotion_AssignDevice_Keyboard_Short}"
-                                             IsEnabled="{Binding WordToMotionSetting.EnableWordToMotion}"
-                                             IsChecked="{Binding WordToMotionSetting.UseKeyboardToStartWordToMotion}"                         
-                                             />                                
+                                <CheckBox.Content>
+                                    <TextBlock Text="{DynamicResource Motion_Face_EnableFaceTracking}"/>
+                                </CheckBox.Content>
+                            </CheckBox>
+
+                            <ComboBox Grid.Row="1" Grid.Column="2"
+                                        HorizontalAlignment="Stretch"
+                                        Margin="5,0"
+                                        IsEnabled="{Binding MotionSetting.EnableFaceTracking}"
+                                        ItemsSource="{Binding MotionSetting.CameraDeviceNames}"
+                                        SelectedItem="{Binding MotionSetting.CameraDeviceName, Converter={StaticResource WhiteSpaceStringToNullConverter}}"
+                                        md:HintAssist.Hint="Camera"
+                                        />
+                        </Grid>
+
+                        <Button HorizontalAlignment="Left"
+                                Margin="10,8,0,0"
+                                Width="160"
+                                Command="{Binding MotionSetting.CalibrateFaceCommand}"
+                                >
+                            <StackPanel Style="{StaticResource IconTextSetStackPanel}">
+                                <md:PackIcon Style="{StaticResource IconTextSetIcon}"
+                                                Kind="Reload"
+                                                />
+                                <TextBlock Style="{StaticResource IconSetSetText}"
+                                            Text="{DynamicResource Motion_Face_Calibration}"
+                                            />
                             </StackPanel>
+                        </Button>
 
-                        </StackPanel>
-                    </md:Card>
+                        <TextBlock Text="{DynamicResource Motion_Eye_LookAtPoint}"
+                                    Margin="10,10,5,5"
+                                    />
 
+                        <Grid Margin="10,3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <CheckBox Grid.Column="0"
+                                        HorizontalAlignment="Left"
+                                        Margin="5,0"
+                                        IsChecked="{Binding MotionSetting.UseLookAtPointMousePointer}"
+                                        Content="{DynamicResource Motion_Eye_LookAtPoint_MousePointer}"/>
+                            <CheckBox Grid.Column="1"
+                                        HorizontalAlignment="Left"
+                                        Margin="5,0"
+                                        IsChecked="{Binding MotionSetting.UseLookAtPointMainCamera}"
+                                        Content="{DynamicResource Motion_Eye_LookAtPoint_MainCamera}"/>
+                            <CheckBox Grid.Column="2"
+                                        HorizontalAlignment="Left"
+                                        Margin="5,0"
+                                        IsChecked="{Binding MotionSetting.UseLookAtPointNone}"
+                                        Content="{DynamicResource Motion_Eye_LookAtPoint_None}"/>
+                        </Grid>
+                    </StackPanel>
+                </md:Card>
 
-                </StackPanel>
+                <md:Card>
+                    <StackPanel>
 
-                <StackPanel Grid.Column="1">
-                    <md:Card>
-                        <StackPanel>
-
-                            <StackPanel Orientation="Horizontal">
-                                <md:PackIcon Style="{StaticResource HeaderPackIcon}" 
-                                             Kind="Eye"/>
-                                <TextBlock Text="{DynamicResource Streaming_View}"
-                                           Margin="5"
-                                           Style="{StaticResource HeaderText}"
-                                           />
-                            </StackPanel>
-
-                            <CheckBox Margin="10,1" Height="25"
-                                      Content="{DynamicResource Layout_Hid}"
-                                      IsChecked="{Binding LayoutSetting.HidVisibility}"
-                                      />
-                            <CheckBox Margin="10,1" Height="25"
-                                      Content="{DynamicResource Shadow_Enable_Streaming}"
-                                      IsChecked="{Binding LightSetting.EnableShadow}"
-                                      />
-                            <CheckBox Margin="10,1" Height="25"
-                                      Content="{DynamicResource Wind_Enable_Streaming}"
-                                      IsChecked="{Binding LightSetting.EnableWind}"
-                                      />
-
+                        <StackPanel Orientation="Horizontal">
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Margin="5,3"
-                                           Text="{DynamicResource Layout_Hid_TypingEffect_Header_Streaming}"
-                                           />
-                                <ComboBox Grid.Column="1"
-                                          HorizontalAlignment="Stretch"
-                                          Margin="5,0"
-                                          ItemsSource="{Binding LayoutSetting.TypingEffectSelections}"
-                                          SelectedItem="{Binding LayoutSetting.TypingEffectItem}"
-                                          md:HintAssist.Hint="Effect"
-                                          >
-                                    <ComboBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <Grid Height="20" VerticalAlignment="Center">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="20"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                </Grid.ColumnDefinitions>
-                                                <md:PackIcon Grid.Column="0"
-                                                             Width="20" Height="20"
-                                                             Margin="0"
-                                                             Kind="{Binding IconKind, Mode=OneTime}"
-                                                             />
-                                                <TextBlock Grid.Column="1"
-                                                           Margin="5,0,0,0"
-                                                           Text="{Binding EffectName}"
-                                                           />
-                                            </Grid>
-                                        </DataTemplate>
-                                    </ComboBox.ItemTemplate>
-                                </ComboBox>
+                                <md:PackIcon Grid.Column="0"
+                                                Width="15" Height="15"
+                                                VerticalAlignment="Center"
+                                                Kind="ABC"/>
+                                <md:PackIcon Grid.Column="1"
+                                                Width="9" Height="9"
+                                                Margin="2,0,0,0"
+                                                VerticalAlignment="Center"                                 
+                                                Kind="ArrowRightBold"/>
+                                <md:PackIcon Grid.Column="2"
+                                                Width="13" Height="13"
+                                                Margin="-2,1,0,0"
+                                                VerticalAlignment="Center"
+                                                Kind="HumanHandsup">
+                                </md:PackIcon>
                             </Grid>
 
+
+                            <TextBlock Text="{DynamicResource Streaming_WordToMotion}"
+                                        Margin="5"
+                                        Style="{StaticResource HeaderText}"
+                                        />
                         </StackPanel>
-                    </md:Card>
 
-                    <md:Card>
-                        <StackPanel>
-
-                            <StackPanel Orientation="Horizontal">
-
-                                <md:PackIcon Style="{StaticResource HeaderPackIcon}"
-                                             Kind="Videocam"
-                                             />
-
-                                <TextBlock Text="{DynamicResource Layout_Camera}"
-                                           Margin="5"
-                                           Style="{StaticResource HeaderText}"
-                                           />
-                            </StackPanel>
-                            
-                            <CheckBox Content="{DynamicResource Layout_EnableFreeCameraMode}" 
-                                      IsChecked="{Binding LayoutSetting.EnableFreeCameraMode}"
-                                      Margin="10,0" Height="25"
-                                      />
-
-                            <Button HorizontalAlignment="Left"
-                                    Width="150"
-                                    Margin="10"
-                                    Command="{Binding LayoutSetting.ResetCameraPositionCommand}"
+                        <CheckBox Margin="10,3" Height="25"
+                                    Content="{DynamicResource WordToMotion_Enable}"
+                                    IsChecked="{Binding WordToMotionSetting.EnableWordToMotion}"
+                                    />
+                        <TextBlock Margin="15,15,5,5" 
+                                    Text="{DynamicResource WordToMotion_AssignDevice}"
+                                    />
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="5,5,5,17"
                                     >
-                                <StackPanel Style="{StaticResource IconTextSetStackPanel}">
-                                    <md:PackIcon Style="{StaticResource IconTextSetIcon}"
-                                                 Kind="Reload"
-                                                 />
-                                    <TextBlock Style="{StaticResource IconSetSetText}"
-                                               Text="{DynamicResource Layout_Camera_ResetPosition}"
-                                               />
-                                </StackPanel>
-                            </Button>
-
-                        </StackPanel>
-                    </md:Card>
-
-                    <md:Card>
-                        <StackPanel>
-                            <StackPanel Orientation="Horizontal">
-
-                                <md:PackIcon Style="{StaticResource HeaderPackIcon}"
-                                             Kind="HumanHandsup"
-                                             />
-
-                                <TextBlock Text="{DynamicResource Streaming_Motion}"
-                                           Margin="5"
-                                           Style="{StaticResource HeaderText}"
-                                           />
-                            </StackPanel>
-
-                            <CheckBox Grid.Row="2" Grid.Column="0"
-                                      Grid.ColumnSpan="3"
-                                      Margin="10,2" 
-                                      Content="{DynamicResource Motion_Arm_EnablePresenterMotion}"
-                                      IsChecked="{Binding MotionSetting.EnablePresenterMotion}"
-                                      />
-                        </StackPanel>
-                    </md:Card>
-
-                    <md:Card>
-                        <StackPanel>
-                            <StackPanel Orientation="Horizontal">
-                                <md:PackIcon Style="{StaticResource HeaderPackIcon}"
-                                             Kind="Camera"
-                                             />
-                                <TextBlock Text="{DynamicResource Streaming_Screenshot}"
-                                       Margin="5"
-                                       Style="{StaticResource HeaderText}"
-                                       />
-                            </StackPanel>
-
-                            <Button Command="{Binding TakeScreenshotCommand}"
-                                    Padding="0"
-                                    HorizontalAlignment="Left"
-                                    >
-                                <StackPanel Style="{StaticResource IconTextSetStackPanel}">
-                                    <md:PackIcon Style="{StaticResource IconTextSetIcon}"
-                                                Kind="Camera"
-                                                />
-                                    <TextBlock Style="{StaticResource IconSetSetText}"
-                                            Text="{DynamicResource Streaming_Screenshot_Take}"
+                            <RadioButton VerticalAlignment="Center"
+                                            VerticalContentAlignment="Center"
+                                            Margin="10,0"
+                                            Content="{DynamicResource WordToMotion_AssignDevice_None}"
+                                            IsEnabled="{Binding WordToMotionSetting.EnableWordToMotion}"
+                                            IsChecked="{Binding WordToMotionSetting.UseNoDeviceToStartWordToMotion}"                         
                                             />
-                                </StackPanel>
+                            <RadioButton VerticalAlignment="Center"
+                                            VerticalContentAlignment="Center"
+                                            Margin="10,0"
+                                            Content="{DynamicResource WordToMotion_AssignDevice_Gamepad}"
+                                            IsEnabled="{Binding WordToMotionSetting.EnableWordToMotion}"
+                                            IsChecked="{Binding WordToMotionSetting.UseGamepadToStartWordToMotion}"                         
+                                            />
+                            <RadioButton VerticalAlignment="Center"
+                                            VerticalContentAlignment="Center"
+                                            Margin="10,0"
+                                            Content="{DynamicResource WordToMotion_AssignDevice_Keyboard_Short}"
+                                            IsEnabled="{Binding WordToMotionSetting.EnableWordToMotion}"
+                                            IsChecked="{Binding WordToMotionSetting.UseKeyboardToStartWordToMotion}"                         
+                                            />                                
+                        </StackPanel>
+
+                    </StackPanel>
+                </md:Card>
+
+
+            </StackPanel>
+
+            <StackPanel Grid.Column="1">
+                <md:Card>
+                    <StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <md:PackIcon Style="{StaticResource HeaderPackIcon}" 
+                                            Kind="Eye"/>
+                            <TextBlock Text="{DynamicResource Streaming_View}"
+                                        Margin="5"
+                                        Style="{StaticResource HeaderText}"
+                                        />
+                        </StackPanel>
+
+                        <CheckBox Margin="10,1" Height="25"
+                                    Content="{DynamicResource Layout_Hid}"
+                                    IsChecked="{Binding LayoutSetting.HidVisibility}"
+                                    />
+                        <CheckBox Margin="10,1" Height="25"
+                                    Content="{DynamicResource Shadow_Enable_Streaming}"
+                                    IsChecked="{Binding LightSetting.EnableShadow}"
+                                    />
+                        <CheckBox Margin="10,1" Height="25"
+                                    Content="{DynamicResource Wind_Enable_Streaming}"
+                                    IsChecked="{Binding LightSetting.EnableWind}"
+                                    />
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Margin="5,3"
+                                        Text="{DynamicResource Layout_Hid_TypingEffect_Header_Streaming}"
+                                        />
+                            <ComboBox Grid.Column="1"
+                                        HorizontalAlignment="Stretch"
+                                        Margin="5,0"
+                                        ItemsSource="{Binding LayoutSetting.TypingEffectSelections}"
+                                        SelectedItem="{Binding LayoutSetting.TypingEffectItem}"
+                                        md:HintAssist.Hint="Effect"
+                                        >
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Height="20" VerticalAlignment="Center">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="20"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <md:PackIcon Grid.Column="0"
+                                                            Width="20" Height="20"
+                                                            Margin="0"
+                                                            Kind="{Binding IconKind, Mode=OneTime}"
+                                                            />
+                                            <TextBlock Grid.Column="1"
+                                                        Margin="5,0,0,0"
+                                                        Text="{Binding EffectName}"
+                                                        />
+                                        </Grid>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </Grid>
+
+                    </StackPanel>
+                </md:Card>
+
+                <md:Card>
+                    <StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+
+                            <md:PackIcon Style="{StaticResource HeaderPackIcon}"
+                                            Kind="Videocam"
+                                            />
+
+                            <TextBlock Text="{DynamicResource Layout_Camera}"
+                                        Margin="5"
+                                        Style="{StaticResource HeaderText}"
+                                        />
+                        </StackPanel>
+                            
+                        <CheckBox Content="{DynamicResource Layout_EnableFreeCameraMode}" 
+                                    IsChecked="{Binding LayoutSetting.EnableFreeCameraMode}"
+                                    Margin="10,0" Height="25"
+                                    />
+
+                        <Grid Margin="10,0">
+                            <Grid.Resources>
+                                <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                                    <Setter Property="Padding" Value="0"/>
+                                    <Setter Property="Width" Value="25"/>
+                                    <Setter Property="Height" Value="25"/>
+                                    <Setter Property="Margin" Value="2"/>
+                                </Style>
+                            </Grid.Resources>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Row="0" Grid.Column="0" 
+                                       Margin="0"
+                                       Text="{DynamicResource Layout_Camera_QuickSave}"/>
+                            <TextBlock Grid.Row="1" Grid.Column="0"
+                                       Margin="0"
+                                       Text="{DynamicResource Layout_Camera_QuickLoad}"/>
+
+                            <Button Grid.Row="0" Grid.Column="1"
+                                    Command="{Binding LayoutSetting.QuickSaveViewPointCommand}"
+                                    CommandParameter="1"
+                                    Content="1"
+                                    />
+                            <Button Grid.Row="0" Grid.Column="2"
+                                    Command="{Binding LayoutSetting.QuickSaveViewPointCommand}"
+                                    CommandParameter="2"
+                                    Content="2"
+                                    />
+                            <Button Grid.Row="0" Grid.Column="3"
+                                    Command="{Binding LayoutSetting.QuickSaveViewPointCommand}"
+                                    CommandParameter="3"
+                                    Content="3"
+                                    />
+
+                            <Button Grid.Row="1" Grid.Column="1"
+                                    Command="{Binding LayoutSetting.QuickLoadViewPointCommand}"
+                                    IsEnabled="{Binding LayoutSetting.HasQuickSaveItem1}"
+                                    CommandParameter="1"
+                                    Content="1"
+                                    />
+                            <Button Grid.Row="1" Grid.Column="2"
+                                    Command="{Binding LayoutSetting.QuickLoadViewPointCommand}"
+                                    IsEnabled="{Binding LayoutSetting.HasQuickSaveItem2}"
+                                    CommandParameter="2"
+                                    Content="2"
+                                    />
+                            <Button Grid.Row="1" Grid.Column="3"
+                                    Command="{Binding LayoutSetting.QuickLoadViewPointCommand}"
+                                    IsEnabled="{Binding LayoutSetting.HasQuickSaveItem3}"
+                                    CommandParameter="3"
+                                    Content="3"
+                                    />
+                        </Grid>
+
+
+                        <Button HorizontalAlignment="Left"
+                                Width="150"
+                                Margin="10,5,10,5"
+                                Command="{Binding LayoutSetting.ResetCameraPositionCommand}"
+                                >
+                            <StackPanel Style="{StaticResource IconTextSetStackPanel}">
+                                <md:PackIcon Style="{StaticResource IconTextSetIcon}"
+                                                Kind="Reload"
+                                                />
+                                <TextBlock Style="{StaticResource IconSetSetText}"
+                                            Text="{DynamicResource Layout_Camera_ResetPosition}"
+                                            />
+                            </StackPanel>
+                        </Button>
+
+                    </StackPanel>
+                </md:Card>
+
+                <md:Card>
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+
+                            <md:PackIcon Style="{StaticResource HeaderPackIcon}"
+                                            Kind="HumanHandsup"
+                                            />
+
+                            <TextBlock Text="{DynamicResource Streaming_Motion}"
+                                        Margin="5"
+                                        Style="{StaticResource HeaderText}"
+                                        />
+                        </StackPanel>
+
+                        <CheckBox Grid.Row="2" Grid.Column="0"
+                                    Grid.ColumnSpan="3"
+                                    Margin="10,2" 
+                                    Content="{DynamicResource Motion_Arm_EnablePresenterMotion}"
+                                    IsChecked="{Binding MotionSetting.EnablePresenterMotion}"
+                                    />
+                    </StackPanel>
+                </md:Card>
+
+                <md:Card>
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <md:PackIcon Style="{StaticResource HeaderPackIcon}"
+                                            Kind="Camera"
+                                            />
+                            <TextBlock Text="{DynamicResource Streaming_Screenshot}"
+                                    Margin="5"
+                                    Style="{StaticResource HeaderText}"
+                                    />
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <Button Command="{Binding TakeScreenshotCommand}"
+                                Padding="0"
+                                Width="40"
+                                HorizontalAlignment="Left"
+                                >
+                                <md:PackIcon Style="{StaticResource IconTextSetIcon}"
+                                            Kind="Camera"
+                                            />
                             </Button>
 
                             <Button Style="{StaticResource MaterialDesignFlatButton}"
                                     Command="{Binding OpenScreenshotFolderCommand}"
                                     Padding="0"
                                     HorizontalAlignment="Left"
-                                    Margin="10,0"
+                                    Margin="0"
                                     >
                                 <StackPanel Style="{StaticResource IconTextSetStackPanel}">
                                     <md:PackIcon Style="{StaticResource IconTextSetIcon}"
-                                                Kind="Folder"
-                                                />
-                                    <TextBlock Style="{StaticResource IconSetSetText}"
-                                            Text="{DynamicResource Streaming_Screenshot_OpenSaveFolder}"
+                                            Kind="Folder"
                                             />
+                                    <TextBlock Style="{StaticResource IconSetSetText}"
+                                        Text="{DynamicResource Streaming_Screenshot_OpenSaveFolder}"
+                                        />
                                 </StackPanel>
                             </Button>
-
                         </StackPanel>
 
 
-                    </md:Card>
+                    </StackPanel>
 
 
-                </StackPanel>
-            </Grid>
-        </StackPanel>
+                </md:Card>
+
+
+            </StackPanel>
+        </Grid>
     </ScrollViewer>
 </UserControl>

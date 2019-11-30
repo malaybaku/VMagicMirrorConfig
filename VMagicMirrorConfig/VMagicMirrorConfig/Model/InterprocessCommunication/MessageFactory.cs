@@ -98,6 +98,7 @@ namespace Baku.VMagicMirrorConfig
         public Message CameraDeviceNames() => NoArg();
 
         public Message EnableTouchTyping(bool enable) => WithArg($"{enable}");
+
         public Message EnableLipSync(bool enable) => WithArg($"{enable}");
 
         public Message SetMicrophoneDeviceName(string deviceName) => WithArg(deviceName);
@@ -132,7 +133,8 @@ namespace Baku.VMagicMirrorConfig
         #region カメラの配置
 
         public Message CameraFov(int cameraFov) => WithArg($"{cameraFov}");
-        public Message SetCustomCameraPosition(string posData) => WithArg($"{posData}");
+        public Message SetCustomCameraPosition(string posData) => WithArg(posData);
+        public Message QuickLoadViewPoint(string posData) => WithArg(posData);
 
         public Message EnableFreeCameraMode(bool enable) => WithArg($"{enable}");
         public Message ResetCameraPosition() => NoArg();
@@ -157,7 +159,6 @@ namespace Baku.VMagicMirrorConfig
         #region ゲームパッド
 
         public Message EnableGamepad(bool enable) => WithArg($"{enable}");
-
         public Message GamepadHeight(int height) => WithArg($"{height}");
         public Message GamepadHorizontalScale(int scale) => WithArg($"{scale}");
 

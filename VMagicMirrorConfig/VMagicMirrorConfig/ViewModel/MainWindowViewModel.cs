@@ -380,7 +380,7 @@ namespace Baku.VMagicMirrorConfig
 
             Initializer.CameraPositionChecker.Start(
                 2000,
-                data => LayoutSetting.CameraPosition = data
+                data => LayoutSetting.SilentSetCameraPosition(data)
                 );
 
             var regSetting = new StartupRegistrySetting();
