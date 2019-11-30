@@ -16,6 +16,8 @@
         
     <!-- Home -->
     <sys:String x:Key="Home_LoadVrm">Load VRM</sys:String>
+    <sys:String x:Key="Home_DragDropVrm" xml:space="preserve">Drag &amp; Drop
+VRM File</sys:String>
     <sys:String x:Key="Home_LoadVrmOnNextStartup">Load current VRM on next startup</sys:String>
     <sys:String x:Key="Home_AutoAdjust">Adjust Size by VRM</sys:String>
     <sys:String x:Key="Home_RecommendVRoidHub">*If you do not have VRM on your PC yet: </sys:String>

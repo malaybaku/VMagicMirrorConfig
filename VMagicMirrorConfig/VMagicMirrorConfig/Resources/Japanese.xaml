@@ -16,6 +16,8 @@
     
     <!-- Home -->
     <sys:String x:Key="Home_LoadVrm">VRMロード</sys:String>
+    <sys:String x:Key="Home_DragDropVrm" xml:space="preserve">VRMファイルを
+ドラッグ&amp;ドロップ</sys:String>
     <sys:String x:Key="Home_LoadVrmOnNextStartup">次回の起動時にも同じVRMを読み込む</sys:String>
     <sys:String x:Key="Home_AutoAdjust">キャラ体格で補正</sys:String>
     <sys:String x:Key="Home_RecommendVRoidHub">※キャラクターのダウンロードがまだの場合: </sys:String>
