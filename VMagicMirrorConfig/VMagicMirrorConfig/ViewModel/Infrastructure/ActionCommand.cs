@@ -23,12 +23,12 @@ namespace Baku.VMagicMirrorConfig
     public class ActionCommand<T> : ICommand
         where T : class
     {
-        public ActionCommand(Action<T> act)
+        public ActionCommand(Action<T?> act)
         {
             _act = act;
         }
 
-        private readonly Action<T> _act;
+        private readonly Action<T?> _act;
 
         public bool CanExecute(object parameter) => true;
         public void Execute(object parameter) => _act?.Invoke(parameter as T);
