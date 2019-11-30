@@ -443,6 +443,9 @@ namespace Baku.VMagicMirrorConfig
         {
             //NOTE: フリーカメラモードについては、もともと揮発性の設定にしているのでココでは触らない
             CameraFov = 40;
+            QuickSave1 = "";
+            QuickSave2 = "";
+            QuickSave3 = "";
             //カメラ位置については、Unity側がカメラの基準位置を持っているのに任せる
             ResetCameraPosition();
         }
