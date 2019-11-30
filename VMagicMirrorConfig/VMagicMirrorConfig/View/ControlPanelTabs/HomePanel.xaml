@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vmm="clr-namespace:Baku.VMagicMirrorConfig"
              mc:Ignorable="d"
@@ -28,22 +29,49 @@
                                Margin="10,10,10,5"
                                />
 
-                    <Button HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
-                            Width="180"
-                            Height="40"
-                            Margin="15,10,15,5"
-                            Command="{Binding LoadVrmCommand}"
-                            >
-                        <StackPanel Style="{StaticResource IconTextSetStackPanel}">
-                            <md:PackIcon Style="{StaticResource IconTextSetIcon}"
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Top"
+                                Width="NaN"
+                                Height="40"
+                                Margin="5"
+                                Padding="5"
+                                Command="{Binding LoadVrmCommand}"
+                                >
+                            <StackPanel Style="{StaticResource IconTextSetStackPanel}">
+                                <md:PackIcon Style="{StaticResource IconTextSetIcon}"
                                          Kind="Human"
                                          />
-                            <TextBlock Style="{StaticResource IconSetSetText}"
+                                <TextBlock Style="{StaticResource IconSetSetText}"
                                        Text="{DynamicResource Home_LoadVrm}"
                                        />
-                        </StackPanel>
-                    </Button>
+                            </StackPanel>
+                        </Button>
+                        <Border Grid.Column="1"
+                                Background="#00000001"
+                                AllowDrop="True"
+                                Margin="5">
+                            <i:Interaction.Behaviors>
+                                <vmm:DragDropToCommandBehavior DropCommand="{Binding LoadVrmByFilePathCommand}"/>
+                            </i:Interaction.Behaviors>
+                            <Grid>
+                                <Rectangle Stroke="{DynamicResource PrimaryHueMidBrush}"
+                                           StrokeThickness="1"
+                                           StrokeDashArray="1 2"
+                                       />
+                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"
+                                           Text="{DynamicResource Home_DragDropVrm}"
+                                           
+                                           />
+                            </Grid>
+                        </Border>
+                    </Grid>
+                    
 
                     <CheckBox Content="{DynamicResource Home_LoadVrmOnNextStartup}"
                               Margin="15,10,15,5"
