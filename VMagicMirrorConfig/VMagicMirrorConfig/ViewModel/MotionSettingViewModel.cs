@@ -137,7 +137,7 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private bool _autoblinkDuringFaceTracking = false;
+        private bool _autoblinkDuringFaceTracking = true;
         public bool AutoBlinkDuringFaceTracking
         {
             get => _autoblinkDuringFaceTracking;
@@ -146,6 +146,35 @@ namespace Baku.VMagicMirrorConfig
                 if (SetValue(ref _autoblinkDuringFaceTracking, value))
                 {
                     SendMessage(MessageFactory.Instance.AutoBlinkDuringFaceTracking(AutoBlinkDuringFaceTracking));
+                }
+            }
+        }
+
+        private bool _enableHeadRotBaseBlinkAdjust = true;
+        public bool EnableHeadRotBaseBlinkAdjust
+        {
+            get => _enableHeadRotBaseBlinkAdjust;
+            set
+            {
+                if (SetValue(ref _enableHeadRotBaseBlinkAdjust, value))
+                {
+                    SendMessage(MessageFactory.Instance.EnableHeadRotationBasedBlinkAdjust(
+                        EnableHeadRotBaseBlinkAdjust
+                        ));
+                }
+            }
+        }
+        private bool _enableLipSyncBaseBlinkAdjust = true;
+        public bool EnableLipSyncBaseBlinkAdjust
+        {
+            get => _enableLipSyncBaseBlinkAdjust;
+            set
+            {
+                if (SetValue(ref _enableLipSyncBaseBlinkAdjust, value))
+                {
+                    SendMessage(MessageFactory.Instance.EnableLipSyncBasedBlinkAdjust(
+                        EnableLipSyncBaseBlinkAdjust
+                        ));
                 }
             }
         }
@@ -649,7 +678,7 @@ namespace Baku.VMagicMirrorConfig
         {
             EnableFaceTracking = true;
             CameraDeviceName = "";
-            AutoBlinkDuringFaceTracking = false;
+            AutoBlinkDuringFaceTracking = true;
             DisableFaceTrackingHorizontalFlip = false;
 
             EnableLipSync = true;
