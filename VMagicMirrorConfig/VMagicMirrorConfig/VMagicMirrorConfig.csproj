@@ -7,8 +7,8 @@
     <UseWpf>true</UseWpf>
     <RootNamespace>Baku.VMagicMirrorConfig</RootNamespace>
     <RuntimeIdentifier>win10-x86</RuntimeIdentifier>
-    <PublishSingleFile>true</PublishSingleFile>
-    <PublishTrimmed>true</PublishTrimmed>
+    <!--<PublishSingleFile>true</PublishSingleFile>
+    <PublishTrimmed>true</PublishTrimmed>-->
     <Platforms>AnyCPU;x64;x86</Platforms>
     <Platform>x86</Platform>
     <Nullable>enable</Nullable>
