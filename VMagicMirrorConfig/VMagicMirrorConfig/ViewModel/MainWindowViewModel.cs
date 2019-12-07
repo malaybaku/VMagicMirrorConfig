@@ -106,6 +106,10 @@ namespace Baku.VMagicMirrorConfig
         public ActionCommand LoadVrmCommand
             => _loadVrmCommand ??= new ActionCommand(LoadVrm);
 
+        private ActionCommand<string>? _loadVrmByPathCommand;
+        public ActionCommand<string> LoadVrmByFilePathCommand
+            => _loadVrmByPathCommand ??= new ActionCommand<string>(LoadVrmByFilePath);
+
         private ActionCommand? _openVRoidHubCommand;
         public ActionCommand OpenVRoidHubCommand
             => _openVRoidHubCommand ??= new ActionCommand(OpenVRoidHub);
@@ -152,23 +156,44 @@ namespace Baku.VMagicMirrorConfig
 
         private void LoadVrm()
         {
+            LoadVrmSub(() =>
+            {
+                var dialog = new OpenFileDialog()
+                {
+                    Title = "Open VRM file",
+                    Filter = "VRM files (*.vrm)|*.vrm|All files (*.*)|*.*",
+                    Multiselect = false,
+                };
+
+                return
+                    (dialog.ShowDialog() == true && File.Exists(dialog.FileName))
+                    ? dialog.FileName
+                    : "";
+            });
+        }
+
+        private void LoadVrmByFilePath(string filePath)
+        {
+            if (Path.GetExtension(filePath) == ".vrm")
+            {
+                LoadVrmSub(() => filePath);
+            }
+        }
+
+        /// <summary>
+        /// ファイルパスを取得する処理を指定して、VRMをロードします。
+        /// </summary>
+        /// <param name="getFilePathProcess"></param>
+        private void LoadVrmSub(Func<string> getFilePathProcess)
+        {
             bool turnOffTopMostTemporary = WindowSetting.TopMost;
             if (turnOffTopMostTemporary)
             {
                 WindowSetting.TopMost = false;
             }
 
-            var dialog = new OpenFileDialog()
-            {
-                Title = "Open VRM file",
-                Filter = "VRM files (*.vrm)|*.vrm|All files (*.*)|*.*",
-                Multiselect = false,
-            };
-
-            if (!(
-                dialog.ShowDialog() == true &&
-                File.Exists(dialog.FileName)
-                ))
+            string filePath = getFilePathProcess();
+            if (!File.Exists(filePath))
             {
                 if (turnOffTopMostTemporary)
                 {
@@ -177,7 +202,7 @@ namespace Baku.VMagicMirrorConfig
                 return;
             }
 
-            MessageSender.SendMessage(MessageFactory.Instance.OpenVrmPreview(dialog.FileName));
+            MessageSender.SendMessage(MessageFactory.Instance.OpenVrmPreview(filePath));
 
 
             var indication = MessageIndication.LoadVrmConfirmation(LanguageName);
@@ -191,8 +216,8 @@ namespace Baku.VMagicMirrorConfig
 
             if (res == MessageBoxResult.OK)
             {
-                MessageSender.SendMessage(MessageFactory.Instance.OpenVrm(dialog.FileName));
-                _lastVrmLoadFilePath = dialog.FileName;
+                MessageSender.SendMessage(MessageFactory.Instance.OpenVrm(filePath));
+                _lastVrmLoadFilePath = filePath;
                 if (AutoAdjustEyebrowOnLoaded)
                 {
                     MessageSender.SendMessage(MessageFactory.Instance.RequestAutoAdjustEyebrow());
@@ -355,7 +380,7 @@ namespace Baku.VMagicMirrorConfig
 
             Initializer.CameraPositionChecker.Start(
                 2000,
-                data => LayoutSetting.CameraPosition = data
+                data => LayoutSetting.SilentSetCameraPosition(data)
                 );
 
             var regSetting = new StartupRegistrySetting();

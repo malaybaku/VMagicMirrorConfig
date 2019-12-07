@@ -16,6 +16,8 @@
     
     <!-- Home -->
     <sys:String x:Key="Home_LoadVrm">VRMロード</sys:String>
+    <sys:String x:Key="Home_DragDropVrm" xml:space="preserve">VRMファイルを
+ドラッグ&amp;ドロップ</sys:String>
     <sys:String x:Key="Home_LoadVrmOnNextStartup">次回の起動時にも同じVRMを読み込む</sys:String>
     <sys:String x:Key="Home_AutoAdjust">キャラ体格で補正</sys:String>
     <sys:String x:Key="Home_RecommendVRoidHub">※キャラクターのダウンロードがまだの場合: </sys:String>
@@ -83,6 +85,8 @@
     <sys:String x:Key="Motion_Face_DefaultFun">Funブレンドのデフォルト値[%]</sys:String>
     <sys:String x:Key="Motion_Face_AutoBlinkDuringFaceTracking">顔トラッキング中も自動でまばたき</sys:String>
     <sys:String x:Key="Motion_Face_DisableFaceTrackingHorizontalFlip">左右反転をオフにする</sys:String>
+    <sys:String x:Key="Motion_Face_HeadRotBaseBlinkAdjust">顔が動くときのまばたき補正</sys:String>
+    <sys:String x:Key="Motion_Face_LipSyncBaseBlinkAdjust">会話の区切りでのまばたき補正</sys:String>
     
     <sys:String x:Key="Motion_Face_Eyebrow">眉毛 (開いてカスタマイズ)</sys:String>    
     <sys:String x:Key="Motion_Face_Eyebrow_LeftUp">左眉上げ</sys:String>    
@@ -138,6 +142,8 @@
     <sys:String x:Key="Layout_CurrentCameraPosition">カメラの位置(x, y, z, rx, ry, rz)</sys:String>
     <sys:String x:Key="Layout_Camera_ResetPosition">位置をリセット</sys:String>
     <sys:String x:Key="Layout_Camera_Fov">視野角 [deg]</sys:String>
+    <sys:String x:Key="Layout_Camera_QuickSave">クイックセーブ</sys:String>
+    <sys:String x:Key="Layout_Camera_QuickLoad">クイックロード</sys:String>
 
     <!-- Layout : Keyboard / Mouse Pad -->
     <sys:String x:Key="Layout_Hid">キーボード</sys:String>

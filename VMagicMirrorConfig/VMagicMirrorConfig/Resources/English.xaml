@@ -16,6 +16,8 @@
         
     <!-- Home -->
     <sys:String x:Key="Home_LoadVrm">Load VRM</sys:String>
+    <sys:String x:Key="Home_DragDropVrm" xml:space="preserve">Drag &amp; Drop
+VRM File</sys:String>
     <sys:String x:Key="Home_LoadVrmOnNextStartup">Load current VRM on next startup</sys:String>
     <sys:String x:Key="Home_AutoAdjust">Adjust Size by VRM</sys:String>
     <sys:String x:Key="Home_RecommendVRoidHub">*If you do not have VRM on your PC yet: </sys:String>
@@ -83,6 +85,8 @@
     <sys:String x:Key="Motion_Face_DefaultFun">Default Fun Blend Value [%]</sys:String>    
     <sys:String x:Key="Motion_Face_AutoBlinkDuringFaceTracking">Auto blink during face tracking</sys:String>
     <sys:String x:Key="Motion_Face_DisableFaceTrackingHorizontalFlip">Disable horizontal flip</sys:String>
+    <sys:String x:Key="Motion_Face_HeadRotBaseBlinkAdjust">Blink adjust by head motion</sys:String>
+    <sys:String x:Key="Motion_Face_LipSyncBaseBlinkAdjust">Blink adjust by lip sync</sys:String>
 
     <sys:String x:Key="Motion_Face_Eyebrow">Eyebrow (Open to Customize)</sys:String>    
     <sys:String x:Key="Motion_Face_EyeBrow_LeftUp">Left Up Key</sys:String>    
@@ -138,6 +142,8 @@
     <sys:String x:Key="Layout_CurrentCameraPosition">Camera Position (x, y, z, rx, ry, rz)</sys:String>
     <sys:String x:Key="Layout_Camera_ResetPosition">Reset Position</sys:String>
     <sys:String x:Key="Layout_Camera_Fov">FOV [deg]</sys:String>
+    <sys:String x:Key="Layout_Camera_QuickSave">Quick Save</sys:String>
+    <sys:String x:Key="Layout_Camera_QuickLoad">Quick Load</sys:String>
 
 
     <!-- Layout : Keyboard / Mouse Pad -->

@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Baku.VMagicMirrorConfig
 {
@@ -55,7 +56,6 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-
         private bool _enableFreeCameraMode = false;
         [XmlIgnore]
         public bool EnableFreeCameraMode
@@ -72,7 +72,7 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        //NOTE: このプロパティは他と違ってユーザーが直接いじるのは想定してない
+        //NOTE: 以下4つのプロパティはユーザーが直接いじるのは想定してない
         private string _cameraPosition = "";
         public string CameraPosition
         {
@@ -83,6 +83,133 @@ namespace Baku.VMagicMirrorConfig
                 {
                     SendMessage(MessageFactory.Instance.SetCustomCameraPosition(CameraPosition));
                 }
+            }
+        }
+        /// <summary>
+        /// カメラ位置の情報を更新しますが、設定時にUnityプロセスにメッセージを送信しません。
+        /// </summary>
+        /// <param name="cameraPos"></param>
+        public void SilentSetCameraPosition(string cameraPos)
+            => _cameraPosition = cameraPos ?? "";
+
+        //NOTE: 数が少ないので、ラクな方法ということでハードコーディングにしてます
+        //以下3つの文字列は"CameraPosition+視野角"というデータで構成されます
+        private string _quickSave1 = "";
+        public string QuickSave1
+        {
+            get => _quickSave1;
+            set
+            {
+                if (SetValue(ref _quickSave1, value))
+                {
+                    RaisePropertyChanged(nameof(HasQuickSaveItem1));
+                }
+            }
+        }
+
+        private string _quickSave2 = "";
+        public string QuickSave2
+        {
+            get => _quickSave2;
+            set
+            {
+                if (SetValue(ref _quickSave2, value))
+                {
+                    RaisePropertyChanged(nameof(HasQuickSaveItem2));
+                }
+            }
+        }
+
+        private string _quickSave3 = "";
+        public string QuickSave3
+        {
+            get => _quickSave3;
+            set
+            {
+                if (SetValue(ref _quickSave3, value))
+                {
+                    RaisePropertyChanged(nameof(HasQuickSaveItem3));
+                }
+            }
+        }
+
+        [XmlIgnore]
+        public bool HasQuickSaveItem1 => !string.IsNullOrWhiteSpace(QuickSave1);
+        [XmlIgnore]
+        public bool HasQuickSaveItem2 => !string.IsNullOrWhiteSpace(QuickSave2);
+        [XmlIgnore]
+        public bool HasQuickSaveItem3 => !string.IsNullOrWhiteSpace(QuickSave3);
+
+        private ActionCommand<string>? _quickSaveViewPointCommand;
+        public ActionCommand<string> QuickSaveViewPointCommand
+            => _quickSaveViewPointCommand ??= new ActionCommand<string>(QuickSaveViewPoint);
+        private async void QuickSaveViewPoint(string? index)
+        {
+            if (!(
+                int.TryParse(index, out int i) && 
+                i > 0 && i <= 3
+                ))
+            {
+                return;
+            }
+
+            try
+            {
+                string res = await SendQueryAsync(MessageFactory.Instance.CurrentCameraPosition());
+                string saveData = new JObject()
+                {
+                    ["fov"] = CameraFov,
+                    ["pos"] = res,
+                }.ToString(Formatting.None);
+
+                if (i == 1)
+                {
+                    QuickSave1 = saveData;
+                }
+                else if (i == 2)
+                {
+                    QuickSave2 = saveData;
+                }
+                else
+                {
+                    QuickSave3 = saveData;
+                }
+            }
+            catch(Exception ex)
+            {
+                LogOutput.Instance.Write(ex);
+            }
+        }
+
+        private ActionCommand<string>? _quickLoadViewPointCommand;
+        public ActionCommand<string> QuickLoadViewPointCommand
+            => _quickLoadViewPointCommand ??= new ActionCommand<string>(QuickLoadViewPoint);
+        private void QuickLoadViewPoint(string? index)
+        {
+            if (!(int.TryParse(index, out int i) && i > 0 && i <= 3))
+            {
+                return;
+            }
+
+            try
+            {
+                string saveData =
+                (i == 1) ? QuickSave1 :
+                (i == 2) ? QuickSave2 :
+                QuickSave3;
+
+                var obj = JObject.Parse(saveData);
+                string cameraPos = (string)obj["pos"];
+                int fov = (int)obj["fov"];
+
+                CameraFov = fov;
+                //NOTE: CameraPositionには書き込まない。
+                //CameraPositionへの書き込みはCameraPositionCheckerのポーリングに任せとけばOK 
+                SendMessage(MessageFactory.Instance.QuickLoadViewPoint(cameraPos));
+            }
+            catch (Exception ex)
+            {
+                LogOutput.Instance.Write(ex);
             }
         }
 
@@ -105,7 +232,7 @@ namespace Baku.VMagicMirrorConfig
                 string response = await SendQueryAsync(MessageFactory.Instance.CurrentCameraPosition());
                 if (!string.IsNullOrWhiteSpace(response))
                 {
-                    CameraPosition = response;
+                    SilentSetCameraPosition(response);
                 }
             }
         }
@@ -316,6 +443,9 @@ namespace Baku.VMagicMirrorConfig
         {
             //NOTE: フリーカメラモードについては、もともと揮発性の設定にしているのでココでは触らない
             CameraFov = 40;
+            QuickSave1 = "";
+            QuickSave2 = "";
+            QuickSave3 = "";
             //カメラ位置については、Unity側がカメラの基準位置を持っているのに任せる
             ResetCameraPosition();
         }

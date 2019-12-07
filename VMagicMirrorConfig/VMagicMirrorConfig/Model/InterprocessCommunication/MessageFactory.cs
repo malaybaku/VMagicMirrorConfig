@@ -86,6 +86,9 @@ namespace Baku.VMagicMirrorConfig
         public Message EnableFaceTracking(bool enable) => WithArg($"{enable}");
         public Message SetCameraDeviceName(string deviceName) => WithArg(deviceName);
         public Message AutoBlinkDuringFaceTracking(bool enable) => WithArg($"{enable}");
+        public Message EnableLipSyncBasedBlinkAdjust(bool enable) => WithArg($"{enable}");
+        public Message EnableHeadRotationBasedBlinkAdjust(bool enable) => WithArg($"{enable}");
+
         //NOTE: falseのほうが普通だよ、という状態にするため、disable云々というやや面倒な言い方になってる事に注意
         public Message DisableFaceTrackingHorizontalFlip(bool disable) => WithArg($"{disable}");
 
@@ -98,6 +101,7 @@ namespace Baku.VMagicMirrorConfig
         public Message CameraDeviceNames() => NoArg();
 
         public Message EnableTouchTyping(bool enable) => WithArg($"{enable}");
+
         public Message EnableLipSync(bool enable) => WithArg($"{enable}");
 
         public Message SetMicrophoneDeviceName(string deviceName) => WithArg(deviceName);
@@ -132,9 +136,11 @@ namespace Baku.VMagicMirrorConfig
         #region カメラの配置
 
         public Message CameraFov(int cameraFov) => WithArg($"{cameraFov}");
-        public Message SetCustomCameraPosition(string posData) => WithArg($"{posData}");
+        public Message SetCustomCameraPosition(string posData) => WithArg(posData);
+        public Message QuickLoadViewPoint(string posData) => WithArg(posData);
 
         public Message EnableFreeCameraMode(bool enable) => WithArg($"{enable}");
+
         public Message ResetCameraPosition() => NoArg();
 
         /// <summary>
@@ -147,6 +153,7 @@ namespace Baku.VMagicMirrorConfig
         #region キーボード・マウスパッド
 
         public Message HidHeight(int heightCentimeter) => WithArg($"{heightCentimeter}");
+
         public Message HidHorizontalScale(int scalePercent) => WithArg($"{scalePercent}");
 
         public Message HidVisibility(bool visible) => WithArg($"{visible}");
@@ -157,7 +164,6 @@ namespace Baku.VMagicMirrorConfig
         #region ゲームパッド
 
         public Message EnableGamepad(bool enable) => WithArg($"{enable}");
-
         public Message GamepadHeight(int height) => WithArg($"{height}");
         public Message GamepadHorizontalScale(int scale) => WithArg($"{scale}");
 

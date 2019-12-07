@@ -146,6 +146,21 @@
                                       />-->
                     </Button>
 
+                    <CheckBox Margin="15,5,0,0"
+                              IsChecked="{Binding EnableHeadRotBaseBlinkAdjust}"
+                              >
+                        <CheckBox.Content>
+                            <TextBlock Text="{DynamicResource Motion_Face_HeadRotBaseBlinkAdjust}"/>
+                        </CheckBox.Content>
+                    </CheckBox>
+                    <CheckBox Margin="15,0,0,5"
+                              IsChecked="{Binding EnableLipSyncBaseBlinkAdjust}"
+                              >
+                        <CheckBox.Content>
+                            <TextBlock Text="{DynamicResource Motion_Face_LipSyncBaseBlinkAdjust}"/>
+                        </CheckBox.Content>
+                    </CheckBox>
+
                     <TextBlock Text="{DynamicResource Motion_Eye_LookAtPoint}"
                                Margin="10,20,5,5"
                                />
