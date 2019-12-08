@@ -279,6 +279,22 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
+        private bool _enableDeviceFreeLayout = false;
+        [XmlIgnore]
+        public bool EnableDeviceFreeLayout
+        {
+            get => _enableDeviceFreeLayout;
+            set
+            {
+                if (SetValue(ref _enableDeviceFreeLayout, value))
+                {
+                    SendMessage(
+                        MessageFactory.Instance.EnableDeviceFreeLayout(EnableDeviceFreeLayout)
+                        );
+                }
+            }
+        }
+
         //NOTE: ラジオボタン表示をザツにやるためにbool値たくさんで代用している(ほんとはあまり良くない)
         //TODO: エフェクトがこれ以上増える可能性が高いので、コンボボックスでの表示を前提にデータ構造を見直すべき
 

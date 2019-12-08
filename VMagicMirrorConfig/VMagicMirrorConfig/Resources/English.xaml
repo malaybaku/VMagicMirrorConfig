@@ -152,6 +152,7 @@ VRM File</sys:String>
     <sys:String x:Key="Layout_HidHorizontalScale">Size [%]</sys:String>
     <sys:String x:Key="Layout_HidHorizontalScale_Tooltip">Specify the size of keyboard. When smallen, the devices are close to the character.</sys:String>
     <sys:String x:Key="Layout_HidVisible">Visible</sys:String>
+    <sys:String x:Key="Layout_DeviceFreeLayout">Free Layout</sys:String>
 
     <sys:String x:Key="Layout_HidReactToKeyboard">Enable keyboard motion</sys:String>
     <sys:String x:Key="Layout_HidReactToMouse">Enable mouse motion</sys:String>

@@ -157,6 +157,9 @@ namespace Baku.VMagicMirrorConfig
         public Message HidHorizontalScale(int scalePercent) => WithArg($"{scalePercent}");
 
         public Message HidVisibility(bool visible) => WithArg($"{visible}");
+
+        public Message EnableDeviceFreeLayout(bool enable) => WithArg($"{enable}");
+
         public Message SetKeyboardTypingEffectType(int typeIndex) => WithArg($"{typeIndex}");
 
         #endregion

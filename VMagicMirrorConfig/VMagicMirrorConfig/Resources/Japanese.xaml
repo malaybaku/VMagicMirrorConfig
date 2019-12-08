@@ -151,6 +151,7 @@
     <sys:String x:Key="Layout_HidHorizontalScale">サイズ[%]</sys:String>
     <sys:String x:Key="Layout_HidHorizontalScale_Tooltip">キーボードのサイズを指定します。小さくすると、デバイスが小さくなり、キャラクターに近づきます。</sys:String>
     <sys:String x:Key="Layout_HidVisible">キーボードを表示</sys:String>
+    <sys:String x:Key="Layout_DeviceFreeLayout">フリーレイアウト</sys:String>
 
     <sys:String x:Key="Layout_HidReactToKeyboard">キーボード操作に反応</sys:String>
     <sys:String x:Key="Layout_HidReactToMouse">マウス操作に反応</sys:String>
