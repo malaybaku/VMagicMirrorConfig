@@ -383,6 +383,11 @@ namespace Baku.VMagicMirrorConfig
                 data => LayoutSetting.SilentSetCameraPosition(data)
                 );
 
+            Initializer.DeviceLayoutChecker.Start(
+                2000,
+                data => LayoutSetting.SilentSetDeviceLayout(data)
+                );
+
             var regSetting = new StartupRegistrySetting();
             _activateOnStartup = regSetting.CheckThisVersionRegistered();
             if (_activateOnStartup)

@@ -46,6 +46,8 @@ VRM File</sys:String>
     <sys:String x:Key="Streaming_Face">Face</sys:String>
     <sys:String x:Key="Streaming_Motion">Motion</sys:String>       
     <sys:String x:Key="Streaming_View">View</sys:String>
+    <sys:String x:Key="Streaming_DeviceLayout">Device Layout</sys:String>
+    <sys:String x:Key="Streaming_DeviceLayout_Reset">Reset</sys:String>
     <sys:String x:Key="Streaming_Screenshot">Screenshot</sys:String>
     <sys:String x:Key="Streaming_Screenshot_Take">Take</sys:String>
     <sys:String x:Key="Streaming_Screenshot_OpenSaveFolder">Saved Folder...</sys:String>
@@ -145,6 +147,9 @@ VRM File</sys:String>
     <sys:String x:Key="Layout_Camera_QuickSave">Quick Save</sys:String>
     <sys:String x:Key="Layout_Camera_QuickLoad">Quick Load</sys:String>
 
+    <!-- Layout : Devices -->
+    <sys:String x:Key="Layout_DeviceLayout">Devices</sys:String>
+    <sys:String x:Key="Layout_DeviceFreeLayout">Free Layout</sys:String>
 
     <!-- Layout : Keyboard / Mouse Pad -->
     <sys:String x:Key="Layout_Hid">Keyboard</sys:String>
@@ -152,7 +157,6 @@ VRM File</sys:String>
     <sys:String x:Key="Layout_HidHorizontalScale">Size [%]</sys:String>
     <sys:String x:Key="Layout_HidHorizontalScale_Tooltip">Specify the size of keyboard. When smallen, the devices are close to the character.</sys:String>
     <sys:String x:Key="Layout_HidVisible">Visible</sys:String>
-    <sys:String x:Key="Layout_DeviceFreeLayout">Free Layout</sys:String>
 
     <sys:String x:Key="Layout_HidReactToKeyboard">Enable keyboard motion</sys:String>
     <sys:String x:Key="Layout_HidReactToMouse">Enable mouse motion</sys:String>

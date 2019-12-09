@@ -158,6 +158,36 @@
                     <StackPanel Orientation="Horizontal"
                                 Margin="5"
                                 >
+                        <md:PackIcon Kind="TabletDashboard"
+                                     Style="{StaticResource SettingHeaderPackIcon}"
+                                     />
+
+                        <TextBlock Text="{DynamicResource Layout_DeviceLayout}"
+                                   Style="{StaticResource HeaderText}"
+                                   Margin="5"
+                                   />
+
+                        <Button Style="{StaticResource CategorySettingResetButton}"
+                                Command="{Binding ResetDeviceLayoutCommand}"
+                                />
+                    </StackPanel>
+
+                    <CheckBox Margin="20,2"
+                              VerticalContentAlignment="Center"
+                              IsChecked="{Binding EnableDeviceFreeLayout}">
+                        <CheckBox.Content>
+                            <TextBlock Text="{DynamicResource Layout_DeviceFreeLayout}"/>
+                        </CheckBox.Content>
+                    </CheckBox>
+                </StackPanel>
+            </md:Card>
+
+            <md:Card>
+                <StackPanel>
+
+                    <StackPanel Orientation="Horizontal"
+                                Margin="5"
+                                >
                         <md:PackIcon Kind="Keyboard"
                                      Style="{StaticResource SettingHeaderPackIcon}"
                                      />
@@ -177,54 +207,6 @@
                               IsChecked="{Binding HidVisibility}">
                         <TextBlock Text="{DynamicResource Layout_HidVisible}"/>
                     </CheckBox>
-
-                    <CheckBox Margin="30,2"
-                              VerticalContentAlignment="Center"
-                              IsChecked="{Binding EnableDeviceFreeLayout}">
-                        <CheckBox.Content>
-                            <TextBlock Text="{DynamicResource Layout_DeviceFreeLayout}"/>
-                        </CheckBox.Content>
-                    </CheckBox>
-
-                    <Grid Margin="5" 
-                          IsEnabled="{Binding EnableDeviceFreeLayout, 
-                                              Converter={StaticResource BooleanReverseConverter}}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="3*" />
-                            <ColumnDefinition Width="1*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <TextBlock Grid.Row="0" Grid.Column="0"
-                                       Text="{DynamicResource Layout_HidHeight}"/>
-                        <Slider Grid.Row="0" Grid.Column="1"
-                                    x:Name="sliderHidHeight"
-                                    Minimum="10"
-                                    Maximum="300"
-                                    Value="{Binding HidHeight, Mode=TwoWay}"
-                                    />
-                        <TextBox Grid.Row="0" Grid.Column="2"
-                                     Text="{Binding Value, ElementName=sliderHidHeight}"
-                                     />
-
-                        <TextBlock Grid.Row="1" Grid.Column="0"
-                                       Text="{DynamicResource Layout_HidHorizontalScale}"
-                                       ToolTip="{DynamicResource Layout_HidHorizontalScale_Tooltip}"
-                                       />
-                        <Slider Grid.Row="1" Grid.Column="1"
-                                    x:Name="sliderHidHorizontalScale"
-                                    Minimum="10"
-                                    Maximum="300"
-                                    Value="{Binding HidHorizontalScale, Mode=TwoWay}"
-                                    />
-                        <TextBox Grid.Row="1" Grid.Column="2"
-                                     Text="{Binding Value, ElementName=sliderHidHorizontalScale}"
-                                     />
-                    </Grid>
 
                     <TextBlock Text="{DynamicResource Layout_Hid_TypingEffect_Header}"/>
                     <Grid Margin="20,5"
@@ -292,47 +274,6 @@
                             <TextBlock Text="{DynamicResource Layout_GamepadEnable}"/>
                         </CheckBox>
 
-                        <Grid Margin="5">
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="3*" />
-                                <ColumnDefinition Width="1*"/>
-                            </Grid.ColumnDefinitions>
-
-                            <TextBlock Grid.Row="0" Grid.Column="0"
-                                           Text="{DynamicResource Layout_GamepadHeight}"/>
-                            <Slider Grid.Row="0" Grid.Column="1"
-                                        x:Name="sliderGamepadHeight"
-                                        Minimum="10"
-                                        Maximum="300"
-                                        IsEnabled="{Binding Gamepad.GamepadEnabled}"
-                                        Value="{Binding Gamepad.GamepadHeight, Mode=TwoWay}"
-                                        />
-                            <TextBox Grid.Row="0" Grid.Column="2"
-                                         IsEnabled="{Binding Gamepad.GamepadEnabled}"
-                                         Text="{Binding Value, ElementName=sliderGamepadHeight}"
-                                         />
-
-                            <TextBlock Grid.Row="1" Grid.Column="0"
-                                           Text="{DynamicResource Layout_GamepadHorizontalScale}"
-                                           />
-                            <Slider Grid.Row="1" Grid.Column="1"
-                                            x:Name="sliderGamepadHorizontalScale"
-                                            Minimum="10"
-                                            Maximum="300"
-                                            IsEnabled="{Binding Gamepad.GamepadEnabled}"
-                                            Value="{Binding Gamepad.GamepadHorizontalScale, Mode=TwoWay}"
-                                            />
-                            <TextBox Grid.Row="1" Grid.Column="2"
-                                         IsEnabled="{Binding Gamepad.GamepadEnabled}"
-                                         Text="{Binding Value, ElementName=sliderGamepadHorizontalScale}"
-                                         />
-
-                        </Grid>
 
                         <TextBlock Text="{DynamicResource Layout_GamepadLean}"/>
 
