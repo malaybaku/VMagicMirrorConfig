@@ -238,8 +238,7 @@ namespace Baku.VMagicMirrorConfig
 
         private void OpenVRoidHub()
         {
-            //=> MessageSender.SendMessage(MessageFactory.Instance.AccessToVRoidHub());
-            Process.Start("https://hub.vroid.com/");
+            UrlNavigate.Open("https://hub.vroid.com/");
         }
 
         private void OpenManualUrl()
@@ -249,7 +248,7 @@ namespace Baku.VMagicMirrorConfig
                 "https://malaybaku.github.io/VMagicMirrorManual/index.html" :
                 "https://malaybaku.github.io/VMagicMirrorManual/en_index.html";
 
-            Process.Start(url);
+            UrlNavigate.Open(url);
         }
 
         private void AutoAdjust() => MessageSender.SendMessage(MessageFactory.Instance.RequestAutoAdjust());
