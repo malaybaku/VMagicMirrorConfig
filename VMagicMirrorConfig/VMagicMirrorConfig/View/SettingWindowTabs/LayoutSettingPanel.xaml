@@ -274,36 +274,41 @@
                             <TextBlock Text="{DynamicResource Layout_GamepadEnable}"/>
                         </CheckBox>
 
+                        <CheckBox Margin="20,2"
+                              VerticalContentAlignment="Center"
+                              IsChecked="{Binding GamepadVisibility}">
+                            <TextBlock Text="{DynamicResource Layout_GamepadVisible}"/>
+                        </CheckBox>
 
                         <TextBlock Text="{DynamicResource Layout_GamepadLean}"/>
 
                         <CheckBox Margin="20,0"
-                                      IsEnabled="{Binding Gamepad.GamepadEnabled}"
-                                      IsChecked="{Binding Gamepad.GamepadLeanNone}"
-                                      Content="{DynamicResource Layout_GamepadLean_None}"/>
+                                  IsEnabled="{Binding Gamepad.GamepadEnabled}"
+                                  IsChecked="{Binding Gamepad.GamepadLeanNone}"
+                                  Content="{DynamicResource Layout_GamepadLean_None}"/>
                         <CheckBox Margin="20,0"
-                                      IsEnabled="{Binding Gamepad.GamepadEnabled}"
-                                      IsChecked="{Binding Gamepad.GamepadLeanLeftButtons}"
-                                      Content="{DynamicResource Layout_GamepadLean_LeftButtons}"/>
+                                  IsEnabled="{Binding Gamepad.GamepadEnabled}"
+                                  IsChecked="{Binding Gamepad.GamepadLeanLeftButtons}"
+                                  Content="{DynamicResource Layout_GamepadLean_LeftButtons}"/>
                         <CheckBox Margin="20,0"
-                                      IsEnabled="{Binding Gamepad.GamepadEnabled}"
-                                      IsChecked="{Binding Gamepad.GamepadLeanLeftStick}"
-                                      Content="{DynamicResource Layout_GamepadLean_LeftStick}"/>
+                                  IsEnabled="{Binding Gamepad.GamepadEnabled}"
+                                  IsChecked="{Binding Gamepad.GamepadLeanLeftStick}"
+                                  Content="{DynamicResource Layout_GamepadLean_LeftStick}"/>
                         <CheckBox Margin="20,0"
-                                      IsEnabled="{Binding Gamepad.GamepadEnabled}"
-                                      IsChecked="{Binding Gamepad.GamepadLeanRightStick}"
-                                      Content="{DynamicResource Layout_GamepadLean_RightStick}"/>
+                                  IsEnabled="{Binding Gamepad.GamepadEnabled}"
+                                  IsChecked="{Binding Gamepad.GamepadLeanRightStick}"
+                                  Content="{DynamicResource Layout_GamepadLean_RightStick}"/>
 
                         <TextBlock Text="{DynamicResource Layout_GamepadLean_Reverse}"/>
 
                         <CheckBox Margin="20,0"
-                                      IsEnabled="{Binding Gamepad.GamepadEnabled}"
-                                      IsChecked="{Binding Gamepad.GamepadLeanReverseHorizontal}"
-                                      Content="{DynamicResource Layout_GamepadLean_ReverseHorizontal}"/>
+                                  IsEnabled="{Binding Gamepad.GamepadEnabled}"
+                                  IsChecked="{Binding Gamepad.GamepadLeanReverseHorizontal}"
+                                  Content="{DynamicResource Layout_GamepadLean_ReverseHorizontal}"/>
                         <CheckBox Margin="20,0"
-                                      IsEnabled="{Binding Gamepad.GamepadEnabled}"
-                                      IsChecked="{Binding Gamepad.GamepadLeanReverseVertical}"
-                                      Content="{DynamicResource Layout_GamepadLean_ReverseVertical}"/>
+                                  IsEnabled="{Binding Gamepad.GamepadEnabled}"
+                                  IsChecked="{Binding Gamepad.GamepadLeanReverseVertical}"
+                                  Content="{DynamicResource Layout_GamepadLean_ReverseVertical}"/>
 
                     </StackPanel>
                 </StackPanel>
