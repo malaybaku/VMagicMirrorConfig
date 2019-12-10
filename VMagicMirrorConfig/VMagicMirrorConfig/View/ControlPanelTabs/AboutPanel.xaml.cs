@@ -13,5 +13,8 @@ namespace Baku.VMagicMirrorConfig
 
         private void OnShowLicenseClick(object sender, RoutedEventArgs e)
             => new LicenseWindow().ShowDialog();
+
+        private void OnClickHyperLinkToModelData(object sender, RoutedEventArgs e)
+            => Process.Start("https://sketchfab.com/3d-models/xbox-controller-fb71f28a6eab4a2785cf68ff87c4c1fc");
     }
 }
