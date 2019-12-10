@@ -20,6 +20,8 @@ namespace Baku.VMagicMirrorConfig
         public LightSettingViewModel LightSetting { get; private set; }
         public WordToMotionSettingViewModel WordToMotionSetting { get; private set; }
 
+        private DeviceFreeLayoutHelper _deviceFreeLayoutHelper = null;
+
         private bool _activateOnStartup = false;
         public bool ActivateOnStartup
         {
@@ -400,6 +402,9 @@ namespace Baku.VMagicMirrorConfig
             {
                 LoadLastLoadedVrm();
             }
+
+            _deviceFreeLayoutHelper = new DeviceFreeLayoutHelper(LayoutSetting, WindowSetting);
+            _deviceFreeLayoutHelper.StartObserve();
         }
 
         public void Dispose()
@@ -409,6 +414,7 @@ namespace Baku.VMagicMirrorConfig
                 _isDisposed = true;
                 SaveSetting(SpecialFilePath.AutoSaveSettingFilePath, true);
                 Initializer.Dispose();
+                _deviceFreeLayoutHelper?.EndObserve();
                 MotionSetting.ClosePointer();
                 UnityAppCloser.Close();
             }
