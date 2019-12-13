@@ -148,6 +148,7 @@ namespace Baku.VMagicMirrorConfig
         /// </summary>
         /// <returns></returns>
         public Message CurrentCameraPosition() => NoArg();
+
         #endregion
 
         #region キーボード・マウスパッド
@@ -157,7 +158,20 @@ namespace Baku.VMagicMirrorConfig
         public Message HidHorizontalScale(int scalePercent) => WithArg($"{scalePercent}");
 
         public Message HidVisibility(bool visible) => WithArg($"{visible}");
+
         public Message SetKeyboardTypingEffectType(int typeIndex) => WithArg($"{typeIndex}");
+
+        public Message EnableDeviceFreeLayout(bool enable) => WithArg($"{enable}");
+
+        public Message SetDeviceLayout(string data) => WithArg(data);
+
+        public Message ResetDeviceLayout() => NoArg();
+
+        /// <summary>
+        /// Query.
+        /// </summary>
+        /// <returns></returns>
+        public Message CurrentDeviceLayout() => NoArg();
 
         #endregion
 

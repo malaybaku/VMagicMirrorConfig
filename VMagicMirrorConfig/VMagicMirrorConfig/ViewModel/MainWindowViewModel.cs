@@ -20,6 +20,8 @@ namespace Baku.VMagicMirrorConfig
         public LightSettingViewModel LightSetting { get; private set; }
         public WordToMotionSettingViewModel WordToMotionSetting { get; private set; }
 
+        private DeviceFreeLayoutHelper _deviceFreeLayoutHelper = null;
+
         private bool _activateOnStartup = false;
         public bool ActivateOnStartup
         {
@@ -236,8 +238,7 @@ namespace Baku.VMagicMirrorConfig
 
         private void OpenVRoidHub()
         {
-            //=> MessageSender.SendMessage(MessageFactory.Instance.AccessToVRoidHub());
-            Process.Start("https://hub.vroid.com/");
+            UrlNavigate.Open("https://hub.vroid.com/");
         }
 
         private void OpenManualUrl()
@@ -247,7 +248,7 @@ namespace Baku.VMagicMirrorConfig
                 "https://malaybaku.github.io/VMagicMirrorManual/index.html" :
                 "https://malaybaku.github.io/VMagicMirrorManual/en_index.html";
 
-            Process.Start(url);
+            UrlNavigate.Open(url);
         }
 
         private void AutoAdjust() => MessageSender.SendMessage(MessageFactory.Instance.RequestAutoAdjust());
@@ -383,6 +384,11 @@ namespace Baku.VMagicMirrorConfig
                 data => LayoutSetting.SilentSetCameraPosition(data)
                 );
 
+            Initializer.DeviceLayoutChecker.Start(
+                2000,
+                data => LayoutSetting.SilentSetDeviceLayout(data)
+                );
+
             var regSetting = new StartupRegistrySetting();
             _activateOnStartup = regSetting.CheckThisVersionRegistered();
             if (_activateOnStartup)
@@ -395,6 +401,9 @@ namespace Baku.VMagicMirrorConfig
             {
                 LoadLastLoadedVrm();
             }
+
+            _deviceFreeLayoutHelper = new DeviceFreeLayoutHelper(LayoutSetting, WindowSetting);
+            _deviceFreeLayoutHelper.StartObserve();
         }
 
         public void Dispose()
@@ -404,6 +413,7 @@ namespace Baku.VMagicMirrorConfig
                 _isDisposed = true;
                 SaveSetting(SpecialFilePath.AutoSaveSettingFilePath, true);
                 Initializer.Dispose();
+                _deviceFreeLayoutHelper?.EndObserve();
                 MotionSetting.ClosePointer();
                 UnityAppCloser.Close();
             }

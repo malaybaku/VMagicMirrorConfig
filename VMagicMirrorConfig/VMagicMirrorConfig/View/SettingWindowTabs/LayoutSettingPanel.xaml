@@ -12,6 +12,7 @@
              d:DesignHeight="1050"
              >
     <UserControl.Resources>
+        <vmm:BooleanReverseConverter x:Key="BooleanReverseConverter"/>
         <Style TargetType="md:PackIcon" x:Key="HeaderPackIcon">
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Width" Value="20"/>
@@ -157,6 +158,36 @@
                     <StackPanel Orientation="Horizontal"
                                 Margin="5"
                                 >
+                        <md:PackIcon Kind="TabletDashboard"
+                                     Style="{StaticResource SettingHeaderPackIcon}"
+                                     />
+
+                        <TextBlock Text="{DynamicResource Layout_DeviceLayout}"
+                                   Style="{StaticResource HeaderText}"
+                                   Margin="5"
+                                   />
+
+                        <Button Style="{StaticResource CategorySettingResetButton}"
+                                Command="{Binding ResetDeviceLayoutCommand}"
+                                />
+                    </StackPanel>
+
+                    <CheckBox Margin="20,2"
+                              VerticalContentAlignment="Center"
+                              IsChecked="{Binding EnableDeviceFreeLayout}">
+                        <CheckBox.Content>
+                            <TextBlock Text="{DynamicResource Layout_DeviceFreeLayout}"/>
+                        </CheckBox.Content>
+                    </CheckBox>
+                </StackPanel>
+            </md:Card>
+
+            <md:Card>
+                <StackPanel>
+
+                    <StackPanel Orientation="Horizontal"
+                                Margin="5"
+                                >
                         <md:PackIcon Kind="Keyboard"
                                      Style="{StaticResource SettingHeaderPackIcon}"
                                      />
@@ -171,57 +202,11 @@
                                 />
                     </StackPanel>
 
-                    <Grid Margin="5">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="3*" />
-                            <ColumnDefinition Width="1*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <CheckBox Grid.Row="0" Grid.Column="0"
-                                    Grid.ColumnSpan="2"
-                                    Margin="20,2"
-                                    VerticalAlignment="Center"
-                                    VerticalContentAlignment="Center"
-                                    IsChecked="{Binding HidVisibility}"
-                                    >
-                            <CheckBox.Content>
-                                <TextBlock Text="{DynamicResource Layout_HidVisible}"/>
-                            </CheckBox.Content>
-
-                        </CheckBox>
-
-                        <TextBlock Grid.Row="1" Grid.Column="0"
-                                       Text="{DynamicResource Layout_HidHeight}"/>
-                        <Slider Grid.Row="1" Grid.Column="1"
-                                    x:Name="sliderHidHeight"
-                                    Minimum="10"
-                                    Maximum="300"
-                                    Value="{Binding HidHeight, Mode=TwoWay}"
-                                    />
-                        <TextBox Grid.Row="1" Grid.Column="2"
-                                     Text="{Binding Value, ElementName=sliderHidHeight}"
-                                     />
-
-                        <TextBlock Grid.Row="2" Grid.Column="0"
-                                       Text="{DynamicResource Layout_HidHorizontalScale}"
-                                       ToolTip="{DynamicResource Layout_HidHorizontalScale_Tooltip}"
-                                       />
-                        <Slider Grid.Row="2" Grid.Column="1"
-                                    x:Name="sliderHidHorizontalScale"
-                                    Minimum="10"
-                                    Maximum="300"
-                                    Value="{Binding HidHorizontalScale, Mode=TwoWay}"
-                                    />
-                        <TextBox Grid.Row="2" Grid.Column="2"
-                                     Text="{Binding Value, ElementName=sliderHidHorizontalScale}"
-                                     />
-                    </Grid>
+                    <CheckBox Margin="20,2"
+                              VerticalContentAlignment="Center"
+                              IsChecked="{Binding HidVisibility}">
+                        <TextBlock Text="{DynamicResource Layout_HidVisible}"/>
+                    </CheckBox>
 
                     <TextBlock Text="{DynamicResource Layout_Hid_TypingEffect_Header}"/>
                     <Grid Margin="20,5"
@@ -289,77 +274,41 @@
                             <TextBlock Text="{DynamicResource Layout_GamepadEnable}"/>
                         </CheckBox>
 
-                        <Grid Margin="5">
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="3*" />
-                                <ColumnDefinition Width="1*"/>
-                            </Grid.ColumnDefinitions>
-
-                            <TextBlock Grid.Row="0" Grid.Column="0"
-                                           Text="{DynamicResource Layout_GamepadHeight}"/>
-                            <Slider Grid.Row="0" Grid.Column="1"
-                                        x:Name="sliderGamepadHeight"
-                                        Minimum="10"
-                                        Maximum="300"
-                                        IsEnabled="{Binding Gamepad.GamepadEnabled}"
-                                        Value="{Binding Gamepad.GamepadHeight, Mode=TwoWay}"
-                                        />
-                            <TextBox Grid.Row="0" Grid.Column="2"
-                                         IsEnabled="{Binding Gamepad.GamepadEnabled}"
-                                         Text="{Binding Value, ElementName=sliderGamepadHeight}"
-                                         />
-
-                            <TextBlock Grid.Row="1" Grid.Column="0"
-                                           Text="{DynamicResource Layout_GamepadHorizontalScale}"
-                                           />
-                            <Slider Grid.Row="1" Grid.Column="1"
-                                            x:Name="sliderGamepadHorizontalScale"
-                                            Minimum="10"
-                                            Maximum="300"
-                                            IsEnabled="{Binding Gamepad.GamepadEnabled}"
-                                            Value="{Binding Gamepad.GamepadHorizontalScale, Mode=TwoWay}"
-                                            />
-                            <TextBox Grid.Row="1" Grid.Column="2"
-                                         IsEnabled="{Binding Gamepad.GamepadEnabled}"
-                                         Text="{Binding Value, ElementName=sliderGamepadHorizontalScale}"
-                                         />
-
-                        </Grid>
+                        <CheckBox Margin="20,2"
+                              VerticalContentAlignment="Center"
+                              IsChecked="{Binding GamepadVisibility}">
+                            <TextBlock Text="{DynamicResource Layout_GamepadVisible}"/>
+                        </CheckBox>
 
                         <TextBlock Text="{DynamicResource Layout_GamepadLean}"/>
 
                         <CheckBox Margin="20,0"
-                                      IsEnabled="{Binding Gamepad.GamepadEnabled}"
-                                      IsChecked="{Binding Gamepad.GamepadLeanNone}"
-                                      Content="{DynamicResource Layout_GamepadLean_None}"/>
+                                  IsEnabled="{Binding Gamepad.GamepadEnabled}"
+                                  IsChecked="{Binding Gamepad.GamepadLeanNone}"
+                                  Content="{DynamicResource Layout_GamepadLean_None}"/>
                         <CheckBox Margin="20,0"
-                                      IsEnabled="{Binding Gamepad.GamepadEnabled}"
-                                      IsChecked="{Binding Gamepad.GamepadLeanLeftButtons}"
-                                      Content="{DynamicResource Layout_GamepadLean_LeftButtons}"/>
+                                  IsEnabled="{Binding Gamepad.GamepadEnabled}"
+                                  IsChecked="{Binding Gamepad.GamepadLeanLeftButtons}"
+                                  Content="{DynamicResource Layout_GamepadLean_LeftButtons}"/>
                         <CheckBox Margin="20,0"
-                                      IsEnabled="{Binding Gamepad.GamepadEnabled}"
-                                      IsChecked="{Binding Gamepad.GamepadLeanLeftStick}"
-                                      Content="{DynamicResource Layout_GamepadLean_LeftStick}"/>
+                                  IsEnabled="{Binding Gamepad.GamepadEnabled}"
+                                  IsChecked="{Binding Gamepad.GamepadLeanLeftStick}"
+                                  Content="{DynamicResource Layout_GamepadLean_LeftStick}"/>
                         <CheckBox Margin="20,0"
-                                      IsEnabled="{Binding Gamepad.GamepadEnabled}"
-                                      IsChecked="{Binding Gamepad.GamepadLeanRightStick}"
-                                      Content="{DynamicResource Layout_GamepadLean_RightStick}"/>
+                                  IsEnabled="{Binding Gamepad.GamepadEnabled}"
+                                  IsChecked="{Binding Gamepad.GamepadLeanRightStick}"
+                                  Content="{DynamicResource Layout_GamepadLean_RightStick}"/>
 
                         <TextBlock Text="{DynamicResource Layout_GamepadLean_Reverse}"/>
 
                         <CheckBox Margin="20,0"
-                                      IsEnabled="{Binding Gamepad.GamepadEnabled}"
-                                      IsChecked="{Binding Gamepad.GamepadLeanReverseHorizontal}"
-                                      Content="{DynamicResource Layout_GamepadLean_ReverseHorizontal}"/>
+                                  IsEnabled="{Binding Gamepad.GamepadEnabled}"
+                                  IsChecked="{Binding Gamepad.GamepadLeanReverseHorizontal}"
+                                  Content="{DynamicResource Layout_GamepadLean_ReverseHorizontal}"/>
                         <CheckBox Margin="20,0"
-                                      IsEnabled="{Binding Gamepad.GamepadEnabled}"
-                                      IsChecked="{Binding Gamepad.GamepadLeanReverseVertical}"
-                                      Content="{DynamicResource Layout_GamepadLean_ReverseVertical}"/>
+                                  IsEnabled="{Binding Gamepad.GamepadEnabled}"
+                                  IsChecked="{Binding Gamepad.GamepadLeanReverseVertical}"
+                                  Content="{DynamicResource Layout_GamepadLean_ReverseVertical}"/>
 
                     </StackPanel>
                 </StackPanel>

@@ -5,10 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vmm="clr-namespace:Baku.VMagicMirrorConfig"
              mc:Ignorable="d" 
-             d:DesignHeight="150" d:DesignWidth="250">
+             d:DesignHeight="250" d:DesignWidth="450">
     <UserControl.Resources>
         <Style x:Key="NoteText" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
             <Setter Property="Margin" Value="2"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
         </Style>
     </UserControl.Resources>
     <StackPanel HorizontalAlignment="Left"
@@ -27,5 +28,20 @@
                 Width="120"
                 Click="OnShowLicenseClick"
                 />
+
+        <Rectangle Width="20" Height="20"
+                   
+                   />
+
+
+        <TextBlock Style="{StaticResource NoteText}"
+                   Text="VMagicMirror uses model data by Attribution 4.0 International (CC BY 4.0)"/>
+        <TextBlock Style="{StaticResource NoteText}"
+                   Text="Model data is by : Criegrrunov"/>
+        <TextBlock>
+                <Hyperlink Click="OnClickHyperLinkToModelData">Model URL (SketchFab)</Hyperlink>
+        </TextBlock>
+        <TextBlock Style="{StaticResource NoteText}"
+                   Text="In VMagicMirror, the materials are replaced for the visual consistency."/>
     </StackPanel>
 </UserControl>

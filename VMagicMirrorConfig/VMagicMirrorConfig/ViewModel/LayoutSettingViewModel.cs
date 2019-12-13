@@ -21,7 +21,6 @@ namespace Baku.VMagicMirrorConfig
         {
             Gamepad = new GamepadSettingViewModel(sender, receiver);
             _typingEffectItem = TypingEffectSelections[0];
-            receiver.ReceivedCommand += OnReceiveCommand;
         }
 
         private bool _silentPropertySetter = false;
@@ -32,7 +31,6 @@ namespace Baku.VMagicMirrorConfig
                 base.SendMessage(message);
             }
         }
-
 
         /// <summary>
         /// </summary>
@@ -72,7 +70,10 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        //NOTE: 以下4つのプロパティはユーザーが直接いじるのは想定してない
+        //NOTE: カメラ位置、デバイスレイアウト、クイックセーブした視点については、ユーザーが直接いじる想定ではない
+
+        #region カメラ位置とデバイスレイアウト
+
         private string _cameraPosition = "";
         public string CameraPosition
         {
@@ -85,12 +86,37 @@ namespace Baku.VMagicMirrorConfig
                 }
             }
         }
+
+        private string _deviceLayout = "";
+        public string DeviceLayout
+        {
+            get => _deviceLayout;
+            set
+            {
+                if (SetValue(ref _deviceLayout, value))
+                {
+                    SendMessage(MessageFactory.Instance.SetDeviceLayout(DeviceLayout));
+                }
+            }
+        }
+
         /// <summary>
         /// カメラ位置の情報を更新しますが、設定時にUnityプロセスにメッセージを送信しません。
         /// </summary>
         /// <param name="cameraPos"></param>
         public void SilentSetCameraPosition(string cameraPos)
             => _cameraPosition = cameraPos ?? "";
+
+        /// <summary>
+        /// デバイスのレイアウト情報を更新しますが、設定時にUnityプロセスにメッセージを送信しません。
+        /// </summary>
+        /// <param name="deviceLayout"></param>
+        public void SilentSetDeviceLayout(string deviceLayout)
+            => _deviceLayout = deviceLayout ?? "";
+
+        #endregion
+
+        #region 視点のクイックセーブ/ロード
 
         //NOTE: 数が少ないので、ラクな方法ということでハードコーディングにしてます
         //以下3つの文字列は"CameraPosition+視野角"というデータで構成されます
@@ -213,6 +239,8 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
+        #endregion
+
         private ActionCommand? _resetCameraPositionCommand;
         public ActionCommand ResetCameraPositionCommand
             => _resetCameraPositionCommand ??= new ActionCommand(ResetCameraPosition);
@@ -237,34 +265,6 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private int _hidHeight = 90;
-        /// <summary> Unit: [cm] </summary>
-        public int HidHeight
-        {
-            get => _hidHeight;
-            set
-            {
-                if (SetValue(ref _hidHeight, value))
-                {
-                    SendMessage(MessageFactory.Instance.HidHeight(HidHeight));
-                }
-            }
-        }
-
-        private int _hidHorizontalScale = 70;
-        /// <summary> Unit: [%] </summary>
-        public int HidHorizontalScale
-        {
-            get => _hidHorizontalScale;
-            set
-            {
-                if (SetValue(ref _hidHorizontalScale, value))
-                {
-                    SendMessage(MessageFactory.Instance.HidHorizontalScale(HidHorizontalScale));
-                }
-            }
-        }
-
         private bool _hidVisibility = true;
         /// <summary> Centimeter </summary>
         public bool HidVisibility
@@ -278,6 +278,24 @@ namespace Baku.VMagicMirrorConfig
                 }
             }
         }
+
+        private bool _enableDeviceFreeLayout = false;
+        [XmlIgnore]
+        public bool EnableDeviceFreeLayout
+        {
+            get => _enableDeviceFreeLayout;
+            set
+            {
+                if (SetValue(ref _enableDeviceFreeLayout, value))
+                {
+                    SendMessage(
+                        MessageFactory.Instance.EnableDeviceFreeLayout(EnableDeviceFreeLayout)
+                        );
+                }
+            }
+        }
+
+        #region タイピングエフェクト
 
         //NOTE: ラジオボタン表示をザツにやるためにbool値たくさんで代用している(ほんとはあまり良くない)
         //TODO: エフェクトがこれ以上増える可能性が高いので、コンボボックスでの表示を前提にデータ構造を見直すべき
@@ -388,38 +406,19 @@ namespace Baku.VMagicMirrorConfig
             new TypingEffectSelectionItem(TypingEffectIndexLight, "Light", MaterialDesignThemes.Wpf.PackIconKind.FlashOn),
         };
 
-        private void OnReceiveCommand(object? sender, CommandReceivedEventArgs e)
-        {
-            switch (e.Command)
-            {
-                case ReceiveMessageNames.AutoAdjustResults:
-                    SetAutoAdjustResults(e.Args);
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        private void SetAutoAdjustResults(string args)
-        {
-            try
-            {
-                var parameters = JsonConvert.DeserializeObject<AutoAdjustParameters>(args);
-                _silentPropertySetter = true;
-                HidHeight = parameters.HidHeight;
-                HidHorizontalScale = parameters.HidHorizontalScale;
-            }
-            catch (Exception)
-            {
-                //諦める
-            }
-            finally
-            {
-                _silentPropertySetter = false;
-            }
-        }
+        #endregion
 
         #region Reset API
+
+        private ActionCommand? _resetDeviceLayoutCommand = null;
+        public ActionCommand ResetDeviceLayoutCommand
+            => _resetDeviceLayoutCommand ??= new ActionCommand(
+                () => SettingResetUtils.ResetSingleCategorySetting(ResetDeviceLayout)
+                );
+        private void ResetDeviceLayout()
+        {
+            SendMessage(MessageFactory.Instance.ResetDeviceLayout());
+        }
 
         private ActionCommand? _resetHidSettingCommand = null;
         public ActionCommand ResetHidSettingCommand
@@ -428,8 +427,6 @@ namespace Baku.VMagicMirrorConfig
                 );
         private void ResetHidSetting()
         {
-            HidHeight = 90;
-            HidHorizontalScale = 70;
             HidVisibility = true;
             TypingEffectIsNone = true;
         }
