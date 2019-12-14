@@ -211,7 +211,7 @@ namespace Baku.VMagicMirrorConfig
         private ActionCommand? _resetBackgroundColorSettingCommand = null;
         public ActionCommand ResetBackgroundColorSettingCommand
             => _resetBackgroundColorSettingCommand ??= new ActionCommand(
-                () => SettingResetUtils.ResetSingleCategorySetting(ResetBackgroundColor)
+                () => SettingResetUtils.ResetSingleCategorySettingAsync(ResetBackgroundColor)
                 );
 
         private void ResetBackgroundColor()
@@ -224,7 +224,7 @@ namespace Baku.VMagicMirrorConfig
         private ActionCommand? _resetOpacitySettingCommand = null;
         public ActionCommand ResetOpacitySettingCommand
             => _resetOpacitySettingCommand ??= new ActionCommand(
-                () => SettingResetUtils.ResetSingleCategorySetting(ResetOpacity)
+                () => SettingResetUtils.ResetSingleCategorySettingAsync(ResetOpacity)
                 );
 
         private void ResetOpacity()

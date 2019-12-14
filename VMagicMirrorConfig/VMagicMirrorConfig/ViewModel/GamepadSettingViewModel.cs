@@ -133,7 +133,7 @@
         private ActionCommand? _resetSettingCommand = null;
         public ActionCommand ResetSettingCommand
             => _resetSettingCommand ??= new ActionCommand(
-                () => SettingResetUtils.ResetSingleCategorySetting(ResetToDefault)
+                () => SettingResetUtils.ResetSingleCategorySettingAsync(ResetToDefault)
                 );
 
         public override void ResetToDefault()

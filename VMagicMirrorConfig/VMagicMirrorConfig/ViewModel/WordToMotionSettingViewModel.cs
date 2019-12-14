@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Windows;
+using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace Baku.VMagicMirrorConfig
@@ -223,16 +223,15 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        public void DeleteItem(WordToMotionItemViewModel item)
+        public async Task DeleteItem(WordToMotionItemViewModel item)
         {
             var indication = MessageIndication.DeleteWordToMotionItem(LanguageSelector.Instance.LanguageName);
-            var res = MessageBox.Show(
-                Application.Current.MainWindow,
-                string.Format(indication.Content, item.Word),
+            bool res = await MessageBoxWrapper.Instance.ShowAsync(
                 indication.Title,
-                MessageBoxButton.OKCancel
+                string.Format(indication.Content, item.Word),
+                MessageBoxWrapper.MessageBoxStyle.OKCancel
                 );
-            if (res == MessageBoxResult.OK)
+            if (res)
             {
                 _items.Remove(item);
                 RequestReload();
@@ -258,7 +257,7 @@ namespace Baku.VMagicMirrorConfig
         private ActionCommand? _resetByDefaultItemsCommand = null;
         public ActionCommand ResetByDefaultItemsCommand
             => _resetByDefaultItemsCommand ??= new ActionCommand(
-                () => SettingResetUtils.ResetSingleCategorySetting(LoadDefaultItems)
+                () => SettingResetUtils.ResetSingleCategorySettingAsync(LoadDefaultItems)
                 );
 
         public override void ResetToDefault()

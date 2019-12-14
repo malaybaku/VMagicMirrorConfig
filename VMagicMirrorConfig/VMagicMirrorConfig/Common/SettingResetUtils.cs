@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows;
 
 namespace Baku.VMagicMirrorConfig
 {
@@ -12,32 +11,19 @@ namespace Baku.VMagicMirrorConfig
         /// 確認ダイアログを出したうえで、個別カテゴリの設定をリセットします。
         /// </summary>
         /// <param name="resetAction"></param>
-        public static void ResetSingleCategorySetting(Action resetAction)
+        public static async void ResetSingleCategorySettingAsync(Action resetAction)
         {
             var indication = MessageIndication.ResetSingleCategoryConfirmation(
                 LanguageSelector.Instance.LanguageName
                 );
 
-            MessageBoxResult res;
-            if (SettingWindow.CurrentWindow != null)
-            {
-                res = MessageBox.Show(
-                    SettingWindow.CurrentWindow,    
-                    indication.Content,
-                    indication.Title,
-                    MessageBoxButton.OKCancel
-                    );
-            }
-            else
-            {
-                res = MessageBox.Show(
-                    indication.Content,
-                    indication.Title,
-                    MessageBoxButton.OKCancel
-                    );
-            }
+            bool res = await MessageBoxWrapper.Instance.ShowAsync(
+                indication.Title, 
+                indication.Content,
+                MessageBoxWrapper.MessageBoxStyle.OKCancel
+                );
 
-            if (res == MessageBoxResult.OK)
+            if (res)
             {
                 resetAction();
             }
