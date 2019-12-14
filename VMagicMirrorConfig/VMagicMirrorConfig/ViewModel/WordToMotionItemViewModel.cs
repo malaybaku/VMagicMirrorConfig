@@ -190,7 +190,7 @@ namespace Baku.VMagicMirrorConfig
 
         private ActionCommand? _deleteCommand;
         public ActionCommand DeleteCommand
-            => _deleteCommand ??= new ActionCommand(() => _parent.DeleteItem(this));
+            => _deleteCommand ??= new ActionCommand(async () => await _parent.DeleteItem(this));
 
         private ObservableCollection<string> _availableBuiltInClipNames
             = new ObservableCollection<string>();

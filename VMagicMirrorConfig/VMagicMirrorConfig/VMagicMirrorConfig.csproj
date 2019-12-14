@@ -2,7 +2,7 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <!--<LangVersion>latest</LangVersion>-->
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <!--<TargetFramework>net4.8</TargetFramework>-->
     <UseWpf>true</UseWpf>
     <RootNamespace>Baku.VMagicMirrorConfig</RootNamespace>
@@ -15,9 +15,9 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Dragablz" Version="0.0.3.203" />
-    <PackageReference Include="MaterialDesignColors" Version="1.2.1-ci699" />
-    <PackageReference Include="MaterialDesignThemes" Version="3.0.0-ci699" />
+    <PackageReference Include="MaterialDesignColors" Version="1.2.1" />
+    <PackageReference Include="MaterialDesignThemes" Version="3.0.0" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.3" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 </Project>

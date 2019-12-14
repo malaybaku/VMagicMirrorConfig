@@ -196,7 +196,9 @@ namespace Baku.VMagicMirrorConfig
             var serializer = new JsonSerializer();
             using (var jsonReader = new JsonTextReader(reader))
             {
-                return serializer.Deserialize<MotionRequestCollection>(jsonReader);
+                return 
+                    serializer.Deserialize<MotionRequestCollection>(jsonReader) ?? 
+                    new MotionRequestCollection(new MotionRequest[0]);
             }
         }
     }

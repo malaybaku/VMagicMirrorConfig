@@ -47,7 +47,10 @@
     <sys:String x:Key="Streaming_Motion">モーション</sys:String>
     <sys:String x:Key="Streaming_View">表示</sys:String>
     <sys:String x:Key="Streaming_WordToMotion">Word To Motion</sys:String>
-    
+
+    <sys:String x:Key="Streaming_DeviceLayout">デバイスのレイアウト</sys:String>
+    <sys:String x:Key="Streaming_DeviceLayout_Reset">リセット</sys:String>
+
     <sys:String x:Key="Streaming_Screenshot">スクリーンショット</sys:String>
     <sys:String x:Key="Streaming_Screenshot_Take">撮影</sys:String>
     <sys:String x:Key="Streaming_Screenshot_OpenSaveFolder">保存フォルダ...</sys:String>
@@ -145,10 +148,12 @@
     <sys:String x:Key="Layout_Camera_QuickSave">クイックセーブ</sys:String>
     <sys:String x:Key="Layout_Camera_QuickLoad">クイックロード</sys:String>
 
+    <!-- Layout : Devices -->
+    <sys:String x:Key="Layout_DeviceLayout">デバイスのレイアウト</sys:String>
+    <sys:String x:Key="Layout_DeviceFreeLayout">フリーレイアウトモード</sys:String>
+
     <!-- Layout : Keyboard / Mouse Pad -->
     <sys:String x:Key="Layout_Hid">キーボード</sys:String>
-    <sys:String x:Key="Layout_HidHeight">高さ[cm]</sys:String>
-    <sys:String x:Key="Layout_HidHorizontalScale">サイズ[%]</sys:String>
     <sys:String x:Key="Layout_HidHorizontalScale_Tooltip">キーボードのサイズを指定します。小さくすると、デバイスが小さくなり、キャラクターに近づきます。</sys:String>
     <sys:String x:Key="Layout_HidVisible">キーボードを表示</sys:String>
 
@@ -167,8 +172,6 @@
     <sys:String x:Key="Layout_GamepadEnable">ゲームパッド入力のキャプチャを有効化</sys:String>
     <sys:String x:Key="Layout_GamepadDeviceNumber">デバイス番号</sys:String>
     
-    <sys:String x:Key="Layout_GamepadHeight">高さ[cm]</sys:String>
-    <sys:String x:Key="Layout_GamepadHorizontalScale">サイズ[%]</sys:String>
     <sys:String x:Key="Layout_GamepadVisible">ゲームパッドを表示</sys:String>
     <sys:String x:Key="Layout_GamepadLean">キャラ傾き入力</sys:String>
     <sys:String x:Key="Layout_GamepadLean_None">なし</sys:String>

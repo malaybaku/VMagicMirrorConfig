@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Xml.Serialization;
 using Microsoft.Win32;
@@ -19,6 +19,10 @@ namespace Baku.VMagicMirrorConfig
         public LayoutSettingViewModel LayoutSetting { get; private set; }
         public LightSettingViewModel LightSetting { get; private set; }
         public WordToMotionSettingViewModel WordToMotionSetting { get; private set; }
+
+        public DialogHelperViewModel DialogHelper => DialogHelperViewModel.Instance;
+
+        private DeviceFreeLayoutHelper? _deviceFreeLayoutHelper;
 
         private bool _activateOnStartup = false;
         public bool ActivateOnStartup
@@ -154,9 +158,11 @@ namespace Baku.VMagicMirrorConfig
 
         #region Command Impl
 
-        private void LoadVrm()
+        //NOTE: async voidを使ってるが、ここはUIイベントのハンドラ相当なので許して
+
+        private async void LoadVrm()
         {
-            LoadVrmSub(() =>
+            await LoadVrmSub(() =>
             {
                 var dialog = new OpenFileDialog()
                 {
@@ -172,11 +178,12 @@ namespace Baku.VMagicMirrorConfig
             });
         }
 
-        private void LoadVrmByFilePath(string filePath)
+        private async void LoadVrmByFilePath(string? filePath)
         {
-            if (Path.GetExtension(filePath) == ".vrm")
+            if (!string.IsNullOrEmpty(filePath) &&
+                Path.GetExtension(filePath) == ".vrm")
             {
-                LoadVrmSub(() => filePath);
+                await LoadVrmSub(() => filePath);
             }
         }
 
@@ -184,7 +191,7 @@ namespace Baku.VMagicMirrorConfig
         /// ファイルパスを取得する処理を指定して、VRMをロードします。
         /// </summary>
         /// <param name="getFilePathProcess"></param>
-        private void LoadVrmSub(Func<string> getFilePathProcess)
+        private async Task LoadVrmSub(Func<string> getFilePathProcess)
         {
             bool turnOffTopMostTemporary = WindowSetting.TopMost;
             if (turnOffTopMostTemporary)
@@ -204,17 +211,14 @@ namespace Baku.VMagicMirrorConfig
 
             MessageSender.SendMessage(MessageFactory.Instance.OpenVrmPreview(filePath));
 
-
             var indication = MessageIndication.LoadVrmConfirmation(LanguageName);
-
-            var res = MessageBox.Show(
-                Application.Current.MainWindow,
-                indication.Content,
+            bool res = await MessageBoxWrapper.Instance.ShowAsync(
                 indication.Title,
-                MessageBoxButton.OKCancel
+                indication.Content,
+                MessageBoxWrapper.MessageBoxStyle.OKCancel
                 );
 
-            if (res == MessageBoxResult.OK)
+            if(res)
             {
                 MessageSender.SendMessage(MessageFactory.Instance.OpenVrm(filePath));
                 _lastVrmLoadFilePath = filePath;
@@ -236,8 +240,7 @@ namespace Baku.VMagicMirrorConfig
 
         private void OpenVRoidHub()
         {
-            //=> MessageSender.SendMessage(MessageFactory.Instance.AccessToVRoidHub());
-            Process.Start("https://hub.vroid.com/");
+            UrlNavigate.Open("https://hub.vroid.com/");
         }
 
         private void OpenManualUrl()
@@ -247,7 +250,7 @@ namespace Baku.VMagicMirrorConfig
                 "https://malaybaku.github.io/VMagicMirrorManual/index.html" :
                 "https://malaybaku.github.io/VMagicMirrorManual/en_index.html";
 
-            Process.Start(url);
+            UrlNavigate.Open(url);
         }
 
         private void AutoAdjust() => MessageSender.SendMessage(MessageFactory.Instance.RequestAutoAdjust());
@@ -284,18 +287,16 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private void ResetToDefault()
+        private async void ResetToDefault()
         {
             var indication = MessageIndication.ResetSettingConfirmation(LanguageName);
-
-            var res = MessageBox.Show(
-                Application.Current.MainWindow,
-                indication.Content,
+            bool res = await MessageBoxWrapper.Instance.ShowAsync(
                 indication.Title,
-                MessageBoxButton.OKCancel
+                indication.Content,
+                MessageBoxWrapper.MessageBoxStyle.OKCancel
                 );
 
-            if (res == MessageBoxResult.OK)
+            if (res)
             {
                 LightSetting.ResetToDefault();
                 MotionSetting.ResetToDefault();
@@ -383,6 +384,11 @@ namespace Baku.VMagicMirrorConfig
                 data => LayoutSetting.SilentSetCameraPosition(data)
                 );
 
+            Initializer.DeviceLayoutChecker.Start(
+                2000,
+                data => LayoutSetting.SilentSetDeviceLayout(data)
+                );
+
             var regSetting = new StartupRegistrySetting();
             _activateOnStartup = regSetting.CheckThisVersionRegistered();
             if (_activateOnStartup)
@@ -395,6 +401,9 @@ namespace Baku.VMagicMirrorConfig
             {
                 LoadLastLoadedVrm();
             }
+
+            _deviceFreeLayoutHelper = new DeviceFreeLayoutHelper(LayoutSetting, WindowSetting);
+            _deviceFreeLayoutHelper.StartObserve();
         }
 
         public void Dispose()
@@ -404,6 +413,7 @@ namespace Baku.VMagicMirrorConfig
                 _isDisposed = true;
                 SaveSetting(SpecialFilePath.AutoSaveSettingFilePath, true);
                 Initializer.Dispose();
+                _deviceFreeLayoutHelper?.EndObserve();
                 MotionSetting.ClosePointer();
                 UnityAppCloser.Close();
             }

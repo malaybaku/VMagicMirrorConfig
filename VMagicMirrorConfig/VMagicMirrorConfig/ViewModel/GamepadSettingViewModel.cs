@@ -1,7 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
-
-namespace Baku.VMagicMirrorConfig
+﻿namespace Baku.VMagicMirrorConfig
 {
     public class GamepadSettingViewModel : SettingViewModelBase
     {
@@ -9,52 +6,7 @@ namespace Baku.VMagicMirrorConfig
 
         internal GamepadSettingViewModel(IMessageSender sender, IMessageReceiver receiver) : base(sender)
         {
-            receiver.ReceivedCommand += OnReceivedCommand;
         }
-
-        private void OnReceivedCommand(object? sender, CommandReceivedEventArgs e)
-        {
-            switch (e.Command)
-            {
-                case ReceiveMessageNames.AutoAdjustResults:
-                    SetAutoAdjustResults(e.Args);
-                    break;
-                default:
-                    break;
-            }
-
-        }
-
-        private bool _silentPropertySetter = false;
-        private protected override void SendMessage(Message message)
-        {
-            if (!_silentPropertySetter)
-            {
-                base.SendMessage(message);
-            }
-        }
-
-        private void SetAutoAdjustResults(string args)
-        {
-            try
-            {
-                var parameters = JsonConvert.DeserializeObject<AutoAdjustParameters>(args);
-                _silentPropertySetter = true;
-                GamepadHeight = parameters.GamepadHeight;
-                GamepadHorizontalScale = parameters.GamepadHorizontalScale;
-            }
-            catch(Exception)
-            {
-                //諦める
-            }
-            finally
-            {
-                _silentPropertySetter = false;
-            }
-        }
-
-
-        #region Properties
 
         private bool _gamepadEnabled = true;
         public bool GamepadEnabled
@@ -69,34 +21,6 @@ namespace Baku.VMagicMirrorConfig
                     {
                         GamepadVisibility = false;
                     }
-                }
-            }
-        }
-
-        private int _height = 100;
-        /// <summary> Unit: [cm] </summary>
-        public int GamepadHeight
-        {
-            get => _height;
-            set
-            {
-                if (SetValue(ref _height, value))
-                {
-                    SendMessage(MessageFactory.Instance.GamepadHeight(GamepadHeight));
-                }
-            }
-        }
-
-        private int _horizontalScale = 80;
-        /// <summary> Unit: [%] </summary>
-        public int GamepadHorizontalScale
-        {
-            get => _horizontalScale;
-            set
-            {
-                if (SetValue(ref _horizontalScale, value))
-                {
-                    SendMessage(MessageFactory.Instance.GamepadHorizontalScale(GamepadHorizontalScale));
                 }
             }
         }
@@ -206,20 +130,15 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        #endregion
-
         private ActionCommand? _resetSettingCommand = null;
         public ActionCommand ResetSettingCommand
             => _resetSettingCommand ??= new ActionCommand(
-                () => SettingResetUtils.ResetSingleCategorySetting(ResetToDefault)
+                () => SettingResetUtils.ResetSingleCategorySettingAsync(ResetToDefault)
                 );
 
         public override void ResetToDefault()
         {
             GamepadEnabled = true;
-
-            GamepadHeight = 100;
-            GamepadHorizontalScale = 80;
             GamepadVisibility = false;
 
             GamepadLeanNone = false;
