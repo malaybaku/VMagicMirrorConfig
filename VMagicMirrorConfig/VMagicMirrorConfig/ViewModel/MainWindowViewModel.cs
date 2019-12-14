@@ -20,7 +20,7 @@ namespace Baku.VMagicMirrorConfig
         public LightSettingViewModel LightSetting { get; private set; }
         public WordToMotionSettingViewModel WordToMotionSetting { get; private set; }
 
-        private DeviceFreeLayoutHelper _deviceFreeLayoutHelper = null;
+        private DeviceFreeLayoutHelper? _deviceFreeLayoutHelper;
 
         private bool _activateOnStartup = false;
         public bool ActivateOnStartup
@@ -174,9 +174,10 @@ namespace Baku.VMagicMirrorConfig
             });
         }
 
-        private void LoadVrmByFilePath(string filePath)
+        private void LoadVrmByFilePath(string? filePath)
         {
-            if (Path.GetExtension(filePath) == ".vrm")
+            if (!string.IsNullOrEmpty(filePath) &&
+                Path.GetExtension(filePath) == ".vrm")
             {
                 LoadVrmSub(() => filePath);
             }

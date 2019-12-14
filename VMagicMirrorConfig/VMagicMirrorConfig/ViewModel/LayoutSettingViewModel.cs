@@ -225,8 +225,8 @@ namespace Baku.VMagicMirrorConfig
                 QuickSave3;
 
                 var obj = JObject.Parse(saveData);
-                string cameraPos = (string)obj["pos"];
-                int fov = (int)obj["fov"];
+                string cameraPos = (string?)obj["pos"] ?? "";
+                int fov = (int)(obj["fov"] ?? new JValue(40));
 
                 CameraFov = fov;
                 //NOTE: CameraPositionには書き込まない。
