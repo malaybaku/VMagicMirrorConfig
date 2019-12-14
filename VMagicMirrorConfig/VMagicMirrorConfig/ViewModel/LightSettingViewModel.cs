@@ -353,25 +353,25 @@ namespace Baku.VMagicMirrorConfig
         private ActionCommand? _resetLightSettingCommand = null;
         public ActionCommand ResetLightSettingCommand
             => _resetLightSettingCommand ??= new ActionCommand(
-                () => SettingResetUtils.ResetSingleCategorySetting(ResetLightSetting)
+                () => SettingResetUtils.ResetSingleCategorySettingAsync(ResetLightSetting)
                 );
 
         private ActionCommand? _resetShadowSettingCommand = null;
         public ActionCommand ResetShadowSettingCommand
             => _resetShadowSettingCommand ??= new ActionCommand(
-                () => SettingResetUtils.ResetSingleCategorySetting(ResetShadowSetting)
+                () => SettingResetUtils.ResetSingleCategorySettingAsync(ResetShadowSetting)
                 );
 
         private ActionCommand? _resetBloomSettingCommand = null;
         public ActionCommand ResetBloomSettingCommand
             => _resetBloomSettingCommand ??= new ActionCommand(
-                () => SettingResetUtils.ResetSingleCategorySetting(ResetBloomSetting)
+                () => SettingResetUtils.ResetSingleCategorySettingAsync(ResetBloomSetting)
                 );
 
         private ActionCommand? _resetWindSettingCommand = null;
         public ActionCommand ResetWindSettingCommand
             => _resetWindSettingCommand ??= new ActionCommand(
-                () => SettingResetUtils.ResetSingleCategorySetting(ResetWindSetting)
+                () => SettingResetUtils.ResetSingleCategorySettingAsync(ResetWindSetting)
                 );
 
         private void ResetLightSetting()

@@ -16,35 +16,66 @@
     <Window.DataContext>
         <vmm:MainWindowViewModel/>
     </Window.DataContext>
-    <dragablz:TabablzControl FixedHeaderCount="5">
-        <dragablz:TabablzControl.HeaderItemTemplate>
-            <DataTemplate>
-                <ContentControl Content="{Binding}"/>
-            </DataTemplate>
-        </dragablz:TabablzControl.HeaderItemTemplate>
-        <TabItem>
-            <TabItem.Header>
-                <vmm:TabHeaderIconText Text="{DynamicResource TopBar_Home}"
-                                       IconKind="Home"
-                                       />
-            </TabItem.Header>
-            <vmm:HomePanel />
-        </TabItem>
-        <TabItem>
-            <TabItem.Header>
-                <vmm:TabHeaderIconText Text="{DynamicResource TopBar_Streaming}"
-                                       IconKind="Videocam"
-                                       />
-            </TabItem.Header>
-            <vmm:StreamingPanel />
-        </TabItem>
-        <TabItem>
-            <TabItem.Header>
-                <vmm:TabHeaderIconText Text="About"
-                                       IconKind="HelpOutline"
-                                       />
-            </TabItem.Header>
-            <vmm:AboutPanel />
-        </TabItem>
-    </dragablz:TabablzControl>
+    <md:DialogHost IsOpen="{Binding DialogHelper.IsOpen}">
+        <md:DialogHost.DialogContent>
+            <StackPanel Orientation="Vertical"
+                        VerticalAlignment="Center">
+                <TextBlock Text="{Binding DialogHelper.Title}"
+                           Margin="10"
+                           TextAlignment="Center"
+                           Foreground="Black"
+                           FontWeight="Bold"
+                           />
+                <TextBlock Text="{Binding DialogHelper.Content}"
+                           Margin="10,0,10,20"
+                           TextAlignment="Center"
+                           Foreground="Black"
+                           />
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Style="{StaticResource MaterialDesignFlatButton}"
+                            Content="OK"
+                            Command="{Binding DialogHelper.OKCommand}"
+                            />
+                    <Button Style="{StaticResource MaterialDesignFlatButton}"
+                            Visibility="{Binding DialogHelper.CanCancel, 
+                                                 Converter={StaticResource BooleanToVisibilityConverter}}"
+                            Content="Cancel"
+                            Command="{Binding DialogHelper.CancelCommand}"
+                            />
+                </StackPanel>
+            </StackPanel>
+        </md:DialogHost.DialogContent>
+
+        <dragablz:TabablzControl FixedHeaderCount="5">
+            <dragablz:TabablzControl.HeaderItemTemplate>
+                <DataTemplate>
+                    <ContentControl Content="{Binding}"/>
+                </DataTemplate>
+            </dragablz:TabablzControl.HeaderItemTemplate>
+            <TabItem>
+                <TabItem.Header>
+                    <vmm:TabHeaderIconText Text="{DynamicResource TopBar_Home}"
+                                           IconKind="Home"
+                                           />
+                </TabItem.Header>
+                <vmm:HomePanel />
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <vmm:TabHeaderIconText Text="{DynamicResource TopBar_Streaming}"
+                                           IconKind="Videocam"
+                                           />
+                </TabItem.Header>
+                <vmm:StreamingPanel />
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <vmm:TabHeaderIconText Text="About"
+                                           IconKind="HelpOutline"
+                                           />
+                </TabItem.Header>
+                <vmm:AboutPanel />
+            </TabItem>
+        </dragablz:TabablzControl>
+    </md:DialogHost>
 </Window>

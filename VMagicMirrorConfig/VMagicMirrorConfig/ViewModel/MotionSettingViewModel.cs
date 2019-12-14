@@ -653,25 +653,25 @@ namespace Baku.VMagicMirrorConfig
         private ActionCommand? _resetFaceMotionSettingCommand = null;
         public ActionCommand ResetFaceMotionSettingCommand
             => _resetFaceMotionSettingCommand ??= new ActionCommand(
-                () => SettingResetUtils.ResetSingleCategorySetting(ResetFaceSetting)
+                () => SettingResetUtils.ResetSingleCategorySettingAsync(ResetFaceSetting)
                 );
 
         private ActionCommand? _resetArmMotionSettingCommand = null;
         public ActionCommand ResetArmMotionSettingCommand
             => _resetArmMotionSettingCommand ??= new ActionCommand(
-                () => SettingResetUtils.ResetSingleCategorySetting(ResetArmSetting)
+                () => SettingResetUtils.ResetSingleCategorySettingAsync(ResetArmSetting)
                 );
 
         private ActionCommand? _resetHandMotionSettingCommand = null;
         public ActionCommand ResetHandMotionSettingCommand
             => _resetHandMotionSettingCommand ??= new ActionCommand(
-                () => SettingResetUtils.ResetSingleCategorySetting(ResetHandSetting)
+                () => SettingResetUtils.ResetSingleCategorySettingAsync(ResetHandSetting)
                 );
 
         private ActionCommand? _resetWaitMotionSettingCommand = null;
         public ActionCommand ResetWaitMotionSettingCommand
             => _resetWaitMotionSettingCommand ??= new ActionCommand(
-                () => SettingResetUtils.ResetSingleCategorySetting(ResetWaitMotionSetting)
+                () => SettingResetUtils.ResetSingleCategorySettingAsync(ResetWaitMotionSetting)
                 );
 
         private void ResetFaceSetting()
