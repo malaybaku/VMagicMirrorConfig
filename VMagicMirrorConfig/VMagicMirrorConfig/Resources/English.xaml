@@ -190,6 +190,9 @@ VRM File</sys:String>
         
     
     <!-- Light Setting -->
+    <sys:String x:Key="ImageQuality">Image Quality</sys:String>
+    <sys:String x:Key="ImageQuality_CurrentQuality">Quality</sys:String>
+    
     <sys:String x:Key="Light">Light</sys:String>
     <sys:String x:Key="Light_Intensity">Intensity [%]</sys:String>
     <sys:String x:Key="Light_Yaw">Yaw Angle [deg]</sys:String>

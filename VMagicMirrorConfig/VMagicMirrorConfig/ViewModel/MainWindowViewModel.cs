@@ -378,6 +378,7 @@ namespace Baku.VMagicMirrorConfig
             LanguageName = LanguageSelector.Instance.LanguageName;
 
             await MotionSetting.InitializeDeviceNamesAsync();
+            await LightSetting.InitializeQualitySelectionsAsync();
 
             Initializer.CameraPositionChecker.Start(
                 2000,
