@@ -192,6 +192,13 @@ namespace Baku.VMagicMirrorConfig
 
         #region Light Setting
 
+        /// <summary>
+        /// Query.
+        /// </summary>
+        /// <returns></returns>
+        public Message GetQualitySettingsInfo() => NoArg();
+        public Message SetImageQuality(string name) => WithArg(name);
+
         public Message LightColor(int r, int g, int b) => WithArg($"{r},{g},{b}");
         public Message LightIntensity(int intensityPercent) => WithArg($"{intensityPercent}");
         public Message LightYaw(int angleDeg) => WithArg($"{angleDeg}");

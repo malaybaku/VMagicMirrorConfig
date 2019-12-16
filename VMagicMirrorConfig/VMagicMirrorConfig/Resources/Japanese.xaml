@@ -185,6 +185,9 @@
         
 
     <!-- Light Setting -->
+    <sys:String x:Key="ImageQuality">画質</sys:String>
+    <sys:String x:Key="ImageQuality_CurrentQuality">現在の設定</sys:String>
+    
     <sys:String x:Key="Light">ライト</sys:String>
     <sys:String x:Key="Light_Intensity">明るさ[%]</sys:String>
     <sys:String x:Key="Light_Yaw">向き(横)[deg]</sys:String>

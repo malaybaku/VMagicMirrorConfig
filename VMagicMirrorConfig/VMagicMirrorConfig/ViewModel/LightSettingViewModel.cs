@@ -1,4 +1,6 @@
-﻿using System.Windows.Media;
+﻿using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using System.Windows.Media;
 using System.Xml.Serialization;
 
 namespace Baku.VMagicMirrorConfig
@@ -14,10 +16,12 @@ namespace Baku.VMagicMirrorConfig
         {
             UpdateLightColor();
             UpdateBloomColor();
+            ImageQualityNames = new ReadOnlyObservableCollection<string>(_imageQualityNames);
         }
 
         internal LightSettingViewModel(IMessageSender sender) : base(sender)
         {
+            ImageQualityNames = new ReadOnlyObservableCollection<string>(_imageQualityNames);
         }
 
         public void Initialize()
@@ -25,6 +29,49 @@ namespace Baku.VMagicMirrorConfig
             UpdateLightColor();
             UpdateBloomColor();
         }
+
+        public async Task InitializeQualitySelectionsAsync()
+        {
+            string res = await SendQueryAsync(MessageFactory.Instance.GetQualitySettingsInfo());
+            var info = ImageQualityInfo.ParseFromJson(res);
+            if (info.ImageQualityNames != null &&
+                info.CurrentQualityIndex >= 0 &&
+                info.CurrentQualityIndex < info.ImageQualityNames.Length
+                )
+            {
+                foreach (var name in info.ImageQualityNames)
+                {
+                    _imageQualityNames.Add(name);
+                }
+                ImageQuality = info.ImageQualityNames[info.CurrentQualityIndex];
+            }
+        }
+
+        #region ImageQuality
+
+        //NOTE: 画質設定はもともとUnityが持っており、かつShift+ダブルクリックの起動によって書き換えられる可能性があるので、
+        //WPF側からは揮発性データのように扱う
+
+        private string _imageQuality = "";
+        [XmlIgnore]
+        public string ImageQuality
+        {
+            get => _imageQuality;
+            set
+            {
+                if (SetValue(ref _imageQuality, value))
+                {
+                    SendMessage(MessageFactory.Instance.SetImageQuality(ImageQuality));
+                }
+            }
+        }
+
+        private readonly ObservableCollection<string> _imageQualityNames 
+            = new ObservableCollection<string>();
+        [XmlIgnore]
+        public ReadOnlyObservableCollection<string> ImageQualityNames { get; }
+
+        #endregion
 
         #region Light
 
