@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 
@@ -40,24 +41,14 @@ namespace Baku.VMagicMirrorConfig
         public bool PreferLipSync { get; set; }
 
         /// <summary>
-        /// NOTE: シリアライズ都合でpublic propertyになってます
+        /// VRM規格で決まっている最小限のブレンドシェイプ一覧
         /// </summary>
         public Dictionary<string, int> BlendShapeValues { get; set; } = new Dictionary<string, int>();
 
-        public void CopyFrom(MotionRequest source)
-        {
-            MotionType = source.MotionType;
-            Word = source.Word;
-            BuiltInAnimationClipName = source.BuiltInAnimationClipName;
-            ExternalBvhFilePath = source.ExternalBvhFilePath;
-            DurationWhenOnlyBlendShape = source.DurationWhenOnlyBlendShape;
-            UseBlendShape = source.UseBlendShape;
-
-            foreach(var p in source.BlendShapeValues)
-            {
-                BlendShapeValues[p.Key] = p.Value;
-            }
-        }
+        /// <summary>
+        /// VRM規格では決まっていないが、ユーザーが読み込んだVRMに含まれていたブレンドシェイプの一覧
+        /// </summary>
+        public List<BlendShapePairItem> ExtraBlendShapeValues { get; set; } = new List<BlendShapePairItem>();
 
         /// <summary>この要素をJSONにシリアライズしたものを取得します。</summary>
         /// <returns></returns>
@@ -201,5 +192,11 @@ namespace Baku.VMagicMirrorConfig
                     new MotionRequestCollection(new MotionRequest[0]);
             }
         }
+    }
+
+    public class BlendShapePairItem
+    {
+        public string Name { get; set; }
+        public int Value { get; set; }
     }
 }

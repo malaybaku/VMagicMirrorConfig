@@ -245,6 +245,9 @@
     <sys:String x:Key="WordToMotion_Face_Duration">(全身モーションが「なし」の場合) 表情の変化時間 [sec]</sys:String>
     <sys:String x:Key="WordToMotion_Face_Hold">アニメーション終了後も表情を維持</sys:String>
     
+    <sys:String x:Key="WordToMotion_Face_CommonClip_Header">基本の表情</sys:String>
+    <sys:String x:Key="WordToMotion_Face_ExtraClip_Header">キャラ固有の表情</sys:String>
+    
     <sys:String x:Key="WordToMotion_EnablePreview">現在のキャラクターでプレビュー</sys:String>    
         
 </ResourceDictionary>

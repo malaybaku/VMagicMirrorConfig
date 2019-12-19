@@ -7,5 +7,7 @@
         public const string SetBlendShapeNames = nameof(SetBlendShapeNames);
         public const string AutoAdjustResults = nameof(AutoAdjustResults);
         public const string AutoAdjustEyebrowResults = nameof(AutoAdjustEyebrowResults);
+
+        public const string ExtraBlendShapeClipNames = nameof(ExtraBlendShapeClipNames);
     }
 }
