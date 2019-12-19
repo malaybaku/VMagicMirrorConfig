@@ -248,6 +248,9 @@ Please test by typing "joy".</sys:String>
     <sys:String x:Key="WordToMotion_Face_Enable">Enable Face Expression</sys:String>
     <sys:String x:Key="WordToMotion_Face_Duration">Duration when Body Motion is None [sec]</sys:String>
     <sys:String x:Key="WordToMotion_Face_Hold">Keep face after motion</sys:String>
+    
+    <sys:String x:Key="WordToMotion_Face_CommonClip_Header">Basic BlendShape</sys:String>
+    <sys:String x:Key="WordToMotion_Face_ExtraClip_Header">Avatar Specific BlendShape</sys:String>    
         
     <sys:String x:Key="WordToMotion_EnablePreview">Enable Preview</sys:String>
 

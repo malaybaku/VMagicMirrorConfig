@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
@@ -18,19 +19,67 @@ namespace Baku.VMagicMirrorConfig
             Items = new ReadOnlyObservableCollection<WordToMotionItemViewModel>(_items);
             _previewDataSender = new WordToMotionItemPreviewDataSender(Sender);
         }
-        internal WordToMotionSettingViewModel(IMessageSender sender) : base(sender)
+        internal WordToMotionSettingViewModel(IMessageSender sender, IMessageReceiver receiver) : base(sender)
         {
             Items = new ReadOnlyObservableCollection<WordToMotionItemViewModel>(_items);
             _previewDataSender = new WordToMotionItemPreviewDataSender(sender);
             _previewDataSender.PrepareDataSend += 
                 (_, __) => _dialogItem?.WriteToModel(_previewDataSender.MotionRequest);
 
+            receiver.ReceivedCommand += OnReceiveCommand;
+
             LoadDefaultItemsIfInitialStart();
         }
 
         private readonly WordToMotionItemPreviewDataSender _previewDataSender;
         private WordToMotionItemViewModel? _dialogItem;
-        
+
+        /// <summary>直近で読み込んだモデルに指定されている、VRM標準以外のブレンドシェイプ名の一覧を取得します。</summary>
+        [XmlIgnore]
+        public IReadOnlyList<string> LatestAvaterExtraClipNames => _latestAvaterExtraClipNames;
+
+        private string[] _latestAvaterExtraClipNames = new string[0];
+
+        private void OnReceiveCommand(object? sender, CommandReceivedEventArgs e)
+        {
+            if (e.Command != ReceiveMessageNames.ExtraBlendShapeClipNames)
+            {
+                return;
+            }
+
+            //やることは2つ: 
+            // - 知らない名前のブレンドシェイプが飛んできたら記憶する
+            // - アバターが持ってるExtraなクリップ名はコレですよ、というのを明示的に与える
+            _latestAvaterExtraClipNames = e.Args
+                .Split(',')
+                .Where(n => !string.IsNullOrEmpty(n))
+                .ToArray();
+
+            bool hasNewBlendShape = false;
+            foreach (var name in _latestAvaterExtraClipNames
+                .Where(n => !ExtraBlendShapeClipNames.Contains(n))
+                )
+            {
+                hasNewBlendShape = true;
+                ExtraBlendShapeClipNames.Add(name);
+            }
+
+            if (hasNewBlendShape)
+            {
+                //新しい名称のクリップを子要素側に反映
+                foreach (var item in _items)
+                {
+                    item.CheckBlendShapeClipNames();
+                }
+            }
+
+            foreach (var item in _items)
+            {
+                item.CheckAvatarExtraClips();
+            }
+        }
+
+
         private bool _enableWordToMotion = true;
         public bool EnableWordToMotion
         {
@@ -114,6 +163,9 @@ namespace Baku.VMagicMirrorConfig
 
         #endregion
 
+        //NOTE: 「UIに出さないけど保存はしたい」系のやつで、キャラロード時にUnityから勝手に送られてくる、という想定
+        public List<string> ExtraBlendShapeClipNames { get; set; } = new List<string>();
+
         [XmlIgnore]
         public ReadOnlyObservableCollection<WordToMotionItemViewModel> Items { get; }
         private readonly ObservableCollection<WordToMotionItemViewModel> _items 
@@ -169,6 +221,20 @@ namespace Baku.VMagicMirrorConfig
                     var requests = MotionRequestCollection.DeserializeFromJson(reader);
                     foreach (var item in requests.Requests)
                     {
+                        //NOTE: 前処理として、この時点で読み込んだモデルに不足なExtraClipがある場合は差し込んでおく
+                        //これは異バージョンとか考慮した処理です
+                        foreach(var extraClip in ExtraBlendShapeClipNames)
+                        {
+                            if (!item.ExtraBlendShapeValues.Any(i => i.Name == extraClip))
+                            {
+                                item.ExtraBlendShapeValues.Add(new BlendShapePairItem()
+                                {
+                                    Name = extraClip,
+                                    Value = 0,
+                                });
+                            }
+                        }
+
                         _items.Add(new WordToMotionItemViewModel(this, item));
                     }
                 }
@@ -238,6 +304,36 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
+        /// <summary>
+        /// 指定されたアイテムについて、必要ならアプリの設定から忘却させる処理をします。
+        /// </summary>
+        /// <param name="blendShapeItem"></param>
+        public async void ForgetClip(BlendShapeItemViewModel blendShapeItem)
+        {
+            string name = blendShapeItem.BlendShapeName;
+            var indication = MessageIndication.ForgetBlendShapeClip(LanguageSelector.Instance.LanguageName);
+            bool res = await MessageBoxWrapper.Instance.ShowAsync(
+                indication.Title,
+                string.Format(indication.Content, name),
+                MessageBoxWrapper.MessageBoxStyle.OKCancel
+                );
+            if (res)
+            {
+                foreach (var item in _items)
+                {
+                    item.ForgetClip(name);
+                }
+
+                if (ExtraBlendShapeClipNames.Contains(name))
+                {
+                    ExtraBlendShapeClipNames.Remove(name);
+                }
+                RequestReload();
+            }
+        }
+
+
+
         /// <summary>モーション一覧の情報が変わったとき、Unity側に再読み込みをリクエストします。</summary>
         public void RequestReload()
         {
@@ -279,12 +375,25 @@ namespace Baku.VMagicMirrorConfig
 
         private void LoadDefaultItems()
         {
+            ExtraBlendShapeClipNames.Clear();
             _items.Clear();
+            //NOTE: 現在ロードされてるキャラがいたら、そのキャラのブレンドシェイプをただちに当て直す
+            ExtraBlendShapeClipNames.AddRange(_latestAvaterExtraClipNames);
+
             var models = MotionRequest.GetDefaultMotionRequestSet();
             for (int i = 0; i < models.Length; i++)
             {
+                foreach(var extraClip in ExtraBlendShapeClipNames)
+                {
+                    models[i].ExtraBlendShapeValues.Add(new BlendShapePairItem()
+                    {
+                        Name = extraClip,
+                        Value = 0,
+                    });
+                }
                 _items.Add(new WordToMotionItemViewModel(this, models[i]));
             }
+
             RequestReload();
         }
 
@@ -297,6 +406,7 @@ namespace Baku.VMagicMirrorConfig
             };
 
             _dialogItem = item;
+           
             EnablePreview = EnablePreviewWhenStartEdit;
 
             if (dialog.ShowDialog() == true)

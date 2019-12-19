@@ -27,13 +27,21 @@
 
         /// <summary>
         /// NOTE: Contentのほうがフォーマット文字列なのでstring.Formatで消すアイテムの名前を指定して完成させること！
-        /// string.Format(res.Content, "itemName")
-        /// みたいな。
+        /// ex: string.Format(res.Content, "itemName")
         /// </summary>
         /// <param name="languageName"></param>
         /// <returns></returns>
         public static MessageIndication DeleteWordToMotionItem(string languageName)
             => DeleteWordToMotionItem(LanguageSelector.StringToLanguage(languageName));
+
+        /// <summary>
+        /// NOTE: Contentがフォーマット文字列なため、削除予定のブレンドシェイプ名を指定して完成させること
+        /// ex: string.Format(res.Content, "clipName")
+        /// </summary>
+        /// <param name="languageName"></param>
+        /// <returns></returns>
+        public static MessageIndication ForgetBlendShapeClip(string languageName)
+            => ForgetBlendShapeClip(LanguageSelector.StringToLanguage(languageName));
 
         public static MessageIndication LoadVrmConfirmation(Languages lang) => lang switch
         {
@@ -99,6 +107,18 @@
             _ => new MessageIndication(
                 "Delete Item",
                 "Are you sure to delete this item '{0}'?"
+                ),
+        };
+
+        public static MessageIndication ForgetBlendShapeClip(Languages lang) => lang switch
+        {
+            Languages.Japanese => new MessageIndication(
+                "ブレンドシェイプ情報のクリア",
+                "このブレンドシェイプ'{0}'の設定を削除しますか？"
+                ),
+            _ => new MessageIndication(
+                "Clear Blend Shape Setting",
+                "Are you sure to clear the blend shape setting of '{0}'?"
                 ),
         };
     }
