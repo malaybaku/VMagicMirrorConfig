@@ -9,5 +9,8 @@
         public const string AutoAdjustEyebrowResults = nameof(AutoAdjustEyebrowResults);
 
         public const string ExtraBlendShapeClipNames = nameof(ExtraBlendShapeClipNames);
+
+        public const string MidiNoteOn = nameof(MidiNoteOn);
+
     }
 }

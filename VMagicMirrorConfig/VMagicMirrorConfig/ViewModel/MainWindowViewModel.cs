@@ -498,7 +498,7 @@ namespace Baku.VMagicMirrorConfig
                 {
                     WordToMotionSetting.CopyFrom(saveData.WordToMotionSetting);
                 }
-                WordToMotionSetting.LoadItems();
+                WordToMotionSetting.LoadSerializedItems();
                 WordToMotionSetting.RequestReload();
 
                 //顔キャリブデータはファイル読み込み時だけ送る特殊なデータなのでここに書いてます
