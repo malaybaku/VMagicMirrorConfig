@@ -152,12 +152,13 @@ VRM File</sys:String>
     <sys:String x:Key="Layout_DeviceFreeLayout">Free Layout</sys:String>
 
     <!-- Layout : Keyboard / Mouse Pad -->
-    <sys:String x:Key="Layout_Hid">Keyboard</sys:String>
+    <sys:String x:Key="Layout_Hid">Keyboard / MIDI</sys:String>
     <sys:String x:Key="Layout_HidHeight">Height [cm]</sys:String>
     <sys:String x:Key="Layout_HidHorizontalScale">Size [%]</sys:String>
     <sys:String x:Key="Layout_HidHorizontalScale_Tooltip">Specify the size of keyboard. When smallen, the devices are close to the character.</sys:String>
-    <sys:String x:Key="Layout_HidVisible">Visible</sys:String>
-
+    <sys:String x:Key="Layout_HidVisible">Keyboard and Touch Pad Visible</sys:String>
+    <sys:String x:Key="Layout_MidiVisible">MIDI Controller Visible</sys:String>
+    <sys:String x:Key="Layout_MidiReadEnable">Use MIDI Controller for VMagicMirror</sys:String>
     <sys:String x:Key="Layout_HidReactToKeyboard">Enable keyboard motion</sys:String>
     <sys:String x:Key="Layout_HidReactToMouse">Enable mouse motion</sys:String>
 
@@ -229,6 +230,10 @@ Please test by typing "joy".</sys:String>
     <sys:String x:Key="WordToMotion_AssignDevice_Gamepad">Gamepad</sys:String>
     <sys:String x:Key="WordToMotion_AssignDevice_Keyboard">Keyboard (Num0 - Num8)</sys:String>
     <sys:String x:Key="WordToMotion_AssignDevice_Keyboard_Short">Keyboard</sys:String>
+
+    <sys:String x:Key="WordToMotion_AssignDevice_Select_Header">Device Assign</sys:String>
+   
+    
     <sys:String x:Key="WordToMotion_KeyAssign">Keys</sys:String>    
     <sys:String x:Key="WordToMotion_LoadDefaultSet">Reset to default items</sys:String>
 
@@ -253,5 +258,13 @@ Please test by typing "joy".</sys:String>
     <sys:String x:Key="WordToMotion_Face_ExtraClip_Header">Avatar Specific BlendShape</sys:String>    
         
     <sys:String x:Key="WordToMotion_EnablePreview">Enable Preview</sys:String>
+    
+    <sys:String x:Key="WordToMotion_MidiAssign">MIDI note assign</sys:String>
+    <sys:String x:Key="WordToMotion_MidiAssign_Instruction" xml:space="preserve">Assign up to 9 notes for motion trigger.
+- Click text input on right side
+- Press MIDI key to input note number</sys:String>
+    <sys:String x:Key="WordToMotion_MidiAssign_Current">Current Note</sys:String>
+    <sys:String x:Key="WordToMotion_MidiAssign_After">Note to Change</sys:String>
+    <sys:String x:Key="WordToMotion_MidiAssign_Clear">Clear</sys:String>
 
 </ResourceDictionary>

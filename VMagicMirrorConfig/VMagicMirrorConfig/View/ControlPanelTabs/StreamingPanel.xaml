@@ -8,13 +8,30 @@
              mc:Ignorable="d" 
              d:DataContext="{x:Type vmm:MainWindowViewModel}"
              d:DesignWidth="520"
-             d:DesignHeight="600"
+             d:DesignHeight="700"
              >
     <UserControl.Resources>
         <vmm:WhiteSpaceStringToNullConverter x:Key="WhiteSpaceStringToNullConverter"/>
         <Style TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}">
             <Setter Property="Margin" Value="5"/>
         </Style>
+        <Style x:Key="SmallMarginCheckBox" TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}">
+            <Setter Property="Margin" Value="10,1"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock Margin="5,0"
+                                   FontSize="12"
+                                   VerticalAlignment="Center"
+                                   Text="{Binding}"
+                                   />
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+            
         <Style TargetType="md:Card" BasedOn="{StaticResource {x:Type md:Card}}">
             <Setter Property="Margin" Value="5"/>
             <Setter Property="Padding" Value="5"/>
@@ -31,6 +48,11 @@
             <Setter Property="Height" Value="20"/>
             <Setter Property="Margin" Value="2"/>
             <Setter Property="md:ShadowAssist.ShadowDepth" Value="Depth1"/>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="BulletItemText">
+            <Setter Property="Margin" Value="10,0"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Text" Value="{Binding}"/>
         </Style>
     </UserControl.Resources>
     
@@ -55,15 +77,15 @@
                                         />
                         </StackPanel>
 
-                        <CheckBox Content="{DynamicResource Window_Transparent}"
-                                    IsChecked="{Binding WindowSetting.IsTransparent, Mode=TwoWay}"
-                                    Margin="10,1" Height="25"
-                                    />
+                        <CheckBox Style="{StaticResource SmallMarginCheckBox}"
+                                  Content="{DynamicResource Window_Transparent}"
+                                  IsChecked="{Binding WindowSetting.IsTransparent, Mode=TwoWay}"
+                                  />
 
-                        <CheckBox Content="{DynamicResource Window_Draggable}"
-                                    IsChecked="{Binding WindowSetting.WindowDraggable, Mode=TwoWay}"
-                                    Margin="10,1" Height="25"
-                                    />
+                        <CheckBox Style="{StaticResource SmallMarginCheckBox}"
+                                  Content="{DynamicResource Window_Draggable}"
+                                  IsChecked="{Binding WindowSetting.WindowDraggable, Mode=TwoWay}"
+                                  />
                     </StackPanel>
                 </md:Card>
 
@@ -221,43 +243,72 @@
                                         />
                         </StackPanel>
 
-                        <CheckBox Margin="10,3" Height="25"
-                                    Content="{DynamicResource WordToMotion_Enable}"
-                                    IsChecked="{Binding WordToMotionSetting.EnableWordToMotion}"
-                                    />
-                        <TextBlock Margin="15,15,5,5" 
-                                    Text="{DynamicResource WordToMotion_AssignDevice}"
-                                    />
-                        <StackPanel Orientation="Horizontal"
-                                    Margin="5,5,5,17"
-                                    >
-                            <RadioButton VerticalAlignment="Center"
-                                            VerticalContentAlignment="Center"
-                                            Margin="10,0"
-                                            Content="{DynamicResource WordToMotion_AssignDevice_None}"
-                                            IsEnabled="{Binding WordToMotionSetting.EnableWordToMotion}"
-                                            IsChecked="{Binding WordToMotionSetting.UseNoDeviceToStartWordToMotion}"                         
-                                            />
-                            <RadioButton VerticalAlignment="Center"
-                                            VerticalContentAlignment="Center"
-                                            Margin="10,0"
-                                            Content="{DynamicResource WordToMotion_AssignDevice_Gamepad}"
-                                            IsEnabled="{Binding WordToMotionSetting.EnableWordToMotion}"
-                                            IsChecked="{Binding WordToMotionSetting.UseGamepadToStartWordToMotion}"                         
-                                            />
-                            <RadioButton VerticalAlignment="Center"
-                                            VerticalContentAlignment="Center"
-                                            Margin="10,0"
-                                            Content="{DynamicResource WordToMotion_AssignDevice_Keyboard_Short}"
-                                            IsEnabled="{Binding WordToMotionSetting.EnableWordToMotion}"
-                                            IsChecked="{Binding WordToMotionSetting.UseKeyboardToStartWordToMotion}"                         
-                                            />                                
-                        </StackPanel>
-
+                        <Grid Margin="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Margin="5,3"
+                                       Text="{DynamicResource WordToMotion_AssignDevice_Select_Header}"
+                                       />
+                            <ComboBox Grid.Column="1"
+                                      HorizontalAlignment="Stretch"
+                                      Margin="5,0"
+                                      ItemsSource="{Binding WordToMotionSetting.Devices}"
+                                      SelectedItem="{Binding WordToMotionSetting.SelectedDevice}"
+                                      md:HintAssist.Hint="Device"
+                                      >
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding DisplayName}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </Grid>
                     </StackPanel>
                 </md:Card>
 
+                <md:Card>
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <md:PackIcon Style="{StaticResource HeaderPackIcon}"
+                                            Kind="Camera"
+                                            />
+                            <TextBlock Text="{DynamicResource Streaming_Screenshot}"
+                                    Margin="5"
+                                    Style="{StaticResource HeaderText}"
+                                    />
+                        </StackPanel>
 
+                        <StackPanel Orientation="Horizontal">
+                            <Button Command="{Binding TakeScreenshotCommand}"
+                                Padding="0"
+                                Width="40"
+                                HorizontalAlignment="Left"
+                                >
+                                <md:PackIcon Style="{StaticResource IconTextSetIcon}"
+                                            Kind="Camera"
+                                            />
+                            </Button>
+
+                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                    Command="{Binding OpenScreenshotFolderCommand}"
+                                    Padding="0"
+                                    HorizontalAlignment="Left"
+                                    Margin="0"
+                                    >
+                                <StackPanel Style="{StaticResource IconTextSetStackPanel}">
+                                    <md:PackIcon Style="{StaticResource IconTextSetIcon}"
+                                            Kind="Folder"
+                                            />
+                                    <TextBlock Style="{StaticResource IconSetSetText}"
+                                        Text="{DynamicResource Streaming_Screenshot_OpenSaveFolder}"
+                                        />
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                </md:Card>
             </StackPanel>
 
             <StackPanel Grid.Column="1">
@@ -273,23 +324,26 @@
                                         />
                         </StackPanel>
 
-                        <CheckBox Margin="10,1" Height="25"
-                                  Content="{DynamicResource Layout_Hid}"
+                        <CheckBox Style="{StaticResource SmallMarginCheckBox}"
                                   IsChecked="{Binding LayoutSetting.HidVisibility}"
+                                  Content="{DynamicResource Layout_Hid_Streaming}"
                                   />
-                        <CheckBox Margin="10,1" Height="25"
+                        <CheckBox Style="{StaticResource SmallMarginCheckBox}"
+                                  IsChecked="{Binding LayoutSetting.MidiControllerVisibility}"
+                                  Content="{DynamicResource Layout_Midi_Streaming}"
+                                  />
+                        <CheckBox Style="{StaticResource SmallMarginCheckBox}"
                                   Content="{DynamicResource Layout_Gamepad}"
                                   IsChecked="{Binding LayoutSetting.Gamepad.GamepadVisibility}"
                                   />
-                        <CheckBox Margin="10,1" Height="25"
-                                    Content="{DynamicResource Shadow_Enable_Streaming}"
-                                    IsChecked="{Binding LightSetting.EnableShadow}"
-                                    />
-                        <CheckBox Margin="10,1" Height="25"
-                                    Content="{DynamicResource Wind_Enable_Streaming}"
-                                    IsChecked="{Binding LightSetting.EnableWind}"
-                                    />
-
+                        <CheckBox Style="{StaticResource SmallMarginCheckBox}"
+                                  Content="{DynamicResource Shadow_Enable_Streaming}"
+                                  IsChecked="{Binding LightSetting.EnableShadow}"
+                                  />
+                        <CheckBox Style="{StaticResource SmallMarginCheckBox}"
+                                  Content="{DynamicResource Wind_Enable_Streaming}"
+                                  IsChecked="{Binding LightSetting.EnableWind}"
+                                  />
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -494,54 +548,6 @@
                                     />
                     </StackPanel>
                 </md:Card>
-
-                <md:Card>
-                    <StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <md:PackIcon Style="{StaticResource HeaderPackIcon}"
-                                            Kind="Camera"
-                                            />
-                            <TextBlock Text="{DynamicResource Streaming_Screenshot}"
-                                    Margin="5"
-                                    Style="{StaticResource HeaderText}"
-                                    />
-                        </StackPanel>
-
-                        <StackPanel Orientation="Horizontal">
-                            <Button Command="{Binding TakeScreenshotCommand}"
-                                Padding="0"
-                                Width="40"
-                                HorizontalAlignment="Left"
-                                >
-                                <md:PackIcon Style="{StaticResource IconTextSetIcon}"
-                                            Kind="Camera"
-                                            />
-                            </Button>
-
-                            <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                    Command="{Binding OpenScreenshotFolderCommand}"
-                                    Padding="0"
-                                    HorizontalAlignment="Left"
-                                    Margin="0"
-                                    >
-                                <StackPanel Style="{StaticResource IconTextSetStackPanel}">
-                                    <md:PackIcon Style="{StaticResource IconTextSetIcon}"
-                                            Kind="Folder"
-                                            />
-                                    <TextBlock Style="{StaticResource IconSetSetText}"
-                                        Text="{DynamicResource Streaming_Screenshot_OpenSaveFolder}"
-                                        />
-                                </StackPanel>
-                            </Button>
-                        </StackPanel>
-
-
-                    </StackPanel>
-
-
-                </md:Card>
-
-
             </StackPanel>
         </Grid>
     </ScrollViewer>

@@ -159,6 +159,8 @@ namespace Baku.VMagicMirrorConfig
 
         public Message HidVisibility(bool visible) => WithArg($"{visible}");
 
+        public Message MidiControllerVisibility(bool visible) => WithArg($"{visible}");
+
         public Message SetKeyboardTypingEffectType(int typeIndex) => WithArg($"{typeIndex}");
 
         public Message EnableDeviceFreeLayout(bool enable) => WithArg($"{enable}");
@@ -172,6 +174,12 @@ namespace Baku.VMagicMirrorConfig
         /// </summary>
         /// <returns></returns>
         public Message CurrentDeviceLayout() => NoArg();
+
+        #endregion
+
+        #region MIDI
+
+        public Message EnableMidiRead(bool enable) => WithArg($"{enable}");
 
         #endregion
 
@@ -230,9 +238,11 @@ namespace Baku.VMagicMirrorConfig
         public Message PlayWordToMotionItem(string word) => WithArg(word);
         public Message EnableWordToMotionPreview(bool enable) => WithArg($"{enable}");
         public Message SendWordToMotionPreviewInfo(string json) => WithArg(json);
-        public Message UseGamepadToStartWordToMotion(bool enable) => WithArg($"{enable}");
         public Message SetDeviceTypeToStartWordToMotion(int deviceType) => WithArg($"{deviceType}");
 
+        public Message LoadMidiNoteToMotionMap(string content) => WithArg(content);
+        public Message RequireMidiNoteOnMessage(bool require) => WithArg($"{require}");
+        
         #endregion
 
         #region その他

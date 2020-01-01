@@ -153,9 +153,13 @@
     <sys:String x:Key="Layout_DeviceFreeLayout">フリーレイアウトモード</sys:String>
 
     <!-- Layout : Keyboard / Mouse Pad -->
-    <sys:String x:Key="Layout_Hid">キーボード</sys:String>
+    <sys:String x:Key="Layout_Hid">キーボード / MIDI</sys:String>
     <sys:String x:Key="Layout_HidHorizontalScale_Tooltip">キーボードのサイズを指定します。小さくすると、デバイスが小さくなり、キャラクターに近づきます。</sys:String>
-    <sys:String x:Key="Layout_HidVisible">キーボードを表示</sys:String>
+    <sys:String x:Key="Layout_HidVisible">キーボード・タッチパッドを表示</sys:String>
+    <sys:String x:Key="Layout_MidiVisible">MIDIコントローラを表示</sys:String>
+    <sys:String x:Key="Layout_MidiReadEnable">MIDIコントローラをVMagicMirrorで使用</sys:String>
+    <sys:String x:Key="Layout_Hid_Streaming">キーボード</sys:String>
+    <sys:String x:Key="Layout_Midi_Streaming">MIDIコン</sys:String>
 
     <sys:String x:Key="Layout_HidReactToKeyboard">キーボード操作に反応</sys:String>
     <sys:String x:Key="Layout_HidReactToMouse">マウス操作に反応</sys:String>
@@ -224,6 +228,8 @@
     <sys:String x:Key="WordToMotion_AssignDevice_Gamepad">ゲームパッド</sys:String>
     <sys:String x:Key="WordToMotion_AssignDevice_Keyboard">キーボード(数字の0-8)</sys:String>
     <sys:String x:Key="WordToMotion_AssignDevice_Keyboard_Short">キーボード</sys:String>
+
+    <sys:String x:Key="WordToMotion_AssignDevice_Select_Header">デバイスの割り当て</sys:String>
     
     <sys:String x:Key="WordToMotion_KeyAssign">キー割り当て</sys:String>
     <sys:String x:Key="WordToMotion_LoadDefaultSet">デフォルト設定にリセット</sys:String>
@@ -250,4 +256,12 @@
     
     <sys:String x:Key="WordToMotion_EnablePreview">現在のキャラクターでプレビュー</sys:String>    
         
+    <sys:String x:Key="WordToMotion_MidiAssign">MIDIのノート割り当て</sys:String>
+    <sys:String x:Key="WordToMotion_MidiAssign_Instruction" xml:space="preserve">9個までのMIDIノートをモーション起動に割り当てます。
+- 右側のテキスト入力をクリック
+- MIDIコントローラのキーを押して番号を入力</sys:String>
+    <sys:String x:Key="WordToMotion_MidiAssign_Current">現在のノート</sys:String>
+    <sys:String x:Key="WordToMotion_MidiAssign_After">変更後のノート</sys:String>
+    <sys:String x:Key="WordToMotion_MidiAssign_Clear">クリア</sys:String>
+    
 </ResourceDictionary>
