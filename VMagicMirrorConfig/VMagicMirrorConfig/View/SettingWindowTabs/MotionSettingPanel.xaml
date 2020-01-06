@@ -41,6 +41,7 @@
                             <RowDefinition/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="35"/>
@@ -114,6 +115,16 @@
                             </CheckBox.Content>
                         </CheckBox>
                         <CheckBox Grid.Row="3" Grid.Column="1"
+                                  Grid.ColumnSpan="2"
+                                  Margin="15,0,0,0"
+                                  IsEnabled="{Binding EnableFaceTracking}"
+                                  IsChecked="{Binding EnableBodyLeanZ}"
+                                  >
+                            <CheckBox.Content>
+                                <TextBlock Text="{DynamicResource Motion_Face_EnableBodyLeanZ}"/>
+                            </CheckBox.Content>
+                        </CheckBox>                        
+                        <CheckBox Grid.Row="4" Grid.Column="1"
                                   Grid.ColumnSpan="2"
                                   Margin="15,0,0,0"
                                   IsEnabled="{Binding EnableFaceTracking}"

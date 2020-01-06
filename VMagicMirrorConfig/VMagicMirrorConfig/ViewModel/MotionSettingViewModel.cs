@@ -150,6 +150,19 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
+        private bool _enableBodyLeanZ = false;
+        public bool EnableBodyLeanZ
+        {
+            get => _enableBodyLeanZ;
+            set
+            {
+                if (SetValue(ref _enableBodyLeanZ, value))
+                {
+                    SendMessage(MessageFactory.Instance.EnableBodyLeanZ(EnableBodyLeanZ));
+                }
+            }
+        }
+
         private bool _enableHeadRotBaseBlinkAdjust = true;
         public bool EnableHeadRotBaseBlinkAdjust
         {
@@ -679,6 +692,7 @@ namespace Baku.VMagicMirrorConfig
             EnableFaceTracking = true;
             CameraDeviceName = "";
             AutoBlinkDuringFaceTracking = true;
+            EnableBodyLeanZ = false;
             DisableFaceTrackingHorizontalFlip = false;
 
             EnableLipSync = true;
