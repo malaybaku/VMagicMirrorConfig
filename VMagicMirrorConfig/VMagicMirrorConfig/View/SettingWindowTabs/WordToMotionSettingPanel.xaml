@@ -54,7 +54,7 @@
                           HorizontalAlignment="Stretch"
                           Margin="5,0"
                           ItemsSource="{Binding Devices}"
-                          SelectedItem="{Binding SelectedDevice}"
+                          SelectedItem="{Binding SelectedDevice, Mode=TwoWay}"
                           md:HintAssist.Hint="Device"
                           >
                     <ComboBox.ItemTemplate>
