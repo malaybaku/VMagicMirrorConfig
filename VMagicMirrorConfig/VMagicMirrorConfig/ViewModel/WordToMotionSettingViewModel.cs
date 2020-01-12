@@ -91,16 +91,11 @@ namespace Baku.VMagicMirrorConfig
 
 
         private bool _enableWordToMotion = true;
+        [XmlIgnore]
         public bool EnableWordToMotion
         {
             get => _enableWordToMotion;
-            set
-            {
-                if (SetValue(ref _enableWordToMotion, value))
-                {
-                    SendMessage(MessageFactory.Instance.EnableWordToMotion(EnableWordToMotion));
-                }
-            }
+            set => SetValue(ref _enableWordToMotion, value);
         }
 
         #region デバイスをWord to Motionに割り当てる設定
@@ -134,6 +129,7 @@ namespace Baku.VMagicMirrorConfig
                 if (SetValue(ref _selectedDeviceType, value))
                 {
                     SelectedDevice = Devices.FirstOrDefault(d => d.Index == SelectedDeviceType);
+                    EnableWordToMotion = (SelectedDeviceType != DeviceTypeNone);
                     SendMessage(MessageFactory.Instance.SetDeviceTypeToStartWordToMotion(SelectedDeviceType));
                 }
             }
@@ -479,6 +475,7 @@ namespace Baku.VMagicMirrorConfig
             _enName = enName;
             _jpName = jpName;
             SetLanguage(Languages.Japanese);
+            LanguageSelector.Instance.LanguageChanged += SetLanguage;
         }
 
         public int Index { get; }

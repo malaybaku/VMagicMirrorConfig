@@ -232,7 +232,6 @@ namespace Baku.VMagicMirrorConfig
 
         #region Word To Motion
 
-        public Message EnableWordToMotion(bool enable) => WithArg($"{enable}");
         public Message ReloadMotionRequests(string content) => WithArg(content);
 
         //NOTE: 以下の3つはユーザーが動作チェックに使う
