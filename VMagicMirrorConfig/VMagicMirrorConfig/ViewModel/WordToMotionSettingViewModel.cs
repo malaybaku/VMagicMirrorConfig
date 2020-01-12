@@ -120,6 +120,7 @@ namespace Baku.VMagicMirrorConfig
                     return;
                 }
                 _selectedDevice = value;
+                RaisePropertyChanged();
                 SelectedDeviceType = _selectedDevice?.Index ?? DeviceTypeNone;
             }
         }
