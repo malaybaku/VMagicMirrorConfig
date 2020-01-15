@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Microsoft.Win32;
 
@@ -14,11 +15,13 @@ namespace Baku.VMagicMirrorConfig
             _parent = parent;
             MotionRequest = model;
             InitializeBuiltInClipNames();
-            InitializeBlendShapeItems();
+            InitializeBlendShapeItems(parent);
             AvailableBuiltInClipNames = 
                 new ReadOnlyObservableCollection<string>(_availableBuiltInClipNames);
             BlendShapeItems = 
                 new ReadOnlyObservableCollection<BlendShapeItemViewModel>(_blendShapeItems);
+            ExtraBlendShapeItems =
+                new ReadOnlyObservableCollection<BlendShapeItemViewModel>(_extraBlendShapeItems);
 
             LoadFromModel(model);
         }
@@ -27,6 +30,73 @@ namespace Baku.VMagicMirrorConfig
 
         /// <summary>ファイルI/Oや通信のベースになるデータを取得します。</summary>
         public MotionRequest? MotionRequest { get; }
+
+        /// <summary>
+        /// 親オブジェクト側でブレンドシェイプを新規に取得したとき、そのブレンドシェイプ名を追加します。
+        /// </summary>
+        public void CheckBlendShapeClipNames()
+        {
+            foreach (var name in _parent
+                .ExtraBlendShapeClipNames
+                .Where(n => !_extraBlendShapeItems.Any(i => i.BlendShapeName == n))
+                )
+            {
+                _extraBlendShapeItems.Add(new BlendShapeItemViewModel(
+                    this,
+                    name,
+                    0, 
+                    _parent.LatestAvaterExtraClipNames.Contains(name)
+                    ));
+                MotionRequest.ExtraBlendShapeValues.Add(new BlendShapePairItem()
+                {
+                    Name = name,
+                    Value = 0
+                });
+            }
+        }
+
+        /// <summary>
+        /// いま表示しているアバターが使っているブレンドシェイプ名を指定することで、
+        /// どのクリップが実際に使われるかの情報を更新します。
+        /// </summary>
+        /// <param name="names"></param>
+        public void CheckAvatarExtraClips()
+        {
+            var names = _parent.LatestAvaterExtraClipNames;
+            foreach(var item in _extraBlendShapeItems)
+            {
+                item.IsUsedWithThisAvatar = names.Contains(item.BlendShapeName);
+            }
+        }
+
+        /// <summary>
+        /// 指定されたブレンドシェイプを忘れることを親オブジェクトにリクエストします。
+        /// </summary>
+        /// <param name="item"></param>
+        public void RequestForgetClip(BlendShapeItemViewModel item)
+            => _parent.ForgetClip(item);
+
+        /// <summary>
+        /// 指定された名称のブレンドシェイプ情報を忘れます。
+        /// </summary>
+        /// <param name="blendShapeName"></param>
+        public void ForgetClip(string blendShapeName)
+        {
+            if (_extraBlendShapeItems
+                .FirstOrDefault(i => i.BlendShapeName == blendShapeName)
+                is BlendShapeItemViewModel item)
+            {
+                _extraBlendShapeItems.Remove(item);
+            }
+
+            if (MotionRequest
+                ?.ExtraBlendShapeValues
+                ?.FirstOrDefault(i => i.Name == blendShapeName) 
+                is BlendShapePairItem itemToRemove)
+            {
+                MotionRequest.ExtraBlendShapeValues.Remove(itemToRemove);
+            }
+        }
 
         //NOTE: ビューは同時に1つまでのItemしか表示しないので、コレだけで
         public bool EnablePreview
@@ -155,6 +225,12 @@ namespace Baku.VMagicMirrorConfig
         private ObservableCollection<BlendShapeItemViewModel> _blendShapeItems
             = new ObservableCollection<BlendShapeItemViewModel>();
 
+        public ReadOnlyObservableCollection<BlendShapeItemViewModel> ExtraBlendShapeItems { get; }
+        private ObservableCollection<BlendShapeItemViewModel> _extraBlendShapeItems
+            = new ObservableCollection<BlendShapeItemViewModel>();
+
+        #region Commands
+
         private ActionCommand? _selectBvhFileCommand;
         public ActionCommand SelectBvhFileCommand
             => _selectBvhFileCommand ??= new ActionCommand(SelectBvhFile);
@@ -192,6 +268,8 @@ namespace Baku.VMagicMirrorConfig
         public ActionCommand DeleteCommand
             => _deleteCommand ??= new ActionCommand(async () => await _parent.DeleteItem(this));
 
+        #endregion
+
         private ObservableCollection<string> _availableBuiltInClipNames
             = new ObservableCollection<string>();
         public ReadOnlyObservableCollection<string> AvailableBuiltInClipNames { get; }
@@ -215,11 +293,21 @@ namespace Baku.VMagicMirrorConfig
 
             model.DurationWhenOnlyBlendShape = DurationWhenOnlyBlendShape;
 
-            
-
+            model.BlendShapeValues.Clear();            
             foreach (var item in BlendShapeItems)
             {
                 model.BlendShapeValues[item.BlendShapeName] = item.ValuePercentage;
+            }
+
+            model.ExtraBlendShapeValues.Clear();
+            foreach (var item in ExtraBlendShapeItems)
+            {
+
+                model.ExtraBlendShapeValues.Add(new BlendShapePairItem()
+                {
+                    Name = item.BlendShapeName,
+                    Value = item.ValuePercentage,
+                });
             }
         }
 
@@ -250,6 +338,7 @@ namespace Baku.VMagicMirrorConfig
             UseBlendShape = model.UseBlendShape;
             HoldBlendShape = model.HoldBlendShape;
             DurationWhenOnlyBlendShape = model.DurationWhenOnlyBlendShape;
+
             foreach (var blendShapeItem in model.BlendShapeValues)
             {
                 var item = BlendShapeItems.FirstOrDefault(i => i.BlendShapeName == blendShapeItem.Key);
@@ -258,7 +347,17 @@ namespace Baku.VMagicMirrorConfig
                     item.ValuePercentage = blendShapeItem.Value;
                 }
             }
+
+            foreach (var blendShapeItem in model.ExtraBlendShapeValues)
+            {
+                var item = ExtraBlendShapeItems.FirstOrDefault(i => i.BlendShapeName == blendShapeItem.Name);
+                if (item != null)
+                {
+                    item.ValuePercentage = blendShapeItem.Value;
+                }
+            }
         }
+
 
         private void InitializeBuiltInClipNames()
         {
@@ -268,46 +367,38 @@ namespace Baku.VMagicMirrorConfig
             _availableBuiltInClipNames.Add("Good");
         }
 
-        private void InitializeBlendShapeItems()
+        private void InitializeBlendShapeItems(WordToMotionSettingViewModel parent)
         {
-            _blendShapeItems.Add(new BlendShapeItemViewModel("Joy", 0));
-            _blendShapeItems.Add(new BlendShapeItemViewModel("Angry", 0));
-            _blendShapeItems.Add(new BlendShapeItemViewModel("Sorrow", 0));
-            _blendShapeItems.Add(new BlendShapeItemViewModel("Fun", 0));
+            _blendShapeItems.Add(new BlendShapeItemViewModel(this, "Joy", 0));
+            _blendShapeItems.Add(new BlendShapeItemViewModel(this, "Angry", 0));
+            _blendShapeItems.Add(new BlendShapeItemViewModel(this, "Sorrow", 0));
+            _blendShapeItems.Add(new BlendShapeItemViewModel(this, "Fun", 0));
 
-            _blendShapeItems.Add(new BlendShapeItemViewModel("A", 0));
-            _blendShapeItems.Add(new BlendShapeItemViewModel("I", 0));
-            _blendShapeItems.Add(new BlendShapeItemViewModel("U", 0));
-            _blendShapeItems.Add(new BlendShapeItemViewModel("E", 0));
-            _blendShapeItems.Add(new BlendShapeItemViewModel("O", 0));
+            _blendShapeItems.Add(new BlendShapeItemViewModel(this, "A", 0));
+            _blendShapeItems.Add(new BlendShapeItemViewModel(this, "I", 0));
+            _blendShapeItems.Add(new BlendShapeItemViewModel(this, "U", 0));
+            _blendShapeItems.Add(new BlendShapeItemViewModel(this, "E", 0));
+            _blendShapeItems.Add(new BlendShapeItemViewModel(this, "O", 0));
 
-            _blendShapeItems.Add(new BlendShapeItemViewModel("Neutral", 0));
-            _blendShapeItems.Add(new BlendShapeItemViewModel("Blink", 0));
-            _blendShapeItems.Add(new BlendShapeItemViewModel("Blink_L", 0));
-            _blendShapeItems.Add(new BlendShapeItemViewModel("Blink_R", 0));
+            _blendShapeItems.Add(new BlendShapeItemViewModel(this, "Neutral", 0));
+            _blendShapeItems.Add(new BlendShapeItemViewModel(this, "Blink", 0));
+            _blendShapeItems.Add(new BlendShapeItemViewModel(this, "Blink_L", 0));
+            _blendShapeItems.Add(new BlendShapeItemViewModel(this, "Blink_R", 0));
 
-            _blendShapeItems.Add(new BlendShapeItemViewModel("LookUp", 0));
-            _blendShapeItems.Add(new BlendShapeItemViewModel("LookDown", 0));
-            _blendShapeItems.Add(new BlendShapeItemViewModel("LookLeft", 0));
-            _blendShapeItems.Add(new BlendShapeItemViewModel("LookRight", 0));
-        }
-    }
+            _blendShapeItems.Add(new BlendShapeItemViewModel(this, "LookUp", 0));
+            _blendShapeItems.Add(new BlendShapeItemViewModel(this, "LookDown", 0));
+            _blendShapeItems.Add(new BlendShapeItemViewModel(this, "LookLeft", 0));
+            _blendShapeItems.Add(new BlendShapeItemViewModel(this, "LookRight", 0));
 
-    public class BlendShapeItemViewModel : ViewModelBase
-    {
-        public BlendShapeItemViewModel(string name, int value)
-        {
-            BlendShapeName = name;
-            ValuePercentage = value;
-        }
-
-        public string BlendShapeName { get; }
-
-        private int _valuePercentage = 0;
-        public int ValuePercentage
-        {
-            get => _valuePercentage;
-            set => SetValue(ref _valuePercentage, value);
+            foreach (var name in parent.ExtraBlendShapeClipNames)
+            {
+                _extraBlendShapeItems.Add(new BlendShapeItemViewModel(
+                    this,
+                    name,
+                    0, 
+                    parent.LatestAvaterExtraClipNames.Contains(name)
+                    ));
+            }
         }
     }
 }

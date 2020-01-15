@@ -12,7 +12,7 @@ namespace Baku.VMagicMirrorConfig
         private const int TypingEffectIndexText = 0;
         private const int TypingEffectIndexLight = 1;
 
-        public LayoutSettingViewModel() : base() 
+        public LayoutSettingViewModel() : base()
         {
             Gamepad = new GamepadSettingViewModel();
             _typingEffectItem = TypingEffectSelections[0];
@@ -66,6 +66,33 @@ namespace Baku.VMagicMirrorConfig
                     //asyncメソッド呼ぶので外に出しておく。
                     //ややだらしない書き方だが、仮に連打されてもさほど害ないのでコレで行きます。
                     OnEnableFreeCameraModeChanged(value);
+                }
+            }
+        }
+
+        private bool _enableMidiRead = true;
+        public bool EnableMidiRead
+        {
+            get
+                  => _enableMidiRead;
+            set
+            {
+                if (SetValue(ref _enableMidiRead, value))
+                {
+                    SendMessage(MessageFactory.Instance.EnableMidiRead(EnableMidiRead));
+                }
+            }
+        }
+
+        private bool _midiControllerVisibility = false;
+        public bool MidiControllerVisibility
+        {
+            get => _midiControllerVisibility;
+            set
+            {
+                if (SetValue(ref _midiControllerVisibility, value))
+                {
+                    SendMessage(MessageFactory.Instance.MidiControllerVisibility(value));
                 }
             }
         }
@@ -172,7 +199,7 @@ namespace Baku.VMagicMirrorConfig
         private async void QuickSaveViewPoint(string? index)
         {
             if (!(
-                int.TryParse(index, out int i) && 
+                int.TryParse(index, out int i) &&
                 i > 0 && i <= 3
                 ))
             {
@@ -201,7 +228,7 @@ namespace Baku.VMagicMirrorConfig
                     QuickSave3 = saveData;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 LogOutput.Instance.Write(ex);
             }
@@ -369,7 +396,7 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private TypingEffectSelectionItem? _typingEffectItem = null;        
+        private TypingEffectSelectionItem? _typingEffectItem = null;
         [XmlIgnore]
         public TypingEffectSelectionItem? TypingEffectItem
         {
@@ -428,6 +455,8 @@ namespace Baku.VMagicMirrorConfig
         private void ResetHidSetting()
         {
             HidVisibility = true;
+            EnableMidiRead = true;
+            MidiControllerVisibility = false;
             TypingEffectIsNone = true;
         }
 

@@ -60,7 +60,7 @@ namespace Baku.VMagicMirrorConfig
             MotionSetting = new MotionSettingViewModel(MessageSender, Initializer.MessageReceiver);
             LayoutSetting = new LayoutSettingViewModel(MessageSender, Initializer.MessageReceiver);
             LightSetting = new LightSettingViewModel(MessageSender);
-            WordToMotionSetting = new WordToMotionSettingViewModel(MessageSender);
+            WordToMotionSetting = new WordToMotionSettingViewModel(MessageSender, Initializer.MessageReceiver);
 
             AvailableLanguageNames = new ReadOnlyObservableCollection<string>(_availableLanguageNames);
         }
@@ -378,6 +378,7 @@ namespace Baku.VMagicMirrorConfig
             LanguageName = LanguageSelector.Instance.LanguageName;
 
             await MotionSetting.InitializeDeviceNamesAsync();
+            await LightSetting.InitializeQualitySelectionsAsync();
 
             Initializer.CameraPositionChecker.Start(
                 2000,
@@ -497,7 +498,7 @@ namespace Baku.VMagicMirrorConfig
                 {
                     WordToMotionSetting.CopyFrom(saveData.WordToMotionSetting);
                 }
-                WordToMotionSetting.LoadItems();
+                WordToMotionSetting.LoadSerializedItems();
                 WordToMotionSetting.RequestReload();
 
                 //顔キャリブデータはファイル読み込み時だけ送る特殊なデータなのでここに書いてます

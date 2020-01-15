@@ -8,8 +8,8 @@
         mc:Ignorable="d"
         d:DataContext="{x:Type vmm:WordToMotionItemViewModel}"
         Title="VMagicMirror - Word To Motion" 
-        Height="600" Width="700"
-        MinHeight="600" MinWidth="700"
+        Height="600" Width="750"
+        MinHeight="600" MinWidth="750"
         WindowStartupLocation="CenterOwner"
         >
     <Grid>
@@ -30,6 +30,7 @@
             <Style x:Key="BlendShapeItemGrid" TargetType="Grid">
                 <Setter Property="Height" Value="35"/>
             </Style>
+            <vmm:BooleanReverseConverter x:Key="BooleanReverseConverter"/>
         </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -149,6 +150,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
@@ -199,42 +201,94 @@
                           IsChecked="{Binding HoldBlendShape}"
                           IsEnabled="{Binding UseBlendShape}"
                           />
-                
-                <ItemsControl Grid.Row="4" 
-                              Margin="0,5,0,0"
-                              ItemsSource="{Binding BlendShapeItems}"
-                              IsEnabled="{Binding UseBlendShape}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel IsItemsHost="True" 
-                                       ItemWidth="200"
-                                       Orientation="Vertical"/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate DataType="{x:Type vmm:BlendShapeItemViewModel}">
-                            <Grid Height="35" Margin="0,0,10,0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="70"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="40"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" 
-                                           VerticalAlignment="Center"
-                                           TextAlignment="Left"
-                                           Text="{Binding BlendShapeName}"/>
-                                <Slider Grid.Column="1"
-                                        Value="{Binding ValuePercentage}" />
-                                <TextBox Grid.Column="2"
-                                         Text="{Binding ValuePercentage}" />
-                            </Grid>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
 
+                <Grid Grid.Row="4" Margin="0,5,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0"
+                               Text="{DynamicResource WordToMotion_Face_CommonClip_Header}"
+                               />
+                    <TextBlock Grid.Column="1"
+                               Text="{DynamicResource WordToMotion_Face_ExtraClip_Header}"
+                               />
+                </Grid>
+                <ScrollViewer Grid.Row="5" 
+                              Margin="0"
+                              HorizontalScrollBarVisibility="Disabled"
+                              VerticalScrollBarVisibility="Auto"
+                              >
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <ItemsControl Grid.Column="0" 
+                                      ItemsSource="{Binding BlendShapeItems}"
+                                      IsEnabled="{Binding UseBlendShape}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate DataType="{x:Type vmm:BlendShapeItemViewModel}">
+                                    <Grid Height="35" Margin="0,0,10,0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="70"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="40"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" 
+                                                       VerticalAlignment="Center"
+                                                       TextAlignment="Left"
+                                                       Text="{Binding BlendShapeName}"/>
+                                        <Slider Grid.Column="1"
+                                                    Value="{Binding ValuePercentage}" />
+                                        <TextBox Grid.Column="2"
+                                                     Text="{Binding ValuePercentage}" />
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <ItemsControl Grid.Column="1" 
+                                      ItemsSource="{Binding ExtraBlendShapeItems}"
+                                      IsEnabled="{Binding UseBlendShape}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate DataType="{x:Type vmm:BlendShapeItemViewModel}">
+                                    <Grid Height="35" Margin="0,0,10,0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="70"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="40"/>
+                                            <ColumnDefinition Width="40"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" 
+                                                   VerticalAlignment="Center"
+                                                   TextAlignment="Left"
+                                                   Text="{Binding BlendShapeName}"/>
+                                        <Slider Grid.Column="1"
+                                                Value="{Binding ValuePercentage}"
+                                                IsEnabled="{Binding IsUsedWithThisAvatar}"
+                                                />
+                                        <TextBox Grid.Column="2"
+                                                 Text="{Binding ValuePercentage}" 
+                                                 IsEnabled="{Binding IsUsedWithThisAvatar}"
+                                                 />
+                                        <Button Grid.Column="3"
+                                                Style="{StaticResource MaterialDesignFlatButton}"
+                                                IsEnabled="{Binding IsUsedWithThisAvatar,
+                                                                    Converter={StaticResource BooleanReverseConverter}}"
+                                                Command="{Binding ForgetThisClipCommand}"
+                                                Width="35" Height="35" 
+                                                Margin="0" Padding="0">
+                                            <md:PackIcon Kind="Close"/>
+                                        </Button>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Grid>
+                </ScrollViewer>
             </Grid>
         </md:Card>
-
+        
         <CheckBox Grid.Row="2" Grid.Column="0"
                   Content="{DynamicResource WordToMotion_EnablePreview}"
                   IsChecked="{Binding EnablePreview}"

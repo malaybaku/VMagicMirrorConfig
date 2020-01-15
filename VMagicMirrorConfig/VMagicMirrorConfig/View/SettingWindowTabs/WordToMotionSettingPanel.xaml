@@ -6,6 +6,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"             
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:vmm="clr-namespace:Baku.VMagicMirrorConfig"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d"
              d:DataContext="{x:Type vmm:WordToMotionSettingViewModel}"
              d:DesignWidth="400"
@@ -14,6 +15,13 @@
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         <vmm:BooleanReverseToVisibilityConverter x:Key="BooleanReverseToVisibilityConverter"/>
         <vmm:BooleanToForegroundConverter x:Key="BooleanToForegroundConverter"/>
+        <vmm:IntEqualityToVisibilityConverter x:Key="IntEqualityToVisibilityConverter"/>
+        <vmm:NoteNumberToTextConverter x:Key="NoteNumberToTextConverter"/>
+        <sys:Int32 x:Key="DeviceTypeNone">-1</sys:Int32>
+        <sys:Int32 x:Key="DeviceTypeKeyboardWords">0</sys:Int32>
+        <sys:Int32 x:Key="DeviceTypeGamepad">1</sys:Int32>
+        <sys:Int32 x:Key="DeviceTypeKeyboardTenKey">2</sys:Int32>
+        <sys:Int32 x:Key="DeviceTypeMidiController">3</sys:Int32>
     </UserControl.Resources>
     <ScrollViewer Grid.Row="4"
                   VerticalScrollBarVisibility="Auto"
@@ -33,14 +41,38 @@
                         TextWrapping="Wrap"
                         Margin="10"
                         />
+            <Grid Grid.Row="1"
+                  Margin="5,5,5,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Margin="5,3"
+                           Text="{DynamicResource WordToMotion_AssignDevice_Select_Header}"
+                           />
+                <ComboBox Grid.Column="1"
+                          HorizontalAlignment="Stretch"
+                          Margin="5,0"
+                          ItemsSource="{Binding Devices}"
+                          SelectedItem="{Binding SelectedDevice, Mode=TwoWay}"
+                          md:HintAssist.Hint="Device"
+                          >
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding DisplayName}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </Grid>
 
-            <CheckBox Grid.Row="1"
+
+            <!--<CheckBox Grid.Row="1"
                         Margin="15,0"
                         Content="{DynamicResource WordToMotion_Enable}"
                         IsChecked="{Binding EnableWordToMotion}"
-                        />
+                        />-->
 
-            <Grid Grid.Row="2" Margin="15,5">
+            <!--<Grid Grid.Row="2" Margin="15,5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="25"/>
                     <RowDefinition Height="25"/>
@@ -77,15 +109,32 @@
                              IsEnabled="{Binding EnableWordToMotion}"
                              IsChecked="{Binding UseKeyboardToStartWordToMotion}"                         
                              />
-            </Grid>
+            </Grid>-->
 
-            <TextBlock Grid.Row="3"
-                        MinWidth="60"
-                        Margin="5,10,0,0"
+            <StackPanel Grid.Row="3"
+                        Orientation="Horizontal"
                         HorizontalAlignment="Left"
-                        TextAlignment="Center"
-                        Text="{DynamicResource WordToMotion_KeyAssign}"
-                        />
+                        >
+                <TextBlock Grid.Row="3"
+                           MinWidth="60"
+                           Margin="5,0,0,0"
+                           VerticalAlignment="Center"
+                           TextAlignment="Center"
+                           Text="{DynamicResource WordToMotion_KeyAssign}"
+                           />
+                <Button Style="{StaticResource MaterialDesignFlatButton}"
+                        Width="20"
+                        Height="20" 
+                        Padding="0"
+                        Visibility="{Binding SelectedDeviceType,
+                                             Converter={StaticResource IntEqualityToVisibilityConverter},
+                                             ConverterParameter={StaticResource DeviceTypeMidiController}}"
+                        Command="{Binding OpenKeyAssignmentEditorCommand}"
+                        >
+                    <md:PackIcon Width="15" Height="15"
+                                 Kind="Edit"/>
+                </Button>
+            </StackPanel>
 
             <Grid Grid.Row="4">
                 <Grid.Resources>
@@ -115,8 +164,9 @@
                 <!-- W2M専用のデバイスが割り当たっていないときのキー割り当て表示 -->
                 <StackPanel Grid.Column="0"
                             Margin="0,0,0,80"
-                            Visibility="{Binding UseNoDeviceToStartWordToMotion, 
-                                                    Converter={StaticResource BooleanToVisibilityConverter}}"
+                            Visibility="{Binding SelectedDeviceType,
+                                                 Converter={StaticResource IntEqualityToVisibilityConverter},
+                                                 ConverterParameter={StaticResource DeviceTypeKeyboardWords}}"
                             >
                     <StackPanel.Resources>
                         <Style TargetType="Grid" BasedOn="{StaticResource KeyAssignGrid}"/>
@@ -154,8 +204,9 @@
                 <!-- ゲームパッドをW2M専用に使うときのキー割り当て表示 -->
                 <StackPanel Grid.Column="0"
                             Margin="0,0,0,80"
-                            Visibility="{Binding UseGamepadToStartWordToMotion, 
-                                                    Converter={StaticResource BooleanToVisibilityConverter}}"
+                            Visibility="{Binding SelectedDeviceType,
+                                                 Converter={StaticResource IntEqualityToVisibilityConverter},
+                                                 ConverterParameter={StaticResource DeviceTypeGamepad}}"
                             >
                     <StackPanel.Resources>
                         <Style TargetType="Grid" BasedOn="{StaticResource KeyAssignGrid}"/>
@@ -179,8 +230,9 @@
                 <StackPanel Grid.Column="0"
                             HorizontalAlignment="Center"
                             Margin="0,0,0,80"
-                            Visibility="{Binding UseKeyboardToStartWordToMotion, 
-                                                    Converter={StaticResource BooleanToVisibilityConverter}}" 
+                            Visibility="{Binding SelectedDeviceType,
+                                                 Converter={StaticResource IntEqualityToVisibilityConverter},
+                                                 ConverterParameter={StaticResource DeviceTypeKeyboardTenKey}}"
                             >
                     <StackPanel.Resources>
                         <Style TargetType="Grid" BasedOn="{StaticResource KeyAssignGrid}"/>
@@ -197,6 +249,27 @@
                     <md:PackIcon Kind="Number7BoxOutline"/>
                     <md:PackIcon Kind="Number8BoxOutline"/>
                 </StackPanel>
+
+                <!-- MIDIコントローラをW2M専用に使うときのノート割り当て -->
+                <ItemsControl Grid.Column="0"
+                            HorizontalAlignment="Center"
+                            Margin="0,0,0,80"
+                            ItemsSource="{Binding MidiNoteMap.Items}"
+                            Visibility="{Binding SelectedDeviceType,
+                                                 Converter={StaticResource IntEqualityToVisibilityConverter},
+                                                 ConverterParameter={StaticResource DeviceTypeMidiController}}"
+                            >
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Style="{StaticResource KeyAssignTextBlock}"
+                                       Height="20"
+                                       Margin="0,10"
+                                       Text="{Binding NoteNumber, 
+                                                      Converter={StaticResource NoteNumberToTextConverter}}"
+                                       />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
 
                 <ItemsControl Grid.Column="1"
                               ItemsSource="{Binding Items}"

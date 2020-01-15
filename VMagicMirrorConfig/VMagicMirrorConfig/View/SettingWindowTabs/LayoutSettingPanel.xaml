@@ -202,10 +202,22 @@
                                 />
                     </StackPanel>
 
-                    <CheckBox Margin="20,2"
+                    <CheckBox Margin="20,0"
                               VerticalContentAlignment="Center"
                               IsChecked="{Binding HidVisibility}">
                         <TextBlock Text="{DynamicResource Layout_HidVisible}"/>
+                    </CheckBox>
+
+                    <CheckBox Margin="20,0"
+                              VerticalContentAlignment="Center"
+                              IsChecked="{Binding EnableMidiRead}">
+                        <TextBlock Text="{DynamicResource Layout_MidiReadEnable}"/>
+                    </CheckBox>
+
+                    <CheckBox Margin="20,0"
+                              VerticalContentAlignment="Center"
+                              IsChecked="{Binding MidiControllerVisibility}">
+                        <TextBlock Text="{DynamicResource Layout_MidiVisible}"/>
                     </CheckBox>
 
                     <TextBlock Text="{DynamicResource Layout_Hid_TypingEffect_Header}"/>

@@ -86,6 +86,7 @@ namespace Baku.VMagicMirrorConfig
         public Message EnableFaceTracking(bool enable) => WithArg($"{enable}");
         public Message SetCameraDeviceName(string deviceName) => WithArg(deviceName);
         public Message AutoBlinkDuringFaceTracking(bool enable) => WithArg($"{enable}");
+        public Message EnableBodyLeanZ(bool enable) => WithArg($"{enable}");
         public Message EnableLipSyncBasedBlinkAdjust(bool enable) => WithArg($"{enable}");
         public Message EnableHeadRotationBasedBlinkAdjust(bool enable) => WithArg($"{enable}");
 
@@ -159,6 +160,8 @@ namespace Baku.VMagicMirrorConfig
 
         public Message HidVisibility(bool visible) => WithArg($"{visible}");
 
+        public Message MidiControllerVisibility(bool visible) => WithArg($"{visible}");
+
         public Message SetKeyboardTypingEffectType(int typeIndex) => WithArg($"{typeIndex}");
 
         public Message EnableDeviceFreeLayout(bool enable) => WithArg($"{enable}");
@@ -172,6 +175,12 @@ namespace Baku.VMagicMirrorConfig
         /// </summary>
         /// <returns></returns>
         public Message CurrentDeviceLayout() => NoArg();
+
+        #endregion
+
+        #region MIDI
+
+        public Message EnableMidiRead(bool enable) => WithArg($"{enable}");
 
         #endregion
 
@@ -191,6 +200,13 @@ namespace Baku.VMagicMirrorConfig
         #endregion
 
         #region Light Setting
+
+        /// <summary>
+        /// Query.
+        /// </summary>
+        /// <returns></returns>
+        public Message GetQualitySettingsInfo() => NoArg();
+        public Message SetImageQuality(string name) => WithArg(name);
 
         public Message LightColor(int r, int g, int b) => WithArg($"{r},{g},{b}");
         public Message LightIntensity(int intensityPercent) => WithArg($"{intensityPercent}");
@@ -216,16 +232,17 @@ namespace Baku.VMagicMirrorConfig
 
         #region Word To Motion
 
-        public Message EnableWordToMotion(bool enable) => WithArg($"{enable}");
         public Message ReloadMotionRequests(string content) => WithArg(content);
 
         //NOTE: 以下の3つはユーザーが動作チェックに使う
         public Message PlayWordToMotionItem(string word) => WithArg(word);
         public Message EnableWordToMotionPreview(bool enable) => WithArg($"{enable}");
         public Message SendWordToMotionPreviewInfo(string json) => WithArg(json);
-        public Message UseGamepadToStartWordToMotion(bool enable) => WithArg($"{enable}");
         public Message SetDeviceTypeToStartWordToMotion(int deviceType) => WithArg($"{deviceType}");
 
+        public Message LoadMidiNoteToMotionMap(string content) => WithArg(content);
+        public Message RequireMidiNoteOnMessage(bool require) => WithArg($"{require}");
+        
         #endregion
 
         #region その他
