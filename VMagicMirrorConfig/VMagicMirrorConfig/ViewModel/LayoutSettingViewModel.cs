@@ -349,7 +349,7 @@ namespace Baku.VMagicMirrorConfig
 
         private async void OnDisableFreeLayoutMode()
         {
-            string response = await Sender.QueryMessageAsync(MessageFactory.Instance.CurrentAccesoryLayout());
+            string response = await Sender.QueryMessageAsync(MessageFactory.Instance.CurrentAccessoryLayout());
             SilentSetAccessoryLayout(response);
         }
 

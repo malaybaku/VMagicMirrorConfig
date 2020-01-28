@@ -183,7 +183,7 @@ namespace Baku.VMagicMirrorConfig
         /// Query.
         /// </summary>
         /// <returns></returns>
-        public Message CurrentAccesoryLayout() => NoArg();
+        public Message CurrentAccessoryLayout() => NoArg();
 
         #endregion
 
