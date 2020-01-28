@@ -127,6 +127,19 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
+        private string _accessoryLayout = "";
+        public string AccessoryLayout
+        {
+            get => _accessoryLayout;
+            set
+            {
+                if (SetValue(ref _accessoryLayout, value))
+                {
+                    SendMessage(MessageFactory.Instance.SetAccessoryLayout(AccessoryLayout));
+                }
+            }
+        }
+
         /// <summary>
         /// カメラ位置の情報を更新しますが、設定時にUnityプロセスにメッセージを送信しません。
         /// </summary>
@@ -140,6 +153,13 @@ namespace Baku.VMagicMirrorConfig
         /// <param name="deviceLayout"></param>
         public void SilentSetDeviceLayout(string deviceLayout)
             => _deviceLayout = deviceLayout ?? "";
+
+        /// <summary>
+        /// アクセサリのレイアウト情報を更新しますが、設定時にUnityプロセスにメッセージを送信しません。
+        /// </summary>
+        /// <param name="accessoryLayout"></param>
+        public void SilentSetAccessoryLayout(string accessoryLayout)
+            => _accessoryLayout = accessoryLayout ?? "";
 
         #endregion
 
@@ -318,8 +338,19 @@ namespace Baku.VMagicMirrorConfig
                     SendMessage(
                         MessageFactory.Instance.EnableDeviceFreeLayout(EnableDeviceFreeLayout)
                         );
+                    //フリーレイアウトを辞めたとき、fire & forget方式でアクセサリのレイアウト情報を確認しておく
+                    if (!value)
+                    {
+                        OnDisableFreeLayoutMode();
+                    }
                 }
             }
+        }
+
+        private async void OnDisableFreeLayoutMode()
+        {
+            string response = await Sender.QueryMessageAsync(MessageFactory.Instance.CurrentAccesoryLayout());
+            SilentSetAccessoryLayout(response);
         }
 
         #region タイピングエフェクト

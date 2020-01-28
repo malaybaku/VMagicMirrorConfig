@@ -170,11 +170,20 @@ namespace Baku.VMagicMirrorConfig
 
         public Message ResetDeviceLayout() => NoArg();
 
+
         /// <summary>
         /// Query.
         /// </summary>
         /// <returns></returns>
         public Message CurrentDeviceLayout() => NoArg();
+
+        public Message SetAccessoryLayout(string data) => WithArg(data);
+
+        /// <summary>
+        /// Query.
+        /// </summary>
+        /// <returns></returns>
+        public Message CurrentAccesoryLayout() => NoArg();
 
         #endregion
 
