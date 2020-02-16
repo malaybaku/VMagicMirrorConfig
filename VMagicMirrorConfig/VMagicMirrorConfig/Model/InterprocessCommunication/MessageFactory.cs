@@ -187,6 +187,7 @@ namespace Baku.VMagicMirrorConfig
         #region ゲームパッド
 
         public Message EnableGamepad(bool enable) => WithArg($"{enable}");
+        public Message PreferDirectInputGamepad(bool preferDirectInput) => WithArg($"{preferDirectInput}");
         public Message GamepadHeight(int height) => WithArg($"{height}");
         public Message GamepadHorizontalScale(int scale) => WithArg($"{scale}");
 

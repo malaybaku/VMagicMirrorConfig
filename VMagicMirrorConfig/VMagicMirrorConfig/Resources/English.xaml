@@ -173,12 +173,13 @@ VRM File</sys:String>
     <sys:String x:Key="Layout_Gamepad">Gamepad</sys:String>
     
     <sys:String x:Key="Layout_GamepadEnable">Enable Input Capture</sys:String>
+    <sys:String x:Key="Layout_Gamepad_PreferDirectInput">Use DirectInput (check for DUAL SHOCK 4)</sys:String>
     <sys:String x:Key="Layout_GamepadDeviceNumber">Device Number</sys:String>
     
     <sys:String x:Key="Layout_GamepadHeight">Height [cm]</sys:String>
     <sys:String x:Key="Layout_GamepadHorizontalScale">Size [%]</sys:String>
-    <sys:String x:Key="Layout_GamepadVisible">Visible</sys:String>
-    <sys:String x:Key="Layout_GamepadLeanMotion">Lean character by directional input</sys:String>
+    <sys:String x:Key="Layout_GamepadVisible">Visible</sys:String>    
+    <sys:String x:Key="Layout_GamepadLeanMotion">Lean character by directional input</sys:String>    
 
     <sys:String x:Key="Layout_GamepadLean">Lean by Stick</sys:String>
     <sys:String x:Key="Layout_GamepadLean_None">None</sys:String>

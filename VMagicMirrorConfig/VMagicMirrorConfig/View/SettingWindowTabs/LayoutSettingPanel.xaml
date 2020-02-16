@@ -285,6 +285,14 @@
                                   >
                             <TextBlock Text="{DynamicResource Layout_GamepadEnable}"/>
                         </CheckBox>
+                        <CheckBox Margin="40,0,0,0"
+                                  VerticalAlignment="Center"
+                                  VerticalContentAlignment="Center"
+                                  IsEnabled="{Binding Gamepad.GamepadEnabled}"
+                                  IsChecked="{Binding Gamepad.PreferDirectInputGamepad}"
+                                  >
+                            <TextBlock Text="{DynamicResource Layout_Gamepad_PreferDirectInput}"/>
+                        </CheckBox>
 
                         <CheckBox Margin="20,2"
                               VerticalContentAlignment="Center"
