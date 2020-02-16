@@ -175,7 +175,6 @@
     <sys:String x:Key="Layout_Gamepad">ゲームパッド</sys:String>
     
     <sys:String x:Key="Layout_GamepadEnable">ゲームパッド入力のキャプチャを有効化</sys:String>
-    <sys:String x:Key="Layout_Gamepad_PreferDirectInput">DirectInputを使用 (DUAL SHOCK 4を使う場合オン)</sys:String>
     <sys:String x:Key="Layout_GamepadDeviceNumber">デバイス番号</sys:String>
     
     <sys:String x:Key="Layout_GamepadVisible">ゲームパッドを表示</sys:String>
