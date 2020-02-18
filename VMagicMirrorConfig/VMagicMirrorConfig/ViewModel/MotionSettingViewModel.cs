@@ -254,7 +254,7 @@ namespace Baku.VMagicMirrorConfig
             SendMessage(MessageFactory.Instance.SetCalibrateFaceData(CalibrateFaceData));
         }
 
-        private int _faceDefaultFun = 20;
+        private int _faceDefaultFun = 0;
         public int FaceDefaultFun
         {
             get => _faceDefaultFun;
@@ -702,7 +702,7 @@ namespace Baku.VMagicMirrorConfig
             UseLookAtPointMousePointer = true;
             UseLookAtPointMainCamera = false;
 
-            FaceDefaultFun = 20;
+            FaceDefaultFun = 0;
 
             EyebrowLeftUpKey = "";
             EyebrowLeftDownKey = "";
