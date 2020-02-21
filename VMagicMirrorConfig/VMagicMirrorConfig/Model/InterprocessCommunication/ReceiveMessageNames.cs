@@ -12,5 +12,7 @@
 
         public const string MidiNoteOn = nameof(MidiNoteOn);
 
+        public const string VRoidModelLoadCompleted = nameof(VRoidModelLoadCompleted);
+        public const string VRoidModelLoadCanceled = nameof(VRoidModelLoadCanceled);
     }
 }

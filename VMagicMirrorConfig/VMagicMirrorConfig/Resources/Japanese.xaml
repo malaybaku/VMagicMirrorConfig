@@ -21,7 +21,8 @@
     <sys:String x:Key="Home_LoadVrmOnNextStartup">次回の起動時にも同じVRMを読み込む</sys:String>
     <sys:String x:Key="Home_AutoAdjust">キャラ体格で補正</sys:String>
     <sys:String x:Key="Home_RecommendVRoidHub">※キャラクターのダウンロードがまだの場合: </sys:String>
-    <sys:String x:Key="Home_OpenVRoidHub">VRoid Hubを開く</sys:String>
+    <sys:String x:Key="Home_OpenVRoidHub">ブラウザでVRoid Hubを開く</sys:String>
+    <sys:String x:Key="Home_ConnectToVRoidHub">VRoid Hubに接続</sys:String>    
     <sys:String x:Key="Home_AutoAdjustFaceParameterOnLoad">モデルロード時に表情を調整</sys:String>
 
     <sys:String x:Key="Home_Manual_Header">使い方</sys:String>

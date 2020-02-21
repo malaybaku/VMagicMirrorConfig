@@ -63,6 +63,27 @@ namespace Baku.VMagicMirrorConfig
             WordToMotionSetting = new WordToMotionSettingViewModel(MessageSender, Initializer.MessageReceiver);
 
             AvailableLanguageNames = new ReadOnlyObservableCollection<string>(_availableLanguageNames);
+
+            Initializer.MessageReceiver.ReceivedCommand += OnReceiveCommand;
+        }
+
+        private void OnReceiveCommand(object sender, CommandReceivedEventArgs e)
+        {
+            switch (e.Command)
+            {
+                case ReceiveMessageNames.VRoidModelLoadCompleted:
+                    //ファイルパスベースのほうを記憶喪失しておく: 防御的な挙動として、
+                    //VRoid SDKでモデルを読み込むと自動読み込みが無効になる。
+                    _lastVrmLoadFilePath = "";
+                    if (AutoAdjustEyebrowOnLoaded)
+                    {
+                        MessageSender.SendMessage(MessageFactory.Instance.RequestAutoAdjustEyebrow());
+                    }
+                    break;
+                case ReceiveMessageNames.VRoidModelLoadCanceled:
+                    //とりあえず何もしない: 気を使う場合、いちど非透過にしたウィンドウを透過にし直したりしてもOK
+                    break;
+            }
         }
 
         #region Properties for View
@@ -113,6 +134,10 @@ namespace Baku.VMagicMirrorConfig
         private ActionCommand<string>? _loadVrmByPathCommand;
         public ActionCommand<string> LoadVrmByFilePathCommand
             => _loadVrmByPathCommand ??= new ActionCommand<string>(LoadVrmByFilePath);
+
+        private ActionCommand? _connectToVRoidHubCommand;
+        public ActionCommand ConnectToVRoidHubCommand
+            => _connectToVRoidHubCommand ??= new ActionCommand(ConnectToVRoidHub);
 
         private ActionCommand? _openVRoidHubCommand;
         public ActionCommand OpenVRoidHubCommand
@@ -238,10 +263,14 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private void OpenVRoidHub()
+        private void ConnectToVRoidHub()
         {
-            UrlNavigate.Open("https://hub.vroid.com/");
+            MessageSender.SendMessage(MessageFactory.Instance.OpenVRoidSdkUi());
+            //ウィンドウ透過のままだと普通のUIとして使うのに支障出るため、非透過に落とす
+            WindowSetting.IsTransparent = false;
         }
+
+        private void OpenVRoidHub() => UrlNavigate.Open("https://hub.vroid.com/");
 
         private void OpenManualUrl()
         {

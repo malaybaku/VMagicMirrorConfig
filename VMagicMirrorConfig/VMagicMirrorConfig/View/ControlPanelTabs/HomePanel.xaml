@@ -71,7 +71,33 @@
                             </Grid>
                         </Border>
                     </Grid>
-                    
+
+                    <TextBlock Text="{DynamicResource Home_RecommendVRoidHub}" Margin="10,5,10,0" />
+
+                    <Button HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Width="180"
+                            Margin="15,10"
+                            Command="{Binding ConnectToVRoidHubCommand}"
+                            >
+                        <StackPanel Style="{StaticResource IconTextSetStackPanel}">
+                            <md:PackIcon Style="{StaticResource IconTextSetIcon}"
+                                         Kind="TransitConnection"
+                                         />
+                            <TextBlock Style="{StaticResource IconSetSetText}"
+                                       Text="{DynamicResource Home_ConnectToVRoidHub}"
+                                       />
+                        </StackPanel>
+                    </Button>
+
+                    <TextBlock Margin="15,0,10,20">
+                        <Hyperlink Command="{Binding OpenVRoidHubCommand}"
+                                   ToolTip="https://hub.vroid.com/">
+                            <Run Text="{DynamicResource Home_OpenVRoidHub}"/>
+                        </Hyperlink>
+                    </TextBlock>
+
+
 
                     <CheckBox Content="{DynamicResource Home_LoadVrmOnNextStartup}"
                               Margin="15,10,15,5"
@@ -98,15 +124,6 @@
                                        />
                         </StackPanel>
                     </Button>
-
-                    <TextBlock Margin="10,5">
-                        <Run Text="{DynamicResource Home_RecommendVRoidHub}"/>
-                        <LineBreak/>
-                        <Hyperlink Command="{Binding OpenVRoidHubCommand}"
-                                   ToolTip="https://hub.vroid.com/">
-                            <Run Text="{DynamicResource Home_OpenVRoidHub}"/>
-                        </Hyperlink>
-                    </TextBlock>
 
                     <TextBlock Style="{StaticResource HeaderText}"
                                Margin="10,20,10,5"
