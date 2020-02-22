@@ -359,6 +359,7 @@
                             <RowDefinition/>
                             <RowDefinition/>
                             <RowDefinition/>
+                            <RowDefinition/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -390,15 +391,22 @@
                                  Text="{Binding Value, ElementName=sliderElbowCloseStrength}"
                                  />
 
-
                         <CheckBox Grid.Row="2" Grid.Column="0"
+                                  Grid.ColumnSpan="3"
+                                  Margin="5" 
+                                  Content="{DynamicResource Motion_Arm_FpsAssumedRightHand}"
+                                  ToolTip="{DynamicResource Motion_Arm_FpsAssumedRightHand_Tooltip}"
+                                  IsChecked="{Binding EnableFpsAssumedRightHand}"
+                                  />
+
+                        <CheckBox Grid.Row="3" Grid.Column="0"
                                   Grid.ColumnSpan="3"
                                   Margin="5" 
                                   Content="{DynamicResource Motion_Arm_EnablePresenterMotion}"
                                   IsChecked="{Binding EnablePresenterMotion}"
                                   />
 
-                        <CheckBox Grid.Row="3" Grid.Column="0"
+                        <CheckBox Grid.Row="4" Grid.Column="0"
                                   Grid.ColumnSpan="3"
                                   Margin="15,5" 
                                   IsEnabled="{Binding EnablePresenterMotion}"
@@ -406,31 +414,31 @@
                                   IsChecked="{Binding ShowPresentationPointer}"
                                   />
                         
-                        <TextBlock Grid.Row="4" Grid.Column="0"
+                        <TextBlock Grid.Row="5" Grid.Column="0"
                                    Margin="15,0,0,0"
                                    Text="{DynamicResource Motion_Arm_PresenterArmMotionScale}"/>
-                        <Slider Grid.Row="4" Grid.Column="1"
+                        <Slider Grid.Row="5" Grid.Column="1"
                                 x:Name="sliderPresentationArmMotionScale"
                                 Minimum="1"
                                 Maximum="100"
                                 IsEnabled="{Binding EnablePresenterMotion}"
                                 Value="{Binding PresentationArmMotionScale, Mode=TwoWay}"
                                 />
-                        <TextBox Grid.Row="4" Grid.Column="2"
+                        <TextBox Grid.Row="5" Grid.Column="2"
                                  IsEnabled="{Binding EnablePresenterMotion}"
                                  Text="{Binding Value, ElementName=sliderPresentationArmMotionScale}"
                                  />
-                        <TextBlock Grid.Row="5" Grid.Column="0"
+                        <TextBlock Grid.Row="6" Grid.Column="0"
                                    Margin="15,0,0,0"
                                    Text="{DynamicResource Motion_Arm_PresenterArmRadiusMin}"/>
-                        <Slider Grid.Row="5" Grid.Column="1"
+                        <Slider Grid.Row="6" Grid.Column="1"
                                 x:Name="sliderPresentationArmRadiusMin"
                                 Minimum="1"
                                 Maximum="100"
                                 IsEnabled="{Binding EnablePresenterMotion}"
                                 Value="{Binding PresentationArmRadiusMin, Mode=TwoWay}"
                                 />
-                        <TextBox Grid.Row="5" Grid.Column="2"
+                        <TextBox Grid.Row="6" Grid.Column="2"
                                  IsEnabled="{Binding EnablePresenterMotion}"
                                  Text="{Binding Value, ElementName=sliderPresentationArmRadiusMin}"
                                  />
