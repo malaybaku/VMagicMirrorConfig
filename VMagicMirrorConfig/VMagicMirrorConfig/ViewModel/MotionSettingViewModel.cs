@@ -498,6 +498,19 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
+        private bool _enableFpsAssumedRightHand = false;
+        public bool EnableFpsAssumedRightHand
+        {
+            get => _enableFpsAssumedRightHand;
+            set
+            {
+                if (SetValue(ref _enableFpsAssumedRightHand, value))
+                {
+                    SendMessage(MessageFactory.Instance.EnableFpsAssumedRightHand(EnableFpsAssumedRightHand));
+                }
+            }
+        }
+
         private bool _enablePresenterMotion = false;
         public bool EnablePresenterMotion
         {
@@ -718,6 +731,7 @@ namespace Baku.VMagicMirrorConfig
             EnableHidArmMotion = true;
             WaistWidth = 30;
             ElbowCloseStrength = 30;
+            EnableFpsAssumedRightHand = false;
             EnablePresenterMotion = false;
             PresentationArmMotionScale = 30;
             PresentationArmRadiusMin = 20;
