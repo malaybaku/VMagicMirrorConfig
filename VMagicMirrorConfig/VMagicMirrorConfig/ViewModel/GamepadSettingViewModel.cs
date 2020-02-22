@@ -24,6 +24,18 @@
                 }
             }
         }
+        private bool _preferDirectInputGamepad = false;
+        public bool PreferDirectInputGamepad
+        {
+            get => _preferDirectInputGamepad;
+            set
+            {
+                if (SetValue(ref _preferDirectInputGamepad, value))
+                {
+                    SendMessage(MessageFactory.Instance.PreferDirectInputGamepad(PreferDirectInputGamepad));
+                }
+            }
+        }
 
         private bool _visibility = false;
         public bool GamepadVisibility
@@ -139,6 +151,7 @@
         public override void ResetToDefault()
         {
             GamepadEnabled = true;
+            PreferDirectInputGamepad = false;
             GamepadVisibility = false;
 
             GamepadLeanNone = false;
