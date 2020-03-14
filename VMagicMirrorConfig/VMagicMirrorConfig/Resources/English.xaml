@@ -88,6 +88,8 @@ VRM File</sys:String>
     <sys:String x:Key="Motion_Face_EnableBodyLeanZ">Enable forward / backward motion</sys:String>    
     <sys:String x:Key="Motion_Face_AutoBlinkDuringFaceTracking">Auto blink during face tracking</sys:String>
     <sys:String x:Key="Motion_Face_DisableFaceTrackingHorizontalFlip">Disable horizontal flip</sys:String>
+    <sys:String x:Key="Motion_Face_EnableImageBasedHandTracking">Enable image based hand tracking</sys:String>
+    
     <sys:String x:Key="Motion_Face_HeadRotBaseBlinkAdjust">Blink adjust by head motion</sys:String>
     <sys:String x:Key="Motion_Face_LipSyncBaseBlinkAdjust">Blink adjust by lip sync</sys:String>
 

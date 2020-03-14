@@ -208,6 +208,21 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
+        private bool _enableImageBasedHandTracking = false;
+        public bool EnableImageBasedHandTracking
+        {
+            get => _enableImageBasedHandTracking;
+            set
+            {
+                if (SetValue(ref _enableImageBasedHandTracking, value))
+                {
+                    SendMessage(
+                        MessageFactory.Instance.EnableImageBasedHandTracking(EnableImageBasedHandTracking)
+                        );
+                }
+            }
+        }
+
         private string _cameraDeviceName = "";
         public string CameraDeviceName
         {
@@ -707,6 +722,7 @@ namespace Baku.VMagicMirrorConfig
             AutoBlinkDuringFaceTracking = true;
             EnableBodyLeanZ = false;
             DisableFaceTrackingHorizontalFlip = false;
+            EnableImageBasedHandTracking = false;
 
             EnableLipSync = true;
             LipSyncMicrophoneDeviceName = "";

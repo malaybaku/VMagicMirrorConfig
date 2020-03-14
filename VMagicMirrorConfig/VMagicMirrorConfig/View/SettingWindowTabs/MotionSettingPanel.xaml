@@ -42,6 +42,7 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="35"/>
@@ -132,6 +133,16 @@
                                   >
                             <CheckBox.Content>
                                 <TextBlock Text="{DynamicResource Motion_Face_DisableFaceTrackingHorizontalFlip}"/>
+                            </CheckBox.Content>
+                        </CheckBox>
+                        <CheckBox Grid.Row="5" Grid.Column="1"
+                                  Grid.ColumnSpan="2"
+                                  Margin="15,0,0,0"
+                                  IsEnabled="{Binding EnableFaceTracking}"
+                                  IsChecked="{Binding EnableImaseBasedHandTracking}"
+                                  >
+                            <CheckBox.Content>
+                                <TextBlock Text="{DynamicResource Motion_Face_EnableImageBasedHandTracking}"/>
                             </CheckBox.Content>
                         </CheckBox>
 
