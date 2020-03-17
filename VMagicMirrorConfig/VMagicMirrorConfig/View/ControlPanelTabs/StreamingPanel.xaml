@@ -169,7 +169,7 @@
                                   Grid.ColumnSpan="2"
                                   Margin="50,0,5,0"
                                   IsEnabled="{Binding MotionSetting.EnableFaceTracking}"
-                                  IsChecked="{Binding MotionSetting.EnableImaseBasedHandTracking}"
+                                  IsChecked="{Binding MotionSetting.EnableImageBasedHandTracking}"
                                   >
                             <CheckBox.Content>
                                 <TextBlock Text="{DynamicResource Motion_Face_EnableImageBasedHandTracking}"/>
