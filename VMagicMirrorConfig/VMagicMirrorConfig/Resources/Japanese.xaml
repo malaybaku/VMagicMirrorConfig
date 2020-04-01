@@ -78,6 +78,21 @@
     <sys:String x:Key="Window_TransparencySupport_Level_3">レベル3: 「キャラ付近を掴んでドラッグ」がオフならば、半透明になります。</sys:String>
     <sys:String x:Key="Window_TransparencySupport_Level_4">レベル4: つねに半透明になります。</sys:String>
     
+    <sys:String x:Key="Window_VirtualCamOutput">仮想カメラ出力</sys:String>
+    <sys:String x:Key="Window_VirtualCamOutput_Enable">仮想カメラ出力を有効化</sys:String>
+    <sys:String x:Key="Window_VirtualCamOutput_Resolution">サイズ</sys:String>
+    <sys:String x:Key="Window_VirtualCamOutput_Width">幅</sys:String>
+    <sys:String x:Key="Window_VirtualCamOutput_Height">高さ</sys:String>
+    <sys:String x:Key="Window_VirtualCamOutput_MatchWindowSize">リサイズ</sys:String>
+    <sys:String x:Key="Window_VirtualCamOutput_FirstTime_Header">※初めて使う場合</sys:String>
+    <sys:String x:Key="Window_VirtualCamOutput_FirstTime_Expr" xml:space="preserve">仮想カメラ機能を使うには、
+VMagicMirrorとは別にカメラのインストールが必要です。
+
+他バージョンのVMagicMirrorで既に仮想カメラをインストールした場合、
+追加でのインストールは不要です。</sys:String>
+    <sys:String x:Key="Window_VirtualCamOutput_FirstTime_Install">インストール</sys:String>
+    <sys:String x:Key="Window_VirtualCamOutput_FirstTime_Uninstall">アンインストール</sys:String>
+    
     <!-- Motion -->
     
     <!-- Motion : Face -->

@@ -76,6 +76,19 @@ VRM File</sys:String>
     <sys:String x:Key="Window_TransparencySupport_Level_3">Level 3: Transparent if "Drag character" is off.</sys:String>
     <sys:String x:Key="Window_TransparencySupport_Level_4">Level 4: Always transparent.</sys:String>
     
+    <sys:String x:Key="Window_VirtualCamOutput">Virtual Camera Output</sys:String>
+    <sys:String x:Key="Window_VirtualCamOutput_Enable">Enable Camera Output</sys:String>
+    <sys:String x:Key="Window_VirtualCamOutput_Resolution">Size</sys:String>
+    <sys:String x:Key="Window_VirtualCamOutput_Width">Width</sys:String>
+    <sys:String x:Key="Window_VirtualCamOutput_Height">Height</sys:String>
+    <sys:String x:Key="Window_VirtualCamOutput_MatchWindowSize">Resize</sys:String>
+    <sys:String x:Key="Window_VirtualCamOutput_FirstTime_Header">*How to setup</sys:String>
+    <sys:String x:Key="Window_VirtualCamOutput_FirstTime_Expr" xml:space="preserve">Please install virtual camera for the setup.
+        
+If you have already installed camera in another version,
+Then additional installation is not required.</sys:String>        
+    <sys:String x:Key="Window_VirtualCamOutput_FirstTime_Install">Install</sys:String>
+    <sys:String x:Key="Window_VirtualCamOutput_FirstTime_Uninstall">Uninstall</sys:String>
     
     <!-- Motion -->
     
