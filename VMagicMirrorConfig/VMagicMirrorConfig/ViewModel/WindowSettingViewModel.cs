@@ -130,6 +130,68 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
+        private bool _virtualCamEnabled = false;
+        public bool VirtualCamEnabled
+        {
+            get => _virtualCamEnabled;
+            set
+            {
+                if (SetValue(ref _virtualCamEnabled, value))
+                {
+                    SendMessage(MessageFactory.Instance.SetVirtualCamEnable(VirtualCamEnabled));
+                }
+            }
+        }
+
+        private int _virtualCamWidth = 640;
+        public int VirtualCamWidth
+        {
+            get => _virtualCamWidth;
+            set
+            {
+                if (SetValue(ref _virtualCamWidth, value))
+                {
+                    SendMessage(MessageFactory.Instance.SetVirtualCamWidth(VirtualCamWidth));
+                }
+            }
+        }
+
+        private int _virtualCamHeight = 480;
+        public int VirtualCamHeight
+        {
+            get => _virtualCamHeight;
+            set
+            {
+                if (SetValue(ref _virtualCamHeight, value))
+                {
+                    SendMessage(MessageFactory.Instance.SetVirtualCamHeight(VirtualCamHeight));
+                }
+            }
+        }
+
+        private ActionCommand? _resetVirtualCamSettingCommand;
+        public ActionCommand ResetVirtualCamSettingCommand
+            => _resetVirtualCamSettingCommand ??= new ActionCommand(ResetVirtualCamSetting);
+        private void ResetVirtualCamSetting()
+        {
+            VirtualCamEnabled = false;
+            VirtualCamWidth = 640;
+            VirtualCamHeight = 480;
+        }
+
+        private ActionCommand? _openCameraInstallDialogCommand;
+        public ActionCommand OpenCameraInstallDialogCommand
+            => _openCameraInstallDialogCommand ??= new ActionCommand(OpenCameraInstallDialog);
+        private void OpenCameraInstallDialog()
+        {
+            //NOTE: カメラのインストール/アンインストールは.batの実行で実現するためViewModelはIPCを行わない
+            new CameraInstallWindow()
+            {
+                DataContext = new CameraInstallerViewModel()
+            }.ShowDialog();
+        }
+
+
         private ActionCommand? _resetWindowPositionCommand;
         public ActionCommand ResetWindowPositionCommand
             => _resetWindowPositionCommand ??= new ActionCommand(ResetWindowPosition);
@@ -245,6 +307,8 @@ namespace Baku.VMagicMirrorConfig
             TopMost = true;
 
             ResetOpacity();
+
+            ResetVirtualCamSetting();
 
             //このリセットはあまり定数的ではないことに注意！
             ResetWindowPosition();
