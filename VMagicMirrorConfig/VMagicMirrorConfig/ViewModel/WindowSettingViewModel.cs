@@ -1,4 +1,5 @@
-﻿using System.Windows.Media;
+﻿using System.Windows;
+using System.Windows.Media;
 using System.Xml.Serialization;
 
 namespace Baku.VMagicMirrorConfig
@@ -218,7 +219,9 @@ namespace Baku.VMagicMirrorConfig
             //NOTE: カメラのインストール/アンインストールは.batの実行で実現するためViewModelはIPCを行わない
             new CameraInstallWindow()
             {
-                DataContext = new CameraInstallerViewModel()
+                DataContext = new CameraInstallerViewModel(),
+                Owner = SettingWindow.CurrentWindow ?? App.Current.MainWindow,
+                WindowStartupLocation = WindowStartupLocation.CenterOwner,
             }.ShowDialog();
         }
 
