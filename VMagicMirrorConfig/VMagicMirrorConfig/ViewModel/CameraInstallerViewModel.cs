@@ -56,7 +56,7 @@ namespace Baku.VMagicMirrorConfig
         private static string GetUninstallBatFilePath() => Path.Combine(
             Path.GetDirectoryName(SpecialFilePath.UnityAppPath) ?? "",
             "CameraInstall",
-            "Install.bat"
+            "Uninstall.bat"
             );
     }
 }
