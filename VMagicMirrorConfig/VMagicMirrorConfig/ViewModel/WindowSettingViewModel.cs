@@ -149,8 +149,20 @@ namespace Baku.VMagicMirrorConfig
             get => _virtualCamWidth;
             set
             {
-                if (SetValue(ref _virtualCamWidth, value))
+                if (_virtualCamWidth == value)
                 {
+                    return;
+                }
+                else if (value < 80 || value > 1920 || _virtualCamWidth == value - value % 4)
+                {
+                    //4の倍数になるよう調整したら元と同じになるケースや、単に値が極端な場合: 変化前の値に戻りました、という体裁にする
+                    RaisePropertyChanged();
+                    return;
+                }
+                else
+                {
+                    _virtualCamWidth = value - value % 4;
+                    RaisePropertyChanged();
                     SendMessage(MessageFactory.Instance.SetVirtualCamWidth(VirtualCamWidth));
                 }
             }
@@ -162,8 +174,19 @@ namespace Baku.VMagicMirrorConfig
             get => _virtualCamHeight;
             set
             {
-                if (SetValue(ref _virtualCamHeight, value))
+                if (_virtualCamHeight == value)
                 {
+                    return;
+                }
+                else if (value < 80 || value > 1920 ||  _virtualCamHeight == value - value % 4)
+                {
+                    RaisePropertyChanged();
+                    return;
+                }
+                else
+                {
+                    _virtualCamHeight = value - value % 4;
+                    RaisePropertyChanged();
                     SendMessage(MessageFactory.Instance.SetVirtualCamHeight(VirtualCamHeight));
                 }
             }

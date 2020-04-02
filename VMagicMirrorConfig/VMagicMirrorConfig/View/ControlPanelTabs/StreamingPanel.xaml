@@ -109,11 +109,11 @@
                                     Command="{Binding WindowSetting.OpenCameraInstallDialogCommand}"
                                     HorizontalAlignment="Right"
                                     Padding="2"
-                                    Margin="0"
+                                    Margin="0,0,10,0"
                                     />
                         </Grid>
 
-                        <CheckBox IsChecked="{Binding WindowSetting.VirtualCameraEnabled}" 
+                        <CheckBox IsChecked="{Binding WindowSetting.VirtualCamEnabled}" 
                               Margin="5,5,5,0">
                             <TextBlock Text="{DynamicResource Window_VirtualCamOutput_Enable}"/>
                         </CheckBox>
@@ -144,11 +144,11 @@
                                     Command="{Binding WindowSetting.VirtualCamResizeCommand}">
                                 <StackPanel Style="{StaticResource IconTextSetStackPanel}">
                                     <md:PackIcon Style="{StaticResource IconTextSetIcon}"
-                                             Kind="Resize"
-                                             />
+                                                 Kind="Resize"
+                                                 />
                                     <TextBlock Style="{StaticResource IconSetSetText}"
-                                           Text="{DynamicResource Window_VirtualCamOutput_MatchWindowSize}"
-                                           />
+                                               Text="{DynamicResource Window_VirtualCamOutput_MatchWindowSize}"
+                                               />
                                 </StackPanel>
                             </Button>
                         </Grid>
