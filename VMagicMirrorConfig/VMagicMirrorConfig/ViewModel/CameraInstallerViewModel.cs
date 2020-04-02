@@ -10,7 +10,7 @@ namespace Baku.VMagicMirrorConfig
     public class CameraInstallerViewModel : ViewModelBase
     {
         private ActionCommand? _openBatFileDirCommand;
-        private ActionCommand OpenBatFileDirCommand
+        public ActionCommand OpenBatFileDirCommand
             => _openBatFileDirCommand ??= new ActionCommand(OpenBatFileDir);
         private void OpenBatFileDir()
         {
