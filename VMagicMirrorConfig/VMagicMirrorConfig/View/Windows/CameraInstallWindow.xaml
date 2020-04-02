@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Camera Install" 
+        Title="{DynamicResource Window_VirtualCamOutput_FirstTime_DialogTitle}" 
         Height="250" 
         MinHeight="250"
         Width="400"
@@ -12,30 +12,23 @@
         >
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Row="0" Grid.Column="0"
-                   Grid.ColumnSpan="2"
+        <TextBlock Grid.Row="0"
                    Text="{DynamicResource Window_VirtualCamOutput_FirstTime_Expr}"
                    Margin="15"
                    TextWrapping="Wrap"
                    />
         <Button Grid.Row="1"
                 Grid.Column="0"
-                Command="{Binding InstallCameraCommand}"
-                Content="{DynamicResource Window_VirtualCamOutput_FirstTime_Install}"
+                Margin="20"
                 Width="150"
-                />
-        <Button Grid.Row="1"
-                Grid.Column="1"
-                Command="{Binding UninstallCameraCommand}"
-                Content="{DynamicResource Window_VirtualCamOutput_FirstTime_Uninstall}"
-                Width="150"
+                Command="{Binding OpenBatFileDirCommand}"
+                Content="{DynamicResource Window_VirtualCamOutput_FirstTime_OpenFolder}"
                 />
     </Grid>
 </Window>

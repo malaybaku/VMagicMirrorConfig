@@ -5,58 +5,31 @@ namespace Baku.VMagicMirrorConfig
 {
     /// <summary>
     /// 仮想カメラのインストール操作に関するビューモデル。
-    /// batファイルを叩く処理まで代行する凄いやつです。
+    /// batファイルを叩く処理をさせようと思っていたが、そこはユーザーに「これやれ」と指示して終わりにします。
     /// </summary>
     public class CameraInstallerViewModel : ViewModelBase
     {
-        private ActionCommand? _installCameraCommand;
-        public ActionCommand InstallCameraCommand
-            => _installCameraCommand ??= new ActionCommand(InstallCamera);
-        private void InstallCamera()
+        private ActionCommand? _openBatFileDirCommand;
+        private ActionCommand OpenBatFileDirCommand
+            => _openBatFileDirCommand ??= new ActionCommand(OpenBatFileDir);
+        private void OpenBatFileDir()
         {
-            string batPath = GetInstallBatFilePath();
-            if (!File.Exists(batPath))
+            string batDir = GetBatFileDir();
+            if (Directory.Exists(batDir))
             {
-                MessageBox.Show("`Install.bat` file was not fuond.", "Camera Install Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
+                System.Diagnostics.Process.Start(batDir);
             }
-
-            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo()
+            else
             {
-                FileName = batPath,
-                UseShellExecute = true,
-            });
+                MessageBox.Show(".bat file directory was not found", "Camera Install Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
-        private ActionCommand? _uninstallCameraCommand;
-        public ActionCommand UninstallCameraCommand
-            => _uninstallCameraCommand ??= new ActionCommand(UninstallCamera);
-        private void UninstallCamera()
-        {
-            string batPath = GetUninstallBatFilePath();
-            if (!File.Exists(batPath))
-            {
-                MessageBox.Show("`Uninstall.bat` file was not fuond.", "Camera Install Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
 
-            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo()
-            {
-                FileName = batPath,
-                UseShellExecute = true,
-            });
-        }
-
-        private static string GetInstallBatFilePath() => Path.Combine(
+        private static string GetBatFileDir() => Path.Combine(
             Path.GetDirectoryName(SpecialFilePath.UnityAppPath) ?? "",
-            "CameraInstall",
-            "Install.bat"
+            "CameraInstall"
             );
 
-        private static string GetUninstallBatFilePath() => Path.Combine(
-            Path.GetDirectoryName(SpecialFilePath.UnityAppPath) ?? "",
-            "CameraInstall",
-            "Uninstall.bat"
-            );
     }
 }
