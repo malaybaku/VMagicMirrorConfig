@@ -192,6 +192,14 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
+        private ActionCommand? _virtualCamResizeCommand;
+        public ActionCommand VirtualCamResizeCommand
+            => _virtualCamResizeCommand ??= new ActionCommand(VirtualCamResize);
+        private void VirtualCamResize()
+        {
+            SendMessage(MessageFactory.Instance.SetVirtualCamBasedWindowSize(VirtualCamWidth, VirtualCamHeight));
+        }
+
         private ActionCommand? _resetVirtualCamSettingCommand;
         public ActionCommand ResetVirtualCamSettingCommand
             => _resetVirtualCamSettingCommand ??= new ActionCommand(ResetVirtualCamSetting);
