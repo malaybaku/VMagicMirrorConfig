@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Windows;
 
 namespace Baku.VMagicMirrorConfig
@@ -14,22 +15,29 @@ namespace Baku.VMagicMirrorConfig
             => _openBatFileDirCommand ??= new ActionCommand(OpenBatFileDir);
         private void OpenBatFileDir()
         {
-            string batDir = GetBatFileDir();
-            if (Directory.Exists(batDir))
+            string batDir = Path.Combine(
+                Path.GetDirectoryName(SpecialFilePath.UnityAppPath) ?? "",
+                "CameraInstall"
+                );
+            try
             {
-                System.Diagnostics.Process.Start(batDir);
+                if (Directory.Exists(batDir))
+                {
+                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo()
+                    {
+                        FileName = batDir,
+                        UseShellExecute = true
+                    });
+                }
+                else
+                {
+                    MessageBox.Show(".bat file directory was not found", "Camera Install Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
-            else
+            catch(Exception ex)
             {
-                MessageBox.Show(".bat file directory was not found", "Camera Install Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.Message + "\n" + ex.StackTrace, ex.GetType().Name, MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
-
-        private static string GetBatFileDir() => Path.Combine(
-            Path.GetDirectoryName(SpecialFilePath.UnityAppPath) ?? "",
-            "CameraInstall"
-            );
-
     }
 }
