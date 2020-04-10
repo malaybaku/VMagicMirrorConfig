@@ -59,6 +59,15 @@ namespace Baku.VMagicMirrorConfig
 
         #endregion
 
+        #region 仮想カメラ
+
+        public Message SetVirtualCamEnable(bool enable) => WithArg($"{enable}");
+        public Message SetVirtualCamWidth(int width) => WithArg($"{width}");
+        public Message SetVirtualCamHeight(int height) => WithArg($"{height}");
+        public Message SetVirtualCamBasedWindowSize(int width, int height) => WithArg($"{width},{height}");
+
+        #endregion
+
         #region モーション
 
         public Message LengthFromWristToTip(int lengthCentimeter) => WithArg($"{lengthCentimeter}");
