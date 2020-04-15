@@ -505,6 +505,19 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
+        private bool _enableShoulderMotionModify = true;
+        public bool EnableShoulderMotionModify
+        {
+            get => _enableShoulderMotionModify;
+            set
+            {
+                if (SetValue(ref _enableShoulderMotionModify, value))
+                {
+                    SendMessage(MessageFactory.Instance.EnableShoulderMotionModify(EnableShoulderMotionModify));
+                }
+            }
+        }
+
         private int _waistWidth = 30;
         public int WaistWidth
         {
@@ -763,6 +776,7 @@ namespace Baku.VMagicMirrorConfig
         private void ResetArmSetting()
         {
             EnableHidArmMotion = true;
+            EnableShoulderMotionModify = true;
             WaistWidth = 30;
             ElbowCloseStrength = 30;
             EnableFpsAssumedRightHand = false;
