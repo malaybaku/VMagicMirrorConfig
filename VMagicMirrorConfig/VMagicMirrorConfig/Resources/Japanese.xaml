@@ -106,6 +106,15 @@
     <sys:String x:Key="Motion_Face_AutoBlinkDuringFaceTracking">顔トラッキング中も自動でまばたき</sys:String>
     <sys:String x:Key="Motion_Face_DisableFaceTrackingHorizontalFlip">左右反転をオフにする</sys:String>
     <sys:String x:Key="Motion_Face_EnableImageBasedHandTracking">顔とセットで手もトラッキング</sys:String>
+    <sys:String x:Key="Motion_Face_FolderMaybeIncorrect_Header">※アプリフォルダの移動を検討してください！</sys:String>
+    <sys:String x:Key="Motion_Face_FolderMaybeIncorrect_Tooltip" xml:space="preserve">アプリの配置フォルダパスに全角文字が含まれています。
+この状態では顔トラッキングが正常動作しないかもしれません。
+
+顔トラッキングの挙動がおかしい場合、一度アプリケーションを終了し、
+フォルダ全体を半角文字のみのフォルダパス以下へ移動してください。
+
+顔トラッキングが正常に動作している場合、この警告を無視してかまいません。
+</sys:String>
     
     <sys:String x:Key="Motion_Face_HeadRotBaseBlinkAdjust">顔が動くときのまばたき補正</sys:String>
     <sys:String x:Key="Motion_Face_LipSyncBaseBlinkAdjust">会話の区切りでのまばたき補正</sys:String>

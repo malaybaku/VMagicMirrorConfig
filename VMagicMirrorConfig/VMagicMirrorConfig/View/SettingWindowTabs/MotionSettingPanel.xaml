@@ -147,6 +147,24 @@
                         </CheckBox>
                     </Grid>
 
+                    <md:Card Margin="15,5,5,5" 
+                             Visibility="{Binding ShowInstallPathWarning, 
+                                                  Converter={StaticResource BooleanToVisibilityConverter}}"
+                             ToolTip="{DynamicResource Motion_Face_FolderMaybeIncorrect_Tooltip}"
+                             HorizontalAlignment="Center"
+                             Background="{StaticResource SecondaryAccentBrush}" Padding="5">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <TextBlock Text="{DynamicResource Motion_Face_FolderMaybeIncorrect_Header}" 
+                                       FontWeight="Bold"
+                                       />
+                            <md:PackIcon Width="20" Height="20" Margin="0,0,5,0"
+                                         VerticalAlignment="Center"
+                                         Kind="HelpCircleOutline"
+                                         Foreground="{StaticResource PrimaryHueMidBrush}"
+                                         />
+                        </StackPanel>
+                    </md:Card>
+
                     <Button HorizontalAlignment="Left"
                             Margin="15,5"
                             Width="160"
