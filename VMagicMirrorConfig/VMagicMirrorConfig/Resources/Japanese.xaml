@@ -143,6 +143,7 @@
     <!-- Motion : Arm -->
     <sys:String x:Key="Motion_Arm">腕・ひじ</sys:String>
     <sys:String x:Key="Motion_Arm_EnableHidMotion">タイピング / マウス動作を反映</sys:String>
+    <sys:String x:Key="Motion_Arm_EnableShoulderModify">肩モーションの補正を有効化</sys:String>
     <sys:String x:Key="Motion_Arm_FpsAssumedRightHand">右手のマウス動作をFPS対策モードにする</sys:String>
     <sys:String x:Key="Motion_Arm_FpsAssumedRightHand_Tooltip">オンにするとPC用のFPSを遊ぶときのマウス動作が自然になりますが、ペンタブ作業や画面タッチへの反応が悪くなります。</sys:String>
     
