@@ -104,6 +104,15 @@ When you want to uninstall. double click "Uninstall.bat".</sys:String>
     <sys:String x:Key="Motion_Face_AutoBlinkDuringFaceTracking">Auto blink during face tracking</sys:String>
     <sys:String x:Key="Motion_Face_DisableFaceTrackingHorizontalFlip">Disable horizontal flip</sys:String>
     <sys:String x:Key="Motion_Face_EnableImageBasedHandTracking">Enable image based hand tracking</sys:String>
+    <sys:String x:Key="Motion_Face_FolderMaybeIncorrect_Header">*Please check folder path!</sys:String>
+    <sys:String x:Key="Motion_Face_FolderMaybeIncorrect_Tooltip" xml:space="preserve">App installed folder path includes multi byte character.
+This might lead incorrect results for the face tracking.
+
+If you notice the avatar does not rotate theia neck, 
+please quit the app and move app folder to single byte character only path.
+
+If the face tracking works correctly, please ignore this warning.
+</sys:String>    
     
     <sys:String x:Key="Motion_Face_HeadRotBaseBlinkAdjust">Blink adjust by head motion</sys:String>
     <sys:String x:Key="Motion_Face_LipSyncBaseBlinkAdjust">Blink adjust by lip sync</sys:String>

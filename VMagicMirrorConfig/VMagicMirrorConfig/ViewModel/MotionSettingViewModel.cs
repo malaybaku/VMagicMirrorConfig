@@ -130,11 +130,29 @@ namespace Baku.VMagicMirrorConfig
             get => _enableFaceTracking;
             set
             {
-                if (SetValue(ref _enableFaceTracking, value))
+                if (_enableFaceTracking == value)
                 {
-                    SendMessage(MessageFactory.Instance.EnableFaceTracking(EnableFaceTracking));
+                    return;
+                }
+
+                _enableFaceTracking = value;
+                SendMessage(MessageFactory.Instance.EnableFaceTracking(EnableFaceTracking));
+
+                //インストールパスにマルチバイトが入ってると顔が動かない可能性が高いため、警告する。
+                //対象環境では一度警告が出たら出っぱなしになるが、これはOKです。
+                if (!ShowInstallPathWarning && value && InstallPathChecker.HasMultiByteCharInInstallPath())
+                {
+                    ShowInstallPathWarning = true;
                 }
             }
+        }
+
+        private bool _showInstallPathWarning = false;
+        [XmlIgnore]
+        public bool ShowInstallPathWarning
+        {
+            get => _showInstallPathWarning;
+            set => SetValue(ref _showInstallPathWarning, value);
         }
 
         private bool _autoblinkDuringFaceTracking = true;
