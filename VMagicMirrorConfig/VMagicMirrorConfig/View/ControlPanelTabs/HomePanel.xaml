@@ -148,7 +148,7 @@
 
                     <TextBlock Margin="10,5">
                         <Hyperlink Command="{Binding OpenManualUrlCommand}"
-                                   ToolTip="https://malaybaku.github.io/VMagicMirrorManual/">
+                                   ToolTip="https://malaybaku.github.io/VMagicMirror/">
                             <Run Text="{DynamicResource Home_Manual_Open}"/>
                         </Hyperlink>
                     </TextBlock>
