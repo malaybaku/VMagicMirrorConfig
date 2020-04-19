@@ -13,6 +13,7 @@ namespace Baku.VMagicMirrorConfig
         internal MotionSettingViewModel(IMessageSender sender, IMessageReceiver receiver) : base(sender)
         {
             receiver.ReceivedCommand += OnReceivedCommand;
+            ShowInstallPathWarning = InstallPathChecker.HasMultiByteCharInInstallPath();
         }
 
         private LargePointerController _largePointerController => LargePointerController.Instance;
@@ -137,13 +138,6 @@ namespace Baku.VMagicMirrorConfig
 
                 _enableFaceTracking = value;
                 SendMessage(MessageFactory.Instance.EnableFaceTracking(EnableFaceTracking));
-
-                //インストールパスにマルチバイトが入ってると顔が動かない可能性が高いため、警告する。
-                //対象環境では一度警告が出たら出っぱなしになるが、これはOKです。
-                if (!ShowInstallPathWarning && value && InstallPathChecker.HasMultiByteCharInInstallPath())
-                {
-                    ShowInstallPathWarning = true;
-                }
             }
         }
 

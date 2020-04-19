@@ -247,8 +247,8 @@ namespace Baku.VMagicMirrorConfig
         {
             string url =
                 (LanguageName == "Japanese") ?
-                "https://malaybaku.github.io/VMagicMirrorManual/index.html" :
-                "https://malaybaku.github.io/VMagicMirrorManual/en_index.html";
+                "https://malaybaku.github.io/VMagicMirror" :
+                "https://malaybaku.github.io/VMagicMirror/en";
 
             UrlNavigate.Open(url);
         }
