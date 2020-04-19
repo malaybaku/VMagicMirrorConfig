@@ -76,6 +76,21 @@ VRM File</sys:String>
     <sys:String x:Key="Window_TransparencySupport_Level_3">Level 3: Transparent if "Drag character" is off.</sys:String>
     <sys:String x:Key="Window_TransparencySupport_Level_4">Level 4: Always transparent.</sys:String>
     
+    <sys:String x:Key="Window_VirtualCamOutput">Virtual Camera Output</sys:String>
+    <sys:String x:Key="Window_VirtualCamOutput_Enable">Enable Camera Output</sys:String>
+    <sys:String x:Key="Window_VirtualCamOutput_Resolution">Size</sys:String>
+    <sys:String x:Key="Window_VirtualCamOutput_Width">Width</sys:String>
+    <sys:String x:Key="Window_VirtualCamOutput_Height">Height</sys:String>
+    <sys:String x:Key="Window_VirtualCamOutput_MatchWindowSize">Resize</sys:String>
+    <sys:String x:Key="Window_VirtualCamOutput_FirstTime_Header">*How to setup</sys:String>
+    <sys:String x:Key="Window_VirtualCamOutput_FirstTime_DialogTitle">Virtual Camera Installation Required</sys:String>    
+    <sys:String x:Key="Window_VirtualCamOutput_FirstTime_Expr" xml:space="preserve">Camera install is required for this feature.
+ 
+  - Open "CameraInstall" folder.
+  - Double click "Install.bat" to execute installation.
+
+When you want to uninstall. double click "Uninstall.bat".</sys:String>        
+    <sys:String x:Key="Window_VirtualCamOutput_FirstTime_OpenFolder">Open Folder</sys:String>
     
     <!-- Motion -->
     
@@ -89,6 +104,15 @@ VRM File</sys:String>
     <sys:String x:Key="Motion_Face_AutoBlinkDuringFaceTracking">Auto blink during face tracking</sys:String>
     <sys:String x:Key="Motion_Face_DisableFaceTrackingHorizontalFlip">Disable horizontal flip</sys:String>
     <sys:String x:Key="Motion_Face_EnableImageBasedHandTracking">Enable image based hand tracking</sys:String>
+    <sys:String x:Key="Motion_Face_FolderMaybeIncorrect_Header">*Please check folder path!</sys:String>
+    <sys:String x:Key="Motion_Face_FolderMaybeIncorrect_Tooltip" xml:space="preserve">App installed folder path includes multi byte character.
+This might lead incorrect results for the face tracking.
+
+If you notice the avatar does not rotate theia neck, 
+please quit the app and move app folder to single byte character only path.
+
+If the face tracking works correctly, please ignore this warning.
+</sys:String>    
     
     <sys:String x:Key="Motion_Face_HeadRotBaseBlinkAdjust">Blink adjust by head motion</sys:String>
     <sys:String x:Key="Motion_Face_LipSyncBaseBlinkAdjust">Blink adjust by lip sync</sys:String>
@@ -117,6 +141,7 @@ VRM File</sys:String>
     <!-- Motion : Arm -->
     <sys:String x:Key="Motion_Arm">Arm</sys:String>    
     <sys:String x:Key="Motion_Arm_EnableHidMotion">Enable Typing / Mouse Motion</sys:String>
+    <sys:String x:Key="Motion_Arm_EnableShoulderModify">Modify shoulder motion</sys:String>
     <sys:String x:Key="Motion_Arm_FpsAssumedRightHand">Enable mouse motion to FPS assumed mode</sys:String>
     <sys:String x:Key="Motion_Arm_FpsAssumedRightHand_Tooltip">When checked right hand motion during playing FPS become more natural, but screen touch or pen tablet operation become become slow</sys:String>
     

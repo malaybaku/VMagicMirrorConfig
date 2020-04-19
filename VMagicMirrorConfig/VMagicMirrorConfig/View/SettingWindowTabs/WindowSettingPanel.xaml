@@ -7,7 +7,7 @@
              xmlns:vmm="clr-namespace:Baku.VMagicMirrorConfig"
              mc:Ignorable="d"
              d:DesignWidth="400"
-             d:DesignHeight="650"
+             d:DesignHeight="1050"
              d:DataContext="{x:Type vmm:WindowSettingViewModel}"
              >
     <UserControl.Resources>
@@ -19,7 +19,6 @@
                   HorizontalScrollBarVisibility="Disabled"
                   >
         <StackPanel>
-
             <md:Card>
                 <StackPanel>
                     <StackPanel Orientation="Horizontal">
@@ -123,6 +122,76 @@
                                        />
                         </StackPanel>                        
                     </Button>
+                </StackPanel>
+            </md:Card>
+
+            <md:Card>
+                <StackPanel>
+                    <Grid>
+                        <StackPanel Orientation="Horizontal">
+
+                            <md:PackIcon Kind="CameraUser"
+                                             Style="{StaticResource SettingHeaderPackIcon}"
+                                             />
+
+                            <TextBlock Text="{DynamicResource Window_VirtualCamOutput}"
+                                           Margin="5"
+                                           Style="{StaticResource HeaderText}"
+                                           />
+
+                            <Button Style="{StaticResource CategorySettingResetButton}"
+                                        Command="{Binding ResetVirtualCamSettingCommand}"
+                                        />
+                        </StackPanel>
+
+                        <Button Style="{StaticResource MaterialDesignOutlinedButton}"
+                                    Content="{DynamicResource Window_VirtualCamOutput_FirstTime_Header}"
+                                    Command="{Binding OpenCameraInstallDialogCommand}"
+                                    HorizontalAlignment="Right"
+                                    Padding="4"
+                                    Margin="0,0,10,0"
+                                    />
+                    </Grid>
+
+                    <CheckBox IsChecked="{Binding VirtualCamEnabled}" 
+                              Margin="5">
+                        <TextBlock Text="{DynamicResource Window_VirtualCamOutput_Enable}"/>
+                    </CheckBox>
+
+                    <Grid Margin="5,0,5,5" IsEnabled="{Binding VirtualCamEnabled}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Margin="10,0"
+                                           Text="{DynamicResource Window_VirtualCamOutput_Resolution}"/>
+                            <TextBox VerticalContentAlignment="Center"
+                                         Width="45"
+                                         Text="{Binding VirtualCamWidth}"
+                                         md:HintAssist.Hint="{DynamicResource Window_VirtualCamOutput_Width}"
+                                         />
+                            <TextBlock Margin="4,3" 
+                                           VerticalAlignment="Bottom"
+                                           Text="x" 
+                                           />
+                            <TextBox VerticalContentAlignment="Center"
+                                         Width="45"
+                                         Text="{Binding VirtualCamHeight}"
+                                         md:HintAssist.Hint="{DynamicResource Window_VirtualCamOutput_Height}"
+                                         />
+                        </StackPanel>
+                        <Button HorizontalAlignment="Right"
+                                Width="90"
+                                Padding="3"
+                                Margin="5,0"
+                                Command="{Binding VirtualCamResizeCommand}">
+                            <StackPanel Style="{StaticResource IconTextSetStackPanel}">
+                                <md:PackIcon Style="{StaticResource IconTextSetIcon}"
+                                             Kind="Resize"
+                                             />
+                                <TextBlock Style="{StaticResource IconSetSetText}"
+                                           Text="{DynamicResource Window_VirtualCamOutput_MatchWindowSize}"
+                                           />
+                            </StackPanel>
+                        </Button>
+                    </Grid>
                 </StackPanel>
             </md:Card>
 

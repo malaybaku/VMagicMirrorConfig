@@ -59,6 +59,15 @@ namespace Baku.VMagicMirrorConfig
 
         #endregion
 
+        #region 仮想カメラ
+
+        public Message SetVirtualCamEnable(bool enable) => WithArg($"{enable}");
+        public Message SetVirtualCamWidth(int width) => WithArg($"{width}");
+        public Message SetVirtualCamHeight(int height) => WithArg($"{height}");
+        public Message SetVirtualCamBasedWindowSize(int width, int height) => WithArg($"{width},{height}");
+
+        #endregion
+
         #region モーション
 
         public Message LengthFromWristToTip(int lengthCentimeter) => WithArg($"{lengthCentimeter}");
@@ -69,6 +78,7 @@ namespace Baku.VMagicMirrorConfig
         public Message HandYOffsetAfterKeyDown(int offsetCentimeter) => WithArg($"{offsetCentimeter}");
 
         public Message EnableHidArmMotion(bool enable) => WithArg($"{enable}");
+        public Message EnableShoulderMotionModify(bool enable) => WithArg($"{enable}");
         public Message SetWaistWidth(int waistWidthCentimeter) => WithArg($"{waistWidthCentimeter}");
         public Message SetElbowCloseStrength(int strengthPercent) => WithArg($"{strengthPercent}");
 

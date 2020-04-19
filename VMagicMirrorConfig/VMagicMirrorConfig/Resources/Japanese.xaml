@@ -78,6 +78,22 @@
     <sys:String x:Key="Window_TransparencySupport_Level_3">レベル3: 「キャラ付近を掴んでドラッグ」がオフならば、半透明になります。</sys:String>
     <sys:String x:Key="Window_TransparencySupport_Level_4">レベル4: つねに半透明になります。</sys:String>
     
+    <sys:String x:Key="Window_VirtualCamOutput">仮想カメラ出力</sys:String>
+    <sys:String x:Key="Window_VirtualCamOutput_Enable">仮想カメラ出力を有効化</sys:String>
+    <sys:String x:Key="Window_VirtualCamOutput_Resolution">サイズ</sys:String>
+    <sys:String x:Key="Window_VirtualCamOutput_Width">幅</sys:String>
+    <sys:String x:Key="Window_VirtualCamOutput_Height">高さ</sys:String>
+    <sys:String x:Key="Window_VirtualCamOutput_MatchWindowSize">リサイズ</sys:String>
+    <sys:String x:Key="Window_VirtualCamOutput_FirstTime_Header">※初めて使う場合</sys:String>
+    <sys:String x:Key="Window_VirtualCamOutput_FirstTime_DialogTitle">仮想カメラのインストールが必要です</sys:String>    
+    <sys:String x:Key="Window_VirtualCamOutput_FirstTime_Expr" xml:space="preserve">この機能を使うには仮想カメラのインストールが必要です。
+        
+  - "CameraInstall"フォルダを開きます。。
+  - "Install.bat"をダブルクリックで実行します。
+        
+アンインストールするには"Uninstall.bat"をダブルクリックで実行します。</sys:String>
+    <sys:String x:Key="Window_VirtualCamOutput_FirstTime_OpenFolder">フォルダを開く</sys:String>
+    
     <!-- Motion -->
     
     <!-- Motion : Face -->
@@ -90,6 +106,15 @@
     <sys:String x:Key="Motion_Face_AutoBlinkDuringFaceTracking">顔トラッキング中も自動でまばたき</sys:String>
     <sys:String x:Key="Motion_Face_DisableFaceTrackingHorizontalFlip">左右反転をオフにする</sys:String>
     <sys:String x:Key="Motion_Face_EnableImageBasedHandTracking">顔とセットで手もトラッキング</sys:String>
+    <sys:String x:Key="Motion_Face_FolderMaybeIncorrect_Header">※アプリフォルダの移動を検討してください！</sys:String>
+    <sys:String x:Key="Motion_Face_FolderMaybeIncorrect_Tooltip" xml:space="preserve">アプリの配置フォルダパスに全角文字が含まれています。
+この状態では顔トラッキングが正常動作しないかもしれません。
+
+顔トラッキングの挙動がおかしい場合、一度アプリケーションを終了し、
+フォルダ全体を半角文字のみのフォルダパス以下へ移動してください。
+
+顔トラッキングが正常に動作している場合、この警告を無視してかまいません。
+</sys:String>
     
     <sys:String x:Key="Motion_Face_HeadRotBaseBlinkAdjust">顔が動くときのまばたき補正</sys:String>
     <sys:String x:Key="Motion_Face_LipSyncBaseBlinkAdjust">会話の区切りでのまばたき補正</sys:String>
@@ -118,6 +143,7 @@
     <!-- Motion : Arm -->
     <sys:String x:Key="Motion_Arm">腕・ひじ</sys:String>
     <sys:String x:Key="Motion_Arm_EnableHidMotion">タイピング / マウス動作を反映</sys:String>
+    <sys:String x:Key="Motion_Arm_EnableShoulderModify">肩モーションの補正を有効化</sys:String>
     <sys:String x:Key="Motion_Arm_FpsAssumedRightHand">右手のマウス動作をFPS対策モードにする</sys:String>
     <sys:String x:Key="Motion_Arm_FpsAssumedRightHand_Tooltip">オンにするとPC用のFPSを遊ぶときのマウス動作が自然になりますが、ペンタブ作業や画面タッチへの反応が悪くなります。</sys:String>
     

@@ -13,6 +13,7 @@ namespace Baku.VMagicMirrorConfig
         internal MotionSettingViewModel(IMessageSender sender, IMessageReceiver receiver) : base(sender)
         {
             receiver.ReceivedCommand += OnReceivedCommand;
+            ShowInstallPathWarning = InstallPathChecker.HasMultiByteCharInInstallPath();
         }
 
         private LargePointerController _largePointerController => LargePointerController.Instance;
@@ -130,11 +131,22 @@ namespace Baku.VMagicMirrorConfig
             get => _enableFaceTracking;
             set
             {
-                if (SetValue(ref _enableFaceTracking, value))
+                if (_enableFaceTracking == value)
                 {
-                    SendMessage(MessageFactory.Instance.EnableFaceTracking(EnableFaceTracking));
+                    return;
                 }
+
+                _enableFaceTracking = value;
+                SendMessage(MessageFactory.Instance.EnableFaceTracking(EnableFaceTracking));
             }
+        }
+
+        private bool _showInstallPathWarning = false;
+        [XmlIgnore]
+        public bool ShowInstallPathWarning
+        {
+            get => _showInstallPathWarning;
+            set => SetValue(ref _showInstallPathWarning, value);
         }
 
         private bool _autoblinkDuringFaceTracking = true;
@@ -487,6 +499,19 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
+        private bool _enableShoulderMotionModify = true;
+        public bool EnableShoulderMotionModify
+        {
+            get => _enableShoulderMotionModify;
+            set
+            {
+                if (SetValue(ref _enableShoulderMotionModify, value))
+                {
+                    SendMessage(MessageFactory.Instance.EnableShoulderMotionModify(EnableShoulderMotionModify));
+                }
+            }
+        }
+
         private int _waistWidth = 30;
         public int WaistWidth
         {
@@ -745,6 +770,7 @@ namespace Baku.VMagicMirrorConfig
         private void ResetArmSetting()
         {
             EnableHidArmMotion = true;
+            EnableShoulderMotionModify = true;
             WaistWidth = 30;
             ElbowCloseStrength = 30;
             EnableFpsAssumedRightHand = false;

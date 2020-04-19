@@ -91,6 +91,72 @@
 
                 <md:Card>
                     <StackPanel>
+                        <Grid>
+                            <StackPanel Orientation="Horizontal">
+
+                                <md:PackIcon Kind="CameraUser"
+                                             Style="{StaticResource SettingHeaderPackIcon}"
+                                             />
+
+                                <TextBlock Text="{DynamicResource Window_VirtualCamOutput}"
+                                           Margin="5"
+                                           Style="{StaticResource HeaderText}"
+                                           />
+                            </StackPanel>
+
+                            <Button Style="{StaticResource MaterialDesignOutlinedButton}"
+                                    Content="{DynamicResource Window_VirtualCamOutput_FirstTime_Header}"
+                                    Command="{Binding WindowSetting.OpenCameraInstallDialogCommand}"
+                                    HorizontalAlignment="Right"
+                                    Padding="2"
+                                    Margin="0,0,10,0"
+                                    />
+                        </Grid>
+
+                        <CheckBox IsChecked="{Binding WindowSetting.VirtualCamEnabled}" 
+                              Margin="5,5,5,0">
+                            <TextBlock Text="{DynamicResource Window_VirtualCamOutput_Enable}"/>
+                        </CheckBox>
+
+                        <Grid Margin="5,0,5,5" IsEnabled="{Binding WindowSetting.VirtualCamEnabled}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Margin="10,0"
+                                           Text="{DynamicResource Window_VirtualCamOutput_Resolution}"/>
+                                <TextBox VerticalContentAlignment="Center"
+                                         Width="45"
+                                         Text="{Binding WindowSetting.VirtualCamWidth}"
+                                         md:HintAssist.Hint="{DynamicResource Window_VirtualCamOutput_Width}"
+                                         />
+                                <TextBlock Margin="4,3" 
+                                           VerticalAlignment="Bottom"
+                                           Text="x" 
+                                           />
+                                <TextBox VerticalContentAlignment="Center"
+                                         Width="45"
+                                         Text="{Binding WindowSetting.VirtualCamHeight}"
+                                         md:HintAssist.Hint="{DynamicResource Window_VirtualCamOutput_Height}"
+                                         />
+                            </StackPanel>
+                            <Button HorizontalAlignment="Right"
+                                    Width="90"
+                                    Padding="3"
+                                    Margin="5,0"
+                                    Command="{Binding WindowSetting.VirtualCamResizeCommand}">
+                                <StackPanel Style="{StaticResource IconTextSetStackPanel}">
+                                    <md:PackIcon Style="{StaticResource IconTextSetIcon}"
+                                                 Kind="Resize"
+                                                 />
+                                    <TextBlock Style="{StaticResource IconSetSetText}"
+                                               Text="{DynamicResource Window_VirtualCamOutput_MatchWindowSize}"
+                                               />
+                                </StackPanel>
+                            </Button>
+                        </Grid>
+                    </StackPanel>
+                </md:Card>
+
+                <md:Card>
+                    <StackPanel>
 
                         <StackPanel Orientation="Horizontal">
                             <md:PackIcon Style="{StaticResource HeaderPackIcon}"
@@ -165,9 +231,27 @@
                                         />
                         </Grid>
 
-                        <CheckBox Grid.Row="2" Grid.Column="1"
-                                  Grid.ColumnSpan="2"
-                                  Margin="50,0,5,0"
+                        <md:Card Margin="15,5,5,0" 
+                                 Visibility="{Binding MotionSetting.ShowInstallPathWarning,
+                                                      Converter={StaticResource BooleanToVisibilityConverter}}"
+                                 ToolTip="{DynamicResource Motion_Face_FolderMaybeIncorrect_Tooltip}"
+                                 HorizontalAlignment="Center"
+                                 Background="{StaticResource SecondaryAccentBrush}" Padding="3">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <TextBlock Text="{DynamicResource Motion_Face_FolderMaybeIncorrect_Header}" 
+                                           FontWeight="Bold"
+                                           />
+                                <md:PackIcon Width="20" Height="20"
+                                             Margin="0,0,5,0"
+                                             VerticalAlignment="Center"
+                                             Kind="HelpCircleOutline"
+                                             Foreground="{StaticResource PrimaryHueMidBrush}"
+                                             />
+                            </StackPanel>
+                        </md:Card>
+
+
+                        <CheckBox Margin="50,0,5,0"
                                   IsEnabled="{Binding MotionSetting.EnableFaceTracking}"
                                   IsChecked="{Binding MotionSetting.EnableImageBasedHandTracking}"
                                   >
