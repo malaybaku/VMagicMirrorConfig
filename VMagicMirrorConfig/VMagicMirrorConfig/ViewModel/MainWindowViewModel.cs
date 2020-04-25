@@ -49,7 +49,12 @@ namespace Baku.VMagicMirrorConfig
         }
 
         private string _lastVrmLoadFilePath = "";
+        private string _lastLoadedVRoidModelId = "";
+
         private bool _isDisposed = false;
+        //VRoid Hubに接続した時点でウィンドウが透過だったかどうか。
+        private bool _isVRoidHubUiActive = false;
+        private bool _windowTransparentOnConnectToVRoidHub = false;
 
         private readonly ScreenshotController _screenshotController;
 
@@ -72,16 +77,27 @@ namespace Baku.VMagicMirrorConfig
             switch (e.Command)
             {
                 case ReceiveMessageNames.VRoidModelLoadCompleted:
-                    //ファイルパスベースのほうを記憶喪失しておく: 防御的な挙動として、
-                    //VRoid SDKでモデルを読み込むと自動読み込みが無効になる。
+                    //WPF側の「キャンセルできるよ」ダイアログはもう不要なので隠す
+                    if (_isVRoidHubUiActive)
+                    {
+                        MessageBoxWrapper.Instance.SetDialogResult(false);
+                    }
+
+                    //ファイルパスではなくモデルID側を最新情報として覚えておく
                     _lastVrmLoadFilePath = "";
+                    _lastLoadedVRoidModelId = e.Args;
+
                     if (AutoAdjustEyebrowOnLoaded)
                     {
                         MessageSender.SendMessage(MessageFactory.Instance.RequestAutoAdjustEyebrow());
                     }
                     break;
                 case ReceiveMessageNames.VRoidModelLoadCanceled:
-                    //とりあえず何もしない: 気を使う場合、いちど非透過にしたウィンドウを透過にし直したりしてもOK
+                    //NOTE: Unity側にキャンセルUIがあったらそれもちゃんとハンドルしますよ、という処理。
+                    if (_isVRoidHubUiActive)
+                    {
+                        MessageBoxWrapper.Instance.SetDialogResult(false);
+                    }
                     break;
             }
         }
@@ -137,7 +153,7 @@ namespace Baku.VMagicMirrorConfig
 
         private ActionCommand? _connectToVRoidHubCommand;
         public ActionCommand ConnectToVRoidHubCommand
-            => _connectToVRoidHubCommand ??= new ActionCommand(ConnectToVRoidHub);
+            => _connectToVRoidHubCommand ??= new ActionCommand(ConnectToVRoidHubAsync);
 
         private ActionCommand? _openVRoidHubCommand;
         public ActionCommand OpenVRoidHubCommand
@@ -247,6 +263,7 @@ namespace Baku.VMagicMirrorConfig
             {
                 MessageSender.SendMessage(MessageFactory.Instance.OpenVrm(filePath));
                 _lastVrmLoadFilePath = filePath;
+                _lastLoadedVRoidModelId = "";
                 if (AutoAdjustEyebrowOnLoaded)
                 {
                     MessageSender.SendMessage(MessageFactory.Instance.RequestAutoAdjustEyebrow());
@@ -263,11 +280,25 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private void ConnectToVRoidHub()
+        private async void ConnectToVRoidHubAsync()
         {
-            MessageSender.SendMessage(MessageFactory.Instance.OpenVRoidSdkUi());
             //ウィンドウ透過のままだと普通のUIとして使うのに支障出るため、非透過に落とす
+            _windowTransparentOnConnectToVRoidHub = WindowSetting.IsTransparent;
             WindowSetting.IsTransparent = false;
+
+            MessageSender.SendMessage(MessageFactory.Instance.OpenVRoidSdkUi());
+
+            //VRoidHub側の操作が終わるまでダイアログでガードをかける: モーダル的な管理状態をファイルロードの場合と揃える為
+            _isVRoidHubUiActive = true;
+            var message = MessageIndication.ShowVRoidSdkUi(LanguageName);
+            bool _ = await MessageBoxWrapper.Instance.ShowAsync(
+                message.Title, message.Content, MessageBoxWrapper.MessageBoxStyle.Cancel
+                );
+
+            //モデルロード完了またはキャンセルによってここに来るので、共通の処理をして終わり
+            MessageSender.SendMessage(MessageFactory.Instance.CloseVRoidSdkUi());
+            _isVRoidHubUiActive = false;
+            WindowSetting.IsTransparent = _windowTransparentOnConnectToVRoidHub;
         }
 
         private void OpenVRoidHub() => UrlNavigate.Open("https://hub.vroid.com/");
@@ -359,6 +390,8 @@ namespace Baku.VMagicMirrorConfig
                     );
 
                 LoadSetting(savePath, true);
+                //NOTE: VRoidの自動ロード設定はちょっと概念的に重たいので引き継ぎ対象から除外する。
+                _lastLoadedVRoidModelId = "";
                 if (AutoLoadLastLoadedVrm)
                 {
                     LoadLastLoadedVrm();
@@ -427,13 +460,18 @@ namespace Baku.VMagicMirrorConfig
             }
             OtherVersionRegisteredOnStartup = regSetting.CheckOtherVersionRegistered();
 
-            if (AutoLoadLastLoadedVrm)
+            if (AutoLoadLastLoadedVrm && !string.IsNullOrEmpty(_lastVrmLoadFilePath))
             {
                 LoadLastLoadedVrm();
-            }
+            }            
 
             _deviceFreeLayoutHelper = new DeviceFreeLayoutHelper(LayoutSetting, WindowSetting);
             _deviceFreeLayoutHelper.StartObserve();
+
+            if (AutoLoadLastLoadedVrm && !string.IsNullOrEmpty(_lastLoadedVRoidModelId))
+            {
+                LoadLastLoadedVRoid();
+            }
         }
 
         public void Dispose()
@@ -468,6 +506,32 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
+        private async void LoadLastLoadedVRoid()
+        {
+            if (string.IsNullOrEmpty(_lastLoadedVRoidModelId))
+            {
+                return;
+            }
+
+            //ウィンドウ透過のままだと普通のUIとして使うのに支障出るため、非透過に落とす
+            _windowTransparentOnConnectToVRoidHub = WindowSetting.IsTransparent;
+            WindowSetting.IsTransparent = false;
+
+            //NOTE: ここでモデルIDを載せるのと、メッセージがちょっと違うこと以外は普通にVRoidのUIを出したときと同じフローに載せる
+            MessageSender.SendMessage(MessageFactory.Instance.RequestLoadVRoidWithId(_lastLoadedVRoidModelId));
+
+            _isVRoidHubUiActive = true;
+            var message = MessageIndication.ShowLoadingPreviousVRoid(LanguageName);
+            bool _ = await MessageBoxWrapper.Instance.ShowAsync(
+                message.Title, message.Content, MessageBoxWrapper.MessageBoxStyle.Cancel
+                );
+
+            //モデルロード完了またはキャンセルによってここに来るので、共通の処理をして終わり
+            MessageSender.SendMessage(MessageFactory.Instance.CloseVRoidSdkUi());
+            _isVRoidHubUiActive = false;
+            WindowSetting.IsTransparent = _windowTransparentOnConnectToVRoidHub;
+        }
+
         private void SaveSetting(string path, bool isInternalFile)
         {
             if (File.Exists(path))
@@ -483,6 +547,7 @@ namespace Baku.VMagicMirrorConfig
                 {
                     IsInternalSaveFile = isInternalFile,
                     LastLoadedVrmFilePath = isInternalFile ? _lastVrmLoadFilePath : "",
+                    LastLoadedVRoidModelId = isInternalFile ? _lastLoadedVRoidModelId : "",
                     AutoLoadLastLoadedVrm = isInternalFile ? AutoLoadLastLoadedVrm : false,
                     PreferredLanguageName = isInternalFile ? LanguageName : "",
                     AdjustEyebrowOnLoaded = AutoAdjustEyebrowOnLoaded,
@@ -509,6 +574,7 @@ namespace Baku.VMagicMirrorConfig
                 if (isInternalFile && saveData.IsInternalSaveFile)
                 {
                     _lastVrmLoadFilePath = saveData.LastLoadedVrmFilePath ?? "";
+                    _lastLoadedVRoidModelId = saveData.LastLoadedVRoidModelId ?? "";
                     AutoLoadLastLoadedVrm = saveData.AutoLoadLastLoadedVrm;
                     LanguageName =
                         AvailableLanguageNames.Contains(saveData.PreferredLanguageName ?? "") ?

@@ -11,6 +11,8 @@
 
         public string? LastLoadedVrmFilePath { get; set; } = "";
 
+        public string? LastLoadedVRoidModelId { get; set; } = "";
+
         public bool AutoLoadLastLoadedVrm { get; set; } = false;
 
         public string? PreferredLanguageName { get; set; } = "";
