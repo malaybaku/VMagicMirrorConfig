@@ -77,7 +77,7 @@ namespace Baku.VMagicMirrorConfig
             switch (e.Command)
             {
                 case ReceiveMessageNames.VRoidModelLoadCompleted:
-                    //WPF側の「キャンセルできるよ」ダイアログはもう不要なので隠す
+                    //WPF側のダイアログによるUIガードを終了: _isVRoidHubUiActiveフラグは別のとこで折るのでここでは無視でOK
                     if (_isVRoidHubUiActive)
                     {
                         MessageBoxWrapper.Instance.SetDialogResult(false);
@@ -93,7 +93,7 @@ namespace Baku.VMagicMirrorConfig
                     }
                     break;
                 case ReceiveMessageNames.VRoidModelLoadCanceled:
-                    //NOTE: Unity側にキャンセルUIがあったらそれもちゃんとハンドルしますよ、という処理。
+                    //WPF側のダイアログによるUIガードを終了
                     if (_isVRoidHubUiActive)
                     {
                         MessageBoxWrapper.Instance.SetDialogResult(false);
@@ -296,7 +296,6 @@ namespace Baku.VMagicMirrorConfig
                 );
 
             //モデルロード完了またはキャンセルによってここに来るので、共通の処理をして終わり
-            MessageSender.SendMessage(MessageFactory.Instance.CloseVRoidSdkUi());
             _isVRoidHubUiActive = false;
             WindowSetting.IsTransparent = _windowTransparentOnConnectToVRoidHub;
         }
@@ -517,7 +516,7 @@ namespace Baku.VMagicMirrorConfig
             _windowTransparentOnConnectToVRoidHub = WindowSetting.IsTransparent;
             WindowSetting.IsTransparent = false;
 
-            //NOTE: ここでモデルIDを載せるのと、メッセージがちょっと違うこと以外は普通にVRoidのUIを出したときと同じフローに載せる
+            //NOTE: モデルIDを載せる以外は通常のUIオープンと同じフロー
             MessageSender.SendMessage(MessageFactory.Instance.RequestLoadVRoidWithId(_lastLoadedVRoidModelId));
 
             _isVRoidHubUiActive = true;
@@ -527,7 +526,6 @@ namespace Baku.VMagicMirrorConfig
                 );
 
             //モデルロード完了またはキャンセルによってここに来るので、共通の処理をして終わり
-            MessageSender.SendMessage(MessageFactory.Instance.CloseVRoidSdkUi());
             _isVRoidHubUiActive = false;
             WindowSetting.IsTransparent = _windowTransparentOnConnectToVRoidHub;
         }
