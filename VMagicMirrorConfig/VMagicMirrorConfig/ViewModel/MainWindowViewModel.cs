@@ -292,7 +292,7 @@ namespace Baku.VMagicMirrorConfig
             _isVRoidHubUiActive = true;
             var message = MessageIndication.ShowVRoidSdkUi(LanguageName);
             bool _ = await MessageBoxWrapper.Instance.ShowAsync(
-                message.Title, message.Content, MessageBoxWrapper.MessageBoxStyle.Cancel
+                message.Title, message.Content, MessageBoxWrapper.MessageBoxStyle.None
                 );
 
             //モデルロード完了またはキャンセルによってここに来るので、共通の処理をして終わり

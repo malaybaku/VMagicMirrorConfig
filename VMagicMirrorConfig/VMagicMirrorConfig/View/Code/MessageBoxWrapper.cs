@@ -53,6 +53,9 @@ namespace Baku.VMagicMirrorConfig
             OK,
             OKCancel,
             Cancel,
+            //NOTE: NoneはUnityの特定操作が終わるまでUIをガードしたいときに使う。
+            //表示したダイアログはSetDialogResultで閉じる必要がある。
+            None,
         }
     }
 }

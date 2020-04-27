@@ -131,7 +131,7 @@
         {
             Languages.Japanese => new MessageIndication(
                 "VRoid Hubに接続中",
-                "VRoid Hub上でモデルを選択するか、または「キャンセル」で操作を中止できます。"),
+                "キャラクターウィンドウ上でモデルを選択するか、またはキャンセルしてください。"),
             _ => new MessageIndication(
                 "Connect to VRoid Hub",
                 "Select model to load, or `Cancel` to cancel operation."),
@@ -141,7 +141,7 @@
         {
             Languages.Japanese => new MessageIndication(
                 "VRoid Hubに接続中",
-                "前回使用したモデルのロードを試みています。「キャンセル」で操作を中止できます。"),
+                "前回使用したモデルのロードを試みています。モデルをロードするか、またはキャンセルしてください。"),
             _ => new MessageIndication(
                 "Connect to VRoid Hub",
                 "Searching avatar used in previous time. Click `Cancel` to cancel operation."),
