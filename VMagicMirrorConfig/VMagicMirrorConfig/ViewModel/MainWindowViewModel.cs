@@ -81,6 +81,7 @@ namespace Baku.VMagicMirrorConfig
                     if (_isVRoidHubUiActive)
                     {
                         MessageBoxWrapper.Instance.SetDialogResult(false);
+                        DialogHelper.IsOpen = false;
                     }
 
                     //ファイルパスではなくモデルID側を最新情報として覚えておく
@@ -97,6 +98,7 @@ namespace Baku.VMagicMirrorConfig
                     if (_isVRoidHubUiActive)
                     {
                         MessageBoxWrapper.Instance.SetDialogResult(false);
+                        DialogHelper.IsOpen = false;
                     }
                     break;
             }
@@ -522,7 +524,7 @@ namespace Baku.VMagicMirrorConfig
             _isVRoidHubUiActive = true;
             var message = MessageIndication.ShowLoadingPreviousVRoid(LanguageName);
             bool _ = await MessageBoxWrapper.Instance.ShowAsync(
-                message.Title, message.Content, MessageBoxWrapper.MessageBoxStyle.Cancel
+                message.Title, message.Content, MessageBoxWrapper.MessageBoxStyle.None
                 );
 
             //モデルロード完了またはキャンセルによってここに来るので、共通の処理をして終わり
