@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DataContext="{x:Type vmm:MainWindowViewModel}"
              d:DesignWidth="520"
-             d:DesignHeight="700"
+             d:DesignHeight="620"
              >
     <UserControl.Resources>
         <vmm:WhiteSpaceStringToNullConverter x:Key="WhiteSpaceStringToNullConverter"/>
@@ -233,7 +233,8 @@
 
                         <md:Card Margin="15,5,5,0" 
                                  Visibility="{Binding MotionSetting.ShowInstallPathWarning,
-                                                      Converter={StaticResource BooleanToVisibilityConverter}}"
+                                                      Converter={StaticResource BooleanToVisibilityConverter}, 
+                                                      FallbackValue=Collapsed}"
                                  ToolTip="{DynamicResource Motion_Face_FolderMaybeIncorrect_Tooltip}"
                                  HorizontalAlignment="Center"
                                  Background="{StaticResource SecondaryAccentBrush}" Padding="3">
@@ -276,7 +277,7 @@
                         </Button>
 
                         <TextBlock Text="{DynamicResource Motion_Eye_LookAtPoint}"
-                                    Margin="10,10,5,5"
+                                    Margin="10,13,5,5"
                                     />
 
                         <Grid Margin="10,3">
@@ -360,48 +361,6 @@
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
                         </Grid>
-                    </StackPanel>
-                </md:Card>
-
-                <md:Card>
-                    <StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <md:PackIcon Style="{StaticResource HeaderPackIcon}"
-                                            Kind="Camera"
-                                            />
-                            <TextBlock Text="{DynamicResource Streaming_Screenshot}"
-                                    Margin="5"
-                                    Style="{StaticResource HeaderText}"
-                                    />
-                        </StackPanel>
-
-                        <StackPanel Orientation="Horizontal">
-                            <Button Command="{Binding TakeScreenshotCommand}"
-                                Padding="0"
-                                Width="40"
-                                HorizontalAlignment="Left"
-                                >
-                                <md:PackIcon Style="{StaticResource IconTextSetIcon}"
-                                            Kind="Camera"
-                                            />
-                            </Button>
-
-                            <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                    Command="{Binding OpenScreenshotFolderCommand}"
-                                    Padding="0"
-                                    HorizontalAlignment="Left"
-                                    Margin="0"
-                                    >
-                                <StackPanel Style="{StaticResource IconTextSetStackPanel}">
-                                    <md:PackIcon Style="{StaticResource IconTextSetIcon}"
-                                            Kind="Folder"
-                                            />
-                                    <TextBlock Style="{StaticResource IconSetSetText}"
-                                        Text="{DynamicResource Streaming_Screenshot_OpenSaveFolder}"
-                                        />
-                                </StackPanel>
-                            </Button>
-                        </StackPanel>
                     </StackPanel>
                 </md:Card>
             </StackPanel>
@@ -637,7 +596,7 @@
 
                         <CheckBox Grid.Row="2" Grid.Column="0"
                                     Grid.ColumnSpan="3"
-                                    Margin="10,2" 
+                                    Margin="14,2,10,14" 
                                     Content="{DynamicResource Motion_Arm_EnablePresenterMotion}"
                                     IsChecked="{Binding MotionSetting.EnablePresenterMotion}"
                                     />

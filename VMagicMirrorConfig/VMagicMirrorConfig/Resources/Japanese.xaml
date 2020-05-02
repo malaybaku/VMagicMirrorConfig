@@ -16,14 +16,14 @@
     
     <!-- Home -->
     <sys:String x:Key="Home_LoadVrm">VRMロード</sys:String>
-    <sys:String x:Key="Home_DragDropVrm" xml:space="preserve">VRMファイルを
-ドラッグ&amp;ドロップ</sys:String>
-    <sys:String x:Key="Home_LoadVrmOnNextStartup">次回の起動時にも同じVRMを読み込む</sys:String>
-    <sys:String x:Key="Home_AutoAdjust">キャラ体格で補正</sys:String>
-    <sys:String x:Key="Home_RecommendVRoidHub">※キャラクターのダウンロードがまだの場合: </sys:String>
+    <sys:String x:Key="Home_LoadVrmFromFile">PC上のファイルをロード</sys:String>    
+    <sys:String x:Key="Home_LoadVrm_Or">または</sys:String>
+    <sys:String x:Key="Home_ConnectToVRoidHub">VRoid Hubからロード</sys:String>    
     <sys:String x:Key="Home_OpenVRoidHub">ブラウザでVRoid Hubを開く</sys:String>
-    <sys:String x:Key="Home_ConnectToVRoidHub">VRoid Hubに接続</sys:String>    
+
+    <sys:String x:Key="Home_LoadVrmOnNextStartup">次回の起動時にも同じVRMを読み込む</sys:String>
     <sys:String x:Key="Home_AutoAdjustFaceParameterOnLoad">モデルロード時に表情を調整</sys:String>
+    <sys:String x:Key="Home_AutoAdjust">キャラ体格で補正</sys:String>
 
     <sys:String x:Key="Home_Manual_Header">使い方</sys:String>
     <sys:String x:Key="Home_Manual_Open">マニュアルのURLにアクセス</sys:String>
@@ -38,7 +38,8 @@
     <sys:String x:Key="Home_LoadPrevSetting">旧バージョンの設定をロード</sys:String>
         
     <sys:String x:Key="Home_OssLicense">OSS License</sys:String>
-    
+
+    <sys:String x:Key="Home_OtherSettings_Header">その他の設定</sys:String>
     <sys:String x:Key="Home_ActivateOnStartupHeader">Windowsの起動後にスタート</sys:String>
     <sys:String x:Key="Home_ActivateOnStartup_OtherVerRegistered">※他バージョンのVMagicMirrorが自動で起動するように登録されています。チェックをオンにすると、このバージョンを起動するよう設定を上書きします。</sys:String>
 

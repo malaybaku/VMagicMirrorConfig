@@ -16,14 +16,14 @@
         
     <!-- Home -->
     <sys:String x:Key="Home_LoadVrm">Load VRM</sys:String>
-    <sys:String x:Key="Home_DragDropVrm" xml:space="preserve">Drag &amp; Drop
-VRM File</sys:String>
-    <sys:String x:Key="Home_LoadVrmOnNextStartup">Load current VRM on next startup</sys:String>
-    <sys:String x:Key="Home_AutoAdjust">Adjust Size by VRM</sys:String>
-    <sys:String x:Key="Home_RecommendVRoidHub">*If you do not have VRM on your PC yet: </sys:String>
+    <sys:String x:Key="Home_LoadVrmFromFile">Load File on PC</sys:String>    
+    <sys:String x:Key="Home_LoadVrm_Or">or</sys:String>
+    <sys:String x:Key="Home_ConnectToVRoidHub">Load Model on VRoid Hub</sys:String>    
     <sys:String x:Key="Home_OpenVRoidHub">Open VRoid Hub URL</sys:String>    
-    <sys:String x:Key="Home_ConnectToVRoidHub">Connect to VRoid Hub by App</sys:String>    
+
+    <sys:String x:Key="Home_LoadVrmOnNextStartup">Load current VRM on next startup</sys:String>
     <sys:String x:Key="Home_AutoAdjustFaceParameterOnLoad">Adjust face settings after loading VRM</sys:String>
+    <sys:String x:Key="Home_AutoAdjust">Adjust Size by VRM</sys:String>
 
     <sys:String x:Key="Home_Manual_Header">Manual</sys:String>
     <sys:String x:Key="Home_Manual_Open">Open Manual URL</sys:String>
@@ -39,6 +39,7 @@ VRM File</sys:String>
 
     <sys:String x:Key="Home_OssLicense">OSS License</sys:String>
     
+    <sys:String x:Key="Home_OtherSettings_Header">Other Preferences</sys:String>
     <sys:String x:Key="Home_ActivateOnStartupHeader">Start on Windows startup</sys:String>
     <sys:String x:Key="Home_ActivateOnStartup_OtherVerRegistered">*Other version VMagicMirror is already registered. If you check it, setting will be overwritten to start this version.</sys:String>
     
