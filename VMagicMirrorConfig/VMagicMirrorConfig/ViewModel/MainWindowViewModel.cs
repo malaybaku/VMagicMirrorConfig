@@ -54,7 +54,10 @@ namespace Baku.VMagicMirrorConfig
         private bool _isDisposed = false;
         //VRoid Hubに接続した時点でウィンドウが透過だったかどうか。
         private bool _isVRoidHubUiActive = false;
-        private bool _windowTransparentOnConnectToVRoidHub = false;
+
+        //NOTE: モデルのロード確認UI(ファイル/VRoidHubいずれか)を出す直前時点での値を保持するフラグで、UIが出てないときはnullになる
+        private bool? _windowTransparentBeforeLoadProcess = null;
+        private bool? _windowTopMostBeforeLoadProcess = null;
 
         private readonly ScreenshotController _screenshotController;
 
@@ -236,19 +239,12 @@ namespace Baku.VMagicMirrorConfig
         /// <param name="getFilePathProcess"></param>
         private async Task LoadVrmSub(Func<string> getFilePathProcess)
         {
-            bool turnOffTopMostTemporary = WindowSetting.TopMost;
-            if (turnOffTopMostTemporary)
-            {
-                WindowSetting.TopMost = false;
-            }
+            PrepareShowUiOnUnity();
 
             string filePath = getFilePathProcess();
             if (!File.Exists(filePath))
             {
-                if (turnOffTopMostTemporary)
-                {
-                    WindowSetting.TopMost = true;
-                }
+                EndShowUiOnUnity();
                 return;
             }
 
@@ -276,17 +272,12 @@ namespace Baku.VMagicMirrorConfig
                 MessageSender.SendMessage(MessageFactory.Instance.CancelLoadVrm());
             }
 
-            if (turnOffTopMostTemporary)
-            {
-                WindowSetting.TopMost = true;
-            }
+            EndShowUiOnUnity();
         }
 
         private async void ConnectToVRoidHubAsync()
         {
-            //ウィンドウ透過のままだと普通のUIとして使うのに支障出るため、非透過に落とす
-            _windowTransparentOnConnectToVRoidHub = WindowSetting.IsTransparent;
-            WindowSetting.IsTransparent = false;
+            PrepareShowUiOnUnity();
 
             MessageSender.SendMessage(MessageFactory.Instance.OpenVRoidSdkUi());
 
@@ -299,7 +290,7 @@ namespace Baku.VMagicMirrorConfig
 
             //モデルロード完了またはキャンセルによってここに来るので、共通の処理をして終わり
             _isVRoidHubUiActive = false;
-            WindowSetting.IsTransparent = _windowTransparentOnConnectToVRoidHub;
+            EndShowUiOnUnity();
         }
 
         private void OpenVRoidHub() => UrlNavigate.Open("https://hub.vroid.com/");
@@ -514,9 +505,7 @@ namespace Baku.VMagicMirrorConfig
                 return;
             }
 
-            //ウィンドウ透過のままだと普通のUIとして使うのに支障出るため、非透過に落とす
-            _windowTransparentOnConnectToVRoidHub = WindowSetting.IsTransparent;
-            WindowSetting.IsTransparent = false;
+            PrepareShowUiOnUnity();
 
             //NOTE: モデルIDを載せる以外は通常のUIオープンと同じフロー
             MessageSender.SendMessage(MessageFactory.Instance.RequestLoadVRoidWithId(_lastLoadedVRoidModelId));
@@ -529,7 +518,7 @@ namespace Baku.VMagicMirrorConfig
 
             //モデルロード完了またはキャンセルによってここに来るので、共通の処理をして終わり
             _isVRoidHubUiActive = false;
-            WindowSetting.IsTransparent = _windowTransparentOnConnectToVRoidHub;
+            EndShowUiOnUnity();
         }
 
         private void SaveSetting(string path, bool isInternalFile)
@@ -537,6 +526,14 @@ namespace Baku.VMagicMirrorConfig
             if (File.Exists(path))
             {
                 File.Delete(path);
+            }
+
+            //前処理: Unity側に開きかけUIがあるままアプリが終了する場合、
+            //TopMostフラグを一時的に書き換えた値からもとに戻しておく。
+            //※透過フラグは整合させたまま戻すのが結構難しいので諦めて、「次回起動時に配信タブ上で直してくれ」状態にする。
+            if (isInternalFile && _windowTopMostBeforeLoadProcess != null)
+            {
+                WindowSetting.SilentSetTopMost(_windowTopMostBeforeLoadProcess.GetValueOrDefault());
             }
 
             using (var sw = new StreamWriter(path))
@@ -617,6 +614,31 @@ namespace Baku.VMagicMirrorConfig
             catch (Exception ex)
             {
                 MessageBox.Show($"Failed to load setting file {path} : {ex.Message}");
+            }
+        }
+
+        //Unity側でウィンドウを表示するとき、最前面と透過を無効にする必要があるため、その準備にあたる処理を行います。
+        private void PrepareShowUiOnUnity()
+        {
+            _windowTransparentBeforeLoadProcess = WindowSetting.IsTransparent;
+            _windowTopMostBeforeLoadProcess = WindowSetting.TopMost;
+            WindowSetting.IsTransparent = false;
+            WindowSetting.TopMost = false;
+        }
+        
+        //Unity側でのUI表示が終わったとき、最前面と透過の設定をもとの状態に戻します。
+        private void EndShowUiOnUnity()
+        {
+            if (_windowTransparentBeforeLoadProcess != null)
+            {
+                WindowSetting.IsTransparent = _windowTransparentBeforeLoadProcess.GetValueOrDefault();
+                _windowTransparentBeforeLoadProcess = null;
+            }
+
+            if (_windowTopMostBeforeLoadProcess != null)
+            {
+                WindowSetting.TopMost = _windowTopMostBeforeLoadProcess.GetValueOrDefault();
+                _windowTopMostBeforeLoadProcess = null;
             }
         }
     }
