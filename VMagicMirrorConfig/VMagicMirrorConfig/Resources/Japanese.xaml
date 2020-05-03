@@ -20,6 +20,7 @@
     <sys:String x:Key="Home_LoadVrm_Or">または</sys:String>
     <sys:String x:Key="Home_ConnectToVRoidHub">VRoid Hubからロード</sys:String>    
     <sys:String x:Key="Home_OpenVRoidHub">ブラウザでVRoid Hubを開く</sys:String>
+    <sys:String x:Key="Home_VrmDragDropInstruction">ドラッグ &amp; ドロップでVRMをロード</sys:String>
 
     <sys:String x:Key="Home_LoadVrmOnNextStartup">次回の起動時にも同じVRMを読み込む</sys:String>
     <sys:String x:Key="Home_AutoAdjustFaceParameterOnLoad">モデルロード時に表情を調整</sys:String>

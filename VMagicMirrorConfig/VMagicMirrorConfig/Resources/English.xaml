@@ -18,11 +18,12 @@
     <sys:String x:Key="Home_LoadVrm">Load VRM</sys:String>
     <sys:String x:Key="Home_LoadVrmFromFile">Load File on PC</sys:String>    
     <sys:String x:Key="Home_LoadVrm_Or">or</sys:String>
-    <sys:String x:Key="Home_ConnectToVRoidHub">Load Model on VRoid Hub</sys:String>    
+    <sys:String x:Key="Home_ConnectToVRoidHub">Load from VRoid Hub</sys:String>    
     <sys:String x:Key="Home_OpenVRoidHub">Open VRoid Hub URL</sys:String>    
+    <sys:String x:Key="Home_VrmDragDropInstruction">Load VRM by Drag &amp; Drop</sys:String>
 
     <sys:String x:Key="Home_LoadVrmOnNextStartup">Load current VRM on next startup</sys:String>
-    <sys:String x:Key="Home_AutoAdjustFaceParameterOnLoad">Adjust face settings after loading VRM</sys:String>
+    <sys:String x:Key="Home_AutoAdjustFaceParameterOnLoad">Adjust face settings after load</sys:String>
     <sys:String x:Key="Home_AutoAdjust">Adjust Size by VRM</sys:String>
 
     <sys:String x:Key="Home_Manual_Header">Manual</sys:String>
@@ -47,6 +48,7 @@
     <sys:String x:Key="Streaming_Window">Window</sys:String>
     <sys:String x:Key="Streaming_Face">Face</sys:String>
     <sys:String x:Key="Streaming_Motion">Motion</sys:String>       
+    <sys:String x:Key="Streaming_WordToMotion">Word to Motion</sys:String>
     <sys:String x:Key="Streaming_View">View</sys:String>
     <sys:String x:Key="Streaming_DeviceLayout">Device Layout</sys:String>
     <sys:String x:Key="Streaming_DeviceLayout_Reset">Reset</sys:String>
@@ -191,6 +193,9 @@ If the face tracking works correctly, please ignore this warning.
     <sys:String x:Key="Layout_HidVisible">Keyboard and Touch Pad Visible</sys:String>
     <sys:String x:Key="Layout_MidiVisible">MIDI Controller Visible</sys:String>
     <sys:String x:Key="Layout_MidiReadEnable">Use MIDI Controller for VMagicMirror</sys:String>
+    <sys:String x:Key="Layout_Hid_Streaming">Keyboard</sys:String>
+    <sys:String x:Key="Layout_Midi_Streaming">MIDI</sys:String>
+        
     <sys:String x:Key="Layout_HidReactToKeyboard">Enable keyboard motion</sys:String>
     <sys:String x:Key="Layout_HidReactToMouse">Enable mouse motion</sys:String>
 
