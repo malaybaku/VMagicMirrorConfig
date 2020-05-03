@@ -133,8 +133,8 @@
                 "VRoid Hubに接続中",
                 "キャラクターウィンドウ上でモデルを選択するか、またはキャンセルしてください。"),
             _ => new MessageIndication(
-                "Connect to VRoid Hub",
-                "Select model to load, or `Cancel` to cancel operation."),
+                "Connecting to VRoid Hub",
+                "Select model to load, or cancel operation."),
         };
 
         public static MessageIndication ShowLoadingPreviousVRoid(Languages lang) => lang switch
@@ -143,8 +143,8 @@
                 "VRoid Hubに接続中",
                 "前回使用したモデルのロードを試みています。モデルをロードするか、またはキャンセルしてください。"),
             _ => new MessageIndication(
-                "Connect to VRoid Hub",
-                "Searching avatar used in previous time. Click `Cancel` to cancel operation."),
+                "Connecting to VRoid Hub",
+                "Trying to load avatar used in previous time. Select model or cancel operation."),
         };
     }
 }
