@@ -10,6 +10,7 @@
              d:DataContext="{x:Type vmm:MainWindowViewModel}"
              d:DesignWidth="550"
              d:DesignHeight="470"
+             AllowDrop="True"
              >
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
@@ -23,13 +24,13 @@
             <Setter Property="Padding" Value="5"/>
         </Style>
     </UserControl.Resources>
+    <!-- このUI全域に対してVRMをドロップできるようにする -->
+    <i:Interaction.Behaviors>
+        <vmm:DragDropToCommandBehavior DropCommand="{Binding LoadVrmByFilePathCommand}"/>
+    </i:Interaction.Behaviors>
     <ScrollViewer VerticalScrollBarVisibility="Auto"
                   HorizontalScrollBarVisibility="Disabled"
                   >
-        <!-- このUI全域に対してVRMをドロップできるようにする -->
-        <i:Interaction.Behaviors>
-            <vmm:DragDropToCommandBehavior DropCommand="{Binding LoadVrmByFilePathCommand}"/>
-        </i:Interaction.Behaviors>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
