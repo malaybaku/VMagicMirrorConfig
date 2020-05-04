@@ -21,10 +21,13 @@ namespace Baku.VMagicMirrorConfig
         /// <returns></returns>
         public Task<bool> ShowAsync(string title, string content, MessageBoxStyle style)
         {
-            DialogHelperViewModel.Instance.Title = title;
-            DialogHelperViewModel.Instance.Content = content;
-            DialogHelperViewModel.Instance.CanCancel = (style == MessageBoxStyle.OKCancel);
-            DialogHelperViewModel.Instance.IsOpen = true;
+            var vm = DialogHelperViewModel.Instance;
+
+            vm.Title = title;
+            vm.Content = content;
+            vm.CanOk = (style == MessageBoxStyle.OK || style == MessageBoxStyle.OKCancel);
+            vm.CanCancel = (style == MessageBoxStyle.Cancel || style == MessageBoxStyle.OKCancel);
+            vm.IsOpen = true;
 
             var result = new TaskCompletionSource<bool>();
             _dialogTasks.Enqueue(result);
@@ -32,7 +35,8 @@ namespace Baku.VMagicMirrorConfig
         }
 
         /// <summary>
-        /// ダイアログの結果を設定します。DialogHelperViewModelから呼び出します。
+        /// ダイアログの結果を設定します。UIがDialogHelperViewModelから呼び出すか、
+        /// またはプログラム的にダイアログを閉じたいときもここを呼び出します。
         /// </summary>
         /// <param name="result"></param>
         public void SetDialogResult(bool result)
@@ -48,6 +52,10 @@ namespace Baku.VMagicMirrorConfig
         {
             OK,
             OKCancel,
+            Cancel,
+            //NOTE: NoneはUnityの特定操作が終わるまでUIをガードしたいときに使う。
+            //表示したダイアログはSetDialogResultで閉じる必要がある。
+            None,
         }
     }
 }

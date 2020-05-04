@@ -34,6 +34,8 @@
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                     <Button Style="{StaticResource MaterialDesignFlatButton}"
                             Content="OK"
+                            Visibility="{Binding DialogHelper.CanOk,
+                                                 Converter={StaticResource BooleanToVisibilityConverter}}"
                             Command="{Binding DialogHelper.OKCommand}"
                             />
                     <Button Style="{StaticResource MaterialDesignFlatButton}"
