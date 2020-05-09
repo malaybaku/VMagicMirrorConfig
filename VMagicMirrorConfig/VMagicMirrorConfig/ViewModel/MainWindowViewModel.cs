@@ -425,11 +425,12 @@ namespace Baku.VMagicMirrorConfig
             //NOTE: ここのEndCommandCompositeはLoadSettingが(ファイル無いとかで)中断したときの対策
             Initializer.MessageSender.EndCommandComposite();
 
-            //LoadCurrentParametersの時点で(もし前回保存した)言語名があればLanguageNameに入っているので、それを渡す。
+            //書いてる通りだが、ファイルから読んだ言語名があれば渡したのちvalidateされた結果でキレイにし、メッセージを送る。
+            //メッセージを明示的に送るのは、タイミングの都合で上のLoadSetting中には言語設定メッセージが積まれないため。
             LanguageSelector.Instance.Initialize(MessageSender, LanguageName);
-            //無効な言語名を渡した場合、LanguageSelector側が面倒を見てくれるので、それをチェックしている。
-            //もともとLanguageNameに有効な名前が入っていた場合は、下の行では何も起きない
             LanguageName = LanguageSelector.Instance.LanguageName;
+            MessageSender.SendMessage(MessageFactory.Instance.Language(LanguageName));
+
 
             await MotionSetting.InitializeDeviceNamesAsync();
             await LightSetting.InitializeQualitySelectionsAsync();
