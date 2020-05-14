@@ -565,7 +565,7 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private bool _showPresentationPointer = true;
+        private bool _showPresentationPointer = false;
         public bool ShowPresentationPointer
         {
             get => _showPresentationPointer;
@@ -775,6 +775,7 @@ namespace Baku.VMagicMirrorConfig
             ElbowCloseStrength = 30;
             EnableFpsAssumedRightHand = false;
             EnablePresenterMotion = false;
+            ShowPresentationPointer = false;
             PresentationArmMotionScale = 30;
             PresentationArmRadiusMin = 20;
         }
