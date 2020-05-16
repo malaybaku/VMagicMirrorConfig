@@ -12,6 +12,7 @@
         ResizeMode="CanMinimize"
         Height="600" Width="550"
         MinHeight="600" MinWidth="550"
+        Icon="../../Images/vmmc_logo.png"
         >
     <Window.DataContext>
         <vmm:MainWindowViewModel/>

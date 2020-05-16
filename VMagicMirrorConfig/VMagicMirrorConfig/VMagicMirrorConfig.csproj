@@ -10,12 +10,21 @@
     <Platforms>AnyCPU;x64;x86</Platforms>
     <Platform>x86</Platform>
     <Nullable>enable</Nullable>
+    <ApplicationIcon>.\Images\vmmc_logo.ico</ApplicationIcon>
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Images\vmmc_logo.ico" />
+    <None Remove="Images\vmmc_logo.png" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Dragablz" Version="0.0.3.203" />
     <PackageReference Include="MaterialDesignColors" Version="1.2.1" />
     <PackageReference Include="MaterialDesignThemes" Version="3.0.0" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.3" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\vmmc_logo.ico" />
+    <Resource Include="Images\vmmc_logo.png" />
   </ItemGroup>
 </Project>
