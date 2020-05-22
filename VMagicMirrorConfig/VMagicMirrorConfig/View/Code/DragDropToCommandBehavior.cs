@@ -20,6 +20,16 @@ namespace Baku.VMagicMirrorConfig
             set => SetValue(DropCommandProperty, value);
         }
 
+        public Visibility InstructionVisibility
+        {
+            get => (Visibility)GetValue(InstructionVisibilityProperty);
+            set
+            {
+                LogOutput.Instance.Write($"Set DragDrop InstrcutionVisibility, value = {value}");
+                SetValue(InstructionVisibilityProperty, value);
+            }
+        }       
+
         /// <summary>
         /// <see cref="DropCommand"/>の依存関係プロパティです。
         /// </summary>
@@ -28,6 +38,14 @@ namespace Baku.VMagicMirrorConfig
                 nameof(DropCommand),
                 typeof(ICommand),
                 typeof(DragDropToCommandBehavior)
+                );
+
+        public static readonly DependencyProperty InstructionVisibilityProperty
+            = DependencyProperty.RegisterAttached(
+                nameof(InstructionVisibility),
+                typeof(Visibility),
+                typeof(DragDropToCommandBehavior),
+                new PropertyMetadata(Visibility.Collapsed)
                 );
 
         protected override void OnAttached()
@@ -55,6 +73,8 @@ namespace Baku.VMagicMirrorConfig
                 ? DragDropEffects.Copy
                 : DragDropEffects.None;
 
+            InstructionVisibility = (e.Effects == DragDropEffects.Copy) ? Visibility.Visible : Visibility.Collapsed;
+
             e.Handled = true;
         }
 
@@ -68,13 +88,14 @@ namespace Baku.VMagicMirrorConfig
                     (e.Data.GetData(DataFormats.FileDrop) as string[])?[0]
                     );
             }
+
+            InstructionVisibility = Visibility.Collapsed;
         }
 
         private void OnDragLeave(object sender, DragEventArgs e)
         {
-            //何もしない
+            LogOutput.Instance.Write($"DragLeave, elem == null ? {InstructionVisibility == null}");
+            InstructionVisibility = Visibility.Collapsed;
         }
-
-
     }
 }

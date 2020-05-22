@@ -8,10 +8,11 @@
         xmlns:vmm="clr-namespace:Baku.VMagicMirrorConfig"
         mc:Ignorable="d"
         d:DataContext="{x:Type vmm:MainWindowViewModel}"
-        Title="VMagicMirror v0.9.9" 
+        Title="VMagicMirror v1.0.0" 
         ResizeMode="CanMinimize"
         Height="600" Width="550"
         MinHeight="600" MinWidth="550"
+        Icon="../../Images/vmmc_logo.png"
         >
     <Window.DataContext>
         <vmm:MainWindowViewModel/>
@@ -34,6 +35,8 @@
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                     <Button Style="{StaticResource MaterialDesignFlatButton}"
                             Content="OK"
+                            Visibility="{Binding DialogHelper.CanOk,
+                                                 Converter={StaticResource BooleanToVisibilityConverter}}"
                             Command="{Binding DialogHelper.OKCommand}"
                             />
                     <Button Style="{StaticResource MaterialDesignFlatButton}"

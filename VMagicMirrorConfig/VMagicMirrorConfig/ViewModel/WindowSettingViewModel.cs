@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Media;
 using System.Xml.Serialization;
 
@@ -347,5 +348,16 @@ namespace Baku.VMagicMirrorConfig
             //このリセットはあまり定数的ではないことに注意！
             ResetWindowPosition();
         }
+
+        #region Unity側にUIが出っぱなしの状態でexeを切ったときの復帰用API
+
+        /// <summary>
+        /// <see cref="TopMost"/>の値を変更しますが、プロセス間通信は行いません。
+        /// </summary>
+        /// <param name="topMost"></param>
+        public void SilentSetTopMost(bool topMost)
+            => SetValue(ref _topMost, topMost, nameof(TopMost));
+
+        #endregion
     }
 }

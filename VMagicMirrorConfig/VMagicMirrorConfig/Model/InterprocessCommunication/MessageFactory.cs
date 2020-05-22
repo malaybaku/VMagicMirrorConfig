@@ -281,5 +281,12 @@ namespace Baku.VMagicMirrorConfig
 
         #endregion
 
+        #region VRoid SDK
+
+        public Message OpenVRoidSdkUi() => NoArg();
+        public Message RequestLoadVRoidWithId(string modelId) => WithArg(modelId);
+        
+        #endregion
+
     }
 }

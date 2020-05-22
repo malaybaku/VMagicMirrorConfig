@@ -31,6 +31,13 @@
             set => SetValue(ref _isOpen, value);
         }
 
+        private bool _canOk = true;
+        public bool CanOk
+        {
+            get => _canOk;
+            set => SetValue(ref _canOk, value);
+        }
+
         private bool _canCancel = false;
         public bool CanCancel
         {

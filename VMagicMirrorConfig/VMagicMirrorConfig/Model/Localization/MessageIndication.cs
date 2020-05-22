@@ -21,7 +21,19 @@
 
         public static MessageIndication ResetSingleCategoryConfirmation(string languageName)
             => ResetSingleCategoryConfirmation(LanguageSelector.StringToLanguage(languageName));
+        public static MessageIndication ShowVRoidSdkUi(string languageName)
+            => ShowVRoidSdkUi(LanguageSelector.StringToLanguage(languageName));
 
+        public static MessageIndication ShowLoadingPreviousVRoid(string languageName)
+            => ShowLoadingPreviousVRoid(LanguageSelector.StringToLanguage(languageName));
+
+        /// <summary>
+        /// NOTE: Contentのほうがフォーマット文字列なのでstring.Formatで消すアイテムの名前を指定して完成させること！
+        /// string.Format(res.Content, "itemName")
+        /// みたいな。
+        /// </summary>
+        /// <param name="languageName"></param>
+        /// <returns></returns>
         public static MessageIndication ErrorLoadSetting(string languageName)
             => ErrorLoadSetting(LanguageSelector.StringToLanguage(languageName));
 
@@ -79,13 +91,6 @@
                 ),
         };
 
-        /// <summary>
-        /// NOTE: Contentのほうがフォーマット文字列なのでstring.Formatで消すアイテムの名前を指定して完成させること！
-        /// string.Format(res.Content, "itemName")
-        /// みたいな。
-        /// </summary>
-        /// <param name="languageName"></param>
-        /// <returns></returns>
         public static MessageIndication ErrorLoadSetting(Languages lang) => lang switch
         {
             Languages.Japanese => new MessageIndication(
@@ -120,6 +125,26 @@
                 "Clear Blend Shape Setting",
                 "Are you sure to clear the blend shape setting of '{0}'?"
                 ),
+        };
+
+        public static MessageIndication ShowVRoidSdkUi(Languages lang) => lang switch
+        {
+            Languages.Japanese => new MessageIndication(
+                "VRoid Hubに接続中",
+                "キャラクターウィンドウ上でモデルを選択するか、またはキャンセルしてください。"),
+            _ => new MessageIndication(
+                "Connecting to VRoid Hub",
+                "Select model to load, or cancel operation."),
+        };
+
+        public static MessageIndication ShowLoadingPreviousVRoid(Languages lang) => lang switch
+        {
+            Languages.Japanese => new MessageIndication(
+                "VRoid Hubに接続中",
+                "前回使用したモデルのロードを試みています。モデルをロードするか、またはキャンセルしてください。"),
+            _ => new MessageIndication(
+                "Connecting to VRoid Hub",
+                "Trying to load avatar used in previous time. Select model or cancel operation."),
         };
     }
 }
