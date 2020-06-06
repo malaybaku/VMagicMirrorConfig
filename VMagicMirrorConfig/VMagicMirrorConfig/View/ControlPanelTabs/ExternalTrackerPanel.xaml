@@ -88,6 +88,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
@@ -123,6 +124,13 @@
                             <LineBreak />
                             <Run Text="Port: 50004"/>
                         </TextBlock>
+
+                        <StackPanel Grid.Row="2" Grid.Column="1" IsEnabled="{Binding IsTrackSourceIFacialMocap}">
+                            <TextBox Text="{Binding IFacialMocapTargetIpAddress}" />
+                            <Button Padding="0"
+                                    Content="Connect" 
+                                    Command="{Binding RefreshIFacialMocapTargetCommand}" />
+                        </StackPanel>
                     </Grid>
 
                     <Button Style="{StaticResource MaterialDesignFlatButton}"

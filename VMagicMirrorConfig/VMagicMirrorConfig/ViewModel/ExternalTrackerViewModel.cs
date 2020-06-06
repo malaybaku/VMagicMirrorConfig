@@ -195,6 +195,22 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
+        private string _iFacialMocapTargetIpAddress = "";
+        public string IFacialMocapTargetIpAddress
+        {
+            get => _iFacialMocapTargetIpAddress;
+            set => SetValue(ref _iFacialMocapTargetIpAddress, value);
+        }
+
+        private ActionCommand? _refreshIFacialMocapTargetCommand = null;
+        public ActionCommand RefreshIFacialMocapTargetCommand
+            => _refreshIFacialMocapTargetCommand ??= new ActionCommand(RefreshIFacialMocapTarget);
+
+        private void RefreshIFacialMocapTarget()
+        {
+            NetworkEnvironmentUtils.SendIFacialMocapDataReceiveRequest(IFacialMocapTargetIpAddress);
+        }
+
         private string _selfIpAddress = "(unknown)";
         [XmlIgnore]
         public string SelfIpAddress
