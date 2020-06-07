@@ -90,7 +90,7 @@ namespace Baku.VMagicMirrorConfig
                     ClipName = "",
                 },
                 //悲しい or 怒り
-                new ExternalTrackerFaceSwitchItem(FaceSwitchKeys.BrowUp)
+                new ExternalTrackerFaceSwitchItem(FaceSwitchKeys.BrowDown)
                 {
                     ThresholdPercent = 70,
                     ClipName = "Sorrow",
