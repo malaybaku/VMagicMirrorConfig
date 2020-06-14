@@ -378,6 +378,14 @@
                               IsChecked="{Binding EnableHidArmMotion}"
                               />
 
+                    <CheckBox Margin="25,5,15,2.5" 
+                              IsEnabled="{Binding EnableHidArmMotion}"
+                              IsChecked="{Binding EnableHidRandomTyping}">
+                        <StackPanel Orientation="Horizontal">
+                            <md:PackIcon Kind="Lock" VerticalAlignment="Center"/>
+                            <TextBlock Text="{DynamicResource Motion_Arm_EnableRandomTyping}"/>
+                        </StackPanel>
+                    </CheckBox>
 
                     <CheckBox Margin="15,2.5,15,10" 
                               Content="{DynamicResource Motion_Arm_EnableShoulderModify}"

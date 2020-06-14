@@ -78,6 +78,7 @@ namespace Baku.VMagicMirrorConfig
         public Message HandYOffsetAfterKeyDown(int offsetCentimeter) => WithArg($"{offsetCentimeter}");
 
         public Message EnableHidArmMotion(bool enable) => WithArg($"{enable}");
+        public Message EnableHidRandomTyping(bool enable) => WithArg($"{enable}");
         public Message EnableShoulderMotionModify(bool enable) => WithArg($"{enable}");
         public Message SetWaistWidth(int waistWidthCentimeter) => WithArg($"{waistWidthCentimeter}");
         public Message SetElbowCloseStrength(int strengthPercent) => WithArg($"{strengthPercent}");
