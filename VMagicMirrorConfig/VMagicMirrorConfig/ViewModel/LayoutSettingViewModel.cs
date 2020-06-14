@@ -21,6 +21,15 @@ namespace Baku.VMagicMirrorConfig
         {
             Gamepad = new GamepadSettingViewModel(sender, receiver);
             _typingEffectItem = TypingEffectSelections[0];
+            receiver.ReceivedCommand += OnReceiveCommand;
+        }
+
+        private void OnReceiveCommand(object? sender, CommandReceivedEventArgs e)
+        {
+            if (e.Command == ReceiveMessageNames.UpdateDeviceLayout)
+            {
+                _deviceLayout = e.Args;
+            }
         }
 
         private bool _silentPropertySetter = false;
@@ -114,6 +123,7 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
+        //NOTE: Setterはファイルロード時にのみ呼ばれる
         private string _deviceLayout = "";
         public string DeviceLayout
         {
@@ -133,13 +143,6 @@ namespace Baku.VMagicMirrorConfig
         /// <param name="cameraPos"></param>
         public void SilentSetCameraPosition(string cameraPos)
             => _cameraPosition = cameraPos ?? "";
-
-        /// <summary>
-        /// デバイスのレイアウト情報を更新しますが、設定時にUnityプロセスにメッセージを送信しません。
-        /// </summary>
-        /// <param name="deviceLayout"></param>
-        public void SilentSetDeviceLayout(string deviceLayout)
-            => _deviceLayout = deviceLayout ?? "";
 
         #endregion
 
