@@ -7,6 +7,7 @@
     <!-- Top Tab -->
     <sys:String x:Key="TopBar_Home">ホーム</sys:String>
     <sys:String x:Key="TopBar_Streaming">配信</sys:String>
+    <sys:String x:Key="TopBar_ExternalFaceTrack">Ex.Tracker</sys:String>
     
     <!-- Top Tab in Setting Window -->
     <sys:String x:Key="TopBar_Setting_Window">ウィンドウ</sys:String>
@@ -57,6 +58,32 @@
     <sys:String x:Key="Streaming_Screenshot">スクリーンショット</sys:String>
     <sys:String x:Key="Streaming_Screenshot_Take">撮影</sys:String>
     <sys:String x:Key="Streaming_Screenshot_OpenSaveFolder">保存フォルダ...</sys:String>
+    
+    <!-- Ex.Tracker -->
+    <sys:String x:Key="ExTracker_Title">外部トラッキング</sys:String>
+    <sys:String x:Key="ExTracker_Instruction" xml:space="preserve">外部アプリによるトラッキングを活用する機能です。
+外部トラッキングをオンにすると、以下の機能は一時的に無効化されます。
+- Webカメラでの顔トラッキング
+- マウスポインタを目で追従する機能</sys:String>
+    <sys:String x:Key="ExTracker_Enable">外部トラッキングを有効化</sys:String>
+    <sys:String x:Key="ExTracker_Enable_ImageLipSync">リップシンクも外部トラッキングの値を適用</sys:String>    
+    <sys:String x:Key="ExTracker_Calibrate">現在位置で顔をキャリブレーション</sys:String>
+    
+    <sys:String x:Key="ExTracker_SourceSelect">連携先アプリ</sys:String>
+    <sys:String x:Key="ExTracker_SourceSelect_Instruction">連携先アプリを選択します。現時点ではiOSアプリのみ対応しています。</sys:String>
+
+    <sys:String x:Key="ExTracker_Source_None">なし</sys:String>
+    <sys:String x:Key="ExTracker_Source_iFacialMocap">iFacialMocap</sys:String>
+    <sys:String x:Key="ExTracker_Source_waidayo">waidayo</sys:String>
+    <sys:String x:Key="ExTracker_Source_HowToCollaborate">※アプリごとの連携方法をチェック (Webページを開きます)</sys:String>
+    <sys:String x:Key="ExTracker_Source_RefreshReceiverSetting">ネットワーク環境を再チェック</sys:String>
+        
+    
+    <sys:String x:Key="ExTracker_FaceSwitch">表情スイッチ</sys:String>
+    <sys:String x:Key="ExTracker_FaceSwitch_Instruction" xml:space="preserve">顔をはっきりと特定の表情にすることでアバターの表情を切り替えます。
+「リップシンクを続行」をオンにすると、表情を切り替えたままリップシンクを動かせます。</sys:String>
+    <sys:String x:Key="ExTracker_FaceSwitch_KeepLipSync">リップシンクを続行</sys:String>
+
     
     <!-- Window -->
     <sys:String x:Key="Window_BackgroundColor">背景色</sys:String>

@@ -255,7 +255,29 @@ namespace Baku.VMagicMirrorConfig
 
         public Message LoadMidiNoteToMotionMap(string content) => WithArg(content);
         public Message RequireMidiNoteOnMessage(bool require) => WithArg($"{require}");
-        
+
+        #endregion
+
+        #region External Tracker
+
+        //共通: 基本操作のオン/オフ + キャリブレーション
+        public Message ExTrackerEnable(bool enable) => WithArg($"{enable}");
+        public Message ExTrackerEnableLipSync(bool enable) => WithArg($"{enable}");
+        public Message ExTrackerCalibrate() => NoArg();
+        //NOTE: このdataについて詳細
+        // - Unityが送ってくるのをまるごと保持してたデータを返すだけで、WPF側では中身に関知しない
+        // - 想定する内部構成としては、全トラッカータイプのデータが1つの文字列に入ったものを想定してます
+        //   (連携先がたかだか5アプリくらいを見込んでるので、これでも手に負えるハズ)
+        public Message ExTrackerSetCalibrateData(string data) => WithArg(data);
+
+        //連携先の切り替え + アプリ固有設定の送信
+        public Message ExTrackerSetSource(int sourceType) => WithArg($"{sourceType}");
+        public Message ExTrackerSetApplicationValue(ExternalTrackerSettingData data) => WithArg(data.ToJsonString());
+
+        //共通: 表情スイッチ機能
+        //NOTE: 設計を安全にするため、全設定をガッと送る機能しか認めていません。
+        public Message ExTrackerSetFaceSwitchSetting(string settingJson) => WithArg(settingJson);
+            
         #endregion
 
         #region その他

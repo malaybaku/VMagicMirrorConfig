@@ -7,6 +7,7 @@
     <!-- Top Tab -->
     <sys:String x:Key="TopBar_Home">Home</sys:String>
     <sys:String x:Key="TopBar_Streaming">Streaming</sys:String>
+    <sys:String x:Key="TopBar_ExternalFaceTrack">Ex.Tracker</sys:String>
 
     <!-- Top Tab In Setting -->
     <sys:String x:Key="TopBar_Setting_Window">Window</sys:String>
@@ -55,6 +56,30 @@
     <sys:String x:Key="Streaming_Screenshot">Screenshot</sys:String>
     <sys:String x:Key="Streaming_Screenshot_Take">Take</sys:String>
     <sys:String x:Key="Streaming_Screenshot_OpenSaveFolder">Saved Folder...</sys:String>
+    
+     <!-- Ex.Tracker -->
+    <sys:String x:Key="ExTracker_Title">External Tracker</sys:String>
+    <sys:String x:Key="ExTracker_Instruction" xml:space="preserve">Feature to use external tracking application.
+During this mode, following features are disabled.
+- Web camera based tracking
+- Eye motion to see the mouse pointer</sys:String>
+    <sys:String x:Key="ExTracker_Enable">Enable External Tracker</sys:String>
+    <sys:String x:Key="ExTracker_Enable_ImageLipSync">Apply LipSync using External Tracker Data</sys:String>    
+    <sys:String x:Key="ExTracker_Calibrate">Calibrate Face Pose</sys:String>
+    
+    <sys:String x:Key="ExTracker_SourceSelect">Target App</sys:String>
+    <sys:String x:Key="ExTracker_SourceSelect_Instruction">Select Application. So far only support iOS application.</sys:String>
+
+    <sys:String x:Key="ExTracker_Source_None">None</sys:String>
+    <sys:String x:Key="ExTracker_Source_iFacialMocap">iFacialMocap</sys:String>
+    <sys:String x:Key="ExTracker_Source_waidayo">waidayo</sys:String>
+    <sys:String x:Key="ExTracker_Source_HowToCollaborate">*See how to use the apps (open web page)</sys:String>
+    <sys:String x:Key="ExTracker_Source_RefreshReceiverSetting">Check network setting again</sys:String>
+            
+    <sys:String x:Key="ExTracker_FaceSwitch">Face Switch</sys:String>
+    <sys:String x:Key="ExTracker_FaceSwitch_Instruction" xml:space="preserve">Activates seleceted BlendShape by making specific face expression.
+Check "Keep LipSync" to make the lipsync continue.</sys:String>
+    <sys:String x:Key="ExTracker_FaceSwitch_KeepLipSync">Keep LipSync</sys:String>
     
     
     <!-- Window -->
