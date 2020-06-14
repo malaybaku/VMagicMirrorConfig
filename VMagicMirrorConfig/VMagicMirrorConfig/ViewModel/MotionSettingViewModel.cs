@@ -499,6 +499,19 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
+        private bool _enableHidRandomTyping = false;
+        public bool EnableHidRandomTyping
+        {
+            get => _enableHidRandomTyping;
+            set
+            {
+                if (SetValue(ref _enableHidRandomTyping, value))
+                {
+                    SendMessage(MessageFactory.Instance.EnableHidRandomTyping(EnableHidRandomTyping));
+                }
+            }
+        }
+
         private bool _enableShoulderMotionModify = true;
         public bool EnableShoulderMotionModify
         {
@@ -770,6 +783,7 @@ namespace Baku.VMagicMirrorConfig
         private void ResetArmSetting()
         {
             EnableHidArmMotion = true;
+            EnableHidRandomTyping = false;
             EnableShoulderMotionModify = true;
             WaistWidth = 30;
             ElbowCloseStrength = 30;
