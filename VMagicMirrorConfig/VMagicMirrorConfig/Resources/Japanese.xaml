@@ -61,8 +61,10 @@
     
     <!-- Ex.Tracker -->
     <sys:String x:Key="ExTracker_Title">外部トラッキング</sys:String>
-    <sys:String x:Key="ExTracker_Instruction" xml:space="preserve">外部アプリのトラッキングを活用する機能です。
-オンにした場合、webカメラ機能はオフになります。</sys:String>
+    <sys:String x:Key="ExTracker_Instruction" xml:space="preserve">外部アプリによるトラッキングを活用する機能です。
+外部トラッキングをオンにすると、以下の機能は一時的に無効化されます。
+- Webカメラでの顔トラッキング
+- マウスポインタを目で追従する機能</sys:String>
     <sys:String x:Key="ExTracker_Enable">外部トラッキングを有効化</sys:String>
     <sys:String x:Key="ExTracker_Enable_ImageLipSync">リップシンクも外部トラッキングの値を適用</sys:String>    
     <sys:String x:Key="ExTracker_Calibrate">現在位置で顔をキャリブレーション</sys:String>
@@ -70,7 +72,7 @@
     <sys:String x:Key="ExTracker_SourceSelect">連携先アプリ</sys:String>
     <sys:String x:Key="ExTracker_SourceSelect_Instruction">連携先アプリを選択します。現時点ではiOSアプリのみ対応しています。</sys:String>
 
-    <sys:String x:Key="ExTracker_Source_None">None</sys:String>
+    <sys:String x:Key="ExTracker_Source_None">なし</sys:String>
     <sys:String x:Key="ExTracker_Source_iFacialMocap">iFacialMocap</sys:String>
     <sys:String x:Key="ExTracker_Source_waidayo">waidayo</sys:String>
     <sys:String x:Key="ExTracker_Source_HowToCollaborate">※アプリごとの連携方法をチェック (Webページを開きます)</sys:String>

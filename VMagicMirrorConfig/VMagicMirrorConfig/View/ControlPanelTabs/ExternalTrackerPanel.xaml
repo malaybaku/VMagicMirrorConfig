@@ -76,7 +76,7 @@
                         <Button Style="{StaticResource MaterialDesignOutlinedButton}"
                                 VerticalAlignment="Top"
                                 HorizontalAlignment="Right"
-                                Command="{Binding OpenExTrackerAppInstructionUrlCommand}"
+                                Command="{Binding OpenInstructionUrlCommand}"
                                 Content="{DynamicResource ExTracker_Source_HowToCollaborate}"
                                 />
                     </Grid>
@@ -86,14 +86,12 @@
                     <Grid Margin="15,10"                      
                           IsEnabled="{Binding EnableExternalTracking}">
                         <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
+                            <!--<RowDefinition Height="50"/>-->
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
+                            <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <RadioButton Grid.Row="0" Grid.Column="0"
@@ -101,51 +99,59 @@
                                      Content="{DynamicResource ExTracker_Source_None}"
                                      IsChecked="{Binding IsTrackSourceNone}"
                                      />
-                        <RadioButton Grid.Row="0" Grid.Column="1"
+                        <RadioButton Grid.Row="1" Grid.Column="0"
                                      VerticalContentAlignment="Center"
                                      Content="{DynamicResource ExTracker_Source_iFacialMocap}"
                                      IsChecked="{Binding IsTrackSourceIFacialMocap}"
                                      />
-                        <RadioButton Grid.Row="0" Grid.Column="2"
+                        <!--<RadioButton Grid.Row="2" Grid.Column="0"
                                      VerticalContentAlignment="Center"
                                      Content="{DynamicResource ExTracker_Source_waidayo}"
                                      IsChecked="{Binding IsTrackSourceWaidayo}"
-                                     />
-                        <!--<RadioButton Grid.Row="0" Grid.Column="3"
+                                     />-->
+                        <!--<RadioButton Grid.Row="3" Grid.Column="0"
                                      VerticalContentAlignment="Center"
                                      Content=""
                                      />-->
-                        <TextBlock Grid.Row="1" Grid.Column="1"
-                                   Text="Port: 50003"
-                                   />
-                        <TextBlock Grid.Row="1" Grid.Column="2">
-                            <Run Text="IP: "/>
-                            <Run Text="{Binding SelfIpAddress}"/>
-                            <LineBreak />
-                            <Run Text="Port: 50004"/>
-                        </TextBlock>
-
-                        <StackPanel Grid.Row="2" Grid.Column="1" IsEnabled="{Binding IsTrackSourceIFacialMocap}">
-                            <TextBox Text="{Binding IFacialMocapTargetIpAddress}" />
-                            <Button Padding="0"
+                        
+                        <StackPanel Grid.Row="1" Grid.Column="1" 
+                                    IsEnabled="{Binding IsTrackSourceIFacialMocap}"
+                                    Margin="10,0"
+                                    Orientation="Horizontal"
+                                    >
+                            <TextBox Text="{Binding IFacialMocapTargetIpAddress}"
+                                     md:HintAssist.Hint="{DynamicResource ExTracker_iFM_IpHint}"
+                                     Width="150"
+                                     />
+                            <Button Padding="0" Margin="8"
+                                    Width="100"
+                                    HorizontalAlignment="Stretch"
                                     Content="Connect" 
                                     Command="{Binding RefreshIFacialMocapTargetCommand}" />
                         </StackPanel>
+
+                        <!--<StackPanel Grid.Row="2" Grid.Column="1" 
+                                    IsEnabled="{Binding IsTrackSourceWaidayo}"
+                                    Margin="10,0"
+                                    Orientation="Horizontal"
+                                    >
+                            <TextBlock Grid.Row="1" Grid.Column="2">
+                                <Run Text="Port: 50004, IP: "/>
+                                <Run Text="{Binding SelfIpAddress}"/>
+                            </TextBlock>
+                            
+                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                    HorizontalAlignment="Left"
+                                    Command="{Binding RefreshReceiverSettingCommand}"
+                                    Content="{DynamicResource ExTracker_Source_RefreshReceiverSetting}"
+                                    />
+                        </StackPanel>-->
+
                     </Grid>
 
-                    <Button Style="{StaticResource MaterialDesignFlatButton}"
-                            HorizontalAlignment="Left"
-                            Command="{Binding RefreshReceiverSettingCommand}"
-                            Content="ネットワーク環境を再チェック"
-                            />
 
                 </StackPanel>
             </md:Card>
-
-            <!-- 
-            NOTE: waidayoの場合だけポート番号を選ばせてもいいんだが、どうしようかなあ。
-            iFacialMocapと公平に扱うなら固定したいんだけど。
-            -->
 
             <!-- 「表情筋でブレンドシェイプクリップを発動する」という設定のUIがここに来ます。カオスになったら別ウィンドウに分けます。 -->
             <md:Card IsEnabled="{Binding EnableExternalTracking}">
