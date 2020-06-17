@@ -46,19 +46,6 @@
                             IsEnabled="{Binding EnableExternalTracking}"
                             IsChecked="{Binding EnableExternalTrackerLipSync}"
                             />
-
-                <Button Width="NaN" 
-                        HorizontalAlignment="Left"
-                        Margin="15,5,15,10"
-                        IsEnabled="{Binding EnableExternalTracking}"
-                        Command="{Binding CalibrateCommand}"
-                        >
-                    <StackPanel Orientation="Horizontal">
-                        <md:PackIcon Kind="AutoFix" />
-                        <TextBlock Text="{DynamicResource ExTracker_Calibrate}"/>
-                    </StackPanel>
-                </Button>
-
             </StackPanel>
 
             <md:Card Padding="5">
@@ -74,8 +61,10 @@
 
  
                         <Button Style="{StaticResource MaterialDesignOutlinedButton}"
+                                Padding="0"
                                 VerticalAlignment="Top"
                                 HorizontalAlignment="Right"
+                                Margin="0,3,5,0"
                                 Command="{Binding OpenInstructionUrlCommand}"
                                 Content="{DynamicResource ExTracker_Source_HowToCollaborate}"
                                 />
@@ -149,7 +138,17 @@
 
                     </Grid>
 
-
+                    <Button Width="NaN" 
+                            HorizontalAlignment="Left"
+                            Margin="25,5,15,10"
+                            IsEnabled="{Binding EnableExternalTracking}"
+                            Command="{Binding CalibrateCommand}"
+                            >
+                        <StackPanel Orientation="Horizontal">
+                            <md:PackIcon Kind="AutoFix" />
+                            <TextBlock Text="{DynamicResource ExTracker_Calibrate}"/>
+                        </StackPanel>
+                    </Button>
                 </StackPanel>
             </md:Card>
 
