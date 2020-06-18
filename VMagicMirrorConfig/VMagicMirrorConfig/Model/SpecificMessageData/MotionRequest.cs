@@ -26,7 +26,7 @@ namespace Baku.VMagicMirrorConfig
         public float DurationWhenOnlyBlendShape { get; set; } = 3.0f;
 
         /// <summary>
-        /// NOTE: ブレンドシェイプは「1個も適用しない」か「全部適用する」のいずれかになる点に留意
+        /// NOTE: ブレンドシェイプは「1個も適用しない」か「(リップシンクだけ例外だけど基本)全部適用する」のいずれかになる点に留意
         /// </summary>
         public bool UseBlendShape { get; set; }
 
