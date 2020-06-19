@@ -151,6 +151,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
@@ -201,8 +202,15 @@
                           IsChecked="{Binding HoldBlendShape}"
                           IsEnabled="{Binding UseBlendShape}"
                           />
+                <CheckBox Grid.Row="4"
+                          Margin="5"
+                          Content="{DynamicResource WordToMotion_Face_PreferLipSync}"
+                          IsChecked="{Binding PreferLipSync}"
+                          IsEnabled="{Binding UseBlendShape}"
+                          />
 
-                <Grid Grid.Row="4" Margin="0,5,0,0">
+
+                <Grid Grid.Row="5" Margin="0,5,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
@@ -214,7 +222,7 @@
                                Text="{DynamicResource WordToMotion_Face_ExtraClip_Header}"
                                />
                 </Grid>
-                <ScrollViewer Grid.Row="5" 
+                <ScrollViewer Grid.Row="6" 
                               Margin="0"
                               HorizontalScrollBarVisibility="Disabled"
                               VerticalScrollBarVisibility="Auto"
