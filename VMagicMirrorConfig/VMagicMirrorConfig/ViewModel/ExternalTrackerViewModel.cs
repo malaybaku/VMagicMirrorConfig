@@ -227,8 +227,8 @@ namespace Baku.VMagicMirrorConfig
         {
             string url =
                 (LanguageSelector.Instance.LanguageName == "Japanese") ?
-                "https://malaybaku.github.io/VMagicMirror/tips/external_tracker" :
-                "https://malaybaku.github.io/VMagicMirror/en/tips/external_tracker";
+                "https://malaybaku.github.io/VMagicMirror/docs/external_tracker" :
+                "https://malaybaku.github.io/VMagicMirror/en/docs/external_tracker";
             UrlNavigate.Open(url);
         }
 
