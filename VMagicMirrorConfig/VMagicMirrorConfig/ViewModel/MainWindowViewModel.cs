@@ -19,6 +19,7 @@ namespace Baku.VMagicMirrorConfig
         public LayoutSettingViewModel LayoutSetting { get; private set; }
         public LightSettingViewModel LightSetting { get; private set; }
         public WordToMotionSettingViewModel WordToMotionSetting { get; private set; }
+        public ExternalTrackerViewModel ExternalTrackerSetting { get; private set; }
 
         public DialogHelperViewModel DialogHelper => DialogHelperViewModel.Instance;
 
@@ -69,6 +70,7 @@ namespace Baku.VMagicMirrorConfig
             LayoutSetting = new LayoutSettingViewModel(MessageSender, Initializer.MessageReceiver);
             LightSetting = new LightSettingViewModel(MessageSender);
             WordToMotionSetting = new WordToMotionSettingViewModel(MessageSender, Initializer.MessageReceiver);
+            ExternalTrackerSetting = new ExternalTrackerViewModel(MessageSender, Initializer.MessageReceiver);
 
             AvailableLanguageNames = new ReadOnlyObservableCollection<string>(_availableLanguageNames);
 
@@ -355,6 +357,7 @@ namespace Baku.VMagicMirrorConfig
                 LayoutSetting.ResetToDefault();
                 WindowSetting.ResetToDefault();
                 WordToMotionSetting.ResetToDefault();
+                ExternalTrackerSetting.ResetToDefault();
 
                 _lastVrmLoadFilePath = "";
             }
@@ -438,11 +441,6 @@ namespace Baku.VMagicMirrorConfig
             Initializer.CameraPositionChecker.Start(
                 2000,
                 data => LayoutSetting.SilentSetCameraPosition(data)
-                );
-
-            Initializer.DeviceLayoutChecker.Start(
-                2000,
-                data => LayoutSetting.SilentSetDeviceLayout(data)
                 );
 
             var regSetting = new StartupRegistrySetting();
@@ -554,6 +552,7 @@ namespace Baku.VMagicMirrorConfig
                     LayoutSetting = this.LayoutSetting,
                     LightSetting = this.LightSetting,
                     WordToMotionSetting = this.WordToMotionSetting,
+                    ExternalTrackerSetting = this.ExternalTrackerSetting,
                 });
             }
         }
@@ -593,6 +592,13 @@ namespace Baku.VMagicMirrorConfig
                 }
                 WordToMotionSetting.LoadSerializedItems();
                 WordToMotionSetting.RequestReload();
+
+                //これも同様に、古いデータだとnullになる
+                if (saveData.ExternalTrackerSetting != null)
+                {
+                    ExternalTrackerSetting.CopyFrom(saveData.ExternalTrackerSetting);
+                }
+                ExternalTrackerSetting.LoadFaceSwitchSettingFromString();
 
                 //顔キャリブデータはファイル読み込み時だけ送る特殊なデータなのでここに書いてます
                 MotionSetting.SendCalibrateFaceData();

@@ -55,6 +55,14 @@
         public static MessageIndication ForgetBlendShapeClip(string languageName)
             => ForgetBlendShapeClip(LanguageSelector.StringToLanguage(languageName));
 
+        /// <summary>
+        /// 無効なIPアドレスを指定したときに怒る文言です。
+        /// </summary>
+        /// <param name="languageName"></param>
+        /// <returns></returns>
+        public static MessageIndication InvalidIpAddress(string languageName)
+            => InvalidIpAddress(LanguageSelector.StringToLanguage(languageName));
+
         public static MessageIndication LoadVrmConfirmation(Languages lang) => lang switch
         {
             Languages.Japanese => new MessageIndication(
@@ -124,6 +132,18 @@
             _ => new MessageIndication(
                 "Clear Blend Shape Setting",
                 "Are you sure to clear the blend shape setting of '{0}'?"
+                ),
+        };
+
+        public static MessageIndication InvalidIpAddress(Languages lang) => lang switch
+        {
+            Languages.Japanese => new MessageIndication(
+                "無効なIPアドレス",
+                "無効なIPアドレスが指定されています。入力を確認して下さい。"
+                ),
+            _ => new MessageIndication(
+                "Invalid IP Address",
+                "Invalid IP Address is set, please check the input."
                 ),
         };
 

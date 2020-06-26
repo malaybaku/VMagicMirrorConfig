@@ -213,6 +213,13 @@ namespace Baku.VMagicMirrorConfig
             set => SetValue(ref _holdBlendShape, value);
         }
 
+        private bool _preferLipSync = false;
+        public bool PreferLipSync
+        {
+            get => _preferLipSync;
+            set => SetValue(ref _preferLipSync, value);
+        }
+
 
         private float _durationWhenOnlyBlendShape = 3.0f;
         public float DurationWhenOnlyBlendShape
@@ -290,6 +297,7 @@ namespace Baku.VMagicMirrorConfig
             model.ExternalBvhFilePath = BvhFilePath;
             model.UseBlendShape = UseBlendShape;
             model.HoldBlendShape = HoldBlendShape;
+            model.PreferLipSync = PreferLipSync;
 
             model.DurationWhenOnlyBlendShape = DurationWhenOnlyBlendShape;
 
@@ -337,6 +345,7 @@ namespace Baku.VMagicMirrorConfig
 
             UseBlendShape = model.UseBlendShape;
             HoldBlendShape = model.HoldBlendShape;
+            PreferLipSync = model.PreferLipSync;
             DurationWhenOnlyBlendShape = model.DurationWhenOnlyBlendShape;
 
             foreach (var blendShapeItem in model.BlendShapeValues)

@@ -8,7 +8,7 @@
         xmlns:vmm="clr-namespace:Baku.VMagicMirrorConfig"
         mc:Ignorable="d"
         d:DataContext="{x:Type vmm:MainWindowViewModel}"
-        Title="VMagicMirror v1.0.0" 
+        Title="VMagicMirror v1.1.0" 
         ResizeMode="CanMinimize"
         Height="600" Width="550"
         MinHeight="600" MinWidth="550"
@@ -73,8 +73,20 @@
             </TabItem>
             <TabItem>
                 <TabItem.Header>
+                    <vmm:TabHeaderIconText Text="{DynamicResource TopBar_ExternalFaceTrack}"
+                                           IconKind="FaceRecognition"
+                                           IconHeight="16"
+                                           IconWidth="16"
+                                           />
+                </TabItem.Header>
+                <vmm:ExternalTrackerPanel DataContext="{Binding ExternalTrackerSetting}" />
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
                     <vmm:TabHeaderIconText Text="About"
                                            IconKind="HelpOutline"
+                                           IconWidth="15"
+                                           IconHeight="15"
                                            />
                 </TabItem.Header>
                 <vmm:AboutPanel />

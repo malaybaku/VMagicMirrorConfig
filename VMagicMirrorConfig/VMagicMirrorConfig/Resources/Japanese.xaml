@@ -7,6 +7,7 @@
     <!-- Top Tab -->
     <sys:String x:Key="TopBar_Home">ホーム</sys:String>
     <sys:String x:Key="TopBar_Streaming">配信</sys:String>
+    <sys:String x:Key="TopBar_ExternalFaceTrack">Ex.Tracker</sys:String>
     
     <!-- Top Tab in Setting Window -->
     <sys:String x:Key="TopBar_Setting_Window">ウィンドウ</sys:String>
@@ -57,6 +58,33 @@
     <sys:String x:Key="Streaming_Screenshot">スクリーンショット</sys:String>
     <sys:String x:Key="Streaming_Screenshot_Take">撮影</sys:String>
     <sys:String x:Key="Streaming_Screenshot_OpenSaveFolder">保存フォルダ...</sys:String>
+    
+    <!-- Ex.Tracker -->
+    <sys:String x:Key="ExTracker_Title">外部トラッキング</sys:String>
+    <sys:String x:Key="ExTracker_Instruction" xml:space="preserve">外部アプリによるトラッキングを活用する機能です。
+外部トラッキングをオンにすると、以下の機能は一時的に無効化されます。
+- Webカメラでの顔トラッキング
+- マウスポインタを目で追従する機能</sys:String>
+    <sys:String x:Key="ExTracker_Enable">外部トラッキングを有効化</sys:String>
+    <sys:String x:Key="ExTracker_Enable_ImageLipSync">リップシンクも外部トラッキングの値を適用</sys:String>    
+    <sys:String x:Key="ExTracker_Calibrate">現在位置で顔をキャリブレーション</sys:String>
+    
+    <sys:String x:Key="ExTracker_SourceSelect">アプリとの連携</sys:String>
+    <sys:String x:Key="ExTracker_SourceSelect_Instruction">連携先アプリを選択します。現時点ではiOSアプリのみ対応しています。</sys:String>
+
+    <sys:String x:Key="ExTracker_Source_None">なし</sys:String>
+    <sys:String x:Key="ExTracker_Source_iFacialMocap">iFacialMocap</sys:String>
+    <sys:String x:Key="ExTracker_iFM_IpHint">iPhoneのIP Address...</sys:String>
+    <sys:String x:Key="ExTracker_Source_waidayo">waidayo</sys:String>
+    <sys:String x:Key="ExTracker_Source_HowToCollaborate">※アプリとの連携方法をチェック (Webページを開きます)</sys:String>
+    <sys:String x:Key="ExTracker_Source_RefreshReceiverSetting">ネットワーク環境を再チェック</sys:String>
+        
+
+    <sys:String x:Key="ExTracker_FaceSwitch">表情スイッチ</sys:String>
+    <sys:String x:Key="ExTracker_FaceSwitch_Instruction" xml:space="preserve">顔をはっきりと特定の表情にすることでアバターの表情を切り替えます。
+「リップシンクを続行」をオンにすると、表情を切り替えたままリップシンクを動かせます。</sys:String>
+    <sys:String x:Key="ExTracker_FaceSwitch_KeepLipSync">リップシンクを続行</sys:String>
+
     
     <!-- Window -->
     <sys:String x:Key="Window_BackgroundColor">背景色</sys:String>
@@ -146,6 +174,7 @@
     <!-- Motion : Arm -->
     <sys:String x:Key="Motion_Arm">腕・ひじ</sys:String>
     <sys:String x:Key="Motion_Arm_EnableHidMotion">タイピング / マウス動作を反映</sys:String>
+    <sys:String x:Key="Motion_Arm_EnableRandomTyping">打鍵をランダム化して入力を隠す</sys:String>
     <sys:String x:Key="Motion_Arm_EnableShoulderModify">肩モーションの補正を有効化</sys:String>
     <sys:String x:Key="Motion_Arm_FpsAssumedRightHand">右手のマウス動作をFPS対策モードにする</sys:String>
     <sys:String x:Key="Motion_Arm_FpsAssumedRightHand_Tooltip">オンにするとPC用のFPSを遊ぶときのマウス動作が自然になりますが、ペンタブ作業や画面タッチへの反応が悪くなります。</sys:String>
@@ -284,7 +313,8 @@
     <sys:String x:Key="WordToMotion_Face_Header">表情</sys:String>
     <sys:String x:Key="WordToMotion_Face_Enable">表情の動作を有効化</sys:String>
     <sys:String x:Key="WordToMotion_Face_Duration">(全身モーションが「なし」の場合) 表情の変化時間 [sec]</sys:String>
-    <sys:String x:Key="WordToMotion_Face_Hold">アニメーション終了後も表情を維持</sys:String>
+    <sys:String x:Key="WordToMotion_Face_Hold">完了後も表情をキープ</sys:String>
+    <sys:String x:Key="WordToMotion_Face_PreferLipSync">リップシンクを続行</sys:String>
     
     <sys:String x:Key="WordToMotion_Face_CommonClip_Header">基本の表情</sys:String>
     <sys:String x:Key="WordToMotion_Face_ExtraClip_Header">キャラ固有の表情</sys:String>

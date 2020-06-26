@@ -28,5 +28,7 @@
         public LightSettingViewModel? LightSetting { get; set; }
 
         public WordToMotionSettingViewModel? WordToMotionSetting { get; set; }
+
+        public ExternalTrackerViewModel? ExternalTrackerSetting { get; set; }
     }
 }
