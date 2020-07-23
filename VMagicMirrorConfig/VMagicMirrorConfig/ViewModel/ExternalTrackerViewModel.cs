@@ -10,7 +10,6 @@ namespace Baku.VMagicMirrorConfig
     {
         private const int TrackSourceNone = 0;
         private const int TrackSourceIFacialMocap = 1;
-        private const int TrackSourceWaidayo = 2;
 
         private ExternalTrackerFaceSwitchSetting _settingModel
             = ExternalTrackerFaceSwitchSetting.LoadDefault();
@@ -136,9 +135,8 @@ namespace Baku.VMagicMirrorConfig
             {
                 if (!IsTrackSourceNone && value)
                 {
-                    _trackSourceType = TrackSourceNone;
+                    TrackSourceType = TrackSourceNone;
                     RaisePropertyChanged(nameof(IsTrackSourceIFacialMocap));
-                    RaisePropertyChanged(nameof(IsTrackSourceWaidayo));
                     RaisePropertyChanged(nameof(IsTrackSourceNone));
                 }
             }
@@ -152,26 +150,9 @@ namespace Baku.VMagicMirrorConfig
             {
                 if (!IsTrackSourceIFacialMocap && value)
                 {
-                    _trackSourceType = TrackSourceIFacialMocap;
-                    RaisePropertyChanged(nameof(IsTrackSourceNone));
-                    RaisePropertyChanged(nameof(IsTrackSourceWaidayo));
-                    RaisePropertyChanged(nameof(IsTrackSourceIFacialMocap));
-                }
-            }
-        }
-
-        [XmlIgnore]
-        public bool IsTrackSourceWaidayo
-        {
-            get => _trackSourceType == TrackSourceWaidayo;
-            set
-            {
-                if (!IsTrackSourceWaidayo && value)
-                {
-                    _trackSourceType = TrackSourceWaidayo;
+                    TrackSourceType = TrackSourceIFacialMocap;
                     RaisePropertyChanged(nameof(IsTrackSourceNone));
                     RaisePropertyChanged(nameof(IsTrackSourceIFacialMocap));
-                    RaisePropertyChanged(nameof(IsTrackSourceWaidayo));
                 }
             }
         }
@@ -190,7 +171,6 @@ namespace Baku.VMagicMirrorConfig
                     SendMessage(MessageFactory.Instance.ExTrackerSetSource(TrackSourceType));
                     RaisePropertyChanged(nameof(IsTrackSourceNone));
                     RaisePropertyChanged(nameof(IsTrackSourceIFacialMocap));
-                    RaisePropertyChanged(nameof(IsTrackSourceWaidayo));
                 }
             }
         }
