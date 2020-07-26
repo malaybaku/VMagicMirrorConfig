@@ -134,7 +134,7 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private int _lightG = 244;
+        private int _lightG = 255;
         public int LightG
         {
             get => _lightG;
@@ -148,7 +148,7 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private int _lightB = 214;
+        private int _lightB = 255;
         public int LightB
         {
             get => _lightB;
@@ -424,8 +424,8 @@ namespace Baku.VMagicMirrorConfig
         private void ResetLightSetting()
         {
             LightR = 255;
-            LightG = 244;
-            LightB = 214;
+            LightG = 255;
+            LightB = 255;
             LightIntensity = 100;
             LightYaw = -30;
             LightPitch = 50;
