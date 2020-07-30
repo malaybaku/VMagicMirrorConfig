@@ -93,16 +93,6 @@
                                      Content="{DynamicResource ExTracker_Source_iFacialMocap}"
                                      IsChecked="{Binding IsTrackSourceIFacialMocap}"
                                      />
-                        <!--<RadioButton Grid.Row="2" Grid.Column="0"
-                                     VerticalContentAlignment="Center"
-                                     Content="{DynamicResource ExTracker_Source_waidayo}"
-                                     IsChecked="{Binding IsTrackSourceWaidayo}"
-                                     />-->
-                        <!--<RadioButton Grid.Row="3" Grid.Column="0"
-                                     VerticalContentAlignment="Center"
-                                     Content=""
-                                     />-->
-                        
                         <StackPanel Grid.Row="1" Grid.Column="1" 
                                     IsEnabled="{Binding IsTrackSourceIFacialMocap}"
                                     Margin="10,0"
@@ -118,24 +108,6 @@
                                     Content="Connect" 
                                     Command="{Binding RefreshIFacialMocapTargetCommand}" />
                         </StackPanel>
-
-                        <!--<StackPanel Grid.Row="2" Grid.Column="1" 
-                                    IsEnabled="{Binding IsTrackSourceWaidayo}"
-                                    Margin="10,0"
-                                    Orientation="Horizontal"
-                                    >
-                            <TextBlock Grid.Row="1" Grid.Column="2">
-                                <Run Text="Port: 50004, IP: "/>
-                                <Run Text="{Binding SelfIpAddress}"/>
-                            </TextBlock>
-                            
-                            <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                    HorizontalAlignment="Left"
-                                    Command="{Binding RefreshReceiverSettingCommand}"
-                                    Content="{DynamicResource ExTracker_Source_RefreshReceiverSetting}"
-                                    />
-                        </StackPanel>-->
-
                     </Grid>
 
                     <Button Width="NaN" 
