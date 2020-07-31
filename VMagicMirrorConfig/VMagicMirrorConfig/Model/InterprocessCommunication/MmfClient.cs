@@ -8,7 +8,11 @@ namespace Baku.VMagicMirrorConfig
 {
     class MmfClient : IMessageSender, IMessageReceiver
     {
-        private const string ChannelName = "Baku.VMagicMirror";
+        /// <summary>
+        /// コマンドライン引数が指定されてない場合に用いるMemoryMappedFileの名称のベース.
+        /// おもにUnity側がエディタ実行 + ConfigAppがダブルクリック直接起動、というケースで使います。
+        /// </summary>
+        private const string DefaultChannelName = "Baku.VMagicMirror";
 
         public MmfClient()
         {
@@ -91,7 +95,10 @@ namespace Baku.VMagicMirrorConfig
 
         private async void StartAsync()
         {
-            await _client.StartAsync(ChannelName);
+            string channelName = CommandLineArgParser.TryLoadMmfFileName(out var givenName)
+                ? givenName
+                : DefaultChannelName;
+            await _client.StartAsync(channelName);
         }
 
         public void Stop()

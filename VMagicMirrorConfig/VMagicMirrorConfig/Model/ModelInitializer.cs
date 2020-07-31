@@ -10,6 +10,8 @@ namespace Baku.VMagicMirrorConfig
             MessageSender = mmfClient;
             MessageReceiver = mmfClient;
             CameraPositionChecker = new CameraPositionChecker(MessageSender);
+            UnityAppCloser = new UnityAppCloser();
+            UnityAppCloser.Initialize(MessageReceiver);
         }
 
         public void StartObserveRoutine()
@@ -20,12 +22,13 @@ namespace Baku.VMagicMirrorConfig
 
         public IMessageSender MessageSender { get; } 
         public IMessageReceiver MessageReceiver { get; } 
-        public CameraPositionChecker CameraPositionChecker { get; private set; }
+        public CameraPositionChecker CameraPositionChecker { get; }
+        public UnityAppCloser UnityAppCloser { get; }
 
         public void Dispose()
         {
             MessageReceiver.Stop();
-            CameraPositionChecker?.Stop();
+            CameraPositionChecker.Stop();
         }
     }
 }
