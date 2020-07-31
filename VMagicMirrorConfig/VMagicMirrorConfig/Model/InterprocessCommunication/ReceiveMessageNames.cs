@@ -2,6 +2,7 @@
 {
     static class ReceiveMessageNames
     {
+        public const string RequestShowError = nameof(RequestShowError);
         public const string SetUnityProcessId = nameof(SetUnityProcessId);
         public const string CloseConfigWindow = nameof(CloseConfigWindow);
         public const string SetCalibrationFaceData = nameof(SetCalibrationFaceData);

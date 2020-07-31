@@ -7,7 +7,7 @@ namespace Baku.VMagicMirrorConfig
     {
         private int _unityProcessId = -1;
 
-        public void Initialize(IMessageReceiver receiver)
+        public UnityAppCloser(IMessageReceiver receiver)
         {
             receiver.ReceivedCommand += (sender, e) =>
             {
