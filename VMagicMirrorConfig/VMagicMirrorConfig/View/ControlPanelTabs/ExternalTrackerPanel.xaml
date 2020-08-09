@@ -40,12 +40,40 @@
                             Content="{DynamicResource ExTracker_Enable}" 
                             IsChecked="{Binding EnableExternalTracking}"
                             />
-                <CheckBox Margin="35,0,15,5" 
+                <CheckBox Margin="35,0,15,0" 
                             VerticalContentAlignment="Center"
                             Content="{DynamicResource ExTracker_Enable_ImageLipSync}" 
                             IsEnabled="{Binding EnableExternalTracking}"
                             IsChecked="{Binding EnableExternalTrackerLipSync}"
                             />
+                <Grid Margin="35,0,0,5"
+                      IsEnabled="{Binding EnableExternalTracking}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <CheckBox Grid.Row="0" Grid.Column="0"
+                              Margin="0"
+                              VerticalContentAlignment="Center"
+                              Content="{DynamicResource ExTracker_Enable_PerfectSync}"                               
+                              IsChecked="{Binding EnableExternalTrackerPerfectSync}"
+                              />
+                    <CheckBox Grid.Row="1" Grid.Column="0"
+                              Margin="20,0,0,0" 
+                              VerticalContentAlignment="Center"
+                              Content="{DynamicResource ExTracker_PerfectSync_UseVRoidDefault}" 
+                              IsEnabled="{Binding EnableExternalTrackerPerfectSync}"
+                              IsChecked="{Binding UseVRoidDefaultForPerfectSync}"
+                              />
+                    <Button Grid.Row="0" Style="{StaticResource MaterialDesignOutlinedButton}"
+                            Padding="0"
+                            VerticalAlignment="Top"
+                            HorizontalAlignment="Right"
+                            Margin="0,0,10,0"
+                            Command="{Binding OpenPerfectSyncTipsUrlCommand}"
+                            Content="{DynamicResource ExTracker_HowTo_PerfectSync}"
+                            />
+                </Grid>
             </StackPanel>
 
             <md:Card Padding="5">

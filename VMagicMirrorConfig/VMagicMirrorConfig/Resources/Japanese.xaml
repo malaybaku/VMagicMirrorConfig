@@ -67,8 +67,13 @@
 - マウスポインタを目で追従する機能</sys:String>
     <sys:String x:Key="ExTracker_Enable">外部トラッキングを有効化</sys:String>
     <sys:String x:Key="ExTracker_Enable_ImageLipSync">リップシンクも外部トラッキングの値を適用</sys:String>    
+
+    <sys:String x:Key="ExTracker_Enable_PerfectSync">パーフェクトシンクで表情を操作</sys:String>
+    <sys:String x:Key="ExTracker_PerfectSync_UseVRoidDefault">VRoid用のデフォルト設定を使う(※VRoidモデルでのみ動作)</sys:String>
+    <sys:String x:Key="ExTracker_HowTo_PerfectSync">パーフェクトシンクとは? (Webページを開きます)</sys:String>
+
     <sys:String x:Key="ExTracker_Calibrate">現在位置で顔をキャリブレーション</sys:String>
-    
+
     <sys:String x:Key="ExTracker_SourceSelect">アプリとの連携</sys:String>
     <sys:String x:Key="ExTracker_SourceSelect_Instruction">連携先アプリを選択します。現時点ではiOSアプリのみ対応しています。</sys:String>
 

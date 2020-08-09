@@ -110,6 +110,49 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
+        private bool _enableExternalTrackerPerfectSync = false;
+        public bool EnableExternalTrackerPerfectSync
+        {
+            get => _enableExternalTrackerPerfectSync;
+            set
+            {
+                if (SetValue(ref _enableExternalTrackerPerfectSync, value))
+                {
+                    SendMessage(MessageFactory.Instance.ExTrackerEnablePerfectSync(
+                        EnableExternalTrackerPerfectSync
+                        ));
+                }
+            }
+        }
+
+        private bool _useVRoidDefaultForPerfectSync = false;
+        public bool UseVRoidDefaultForPerfectSync
+        {
+            get => _useVRoidDefaultForPerfectSync;
+            set
+            {
+                if (SetValue(ref _useVRoidDefaultForPerfectSync, value))
+                {
+                    SendMessage(MessageFactory.Instance.ExTrackerUseVRoidDefaultForPerfectSync(
+                        UseVRoidDefaultForPerfectSync
+                        ));
+                }
+            }
+        }
+
+        private ActionCommand? _openPerfectSyncTipsUrlCommand;
+        public ActionCommand OpenPerfectSyncTipsUrlCommand
+            => _openPerfectSyncTipsUrlCommand ??= new ActionCommand(OpenPerfectSyncTipsUrl);
+
+        private void OpenPerfectSyncTipsUrl()
+        {
+            string url =
+                (LanguageSelector.Instance.LanguageName == "Japanese") ?
+                "https://malaybaku.github.io/VMagicMirror/tips/perfect_sync" :
+                "https://malaybaku.github.io/VMagicMirror/en/tips/perfect_sync";
+            UrlNavigate.Open(url);
+        }
+
         private ActionCommand? _calibrateCommand = null;
         public ActionCommand CalibrateCommand
             => _calibrateCommand ??= new ActionCommand(Calibrate);
@@ -274,8 +317,10 @@ namespace Baku.VMagicMirrorConfig
             SaveFaceSwitchSettingAsString();
             CalibrateData = "";
             TrackSourceType = TrackSourceNone;
-            EnableExternalTrackerLipSync = false;
             EnableExternalTracking = false;
+            EnableExternalTrackerLipSync = false;
+            UseVRoidDefaultForPerfectSync = false;
+            EnableExternalTrackerPerfectSync = false;
         }
     }
 
