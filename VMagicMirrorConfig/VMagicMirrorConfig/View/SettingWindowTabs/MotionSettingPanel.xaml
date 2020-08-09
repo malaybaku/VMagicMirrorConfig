@@ -203,7 +203,7 @@
                                Margin="10,20,5,5"
                                />
 
-                    <Grid Margin="5">
+                    <Grid Margin="5,5,5,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
@@ -227,6 +227,12 @@
                     </Grid>
 
                     <Grid Margin="5,0,0,10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="35"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="3*" />
@@ -234,14 +240,39 @@
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Grid.Row="0" Grid.Column="0"
+                                   Text="{DynamicResource Motion_Eye_RotScale}"
+                                   />
+                        <Slider x:Name="sliderEyeRotationScale"
+                                Grid.Row="0" Grid.Column="1"
+                                Minimum="50"
+                                Maximum="500"
+                                TickFrequency="1"
+                                IsSnapToTickEnabled="True"
+                                Value="{Binding EyeBoneRotationScale, Mode=TwoWay}"
+                                />
+                        <TextBox Grid.Row="0" Grid.Column="2"
+                                 Text="{Binding Value, ElementName=sliderEyeRotationScale}"
+                                 />
+
+                        <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
+                                   TextAlignment="Right"
+                                   Margin="20,5,20,0" 
+                                   FontSize="11"
+                                   >
+                            <Run Text="{DynamicResource Motion_Eye_ApproxRotRangePrefix}"/>
+                            <Run Text="{Binding EyeRotRangeText, Mode=OneWay}"/>
+                            <Run Text="{DynamicResource Motion_Eye_ApproxRotRangeSuffix}"/>
+                        </TextBlock>
+
+                        <TextBlock Grid.Row="3" Grid.Column="0"
                                     Text="{DynamicResource Motion_Face_DefaultFun}"/>
-                        <Slider Grid.Row="0" Grid.Column="1"
+                        <Slider Grid.Row="3" Grid.Column="1"
                                 x:Name="sliderFaceDefaultFun"
                                 Minimum="0"
                                 Maximum="100"
                                 Value="{Binding FaceDefaultFun, Mode=TwoWay}"
                                 />
-                        <TextBox Grid.Row="0" Grid.Column="2"
+                        <TextBox Grid.Row="3" Grid.Column="2"
                                  Text="{Binding Value, ElementName=sliderFaceDefaultFun}"
                                  />
 

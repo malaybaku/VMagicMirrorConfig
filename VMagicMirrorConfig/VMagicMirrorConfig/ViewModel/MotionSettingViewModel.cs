@@ -445,6 +445,35 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
+        private int _eyeBoneRotationScale = 100;
+        public int EyeBoneRotationScale
+        {
+            get => _eyeBoneRotationScale;
+            set
+            {
+                if (SetValue(ref _eyeBoneRotationScale, value))
+                {
+                    SendMessage(MessageFactory.Instance.SetEyeBoneRotationScale(EyeBoneRotationScale));
+                    UpdateEyeRotRangeText();
+                }
+            }
+        }
+
+        //NOTE: ちょっと作法が悪いけど、「-7.0 ~ +7.0」のようなテキストでViewにわたす
+        private const double EyeRotDefaultRange = 7.0;
+        private string _eyeRotRangeText = $"-{EyeRotDefaultRange:0.00} ~ +{EyeRotDefaultRange:0.00}";
+        [XmlIgnore]
+        public string EyeRotRangeText
+        {
+            get => _eyeRotRangeText;
+            private set => SetValue(ref _eyeRotRangeText, value);
+        }
+        private void UpdateEyeRotRangeText()
+        {
+            double range = EyeRotDefaultRange * EyeBoneRotationScale * 0.01;
+            EyeRotRangeText =  $"-{range:0.00} ~ +{range:0.00}";
+        }
+
         #endregion
 
         #region Mouth
@@ -768,6 +797,7 @@ namespace Baku.VMagicMirrorConfig
             UseLookAtPointNone = false;
             UseLookAtPointMousePointer = true;
             UseLookAtPointMainCamera = false;
+            EyeBoneRotationScale = 100;
 
             FaceDefaultFun = 0;
 
