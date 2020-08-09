@@ -246,7 +246,7 @@
                                 Grid.Row="0" Grid.Column="1"
                                 Minimum="50"
                                 Maximum="500"
-                                TickFrequency="10"
+                                TickFrequency="1"
                                 IsSnapToTickEnabled="True"
                                 Value="{Binding EyeBoneRotationScale, Mode=TwoWay}"
                                 />
@@ -259,8 +259,8 @@
                                    Margin="20,5,20,0" 
                                    FontSize="11"
                                    >
-                            <Run Text="{DynamicResource Motion_Eye_ApproxRotRange}"/>
-                            <Run Text="{Binding EyeRotRangeText}"/>
+                            <Run Text="{DynamicResource Motion_Eye_ApproxRotRangePrefix}"/>
+                            <Run Text="{Binding EyeRotRangeText, Mode=OneWay}"/>
                             <Run Text="{DynamicResource Motion_Eye_ApproxRotRangeSuffix}"/>
                         </TextBlock>
 
