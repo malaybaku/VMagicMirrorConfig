@@ -126,6 +126,7 @@ namespace Baku.VMagicMirrorConfig
         public Message MicrophoneDeviceNames() => NoArg();
 
         public Message LookAtStyle(string v) => WithArg(v);
+        public Message SetEyeBoneRotationScale(int percent) => WithArg($"{percent}");
 
         /// <summary>
         /// Query.
