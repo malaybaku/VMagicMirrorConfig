@@ -63,6 +63,14 @@
         public static MessageIndication InvalidIpAddress(string languageName)
             => InvalidIpAddress(LanguageSelector.StringToLanguage(languageName));
 
+        /// <summary>
+        /// モデルでExTrackerのパーフェクトシンクに必要なブレンドシェイプクリップが未定義だったときのエラーのヘッダー部
+        /// </summary>
+        /// <param name="languageName"></param>
+        /// <returns></returns>
+        public static MessageIndication ExTrackerMissingBlendShapeNames(string languageName)
+            => ExTrackerMissingBlendShapeNames(LanguageSelector.StringToLanguage(languageName));
+
         public static MessageIndication LoadVrmConfirmation(Languages lang) => lang switch
         {
             Languages.Japanese => new MessageIndication(
@@ -165,6 +173,28 @@
             _ => new MessageIndication(
                 "Connecting to VRoid Hub",
                 "Trying to load avatar used in previous time. Select model or cancel operation."),
+        };
+
+        public static MessageIndication ExTrackerMissingBlendShapeNames(Languages lang) => lang switch
+        {
+            Languages.Japanese => new MessageIndication(
+                "未定義のBlendShapeClipがあります",
+                @"パーフェクトシンクに必要なBlendShapeClipの一部が未定義です。
+
+モデルの見た目が正常であれば、この警告を無視して構いません。モデルの見た目がおかしい場合、このダイアログを閉じてから「パーフェクトシンクとは？」をタップし、モデルのセットアップ手順を確認して下さい。
+
+---
+
+定義されていないBlendShapeClipの名称: "),
+            _ => new MessageIndication(
+                "Missing BlendShapeClip",
+                @"Detect missing BlendShapeClips for perfect sync.
+
+If your avatar looks normal, ignore this message. If your avatar looks strange, close this dialog and see 'About Perfect Sync' to check how to setup the model.
+
+---
+
+Undefined BlendShaepClip names:"),
         };
     }
 }

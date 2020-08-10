@@ -68,7 +68,9 @@ During this mode, following features are disabled.
 
     <sys:String x:Key="ExTracker_Enable_PerfectSync">Use Perfect Sync</sys:String>
     <sys:String x:Key="ExTracker_PerfectSync_UseVRoidDefault">Perfect sync with VRoid's default setting</sys:String>
-    <sys:String x:Key="ExTracker_HowTo_PerfectSync">About "Perfect Sync" (open web page)</sys:String>
+    <sys:String x:Key="ExTracker_HowTo_PerfectSync">About Perfect Sync (open web page)</sys:String>
+    <sys:String x:Key="ExTracker_PerfectSync_MissingBlendShape_Header">Please check model setup! </sys:String>
+    <sys:String x:Key="ExTracker_PerfectSync_MissingBlendShape_HeaderSub">(click for detail)</sys:String>
     
     <sys:String x:Key="ExTracker_Calibrate">Calibrate Face Pose</sys:String>
     

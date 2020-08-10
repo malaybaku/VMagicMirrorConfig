@@ -50,15 +50,45 @@
                       IsEnabled="{Binding EnableExternalTracking}">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <CheckBox Grid.Row="0" Grid.Column="0"
+                    <CheckBox Grid.Row="0" 
                               Margin="0"
                               VerticalContentAlignment="Center"
                               Content="{DynamicResource ExTracker_Enable_PerfectSync}"                               
                               IsChecked="{Binding EnableExternalTrackerPerfectSync}"
                               />
-                    <CheckBox Grid.Row="1" Grid.Column="0"
+                    <Button Grid.Row="1"
+                            HorizontalAlignment="Left"
+                            Margin="25,5"
+                            Padding="5"
+                            Width="NaN"
+                            Background="{StaticResource SecondaryAccentBrush}"
+                            BorderBrush="Transparent"
+                            Foreground="Black"
+                            Visibility="{Binding ShouldNotifyMissingBlendShapeClipNames,
+                                                 Converter={StaticResource BooleanToVisibilityConverter}}"
+                            Command="{Binding ShowMissingBlendShapeNotificationCommand}"                            
+                            >
+                        <StackPanel Orientation="Horizontal">
+                            <md:PackIcon Kind="WarningOutline"
+                                         Margin="0"
+                                         VerticalAlignment="Center"
+                                         Foreground="{StaticResource PrimaryHueMidBrush}"
+                                         />
+                            <TextBlock Text="{DynamicResource ExTracker_PerfectSync_MissingBlendShape_Header}" 
+                                       FontWeight="Bold"
+                                       Margin="3,0"
+                                       />
+                            <TextBlock Text="{DynamicResource ExTracker_PerfectSync_MissingBlendShape_HeaderSub}" 
+                                       FontWeight="Bold"
+                                       Margin="3,0"
+                                       Foreground="{StaticResource PrimaryHueMidBrush}"
+                                       />
+                        </StackPanel>
+                    </Button>
+                    <CheckBox Grid.Row="2"
                               Margin="20,0,0,0" 
                               VerticalContentAlignment="Center"
                               Content="{DynamicResource ExTracker_PerfectSync_UseVRoidDefault}" 
