@@ -181,20 +181,25 @@
                 "未定義のBlendShapeClipがあります",
                 @"パーフェクトシンクに必要なBlendShapeClipの一部が未定義です。
 
-モデルの見た目が正常であれば、この警告を無視して構いません。モデルの見た目がおかしい場合、このダイアログを閉じてから「パーフェクトシンクとは？」をタップし、モデルのセットアップ手順を確認して下さい。
+モデルの見た目が正常であれば、この警告を無視して構いません。
+モデルの見た目がおかしい場合はこのダイアログを閉じてから
+「パーフェクトシンクとは？」をクリックし、
+モデルのセットアップ手順を確認して下さい。
 
 ---
-
-定義されていないBlendShapeClipの名称: "),
+定義されていないBlendShapeClipの名称: 
+"),
             _ => new MessageIndication(
                 "Missing BlendShapeClip",
                 @"Detect missing BlendShapeClips for perfect sync.
 
-If your avatar looks normal, ignore this message. If your avatar looks strange, close this dialog and see 'About Perfect Sync' to check how to setup the model.
+If your avatar looks normal, ignore this message. 
+Otherwise, close this dialog and see 'About Perfect Sync',
+to check how to setup the model.
 
 ---
-
-Undefined BlendShaepClip names:"),
+Undefined BlendShaepClip names:
+"),
         };
     }
 }
