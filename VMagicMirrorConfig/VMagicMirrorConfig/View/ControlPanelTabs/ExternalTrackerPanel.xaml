@@ -40,12 +40,70 @@
                             Content="{DynamicResource ExTracker_Enable}" 
                             IsChecked="{Binding EnableExternalTracking}"
                             />
-                <CheckBox Margin="35,0,15,5" 
+                <CheckBox Margin="35,0,15,0" 
                             VerticalContentAlignment="Center"
                             Content="{DynamicResource ExTracker_Enable_ImageLipSync}" 
                             IsEnabled="{Binding EnableExternalTracking}"
                             IsChecked="{Binding EnableExternalTrackerLipSync}"
                             />
+                <Grid Margin="35,0,0,5"
+                      IsEnabled="{Binding EnableExternalTracking}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <CheckBox Grid.Row="0" 
+                              Margin="0"
+                              VerticalContentAlignment="Center"
+                              Content="{DynamicResource ExTracker_Enable_PerfectSync}"                               
+                              IsChecked="{Binding EnableExternalTrackerPerfectSync}"
+                              />
+                    <Button Grid.Row="1"
+                            HorizontalAlignment="Left"
+                            Margin="25,5"
+                            Padding="5"
+                            Width="NaN"
+                            Background="{StaticResource SecondaryAccentBrush}"
+                            BorderBrush="Transparent"
+                            Foreground="Black"
+                            Visibility="{Binding ShouldNotifyMissingBlendShapeClipNames,
+                                                 Converter={StaticResource BooleanToVisibilityConverter}}"
+                            Command="{Binding ShowMissingBlendShapeNotificationCommand}"                            
+                            >
+                        <StackPanel Orientation="Horizontal">
+                            <md:PackIcon Kind="WarningOutline"
+                                         Margin="0"
+                                         VerticalAlignment="Center"
+                                         Foreground="{StaticResource PrimaryHueMidBrush}"
+                                         />
+                            <TextBlock Text="{DynamicResource ExTracker_PerfectSync_MissingBlendShape_Header}" 
+                                       FontWeight="Bold"
+                                       Margin="3,0"
+                                       />
+                            <TextBlock Text="{DynamicResource ExTracker_PerfectSync_MissingBlendShape_HeaderSub}" 
+                                       FontWeight="Bold"
+                                       Margin="3,0"
+                                       Foreground="{StaticResource PrimaryHueMidBrush}"
+                                       />
+                        </StackPanel>
+                    </Button>
+                    <CheckBox Grid.Row="2"
+                              Margin="20,0,0,0" 
+                              VerticalContentAlignment="Center"
+                              Content="{DynamicResource ExTracker_PerfectSync_UseVRoidDefault}" 
+                              IsEnabled="{Binding EnableExternalTrackerPerfectSync}"
+                              IsChecked="{Binding UseVRoidDefaultForPerfectSync}"
+                              />
+                    <Button Grid.Row="0" Style="{StaticResource MaterialDesignOutlinedButton}"
+                            Padding="0"
+                            VerticalAlignment="Top"
+                            HorizontalAlignment="Right"
+                            Margin="0,0,10,0"
+                            Command="{Binding OpenPerfectSyncTipsUrlCommand}"
+                            Content="{DynamicResource ExTracker_HowTo_PerfectSync}"
+                            />
+                </Grid>
             </StackPanel>
 
             <md:Card Padding="5">
