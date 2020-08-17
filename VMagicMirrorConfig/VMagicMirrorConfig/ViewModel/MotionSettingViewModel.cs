@@ -175,31 +175,28 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private bool _enableHeadRotBaseBlinkAdjust = true;
-        public bool EnableHeadRotBaseBlinkAdjust
+        private bool _enableBlinkAdjust = true;
+        public bool EnableBlinkAdjust
         {
-            get => _enableHeadRotBaseBlinkAdjust;
+            get => _enableBlinkAdjust;
             set
             {
-                if (SetValue(ref _enableHeadRotBaseBlinkAdjust, value))
+                if (SetValue(ref _enableBlinkAdjust, value))
                 {
-                    SendMessage(MessageFactory.Instance.EnableHeadRotationBasedBlinkAdjust(
-                        EnableHeadRotBaseBlinkAdjust
-                        ));
+                    SendMessage(MessageFactory.Instance.EnableHeadRotationBasedBlinkAdjust(EnableBlinkAdjust));
+                    SendMessage(MessageFactory.Instance.EnableLipSyncBasedBlinkAdjust(EnableBlinkAdjust));
                 }
             }
         }
-        private bool _enableLipSyncBaseBlinkAdjust = true;
-        public bool EnableLipSyncBaseBlinkAdjust
+        private bool _enableVoiceBasedMotion = true;
+        public bool EnableVoiceBasedMotion
         {
-            get => _enableLipSyncBaseBlinkAdjust;
+            get => _enableVoiceBasedMotion;
             set
             {
-                if (SetValue(ref _enableLipSyncBaseBlinkAdjust, value))
+                if (SetValue(ref _enableVoiceBasedMotion, value))
                 {
-                    SendMessage(MessageFactory.Instance.EnableLipSyncBasedBlinkAdjust(
-                        EnableLipSyncBaseBlinkAdjust
-                        ));
+                    SendMessage(MessageFactory.Instance.EnableVoiceBasedMotion(EnableVoiceBasedMotion));
                 }
             }
         }
@@ -788,6 +785,9 @@ namespace Baku.VMagicMirrorConfig
             CameraDeviceName = "";
             AutoBlinkDuringFaceTracking = true;
             EnableBodyLeanZ = false;
+
+            EnableBlinkAdjust = true;
+            EnableVoiceBasedMotion = true;
             DisableFaceTrackingHorizontalFlip = false;
             EnableImageBasedHandTracking = false;
 

@@ -101,6 +101,7 @@ namespace Baku.VMagicMirrorConfig
         public Message EnableBodyLeanZ(bool enable) => WithArg($"{enable}");
         public Message EnableLipSyncBasedBlinkAdjust(bool enable) => WithArg($"{enable}");
         public Message EnableHeadRotationBasedBlinkAdjust(bool enable) => WithArg($"{enable}");
+        public Message EnableVoiceBasedMotion(bool enable) => WithArg($"{enable}");
 
         //NOTE: falseのほうが普通だよ、という状態にするため、disable云々というやや面倒な言い方になってる事に注意
         public Message DisableFaceTrackingHorizontalFlip(bool disable) => WithArg($"{disable}");
