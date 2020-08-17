@@ -153,8 +153,8 @@
 顔トラッキングが正常に動作している場合、この警告を無視してかまいません。
 </sys:String>
     
-    <sys:String x:Key="Motion_Face_HeadRotBaseBlinkAdjust">顔が動くときのまばたき補正</sys:String>
-    <sys:String x:Key="Motion_Face_LipSyncBaseBlinkAdjust">会話の区切りでのまばたき補正</sys:String>
+    <sys:String x:Key="Motion_Face_BlinkAdjust">顔の動きや声でまばたきを補正</sys:String>
+    <sys:String x:Key="Motion_Face_NoCamMotion">カメラ非使用時、音声ベースでアバターを動かす</sys:String>
     
     <sys:String x:Key="Motion_Face_Eyebrow">眉毛 (開いてカスタマイズ)</sys:String>    
     <sys:String x:Key="Motion_Face_Eyebrow_LeftUp">左眉上げ</sys:String>    

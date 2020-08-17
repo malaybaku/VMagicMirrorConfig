@@ -150,8 +150,8 @@ please quit the app and move app folder to single byte character only path.
 If the face tracking works correctly, please ignore this warning.
 </sys:String>    
     
-    <sys:String x:Key="Motion_Face_HeadRotBaseBlinkAdjust">Blink adjust by head motion</sys:String>
-    <sys:String x:Key="Motion_Face_LipSyncBaseBlinkAdjust">Blink adjust by lip sync</sys:String>
+    <sys:String x:Key="Motion_Face_BlinkAdjust">Blink adjust by head motion and lip sync</sys:String>
+    <sys:String x:Key="Motion_Face_NoCamMotion">Voice based motion when webcam not used</sys:String>
 
     <sys:String x:Key="Motion_Face_Eyebrow">Eyebrow (Open to Customize)</sys:String>    
     <sys:String x:Key="Motion_Face_EyeBrow_LeftUp">Left Up Key</sys:String>    
