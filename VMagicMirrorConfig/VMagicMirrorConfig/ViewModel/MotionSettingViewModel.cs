@@ -131,13 +131,10 @@ namespace Baku.VMagicMirrorConfig
             get => _enableFaceTracking;
             set
             {
-                if (_enableFaceTracking == value)
+                if (SetValue(ref _enableFaceTracking, value))
                 {
-                    return;
+                    SendMessage(MessageFactory.Instance.EnableFaceTracking(EnableFaceTracking));
                 }
-
-                _enableFaceTracking = value;
-                SendMessage(MessageFactory.Instance.EnableFaceTracking(EnableFaceTracking));
             }
         }
 
