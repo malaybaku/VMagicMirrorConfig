@@ -194,7 +194,7 @@
                 @"Detect missing BlendShapeClips for perfect sync.
 
 If your avatar looks normal, ignore this message. 
-Otherwise, close this dialog and see 'About Perfect Sync',
+Otherwise, close this dialog and see 'About Perfect Sync'
 to check how to setup the model.
 
 ---

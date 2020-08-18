@@ -71,8 +71,7 @@
     <sys:String x:Key="ExTracker_Enable_PerfectSync">パーフェクトシンクを使用</sys:String>
     <sys:String x:Key="ExTracker_PerfectSync_UseVRoidDefault">VRoid用のデフォルト設定を使う(※VRoidモデルでのみ動作)</sys:String>
     <sys:String x:Key="ExTracker_HowTo_PerfectSync">パーフェクトシンクとは? (Webページを開きます)</sys:String>
-    <sys:String x:Key="ExTracker_PerfectSync_MissingBlendShape_Header">モデルのセットアップを確認して下さい！ </sys:String>
-    <sys:String x:Key="ExTracker_PerfectSync_MissingBlendShape_HeaderSub">(クリックで詳細)</sys:String>
+    <sys:String x:Key="ExTracker_PerfectSync_MissingBlendShape_Header">モデルがパーフェクトシンク未対応のようです (クリックで詳細)</sys:String>
 
     <sys:String x:Key="ExTracker_Calibrate">現在位置で顔をキャリブレーション</sys:String>
 
