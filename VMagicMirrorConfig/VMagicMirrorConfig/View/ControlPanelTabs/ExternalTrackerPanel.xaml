@@ -64,8 +64,7 @@
                             Margin="25,5"
                             Padding="5"
                             Width="NaN"
-                            Background="{StaticResource SecondaryAccentBrush}"
-                            BorderBrush="Transparent"
+                            Style="{StaticResource MaterialDesignOutlinedButton}"
                             Foreground="Black"
                             Visibility="{Binding ShouldNotifyMissingBlendShapeClipNames,
                                                  Converter={StaticResource BooleanToVisibilityConverter}}"
@@ -78,13 +77,7 @@
                                          Foreground="{StaticResource PrimaryHueMidBrush}"
                                          />
                             <TextBlock Text="{DynamicResource ExTracker_PerfectSync_MissingBlendShape_Header}" 
-                                       FontWeight="Bold"
                                        Margin="3,0"
-                                       />
-                            <TextBlock Text="{DynamicResource ExTracker_PerfectSync_MissingBlendShape_HeaderSub}" 
-                                       FontWeight="Bold"
-                                       Margin="3,0"
-                                       Foreground="{StaticResource PrimaryHueMidBrush}"
                                        />
                         </StackPanel>
                     </Button>
