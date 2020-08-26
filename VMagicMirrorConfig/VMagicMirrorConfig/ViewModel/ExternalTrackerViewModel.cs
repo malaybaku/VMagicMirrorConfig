@@ -104,7 +104,7 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private bool _enableExternalTrackerLipSync = false;
+        private bool _enableExternalTrackerLipSync = true;
         public bool EnableExternalTrackerLipSync
         {
             get => _enableExternalTrackerLipSync;
@@ -370,7 +370,7 @@ namespace Baku.VMagicMirrorConfig
             CalibrateData = "";
             TrackSourceType = TrackSourceNone;
             EnableExternalTracking = false;
-            EnableExternalTrackerLipSync = false;
+            EnableExternalTrackerLipSync = true;
             UseVRoidDefaultForPerfectSync = false;
             EnableExternalTrackerPerfectSync = false;
         }
