@@ -65,6 +65,12 @@ During this mode, following features are disabled.
 - Eye motion to see the mouse pointer</sys:String>
     <sys:String x:Key="ExTracker_Enable">Enable External Tracker</sys:String>
     <sys:String x:Key="ExTracker_Enable_ImageLipSync">Apply LipSync using External Tracker Data</sys:String>    
+
+    <sys:String x:Key="ExTracker_Enable_PerfectSync">Use Perfect Sync</sys:String>
+    <sys:String x:Key="ExTracker_PerfectSync_UseVRoidDefault">Perfect sync with VRoid's default setting</sys:String>
+    <sys:String x:Key="ExTracker_HowTo_PerfectSync">About Perfect Sync (open web page)</sys:String>
+    <sys:String x:Key="ExTracker_PerfectSync_MissingBlendShape_Header">The model does not support perfect sync (click for detail)</sys:String>
+    
     <sys:String x:Key="ExTracker_Calibrate">Calibrate Face Pose</sys:String>
     
     <sys:String x:Key="ExTracker_SourceSelect">Connect to App</sys:String>
@@ -143,8 +149,8 @@ please quit the app and move app folder to single byte character only path.
 If the face tracking works correctly, please ignore this warning.
 </sys:String>    
     
-    <sys:String x:Key="Motion_Face_HeadRotBaseBlinkAdjust">Blink adjust by head motion</sys:String>
-    <sys:String x:Key="Motion_Face_LipSyncBaseBlinkAdjust">Blink adjust by lip sync</sys:String>
+    <sys:String x:Key="Motion_Face_BlinkAdjust">Blink adjust by head motion and lip sync</sys:String>
+    <sys:String x:Key="Motion_Face_NoCamMotion">Voice based motion when webcam not used</sys:String>
 
     <sys:String x:Key="Motion_Face_Eyebrow">Eyebrow (Open to Customize)</sys:String>    
     <sys:String x:Key="Motion_Face_EyeBrow_LeftUp">Left Up Key</sys:String>    
@@ -161,6 +167,9 @@ If the face tracking works correctly, please ignore this warning.
     <sys:String x:Key="Motion_Eye_LookAtPoint_None">None</sys:String>
     <sys:String x:Key="Motion_Eye_LookAtPoint_MousePointer">Mouse</sys:String>
     <sys:String x:Key="Motion_Eye_LookAtPoint_MainCamera">User</sys:String>
+    <sys:String x:Key="Motion_Eye_RotScale">Eye Motion Scale[%]</sys:String>
+    <sys:String x:Key="Motion_Eye_ApproxRotRangePrefix">(Eye bones will move about: </sys:String>
+    <sys:String x:Key="Motion_Eye_ApproxRotRangeSuffix"> [deg])</sys:String>
     
     <!-- Motion : Mouth -->
     <sys:String x:Key="Motion_Mouth">Mouth</sys:String>

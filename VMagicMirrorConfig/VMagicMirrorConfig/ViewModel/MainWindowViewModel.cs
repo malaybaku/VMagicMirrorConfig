@@ -474,7 +474,7 @@ namespace Baku.VMagicMirrorConfig
                 Initializer.Dispose();
                 _deviceFreeLayoutHelper?.EndObserve();
                 MotionSetting.ClosePointer();
-                UnityAppCloser.Close();
+                Initializer.UnityAppCloser.Close();
             }
         }
 

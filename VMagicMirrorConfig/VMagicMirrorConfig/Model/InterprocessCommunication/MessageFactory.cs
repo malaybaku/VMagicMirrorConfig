@@ -101,6 +101,7 @@ namespace Baku.VMagicMirrorConfig
         public Message EnableBodyLeanZ(bool enable) => WithArg($"{enable}");
         public Message EnableLipSyncBasedBlinkAdjust(bool enable) => WithArg($"{enable}");
         public Message EnableHeadRotationBasedBlinkAdjust(bool enable) => WithArg($"{enable}");
+        public Message EnableVoiceBasedMotion(bool enable) => WithArg($"{enable}");
 
         //NOTE: falseのほうが普通だよ、という状態にするため、disable云々というやや面倒な言い方になってる事に注意
         public Message DisableFaceTrackingHorizontalFlip(bool disable) => WithArg($"{disable}");
@@ -126,6 +127,7 @@ namespace Baku.VMagicMirrorConfig
         public Message MicrophoneDeviceNames() => NoArg();
 
         public Message LookAtStyle(string v) => WithArg(v);
+        public Message SetEyeBoneRotationScale(int percent) => WithArg($"{percent}");
 
         /// <summary>
         /// Query.
@@ -264,6 +266,8 @@ namespace Baku.VMagicMirrorConfig
         //共通: 基本操作のオン/オフ + キャリブレーション
         public Message ExTrackerEnable(bool enable) => WithArg($"{enable}");
         public Message ExTrackerEnableLipSync(bool enable) => WithArg($"{enable}");
+        public Message ExTrackerEnablePerfectSync(bool enable) => WithArg($"{enable}");
+        public Message ExTrackerUseVRoidDefaultForPerfectSync(bool enable) => WithArg($"{enable}");
         public Message ExTrackerCalibrate() => NoArg();
         //NOTE: このdataについて詳細
         // - Unityが送ってくるのをまるごと保持してたデータを返すだけで、WPF側では中身に関知しない

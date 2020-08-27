@@ -131,13 +131,10 @@ namespace Baku.VMagicMirrorConfig
             get => _enableFaceTracking;
             set
             {
-                if (_enableFaceTracking == value)
+                if (SetValue(ref _enableFaceTracking, value))
                 {
-                    return;
+                    SendMessage(MessageFactory.Instance.EnableFaceTracking(EnableFaceTracking));
                 }
-
-                _enableFaceTracking = value;
-                SendMessage(MessageFactory.Instance.EnableFaceTracking(EnableFaceTracking));
             }
         }
 
@@ -175,31 +172,28 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private bool _enableHeadRotBaseBlinkAdjust = true;
-        public bool EnableHeadRotBaseBlinkAdjust
+        private bool _enableBlinkAdjust = true;
+        public bool EnableBlinkAdjust
         {
-            get => _enableHeadRotBaseBlinkAdjust;
+            get => _enableBlinkAdjust;
             set
             {
-                if (SetValue(ref _enableHeadRotBaseBlinkAdjust, value))
+                if (SetValue(ref _enableBlinkAdjust, value))
                 {
-                    SendMessage(MessageFactory.Instance.EnableHeadRotationBasedBlinkAdjust(
-                        EnableHeadRotBaseBlinkAdjust
-                        ));
+                    SendMessage(MessageFactory.Instance.EnableHeadRotationBasedBlinkAdjust(EnableBlinkAdjust));
+                    SendMessage(MessageFactory.Instance.EnableLipSyncBasedBlinkAdjust(EnableBlinkAdjust));
                 }
             }
         }
-        private bool _enableLipSyncBaseBlinkAdjust = true;
-        public bool EnableLipSyncBaseBlinkAdjust
+        private bool _enableVoiceBasedMotion = true;
+        public bool EnableVoiceBasedMotion
         {
-            get => _enableLipSyncBaseBlinkAdjust;
+            get => _enableVoiceBasedMotion;
             set
             {
-                if (SetValue(ref _enableLipSyncBaseBlinkAdjust, value))
+                if (SetValue(ref _enableVoiceBasedMotion, value))
                 {
-                    SendMessage(MessageFactory.Instance.EnableLipSyncBasedBlinkAdjust(
-                        EnableLipSyncBaseBlinkAdjust
-                        ));
+                    SendMessage(MessageFactory.Instance.EnableVoiceBasedMotion(EnableVoiceBasedMotion));
                 }
             }
         }
@@ -443,6 +437,35 @@ namespace Baku.VMagicMirrorConfig
                     UseLookAtPointMousePointer = false;
                 }
             }
+        }
+
+        private int _eyeBoneRotationScale = 100;
+        public int EyeBoneRotationScale
+        {
+            get => _eyeBoneRotationScale;
+            set
+            {
+                if (SetValue(ref _eyeBoneRotationScale, value))
+                {
+                    SendMessage(MessageFactory.Instance.SetEyeBoneRotationScale(EyeBoneRotationScale));
+                    UpdateEyeRotRangeText();
+                }
+            }
+        }
+
+        //NOTE: ちょっと作法が悪いけど、「-7.0 ~ +7.0」のようなテキストでViewにわたす
+        private const double EyeRotDefaultRange = 7.0;
+        private string _eyeRotRangeText = $"-{EyeRotDefaultRange:0.00} ~ +{EyeRotDefaultRange:0.00}";
+        [XmlIgnore]
+        public string EyeRotRangeText
+        {
+            get => _eyeRotRangeText;
+            private set => SetValue(ref _eyeRotRangeText, value);
+        }
+        private void UpdateEyeRotRangeText()
+        {
+            double range = EyeRotDefaultRange * EyeBoneRotationScale * 0.01;
+            EyeRotRangeText =  $"-{range:0.00} ~ +{range:0.00}";
         }
 
         #endregion
@@ -759,6 +782,9 @@ namespace Baku.VMagicMirrorConfig
             CameraDeviceName = "";
             AutoBlinkDuringFaceTracking = true;
             EnableBodyLeanZ = false;
+
+            EnableBlinkAdjust = true;
+            EnableVoiceBasedMotion = true;
             DisableFaceTrackingHorizontalFlip = false;
             EnableImageBasedHandTracking = false;
 
@@ -768,6 +794,7 @@ namespace Baku.VMagicMirrorConfig
             UseLookAtPointNone = false;
             UseLookAtPointMousePointer = true;
             UseLookAtPointMainCamera = false;
+            EyeBoneRotationScale = 100;
 
             FaceDefaultFun = 0;
 
