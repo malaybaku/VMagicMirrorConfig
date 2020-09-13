@@ -6,13 +6,14 @@
         mc:Ignorable="d"
         Title="{DynamicResource Window_VirtualCamOutput_FirstTime_DialogTitle}" 
         Height="250" 
-        MinHeight="250"
+        MinHeight="280"
         Width="400"
         MinWidth="400"
         >
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -23,7 +24,16 @@
                    Margin="15"
                    TextWrapping="Wrap"
                    />
-        <Button Grid.Row="1"
+        <TextBlock Grid.Row="1"
+                   HorizontalAlignment="Right"
+                   TextAlignment="Right"
+                   Margin="15,0"
+                   TextWrapping="NoWrap">
+            <Hyperlink Command="{Binding OpenVirtualCamTipsCommand}">
+                <Run Text="{DynamicResource Window_VirtualCamOutput_FirstTime_SeeMore}"/>
+            </Hyperlink>
+        </TextBlock>
+        <Button Grid.Row="2"
                 Grid.Column="0"
                 Margin="20"
                 Width="150"

@@ -129,6 +129,7 @@
         
 アンインストールするには"Uninstall.bat"をダブルクリックで実行します。</sys:String>
     <sys:String x:Key="Window_VirtualCamOutput_FirstTime_OpenFolder">フォルダを開く</sys:String>
+    <sys:String x:Key="Window_VirtualCamOutput_FirstTime_SeeMore">さらに詳しく見る (webページへ)</sys:String>
     
     <!-- Motion -->
     
