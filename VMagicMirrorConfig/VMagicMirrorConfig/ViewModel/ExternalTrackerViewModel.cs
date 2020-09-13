@@ -362,7 +362,41 @@ namespace Baku.VMagicMirrorConfig
 
         #endregion
 
-        #region 配信タブの顔メニューに注意を出すためのやつ
+        #region エラーまわり: iFMの設定が怪しそうなときのメッセージ + webカメラが止まる問題の対処
+
+        private string _iFacialMocapTroubleMessage = "";
+        [XmlIgnore]
+        public string IFacialMocapTroubleMessage
+        {
+            get => _iFacialMocapTroubleMessage;
+            set
+            {
+                if (SetValue(ref _iFacialMocapTroubleMessage, value))
+                {
+                    IFacialMocapHasTrouble = !string.IsNullOrEmpty(IFacialMocapTroubleMessage));
+                }
+            }
+        }
+
+        private bool _iFacialMocapHasTrouble = false;
+        [XmlIgnore]
+        public bool IFacialMocapHasTrouble
+        {
+            get => _iFacialMocapHasTrouble;
+            set => SetValue(ref _iFacialMocapHasTrouble, value);
+        }
+
+        private ActionCommand? _openIFMTroubleShootCommand;
+        private ActionCommand? OpenIFMTroubleShootCommand => _openIFMTroubleShootCommand ??= new ActionCommand(OpenIFMTroubleShoot);
+        private void OpenIFMTroubleShoot()
+        {
+            var url = LanguageSelector.StringToLanguage(LanguageSelector.Instance.LanguageName) switch
+            {
+                Languages.Japanese => "https://malaybaku.github.io/VMagicMirror/docs/external_tracker_ifacialmocap#troubleshoot",
+                _ => "https://malaybaku.github.io/VMagicMirror/en/docs/external_tracker_ifacialmocap#troubleshoot",
+            };
+            UrlNavigate.Open(url);
+        }
 
         private ActionCommand? _endExTrackerIfNeededCommand;
         public ActionCommand EndExTrackerIfNeededCommand

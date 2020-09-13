@@ -67,7 +67,8 @@
                             Style="{StaticResource MaterialDesignOutlinedButton}"
                             Foreground="Black"
                             Visibility="{Binding ShouldNotifyMissingBlendShapeClipNames,
-                                                 Converter={StaticResource BooleanToVisibilityConverter}}"
+                                                 Converter={StaticResource BooleanToVisibilityConverter}, 
+                                                 FallbackValue=Collapsed}"
                             Command="{Binding ShowMissingBlendShapeNotificationCommand}"                            
                             >
                         <StackPanel Orientation="Horizontal">
@@ -160,6 +161,36 @@
                                     Command="{Binding RefreshIFacialMocapTargetCommand}" />
                         </StackPanel>
                     </Grid>
+
+                    <md:Card Padding="3"
+                             Visibility="{Binding IFacialMocapHasTrouble, 
+                                                  Converter={StaticResource BooleanToVisibilityConverter}, 
+                                                  FallbackValue=Collapsed}"
+                             >
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="3">
+                                <md:PackIcon Kind="WarningOutline" VerticalAlignment="Center"
+                                             Foreground="{StaticResource PrimaryHueMidBrush}"
+                                             />
+                                <TextBlock FontWeight="Bold"
+                                       Text="{DynamicResource ExTracker_iFM_HasTrouble_Header}"
+                                       />
+                            </StackPanel>
+                            <TextBlock Text="{Binding IFacialMocapTroubleMessage}"
+                                       Margin="10,0"
+                                       TextWrapping="Wrap"                                       
+                                       />
+                            <Button Style="{StaticResource MaterialDesignOutlinedButton}"
+                                    HorizontalAlignment="Right"
+                                    Padding="3"
+                                    Margin="5"
+                                    Command="{Binding OpenIFMTroubleShootCommand}"
+                                    Content="{DynamicResource ExTracker_iFM_HasTrouble_OpenUrl}"
+                                    />
+
+                        </StackPanel>
+                    </md:Card>
+
 
                     <Button Width="NaN" 
                             HorizontalAlignment="Left"
