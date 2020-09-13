@@ -84,6 +84,10 @@ namespace Baku.VMagicMirrorConfig
             {
                 MissingBlendShapeNames = e.Args;
             }
+            else if (e.Command == ReceiveMessageNames.ExTrackerSetIFacialMocapTroubleMessage)
+            {
+                IFacialMocapTroubleMessage = e.Args;
+            }
         }
 
         #region 基本メニュー部分

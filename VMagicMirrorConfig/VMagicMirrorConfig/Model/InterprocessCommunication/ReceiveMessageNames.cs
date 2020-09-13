@@ -17,6 +17,7 @@
 
         public const string ExTrackerCalibrateComplete = nameof(ExTrackerCalibrateComplete);
         public const string ExTrackerSetPerfectSyncMissedClipNames = nameof(ExTrackerSetPerfectSyncMissedClipNames);
+        public const string ExTrackerSetIFacialMocapTroubleMessage = nameof(ExTrackerSetIFacialMocapTroubleMessage);
 
         public const string VRoidModelLoadCompleted = nameof(VRoidModelLoadCompleted);
         public const string VRoidModelLoadCanceled = nameof(VRoidModelLoadCanceled);
