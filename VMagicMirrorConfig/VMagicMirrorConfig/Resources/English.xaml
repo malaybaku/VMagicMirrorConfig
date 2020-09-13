@@ -126,6 +126,7 @@ Check "Keep LipSync" to make the lipsync continue.</sys:String>
 
 When you want to uninstall. double click "Uninstall.bat".</sys:String>        
     <sys:String x:Key="Window_VirtualCamOutput_FirstTime_OpenFolder">Open Folder</sys:String>
+    <sys:String x:Key="Window_VirtualCamOutput_FirstTime_SeeMore">Read more (on web)</sys:String>
     
     <!-- Motion -->
     
