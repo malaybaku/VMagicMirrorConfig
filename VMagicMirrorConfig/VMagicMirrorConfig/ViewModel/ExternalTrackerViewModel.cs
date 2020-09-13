@@ -362,6 +362,28 @@ namespace Baku.VMagicMirrorConfig
 
         #endregion
 
+        #region 配信タブの顔メニューに注意を出すためのやつ
+
+        private ActionCommand? _endExTrackerIfNeededCommand;
+        public ActionCommand EndExTrackerIfNeededCommand
+            => _endExTrackerIfNeededCommand ??= new ActionCommand(EndExTrackerIfNeeded);
+        private async void EndExTrackerIfNeeded()
+        {
+            var indication = MessageIndication.ExTrackerCheckTurnOff(LanguageSelector.Instance.LanguageName);
+            bool result = await MessageBoxWrapper.Instance.ShowAsync(
+                indication.Title,
+                indication.Content,
+                MessageBoxWrapper.MessageBoxStyle.OKCancel
+                );
+
+            if (result)
+            {
+                EnableExternalTracking = false;
+            }
+        }
+
+        #endregion
+
         public override void ResetToDefault()
         {
             _settingModel = ExternalTrackerFaceSwitchSetting.LoadDefault();
