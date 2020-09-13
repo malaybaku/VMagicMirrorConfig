@@ -377,7 +377,7 @@ namespace Baku.VMagicMirrorConfig
             {
                 if (SetValue(ref _iFacialMocapTroubleMessage, value))
                 {
-                    IFacialMocapHasTrouble = !string.IsNullOrEmpty(IFacialMocapTroubleMessage));
+                    IFacialMocapHasTrouble = !string.IsNullOrEmpty(IFacialMocapTroubleMessage);
                 }
             }
         }
