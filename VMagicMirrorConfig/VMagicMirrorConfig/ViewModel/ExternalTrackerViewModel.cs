@@ -391,7 +391,7 @@ namespace Baku.VMagicMirrorConfig
         }
 
         private ActionCommand? _openIFMTroubleShootCommand;
-        private ActionCommand? OpenIFMTroubleShootCommand => _openIFMTroubleShootCommand ??= new ActionCommand(OpenIFMTroubleShoot);
+        public ActionCommand? OpenIFMTroubleShootCommand => _openIFMTroubleShootCommand ??= new ActionCommand(OpenIFMTroubleShoot);
         private void OpenIFMTroubleShoot()
         {
             var url = LanguageSelector.StringToLanguage(LanguageSelector.Instance.LanguageName) switch
