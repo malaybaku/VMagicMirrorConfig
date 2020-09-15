@@ -81,7 +81,10 @@ During this mode, following features are disabled.
     <sys:String x:Key="ExTracker_iFM_IpHint">iPhone IP Address...</sys:String>
     <sys:String x:Key="ExTracker_Source_HowToCollaborate">*See how to connect (open web page)</sys:String>
     <sys:String x:Key="ExTracker_Source_RefreshReceiverSetting">Check network setting again</sys:String>
-            
+
+    <sys:String x:Key="ExTracker_iFM_HasTrouble_Header">Please check connected app setting</sys:String>
+    <sys:String x:Key="ExTracker_iFM_HasTrouble_OpenUrl">Open Troubleshoot web page</sys:String>    
+    
     <sys:String x:Key="ExTracker_FaceSwitch">Face Switch</sys:String>
     <sys:String x:Key="ExTracker_FaceSwitch_Instruction" xml:space="preserve">Activates seleceted BlendShape by making specific face expression.
 Check "Keep LipSync" to make the lipsync continue.</sys:String>
@@ -149,6 +152,8 @@ please quit the app and move app folder to single byte character only path.
 
 If the face tracking works correctly, please ignore this warning.
 </sys:String>    
+    <sys:String x:Key="Motion_Face_ExTrackerWorking_Header">*Webcam tracking is disabled because External Tracker is enabled.</sys:String>
+    <sys:String x:Key="Motion_Face_ExTrackerWorking_TurnOffExTracker">Enable Webcam Tracking</sys:String>
     
     <sys:String x:Key="Motion_Face_BlinkAdjust">Blink adjust by head motion and lip sync</sys:String>
     <sys:String x:Key="Motion_Face_NoCamMotion">Voice based motion when webcam not used</sys:String>

@@ -83,7 +83,9 @@
     <sys:String x:Key="ExTracker_iFM_IpHint">iPhoneのIP Address...</sys:String>
     <sys:String x:Key="ExTracker_Source_HowToCollaborate">※アプリとの連携方法をチェック (Webページを開きます)</sys:String>
     <sys:String x:Key="ExTracker_Source_RefreshReceiverSetting">ネットワーク環境を再チェック</sys:String>
-        
+
+    <sys:String x:Key="ExTracker_iFM_HasTrouble_Header">連携先アプリの設定を確認して下さい</sys:String>
+    <sys:String x:Key="ExTracker_iFM_HasTrouble_OpenUrl">トラブルシューティングを開く(webページへ)</sys:String>
 
     <sys:String x:Key="ExTracker_FaceSwitch">表情スイッチ</sys:String>
     <sys:String x:Key="ExTracker_FaceSwitch_Instruction" xml:space="preserve">顔をはっきりと特定の表情にすることでアバターの表情を切り替えます。
@@ -152,6 +154,8 @@
 
 顔トラッキングが正常に動作している場合、この警告を無視してかまいません。
 </sys:String>
+    <sys:String x:Key="Motion_Face_ExTrackerWorking_Header">※現在webカメラには反応しません。外部トラッキングが有効です。</sys:String>
+    <sys:String x:Key="Motion_Face_ExTrackerWorking_TurnOffExTracker">webカメラを使う場合はここをクリック</sys:String>
     
     <sys:String x:Key="Motion_Face_BlinkAdjust">顔の動きや声でまばたきを補正</sys:String>
     <sys:String x:Key="Motion_Face_NoCamMotion">カメラ非使用時、音声ベースでアバターを動かす</sys:String>
