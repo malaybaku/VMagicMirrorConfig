@@ -123,6 +123,23 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
+        #region Full Body 
+
+        private bool _enableNoHandTrackMode = false;
+        public bool EnableNoHandTrackMode
+        {
+            get => _enableNoHandTrackMode;
+            set
+            {
+                if (SetValue(ref _enableNoHandTrackMode, value))
+                {
+                    SendMessage(MessageFactory.Instance.EnableNoHandTrackMode(EnableNoHandTrackMode));
+                }
+            }
+        }
+
+        #endregion
+
         #region Face
 
         private bool _enableFaceTracking = true;
@@ -838,6 +855,7 @@ namespace Baku.VMagicMirrorConfig
 
         public override void ResetToDefault()
         {
+            EnableNoHandTrackMode = false;
             ResetFaceSetting();
             ResetArmSetting();
             ResetHandSetting();

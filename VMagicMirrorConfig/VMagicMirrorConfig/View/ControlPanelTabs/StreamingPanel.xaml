@@ -613,12 +613,18 @@
                                         />
                         </StackPanel>
 
-                        <CheckBox Grid.Row="2" Grid.Column="0"
-                                    Grid.ColumnSpan="3"
-                                    Margin="14,2,10,14" 
-                                    Content="{DynamicResource Motion_Arm_EnablePresenterMotion}"
-                                    IsChecked="{Binding MotionSetting.EnablePresenterMotion}"
-                                    />
+                        <CheckBox Margin="10,3,10,0" 
+                                  Content="{DynamicResource Motion_Arm_EnablePresenterMotion}"
+                                  IsChecked="{Binding MotionSetting.EnablePresenterMotion}"
+                                  />
+
+                        <CheckBox Margin="10,0,10,10"
+                                  IsChecked="{Binding MotionSetting.EnableNoHandTrackMode}"                              >
+                            <CheckBox.Content>
+                                <TextBlock Text="{DynamicResource Motion_FullBody_NoHandTrackMode_Streaming}"/>
+                            </CheckBox.Content>
+                        </CheckBox>
+
                     </StackPanel>
                 </md:Card>
             </StackPanel>
