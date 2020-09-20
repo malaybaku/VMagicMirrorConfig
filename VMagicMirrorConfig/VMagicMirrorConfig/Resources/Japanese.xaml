@@ -137,8 +137,8 @@
     
     <!-- Motion : Full Body -->
     <sys:String x:Key="Motion_FullBody">上半身</sys:String>
-    <sys:String x:Key="Motion_FullBody_NoHandTrackMode">手の動きなしモード (※体の動きが増えます)</sys:String>    
-    <sys:String x:Key="Motion_FullBody_NoHandTrackMode_Streaming">手の動きなしモード</sys:String>    
+    <sys:String x:Key="Motion_FullBody_NoHandTrackMode">つねに手下げモード (※体の動きが増えます)</sys:String>    
+    <sys:String x:Key="Motion_FullBody_NoHandTrackMode_Streaming">つねに手下げモード</sys:String>    
     
     <!-- Motion : Face -->
     <sys:String x:Key="Motion_Face">顔・表情</sys:String>
