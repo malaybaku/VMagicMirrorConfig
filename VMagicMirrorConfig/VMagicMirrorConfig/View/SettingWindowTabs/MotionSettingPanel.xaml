@@ -17,6 +17,32 @@
                   HorizontalScrollBarVisibility="Disabled"
                   >
         <StackPanel Margin="0,5">
+
+            <md:Card>
+                <StackPanel>
+
+                    <StackPanel Orientation="Horizontal"
+                                Margin="5"
+                                >
+                        <md:PackIcon Kind="HumanHandsdown"
+                                     Style="{StaticResource SettingHeaderPackIcon}"
+                                     />
+                        <TextBlock Text="{DynamicResource Motion_FullBody}"
+                                   Style="{StaticResource HeaderText}"
+                                   Margin="5"
+                                   />
+                    </StackPanel>
+
+                    <CheckBox Margin="15,0"
+                              IsChecked="{Binding EnableNoHandTrackMode}"
+                              >
+                        <CheckBox.Content>
+                            <TextBlock Text="{DynamicResource Motion_FullBody_NoHandTrackMode}"/>
+                        </CheckBox.Content>
+                    </CheckBox>
+                </StackPanel>
+            </md:Card>
+
             <md:Card>
                 <StackPanel>
 

@@ -133,6 +133,11 @@ When you want to uninstall. double click "Uninstall.bat".</sys:String>
     
     <!-- Motion -->
     
+    <!-- Motion : Full Body -->
+    <sys:String x:Key="Motion_FullBody">Upper Body</sys:String>
+    <sys:String x:Key="Motion_FullBody_NoHandTrackMode">Always-Hands-Down Mode (*Increase body move)</sys:String>    
+    <sys:String x:Key="Motion_FullBody_NoHandTrackMode_Streaming">Hands-Down Mode</sys:String>    
+    
     <!-- Motion : Face -->
     <sys:String x:Key="Motion_Face">Face</sys:String>
     <sys:String x:Key="Motion_Face_EnableFaceTracking">Track Face</sys:String>
