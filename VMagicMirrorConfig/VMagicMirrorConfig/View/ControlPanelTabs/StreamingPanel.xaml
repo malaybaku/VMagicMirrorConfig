@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DataContext="{x:Type vmm:MainWindowViewModel}"
              d:DesignWidth="520"
-             d:DesignHeight="620"
+             d:DesignHeight="570"
              >
     <UserControl.Resources>
         <vmm:WhiteSpaceStringToNullConverter x:Key="WhiteSpaceStringToNullConverter"/>
@@ -33,7 +33,7 @@
         </Style>
             
         <Style TargetType="md:Card" BasedOn="{StaticResource {x:Type md:Card}}">
-            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Margin" Value="4"/>
             <Setter Property="Padding" Value="5"/>
         </Style>
         <Style TargetType="md:PackIcon" x:Key="HeaderPackIcon">
@@ -59,7 +59,7 @@
     <ScrollViewer VerticalScrollBarVisibility="Auto"
                   HorizontalScrollBarVisibility="Disabled"
                   >
-        <Grid Margin="5">
+        <Grid Margin="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="300"/>
                 <ColumnDefinition Width="*"/>
@@ -114,7 +114,7 @@
                         </Grid>
 
                         <CheckBox IsChecked="{Binding WindowSetting.VirtualCamEnabled}" 
-                              Margin="5,5,5,0">
+                              Margin="5,3,5,0">
                             <TextBlock Text="{DynamicResource Window_VirtualCamOutput_Enable}"/>
                         </CheckBox>
 
@@ -168,7 +168,7 @@
                                         />
                         </StackPanel>
 
-                        <Grid Margin="5">
+                        <Grid Margin="5,3,5,5">
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                                 <RowDefinition/>
@@ -358,7 +358,7 @@
                                         />
                         </StackPanel>
 
-                        <Grid Margin="5">
+                        <Grid Margin="5,3">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
@@ -614,7 +614,7 @@
                                   IsChecked="{Binding MotionSetting.EnablePresenterMotion}"
                                   />
 
-                        <CheckBox Margin="10,0,10,10"
+                        <CheckBox Margin="10,0,10,3"
                                   IsChecked="{Binding MotionSetting.EnableNoHandTrackMode}"                              >
                             <CheckBox.Content>
                                 <TextBlock Text="{DynamicResource Motion_FullBody_NoHandTrackMode_Streaming}"/>
