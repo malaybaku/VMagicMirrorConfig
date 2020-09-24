@@ -71,6 +71,14 @@
         public static MessageIndication ExTrackerMissingBlendShapeNames(string languageName)
             => ExTrackerMissingBlendShapeNames(LanguageSelector.StringToLanguage(languageName));
 
+        /// <summary>
+        /// webカメラのトラッキングを使うために外部トラッキングを切ろうとしてる人向けの確認ダイアログ
+        /// </summary>
+        /// <param name="languageName"></param>
+        /// <returns></returns>
+        public static MessageIndication ExTrackerCheckTurnOff(string languageName)
+            => ExTrackerCheckTurnOff(LanguageSelector.StringToLanguage(languageName));
+
         public static MessageIndication LoadVrmConfirmation(Languages lang) => lang switch
         {
             Languages.Japanese => new MessageIndication(
@@ -200,6 +208,20 @@ to check how to setup the model.
 ---
 Undefined BlendShaepClip names:
 "),
+        };
+
+        public static MessageIndication ExTrackerCheckTurnOff(Languages lang) => lang switch
+        {
+            Languages.Japanese => new MessageIndication(
+                "外部トラッキング機能をオフ",
+                @"外部トラッキング機能をオフにしますか？
+webカメラでの顔トラッキングを有効にする場合は
+'OK'を選択し、iPhone/iPadとの連携を終了してください。"),
+            _ => new MessageIndication(
+                "Turn Off External Tracker",
+                @"Do you want to turn off external tracker?.
+
+Choose 'OK' to enable webcam based tracking."),
         };
     }
 }

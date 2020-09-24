@@ -70,6 +70,8 @@ namespace Baku.VMagicMirrorConfig
 
         #region モーション
 
+        public Message EnableNoHandTrackMode(bool enable) => WithArg($"{enable}");
+
         public Message LengthFromWristToTip(int lengthCentimeter) => WithArg($"{lengthCentimeter}");
 
         public Message LengthFromWristToPalm(int lengthCentimeter) => WithArg($"{lengthCentimeter}");
