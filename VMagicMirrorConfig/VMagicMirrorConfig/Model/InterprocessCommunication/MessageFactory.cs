@@ -74,8 +74,6 @@ namespace Baku.VMagicMirrorConfig
 
         public Message LengthFromWristToTip(int lengthCentimeter) => WithArg($"{lengthCentimeter}");
 
-        public Message LengthFromWristToPalm(int lengthCentimeter) => WithArg($"{lengthCentimeter}");
-
         public Message HandYOffsetBasic(int offsetCentimeter) => WithArg($"{offsetCentimeter}");
         public Message HandYOffsetAfterKeyDown(int offsetCentimeter) => WithArg($"{offsetCentimeter}");
 
@@ -87,7 +85,6 @@ namespace Baku.VMagicMirrorConfig
 
         public Message EnableFpsAssumedRightHand(bool enable) => WithArg($"{enable}");
         public Message EnablePresenterMotion(bool enable) => WithArg($"{enable}");
-        public Message PresentationArmMotionScale(int scalePercent) => WithArg($"{scalePercent}");
         public Message PresentationArmRadiusMin(int radiusMinCentimeter) => WithArg($"{radiusMinCentimeter}");
 
         public Message EnableWaitMotion(bool enable) => WithArg($"{enable}");

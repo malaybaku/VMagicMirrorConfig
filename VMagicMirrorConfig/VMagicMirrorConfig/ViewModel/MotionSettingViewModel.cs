@@ -109,7 +109,6 @@ namespace Baku.VMagicMirrorConfig
 
                 if (!onlyEyebrow)
                 {
-                    LengthFromWristToPalm = parameters.LengthFromWristToPalm;
                     LengthFromWristToTip = parameters.LengthFromWristToTip;
                 }
             }
@@ -638,19 +637,6 @@ namespace Baku.VMagicMirrorConfig
                 );
         }
 
-        private int _presentationArmMotionScale = 50;
-        public int PresentationArmMotionScale
-        {
-            get => _presentationArmMotionScale;
-            set
-            {
-                if (SetValue(ref _presentationArmMotionScale, value))
-                {
-                    SendMessage(MessageFactory.Instance.PresentationArmMotionScale(PresentationArmMotionScale));
-                }
-            }
-        }
-
         private int _presentationArmRadiusMin = 20;
         public int PresentationArmRadiusMin
         {
@@ -678,20 +664,6 @@ namespace Baku.VMagicMirrorConfig
                 if (SetValue(ref _lengthFromWristToTip, value))
                 {
                     SendMessage(MessageFactory.Instance.LengthFromWristToTip(LengthFromWristToTip));
-                }
-            }
-        }
-
-        private int _lengthFromWristToPalm = 6;
-        /// <summary> Unit: [cm] </summary>
-        public int LengthFromWristToPalm
-        {
-            get => _lengthFromWristToPalm;
-            set
-            {
-                if (SetValue(ref _lengthFromWristToPalm, value))
-                {
-                    SendMessage(MessageFactory.Instance.LengthFromWristToPalm(LengthFromWristToPalm));
                 }
             }
         }
@@ -834,14 +806,12 @@ namespace Baku.VMagicMirrorConfig
             EnableFpsAssumedRightHand = false;
             EnablePresenterMotion = false;
             ShowPresentationPointer = false;
-            PresentationArmMotionScale = 30;
             PresentationArmRadiusMin = 20;
         }
 
         private void ResetHandSetting()
         {
             LengthFromWristToTip = 12;
-            LengthFromWristToPalm = 6;
             HandYOffsetBasic = 3;
             HandYOffsetAfterKeyDown = 2;
         }
