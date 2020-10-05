@@ -638,19 +638,6 @@ namespace Baku.VMagicMirrorConfig
                 );
         }
 
-        private int _presentationArmMotionScale = 50;
-        public int PresentationArmMotionScale
-        {
-            get => _presentationArmMotionScale;
-            set
-            {
-                if (SetValue(ref _presentationArmMotionScale, value))
-                {
-                    SendMessage(MessageFactory.Instance.PresentationArmMotionScale(PresentationArmMotionScale));
-                }
-            }
-        }
-
         private int _presentationArmRadiusMin = 20;
         public int PresentationArmRadiusMin
         {
@@ -834,7 +821,6 @@ namespace Baku.VMagicMirrorConfig
             EnableFpsAssumedRightHand = false;
             EnablePresenterMotion = false;
             ShowPresentationPointer = false;
-            PresentationArmMotionScale = 30;
             PresentationArmRadiusMin = 20;
         }
 
