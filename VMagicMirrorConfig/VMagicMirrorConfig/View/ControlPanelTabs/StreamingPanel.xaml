@@ -456,18 +456,27 @@
                 <md:Card>
                     <StackPanel>
 
-                        <StackPanel Orientation="Horizontal">
+                        <Grid>
+                            <StackPanel Orientation="Horizontal">
 
-                            <md:PackIcon Style="{StaticResource HeaderPackIcon}"
-                                            Kind="Videocam"
-                                            />
+                                <md:PackIcon Style="{StaticResource HeaderPackIcon}"
+                                                Kind="Videocam"
+                                                />
 
-                            <TextBlock Text="{DynamicResource Layout_Camera}"
-                                        Margin="5"
-                                        Style="{StaticResource HeaderText}"
-                                        />
-                        </StackPanel>
-                            
+                                <TextBlock Text="{DynamicResource Layout_Camera}"
+                                           Margin="5"
+                                           Style="{StaticResource HeaderText}"
+                                           />
+                            </StackPanel>
+
+                            <TextBlock Text="{DynamicResource Layout_Camera_HowTo}"
+                                       ToolTip="{DynamicResource Layout_Camera_HowTo_Content}"
+                                       Foreground="{StaticResource PrimaryHueMidBrush}"
+                                       FontWeight="Bold"
+                                       HorizontalAlignment="Right"
+                                       />
+                        </Grid>
+                        
                         <CheckBox Content="{DynamicResource Layout_EnableFreeCameraMode}" 
                                     IsChecked="{Binding LayoutSetting.EnableFreeCameraMode}"
                                     Margin="10,0" Height="25"

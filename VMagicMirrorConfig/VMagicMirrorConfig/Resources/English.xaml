@@ -220,6 +220,13 @@ If the face tracking works correctly, please ignore this warning.
    
     <!-- Layout : Camera -->
     <sys:String x:Key="Layout_Camera">Camera</sys:String>
+    <sys:String x:Key="Layout_Camera_HowTo">Usage...</sys:String>
+    <sys:String x:Key="Layout_Camera_HowTo_Content" xml:space="preserve">'Free Camera Mode' enables
+camera movements following:
+        
+- Left click + drag: rotate
+- Mid click + drag: translate
+- Mouse wheel: forward/backward</sys:String>
     <sys:String x:Key="Layout_EnableFreeCameraMode">Free Camera Mode</sys:String>
     <sys:String x:Key="Layout_CurrentCameraPosition">Camera Position (x, y, z, rx, ry, rz)</sys:String>
     <sys:String x:Key="Layout_Camera_ResetPosition">Reset Position</sys:String>
