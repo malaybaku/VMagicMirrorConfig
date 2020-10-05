@@ -8,7 +8,7 @@
              mc:Ignorable="d"
              d:DataContext="{x:Type vmm:MotionSettingViewModel}"
              d:DesignWidth="400"
-             d:DesignHeight="1350"
+             d:DesignHeight="2850"
              >
     <UserControl.Resources>
         <vmm:WhiteSpaceStringToNullConverter x:Key="WhiteSpaceStringToNullConverter"/>
@@ -581,7 +581,7 @@
                                    Text="{DynamicResource Motion_Hand_WristToHandTip}"/>
                         <Slider Grid.Row="0" Grid.Column="1"
                                 x:Name="sliderWristToTip"
-                                Minimum="1"
+                                Minimum="0"
                                 Maximum="50"
                                 Value="{Binding LengthFromWristToTip, Mode=TwoWay}"
                                 />
@@ -593,7 +593,7 @@
                                    Text="{DynamicResource Motion_Hand_WristToPalm}"/>
                         <Slider Grid.Row="1" Grid.Column="1"
                                 x:Name="sliderWristToPalm"
-                                Minimum="1"
+                                Minimum="0"
                                 Maximum="50"
                                 Value="{Binding LengthFromWristToPalm, Mode=TwoWay}"
                                 />
