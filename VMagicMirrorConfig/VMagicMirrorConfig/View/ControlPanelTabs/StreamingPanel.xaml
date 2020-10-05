@@ -469,12 +469,21 @@
                                            />
                             </StackPanel>
 
-                            <TextBlock Text="{DynamicResource Layout_Camera_HowTo}"
-                                       ToolTip="{DynamicResource Layout_Camera_HowTo_Content}"
-                                       Foreground="{StaticResource PrimaryHueMidBrush}"
-                                       FontWeight="Bold"
-                                       HorizontalAlignment="Right"
-                                       />
+                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                    Content="{DynamicResource Layout_Camera_HowTo}"
+                                    Click="OnCameraHowToButtonClicked"
+                                    MouseLeave="OnCameraHowToButtonMouseLeave"
+                                    MouseEnter="OnCameraHowToButtonMouseEnter"
+                                    HorizontalAlignment="Right"
+                                    Width="NaN"
+                                    Padding="3"
+                                    >
+                                <Button.ToolTip>
+                                    <ToolTip>
+                                        <TextBlock Text="{DynamicResource Layout_Camera_HowTo_Content}"/>
+                                    </ToolTip>
+                                </Button.ToolTip>
+                            </Button>
                         </Grid>
                         
                         <CheckBox Content="{DynamicResource Layout_EnableFreeCameraMode}" 
