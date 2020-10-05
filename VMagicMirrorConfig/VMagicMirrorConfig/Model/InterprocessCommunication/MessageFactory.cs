@@ -74,8 +74,6 @@ namespace Baku.VMagicMirrorConfig
 
         public Message LengthFromWristToTip(int lengthCentimeter) => WithArg($"{lengthCentimeter}");
 
-        public Message LengthFromWristToPalm(int lengthCentimeter) => WithArg($"{lengthCentimeter}");
-
         public Message HandYOffsetBasic(int offsetCentimeter) => WithArg($"{offsetCentimeter}");
         public Message HandYOffsetAfterKeyDown(int offsetCentimeter) => WithArg($"{offsetCentimeter}");
 

@@ -109,7 +109,6 @@ namespace Baku.VMagicMirrorConfig
 
                 if (!onlyEyebrow)
                 {
-                    LengthFromWristToPalm = parameters.LengthFromWristToPalm;
                     LengthFromWristToTip = parameters.LengthFromWristToTip;
                 }
             }
@@ -669,20 +668,6 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private int _lengthFromWristToPalm = 6;
-        /// <summary> Unit: [cm] </summary>
-        public int LengthFromWristToPalm
-        {
-            get => _lengthFromWristToPalm;
-            set
-            {
-                if (SetValue(ref _lengthFromWristToPalm, value))
-                {
-                    SendMessage(MessageFactory.Instance.LengthFromWristToPalm(LengthFromWristToPalm));
-                }
-            }
-        }
-
         private int _handYOffsetBasic = 3;
         public int HandYOffsetBasic
         {
@@ -827,7 +812,6 @@ namespace Baku.VMagicMirrorConfig
         private void ResetHandSetting()
         {
             LengthFromWristToTip = 12;
-            LengthFromWristToPalm = 6;
             HandYOffsetBasic = 3;
             HandYOffsetAfterKeyDown = 2;
         }

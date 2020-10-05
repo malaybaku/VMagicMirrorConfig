@@ -575,18 +575,6 @@
                                  Text="{Binding Value, ElementName=sliderWristToTip}"
                                  />
 
-                        <TextBlock Grid.Row="1" Grid.Column="0"
-                                   Text="{DynamicResource Motion_Hand_WristToPalm}"/>
-                        <Slider Grid.Row="1" Grid.Column="1"
-                                x:Name="sliderWristToPalm"
-                                Minimum="0"
-                                Maximum="50"
-                                Value="{Binding LengthFromWristToPalm, Mode=TwoWay}"
-                                />
-                        <TextBox Grid.Row="1" Grid.Column="2"
-                                 Text="{Binding Value, ElementName=sliderWristToPalm}"
-                                 />
-
                         <TextBlock Grid.Row="2" Grid.Column="0"
                                    Text="{DynamicResource Motion_Hand_HandYOffsetBasic}"/>
                         <Slider Grid.Row="2" Grid.Column="1"
