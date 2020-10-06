@@ -456,18 +456,36 @@
                 <md:Card>
                     <StackPanel>
 
-                        <StackPanel Orientation="Horizontal">
+                        <Grid>
+                            <StackPanel Orientation="Horizontal">
 
-                            <md:PackIcon Style="{StaticResource HeaderPackIcon}"
-                                            Kind="Videocam"
-                                            />
+                                <md:PackIcon Style="{StaticResource HeaderPackIcon}"
+                                                Kind="Videocam"
+                                                />
 
-                            <TextBlock Text="{DynamicResource Layout_Camera}"
-                                        Margin="5"
-                                        Style="{StaticResource HeaderText}"
-                                        />
-                        </StackPanel>
-                            
+                                <TextBlock Text="{DynamicResource Layout_Camera}"
+                                           Margin="5"
+                                           Style="{StaticResource HeaderText}"
+                                           />
+                            </StackPanel>
+
+                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                    Content="{DynamicResource Layout_Camera_HowTo}"
+                                    Click="OnCameraHowToButtonClicked"
+                                    MouseLeave="OnCameraHowToButtonMouseLeave"
+                                    MouseEnter="OnCameraHowToButtonMouseEnter"
+                                    HorizontalAlignment="Right"
+                                    Width="NaN"
+                                    Padding="3"
+                                    >
+                                <Button.ToolTip>
+                                    <ToolTip>
+                                        <TextBlock Text="{DynamicResource Layout_Camera_HowTo_Content}"/>
+                                    </ToolTip>
+                                </Button.ToolTip>
+                            </Button>
+                        </Grid>
+                        
                         <CheckBox Content="{DynamicResource Layout_EnableFreeCameraMode}" 
                                     IsChecked="{Binding LayoutSetting.EnableFreeCameraMode}"
                                     Margin="10,0" Height="25"

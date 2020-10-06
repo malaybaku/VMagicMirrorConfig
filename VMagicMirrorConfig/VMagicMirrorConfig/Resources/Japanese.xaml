@@ -222,6 +222,13 @@
 
     <!-- Layout : Camera -->
     <sys:String x:Key="Layout_Camera">カメラ</sys:String>
+    <sys:String x:Key="Layout_Camera_HowTo">使い方…</sys:String>
+    <sys:String x:Key="Layout_Camera_HowTo_Content" xml:space="preserve">フリーカメラモードをオンにすると、
+以下のカメラ操作ができます。
+       
+- 左クリック + ドラッグ: 回転
+- 中クリック + ドラッグ: 並行移動
+- マウスホイール: 前後に移動</sys:String>    
     <sys:String x:Key="Layout_EnableFreeCameraMode">フリーカメラモード</sys:String>
     <sys:String x:Key="Layout_CurrentCameraPosition">カメラの位置(x, y, z, rx, ry, rz)</sys:String>
     <sys:String x:Key="Layout_Camera_ResetPosition">位置をリセット</sys:String>
