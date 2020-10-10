@@ -514,6 +514,20 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
+        //NOTE: dB単位なので0がデフォルト。対数ベースのほうがレンジ取りやすい
+        private int _microphoneSensitivity = 0;
+        public int MicrophoneSensitivity
+        {
+            get => _microphoneSensitivity;
+            set
+            {
+                if (SetValue(ref _microphoneSensitivity, value))
+                {
+                    SendMessage(MessageFactory.Instance.SetMicrophoneSensitivity(MicrophoneSensitivity));
+                }
+            }
+        }
+
         private readonly ObservableCollection<string> _writableMicrophoneDeviceNames
             = new ObservableCollection<string>();
         private ReadOnlyObservableCollection<string>? _microphoneDeviceNames = null;
@@ -779,6 +793,7 @@ namespace Baku.VMagicMirrorConfig
 
             EnableLipSync = true;
             LipSyncMicrophoneDeviceName = "";
+            MicrophoneSensitivity = 0;
 
             UseLookAtPointNone = false;
             UseLookAtPointMousePointer = true;
