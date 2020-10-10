@@ -119,6 +119,8 @@ namespace Baku.VMagicMirrorConfig
         public Message EnableLipSync(bool enable) => WithArg($"{enable}");
 
         public Message SetMicrophoneDeviceName(string deviceName) => WithArg(deviceName);
+        public Message SetMicrophoneSensitivity(int sensitivity) => WithArg($"{sensitivity}");
+
         /// <summary>
         /// Query.
         /// </summary>
