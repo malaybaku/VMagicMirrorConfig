@@ -473,7 +473,6 @@
                                     Content="{DynamicResource Layout_Camera_HowTo}"
                                     Click="OnCameraHowToButtonClicked"
                                     MouseLeave="OnCameraHowToButtonMouseLeave"
-                                    MouseEnter="OnCameraHowToButtonMouseEnter"
                                     HorizontalAlignment="Right"
                                     Width="NaN"
                                     Padding="3"

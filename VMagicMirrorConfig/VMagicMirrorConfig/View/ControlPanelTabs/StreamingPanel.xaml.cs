@@ -18,7 +18,7 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private async void OnCameraHowToButtonMouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        private void OnCameraHowToButtonMouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
             //明確に切らないと出っぱなしになりがちなので、マウスが動いたらさっさと消してしまう
             if ((sender as Button)?.ToolTip is ToolTip tooltip)
