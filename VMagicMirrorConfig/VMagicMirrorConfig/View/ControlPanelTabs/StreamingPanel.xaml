@@ -12,6 +12,7 @@
              >
     <UserControl.Resources>
         <vmm:WhiteSpaceStringToNullConverter x:Key="WhiteSpaceStringToNullConverter"/>
+        <vmm:Lv50Converter x:Key="Lv50Converter"/>
         <Style TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}">
             <Setter Property="Margin" Value="5"/>
         </Style>
@@ -106,6 +107,7 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
@@ -140,8 +142,8 @@
                                         />
 
                             <Grid Grid.Row="1" Grid.Column="0"
-                              Grid.ColumnSpan="3"
-                              Margin="40,5,0,5">
+                                  Grid.ColumnSpan="3"
+                                  Margin="40,5,0,0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="3*" />
@@ -162,8 +164,52 @@
                                      />
                             </Grid>
 
+                            <Grid Grid.Row="2" Grid.Column="1"
+                              Grid.ColumnSpan="2"
+                              Margin="0,3,0,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="100" />
+                                </Grid.ColumnDefinitions>
+                                <CheckBox IsEnabled="{Binding MotionSetting.EnableLipSync}"
+                                      IsChecked="{Binding MotionSetting.ShowMicrophoneVolume}"
+                                      HorizontalAlignment="Left"
+                                      Margin="15,0,0,0"
+                                      >
+                                    <TextBlock Text="{DynamicResource Motion_Mouth_Microphone_Visualize}" />
+                                </CheckBox>
+                                <Border Grid.Column="2"
+                                    Margin="0"
+                                    Height="8" Background="LightGray"
+                                    >
+                                    <Grid Margin="0"
+                                      Height="6"
+                                      Background="LightGray">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="2*"/>
+                                            <ColumnDefinition Width="2*"/>
+                                            <ColumnDefinition Width="1*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.OpacityMask>
+                                            <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                                                <GradientStop Offset="0" Color="White"/>
+                                                <GradientStop Offset="{Binding MotionSetting.MicrophoneVolumeValue,
+                                                                               Converter={StaticResource Lv50Converter}}"
+                                                          Color="White"/>
+                                                <GradientStop Offset="{Binding MotionSetting.MicrophoneVolumeValue,
+                                                                               Converter={StaticResource Lv50Converter}}"
+                                                          Color="Transparent"/>
+                                            </LinearGradientBrush>
+                                        </Grid.OpacityMask>
+                                        <Rectangle Grid.Column="0" Fill="DarkGray" />
+                                        <Rectangle Grid.Column="1" Fill="Lime" />
+                                        <Rectangle Grid.Column="2" Fill="Salmon" />
+                                    </Grid>
+                                </Border>
+                            </Grid>
 
-                            <md:PackIcon Grid.Row="2" Grid.Column="0"
+
+                            <md:PackIcon Grid.Row="3" Grid.Column="0"
                                             VerticalAlignment="Center"
                                             HorizontalAlignment="Center"
                                             Width="25"
@@ -171,7 +217,7 @@
                                             Kind="Webcam"
                                             />
 
-                            <CheckBox Grid.Row="2" Grid.Column="1"
+                            <CheckBox Grid.Row="3" Grid.Column="1"
                                         Margin="5"
                                         IsChecked="{Binding MotionSetting.EnableFaceTracking}"
                                         >
@@ -180,7 +226,7 @@
                                 </CheckBox.Content>
                             </CheckBox>
 
-                            <ComboBox Grid.Row="2" Grid.Column="2"
+                            <ComboBox Grid.Row="3" Grid.Column="2"
                                         HorizontalAlignment="Stretch"
                                         Margin="5,0"
                                         IsEnabled="{Binding MotionSetting.EnableFaceTracking}"

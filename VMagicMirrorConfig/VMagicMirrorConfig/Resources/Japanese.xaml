@@ -189,6 +189,7 @@
     <sys:String x:Key="Motion_Mouth_EnableLipSync">リップシンク</sys:String>
     <sys:String x:Key="Motion_Mouth_MicrophoneName">マイク</sys:String>    
     <sys:String x:Key="Motion_Mouth_Microphone_Sensitivity">マイク感度 [dB]</sys:String>
+    <sys:String x:Key="Motion_Mouth_Microphone_Visualize">音量をチェック</sys:String>
     
     <!-- Motion : Arm -->
     <sys:String x:Key="Motion_Arm">腕・ひじ</sys:String>

@@ -44,6 +44,12 @@ namespace Baku.VMagicMirrorConfig
                 case ReceiveMessageNames.SetBlendShapeNames:
                     SetBlendShapeNames(e.Args);
                     break;
+                case ReceiveMessageNames.MicrophoneVolumeLevel:
+                    if (ShowMicrophoneVolume && int.TryParse(e.Args, out int i))
+                    {
+                        MicrophoneVolumeValue = i;
+                    }
+                    break;
                 default:
                     break;
             }
@@ -497,6 +503,11 @@ namespace Baku.VMagicMirrorConfig
                 if (SetValue(ref _enableLipSync, value))
                 {
                     SendMessage(MessageFactory.Instance.EnableLipSync(EnableLipSync));
+                    if (!value)
+                    {
+                        //マイク切ったのにゲイン計算が持続してると嬉しくない、という事。
+                        ShowMicrophoneVolume = false;
+                    }
                 }
             }
         }
@@ -527,6 +538,34 @@ namespace Baku.VMagicMirrorConfig
                 }
             }
         }
+
+        private bool _showMicrophoneVolume = false;
+        [XmlIgnore]
+        public bool ShowMicrophoneVolume
+        {
+            get => _showMicrophoneVolume;
+            set
+            {
+                if (SetValue(ref _showMicrophoneVolume, value))
+                {
+                    SendMessage(MessageFactory.Instance.SetMicrophoneVolumeVisibility(ShowMicrophoneVolume));
+                    if (!value)
+                    {
+                        MicrophoneVolumeValue = 0;
+                    }
+                }
+            }
+        }
+        
+        private int _microphoneVolumeValue = 0;
+        //NOTE: 0 ~ 20が無音、21~40が適正、41~50がデカすぎになる。これはUnity側がそういう整形をしてくれる
+        [XmlIgnore]
+        public int MicrophoneVolumeValue
+        {
+            get => _microphoneVolumeValue;
+            set => SetValue(ref _microphoneVolumeValue, value);
+        }
+
 
         private readonly ObservableCollection<string> _writableMicrophoneDeviceNames
             = new ObservableCollection<string>();

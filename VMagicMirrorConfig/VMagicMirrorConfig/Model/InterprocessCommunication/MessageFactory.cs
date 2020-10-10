@@ -120,6 +120,7 @@ namespace Baku.VMagicMirrorConfig
 
         public Message SetMicrophoneDeviceName(string deviceName) => WithArg(deviceName);
         public Message SetMicrophoneSensitivity(int sensitivity) => WithArg($"{sensitivity}");
+        public Message SetMicrophoneVolumeVisibility(bool isVisible) => WithArg($"{isVisible}");
 
         /// <summary>
         /// Query.
