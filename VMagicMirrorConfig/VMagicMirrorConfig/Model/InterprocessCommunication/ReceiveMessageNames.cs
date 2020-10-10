@@ -10,6 +10,7 @@
         public const string AutoAdjustResults = nameof(AutoAdjustResults);
         public const string AutoAdjustEyebrowResults = nameof(AutoAdjustEyebrowResults);
         public const string UpdateDeviceLayout = nameof(UpdateDeviceLayout);
+        public const string MicrophoneVolumeLevel = nameof(MicrophoneVolumeLevel);
 
         public const string ExtraBlendShapeClipNames = nameof(ExtraBlendShapeClipNames);
 
