@@ -97,7 +97,7 @@
     <sys:String x:Key="Window_BackgroundColor">背景色</sys:String>
     <sys:String x:Key="Window_Transparent">背景を透過</sys:String>
     <sys:String x:Key="Window_Draggable">(透過中)キャラ付近を掴んでドラッグ</sys:String>
-    <sys:String x:Key="Window_TopMost">キャラクターをつねに最前面で表示</sys:String>
+    <sys:String x:Key="Window_TopMost">(透過中)キャラクターをつねに最前面で表示</sys:String>
     <sys:String x:Key="Window_ResetPosition">キャラクター位置のリセット</sys:String>
     
     <sys:String x:Key="Window_EnableInitialPlacement">起動時に特定の位置へウィンドウを動かす</sys:String>

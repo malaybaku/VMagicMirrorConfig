@@ -58,7 +58,6 @@ namespace Baku.VMagicMirrorConfig
 
         //NOTE: モデルのロード確認UI(ファイル/VRoidHubいずれか)を出す直前時点での値を保持するフラグで、UIが出てないときはnullになる
         private bool? _windowTransparentBeforeLoadProcess = null;
-        private bool? _windowTopMostBeforeLoadProcess = null;
 
         private readonly ScreenshotController _screenshotController;
 
@@ -527,14 +526,6 @@ namespace Baku.VMagicMirrorConfig
                 File.Delete(path);
             }
 
-            //前処理: Unity側に開きかけUIがあるままアプリが終了する場合、
-            //TopMostフラグを一時的に書き換えた値からもとに戻しておく。
-            //※透過フラグは整合させたまま戻すのが結構難しいので諦めて、「次回起動時に配信タブ上で直してくれ」状態にする。
-            if (isInternalFile && _windowTopMostBeforeLoadProcess != null)
-            {
-                WindowSetting.SilentSetTopMost(_windowTopMostBeforeLoadProcess.GetValueOrDefault());
-            }
-
             using (var sw = new StreamWriter(path))
             {
                 //note: 動作設定の一覧は(Unityに投げる都合で)JSONになってるのでやや構造がめんどいです。
@@ -628,7 +619,6 @@ namespace Baku.VMagicMirrorConfig
         private void PrepareShowUiOnUnity()
         {
             _windowTransparentBeforeLoadProcess = WindowSetting.IsTransparent;
-            _windowTopMostBeforeLoadProcess = WindowSetting.TopMost;
             WindowSetting.IsTransparent = false;
             WindowSetting.TopMost = false;
         }
@@ -640,12 +630,6 @@ namespace Baku.VMagicMirrorConfig
             {
                 WindowSetting.IsTransparent = _windowTransparentBeforeLoadProcess.GetValueOrDefault();
                 _windowTransparentBeforeLoadProcess = null;
-            }
-
-            if (_windowTopMostBeforeLoadProcess != null)
-            {
-                WindowSetting.TopMost = _windowTopMostBeforeLoadProcess.GetValueOrDefault();
-                _windowTopMostBeforeLoadProcess = null;
             }
         }
     }
