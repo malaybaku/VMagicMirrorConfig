@@ -12,8 +12,8 @@ namespace Baku.VMagicMirrorConfig
         private const int TypingEffectIndexNone = -1;
         private const int TypingEffectIndexText = 0;
         private const int TypingEffectIndexLight = 1;
-        private const int TypingEffectIndexButtefly = 2;
-        private const int TypingEffectIndexLaser = 3;
+        private const int TypingEffectIndexLaser = 2;
+        private const int TypingEffectIndexButtefly = 3;
 
         public LayoutSettingViewModel() : base()
         {
@@ -340,7 +340,7 @@ namespace Baku.VMagicMirrorConfig
             {
                 if (SetValue(ref _selectedTypingEffectId, value))
                 {
-                    SendMessage(MessageFactory.Instance.SetKeyboardTypingEffectType(TypingEffectIndexNone));
+                    SendMessage(MessageFactory.Instance.SetKeyboardTypingEffectType(_selectedTypingEffectId));
                     TypingEffectItem = TypingEffectSelections.FirstOrDefault(i => i.Id == value);
                 }
             }
