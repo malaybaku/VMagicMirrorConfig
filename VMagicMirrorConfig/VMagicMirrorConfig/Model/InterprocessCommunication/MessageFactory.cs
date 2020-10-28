@@ -37,7 +37,6 @@ namespace Baku.VMagicMirrorConfig
         public Message CancelLoadVrm() => NoArg();
 
         public Message RequestAutoAdjust() => NoArg();
-        public Message RequestAutoAdjustEyebrow() => NoArg();
 
         #endregion
 

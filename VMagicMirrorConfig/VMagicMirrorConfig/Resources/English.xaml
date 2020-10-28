@@ -24,7 +24,6 @@
     <sys:String x:Key="Home_VrmDragDropInstruction">Load VRM by Drag &amp; Drop</sys:String>
 
     <sys:String x:Key="Home_LoadVrmOnNextStartup">Load current VRM on next startup</sys:String>
-    <sys:String x:Key="Home_AutoAdjustFaceParameterOnLoad">Adjust face settings after load</sys:String>
     <sys:String x:Key="Home_AutoAdjust">Adjust Size by VRM</sys:String>
 
     <sys:String x:Key="Home_Manual_Header">Manual</sys:String>

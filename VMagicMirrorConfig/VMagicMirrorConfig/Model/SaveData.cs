@@ -17,8 +17,6 @@
 
         public string? PreferredLanguageName { get; set; } = "";
 
-        public bool AdjustEyebrowOnLoaded { get; set; } = true;
-
         public WindowSettingViewModel? WindowSetting { get; set; }
 
         public MotionSettingViewModel? MotionSetting { get; set; }
