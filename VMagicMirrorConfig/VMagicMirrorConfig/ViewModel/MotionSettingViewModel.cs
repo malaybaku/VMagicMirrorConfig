@@ -236,6 +236,19 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
+        private bool _enableWebCamHighPowerMode = false;
+        public bool EnableWebCamHighPowerMode
+        {
+            get => _enableWebCamHighPowerMode;
+            set
+            {
+                if (SetValue(ref _enableWebCamHighPowerMode, value))
+                {
+                    SendMessage(MessageFactory.Instance.EnableWebCamHighPowerMode(EnableWebCamHighPowerMode));
+                }
+            }
+        }
+
         private bool _enableImageBasedHandTracking = false;
         public bool EnableImageBasedHandTracking
         {
