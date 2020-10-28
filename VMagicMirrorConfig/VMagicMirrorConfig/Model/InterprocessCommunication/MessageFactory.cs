@@ -37,7 +37,6 @@ namespace Baku.VMagicMirrorConfig
         public Message CancelLoadVrm() => NoArg();
 
         public Message RequestAutoAdjust() => NoArg();
-        public Message RequestAutoAdjustEyebrow() => NoArg();
 
         #endregion
 
@@ -131,24 +130,6 @@ namespace Baku.VMagicMirrorConfig
 
         public Message LookAtStyle(string v) => WithArg(v);
         public Message SetEyeBoneRotationScale(int percent) => WithArg($"{percent}");
-
-        /// <summary>
-        /// Query.
-        /// </summary>
-        /// <returns></returns>
-        public Message GetBlendShapeNames() => NoArg();
-
-
-        //眉毛関係
-
-        public Message EyebrowLeftUpKey(string key) => WithArg(key);
-        public Message EyebrowLeftDownKey(string key) => WithArg(key);
-        public Message UseSeparatedKeyForEyebrow(bool separate) => WithArg($"{separate}");
-        public Message EyebrowRightUpKey(string key) => WithArg(key);
-
-        public Message EyebrowRightDownKey(string key) => WithArg(key);
-        public Message EyebrowUpScale(int percentage) => WithArg($"{percentage}");
-        public Message EyebrowDownScale(int percentage) => WithArg($"{percentage}");
 
         #endregion
 

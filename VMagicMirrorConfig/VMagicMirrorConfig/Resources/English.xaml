@@ -24,7 +24,6 @@
     <sys:String x:Key="Home_VrmDragDropInstruction">Load VRM by Drag &amp; Drop</sys:String>
 
     <sys:String x:Key="Home_LoadVrmOnNextStartup">Load current VRM on next startup</sys:String>
-    <sys:String x:Key="Home_AutoAdjustFaceParameterOnLoad">Adjust face settings after load</sys:String>
     <sys:String x:Key="Home_AutoAdjust">Adjust Size by VRM</sys:String>
 
     <sys:String x:Key="Home_Manual_Header">Manual</sys:String>
@@ -164,15 +163,6 @@ If the face tracking works correctly, please ignore this warning.
     <sys:String x:Key="Motion_Face_BlinkAdjust">Blink adjust by head motion and lip sync</sys:String>
     <sys:String x:Key="Motion_Face_NoCamMotion">Voice based motion when webcam not used</sys:String>
 
-    <sys:String x:Key="Motion_Face_Eyebrow">Eyebrow (Open to Customize)</sys:String>    
-    <sys:String x:Key="Motion_Face_EyeBrow_LeftUp">Left Up Key</sys:String>    
-    <sys:String x:Key="Motion_Face_EyeBrow_LeftDown">Left Down Key</sys:String>    
-    <sys:String x:Key="Motion_Face_EyeBrow_UseSeparatedKey">Use Different Key for Right Eyebrow</sys:String>    
-    <sys:String x:Key="Motion_Face_EyeBrow_RightUp">Right Up Key</sys:String>    
-    <sys:String x:Key="Motion_Face_EyeBrow_RightDown">Riht Down Key</sys:String>    
-    <sys:String x:Key="Motion_Face_EyeBrow_UpScale">Up Scale [%]</sys:String>    
-    <sys:String x:Key="Motion_Face_EyeBrow_DownScale">Down Scale [%]</sys:String>    
-    
     <!-- Motion : Eye -->
     <sys:String x:Key="Motion_Eye">Eye</sys:String>
     <sys:String x:Key="Motion_Eye_LookAtPoint">Eye Look Target</sys:String>
