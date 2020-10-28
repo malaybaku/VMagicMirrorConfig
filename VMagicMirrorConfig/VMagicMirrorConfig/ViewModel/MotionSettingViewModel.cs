@@ -38,12 +38,6 @@ namespace Baku.VMagicMirrorConfig
                 case ReceiveMessageNames.AutoAdjustResults:
                     SetAutoAdjustResults(e.Args);
                     break;
-                case ReceiveMessageNames.AutoAdjustEyebrowResults:
-                    SetAutoAdjustResults(e.Args, true);
-                    break;
-                case ReceiveMessageNames.SetBlendShapeNames:
-                    SetBlendShapeNames(e.Args);
-                    break;
                 case ReceiveMessageNames.MicrophoneVolumeLevel:
                     if (ShowMicrophoneVolume && int.TryParse(e.Args, out int i))
                     {
@@ -53,19 +47,6 @@ namespace Baku.VMagicMirrorConfig
                 default:
                     break;
             }
-        }
-
-        private void SetBlendShapeNames(string args)
-        {
-            Application.Current.Dispatcher.Invoke(() =>
-            {
-                _writableBlendShapeNames.Clear();
-                _writableBlendShapeNames.Add("");
-                foreach (var name in args.Split('\t'))
-                {
-                    _writableBlendShapeNames.Add(name);
-                }
-            });
         }
 
         public async Task InitializeDeviceNamesAsync()
@@ -93,30 +74,13 @@ namespace Baku.VMagicMirrorConfig
 
         public void ClosePointer() => _largePointerController.Close();
 
-        private void SetAutoAdjustResults(string data) => SetAutoAdjustResults(data, false);
-
-        private void SetAutoAdjustResults(string data, bool onlyEyebrow)
+        private void SetAutoAdjustResults(string data) 
         {
             try
             {
                 var parameters = JsonConvert.DeserializeObject<AutoAdjustParameters>(data);
                 _silentPropertySetter = true;
-
-                if (parameters.EyebrowIsValidPreset)
-                {
-                    EyebrowLeftUpKey = parameters.EyebrowLeftUpKey;
-                    EyebrowLeftDownKey = parameters.EyebrowLeftDownKey;
-                    UseSeparatedKeyForEyebrow = parameters.UseSeparatedKeyForEyebrow;
-                    EyebrowRightUpKey = parameters.EyebrowRightUpKey;
-                    EyebrowRightDownKey = parameters.EyebrowRightDownKey;
-                    EyebrowUpScale = parameters.EyebrowUpScale;
-                    EyebrowDownScale = parameters.EyebrowDownScale;
-                }
-
-                if (!onlyEyebrow)
-                {
-                    LengthFromWristToTip = parameters.LengthFromWristToTip;
-                }
+                LengthFromWristToTip = parameters.LengthFromWristToTip;
             }
             catch (Exception)
             {
@@ -322,108 +286,6 @@ namespace Baku.VMagicMirrorConfig
                 }
             }
         }
-
-        #region Eyebrow
-
-        private readonly ObservableCollection<string> _writableBlendShapeNames
-          = new ObservableCollection<string>();
-        private ReadOnlyObservableCollection<string>? _availableBlendShapeNames = null;
-        [XmlIgnore]
-        public ReadOnlyObservableCollection<string> AvailableBlendShapeNames
-            => _availableBlendShapeNames ??= new ReadOnlyObservableCollection<string>(_writableBlendShapeNames);
-
-        private string _eyebrowLeftUpKey = "";
-        public string EyebrowLeftUpKey
-        {
-            get => _eyebrowLeftUpKey;
-            set
-            {
-                if (SetValue(ref _eyebrowLeftUpKey, value))
-                {
-                    SendMessage(MessageFactory.Instance.EyebrowLeftUpKey(EyebrowLeftUpKey));
-                }
-            }
-        }
-
-        private string _eyebrowLeftDownKey = "";
-        public string EyebrowLeftDownKey
-        {
-            get => _eyebrowLeftDownKey;
-            set
-            {
-                if (SetValue(ref _eyebrowLeftDownKey, value))
-                {
-                    SendMessage(MessageFactory.Instance.EyebrowLeftDownKey(EyebrowLeftDownKey));
-                }
-            }
-        }
-
-        private bool _useSeparatedKeyForEyebrow = false;
-        public bool UseSeparatedKeyForEyebrow
-        {
-            get => _useSeparatedKeyForEyebrow;
-            set
-            {
-                if (SetValue(ref _useSeparatedKeyForEyebrow, value))
-                {
-                    SendMessage(MessageFactory.Instance.UseSeparatedKeyForEyebrow(UseSeparatedKeyForEyebrow));
-                }
-            }
-        }
-
-        private string _eyebrowRightUpKey = "";
-        public string EyebrowRightUpKey
-        {
-            get => _eyebrowRightUpKey;
-            set
-            {
-                if (SetValue(ref _eyebrowRightUpKey, value))
-                {
-                    SendMessage(MessageFactory.Instance.EyebrowRightUpKey(EyebrowRightUpKey));
-                }
-            }
-        }
-
-        private string _eyebrowRightDownKey = "";
-        public string EyebrowRightDownKey
-        {
-            get => _eyebrowRightDownKey;
-            set
-            {
-                if (SetValue(ref _eyebrowRightDownKey, value))
-                {
-                    SendMessage(MessageFactory.Instance.EyebrowRightDownKey(EyebrowRightDownKey));
-                }
-            }
-        }
-
-        private int _eyebrowUpScale = 100;
-        public int EyebrowUpScale
-        {
-            get => _eyebrowUpScale;
-            set
-            {
-                if (SetValue(ref _eyebrowUpScale, value))
-                {
-                    SendMessage(MessageFactory.Instance.EyebrowUpScale(EyebrowUpScale));
-                }
-            }
-        }
-
-        private int _eyebrowDownScale = 100;
-        public int EyebrowDownScale
-        {
-            get => _eyebrowDownScale;
-            set
-            {
-                if (SetValue(ref _eyebrowDownScale, value))
-                {
-                    SendMessage(MessageFactory.Instance.EyebrowDownScale(EyebrowDownScale));
-                }
-            }
-        }
-
-        #endregion
 
         #endregion
 
@@ -853,14 +715,6 @@ namespace Baku.VMagicMirrorConfig
             EyeBoneRotationScale = 100;
 
             FaceDefaultFun = 0;
-
-            EyebrowLeftUpKey = "";
-            EyebrowLeftDownKey = "";
-            UseSeparatedKeyForEyebrow = false;
-            EyebrowRightUpKey = "";
-            EyebrowRightDownKey = "";
-            EyebrowUpScale = 100;
-            EyebrowDownScale = 100;
         }
 
         private void ResetArmSetting()
