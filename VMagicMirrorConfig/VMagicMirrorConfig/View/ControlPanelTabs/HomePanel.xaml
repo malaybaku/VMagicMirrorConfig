@@ -120,11 +120,6 @@
                                       IsChecked="{Binding AutoLoadLastLoadedVrm, Mode=TwoWay}"
                                       />
 
-                            <CheckBox Content="{DynamicResource Home_AutoAdjustFaceParameterOnLoad}"
-                                      IsChecked="{Binding AutoAdjustEyebrowOnLoaded}"
-                                      Margin="10,0,5,10"                              
-                                      />
-
                             <Button HorizontalAlignment="Left"
                                     VerticalAlignment="Top"
                                     Width="180"
@@ -226,7 +221,7 @@
                                         />
                             </StackPanel>
 
-                            <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                                 <Button Command="{Binding TakeScreenshotCommand}"
                                     Padding="0"
                                     Width="40"

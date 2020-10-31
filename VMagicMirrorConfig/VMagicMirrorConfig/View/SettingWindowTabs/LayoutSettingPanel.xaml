@@ -220,38 +220,41 @@
                         <TextBlock Text="{DynamicResource Layout_MidiVisible}"/>
                     </CheckBox>
 
-                    <TextBlock Text="{DynamicResource Layout_Hid_TypingEffect_Header}"/>
-                    <Grid Margin="20,5"
-                          HorizontalAlignment="Stretch">
+                    <Grid Margin="17,5,0,0">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <RadioButton Grid.Column="0"
-                                     VerticalContentAlignment="Center"
-                                     IsChecked="{Binding TypingEffectIsNone, Mode=TwoWay}"
-                                     >
-                            <md:PackIcon Style="{StaticResource HeaderPackIcon}" 
-                                         Kind="EyeOff"
-                                         />
-                        </RadioButton>
-                        <RadioButton Grid.Column="1"
-                                     VerticalContentAlignment="Center"
-                                     IsChecked="{Binding TypingEffectIsText, Mode=TwoWay}"
-                                     >
-                            <md:PackIcon Style="{StaticResource HeaderPackIcon}" 
-                                         Kind="Abc"
-                                         />
-                        </RadioButton>
-                        <RadioButton Grid.Column="2"
-                                     VerticalContentAlignment="Center"
-                                     IsChecked="{Binding TypingEffectIsLight, Mode=TwoWay}"
-                                     >
-                            <md:PackIcon Style="{StaticResource HeaderPackIcon}" 
-                                         Kind="FlashOn"
-                                         />
-                        </RadioButton>
+                        <TextBlock Margin="5,3"
+                                        Text="{DynamicResource Layout_Hid_TypingEffect_Header_Streaming}"
+                                        />
+                        <ComboBox Grid.Column="1"
+                                  HorizontalAlignment="Stretch"
+                                  Margin="5,0"
+                                  ItemsSource="{Binding TypingEffectSelections}"
+                                  SelectedItem="{Binding TypingEffectItem}"
+                                  md:HintAssist.Hint="Effect"
+                                  >
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Height="20" VerticalAlignment="Center">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="20"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <md:PackIcon Grid.Column="0"
+                                                     Width="20" Height="20"
+                                                     Margin="0"
+                                                     Kind="{Binding IconKind, Mode=OneTime}"
+                                                     />
+                                        <TextBlock Grid.Column="1"
+                                                   Margin="5,0,0,0"
+                                                   Text="{Binding EffectName}"
+                                                   />
+                                    </Grid>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
                     </Grid>
                 </StackPanel>
             </md:Card>

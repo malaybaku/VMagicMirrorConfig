@@ -24,7 +24,6 @@
     <sys:String x:Key="Home_VrmDragDropInstruction">ドラッグ &amp; ドロップでVRMをロード</sys:String>
 
     <sys:String x:Key="Home_LoadVrmOnNextStartup">次回の起動時にも同じVRMを読み込む</sys:String>
-    <sys:String x:Key="Home_AutoAdjustFaceParameterOnLoad">モデルロード時に表情を調整</sys:String>
     <sys:String x:Key="Home_AutoAdjust">キャラ体格で補正</sys:String>
 
     <sys:String x:Key="Home_Manual_Header">使い方</sys:String>
@@ -97,7 +96,7 @@
     <sys:String x:Key="Window_BackgroundColor">背景色</sys:String>
     <sys:String x:Key="Window_Transparent">背景を透過</sys:String>
     <sys:String x:Key="Window_Draggable">(透過中)キャラ付近を掴んでドラッグ</sys:String>
-    <sys:String x:Key="Window_TopMost">キャラクターをつねに最前面で表示</sys:String>
+    <sys:String x:Key="Window_TopMost">(透過中)キャラクターをつねに最前面で表示</sys:String>
     <sys:String x:Key="Window_ResetPosition">キャラクター位置のリセット</sys:String>
     
     <sys:String x:Key="Window_EnableInitialPlacement">起動時に特定の位置へウィンドウを動かす</sys:String>
@@ -150,6 +149,7 @@
     <sys:String x:Key="Motion_Face_AutoBlinkDuringFaceTracking">顔トラッキング中も自動でまばたき</sys:String>
     <sys:String x:Key="Motion_Face_DisableFaceTrackingHorizontalFlip">左右反転をオフにする</sys:String>
     <sys:String x:Key="Motion_Face_EnableImageBasedHandTracking">顔とセットで手もトラッキング</sys:String>
+    <sys:String x:Key="Motion_Face_EnableWebCamHighPowerMode">高解像度モード(ベータ)</sys:String>
     <sys:String x:Key="Motion_Face_FolderMaybeIncorrect_Header">※アプリフォルダの移動を検討してください！</sys:String>
     <sys:String x:Key="Motion_Face_FolderMaybeIncorrect_Tooltip" xml:space="preserve">アプリの配置フォルダパスに全角文字が含まれています。
 この状態では顔トラッキングが正常動作しないかもしれません。
@@ -164,16 +164,7 @@
     
     <sys:String x:Key="Motion_Face_BlinkAdjust">顔の動きや声でまばたきを補正</sys:String>
     <sys:String x:Key="Motion_Face_NoCamMotion">カメラ非使用時、音声ベースでアバターを動かす</sys:String>
-    
-    <sys:String x:Key="Motion_Face_Eyebrow">眉毛 (開いてカスタマイズ)</sys:String>    
-    <sys:String x:Key="Motion_Face_Eyebrow_LeftUp">左眉上げ</sys:String>    
-    <sys:String x:Key="Motion_Face_Eyebrow_LeftDown">左眉下げ</sys:String>    
-    <sys:String x:Key="Motion_Face_Eyebrow_UseSeparatedKey">左右で別々のキーを使う</sys:String>    
-    <sys:String x:Key="Motion_Face_Eyebrow_RightUp">右眉上げ</sys:String>    
-    <sys:String x:Key="Motion_Face_Eyebrow_RightDown">右眉下げ</sys:String>    
-    <sys:String x:Key="Motion_Face_Eyebrow_UpScale">眉上げスケール [%]</sys:String>    
-    <sys:String x:Key="Motion_Face_Eyebrow_DownScale">眉下げスケール [%]</sys:String>    
-    
+        
     <!-- Motion : Eye -->
     <sys:String x:Key="Motion_Eye">目・視線</sys:String>
     <sys:String x:Key="Motion_Eye_LookAtPoint">視線の動き</sys:String>
@@ -188,6 +179,8 @@
     <sys:String x:Key="Motion_Mouth">口・リップシンク</sys:String>
     <sys:String x:Key="Motion_Mouth_EnableLipSync">リップシンク</sys:String>
     <sys:String x:Key="Motion_Mouth_MicrophoneName">マイク</sys:String>    
+    <sys:String x:Key="Motion_Mouth_Microphone_Sensitivity">マイク感度 [dB]</sys:String>
+    <sys:String x:Key="Motion_Mouth_Microphone_Visualize">音量をチェック</sys:String>
     
     <!-- Motion : Arm -->
     <sys:String x:Key="Motion_Arm">腕・ひじ</sys:String>
@@ -222,6 +215,13 @@
 
     <!-- Layout : Camera -->
     <sys:String x:Key="Layout_Camera">カメラ</sys:String>
+    <sys:String x:Key="Layout_Camera_HowTo">使い方…</sys:String>
+    <sys:String x:Key="Layout_Camera_HowTo_Content" xml:space="preserve">フリーカメラモードをオンにすると、
+以下のカメラ操作ができます。
+       
+- 右クリック + ドラッグ: 回転
+- 中クリック + ドラッグ: 並行移動
+- マウスホイール: 前後に移動</sys:String>    
     <sys:String x:Key="Layout_EnableFreeCameraMode">フリーカメラモード</sys:String>
     <sys:String x:Key="Layout_CurrentCameraPosition">カメラの位置(x, y, z, rx, ry, rz)</sys:String>
     <sys:String x:Key="Layout_Camera_ResetPosition">位置をリセット</sys:String>

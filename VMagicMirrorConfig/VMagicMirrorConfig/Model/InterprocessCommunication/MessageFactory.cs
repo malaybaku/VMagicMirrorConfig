@@ -37,7 +37,6 @@ namespace Baku.VMagicMirrorConfig
         public Message CancelLoadVrm() => NoArg();
 
         public Message RequestAutoAdjust() => NoArg();
-        public Message RequestAutoAdjustEyebrow() => NoArg();
 
         #endregion
 
@@ -74,8 +73,6 @@ namespace Baku.VMagicMirrorConfig
 
         public Message LengthFromWristToTip(int lengthCentimeter) => WithArg($"{lengthCentimeter}");
 
-        public Message LengthFromWristToPalm(int lengthCentimeter) => WithArg($"{lengthCentimeter}");
-
         public Message HandYOffsetBasic(int offsetCentimeter) => WithArg($"{offsetCentimeter}");
         public Message HandYOffsetAfterKeyDown(int offsetCentimeter) => WithArg($"{offsetCentimeter}");
 
@@ -87,7 +84,6 @@ namespace Baku.VMagicMirrorConfig
 
         public Message EnableFpsAssumedRightHand(bool enable) => WithArg($"{enable}");
         public Message EnablePresenterMotion(bool enable) => WithArg($"{enable}");
-        public Message PresentationArmMotionScale(int scalePercent) => WithArg($"{scalePercent}");
         public Message PresentationArmRadiusMin(int radiusMinCentimeter) => WithArg($"{radiusMinCentimeter}");
 
         public Message EnableWaitMotion(bool enable) => WithArg($"{enable}");
@@ -108,7 +104,8 @@ namespace Baku.VMagicMirrorConfig
         //NOTE: falseのほうが普通だよ、という状態にするため、disable云々というやや面倒な言い方になってる事に注意
         public Message DisableFaceTrackingHorizontalFlip(bool disable) => WithArg($"{disable}");
         public Message EnableImageBasedHandTracking(bool enable) => WithArg($"{enable}");
-             
+        public Message EnableWebCamHighPowerMode(bool enable) => WithArg($"{enable}");            
+
         public Message FaceDefaultFun(int percentage) => WithArg($"{percentage}");
 
         /// <summary>
@@ -122,6 +119,9 @@ namespace Baku.VMagicMirrorConfig
         public Message EnableLipSync(bool enable) => WithArg($"{enable}");
 
         public Message SetMicrophoneDeviceName(string deviceName) => WithArg(deviceName);
+        public Message SetMicrophoneSensitivity(int sensitivity) => WithArg($"{sensitivity}");
+        public Message SetMicrophoneVolumeVisibility(bool isVisible) => WithArg($"{isVisible}");
+
         /// <summary>
         /// Query.
         /// </summary>
@@ -130,24 +130,6 @@ namespace Baku.VMagicMirrorConfig
 
         public Message LookAtStyle(string v) => WithArg(v);
         public Message SetEyeBoneRotationScale(int percent) => WithArg($"{percent}");
-
-        /// <summary>
-        /// Query.
-        /// </summary>
-        /// <returns></returns>
-        public Message GetBlendShapeNames() => NoArg();
-
-
-        //眉毛関係
-
-        public Message EyebrowLeftUpKey(string key) => WithArg(key);
-        public Message EyebrowLeftDownKey(string key) => WithArg(key);
-        public Message UseSeparatedKeyForEyebrow(bool separate) => WithArg($"{separate}");
-        public Message EyebrowRightUpKey(string key) => WithArg(key);
-
-        public Message EyebrowRightDownKey(string key) => WithArg(key);
-        public Message EyebrowUpScale(int percentage) => WithArg($"{percentage}");
-        public Message EyebrowDownScale(int percentage) => WithArg($"{percentage}");
 
         #endregion
 

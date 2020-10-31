@@ -24,7 +24,6 @@
     <sys:String x:Key="Home_VrmDragDropInstruction">Load VRM by Drag &amp; Drop</sys:String>
 
     <sys:String x:Key="Home_LoadVrmOnNextStartup">Load current VRM on next startup</sys:String>
-    <sys:String x:Key="Home_AutoAdjustFaceParameterOnLoad">Adjust face settings after load</sys:String>
     <sys:String x:Key="Home_AutoAdjust">Adjust Size by VRM</sys:String>
 
     <sys:String x:Key="Home_Manual_Header">Manual</sys:String>
@@ -94,8 +93,8 @@ Check "Keep LipSync" to make the lipsync continue.</sys:String>
     <!-- Window -->
     <sys:String x:Key="Window_BackgroundColor">Background</sys:String>
     <sys:String x:Key="Window_Transparent">Transparent Window</sys:String>
-    <sys:String x:Key="Window_Draggable">(When Transparent)Drag character</sys:String>
-    <sys:String x:Key="Window_TopMost">Always Foreground</sys:String>
+    <sys:String x:Key="Window_Draggable">(When Transparent) Drag character</sys:String>
+    <sys:String x:Key="Window_TopMost">(When Transparent) Always Foreground</sys:String>
     <sys:String x:Key="Window_ResetPosition">Reset Character Position</sys:String>
     
     <sys:String x:Key="Window_EnableInitialPlacement">Move window to specific position on startup</sys:String>
@@ -148,6 +147,7 @@ When you want to uninstall. double click "Uninstall.bat".</sys:String>
     <sys:String x:Key="Motion_Face_AutoBlinkDuringFaceTracking">Auto blink during face tracking</sys:String>
     <sys:String x:Key="Motion_Face_DisableFaceTrackingHorizontalFlip">Disable horizontal flip</sys:String>
     <sys:String x:Key="Motion_Face_EnableImageBasedHandTracking">Enable image based hand tracking</sys:String>
+    <sys:String x:Key="Motion_Face_EnableWebCamHighPowerMode">High Power Mode (Beta)</sys:String>
     <sys:String x:Key="Motion_Face_FolderMaybeIncorrect_Header">*Please check folder path!</sys:String>
     <sys:String x:Key="Motion_Face_FolderMaybeIncorrect_Tooltip" xml:space="preserve">App installed folder path includes multi byte character.
 This might lead incorrect results for the face tracking.
@@ -163,15 +163,6 @@ If the face tracking works correctly, please ignore this warning.
     <sys:String x:Key="Motion_Face_BlinkAdjust">Blink adjust by head motion and lip sync</sys:String>
     <sys:String x:Key="Motion_Face_NoCamMotion">Voice based motion when webcam not used</sys:String>
 
-    <sys:String x:Key="Motion_Face_Eyebrow">Eyebrow (Open to Customize)</sys:String>    
-    <sys:String x:Key="Motion_Face_EyeBrow_LeftUp">Left Up Key</sys:String>    
-    <sys:String x:Key="Motion_Face_EyeBrow_LeftDown">Left Down Key</sys:String>    
-    <sys:String x:Key="Motion_Face_EyeBrow_UseSeparatedKey">Use Different Key for Right Eyebrow</sys:String>    
-    <sys:String x:Key="Motion_Face_EyeBrow_RightUp">Right Up Key</sys:String>    
-    <sys:String x:Key="Motion_Face_EyeBrow_RightDown">Riht Down Key</sys:String>    
-    <sys:String x:Key="Motion_Face_EyeBrow_UpScale">Up Scale [%]</sys:String>    
-    <sys:String x:Key="Motion_Face_EyeBrow_DownScale">Down Scale [%]</sys:String>    
-    
     <!-- Motion : Eye -->
     <sys:String x:Key="Motion_Eye">Eye</sys:String>
     <sys:String x:Key="Motion_Eye_LookAtPoint">Eye Look Target</sys:String>
@@ -186,6 +177,8 @@ If the face tracking works correctly, please ignore this warning.
     <sys:String x:Key="Motion_Mouth">Mouth</sys:String>
     <sys:String x:Key="Motion_Mouth_EnableLipSync">LipSync</sys:String>
     <sys:String x:Key="Motion_Mouth_MicrophoneName">Microphone</sys:String>    
+    <sys:String x:Key="Motion_Mouth_Microphone_Sensitivity">Sensitivity [dB]</sys:String>
+    <sys:String x:Key="Motion_Mouth_Microphone_Visualize">Show Volume</sys:String>
     
     <!-- Motion : Arm -->
     <sys:String x:Key="Motion_Arm">Arm</sys:String>    
@@ -220,6 +213,13 @@ If the face tracking works correctly, please ignore this warning.
    
     <!-- Layout : Camera -->
     <sys:String x:Key="Layout_Camera">Camera</sys:String>
+    <sys:String x:Key="Layout_Camera_HowTo">Usage...</sys:String>
+    <sys:String x:Key="Layout_Camera_HowTo_Content" xml:space="preserve">'Free Camera Mode' enables
+camera movements following:
+        
+- Right click + drag: rotate
+- Mid click + drag: translate
+- Mouse wheel: forward/backward</sys:String>
     <sys:String x:Key="Layout_EnableFreeCameraMode">Free Camera Mode</sys:String>
     <sys:String x:Key="Layout_CurrentCameraPosition">Camera Position (x, y, z, rx, ry, rz)</sys:String>
     <sys:String x:Key="Layout_Camera_ResetPosition">Reset Position</sys:String>

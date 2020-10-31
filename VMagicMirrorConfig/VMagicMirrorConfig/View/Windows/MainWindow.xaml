@@ -8,7 +8,7 @@
         xmlns:vmm="clr-namespace:Baku.VMagicMirrorConfig"
         mc:Ignorable="d"
         d:DataContext="{x:Type vmm:MainWindowViewModel}"
-        Title="VMagicMirror v1.4.0" 
+        Title="VMagicMirror v1.5.0" 
         ResizeMode="CanMinimize"
         Height="650" Width="550"
         MinHeight="650" MinWidth="550"
