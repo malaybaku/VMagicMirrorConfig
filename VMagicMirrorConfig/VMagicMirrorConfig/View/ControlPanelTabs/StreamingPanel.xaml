@@ -166,7 +166,7 @@
 
                             <Grid Grid.Row="2" Grid.Column="1"
                               Grid.ColumnSpan="2"
-                              Margin="0,3,0,10">
+                              Margin="0,3,0,7">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition />
                                     <ColumnDefinition Width="100" />
@@ -372,7 +372,7 @@
                                         />
                         </StackPanel>
 
-                        <Grid Margin="5,3">
+                        <Grid Margin="5,3,5,20">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
@@ -602,7 +602,7 @@
 
                         <CheckBox Grid.Row="2" Grid.Column="0"
                                     Grid.ColumnSpan="3"
-                                    Margin="10,2" 
+                                    Margin="10,0" 
                                     Content="{DynamicResource Layout_DeviceFreeLayout}"
                                     IsChecked="{Binding LayoutSetting.EnableDeviceFreeLayout}"
                                     />

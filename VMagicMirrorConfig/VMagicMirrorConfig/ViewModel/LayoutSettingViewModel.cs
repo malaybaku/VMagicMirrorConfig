@@ -12,7 +12,7 @@ namespace Baku.VMagicMirrorConfig
         private const int TypingEffectIndexNone = -1;
         private const int TypingEffectIndexText = 0;
         private const int TypingEffectIndexLight = 1;
-        private const int TypingEffectIndexLaser = 2;
+        //private const int TypingEffectIndexLaser = 2;
         private const int TypingEffectIndexButtefly = 3;
 
         public LayoutSettingViewModel() : base()
@@ -370,7 +370,7 @@ namespace Baku.VMagicMirrorConfig
             new TypingEffectSelectionItem(TypingEffectIndexNone, "None", MaterialDesignThemes.Wpf.PackIconKind.EyeOff),
             new TypingEffectSelectionItem(TypingEffectIndexText, "Text", MaterialDesignThemes.Wpf.PackIconKind.Abc),
             new TypingEffectSelectionItem(TypingEffectIndexLight, "Light", MaterialDesignThemes.Wpf.PackIconKind.FlashOn),
-            new TypingEffectSelectionItem(TypingEffectIndexLaser, "Laser", MaterialDesignThemes.Wpf.PackIconKind.Wand),
+            //new TypingEffectSelectionItem(TypingEffectIndexLaser, "Laser", MaterialDesignThemes.Wpf.PackIconKind.Wand),
             new TypingEffectSelectionItem(TypingEffectIndexButtefly, "Butterfly", MaterialDesignThemes.Wpf.PackIconKind.DotsHorizontal),
         };
 
