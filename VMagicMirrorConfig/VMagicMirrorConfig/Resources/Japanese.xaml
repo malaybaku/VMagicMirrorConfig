@@ -114,24 +114,7 @@
     <sys:String x:Key="Window_TransparencySupport_Level_2">レベル2: キャラの近くにマウスポインタがあれば、半透明になります。</sys:String>
     <sys:String x:Key="Window_TransparencySupport_Level_3">レベル3: 「キャラ付近を掴んでドラッグ」がオフならば、半透明になります。</sys:String>
     <sys:String x:Key="Window_TransparencySupport_Level_4">レベル4: つねに半透明になります。</sys:String>
-    
-    <sys:String x:Key="Window_VirtualCamOutput">仮想カメラ出力</sys:String>
-    <sys:String x:Key="Window_VirtualCamOutput_Enable">仮想カメラ出力を有効化</sys:String>
-    <sys:String x:Key="Window_VirtualCamOutput_Resolution">サイズ</sys:String>
-    <sys:String x:Key="Window_VirtualCamOutput_Width">幅</sys:String>
-    <sys:String x:Key="Window_VirtualCamOutput_Height">高さ</sys:String>
-    <sys:String x:Key="Window_VirtualCamOutput_MatchWindowSize">リサイズ</sys:String>
-    <sys:String x:Key="Window_VirtualCamOutput_FirstTime_Header">※初めて使う場合</sys:String>
-    <sys:String x:Key="Window_VirtualCamOutput_FirstTime_DialogTitle">仮想カメラのインストールが必要です</sys:String>    
-    <sys:String x:Key="Window_VirtualCamOutput_FirstTime_Expr" xml:space="preserve">この機能を使うには仮想カメラのインストールが必要です。
         
-  - "CameraInstall"フォルダを開きます。。
-  - "Install.bat"をダブルクリックで実行します。
-        
-アンインストールするには"Uninstall.bat"をダブルクリックで実行します。</sys:String>
-    <sys:String x:Key="Window_VirtualCamOutput_FirstTime_OpenFolder">フォルダを開く</sys:String>
-    <sys:String x:Key="Window_VirtualCamOutput_FirstTime_SeeMore">さらに詳しく見る (webページへ)</sys:String>
-    
     <!-- Motion -->
     
     <!-- Motion : Full Body -->

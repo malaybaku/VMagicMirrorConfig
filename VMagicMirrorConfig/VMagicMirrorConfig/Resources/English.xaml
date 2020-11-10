@@ -112,24 +112,7 @@ Check "Keep LipSync" to make the lipsync continue.</sys:String>
     <sys:String x:Key="Window_TransparencySupport_Level_2">Level 2: Transparent if mouse pointer is close to the character.</sys:String>
     <sys:String x:Key="Window_TransparencySupport_Level_3">Level 3: Transparent if "Drag character" is off.</sys:String>
     <sys:String x:Key="Window_TransparencySupport_Level_4">Level 4: Always transparent.</sys:String>
-    
-    <sys:String x:Key="Window_VirtualCamOutput">Virtual Camera Output</sys:String>
-    <sys:String x:Key="Window_VirtualCamOutput_Enable">Enable Camera Output</sys:String>
-    <sys:String x:Key="Window_VirtualCamOutput_Resolution">Size</sys:String>
-    <sys:String x:Key="Window_VirtualCamOutput_Width">Width</sys:String>
-    <sys:String x:Key="Window_VirtualCamOutput_Height">Height</sys:String>
-    <sys:String x:Key="Window_VirtualCamOutput_MatchWindowSize">Resize</sys:String>
-    <sys:String x:Key="Window_VirtualCamOutput_FirstTime_Header">*How to setup</sys:String>
-    <sys:String x:Key="Window_VirtualCamOutput_FirstTime_DialogTitle">Virtual Camera Installation Required</sys:String>    
-    <sys:String x:Key="Window_VirtualCamOutput_FirstTime_Expr" xml:space="preserve">Camera install is required for this feature.
- 
-  - Open "CameraInstall" folder.
-  - Double click "Install.bat" to execute installation.
-
-When you want to uninstall. double click "Uninstall.bat".</sys:String>        
-    <sys:String x:Key="Window_VirtualCamOutput_FirstTime_OpenFolder">Open Folder</sys:String>
-    <sys:String x:Key="Window_VirtualCamOutput_FirstTime_SeeMore">Read more (on web)</sys:String>
-    
+   
     <!-- Motion -->
     
     <!-- Motion : Full Body -->
