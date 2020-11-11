@@ -207,6 +207,13 @@ namespace Baku.VMagicMirrorConfig
                     var requests = MotionRequestCollection.DeserializeFromJson(reader);
                     foreach (var item in requests.Requests)
                     {
+                        if (item == null)
+                        {
+                            //一応チェックしてるけど本来nullはあり得ない
+                            LogOutput.Instance.Write("Receive null MotionRequest");
+                            continue;
+                        }
+
                         //NOTE: 前処理として、この時点で読み込んだモデルに不足なExtraClipがある場合は差し込んでおく
                         //これは異バージョンとか考慮した処理です
                         foreach (var extraClip in ExtraBlendShapeClipNames)

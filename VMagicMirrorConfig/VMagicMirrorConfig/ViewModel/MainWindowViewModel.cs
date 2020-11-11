@@ -76,7 +76,7 @@ namespace Baku.VMagicMirrorConfig
             Initializer.MessageReceiver.ReceivedCommand += OnReceiveCommand;
         }
 
-        private void OnReceiveCommand(object sender, CommandReceivedEventArgs e)
+        private void OnReceiveCommand(object? sender, CommandReceivedEventArgs e)
         {
             switch (e.Command)
             {
@@ -533,7 +533,7 @@ namespace Baku.VMagicMirrorConfig
             using (var sr = new StreamReader(path))
             {
                 var serializer = new XmlSerializer(typeof(SaveData));
-                var saveData = (SaveData)serializer.Deserialize(sr);
+                var saveData = (SaveData?)serializer.Deserialize(sr);
                 if (saveData == null)
                 {
                     return;

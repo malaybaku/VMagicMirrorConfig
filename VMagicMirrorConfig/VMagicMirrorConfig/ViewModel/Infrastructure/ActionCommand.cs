@@ -12,8 +12,8 @@ namespace Baku.VMagicMirrorConfig
 
         private readonly Action _act;
 
-        public bool CanExecute(object parameter) => true;
-        public void Execute(object parameter) => _act?.Invoke();
+        public bool CanExecute(object? parameter) => true;
+        public void Execute(object? parameter) => _act?.Invoke();
 
 #pragma warning disable CS0067
         public event EventHandler? CanExecuteChanged;
@@ -30,8 +30,8 @@ namespace Baku.VMagicMirrorConfig
 
         private readonly Action<T?> _act;
 
-        public bool CanExecute(object parameter) => true;
-        public void Execute(object parameter) => _act?.Invoke(parameter as T);
+        public bool CanExecute(object? parameter) => true;
+        public void Execute(object? parameter) => _act?.Invoke(parameter as T);
 
 #pragma warning disable CS0067
         public event EventHandler? CanExecuteChanged;

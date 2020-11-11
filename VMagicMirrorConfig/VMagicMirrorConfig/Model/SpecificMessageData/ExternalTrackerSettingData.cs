@@ -4,9 +4,9 @@ namespace Baku.VMagicMirrorConfig
 {
     public class ExternalTrackerSettingData
     {
-        public string AppName { get; set; }
-        public string ParamName { get; set; }
-        public string Value { get; set; }
+        public string? AppName { get; set; }
+        public string? ParamName { get; set; }
+        public string? Value { get; set; }
 
         public string ToJsonString()
         {

@@ -13,7 +13,7 @@ namespace Baku.VMagicMirrorConfig
 
         private IMessageSender? _sender = null;
 
-        public event Action<Languages> LanguageChanged;
+        public event Action<Languages>? LanguageChanged;
 
         private string _languageName = nameof(Languages.Japanese);
         public string LanguageName

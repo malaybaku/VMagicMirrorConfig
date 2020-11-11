@@ -31,7 +31,7 @@ namespace Baku.VMagicMirrorConfig
         /// </summary>
         public void EndObserve() => _layout.PropertyChanged -= OnLayoutPropertyChanged;
 
-        private void OnLayoutPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void OnLayoutPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName != nameof(_layout.EnableDeviceFreeLayout))
             {

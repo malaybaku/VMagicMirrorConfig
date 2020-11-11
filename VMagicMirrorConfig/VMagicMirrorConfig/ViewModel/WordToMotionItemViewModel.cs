@@ -47,7 +47,7 @@ namespace Baku.VMagicMirrorConfig
                     0, 
                     _parent.LatestAvaterExtraClipNames.Contains(name)
                     ));
-                MotionRequest.ExtraBlendShapeValues.Add(new BlendShapePairItem()
+                MotionRequest?.ExtraBlendShapeValues.Add(new BlendShapePairItem()
                 {
                     Name = name,
                     Value = 0
