@@ -242,7 +242,7 @@
                                                       FallbackValue=Collapsed}"
                                  ToolTip="{DynamicResource Motion_Face_FolderMaybeIncorrect_Tooltip}"
                                  HorizontalAlignment="Center"
-                                 Background="{StaticResource SecondaryAccentBrush}" Padding="3">
+                                 Background="{StaticResource SecondaryHueMidBrush}" Padding="3">
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                                 <TextBlock Text="{DynamicResource Motion_Face_FolderMaybeIncorrect_Header}" 
                                            FontWeight="Bold"

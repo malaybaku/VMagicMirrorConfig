@@ -259,7 +259,7 @@
                                                   Converter={StaticResource BooleanToVisibilityConverter}}"
                              ToolTip="{DynamicResource Motion_Face_FolderMaybeIncorrect_Tooltip}"
                              HorizontalAlignment="Center"
-                             Background="{StaticResource SecondaryAccentBrush}" Padding="5">
+                             Background="{StaticResource SecondaryHueMidBrush}" Padding="5">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                             <TextBlock Text="{DynamicResource Motion_Face_FolderMaybeIncorrect_Header}" 
                                        FontWeight="Bold"
