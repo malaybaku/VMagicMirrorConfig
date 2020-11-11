@@ -84,7 +84,7 @@
             <TabItem>
                 <TabItem.Header>
                     <vmm:TabHeaderIconText Text="About"
-                                           IconKind="HelpOutline"
+                                           IconKind="QuestionMarkCircleOutline"
                                            IconWidth="15"
                                            IconHeight="15"
                                            />
