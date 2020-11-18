@@ -100,7 +100,8 @@
                 </Grid>
             </StackPanel>
 
-            <md:Card Padding="5">
+            <Border Style="{StaticResource SectionBorder}"
+                    Padding="5">
                 <StackPanel>
                     <Grid>
                         <StackPanel Orientation="Horizontal" Margin="5">
@@ -204,10 +205,11 @@
                         </StackPanel>
                     </Button>
                 </StackPanel>
-            </md:Card>
+            </Border>
 
             <!-- 「表情筋でブレンドシェイプクリップを発動する」という設定のUIがここに来ます。カオスになったら別ウィンドウに分けます。 -->
-            <md:Card IsEnabled="{Binding EnableExternalTracking}">
+            <Border Style="{StaticResource SectionBorder}"
+                    IsEnabled="{Binding EnableExternalTracking}">
 
                 <StackPanel>
                     <StackPanel Orientation="Horizontal"
@@ -241,7 +243,7 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                 </StackPanel>
-            </md:Card>
+            </Border>
         </StackPanel>
     </ScrollViewer>
 </UserControl>

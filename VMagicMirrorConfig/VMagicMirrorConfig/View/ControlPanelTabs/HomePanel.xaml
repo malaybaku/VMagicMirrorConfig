@@ -41,7 +41,8 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0" Margin="0,5">
-                    <md:Card Padding="5" Margin="5">
+                    <Border Style="{StaticResource SectionBorder}"
+                            Padding="5" Margin="5">
                         <StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <md:PackIcon Style="{StaticResource HeaderPackIcon}"
@@ -137,10 +138,10 @@
                             </Button>
 
                         </StackPanel>
-                    </md:Card>
+                    </Border>
 
 
-                    <md:Card>
+                    <Border Style="{StaticResource SectionBorder}">
                         <StackPanel>
                             <TextBlock Style="{StaticResource HeaderText}"
                                         Margin="5"
@@ -164,13 +165,13 @@
                                       IsChecked="{Binding ActivateOnStartup}"
                                       />
                         </StackPanel>
-                    </md:Card>
+                    </Border>
                 </StackPanel>
 
                 <StackPanel Grid.Column="1"
                             Margin="0,5">
 
-                    <md:Card>
+                    <Border Style="{StaticResource SectionBorder}">
                         <StackPanel>
                             <TextBlock Style="{StaticResource HeaderText}"
                                         Text="{DynamicResource Home_Manual_Header}"
@@ -184,9 +185,9 @@
                                 </Hyperlink>
                             </TextBlock>
                         </StackPanel>
-                    </md:Card>
+                    </Border>
 
-                    <md:Card>
+                    <Border Style="{StaticResource SectionBorder}">
                         <StackPanel>
                             <TextBlock Style="{StaticResource HeaderText}"
                                        Text="{DynamicResource Home_SettingFileIo}"
@@ -208,8 +209,8 @@
                                 </StackPanel>
                             </Button>
                         </StackPanel>
-                    </md:Card>
-                    <md:Card>
+                    </Border>
+                    <Border Style="{StaticResource SectionBorder}">
                         <StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <md:PackIcon Style="{StaticResource HeaderPackIcon}"
@@ -249,9 +250,9 @@
                                 </Button>
                             </StackPanel>
                         </StackPanel>
-                    </md:Card>
+                    </Border>
 
-                    <md:Card>
+                    <Border Style="{StaticResource SectionBorder}">
                         <StackPanel>
                             <TextBlock Style="{StaticResource HeaderText}"
                                        Text="{DynamicResource Home_SettingManagement}"
@@ -300,7 +301,7 @@
                             </Grid>
 
                         </StackPanel>
-                    </md:Card>
+                    </Border>
                 </StackPanel>
             </Grid>
         </ScrollViewer>

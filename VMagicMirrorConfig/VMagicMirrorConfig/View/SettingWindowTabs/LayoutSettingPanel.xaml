@@ -24,7 +24,7 @@
                   >
         <StackPanel Margin="0,5">
 
-            <md:Card>
+            <Border Style="{StaticResource SectionBorder}">
                 <StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="5">
@@ -150,9 +150,9 @@
                     </Button>
 
                 </StackPanel>
-            </md:Card>
+            </Border>
 
-            <md:Card>
+            <Border Style="{StaticResource SectionBorder}">
                 <StackPanel>
 
                     <StackPanel Orientation="Horizontal"
@@ -180,9 +180,9 @@
                         </CheckBox.Content>
                     </CheckBox>
                 </StackPanel>
-            </md:Card>
+            </Border>
 
-            <md:Card>
+            <Border Style="{StaticResource SectionBorder}">
                 <StackPanel>
 
                     <StackPanel Orientation="Horizontal"
@@ -257,9 +257,9 @@
                         </ComboBox>
                     </Grid>
                 </StackPanel>
-            </md:Card>
+            </Border>
 
-            <md:Card>
+            <Border Style="{StaticResource SectionBorder}">
                 <StackPanel>
 
                     <StackPanel Orientation="Horizontal"
@@ -335,7 +335,7 @@
 
                     </StackPanel>
                 </StackPanel>
-            </md:Card>
+            </Border>
 
         </StackPanel>
     </ScrollViewer>

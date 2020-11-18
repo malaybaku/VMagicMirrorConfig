@@ -19,7 +19,7 @@
                   >
         <StackPanel Margin="0,5">
 
-            <md:Card>
+            <Border Style="{StaticResource SectionBorder}">
                 <StackPanel>
 
                     <StackPanel Orientation="Horizontal"
@@ -42,9 +42,9 @@
                         </CheckBox.Content>
                     </CheckBox>
                 </StackPanel>
-            </md:Card>
+            </Border>
 
-            <md:Card>
+            <Border Style="{StaticResource SectionBorder}">
                 <StackPanel>
 
                     <StackPanel Orientation="Horizontal"
@@ -386,9 +386,9 @@
                     </Grid>
 
                 </StackPanel>
-            </md:Card>
+            </Border>
 
-            <md:Card>
+            <Border Style="{StaticResource SectionBorder}">
                 <StackPanel>
 
                     <StackPanel Orientation="Horizontal"
@@ -509,9 +509,9 @@
 
                     </Grid>
                 </StackPanel>                
-            </md:Card>
+            </Border>
 
-            <md:Card>
+            <Border Style="{StaticResource SectionBorder}">
                 <StackPanel>
 
                     <StackPanel Orientation="Horizontal"
@@ -579,9 +579,9 @@
                                  />
                     </Grid>
                 </StackPanel>
-            </md:Card>
+            </Border>
 
-            <md:Card>
+            <Border Style="{StaticResource SectionBorder}">
                 <StackPanel>
 
                     <StackPanel Orientation="Horizontal"
@@ -653,7 +653,7 @@
                     </Grid>
                 </StackPanel>
 
-            </md:Card>
+            </Border>
         </StackPanel>
     </ScrollViewer>
 </UserControl>

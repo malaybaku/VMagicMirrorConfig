@@ -42,9 +42,10 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <md:Card Grid.Row="0" Grid.Column="0"
-                 Margin="8" Padding="10"
-                 >
+        <Border Style="{StaticResource SectionBorder}"
+                Grid.Row="0" Grid.Column="0"
+                Margin="8" Padding="10"
+                >
             <StackPanel>
                 <TextBlock Style="{StaticResource HeaderText}"
                            Text="{DynamicResource WordToMotion_Word_Header}" 
@@ -65,13 +66,14 @@
                            TextAlignment="Left"
                            />
             </StackPanel>
-        </md:Card>
-        
-        <md:Card Grid.Row="1" Grid.Column="0"
-                 VerticalAlignment="Stretch" 
-                 Margin="8"
-                 Padding="10"
-                 >
+        </Border>
+
+        <Border Style="{StaticResource SectionBorder}"
+                Grid.Row="1" Grid.Column="0"
+                VerticalAlignment="Stretch" 
+                Margin="8"
+                Padding="10"
+                >
             <StackPanel>
                 <TextBlock Style="{StaticResource HeaderText}"
                            Text="{DynamicResource WordToMotion_BodyMotion_Header}" 
@@ -136,14 +138,15 @@
                 </DockPanel>-->
 
             </StackPanel>
-        </md:Card>
+        </Border>
 
-        <md:Card Grid.Row="0" Grid.Column="1"
-                 Grid.RowSpan="2"
-                 VerticalAlignment="Stretch" 
-                 Margin="8"
-                 Padding="10"
-                 >
+        <Border Style="{StaticResource SectionBorder}"
+                Grid.Row="0" Grid.Column="1"
+                Grid.RowSpan="2"
+                VerticalAlignment="Stretch" 
+                Margin="8"
+                Padding="10"
+                >
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -295,7 +298,7 @@
                     </Grid>
                 </ScrollViewer>
             </Grid>
-        </md:Card>
+        </Border>
         
         <CheckBox Grid.Row="2" Grid.Column="0"
                   Content="{DynamicResource WordToMotion_EnablePreview}"

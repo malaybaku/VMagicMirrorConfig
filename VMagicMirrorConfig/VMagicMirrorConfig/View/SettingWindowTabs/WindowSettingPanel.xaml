@@ -19,7 +19,7 @@
                   HorizontalScrollBarVisibility="Disabled"
                   >
         <StackPanel>
-            <md:Card>
+            <Border Style="{StaticResource SectionBorder}">
                 <StackPanel>
                     <StackPanel Orientation="Horizontal">
 
@@ -32,14 +32,14 @@
                                    Style="{StaticResource HeaderText}"
                                    />
 
-                        <md:Card Style="{StaticResource ColorIndicatorCard}"
+                        <Border Style="{StaticResource ColorIndicatorBorder}"
                                  Margin="10,5,5,0">
                             <Rectangle>
                                 <Rectangle.Fill>
                                     <SolidColorBrush Color="{Binding Color}"/>
                                 </Rectangle.Fill>
                             </Rectangle>
-                        </md:Card>
+                        </Border>
 
                         <Button Style="{StaticResource CategorySettingResetButton}"
                                 Command="{Binding ResetBackgroundColorSettingCommand}"
@@ -94,9 +94,9 @@
                                  />
                     </Grid>
                 </StackPanel>
-            </md:Card>
+            </Border>
 
-            <md:Card>
+            <Border Style="{StaticResource SectionBorder}">
                 <StackPanel>
                     <CheckBox Content="{DynamicResource Window_Transparent}"
                               IsChecked="{Binding IsTransparent, Mode=TwoWay}"
@@ -123,9 +123,9 @@
                         </StackPanel>                        
                     </Button>
                 </StackPanel>
-            </md:Card>
+            </Border>
 
-            <md:Card>
+            <Border Style="{StaticResource SectionBorder}">
                 <StackPanel>
                     <StackPanel Orientation="Horizontal">
 
@@ -213,7 +213,7 @@
                     </Grid>
 
                 </StackPanel>
-            </md:Card>
+            </Border>
 
 
             <!--<md:Card>
