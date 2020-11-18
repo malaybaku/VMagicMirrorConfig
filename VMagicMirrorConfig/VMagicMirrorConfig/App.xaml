@@ -11,6 +11,10 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Japanese.xaml" />
 
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Blue.xaml" />
+
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
@@ -22,11 +26,14 @@
             <SolidColorBrush x:Key="SecondaryAccentBrush" Color="{StaticResource Accent400}"/>
             <SolidColorBrush x:Key="SecondaryAccentForegroundBrush" Color="{StaticResource Accent400Foreground}"/>
 
+            <Color x:Key="BorderDarkColor">#5B5B5B</Color>
+                           
             <SolidColorBrush x:Key="SelectedTabItemForeground" Color="{StaticResource Primary500}"/>
             <!-- 黒をalpha=0.64にした色、という考え方の方が正しいかもしれないが、まあ見た目にほぼ影響ないので… -->
-            <SolidColorBrush x:Key="UnselectedTabItemForeground" Color="#5B5B5B"/>
+            <SolidColorBrush x:Key="UnselectedTabItemForeground" Color="{StaticResource BorderDarkColor}"/>
 
-            <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
+
+            <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatMidBgButton}">
                 <Setter Property="Width" Value="80"/>
                 <Setter Property="Height" Value="30"/>
                 <Setter Property="Margin" Value="10,5"/>
@@ -88,7 +95,7 @@
             </Style>
 
             <Style x:Key="ColorIndicatorBorder" TargetType="Border">
-                <Setter Property="BorderBrush" Value="{StaticResource MaterialDesignToolForeground}"/>
+                <Setter Property="BorderBrush" Value="Transparent"/>
                 <Setter Property="BorderThickness" Value="1"/>
                 <Setter Property="Width" Value="25"/>
                 <Setter Property="Height" Value="25"/>

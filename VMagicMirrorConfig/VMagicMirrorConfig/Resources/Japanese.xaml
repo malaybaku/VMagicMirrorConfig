@@ -4,6 +4,12 @@
                     xml:space="preserve"
                     >
     
+    <!-- Window Title Bar -->
+    <sys:String x:Key="TitleBar_Help">ヘルプ</sys:String>
+    <sys:String x:Key="TitleBar_Visit_OfficialPage">ウェブサイト</sys:String>
+    <sys:String x:Key="TitleBar_Visit_DownloadPage">ダウンロードページ(BOOTH)</sys:String>
+    <sys:String x:Key="TitleBar_About">VMagicMirrorについて</sys:String>
+    
     <!-- Top Tab -->
     <sys:String x:Key="TopBar_Home">ホーム</sys:String>
     <sys:String x:Key="TopBar_Streaming">配信</sys:String>
