@@ -69,7 +69,10 @@
                                              ConverterParameter=0}"   
                         />
                 </TabItem.Header>
-                <vmm:HomePanel />
+                <Grid>
+                    <vmm:HomePanel />
+                    <Rectangle Style="{StaticResource MainWindowSeparatorLine}"/>
+                </Grid>
             </TabItem>
             <TabItem>
                 <TabItem.Header>
@@ -82,7 +85,10 @@
                                              ConverterParameter=1}"                           
                         />
                 </TabItem.Header>
-                <vmm:StreamingPanel />
+                <Grid>
+                    <vmm:StreamingPanel />
+                    <Rectangle Style="{StaticResource MainWindowSeparatorLine}"/>
+                </Grid>
             </TabItem>
             <TabItem>
                 <TabItem.Header>
@@ -97,7 +103,10 @@
                                              ConverterParameter=2}"                           
                         />
                 </TabItem.Header>
-                <vmm:ExternalTrackerPanel DataContext="{Binding ExternalTrackerSetting}" />
+                <Grid>
+                    <vmm:ExternalTrackerPanel DataContext="{Binding ExternalTrackerSetting}" />
+                    <Rectangle Style="{StaticResource MainWindowSeparatorLine}"/>
+                </Grid>
             </TabItem>
             <TabItem>
                 <TabItem.Header>
@@ -112,7 +121,10 @@
                                              ConverterParameter=3}"                           
                         />
                 </TabItem.Header>
-                <vmm:AboutPanel />
+                <Grid>
+                    <vmm:AboutPanel />
+                    <Rectangle Style="{StaticResource MainWindowSeparatorLine}"/>
+                </Grid>
             </TabItem>
         </dragablz:TabablzControl>
     </md:DialogHost>
