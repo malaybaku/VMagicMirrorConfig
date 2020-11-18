@@ -31,27 +31,27 @@
     </metro:MetroWindow.IconTemplate>
     <metro:MetroWindow.RightWindowCommands>
         <metro:WindowCommands ShowLastSeparator="False">
+            <metro:WindowCommands.DataContext>
+                <vmm:HelpViewModel />
+            </metro:WindowCommands.DataContext>
             <metro:DropDownButton Content="{DynamicResource TitleBar_Help}" 
                                   Style="{StaticResource MahApps.Styles.DropDownButton.WindowCommands}"                                  
                                   ArrowVisibility="Collapsed">
                 <metro:DropDownButton.ItemsSource>
                     <CompositeCollection>
                         <MenuItem Header="{DynamicResource TitleBar_Visit_OfficialPage}" 
-                                />
+                                  Command="{Binding OpenManualUrlCommand}"
+                                  />
                         <MenuItem Header="{DynamicResource TitleBar_Visit_DownloadPage}" 
-                                />
+                                  Command="{Binding OpenDownloadUrlCommand}"
+                                  />
                         <MenuItem Header="{DynamicResource TitleBar_About}" 
-                                />
+                                  Command="{Binding ShowLicenseCommand}"
+                                  />
                     </CompositeCollection>
                 </metro:DropDownButton.ItemsSource>
             </metro:DropDownButton>
         </metro:WindowCommands>
-        
-        <!--<metro:WindowCommands>
-            <Button Command="{Binding OpenManualUrlCommand}"
-                    Content="{DynamicResource TitleBar_Visit_Official}"
-                    ToolTip="https://malaybaku.github.io/VMagicMirror/"/>
-        </metro:WindowCommands>-->
     </metro:MetroWindow.RightWindowCommands>
     <md:DialogHost IsOpen="{Binding DialogHelper.IsOpen}">
         <md:DialogHost.DialogContent>

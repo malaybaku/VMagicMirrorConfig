@@ -3,35 +3,72 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d"
-        Title="VMagicMirror License" Height="450" Width="600">
+        xmlns:vmm="clr-namespace:Baku.VMagicMirrorConfig"
+        mc:Ignorable="d"        
+        Title="About VMagicMirror" 
+        Height="450" Width="600"
+        MinHeight="450" MinWidth="500">
     <Window.Resources>
-        <ResourceDictionary Source="../../Resources/LicenseTextResource.xaml"/>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Resources/LicenseTextResource.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="NoteText" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                <Setter Property="Margin" Value="2"/>
+                <Setter Property="TextWrapping" Value="Wrap"/>
+            </Style>
+        </ResourceDictionary>
     </Window.Resources>
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto"
-                  HorizontalScrollBarVisibility="Disabled">
-        <StackPanel Margin="10">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
 
-            <TextBlock HorizontalAlignment="Center"
-                       FontWeight="Bold"
-                       FontSize="16"
-                       Text="OSS URLs"/>
-
-            <TextBlock Text="{StaticResource OpenSourceURLs}"
-                       TextWrapping="Wrap"
-                       Margin="5,0,5,15"
-                       />
-
-            <TextBlock HorizontalAlignment="Center"
-                       FontWeight="Bold"
-                       FontSize="16"
-                       Text="OSS License"/>
-
-            <TextBlock Text="{StaticResource OpenSourceLicenses}"
-                       TextWrapping="Wrap"
-                       />
-
+        <StackPanel Margin="10,10,10,5">
+            <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                        Text="VMagicMirror v1.5.0"
+                        Margin="0"
+                        />
+            <vmm:AboutPanel />
         </StackPanel>
-    </ScrollViewer>
+
+
+        <ScrollViewer Grid.Row="2"
+                      VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled">
+            <StackPanel Margin="10,0,10,10">
+
+                <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                           Margin="0,5"
+                           Text="Open Source License"
+                           />
+
+                <TextBlock HorizontalAlignment="Center"
+                           FontWeight="Bold"
+                           FontSize="16"
+                           Text="URLs"/>
+
+                <TextBlock Text="{StaticResource OpenSourceURLs}"
+                           TextWrapping="Wrap"
+                           Margin="5,0,5,15"
+                           />
+
+                <TextBlock HorizontalAlignment="Center"
+                           FontWeight="Bold"
+                           FontSize="16"
+                           Text="OSS License"/>
+
+                <TextBlock Text="{StaticResource OpenSourceLicenses}"
+                           TextWrapping="Wrap"
+                           />
+
+            </StackPanel>
+        </ScrollViewer>
+
+    </Grid>
+    
+
 </Window>
