@@ -17,6 +17,9 @@
     <Window.DataContext>
         <vmm:MainWindowViewModel/>
     </Window.DataContext>
+    <Window.Resources>
+        <vmm:TabSelectionToForegroundConverter x:Key="SelectionToForeground"/>
+    </Window.Resources>
     <md:DialogHost IsOpen="{Binding DialogHelper.IsOpen}">
         <md:DialogHost.DialogContent>
             <StackPanel Orientation="Vertical"
@@ -49,7 +52,7 @@
             </StackPanel>
         </md:DialogHost.DialogContent>
 
-        <dragablz:TabablzControl FixedHeaderCount="5">
+        <dragablz:TabablzControl x:Name="MainTabControl" FixedHeaderCount="5">
             <dragablz:TabablzControl.HeaderItemTemplate>
                 <DataTemplate>
                     <ContentControl Content="{Binding}"/>
@@ -57,37 +60,57 @@
             </dragablz:TabablzControl.HeaderItemTemplate>
             <TabItem>
                 <TabItem.Header>
-                    <vmm:TabHeaderIconText Text="{DynamicResource TopBar_Home}"
-                                           IconKind="Home"
-                                           />
+                    <vmm:TabHeaderIconText
+                        Text="{DynamicResource TopBar_Home}"                        
+                        IconKind="Home"
+                        Foreground="{Binding SelectedIndex,
+                                             ElementName=MainTabControl,
+                                             Converter={StaticResource SelectionToForeground},
+                                             ConverterParameter=0}"   
+                        />
                 </TabItem.Header>
                 <vmm:HomePanel />
             </TabItem>
             <TabItem>
                 <TabItem.Header>
-                    <vmm:TabHeaderIconText Text="{DynamicResource TopBar_Streaming}"
-                                           IconKind="Videocam"
-                                           />
+                    <vmm:TabHeaderIconText 
+                        Text="{DynamicResource TopBar_Streaming}"                        
+                        IconKind="Videocam"
+                        Foreground="{Binding SelectedIndex,
+                                             ElementName=MainTabControl,
+                                             Converter={StaticResource SelectionToForeground},
+                                             ConverterParameter=1}"                           
+                        />
                 </TabItem.Header>
                 <vmm:StreamingPanel />
             </TabItem>
             <TabItem>
                 <TabItem.Header>
-                    <vmm:TabHeaderIconText Text="{DynamicResource TopBar_ExternalFaceTrack}"
-                                           IconKind="FaceRecognition"
-                                           IconHeight="16"
-                                           IconWidth="16"
-                                           />
+                    <vmm:TabHeaderIconText 
+                        Text="{DynamicResource TopBar_ExternalFaceTrack}"                        
+                        IconKind="FaceRecognition"                        
+                        IconHeight="16"                        
+                        IconWidth="16"
+                        Foreground="{Binding SelectedIndex,
+                                             ElementName=MainTabControl,
+                                             Converter={StaticResource SelectionToForeground},
+                                             ConverterParameter=2}"                           
+                        />
                 </TabItem.Header>
                 <vmm:ExternalTrackerPanel DataContext="{Binding ExternalTrackerSetting}" />
             </TabItem>
             <TabItem>
                 <TabItem.Header>
-                    <vmm:TabHeaderIconText Text="About"
-                                           IconKind="QuestionMarkCircleOutline"
-                                           IconWidth="15"
-                                           IconHeight="15"
-                                           />
+                    <vmm:TabHeaderIconText 
+                        Text="About"
+                        IconKind="QuestionMarkCircleOutline"                       
+                        IconWidth="15"                        
+                        IconHeight="15"
+                        Foreground="{Binding SelectedIndex,
+                                             ElementName=MainTabControl,
+                                             Converter={StaticResource SelectionToForeground},
+                                             ConverterParameter=3}"                           
+                        />
                 </TabItem.Header>
                 <vmm:AboutPanel />
             </TabItem>

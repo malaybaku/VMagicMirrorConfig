@@ -22,12 +22,17 @@
             <SolidColorBrush x:Key="SecondaryAccentBrush" Color="{StaticResource Accent400}"/>
             <SolidColorBrush x:Key="SecondaryAccentForegroundBrush" Color="{StaticResource Accent400Foreground}"/>
 
+            <SolidColorBrush x:Key="SelectedTabItemForeground" Color="{StaticResource Primary500}"/>
+            <!-- 黒をalpha=0.64にした色、という考え方の方が正しいかもしれないが、まあ見た目にほぼ影響ないので… -->
+            <SolidColorBrush x:Key="UnselectedTabItemForeground" Color="#5B5B5B"/>
+
             <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
                 <Setter Property="Width" Value="80"/>
                 <Setter Property="Height" Value="30"/>
                 <Setter Property="Margin" Value="10,5"/>
             </Style>
-
+            
+           
             <Style TargetType="Slider" BasedOn="{StaticResource MaterialDesignSlider}">
                 <Setter Property="VerticalAlignment" Value="Center"/>
                 <Setter Property="Margin" Value="5"/>
@@ -113,7 +118,9 @@
             <Style TargetType="{x:Type Expander}" BasedOn="{StaticResource MaterialDesignExpander}"/>
 
             <!-- Dragablz Material Design -->
-            <Style TargetType="{x:Type dragablz:TabablzControl}" BasedOn="{StaticResource MaterialDesignTabablzControlStyle}" />
+            <Style TargetType="{x:Type dragablz:TabablzControl}" BasedOn="{StaticResource MaterialDesignAlternateTabablzControlStyle}">
+                <Setter Property="BorderBrush" Value="Transparent"/>
+            </Style>
 
             <Style x:Key="SettingHeaderPackIcon" TargetType="md:PackIcon">
                 <Setter Property="VerticalAlignment" Value="Center"/>
