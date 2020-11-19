@@ -6,8 +6,10 @@
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="50" d:DesignWidth="150">
-    <StackPanel Orientation="Horizontal" Margin="0">
-
+    <StackPanel Orientation="Horizontal" Margin="5,0">
+        <StackPanel.RenderTransform>
+            <TranslateTransform x:Name="PositionTransform"/>
+        </StackPanel.RenderTransform>
         <md:PackIcon Name="packIcon"
                      VerticalAlignment="Center"
                      Margin="5,0,3,0"

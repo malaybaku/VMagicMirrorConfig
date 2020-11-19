@@ -17,6 +17,7 @@
     NonActiveWindowTitleBrush="{StaticResource PrimaryHueMidBrush}"
     Height="650" Width="550"
     MinHeight="650" MinWidth="550"
+    Background="{StaticResource TabAreaBackground}"
     >
     <Window.DataContext>
         <vmm:MainWindowViewModel/>
@@ -85,7 +86,10 @@
             </StackPanel>
         </md:DialogHost.DialogContent>
 
-        <dragablz:TabablzControl x:Name="MainTabControl" FixedHeaderCount="5">
+        <dragablz:TabablzControl 
+            x:Name="MainTabControl"             
+            FixedHeaderCount="5"
+            >
             <dragablz:TabablzControl.HeaderItemTemplate>
                 <DataTemplate>
                     <ContentControl Content="{Binding}"/>
@@ -102,10 +106,7 @@
                                              ConverterParameter=0}"   
                         />
                 </TabItem.Header>
-                <Grid>
-                    <vmm:HomePanel />
-                    <Rectangle Style="{StaticResource MainWindowSeparatorLine}"/>
-                </Grid>
+                <vmm:HomePanel Background="White" />
             </TabItem>
             <TabItem>
                 <TabItem.Header>
@@ -118,10 +119,7 @@
                                              ConverterParameter=1}"                           
                         />
                 </TabItem.Header>
-                <Grid>
-                    <vmm:StreamingPanel />
-                    <Rectangle Style="{StaticResource MainWindowSeparatorLine}"/>
-                </Grid>
+                <vmm:StreamingPanel Background="White"/>
             </TabItem>
             <TabItem>
                 <TabItem.Header>
@@ -136,28 +134,7 @@
                                              ConverterParameter=2}"                           
                         />
                 </TabItem.Header>
-                <Grid>
-                    <vmm:ExternalTrackerPanel DataContext="{Binding ExternalTrackerSetting}" />
-                    <Rectangle Style="{StaticResource MainWindowSeparatorLine}"/>
-                </Grid>
-            </TabItem>
-            <TabItem>
-                <TabItem.Header>
-                    <vmm:TabHeaderIconText 
-                        Text="About"
-                        IconKind="QuestionMarkCircleOutline"                       
-                        IconWidth="15"                        
-                        IconHeight="15"
-                        Foreground="{Binding SelectedIndex,
-                                             ElementName=MainTabControl,
-                                             Converter={StaticResource SelectionToForeground},
-                                             ConverterParameter=3}"                           
-                        />
-                </TabItem.Header>
-                <Grid>
-                    <vmm:AboutPanel />
-                    <Rectangle Style="{StaticResource MainWindowSeparatorLine}"/>
-                </Grid>
+                <vmm:ExternalTrackerPanel Background="White" DataContext="{Binding ExternalTrackerSetting}" />
             </TabItem>
         </dragablz:TabablzControl>
     </md:DialogHost>

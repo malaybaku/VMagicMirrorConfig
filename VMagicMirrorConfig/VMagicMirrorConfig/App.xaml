@@ -29,9 +29,13 @@
             <Color x:Key="BorderDarkColor">#5B5B5B</Color>
                            
             <SolidColorBrush x:Key="SelectedTabItemForeground" Color="{StaticResource Primary500}"/>
-            <!-- 黒をalpha=0.64にした色、という考え方の方が正しいかもしれないが、まあ見た目にほぼ影響ないので… -->
-            <SolidColorBrush x:Key="UnselectedTabItemForeground" Color="{StaticResource BorderDarkColor}"/>
+            <SolidColorBrush x:Key="UnselectedTabItemForeground" Color="{StaticResource MahApps.Colors.Gray2}"/>
 
+            <SolidColorBrush x:Key="SelectedTabItemBackground" Color="{StaticResource MahApps.Colors.Gray9}"/>
+            <SolidColorBrush x:Key="UnselectedTabItemBackground" Color="Transparent"/>
+
+            <!-- VSCode のVS Light Themeでファイル一覧とかのエリアをこのくらいの色にしてるのをリスペクトしてます -->
+            <SolidColorBrush x:Key="TabAreaBackground" Color="#F3F3F3"/>
 
             <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatMidBgButton}">
                 <Setter Property="Width" Value="80"/>
@@ -157,7 +161,7 @@
                 <Setter Property="HorizontalAlignment" Value="Stretch"/>
                 <Setter Property="Margin" Value="0"/>
                 <Setter Property="Height" Value="2"/>
-                <Setter Property="Fill" Value="{StaticResource MaterialDesignDarkSeparatorBackground}"/>
+                <Setter Property="Fill" Value="{StaticResource TabAreaBackground}"/>
                 <Setter Property="RenderTransform">
                     <Setter.Value>
                         <TranslateTransform Y="-2"/>
