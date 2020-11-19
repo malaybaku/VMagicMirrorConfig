@@ -97,6 +97,8 @@ Check "Keep LipSync" to make the lipsync continue.</sys:String>
     
     
     <!-- Window -->
+    <sys:String x:Key="Window_Header">Window</sys:String>
+    <sys:String x:Key="Window_Basics">Basic Settings</sys:String>
     <sys:String x:Key="Window_BackgroundColor">Background</sys:String>
     <sys:String x:Key="Window_Transparent">Transparent Window</sys:String>
     <sys:String x:Key="Window_Draggable">(When Transparent) Drag character</sys:String>
@@ -120,7 +122,8 @@ Check "Keep LipSync" to make the lipsync continue.</sys:String>
     <sys:String x:Key="Window_TransparencySupport_Level_4">Level 4: Always transparent.</sys:String>
    
     <!-- Motion -->
-    
+    <sys:String x:Key="Motion_Header">Motion</sys:String>   
+
     <!-- Motion : Full Body -->
     <sys:String x:Key="Motion_FullBody">Upper Body</sys:String>
     <sys:String x:Key="Motion_FullBody_NoHandTrackMode">Always-Hands-Down Mode (*Increase body move)</sys:String>    
@@ -199,6 +202,7 @@ If the face tracking works correctly, please ignore this warning.
     <sys:String x:Key="Motion_Wait_WaitMotionPeriod">Period [sec]</sys:String>    
     
     <!-- Layout Setting -->
+    <sys:String x:Key="Layout_Header">Layout</sys:String>   
    
     <!-- Layout : Camera -->
     <sys:String x:Key="Layout_Camera">Camera</sys:String>
@@ -264,6 +268,8 @@ camera movements following:
         
     
     <!-- Light Setting -->
+    <sys:String x:Key="Effect_Header">Effect</sys:String>       
+    
     <sys:String x:Key="ImageQuality">Image Quality</sys:String>
     <sys:String x:Key="ImageQuality_CurrentQuality">Quality</sys:String>
     
@@ -293,6 +299,8 @@ camera movements following:
         
     
     <!-- Word To Motion -->
+    <sys:String x:Key="WordToMotion_Header">Word to Motion</sys:String>   
+    
     <sys:String x:Key="WordToMotion_Enable">Enable Word to Motion</sys:String>
     <sys:String x:Key="WordToMotion_UseGamepadForInput">Use gamepad as launcher</sys:String>
     <sys:String x:Key="WordToMotion_Instruction" xml:space="preserve">This tab is `Word to Motion` tab.

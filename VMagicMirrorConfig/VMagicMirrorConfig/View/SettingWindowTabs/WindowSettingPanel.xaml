@@ -19,7 +19,50 @@
                   HorizontalScrollBarVisibility="Disabled"
                   >
         <StackPanel>
-            <Border Style="{StaticResource SectionBorder}">
+
+            <TextBlock 
+                Text="{DynamicResource Window_Header}"                 
+                Style="{StaticResource SectionHeaderText}"
+                />
+
+            <Border Style="{StaticResource SideMarginSectionBorder}">
+                <StackPanel>
+                    <TextBlock Text="{DynamicResource Window_Basics}"
+                                   Margin="5"
+                                   Style="{StaticResource HeaderText}"
+                                   />
+
+                    <CheckBox Content="{DynamicResource Window_Transparent}"
+                              IsChecked="{Binding IsTransparent, Mode=TwoWay}"
+                              Margin="15,0"
+                              />
+
+                    <CheckBox Content="{DynamicResource Window_Draggable}"
+                              IsChecked="{Binding WindowDraggable, Mode=TwoWay}"
+                              Margin="15,0"
+                              />
+
+                    <CheckBox Content="{DynamicResource Window_TopMost}"
+                              IsChecked="{Binding TopMost, Mode=TwoWay}"
+                              Margin="15,0"
+                              />
+
+                    <Button Width="220"
+                            Command="{Binding ResetWindowPositionCommand}"
+                            >
+                        <StackPanel Style="{StaticResource IconTextSetStackPanel}">
+                            <md:PackIcon Style="{StaticResource IconTextSetIcon}"
+                                         Kind="Reload"
+                                         />
+                            <TextBlock Style="{StaticResource IconSetSetText}"
+                                       Text="{DynamicResource Window_ResetPosition}"
+                                       />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource SideMarginSectionBorder}">
                 <StackPanel>
                     <StackPanel Orientation="Horizontal">
 
@@ -32,14 +75,14 @@
                                    Style="{StaticResource HeaderText}"
                                    />
 
-                        <Border Style="{StaticResource ColorIndicatorBorder}"
+                        <md:Card Style="{StaticResource ColorIndicatorCard}"
                                  Margin="10,5,5,0">
                             <Rectangle>
                                 <Rectangle.Fill>
                                     <SolidColorBrush Color="{Binding Color}"/>
                                 </Rectangle.Fill>
                             </Rectangle>
-                        </Border>
+                        </md:Card>
 
                         <Button Style="{StaticResource CategorySettingResetButton}"
                                 Command="{Binding ResetBackgroundColorSettingCommand}"
@@ -96,36 +139,7 @@
                 </StackPanel>
             </Border>
 
-            <Border Style="{StaticResource SectionBorder}">
-                <StackPanel>
-                    <CheckBox Content="{DynamicResource Window_Transparent}"
-                              IsChecked="{Binding IsTransparent, Mode=TwoWay}"
-                              />
-
-                    <CheckBox Content="{DynamicResource Window_Draggable}"
-                              IsChecked="{Binding WindowDraggable, Mode=TwoWay}"
-                              />
-
-                    <CheckBox Content="{DynamicResource Window_TopMost}"
-                              IsChecked="{Binding TopMost, Mode=TwoWay}"
-                              />
-
-                    <Button Width="220"
-                            Command="{Binding ResetWindowPositionCommand}"
-                            >
-                        <StackPanel Style="{StaticResource IconTextSetStackPanel}">
-                            <md:PackIcon Style="{StaticResource IconTextSetIcon}"
-                                         Kind="Reload"
-                                         />
-                            <TextBlock Style="{StaticResource IconSetSetText}"
-                                       Text="{DynamicResource Window_ResetPosition}"
-                                       />
-                        </StackPanel>                        
-                    </Button>
-                </StackPanel>
-            </Border>
-
-            <Border Style="{StaticResource SectionBorder}">
+            <Border Style="{StaticResource SideMarginSectionBorder}">
                 <StackPanel>
                     <StackPanel Orientation="Horizontal">
 
@@ -215,50 +229,8 @@
                 </StackPanel>
             </Border>
 
-
-            <!--<md:Card>
-                <StackPanel>
-                    <CheckBox Content="{DynamicResource Window_EnableInitialPlacement}"
-                              IsChecked="{Binding EnableWindowInitialPlacement, Mode=TwoWay}"
-                              />
-                    <Button Width="240"
-                            Content="{DynamicResource Window_FetchUnityWindowPos}"
-                            Command="{Binding FetchUnityWindowPositionCommand}"
-                            />
-                    <Button Width="240"
-                            Content="{DynamicResource Window_MoveWindow}"
-                            Command="{Binding MoveWindowCommand}"
-                            />
-
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-
-                        <TextBlock Grid.Row="0" Grid.Column="0"
-                                   Text="{DynamicResource Window_InitialPositionX}"
-                                   />
-                        <TextBox Grid.Row="0" Grid.Column="1" 
-                                 Text="{Binding WindowInitialPositionX, Mode=TwoWay}"
-                                 />
-
-                        <TextBlock Grid.Row="1" Grid.Column="0"
-                                   Text="{DynamicResource Window_InitialPositionY}"
-                                   />
-                        <TextBox Grid.Row="1" Grid.Column="1"
-                                 Text="{Binding WindowInitialPositionY, Mode=TwoWay}"
-                                 />
-                    </Grid>
-
-
-                </StackPanel>
-            </md:Card>-->
-
+            <!-- マージン用の虚無空間です -->
+            <Grid Width="50" Height="50"/>
         </StackPanel>
     </ScrollViewer>
 </UserControl>

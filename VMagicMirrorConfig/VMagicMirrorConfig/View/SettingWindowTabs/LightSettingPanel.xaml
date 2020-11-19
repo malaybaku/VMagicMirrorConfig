@@ -21,7 +21,12 @@
                   >
         <StackPanel>
 
-            <Border Style="{StaticResource SectionBorder}">
+            <TextBlock 
+                Text="{DynamicResource Effect_Header}"                 
+                Style="{StaticResource SectionHeaderText}"
+                />
+            
+            <Border Style="{StaticResource SideMarginSectionBorder}">
                 <StackPanel>
 
                     <StackPanel Orientation="Horizontal"
@@ -60,7 +65,7 @@
                 </StackPanel>
             </Border>
 
-            <Border Style="{StaticResource SectionBorder}">
+            <Border Style="{StaticResource SideMarginSectionBorder}">
                 <StackPanel>
 
                     <StackPanel Orientation="Horizontal">
@@ -74,13 +79,13 @@
                                    Style="{StaticResource HeaderText}"
                                    />
 
-                        <Border Style="{StaticResource ColorIndicatorBorder}">
+                        <md:Card Style="{StaticResource ColorIndicatorCard}">
                             <Rectangle>
                                 <Rectangle.Fill>
                                     <SolidColorBrush Color="{Binding LightColor}"/>
                                 </Rectangle.Fill>
                             </Rectangle>
-                        </Border>
+                        </md:Card>
                         
                         <Button Style="{StaticResource CategorySettingResetButton}"
                                 Command="{Binding ResetLightSettingCommand}"
@@ -179,7 +184,7 @@
                 </StackPanel>
             </Border>
 
-            <Border Style="{StaticResource SectionBorder}">
+            <Border Style="{StaticResource SideMarginSectionBorder}">
                 <StackPanel>
 
                     <StackPanel Orientation="Horizontal"
@@ -276,7 +281,7 @@
                 </StackPanel>
             </Border>
 
-            <Border Style="{StaticResource SectionBorder}">
+            <Border Style="{StaticResource SideMarginSectionBorder}">
                 <StackPanel>
                     <StackPanel Orientation="Horizontal">
 
@@ -289,13 +294,13 @@
                                    Style="{StaticResource HeaderText}"
                                    />
                         
-                        <Border Style="{StaticResource ColorIndicatorBorder}">
+                        <md:Card Style="{StaticResource ColorIndicatorCard}">
                             <Rectangle>
                                 <Rectangle.Fill>
                                     <SolidColorBrush Color="{Binding BloomColor}"/>
                                 </Rectangle.Fill>
                             </Rectangle>
-                        </Border>
+                        </md:Card>
 
                         <Button Style="{StaticResource CategorySettingResetButton}"
                                 Command="{Binding ResetBloomSettingCommand}"
@@ -380,7 +385,7 @@
                 </StackPanel>
             </Border>
 
-            <Border Style="{StaticResource SectionBorder}">
+            <Border Style="{StaticResource SideMarginSectionBorder}">
                 <StackPanel>
 
                     <StackPanel Orientation="Horizontal"

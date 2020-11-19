@@ -70,6 +70,10 @@
                 <Setter Property="Margin" Value="5,0"/>
             </Style>
 
+            <Style x:Key="SectionHeaderText" TargetType="TextBlock" BasedOn="{StaticResource MaterialDesignHeadline4TextBlock}">
+                <Setter Property="Margin" Value="25,15,15,15"/>
+            </Style>
+
             <Style x:Key="HeaderText" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
                 <Setter Property="FontWeight" Value="Bold"/>
                 <Setter Property="Margin" Value="10,15,10,0"/>
@@ -83,7 +87,11 @@
                 <Setter Property="Margin" Value="10,5"/>
                 <Setter Property="Padding" Value="5"/>
             </Style>
-
+            
+            <Style x:Key="SideMarginSectionBorder" TargetType="Border" BasedOn="{StaticResource SectionBorder}">
+                <Setter Property="Margin" Value="25,10"/>
+            </Style>
+            
             <Style TargetType="{x:Type md:Card}" BasedOn="{StaticResource {x:Type md:Card}}">
                 <Setter Property="md:ShadowAssist.ShadowDepth" Value="Depth1"/>
                 <Setter Property="Margin" Value="10,5"/>

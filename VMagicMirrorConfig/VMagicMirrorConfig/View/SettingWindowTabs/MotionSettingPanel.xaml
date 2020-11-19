@@ -19,7 +19,12 @@
                   >
         <StackPanel Margin="0,5">
 
-            <Border Style="{StaticResource SectionBorder}">
+            <TextBlock 
+                Text="{DynamicResource Motion_Header}"                 
+                Style="{StaticResource SectionHeaderText}"
+                />
+            
+            <Border Style="{StaticResource SideMarginSectionBorder}">
                 <StackPanel>
 
                     <StackPanel Orientation="Horizontal"
@@ -44,7 +49,7 @@
                 </StackPanel>
             </Border>
 
-            <Border Style="{StaticResource SectionBorder}">
+            <Border Style="{StaticResource SideMarginSectionBorder}">
                 <StackPanel>
 
                     <StackPanel Orientation="Horizontal"
@@ -388,7 +393,7 @@
                 </StackPanel>
             </Border>
 
-            <Border Style="{StaticResource SectionBorder}">
+            <Border Style="{StaticResource SideMarginSectionBorder}">
                 <StackPanel>
 
                     <StackPanel Orientation="Horizontal"
@@ -511,7 +516,7 @@
                 </StackPanel>                
             </Border>
 
-            <Border Style="{StaticResource SectionBorder}">
+            <Border Style="{StaticResource SideMarginSectionBorder}">
                 <StackPanel>
 
                     <StackPanel Orientation="Horizontal"
@@ -581,7 +586,7 @@
                 </StackPanel>
             </Border>
 
-            <Border Style="{StaticResource SectionBorder}">
+            <Border Style="{StaticResource SideMarginSectionBorder}">
                 <StackPanel>
 
                     <StackPanel Orientation="Horizontal"

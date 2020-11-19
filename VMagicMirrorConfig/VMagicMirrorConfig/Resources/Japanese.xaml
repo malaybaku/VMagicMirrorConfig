@@ -99,6 +99,8 @@
 
     
     <!-- Window -->
+    <sys:String x:Key="Window_Header">ウィンドウ</sys:String>
+    <sys:String x:Key="Window_Basics">基本の設定</sys:String>
     <sys:String x:Key="Window_BackgroundColor">背景色</sys:String>
     <sys:String x:Key="Window_Transparent">背景を透過</sys:String>
     <sys:String x:Key="Window_Draggable">(透過中)キャラ付近を掴んでドラッグ</sys:String>
@@ -122,6 +124,7 @@
     <sys:String x:Key="Window_TransparencySupport_Level_4">レベル4: つねに半透明になります。</sys:String>
         
     <!-- Motion -->
+    <sys:String x:Key="Motion_Header">モーション</sys:String>   
     
     <!-- Motion : Full Body -->
     <sys:String x:Key="Motion_FullBody">上半身</sys:String>
@@ -201,6 +204,7 @@
     <sys:String x:Key="Motion_Wait_WaitMotionPeriod">周期 [sec]</sys:String>    
     
     <!-- Layout Setting -->
+    <sys:String x:Key="Layout_Header">レイアウト</sys:String>   
 
     <!-- Layout : Camera -->
     <sys:String x:Key="Layout_Camera">カメラ</sys:String>
@@ -260,6 +264,8 @@
         
 
     <!-- Light Setting -->
+    <sys:String x:Key="Effect_Header">エフェクト</sys:String>       
+
     <sys:String x:Key="ImageQuality">画質</sys:String>
     <sys:String x:Key="ImageQuality_CurrentQuality">現在の設定</sys:String>
     
@@ -289,6 +295,8 @@
 
     
     <!-- Word To Motion -->
+    <sys:String x:Key="WordToMotion_Header">Word to Motion</sys:String>
+    
     <sys:String x:Key="WordToMotion_Enable">Word to Motionを有効化</sys:String>
     <sys:String x:Key="WordToMotion_UseGamepadForInput">ゲームパッドのボタンで表情/モーションを実行</sys:String>
     <sys:String x:Key="WordToMotion_Instruction" xml:space="preserve">このタブは `Word to Motion` タブです。

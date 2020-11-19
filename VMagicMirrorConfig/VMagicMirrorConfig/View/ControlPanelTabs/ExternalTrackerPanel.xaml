@@ -19,86 +19,88 @@
     <ScrollViewer VerticalScrollBarVisibility="Auto" 
                   HorizontalScrollBarVisibility="Disabled">
         <StackPanel Margin="5">
-            <StackPanel Margin="10">
-                <StackPanel Orientation="Horizontal" Margin="5">
-                    <md:PackIcon Style="{StaticResource HeaderPackIcon}" 
-                                 Width="18" Height="18"
-                                    Kind="FaceRecognition" />
-                    <TextBlock Style="{StaticResource HeaderText}" 
-                                Text="{DynamicResource ExTracker_Title}" 
-                                Margin="10,5"/>
-                    <Button Style="{StaticResource CategorySettingResetButton}"
-                            Command="{Binding ResetSettingsCommand}"
-                            />
-                </StackPanel>
+            <Border Style="{StaticResource SectionBorder}">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <md:PackIcon Style="{StaticResource HeaderPackIcon}" 
+                                     Width="18" Height="18"
+                                        Kind="FaceRecognition" />
+                        <TextBlock Style="{StaticResource HeaderText}" 
+                                    Text="{DynamicResource ExTracker_Title}" 
+                                    Margin="10,5"/>
+                        <Button Style="{StaticResource CategorySettingResetButton}"
+                                Command="{Binding ResetSettingsCommand}"
+                                />
+                    </StackPanel>
 
 
-                <TextBlock Margin="15,5" 
-                            Text="{DynamicResource ExTracker_Instruction}"/>
-                <CheckBox Margin="15,10,15,0" 
-                            VerticalContentAlignment="Center"
-                            Content="{DynamicResource ExTracker_Enable}" 
-                            IsChecked="{Binding EnableExternalTracking}"
-                            />
-                <CheckBox Margin="35,0,15,0" 
-                            VerticalContentAlignment="Center"
-                            Content="{DynamicResource ExTracker_Enable_ImageLipSync}" 
-                            IsEnabled="{Binding EnableExternalTracking}"
-                            IsChecked="{Binding EnableExternalTrackerLipSync}"
-                            />
+                    <TextBlock Margin="15,5" 
+                                Text="{DynamicResource ExTracker_Instruction}"/>
+                    <CheckBox Margin="15,10,15,0" 
+                                VerticalContentAlignment="Center"
+                                Content="{DynamicResource ExTracker_Enable}" 
+                                IsChecked="{Binding EnableExternalTracking}"
+                                />
+                    <CheckBox Margin="35,0,15,0" 
+                                VerticalContentAlignment="Center"
+                                Content="{DynamicResource ExTracker_Enable_ImageLipSync}" 
+                                IsEnabled="{Binding EnableExternalTracking}"
+                                IsChecked="{Binding EnableExternalTrackerLipSync}"
+                                />
                 <Grid Margin="35,0,0,5"
-                      IsEnabled="{Binding EnableExternalTracking}">
+                          IsEnabled="{Binding EnableExternalTracking}">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <CheckBox Grid.Row="0" 
-                              Margin="0"
-                              VerticalContentAlignment="Center"
-                              Content="{DynamicResource ExTracker_Enable_PerfectSync}"                               
-                              IsChecked="{Binding EnableExternalTrackerPerfectSync}"
-                              />
+                                  Margin="0"
+                                  VerticalContentAlignment="Center"
+                                  Content="{DynamicResource ExTracker_Enable_PerfectSync}"                               
+                                  IsChecked="{Binding EnableExternalTrackerPerfectSync}"
+                                  />
                     <Button Grid.Row="1"
-                            HorizontalAlignment="Left"
-                            Margin="25,5"
-                            Padding="5"
-                            Width="NaN"
-                            Style="{StaticResource MaterialDesignOutlinedButton}"
-                            Foreground="Black"
-                            Visibility="{Binding ShouldNotifyMissingBlendShapeClipNames,
-                                                 Converter={StaticResource BooleanToVisibilityConverter}, 
-                                                 FallbackValue=Collapsed}"
-                            Command="{Binding ShowMissingBlendShapeNotificationCommand}"                            
-                            >
+                                HorizontalAlignment="Left"
+                                Margin="25,5"
+                                Padding="5"
+                                Width="NaN"
+                                Style="{StaticResource MaterialDesignOutlinedButton}"
+                                Foreground="Black"
+                                Visibility="{Binding ShouldNotifyMissingBlendShapeClipNames,
+                                                     Converter={StaticResource BooleanToVisibilityConverter}, 
+                                                     FallbackValue=Collapsed}"
+                                Command="{Binding ShowMissingBlendShapeNotificationCommand}"                            
+                                >
                         <StackPanel Orientation="Horizontal">
                             <md:PackIcon Kind="WarningOutline"
-                                         Margin="0"
-                                         VerticalAlignment="Center"
-                                         Foreground="{StaticResource PrimaryHueMidBrush}"
-                                         />
+                                             Margin="0"
+                                             VerticalAlignment="Center"
+                                             Foreground="{StaticResource PrimaryHueMidBrush}"
+                                             />
                             <TextBlock Text="{DynamicResource ExTracker_PerfectSync_MissingBlendShape_Header}" 
-                                       Margin="3,0"
-                                       />
+                                           Margin="3,0"
+                                           />
                         </StackPanel>
                     </Button>
                     <CheckBox Grid.Row="2"
-                              Margin="20,0,0,0" 
-                              VerticalContentAlignment="Center"
-                              Content="{DynamicResource ExTracker_PerfectSync_UseVRoidDefault}" 
-                              IsEnabled="{Binding EnableExternalTrackerPerfectSync}"
-                              IsChecked="{Binding UseVRoidDefaultForPerfectSync}"
-                              />
+                                  Margin="20,0,0,0" 
+                                  VerticalContentAlignment="Center"
+                                  Content="{DynamicResource ExTracker_PerfectSync_UseVRoidDefault}" 
+                                  IsEnabled="{Binding EnableExternalTrackerPerfectSync}"
+                                  IsChecked="{Binding UseVRoidDefaultForPerfectSync}"
+                                  />
                     <Button Grid.Row="0" Style="{StaticResource MaterialDesignOutlinedButton}"
-                            Padding="0"
-                            VerticalAlignment="Top"
-                            HorizontalAlignment="Right"
-                            Margin="0,0,10,0"
-                            Command="{Binding OpenPerfectSyncTipsUrlCommand}"
-                            Content="{DynamicResource ExTracker_HowTo_PerfectSync}"
-                            />
-                </Grid>
-            </StackPanel>
+                                Padding="0"
+                                VerticalAlignment="Top"
+                                HorizontalAlignment="Right"
+                                Margin="0,0,10,0"
+                                Command="{Binding OpenPerfectSyncTipsUrlCommand}"
+                                Content="{DynamicResource ExTracker_HowTo_PerfectSync}"
+                                />
+                    </Grid>
+                </StackPanel>
+            </Border>
 
             <Border Style="{StaticResource SectionBorder}"
                     Padding="5">

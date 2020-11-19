@@ -13,6 +13,7 @@
     Title="VMagicMirror v1.5.0" 
     ResizeMode="CanMinimize"
     TitleCharacterCasing="Normal"
+    WindowTransitionsEnabled="False"
     WindowTitleBrush="{StaticResource PrimaryHueMidBrush}"
     NonActiveWindowTitleBrush="{StaticResource PrimaryHueMidBrush}"
     Height="650" Width="550"
