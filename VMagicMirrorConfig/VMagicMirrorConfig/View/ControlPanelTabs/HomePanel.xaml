@@ -9,7 +9,7 @@
              mc:Ignorable="d"
              d:DataContext="{x:Type vmm:MainWindowViewModel}"
              d:DesignWidth="550"
-             d:DesignHeight="470"
+             d:DesignHeight="600"
              AllowDrop="True"
              >
     <UserControl.Resources>
@@ -35,7 +35,7 @@
         <ScrollViewer VerticalScrollBarVisibility="Auto"
                       HorizontalScrollBarVisibility="Disabled"
                       >
-            <Grid>
+            <Grid Margin="5,15">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />

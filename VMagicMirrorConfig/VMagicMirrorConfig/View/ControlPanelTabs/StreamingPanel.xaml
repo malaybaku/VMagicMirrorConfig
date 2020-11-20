@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DataContext="{x:Type vmm:MainWindowViewModel}"
              d:DesignWidth="520"
-             d:DesignHeight="590"
+             d:DesignHeight="590"             
              >
     <UserControl.Resources>
         <vmm:WhiteSpaceStringToNullConverter x:Key="WhiteSpaceStringToNullConverter"/>
@@ -37,7 +37,7 @@
             <Setter Property="Margin" Value="4"/>
             <Setter Property="Padding" Value="5"/>
         </Style>
-        <Style TargetType="Border" BasedOn="{StaticResource SectionBorder}">
+        <Style x:Key="StreamingSectionBorder" TargetType="Border" BasedOn="{StaticResource SectionBorder}">
             <Setter Property="Margin" Value="4"/>
             <Setter Property="Padding" Value="5"/>
         </Style>
@@ -63,14 +63,15 @@
     
     <ScrollViewer VerticalScrollBarVisibility="Auto"
                   HorizontalScrollBarVisibility="Disabled"
+                  Margin="0"
                   >
-        <Grid Margin="4">
+        <Grid Margin="5,10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="300"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0">
-                <Border>
+                <Border Style="{StaticResource StreamingSectionBorder}">
                     <StackPanel>
 
                         <StackPanel Orientation="Horizontal">
@@ -94,7 +95,7 @@
                     </StackPanel>
                 </Border>
 
-                <Border>
+                <Border Style="{StaticResource StreamingSectionBorder}">
                     <StackPanel>
 
                         <StackPanel Orientation="Horizontal">
@@ -344,7 +345,7 @@
                     </StackPanel>
                 </Border>
 
-                <Border>
+                <Border Style="{StaticResource StreamingSectionBorder}">
                     <StackPanel>
 
                         <StackPanel Orientation="Horizontal">
@@ -405,7 +406,7 @@
             </StackPanel>
 
             <StackPanel Grid.Column="1">
-                <Border>
+                <Border Style="{StaticResource StreamingSectionBorder}">
                     <StackPanel>
 
                         <StackPanel Orientation="Horizontal">
@@ -473,7 +474,7 @@
                     </StackPanel>
                 </Border>
 
-                <Border>
+                <Border Style="{StaticResource StreamingSectionBorder}">
                     <StackPanel>
 
                         <Grid>
@@ -592,7 +593,7 @@
                     </StackPanel>
                 </Border>
 
-                <Border>
+                <Border Style="{StaticResource StreamingSectionBorder}">
                     <StackPanel>
                         <StackPanel Orientation="Horizontal">
 
@@ -631,7 +632,7 @@
                     </StackPanel>
                 </Border>
 
-                <Border>
+                <Border Style="{StaticResource StreamingSectionBorder}">
                     <StackPanel>
                         <StackPanel Orientation="Horizontal">
 

@@ -16,8 +16,8 @@
     WindowTransitionsEnabled="False"
     WindowTitleBrush="{StaticResource PrimaryHueMidBrush}"
     NonActiveWindowTitleBrush="{StaticResource PrimaryHueMidBrush}"
-    Height="650" Width="550"
-    MinHeight="650" MinWidth="550"
+    Height="680" Width="550"
+    MinHeight="680" MinWidth="550"
     Background="{StaticResource TabAreaBackground}"
     >
     <Window.DataContext>
