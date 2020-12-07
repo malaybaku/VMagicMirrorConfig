@@ -18,6 +18,7 @@
     NonActiveWindowTitleBrush="{StaticResource PrimaryHueMidBrush}"
     Height="680" Width="550"
     MinHeight="680" MinWidth="550"
+    ShowDialogsOverTitleBar="False"
     Background="{StaticResource TabAreaBackground}"
     >
     <Window.DataContext>
@@ -55,7 +56,8 @@
             </metro:DropDownButton>
         </metro:WindowCommands>
     </metro:MetroWindow.RightWindowCommands>
-    <md:DialogHost IsOpen="{Binding DialogHelper.IsOpen}">
+    <!-- DEBUG: ダイアログの出し方を変えます。 -->
+    <md:DialogHost> <!-- IsOpen="{Binding DialogHelper.IsOpen}"> -->
         <md:DialogHost.DialogContent>
             <StackPanel Orientation="Vertical"
                         VerticalAlignment="Center">

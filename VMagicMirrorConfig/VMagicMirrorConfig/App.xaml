@@ -42,8 +42,17 @@
                 <Setter Property="Height" Value="30"/>
                 <Setter Property="Margin" Value="10,5"/>
             </Style>
-            
-           
+
+
+            <Style TargetType="Slider" BasedOn="{StaticResource MahApps.Styles.Slider}">
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="Minimum" Value="0"/>
+                <Setter Property="Maximum" Value="255"/>
+                <Setter Property="IsSnapToTickEnabled" Value="True"/>
+                <Setter Property="TickFrequency" Value="1"/>
+            </Style>
+            <!--
             <Style TargetType="Slider" BasedOn="{StaticResource MaterialDesignSlider}">
                 <Setter Property="VerticalAlignment" Value="Center"/>
                 <Setter Property="Margin" Value="5"/>
@@ -52,6 +61,7 @@
                 <Setter Property="IsSnapToTickEnabled" Value="True"/>
                 <Setter Property="TickFrequency" Value="1"/>
             </Style>
+            -->
 
             <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
                 <Setter Property="VerticalAlignment" Value="Center"/>

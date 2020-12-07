@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
+using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 
 namespace Baku.VMagicMirrorConfig
 {
@@ -10,7 +13,9 @@ namespace Baku.VMagicMirrorConfig
         public static MessageBoxWrapper Instance
             => _instance ??= new MessageBoxWrapper();
 
-        private readonly Queue<TaskCompletionSource<bool>> _dialogTasks = new Queue<TaskCompletionSource<bool>>();
+        private ProgressDialogController? _mainProgress = null;
+        private ProgressDialogController? _settingProgress = null;
+        private TaskCompletionSource<bool>? _tcsProgress = null;
 
         /// <summary>
         /// メインウィンドウ、および表示されている場合は設定ウィンドウに、
@@ -19,19 +24,99 @@ namespace Baku.VMagicMirrorConfig
         /// MessageBox.Showの代わりに呼び出して使います。
         /// </summary>
         /// <returns></returns>
-        public Task<bool> ShowAsync(string title, string content, MessageBoxStyle style)
+        public async Task<bool> ShowAsync(string title, string content, MessageBoxStyle style)
         {
-            var vm = DialogHelperViewModel.Instance;
+            if (Application.Current.MainWindow is not MetroWindow window)
+            {
+                //ウィンドウが何かおかしい: 無視
+                return true;
+            }
 
-            vm.Title = title;
-            vm.Content = content;
-            vm.CanOk = (style == MessageBoxStyle.OK || style == MessageBoxStyle.OKCancel);
-            vm.CanCancel = (style == MessageBoxStyle.Cancel || style == MessageBoxStyle.OKCancel);
-            vm.IsOpen = true;
+            var settingWindow = SettingWindow.CurrentWindow;
 
-            var result = new TaskCompletionSource<bool>();
-            _dialogTasks.Enqueue(result);
-            return result.Task;            
+            if (style == MessageBoxStyle.OK)
+            {
+                var cts = new CancellationTokenSource();
+                var mainWindowTask = window.ShowMessageAsync(
+                    title,
+                    content,
+                    settings: SettingsForOkDialog(cts.Token)
+                    );
+
+                if (settingWindow != null)
+                {
+                    await Task.WhenAny(
+                        mainWindowTask,                        
+                        settingWindow.ShowMessageAsync(
+                            title,
+                            content,
+                            settings: SettingsForOkDialog(cts.Token)
+                        )
+                    );
+                }
+                else
+                {
+                    await mainWindowTask;
+                }
+                //どっちかのダイアログが閉じたらもう片方も閉じる
+                cts.Cancel();
+                return true;
+            }
+            else if (style == MessageBoxStyle.OKCancel)
+            {
+                var cts = new CancellationTokenSource();
+                var mainWindowTask = window.ShowMessageAsync(
+                    title,
+                    content,
+                    MessageDialogStyle.AffirmativeAndNegative,
+                    SettingsForOkCancel(cts.Token)
+                    );
+
+                if (settingWindow != null)
+                {
+                    var firstTask = await Task.WhenAny(
+                        mainWindowTask,
+                        settingWindow.ShowMessageAsync(
+                            title,
+                            content,
+                            MessageDialogStyle.AffirmativeAndNegative,
+                            SettingsForOkCancel(cts.Token)
+                        )
+                    );
+                    //どっちかのダイアログが閉じたらもう片方も閉じる
+                    cts.Cancel();
+                    return firstTask.Result == MessageDialogResult.Affirmative;
+                }
+                else
+                {
+                    var result = await mainWindowTask;
+                    return result == MessageDialogResult.Affirmative;                    
+                }
+            }
+            else if (style == MessageBoxStyle.None)
+            {
+                //Progress方式で出す
+                _mainProgress = await window.ShowProgressAsync(
+                   title,
+                   content,
+                   settings: SettingsForProgress()
+                   );
+
+                if (settingWindow != null)
+                {
+                    _settingProgress = await settingWindow.ShowProgressAsync(
+                            title,
+                            content,
+                            settings: SettingsForProgress()
+                        );
+                }
+
+                _tcsProgress = new TaskCompletionSource<bool>();
+                return await _tcsProgress.Task;
+            }
+
+            //ふつう到達しない
+            return true;
         }
 
         /// <summary>
@@ -39,20 +124,66 @@ namespace Baku.VMagicMirrorConfig
         /// またはプログラム的にダイアログを閉じたいときもここを呼び出します。
         /// </summary>
         /// <param name="result"></param>
-        public void SetDialogResult(bool result)
+        public async void SetDialogResult(bool result)
         {
-            if (_dialogTasks.Count > 0)
+            //NOTE: 名前に反して、ほぼダイアログを閉じためだけに使う
+            if (_mainProgress != null)
             {
-                var tcs = _dialogTasks.Dequeue();
-                tcs.SetResult(result);
+                await _mainProgress.CloseAsync();
             }
+
+            if (_settingProgress != null)
+            {
+                await _settingProgress.CloseAsync();
+            }
+
+            _tcsProgress?.SetResult(true);
+
+            _mainProgress = null;
+            _settingProgress = null;
+            _tcsProgress = null;
+        }
+
+        private MetroDialogSettings SettingsForOkDialog(CancellationToken token)
+        {
+            return new MetroDialogSettings()
+            {
+                CancellationToken = token,
+                AnimateShow = true,
+                AnimateHide = false,
+                OwnerCanCloseWithDialog = true,
+            };
+        }
+
+        private MetroDialogSettings SettingsForOkCancel(CancellationToken token)
+        {
+            return new MetroDialogSettings()
+            {
+                CancellationToken = token,
+                AffirmativeButtonText = "OK",
+                NegativeButtonText = "Cancel",
+                AnimateShow = true,
+                AnimateHide = false,
+                DialogResultOnCancel = MessageDialogResult.Negative,
+                OwnerCanCloseWithDialog = true,
+            };
+        }
+
+        private MetroDialogSettings SettingsForProgress()
+        {
+            return new MetroDialogSettings()
+            {
+                DialogResultOnCancel = MessageDialogResult.Negative,
+                AnimateShow = true,
+                AnimateHide = false,
+                OwnerCanCloseWithDialog = true,
+            };
         }
 
         public enum MessageBoxStyle
         {
             OK,
             OKCancel,
-            Cancel,
             //NOTE: NoneはUnityの特定操作が終わるまでUIをガードしたいときに使う。
             //表示したダイアログはSetDialogResultで閉じる必要がある。
             None,
