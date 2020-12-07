@@ -120,13 +120,13 @@ namespace Baku.VMagicMirrorConfig
         }
 
         /// <summary>
-        /// ダイアログの結果を設定します。UIがDialogHelperViewModelから呼び出すか、
-        /// またはプログラム的にダイアログを閉じたいときもここを呼び出します。
+        /// ダイアログの結果を設定します。UIから実行したり、プログラム的にダイアログを閉じたいときに呼び出します。
         /// </summary>
         /// <param name="result"></param>
         public async void SetDialogResult(bool result)
         {
-            //NOTE: 名前に反して、ほぼダイアログを閉じためだけに使う
+            //NOTE: 名前に反して、ほぼダイアログを閉じるためだけに使う。
+            //これは現状の用途が"UI上ではキャンセル不可のダイアログをコードからキャンセル扱いで閉じる"という特殊な目的に限定されているため。
             if (_mainProgress != null)
             {
                 await _mainProgress.CloseAsync();

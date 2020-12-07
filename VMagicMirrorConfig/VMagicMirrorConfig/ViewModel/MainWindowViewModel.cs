@@ -21,8 +21,6 @@ namespace Baku.VMagicMirrorConfig
         public WordToMotionSettingViewModel WordToMotionSetting { get; private set; }
         public ExternalTrackerViewModel ExternalTrackerSetting { get; private set; }
 
-        public DialogHelperViewModel DialogHelper => DialogHelperViewModel.Instance;
-
         private DeviceFreeLayoutHelper? _deviceFreeLayoutHelper;
 
         private bool _activateOnStartup = false;
@@ -85,7 +83,6 @@ namespace Baku.VMagicMirrorConfig
                     if (_isVRoidHubUiActive)
                     {
                         MessageBoxWrapper.Instance.SetDialogResult(false);
-                        DialogHelper.IsOpen = false;
                     }
 
                     //ファイルパスではなくモデルID側を最新情報として覚えておく
@@ -98,7 +95,6 @@ namespace Baku.VMagicMirrorConfig
                     if (_isVRoidHubUiActive)
                     {
                         MessageBoxWrapper.Instance.SetDialogResult(false);
-                        DialogHelper.IsOpen = false;
                     }
                     break;
             }
