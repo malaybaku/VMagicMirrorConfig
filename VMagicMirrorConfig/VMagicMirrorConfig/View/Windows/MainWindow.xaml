@@ -57,88 +57,55 @@
         </metro:WindowCommands>
     </metro:MetroWindow.RightWindowCommands>
     <!-- DEBUG: ダイアログの出し方を変えます。 -->
-    <md:DialogHost> <!-- IsOpen="{Binding DialogHelper.IsOpen}"> -->
-        <md:DialogHost.DialogContent>
-            <StackPanel Orientation="Vertical"
-                        VerticalAlignment="Center">
-                <TextBlock Text="{Binding DialogHelper.Title}"
-                           Margin="10"
-                           TextAlignment="Center"
-                           Foreground="Black"
-                           FontWeight="Bold"
-                           />
-                <TextBlock Text="{Binding DialogHelper.Content}"
-                           Margin="10,0,10,20"
-                           TextAlignment="Center"
-                           Foreground="Black"
-                           />
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button Style="{StaticResource MaterialDesignFlatButton}"
-                            Content="OK"
-                            Visibility="{Binding DialogHelper.CanOk,
-                                                 Converter={StaticResource BooleanToVisibilityConverter}}"
-                            Command="{Binding DialogHelper.OKCommand}"
-                            />
-                    <Button Style="{StaticResource MaterialDesignFlatButton}"
-                            Visibility="{Binding DialogHelper.CanCancel, 
-                                                 Converter={StaticResource BooleanToVisibilityConverter}}"
-                            Content="Cancel"
-                            Command="{Binding DialogHelper.CancelCommand}"
-                            />
-                </StackPanel>
-            </StackPanel>
-        </md:DialogHost.DialogContent>
-
-        <dragablz:TabablzControl 
-            x:Name="MainTabControl"             
-            FixedHeaderCount="5"
-            >
-            <dragablz:TabablzControl.HeaderItemTemplate>
-                <DataTemplate>
-                    <ContentControl Content="{Binding}"/>
-                </DataTemplate>
-            </dragablz:TabablzControl.HeaderItemTemplate>
-            <TabItem>
-                <TabItem.Header>
-                    <vmm:TabHeaderIconText
-                        Text="{DynamicResource TopBar_Home}"                        
-                        IconKind="Home"
-                        Foreground="{Binding SelectedIndex,
-                                             ElementName=MainTabControl,
-                                             Converter={StaticResource SelectionToForeground},
-                                             ConverterParameter=0}"   
-                        />
-                </TabItem.Header>
-                <vmm:HomePanel Background="White" />
-            </TabItem>
-            <TabItem>
-                <TabItem.Header>
-                    <vmm:TabHeaderIconText 
-                        Text="{DynamicResource TopBar_Streaming}"                        
-                        IconKind="Videocam"
-                        Foreground="{Binding SelectedIndex,
-                                             ElementName=MainTabControl,
-                                             Converter={StaticResource SelectionToForeground},
-                                             ConverterParameter=1}"                           
-                        />
-                </TabItem.Header>
-                <vmm:StreamingPanel Background="White"/>
-            </TabItem>
-            <TabItem>
-                <TabItem.Header>
-                    <vmm:TabHeaderIconText 
-                        Text="{DynamicResource TopBar_ExternalFaceTrack}"                        
-                        IconKind="FaceRecognition"                        
-                        IconHeight="16"                        
-                        IconWidth="16"
-                        Foreground="{Binding SelectedIndex,
-                                             ElementName=MainTabControl,
-                                             Converter={StaticResource SelectionToForeground},
-                                             ConverterParameter=2}"                           
-                        />
-                </TabItem.Header>
-                <vmm:ExternalTrackerPanel Background="White" DataContext="{Binding ExternalTrackerSetting}" />
-            </TabItem>
-        </dragablz:TabablzControl>
-    </md:DialogHost>
+    <dragablz:TabablzControl 
+        x:Name="MainTabControl"             
+        FixedHeaderCount="5"
+        >
+        <dragablz:TabablzControl.HeaderItemTemplate>
+            <DataTemplate>
+                <ContentControl Content="{Binding}"/>
+            </DataTemplate>
+        </dragablz:TabablzControl.HeaderItemTemplate>
+        <TabItem>
+            <TabItem.Header>
+                <vmm:TabHeaderIconText
+                    Text="{DynamicResource TopBar_Home}"                        
+                    IconKind="Home"
+                    Foreground="{Binding SelectedIndex,
+                                            ElementName=MainTabControl,
+                                            Converter={StaticResource SelectionToForeground},
+                                            ConverterParameter=0}"   
+                    />
+            </TabItem.Header>
+            <vmm:HomePanel Background="White" />
+        </TabItem>
+        <TabItem>
+            <TabItem.Header>
+                <vmm:TabHeaderIconText 
+                    Text="{DynamicResource TopBar_Streaming}"                        
+                    IconKind="Videocam"
+                    Foreground="{Binding SelectedIndex,
+                                            ElementName=MainTabControl,
+                                            Converter={StaticResource SelectionToForeground},
+                                            ConverterParameter=1}"                           
+                    />
+            </TabItem.Header>
+            <vmm:StreamingPanel Background="White"/>
+        </TabItem>
+        <TabItem>
+            <TabItem.Header>
+                <vmm:TabHeaderIconText 
+                    Text="{DynamicResource TopBar_ExternalFaceTrack}"                        
+                    IconKind="FaceRecognition"                        
+                    IconHeight="16"                        
+                    IconWidth="16"
+                    Foreground="{Binding SelectedIndex,
+                                            ElementName=MainTabControl,
+                                            Converter={StaticResource SelectionToForeground},
+                                            ConverterParameter=2}"                           
+                    />
+            </TabItem.Header>
+            <vmm:ExternalTrackerPanel Background="White" DataContext="{Binding ExternalTrackerSetting}" />
+        </TabItem>
+    </dragablz:TabablzControl>
 </metro:MetroWindow>

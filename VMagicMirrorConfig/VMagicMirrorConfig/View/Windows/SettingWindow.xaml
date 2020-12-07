@@ -36,190 +36,153 @@
             <Setter Property="Height" Value="40"/>
         </Style>
     </Window.Resources>
-    <md:DialogHost 
-        IsOpen="{Binding DialogHelper.IsOpen}">
-        <!--IsOpen="True">-->
-        <md:DialogHost.DialogContent>
-            <StackPanel Orientation="Vertical"
-                        VerticalAlignment="Center">
-                <TextBlock Text="{Binding DialogHelper.Title}"
-                           Margin="10"
-                           TextAlignment="Center"
-                           Foreground="Black"
-                           FontWeight="Bold"
-                           />
-                <TextBlock Text="{Binding DialogHelper.Content}"
-                           Margin="10,0,10,20"
-                           TextAlignment="Center"
-                           Foreground="Black"
-                           />
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button Style="{StaticResource MaterialDesignFlatButton}"
-                            Content="OK"
-                            BorderBrush="Transparent"
-                            Visibility="{Binding DialogHelper.CanOk,
-                                                 Converter={StaticResource BooleanToVisibilityConverter}}"
-                            Command="{Binding DialogHelper.OKCommand}"
-                            />
-                    <Button Style="{StaticResource MaterialDesignFlatButton}"
-                            Visibility="{Binding DialogHelper.CanCancel, 
-                                                 Converter={StaticResource BooleanToVisibilityConverter}}"
-                            Content="Cancel"
-                            BorderBrush="Transparent"
-                            Command="{Binding DialogHelper.CancelCommand}"
-                            />
-                </StackPanel>
-            </StackPanel>
-        </md:DialogHost.DialogContent>
-
-        <dragablz:TabablzControl 
-            x:Name="MainTabControl"
-            FixedHeaderCount="5"
-            TabStripPlacement="Left">
-            <dragablz:TabablzControl.HeaderItemTemplate>
-                <DataTemplate>
-                    <ContentControl Content="{Binding}"/>
-                </DataTemplate>
-            </dragablz:TabablzControl.HeaderItemTemplate>
-            <TabItem>
-                <TabItem.Header>
-                    <vmm:TabHeaderIconText 
-                        Text="{DynamicResource TopBar_Setting_Window}"                        
-                        IconKind="WindowRestore"    
-                        IconWidth="15"
-                        IconHeight="15"
-                        TextMargin="0"
-                        TranslateX="-3"
-                        Background="{Binding SelectedIndex,
-                                            ElementName=MainTabControl,
-                                            Converter={StaticResource SelectionToBackground},
-                                            ConverterParameter=0}"
-                        Foreground="{Binding SelectedIndex,
-                                            ElementName=MainTabControl,
-                                            Converter={StaticResource SelectionToForeground},
-                                            ConverterParameter=0}"
-                        />
-                </TabItem.Header>
-                <vmm:WindowSettingPanel 
-                    Background="White" 
-                    DataContext="{Binding WindowSetting}"
+    <dragablz:TabablzControl 
+        x:Name="MainTabControl"
+        FixedHeaderCount="5"
+        TabStripPlacement="Left">
+        <dragablz:TabablzControl.HeaderItemTemplate>
+            <DataTemplate>
+                <ContentControl Content="{Binding}"/>
+            </DataTemplate>
+        </dragablz:TabablzControl.HeaderItemTemplate>
+        <TabItem>
+            <TabItem.Header>
+                <vmm:TabHeaderIconText 
+                    Text="{DynamicResource TopBar_Setting_Window}"                        
+                    IconKind="WindowRestore"    
+                    IconWidth="15"
+                    IconHeight="15"
+                    TextMargin="0"
+                    TranslateX="-3"
+                    Background="{Binding SelectedIndex,
+                                        ElementName=MainTabControl,
+                                        Converter={StaticResource SelectionToBackground},
+                                        ConverterParameter=0}"
+                    Foreground="{Binding SelectedIndex,
+                                        ElementName=MainTabControl,
+                                        Converter={StaticResource SelectionToForeground},
+                                        ConverterParameter=0}"
                     />
-            </TabItem>
-            <TabItem>
-                <TabItem.Header>
-                    <vmm:TabHeaderIconText 
-                        Text="{DynamicResource TopBar_Setting_Motion}"
-                        IconKind="HumanHandsup"
-                        IconWidth="18"
-                        IconHeight="18"
-                        TextMargin="0"
-                        TranslateX="-5"
-                        Background="{Binding SelectedIndex,
-                                            ElementName=MainTabControl,
-                                            Converter={StaticResource SelectionToBackground},
-                                            ConverterParameter=1}"
-                        Foreground="{Binding SelectedIndex,
-                                            ElementName=MainTabControl,
-                                            Converter={StaticResource SelectionToForeground},
-                                            ConverterParameter=1}"
-                        />
-                </TabItem.Header>
-                <vmm:MotionSettingPanel
-                    Background="White"
-                    DataContext="{Binding MotionSetting}"
+            </TabItem.Header>
+            <vmm:WindowSettingPanel 
+                Background="White" 
+                DataContext="{Binding WindowSetting}"
+                />
+        </TabItem>
+        <TabItem>
+            <TabItem.Header>
+                <vmm:TabHeaderIconText 
+                    Text="{DynamicResource TopBar_Setting_Motion}"
+                    IconKind="HumanHandsup"
+                    IconWidth="18"
+                    IconHeight="18"
+                    TextMargin="0"
+                    TranslateX="-5"
+                    Background="{Binding SelectedIndex,
+                                        ElementName=MainTabControl,
+                                        Converter={StaticResource SelectionToBackground},
+                                        ConverterParameter=1}"
+                    Foreground="{Binding SelectedIndex,
+                                        ElementName=MainTabControl,
+                                        Converter={StaticResource SelectionToForeground},
+                                        ConverterParameter=1}"
                     />
-            </TabItem>
-            <TabItem>
-                <TabItem.Header>
-                    <vmm:TabHeaderIconText 
-                        Text="{DynamicResource TopBar_Setting_Layout}"                        
-                        IconKind="ViewDashboard"
-                        IconWidth="17"
-                        IconHeight="17"
-                        TextMargin="0,0,0,0"
-                        TranslateX="-4"
-                        Background="{Binding SelectedIndex,
-                                            ElementName=MainTabControl,
-                                            Converter={StaticResource SelectionToBackground},
-                                            ConverterParameter=2}"
-                        Foreground="{Binding SelectedIndex,
-                                            ElementName=MainTabControl,
-                                            Converter={StaticResource SelectionToForeground},
-                                            ConverterParameter=2}"                        
-                        />
-                </TabItem.Header>
-                <vmm:LayoutSettingPanel 
-                    Background="White"
-                    DataContext="{Binding LayoutSetting}" />
-            </TabItem>
-            <TabItem>
-                <TabItem.Header>
-                    <vmm:TabHeaderIconText 
-                        Text="{DynamicResource TopBar_Setting_Effects}"                        
-                        IconKind="LightbulbOn"
-                        IconWidth="16"
-                        IconHeight="16"
-                        TextMargin="1,0,0,0"
-                        TranslateX="-4"
-                        Background="{Binding SelectedIndex,
-                                            ElementName=MainTabControl,
-                                            Converter={StaticResource SelectionToBackground},
-                                            ConverterParameter=3}"
-                        Foreground="{Binding SelectedIndex,
-                                            ElementName=MainTabControl,
-                                            Converter={StaticResource SelectionToForeground},
-                                            ConverterParameter=3}"                                
-                        />
-                </TabItem.Header>
-                <vmm:LightSettingPanel
-                    Background="White"
-                    DataContext="{Binding LightSetting}" />
-            </TabItem>
-            <TabItem>
-                <TabItem.Header>
-                    <!-- NOTE: "Word to Motion"が正式名だが、長すぎるのでアイコンにしておく-->
-                    <UserControl
-                        Width="82"
-                        Height="40"
-                        Background="{Binding SelectedIndex,
-                                            ElementName=MainTabControl,
-                                            Converter={StaticResource SelectionToBackground},
-                                            ConverterParameter=4}"
-                        Foreground="{Binding SelectedIndex,
-                                            ElementName=MainTabControl,
-                                            Converter={StaticResource SelectionToForeground},
-                                            ConverterParameter=4}">
+            </TabItem.Header>
+            <vmm:MotionSettingPanel
+                Background="White"
+                DataContext="{Binding MotionSetting}"
+                />
+        </TabItem>
+        <TabItem>
+            <TabItem.Header>
+                <vmm:TabHeaderIconText 
+                    Text="{DynamicResource TopBar_Setting_Layout}"                        
+                    IconKind="ViewDashboard"
+                    IconWidth="17"
+                    IconHeight="17"
+                    TextMargin="0,0,0,0"
+                    TranslateX="-4"
+                    Background="{Binding SelectedIndex,
+                                        ElementName=MainTabControl,
+                                        Converter={StaticResource SelectionToBackground},
+                                        ConverterParameter=2}"
+                    Foreground="{Binding SelectedIndex,
+                                        ElementName=MainTabControl,
+                                        Converter={StaticResource SelectionToForeground},
+                                        ConverterParameter=2}"                        
+                    />
+            </TabItem.Header>
+            <vmm:LayoutSettingPanel 
+                Background="White"
+                DataContext="{Binding LayoutSetting}" />
+        </TabItem>
+        <TabItem>
+            <TabItem.Header>
+                <vmm:TabHeaderIconText 
+                    Text="{DynamicResource TopBar_Setting_Effects}"                        
+                    IconKind="LightbulbOn"
+                    IconWidth="16"
+                    IconHeight="16"
+                    TextMargin="1,0,0,0"
+                    TranslateX="-4"
+                    Background="{Binding SelectedIndex,
+                                        ElementName=MainTabControl,
+                                        Converter={StaticResource SelectionToBackground},
+                                        ConverterParameter=3}"
+                    Foreground="{Binding SelectedIndex,
+                                        ElementName=MainTabControl,
+                                        Converter={StaticResource SelectionToForeground},
+                                        ConverterParameter=3}"                                
+                    />
+            </TabItem.Header>
+            <vmm:LightSettingPanel
+                Background="White"
+                DataContext="{Binding LightSetting}" />
+        </TabItem>
+        <TabItem>
+            <TabItem.Header>
+                <!-- NOTE: "Word to Motion"が正式名だが、長すぎるのでアイコンにしておく-->
+                <UserControl
+                    Width="82"
+                    Height="40"
+                    Background="{Binding SelectedIndex,
+                                        ElementName=MainTabControl,
+                                        Converter={StaticResource SelectionToBackground},
+                                        ConverterParameter=4}"
+                    Foreground="{Binding SelectedIndex,
+                                        ElementName=MainTabControl,
+                                        Converter={StaticResource SelectionToForeground},
+                                        ConverterParameter=4}">
                         
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <md:PackIcon Grid.Column="0"
-                                        Width="21" Height="21"
-                                         Margin="12,0,0,0"
-                                        VerticalAlignment="Center"
-                                        Kind="ABC"/>
-                            <md:PackIcon Grid.Column="1"
-                                        Width="13" Height="13"
-                                        Margin="2,0"
-                                        VerticalAlignment="Center"                                 
-                                        Kind="ArrowRightBold"/>
-                            <md:PackIcon Grid.Column="2"
-                                        Width="19" Height="19"
-                                        Margin="-2,1,0,0"
-                                        VerticalAlignment="Center"
-                                        Kind="HumanHandsup"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <md:PackIcon Grid.Column="0"
+                                    Width="21" Height="21"
+                                        Margin="12,0,0,0"
+                                    VerticalAlignment="Center"
+                                    Kind="ABC"/>
+                        <md:PackIcon Grid.Column="1"
+                                    Width="13" Height="13"
+                                    Margin="2,0"
+                                    VerticalAlignment="Center"                                 
+                                    Kind="ArrowRightBold"/>
+                        <md:PackIcon Grid.Column="2"
+                                    Width="19" Height="19"
+                                    Margin="-2,1,0,0"
+                                    VerticalAlignment="Center"
+                                    Kind="HumanHandsup"/>
 
-                        </Grid>
-                    </UserControl>
-                </TabItem.Header>
-                <vmm:WordToMotionSettingPanel 
-                    Background="White"                     
-                    DataContext="{Binding WordToMotionSetting}"
-                    />
-            </TabItem>
-        </dragablz:TabablzControl>
-    </md:DialogHost>
+                    </Grid>
+                </UserControl>
+            </TabItem.Header>
+            <vmm:WordToMotionSettingPanel 
+                Background="White"                     
+                DataContext="{Binding WordToMotionSetting}"
+                />
+        </TabItem>
+    </dragablz:TabablzControl>
 </metro:MetroWindow>
