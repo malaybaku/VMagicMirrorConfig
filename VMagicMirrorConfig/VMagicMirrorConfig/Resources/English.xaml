@@ -95,6 +95,8 @@ During this mode, following features are disabled.
 Check "Keep LipSync" to make the lipsync continue.</sys:String>
     <sys:String x:Key="ExTracker_FaceSwitch_KeepLipSync">Keep LipSync</sys:String>
     
+    <!-- Settings General -->
+    <sys:String x:Key="Setting_Color_Expander_Header">Edit Color (Click to Expand)</sys:String>
     
     <!-- Window -->
     <sys:String x:Key="Window_Header">Window</sys:String>

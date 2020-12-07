@@ -49,7 +49,7 @@
     <sys:String x:Key="Home_OtherSettings_Header">その他の設定</sys:String>
     <sys:String x:Key="Home_ActivateOnStartupHeader">Windowsの起動後にスタート</sys:String>
     <sys:String x:Key="Home_ActivateOnStartup_OtherVerRegistered">※他バージョンのVMagicMirrorが自動で起動するように登録されています。チェックをオンにすると、このバージョンを起動するよう設定を上書きします。</sys:String>
-
+    
     <!-- Streaming -->
     <sys:String x:Key="Streaming_Window">ウィンドウ</sys:String>
     <sys:String x:Key="Streaming_Face">顔・表情</sys:String>
@@ -97,6 +97,8 @@
 「リップシンクを続行」をオンにすると、表情を切り替えたままリップシンクを動かせます。</sys:String>
     <sys:String x:Key="ExTracker_FaceSwitch_KeepLipSync">リップシンクを続行</sys:String>
 
+    <!-- Settings General -->
+    <sys:String x:Key="Setting_Color_Expander_Header">色を編集 (クリックで展開)</sys:String>
     
     <!-- Window -->
     <sys:String x:Key="Window_Header">ウィンドウ</sys:String>
