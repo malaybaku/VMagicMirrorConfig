@@ -19,7 +19,12 @@
                   >
         <StackPanel Margin="0,5">
 
-            <md:Card>
+            <TextBlock 
+                Text="{DynamicResource Motion_Header}"                 
+                Style="{StaticResource SectionHeaderText}"
+                />
+            
+            <Border Style="{StaticResource SideMarginSectionBorder}">
                 <StackPanel>
 
                     <StackPanel Orientation="Horizontal"
@@ -42,9 +47,9 @@
                         </CheckBox.Content>
                     </CheckBox>
                 </StackPanel>
-            </md:Card>
+            </Border>
 
-            <md:Card>
+            <Border Style="{StaticResource SideMarginSectionBorder}">
                 <StackPanel>
 
                     <StackPanel Orientation="Horizontal"
@@ -259,7 +264,7 @@
                                                   Converter={StaticResource BooleanToVisibilityConverter}}"
                              ToolTip="{DynamicResource Motion_Face_FolderMaybeIncorrect_Tooltip}"
                              HorizontalAlignment="Center"
-                             Background="{StaticResource SecondaryAccentBrush}" Padding="5">
+                             Background="{StaticResource SecondaryHueMidBrush}" Padding="5">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                             <TextBlock Text="{DynamicResource Motion_Face_FolderMaybeIncorrect_Header}" 
                                        FontWeight="Bold"
@@ -386,9 +391,9 @@
                     </Grid>
 
                 </StackPanel>
-            </md:Card>
+            </Border>
 
-            <md:Card>
+            <Border Style="{StaticResource SideMarginSectionBorder}">
                 <StackPanel>
 
                     <StackPanel Orientation="Horizontal"
@@ -509,9 +514,9 @@
 
                     </Grid>
                 </StackPanel>                
-            </md:Card>
+            </Border>
 
-            <md:Card>
+            <Border Style="{StaticResource SideMarginSectionBorder}">
                 <StackPanel>
 
                     <StackPanel Orientation="Horizontal"
@@ -579,9 +584,9 @@
                                  />
                     </Grid>
                 </StackPanel>
-            </md:Card>
+            </Border>
 
-            <md:Card>
+            <Border Style="{StaticResource SideMarginSectionBorder}">
                 <StackPanel>
 
                     <StackPanel Orientation="Horizontal"
@@ -653,7 +658,7 @@
                     </Grid>
                 </StackPanel>
 
-            </md:Card>
+            </Border>
         </StackPanel>
     </ScrollViewer>
 </UserControl>

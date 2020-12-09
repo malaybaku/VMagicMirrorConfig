@@ -1,6 +1,4 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Media;
+﻿using System.Windows.Media;
 using System.Xml.Serialization;
 
 namespace Baku.VMagicMirrorConfig
@@ -26,6 +24,7 @@ namespace Baku.VMagicMirrorConfig
             {
                 if (SetValue(ref _r, value))
                 {
+                    UpdatePickerColor();
                     UpdateBackgroundColor();
                     RaisePropertyChanged(nameof(Color));
                 }
@@ -40,6 +39,7 @@ namespace Baku.VMagicMirrorConfig
             {
                 if (SetValue(ref _g, value))
                 {
+                    UpdatePickerColor();
                     UpdateBackgroundColor();
                     RaisePropertyChanged(nameof(Color));
                 }
@@ -54,14 +54,36 @@ namespace Baku.VMagicMirrorConfig
             {
                 if (SetValue(ref _b, value))
                 {
+                    UpdatePickerColor();
                     UpdateBackgroundColor();
                     RaisePropertyChanged(nameof(Color));
                 }
             }
         }
 
+        private Color _pickerColor = Color.FromRgb(0, 255, 0);
+        /// <summary>
+        /// ColorPickerに表示する、Alphaを考慮しない背景色を取得、設定します。
+        /// </summary>
+        [XmlIgnore]
+        public Color PickerColor
+        {
+            get => _pickerColor;
+            set
+            {
+                if (SetValue(ref _pickerColor, value))
+                {
+                    R = PickerColor.R;
+                    G = PickerColor.G;
+                    B = PickerColor.B;
+                }
+            }
+        }
+
         [XmlIgnore]
         public Color Color { get; private set; }
+
+        private void UpdatePickerColor() => PickerColor = Color.FromRgb((byte)R, (byte)G, (byte)B);
         
         private void UpdateBackgroundColor()
         {
@@ -131,101 +153,6 @@ namespace Baku.VMagicMirrorConfig
                 }
             }
         }
-
-        private bool _virtualCamEnabled = false;
-        public bool VirtualCamEnabled
-        {
-            get => _virtualCamEnabled;
-            set
-            {
-                if (SetValue(ref _virtualCamEnabled, value))
-                {
-                    SendMessage(MessageFactory.Instance.SetVirtualCamEnable(VirtualCamEnabled));
-                }
-            }
-        }
-
-        private int _virtualCamWidth = 640;
-        public int VirtualCamWidth
-        {
-            get => _virtualCamWidth;
-            set
-            {
-                if (_virtualCamWidth == value)
-                {
-                    return;
-                }
-                else if (value < 80 || value > 1920 || _virtualCamWidth == value - value % 4)
-                {
-                    //4の倍数になるよう調整したら元と同じになるケースや、単に値が極端な場合: 変化前の値に戻りました、という体裁にする
-                    RaisePropertyChanged();
-                    return;
-                }
-                else
-                {
-                    _virtualCamWidth = value - value % 4;
-                    RaisePropertyChanged();
-                    SendMessage(MessageFactory.Instance.SetVirtualCamWidth(VirtualCamWidth));
-                }
-            }
-        }
-
-        private int _virtualCamHeight = 480;
-        public int VirtualCamHeight
-        {
-            get => _virtualCamHeight;
-            set
-            {
-                if (_virtualCamHeight == value)
-                {
-                    return;
-                }
-                else if (value < 80 || value > 1920 ||  _virtualCamHeight == value - value % 4)
-                {
-                    RaisePropertyChanged();
-                    return;
-                }
-                else
-                {
-                    _virtualCamHeight = value - value % 4;
-                    RaisePropertyChanged();
-                    SendMessage(MessageFactory.Instance.SetVirtualCamHeight(VirtualCamHeight));
-                }
-            }
-        }
-
-        private ActionCommand? _virtualCamResizeCommand;
-        public ActionCommand VirtualCamResizeCommand
-            => _virtualCamResizeCommand ??= new ActionCommand(VirtualCamResize);
-        private void VirtualCamResize()
-        {
-            SendMessage(MessageFactory.Instance.SetVirtualCamBasedWindowSize(VirtualCamWidth, VirtualCamHeight));
-        }
-
-        private ActionCommand? _resetVirtualCamSettingCommand;
-        public ActionCommand ResetVirtualCamSettingCommand
-            => _resetVirtualCamSettingCommand ??= new ActionCommand(ResetVirtualCamSetting);
-        private void ResetVirtualCamSetting()
-        {
-            VirtualCamEnabled = false;
-            VirtualCamWidth = 640;
-            VirtualCamHeight = 480;
-        }
-
-        private ActionCommand? _openCameraInstallDialogCommand;
-        public ActionCommand OpenCameraInstallDialogCommand
-            => _openCameraInstallDialogCommand ??= new ActionCommand(OpenCameraInstallDialog);
-        private void OpenCameraInstallDialog()
-        {
-            //NOTE: カメラのインストール/アンインストールは.batの実行で実現するためViewModelはIPCを行わない
-            new CameraInstallWindow()
-            {
-                DataContext = new CameraInstallerViewModel(),
-                Owner = SettingWindow.CurrentWindow ?? App.Current.MainWindow,
-                WindowStartupLocation = WindowStartupLocation.CenterOwner,
-            }.ShowDialog();
-        }
-
 
         private ActionCommand? _resetWindowPositionCommand;
         public ActionCommand ResetWindowPositionCommand
@@ -342,8 +269,6 @@ namespace Baku.VMagicMirrorConfig
             TopMost = true;
 
             ResetOpacity();
-
-            ResetVirtualCamSetting();
 
             //このリセットはあまり定数的ではないことに注意！
             ResetWindowPosition();

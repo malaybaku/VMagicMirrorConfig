@@ -92,10 +92,6 @@ namespace Baku.VMagicMirrorConfig
             InstructionVisibility = Visibility.Collapsed;
         }
 
-        private void OnDragLeave(object sender, DragEventArgs e)
-        {
-            LogOutput.Instance.Write($"DragLeave, elem == null ? {InstructionVisibility == null}");
-            InstructionVisibility = Visibility.Collapsed;
-        }
+        private void OnDragLeave(object sender, DragEventArgs e) => InstructionVisibility = Visibility.Collapsed;
     }
 }

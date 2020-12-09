@@ -4,6 +4,12 @@
                     xml:space="preserve"
                     >
     
+    <!-- Window Title Bar -->
+    <sys:String x:Key="TitleBar_Help">ヘルプ</sys:String>
+    <sys:String x:Key="TitleBar_Visit_OfficialPage">ウェブサイト</sys:String>
+    <sys:String x:Key="TitleBar_Visit_DownloadPage">ダウンロードページ(BOOTH)</sys:String>
+    <sys:String x:Key="TitleBar_About">VMagicMirrorについて</sys:String>
+    
     <!-- Top Tab -->
     <sys:String x:Key="TopBar_Home">ホーム</sys:String>
     <sys:String x:Key="TopBar_Streaming">配信</sys:String>
@@ -43,7 +49,7 @@
     <sys:String x:Key="Home_OtherSettings_Header">その他の設定</sys:String>
     <sys:String x:Key="Home_ActivateOnStartupHeader">Windowsの起動後にスタート</sys:String>
     <sys:String x:Key="Home_ActivateOnStartup_OtherVerRegistered">※他バージョンのVMagicMirrorが自動で起動するように登録されています。チェックをオンにすると、このバージョンを起動するよう設定を上書きします。</sys:String>
-
+    
     <!-- Streaming -->
     <sys:String x:Key="Streaming_Window">ウィンドウ</sys:String>
     <sys:String x:Key="Streaming_Face">顔・表情</sys:String>
@@ -91,8 +97,12 @@
 「リップシンクを続行」をオンにすると、表情を切り替えたままリップシンクを動かせます。</sys:String>
     <sys:String x:Key="ExTracker_FaceSwitch_KeepLipSync">リップシンクを続行</sys:String>
 
+    <!-- Settings General -->
+    <sys:String x:Key="Setting_Color_Expander_Header">色を編集 (クリックで展開)</sys:String>
     
     <!-- Window -->
+    <sys:String x:Key="Window_Header">ウィンドウ</sys:String>
+    <sys:String x:Key="Window_Basics">基本の設定</sys:String>
     <sys:String x:Key="Window_BackgroundColor">背景色</sys:String>
     <sys:String x:Key="Window_Transparent">背景を透過</sys:String>
     <sys:String x:Key="Window_Draggable">(透過中)キャラ付近を掴んでドラッグ</sys:String>
@@ -114,25 +124,9 @@
     <sys:String x:Key="Window_TransparencySupport_Level_2">レベル2: キャラの近くにマウスポインタがあれば、半透明になります。</sys:String>
     <sys:String x:Key="Window_TransparencySupport_Level_3">レベル3: 「キャラ付近を掴んでドラッグ」がオフならば、半透明になります。</sys:String>
     <sys:String x:Key="Window_TransparencySupport_Level_4">レベル4: つねに半透明になります。</sys:String>
-    
-    <sys:String x:Key="Window_VirtualCamOutput">仮想カメラ出力</sys:String>
-    <sys:String x:Key="Window_VirtualCamOutput_Enable">仮想カメラ出力を有効化</sys:String>
-    <sys:String x:Key="Window_VirtualCamOutput_Resolution">サイズ</sys:String>
-    <sys:String x:Key="Window_VirtualCamOutput_Width">幅</sys:String>
-    <sys:String x:Key="Window_VirtualCamOutput_Height">高さ</sys:String>
-    <sys:String x:Key="Window_VirtualCamOutput_MatchWindowSize">リサイズ</sys:String>
-    <sys:String x:Key="Window_VirtualCamOutput_FirstTime_Header">※初めて使う場合</sys:String>
-    <sys:String x:Key="Window_VirtualCamOutput_FirstTime_DialogTitle">仮想カメラのインストールが必要です</sys:String>    
-    <sys:String x:Key="Window_VirtualCamOutput_FirstTime_Expr" xml:space="preserve">この機能を使うには仮想カメラのインストールが必要です。
         
-  - "CameraInstall"フォルダを開きます。。
-  - "Install.bat"をダブルクリックで実行します。
-        
-アンインストールするには"Uninstall.bat"をダブルクリックで実行します。</sys:String>
-    <sys:String x:Key="Window_VirtualCamOutput_FirstTime_OpenFolder">フォルダを開く</sys:String>
-    <sys:String x:Key="Window_VirtualCamOutput_FirstTime_SeeMore">さらに詳しく見る (webページへ)</sys:String>
-    
     <!-- Motion -->
+    <sys:String x:Key="Motion_Header">モーション</sys:String>   
     
     <!-- Motion : Full Body -->
     <sys:String x:Key="Motion_FullBody">上半身</sys:String>
@@ -212,6 +206,7 @@
     <sys:String x:Key="Motion_Wait_WaitMotionPeriod">周期 [sec]</sys:String>    
     
     <!-- Layout Setting -->
+    <sys:String x:Key="Layout_Header">レイアウト</sys:String>   
 
     <!-- Layout : Camera -->
     <sys:String x:Key="Layout_Camera">カメラ</sys:String>
@@ -271,6 +266,8 @@
         
 
     <!-- Light Setting -->
+    <sys:String x:Key="Effect_Header">エフェクト</sys:String>       
+
     <sys:String x:Key="ImageQuality">画質</sys:String>
     <sys:String x:Key="ImageQuality_CurrentQuality">現在の設定</sys:String>
     
@@ -300,6 +297,8 @@
 
     
     <!-- Word To Motion -->
+    <sys:String x:Key="WordToMotion_Header">Word to Motion</sys:String>
+    
     <sys:String x:Key="WordToMotion_Enable">Word to Motionを有効化</sys:String>
     <sys:String x:Key="WordToMotion_UseGamepadForInput">ゲームパッドのボタンで表情/モーションを実行</sys:String>
     <sys:String x:Key="WordToMotion_Instruction" xml:space="preserve">このタブは `Word to Motion` タブです。

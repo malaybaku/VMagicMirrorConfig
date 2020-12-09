@@ -17,7 +17,8 @@ namespace Baku.VMagicMirrorConfig
 
         static SpecialFilePath()
         {
-            string exePath = Process.GetCurrentProcess().MainModule.FileName;
+            //NOTE: 実際はnullになることはない(コーディングエラーでのみ発生する)
+            string exePath = Process.GetCurrentProcess().MainModule?.FileName ?? "";
             string exeDir = Path.GetDirectoryName(exePath) ?? "";
             AutoSaveSettingFilePath = Path.Combine(exeDir, AutoSaveSettingFileName);
 

@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DataContext="{x:Type vmm:MainWindowViewModel}"
              d:DesignWidth="520"
-             d:DesignHeight="570"
+             d:DesignHeight="590"             
              >
     <UserControl.Resources>
         <vmm:WhiteSpaceStringToNullConverter x:Key="WhiteSpaceStringToNullConverter"/>
@@ -37,6 +37,10 @@
             <Setter Property="Margin" Value="4"/>
             <Setter Property="Padding" Value="5"/>
         </Style>
+        <Style x:Key="StreamingSectionBorder" TargetType="Border" BasedOn="{StaticResource SectionBorder}">
+            <Setter Property="Margin" Value="4"/>
+            <Setter Property="Padding" Value="5"/>
+        </Style>
         <Style TargetType="md:PackIcon" x:Key="HeaderPackIcon">
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Width" Value="20"/>
@@ -59,14 +63,15 @@
     
     <ScrollViewer VerticalScrollBarVisibility="Auto"
                   HorizontalScrollBarVisibility="Disabled"
+                  Margin="0"
                   >
-        <Grid Margin="4">
+        <Grid Margin="5,10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="300"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0">
-                <md:Card>
+                <Border Style="{StaticResource StreamingSectionBorder}">
                     <StackPanel>
 
                         <StackPanel Orientation="Horizontal">
@@ -88,9 +93,9 @@
                                   IsChecked="{Binding WindowSetting.WindowDraggable, Mode=TwoWay}"
                                   />
                     </StackPanel>
-                </md:Card>
+                </Border>
 
-                <md:Card>
+                <Border Style="{StaticResource StreamingSectionBorder}">
                     <StackPanel>
 
                         <StackPanel Orientation="Horizontal">
@@ -179,9 +184,11 @@
                                     <TextBlock Text="{DynamicResource Motion_Mouth_Microphone_Visualize}" />
                                 </CheckBox>
                                 <Border Grid.Column="2"
-                                    Margin="0"
-                                    Height="8" Background="LightGray"
-                                    >
+                                        Style="{x:Null}"
+                                        Margin="0"
+                                        Height="8" 
+                                        Background="LightGray"
+                                        >
                                     <Grid Margin="0"
                                       Height="6"
                                       Background="LightGray">
@@ -242,7 +249,7 @@
                                                       FallbackValue=Collapsed}"
                                  ToolTip="{DynamicResource Motion_Face_FolderMaybeIncorrect_Tooltip}"
                                  HorizontalAlignment="Center"
-                                 Background="{StaticResource SecondaryAccentBrush}" Padding="3">
+                                 Background="{StaticResource SecondaryHueMidBrush}" Padding="3">
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                                 <TextBlock Text="{DynamicResource Motion_Face_FolderMaybeIncorrect_Header}" 
                                            FontWeight="Bold"
@@ -336,9 +343,9 @@
                                         Content="{DynamicResource Motion_Eye_LookAtPoint_None}"/>
                         </Grid>
                     </StackPanel>
-                </md:Card>
+                </Border>
 
-                <md:Card>
+                <Border Style="{StaticResource StreamingSectionBorder}">
                     <StackPanel>
 
                         <StackPanel Orientation="Horizontal">
@@ -395,11 +402,11 @@
                             </ComboBox>
                         </Grid>
                     </StackPanel>
-                </md:Card>
+                </Border>
             </StackPanel>
 
             <StackPanel Grid.Column="1">
-                <md:Card>
+                <Border Style="{StaticResource StreamingSectionBorder}">
                     <StackPanel>
 
                         <StackPanel Orientation="Horizontal">
@@ -465,9 +472,9 @@
                         </Grid>
 
                     </StackPanel>
-                </md:Card>
+                </Border>
 
-                <md:Card>
+                <Border Style="{StaticResource StreamingSectionBorder}">
                     <StackPanel>
 
                         <Grid>
@@ -584,9 +591,9 @@
                         </Button>
 
                     </StackPanel>
-                </md:Card>
+                </Border>
 
-                <md:Card>
+                <Border Style="{StaticResource StreamingSectionBorder}">
                     <StackPanel>
                         <StackPanel Orientation="Horizontal">
 
@@ -623,10 +630,9 @@
                         </Button>
 
                     </StackPanel>
-                </md:Card>
+                </Border>
 
-
-                <md:Card>
+                <Border Style="{StaticResource StreamingSectionBorder}">
                     <StackPanel>
                         <StackPanel Orientation="Horizontal">
 
@@ -653,7 +659,7 @@
                         </CheckBox>
 
                     </StackPanel>
-                </md:Card>
+                </Border>
             </StackPanel>
         </Grid>
     </ScrollViewer>

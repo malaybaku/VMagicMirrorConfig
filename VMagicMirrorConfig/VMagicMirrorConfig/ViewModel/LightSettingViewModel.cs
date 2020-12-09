@@ -162,8 +162,21 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
+        private Color _lightColor = Color.FromRgb(255, 255, 255);
         [XmlIgnore]
-        public Color LightColor { get; private set; }
+        public Color LightColor 
+        {
+            get => _lightColor;
+            set
+            {
+                if (SetValue(ref _lightColor, value))
+                {
+                    LightR = value.R;
+                    LightG = value.G;
+                    LightB = value.B;
+                }
+            }
+        }
 
         private void UpdateLightColor()
         {
@@ -326,8 +339,21 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
+        private Color _bloomColor = Color.FromRgb(255, 255, 255);
         [XmlIgnore]
-        public Color BloomColor { get; private set; }
+        public Color BloomColor 
+        {
+            get => _bloomColor;
+            set
+            {
+                if (SetValue(ref _bloomColor, value))
+                {
+                    BloomR = value.R;
+                    BloomG = value.G;
+                    BloomB = value.B;
+                }
+            }
+        }
 
         private void UpdateBloomColor()
         {

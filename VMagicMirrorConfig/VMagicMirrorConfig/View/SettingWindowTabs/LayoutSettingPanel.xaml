@@ -24,7 +24,12 @@
                   >
         <StackPanel Margin="0,5">
 
-            <md:Card>
+            <TextBlock 
+                Text="{DynamicResource Layout_Header}"                 
+                Style="{StaticResource SectionHeaderText}"
+                />
+            
+            <Border Style="{StaticResource SideMarginSectionBorder}">
                 <StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="5">
@@ -150,9 +155,9 @@
                     </Button>
 
                 </StackPanel>
-            </md:Card>
+            </Border>
 
-            <md:Card>
+            <Border Style="{StaticResource SideMarginSectionBorder}">
                 <StackPanel>
 
                     <StackPanel Orientation="Horizontal"
@@ -180,9 +185,9 @@
                         </CheckBox.Content>
                     </CheckBox>
                 </StackPanel>
-            </md:Card>
+            </Border>
 
-            <md:Card>
+            <Border Style="{StaticResource SideMarginSectionBorder}">
                 <StackPanel>
 
                     <StackPanel Orientation="Horizontal"
@@ -257,9 +262,9 @@
                         </ComboBox>
                     </Grid>
                 </StackPanel>
-            </md:Card>
+            </Border>
 
-            <md:Card>
+            <Border Style="{StaticResource SideMarginSectionBorder}">
                 <StackPanel>
 
                     <StackPanel Orientation="Horizontal"
@@ -335,7 +340,7 @@
 
                     </StackPanel>
                 </StackPanel>
-            </md:Card>
+            </Border>
 
         </StackPanel>
     </ScrollViewer>
