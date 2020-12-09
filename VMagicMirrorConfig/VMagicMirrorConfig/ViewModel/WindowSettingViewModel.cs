@@ -24,6 +24,7 @@ namespace Baku.VMagicMirrorConfig
             {
                 if (SetValue(ref _r, value))
                 {
+                    UpdatePickerColor();
                     UpdateBackgroundColor();
                     RaisePropertyChanged(nameof(Color));
                 }
@@ -38,6 +39,7 @@ namespace Baku.VMagicMirrorConfig
             {
                 if (SetValue(ref _g, value))
                 {
+                    UpdatePickerColor();
                     UpdateBackgroundColor();
                     RaisePropertyChanged(nameof(Color));
                 }
@@ -52,14 +54,36 @@ namespace Baku.VMagicMirrorConfig
             {
                 if (SetValue(ref _b, value))
                 {
+                    UpdatePickerColor();
                     UpdateBackgroundColor();
                     RaisePropertyChanged(nameof(Color));
                 }
             }
         }
 
+        private Color _pickerColor = Color.FromRgb(0, 255, 0);
+        /// <summary>
+        /// ColorPickerに表示する、Alphaを考慮しない背景色を取得、設定します。
+        /// </summary>
+        [XmlIgnore]
+        public Color PickerColor
+        {
+            get => _pickerColor;
+            set
+            {
+                if (SetValue(ref _pickerColor, value))
+                {
+                    R = PickerColor.R;
+                    G = PickerColor.G;
+                    B = PickerColor.B;
+                }
+            }
+        }
+
         [XmlIgnore]
         public Color Color { get; private set; }
+
+        private void UpdatePickerColor() => PickerColor = Color.FromRgb((byte)R, (byte)G, (byte)B);
         
         private void UpdateBackgroundColor()
         {

@@ -9,7 +9,7 @@
              mc:Ignorable="d"
              d:DataContext="{x:Type vmm:MainWindowViewModel}"
              d:DesignWidth="550"
-             d:DesignHeight="470"
+             d:DesignHeight="600"
              AllowDrop="True"
              >
     <UserControl.Resources>
@@ -35,13 +35,14 @@
         <ScrollViewer VerticalScrollBarVisibility="Auto"
                       HorizontalScrollBarVisibility="Disabled"
                       >
-            <Grid>
+            <Grid Margin="5,15">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0" Margin="0,5">
-                    <md:Card Padding="5" Margin="5">
+                    <Border Style="{StaticResource SectionBorder}"
+                            Padding="5" Margin="5">
                         <StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <md:PackIcon Style="{StaticResource HeaderPackIcon}"
@@ -82,11 +83,11 @@
                                 <TextBlock Grid.Column="1"
                                            HorizontalAlignment="Center"
                                            Text="{DynamicResource Home_LoadVrm_Or}"
-                                           Background="White"
                                            Margin="5,0"
                                            />
                                 <Rectangle Grid.Column="2" Height="1" Fill="#767676"/>
                             </Grid>
+                            
                             <Button HorizontalAlignment="Left"
                                     VerticalAlignment="Top"
                                     Width="180"
@@ -106,7 +107,7 @@
                                 </StackPanel>
                             </Button>
 
-                            <TextBlock Margin="39,0,10,10">
+                            <TextBlock Margin="30,5,20,5">
                                 <Hyperlink Command="{Binding OpenVRoidHubCommand}"
                                             ToolTip="https://hub.vroid.com/">
                                     <Run Text="{DynamicResource Home_OpenVRoidHub}"/>
@@ -137,10 +138,10 @@
                             </Button>
 
                         </StackPanel>
-                    </md:Card>
+                    </Border>
 
 
-                    <md:Card>
+                    <Border Style="{StaticResource SectionBorder}" Padding="5" Margin="5">
                         <StackPanel>
                             <TextBlock Style="{StaticResource HeaderText}"
                                         Margin="5"
@@ -164,29 +165,13 @@
                                       IsChecked="{Binding ActivateOnStartup}"
                                       />
                         </StackPanel>
-                    </md:Card>
+                    </Border>
                 </StackPanel>
 
                 <StackPanel Grid.Column="1"
                             Margin="0,5">
 
-                    <md:Card>
-                        <StackPanel>
-                            <TextBlock Style="{StaticResource HeaderText}"
-                                        Text="{DynamicResource Home_Manual_Header}"
-                                        Margin="5"
-                                        />
-
-                            <TextBlock Margin="10,5">
-                                <Hyperlink Command="{Binding OpenManualUrlCommand}"
-                                            ToolTip="https://malaybaku.github.io/VMagicMirror/">
-                                    <Run Text="{DynamicResource Home_Manual_Open}"/>
-                                </Hyperlink>
-                            </TextBlock>
-                        </StackPanel>
-                    </md:Card>
-
-                    <md:Card>
+                    <Border Style="{StaticResource SectionBorder}">
                         <StackPanel>
                             <TextBlock Style="{StaticResource HeaderText}"
                                        Text="{DynamicResource Home_SettingFileIo}"
@@ -208,8 +193,25 @@
                                 </StackPanel>
                             </Button>
                         </StackPanel>
-                    </md:Card>
-                    <md:Card>
+                    </Border>
+
+                    <Border Style="{StaticResource SectionBorder}">
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource HeaderText}"
+                                        Text="{DynamicResource Home_Manual_Header}"
+                                        Margin="5"
+                                        />
+
+                            <TextBlock Margin="10,5">
+                                <Hyperlink Command="{Binding OpenManualUrlCommand}"
+                                            ToolTip="https://malaybaku.github.io/VMagicMirror/">
+                                    <Run Text="{DynamicResource Home_Manual_Open}"/>
+                                </Hyperlink>
+                            </TextBlock>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Style="{StaticResource SectionBorder}">
                         <StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <md:PackIcon Style="{StaticResource HeaderPackIcon}"
@@ -221,7 +223,7 @@
                                         />
                             </StackPanel>
 
-                            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
                                 <Button Command="{Binding TakeScreenshotCommand}"
                                     Padding="0"
                                     Width="40"
@@ -249,58 +251,41 @@
                                 </Button>
                             </StackPanel>
                         </StackPanel>
-                    </md:Card>
+                    </Border>
 
-                    <md:Card>
+                    <Border Style="{StaticResource SectionBorder}">
                         <StackPanel>
                             <TextBlock Style="{StaticResource HeaderText}"
                                        Text="{DynamicResource Home_SettingManagement}"
                                        Margin="0"
                                        />
 
-                            <Grid Margin="10,10,10,11">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition Width="15"/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
 
-                                <Button Grid.Row="0" Grid.Column="0"
-                                        Width="NaN"
-                                        Margin="0"
-                                        Content="{DynamicResource Home_SaveSettingFile}" 
-                                        Command="{Binding SaveSettingToFileCommand}"
-                                        />
-                                <Button Grid.Row="0" Grid.Column="2" 
-                                        Width="NaN"
-                                        Margin="0"
-                                        Content="{DynamicResource Home_LoadSettingFile}" 
-                                        Command="{Binding LoadSettingFromFileCommand}"
-                                        />
+                            <Button Width="NaN"
+                                    Margin="10,15,10,10"
+                                    Content="{DynamicResource Home_SaveSettingFile}" 
+                                    Command="{Binding SaveSettingToFileCommand}"
+                                    />
+                            <Button Width="NaN"
+                                    Margin="10"
+                                    Content="{DynamicResource Home_LoadSettingFile}" 
+                                    Command="{Binding LoadSettingFromFileCommand}"
+                                    />
 
-                                <Button Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
-                                        Margin="0,15"
-                                        Width="NaN"
-                                        Content="{DynamicResource Home_LoadPrevSetting}" 
-                                        Command="{Binding LoadPrevSettingCommand}"
-                                        />
+                            <Button Width="NaN"
+                                    Margin="10"
+                                    Content="{DynamicResource Home_LoadPrevSetting}" 
+                                    Command="{Binding LoadPrevSettingCommand}"
+                                    />
 
-                                <Button Grid.Row="2" Grid.Column="0"
-                                        Width="NaN"
-                                        Margin="0"
-                                        Content="{DynamicResource Home_Reset}" 
-                                        Command="{Binding ResetToDefaultCommand}"
-                                        />
-                            </Grid>
+                            <Button Width="NaN"
+                                    Margin="10"
+                                    Content="{DynamicResource Home_Reset}" 
+                                    Command="{Binding ResetToDefaultCommand}"
+                                    />
 
                         </StackPanel>
-                    </md:Card>
+                    </Border>
                 </StackPanel>
             </Grid>
         </ScrollViewer>
