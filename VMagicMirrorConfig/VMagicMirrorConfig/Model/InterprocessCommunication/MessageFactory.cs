@@ -240,7 +240,7 @@ namespace Baku.VMagicMirrorConfig
         /// Query 
         /// </summary>
         /// <returns></returns>
-        public Message GetAvailableCustomClipNames() => NoArg();
+        public Message GetAvailableCustomMotionClipNames() => NoArg();
 
         #endregion
 

@@ -93,7 +93,7 @@ namespace Baku.VMagicMirrorConfig
 
         public async Task InitializeCustomMotionClipNamesAsync()
         {
-            var rawClipNames = await SendQueryAsync(MessageFactory.Instance.GetAvailableCustomClipNames());
+            var rawClipNames = await SendQueryAsync(MessageFactory.Instance.GetAvailableCustomMotionClipNames());
             var clipNames = rawClipNames.Split('\t');
             foreach(var name in clipNames)
             {
