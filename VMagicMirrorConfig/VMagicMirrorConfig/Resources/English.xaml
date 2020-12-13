@@ -254,7 +254,7 @@ camera movements following:
     <sys:String x:Key="Devices_Midi_ReadEnable">Use MIDI Controller for VMagicMirror</sys:String>
     
     <!-- Devices: Gamepad -->
-    <sys:String x:Key="Devices_Gamepad">Gamepad</sys:String>
+    <sys:String x:Key="Devices_Gamepad_Header">Gamepad</sys:String>
     
     <sys:String x:Key="Devices_GamepadEnable">Enable Input Capture</sys:String>
     <sys:String x:Key="Devices_Gamepad_PreferDirectInput">Use DirectInput (check for DUAL SHOCK 4)</sys:String>
