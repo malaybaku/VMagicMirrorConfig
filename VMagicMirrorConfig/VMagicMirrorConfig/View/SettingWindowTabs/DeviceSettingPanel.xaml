@@ -117,7 +117,7 @@
                                    />
 
                         <Button Style="{StaticResource CategorySettingResetButton}"
-                                Command="{Binding ResetDeviceLayoutCommand}"
+                                Command="{Binding ResetMidiSettingCommand}"
                                 />
                     </StackPanel>
 
