@@ -234,6 +234,14 @@ namespace Baku.VMagicMirrorConfig
         public Message LoadMidiNoteToMotionMap(string content) => WithArg(content);
         public Message RequireMidiNoteOnMessage(bool require) => WithArg($"{require}");
 
+        public Message RequestCustomMotionDoctor() => NoArg();
+
+        /// <summary>
+        /// Query 
+        /// </summary>
+        /// <returns></returns>
+        public Message GetAvailableCustomClipNames() => NoArg();
+
         #endregion
 
         #region External Tracker

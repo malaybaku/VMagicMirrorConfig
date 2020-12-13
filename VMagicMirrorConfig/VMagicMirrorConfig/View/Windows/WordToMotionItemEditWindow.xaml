@@ -105,38 +105,35 @@
                 </DockPanel>
 
 
-                <!--<RadioButton Content="{DynamicResource WordToMotion_MotionType_BvhFile}"
+                <RadioButton Content="{DynamicResource WordToMotion_MotionType_Custom}"
                              Margin="0,20,0,5"
                              VerticalContentAlignment="Center"
-                             IsChecked="{Binding IsMotionTypeBvhFile}"
+                             IsChecked="{Binding IsMotionTypeCustom}"
                              />
-                <DockPanel Margin="5"
-                           LastChildFill="True"
-                           >
-                    <TextBlock DockPanel.Dock="Left"
-                               Text="{DynamicResource WordToMotion_Motion_BvhFile_Label}"
-                               />
+                                
+                <DockPanel LastChildFill="True"
+                           Margin="5">
+                    <TextBlock Text="{DynamicResource WordToMotion_Motion_Custom_Label}" />
+                    <ComboBox ItemsSource="{Binding AvailableCustomMotionClipNames}"
+                              SelectedItem="{Binding CustomMotionClipName}"
+                              IsEnabled="{Binding IsMotionTypeCustomClip}"
+                              Margin="10,0"
+                              md:HintAssist.Hint="{DynamicResource WordToMotion_Motion_Custom_Hint}"
+                              />
+                </DockPanel>
 
-                    <Button DockPanel.Dock="Right"
-                            Style="{StaticResource MaterialDesignRaisedLightButton}"
-                            Content="..."
-                            Width="30"
-                            Height="25"
-                            Padding="0"
-                            Margin="0"
-                            Command="{Binding SelectBvhFileCommand}"
-                            IsEnabled="{Binding IsMotionTypeBvhFile}"
-                            />
-
-
-                    <TextBox Margin="5,0"
-                             Text="{Binding BvhFilePath}"
-                             IsEnabled="{Binding IsMotionTypeBvhFile}"
-                             md:HintAssist.Hint="{DynamicResource WordToMotion_Motion_BvhFile_Hint}"
-                             />
-
-                </DockPanel>-->
-
+                <Button Style="{StaticResource MaterialDesignOutlinedButton}"
+                        Content="{DynamicResource WordToMotion_Motion_Custom_HowTo}"
+                        Command="{Binding OpenWordToMotionCustomHowToCommand}"
+                        Margin="10,0"
+                        Width="NaN"
+                        HorizontalAlignment="Left"
+                        />
+                <Button Style="{StaticResource MaterialDesignRaisedButton}"
+                        Content="{DynamicResource WordToMotion_Motion_Custom_Doctor}"
+                        Command="{Binding CheckCustomMotionDataValidityCommand}"
+                        Margin="10,5"
+                        />
             </StackPanel>
         </Border>
 
