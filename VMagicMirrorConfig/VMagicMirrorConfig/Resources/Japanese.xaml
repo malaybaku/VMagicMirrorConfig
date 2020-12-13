@@ -19,6 +19,7 @@
     <sys:String x:Key="TopBar_Setting_Window">ウィンドウ</sys:String>
     <sys:String x:Key="TopBar_Setting_Motion">モーション</sys:String>
     <sys:String x:Key="TopBar_Setting_Layout">レイアウト</sys:String>
+    <sys:String x:Key="TopBar_Setting_Devices">デバイス</sys:String>
     <sys:String x:Key="TopBar_Setting_Effects">エフェクト</sys:String>
     
     <!-- Home -->
@@ -229,16 +230,13 @@
     <sys:String x:Key="Layout_DeviceFreeLayout">フリーレイアウトモード</sys:String>
 
     <!-- Layout : Keyboard / Mouse Pad -->
-    <sys:String x:Key="Layout_Hid">キーボード / MIDI</sys:String>
-    <sys:String x:Key="Layout_HidHorizontalScale_Tooltip">キーボードのサイズを指定します。小さくすると、デバイスが小さくなり、キャラクターに近づきます。</sys:String>
-    <sys:String x:Key="Layout_HidVisible">キーボード・タッチパッドを表示</sys:String>
-    <sys:String x:Key="Layout_MidiVisible">MIDIコントローラを表示</sys:String>
-    <sys:String x:Key="Layout_MidiReadEnable">MIDIコントローラをVMagicMirrorで使用</sys:String>
+    <sys:String x:Key="Layout_Hid">デバイスの表示</sys:String>
+    <sys:String x:Key="Layout_HidVisible">キーボード・タッチパッド</sys:String>
+    <sys:String x:Key="Layout_MidiVisible">MIDIコントローラ</sys:String>
+    <sys:String x:Key="Layout_GamepadVisible">ゲームパッドを表示</sys:String>
+
     <sys:String x:Key="Layout_Hid_Streaming">キーボード</sys:String>
     <sys:String x:Key="Layout_Midi_Streaming">MIDIコン</sys:String>
-
-    <sys:String x:Key="Layout_HidReactToKeyboard">キーボード操作に反応</sys:String>
-    <sys:String x:Key="Layout_HidReactToMouse">マウス操作に反応</sys:String>
 
     <sys:String x:Key="Layout_Hid_TypingEffect_Header">タイピング時の演出</sys:String>
     <sys:String x:Key="Layout_Hid_TypingEffect_Header_Streaming">タイピング演出</sys:String>
@@ -246,25 +244,36 @@
     <sys:String x:Key="Layout_Hid_TypingEffect_Text">テキスト</sys:String>
     <sys:String x:Key="Layout_Hid_TypingEffect_Light">ライト</sys:String>
     
-    <!-- Layout : Gamepad -->
-    <sys:String x:Key="Layout_Gamepad">ゲームパッド</sys:String>
-    
-    <sys:String x:Key="Layout_GamepadEnable">ゲームパッド入力のキャプチャを有効化</sys:String>
-    <sys:String x:Key="Layout_Gamepad_PreferDirectInput">DirectInputを使用 (DUAL SHOCK 4を使う場合オン)</sys:String>
-    <sys:String x:Key="Layout_GamepadDeviceNumber">デバイス番号</sys:String>
-    
-    <sys:String x:Key="Layout_GamepadVisible">ゲームパッドを表示</sys:String>
-    <sys:String x:Key="Layout_GamepadLean">キャラ傾き入力</sys:String>
-    <sys:String x:Key="Layout_GamepadLean_None">なし</sys:String>
-    <sys:String x:Key="Layout_GamepadLean_LeftButtons">左十字キー</sys:String>
-    <sys:String x:Key="Layout_GamepadLean_LeftStick">左スティック</sys:String>
-    <sys:String x:Key="Layout_GamepadLean_RightStick">右スティック</sys:String>
+    <sys:String x:Key="Layout_Gamepad">ゲームパッド</sys:String>    
 
-    <sys:String x:Key="Layout_GamepadLean_Reverse">傾く方向を反転</sys:String>
-    <sys:String x:Key="Layout_GamepadLean_ReverseHorizontal">左右</sys:String>
-    <sys:String x:Key="Layout_GamepadLean_ReverseVertical">前後</sys:String>
-        
+    <!-- Devices -->
+    <sys:String x:Key="Devices_Header">デバイス接続</sys:String>
+    
+    <!-- Devices: Keyboard and mouse -->
+    <sys:String x:Key="Devices_Keyboard_Mouse_Header">キーボード・マウス</sys:String>
+    
+    <!-- Devices: MIDI -->
+    <sys:String x:Key="Devices_Midi_Header">MIDI</sys:String>
+    <sys:String x:Key="Devices_Midi_ReadEnable">MIDIコントローラ入力をVMagicMirrorで取得する</sys:String>
+    
+    <!-- Devices: Gamepad -->
+    <sys:String x:Key="Devices_Gamepad_Header">ゲームパッド</sys:String>
+    
+    <sys:String x:Key="Devices_GamepadEnable">ゲームパッドの入力をVMagicMirrorで取得する</sys:String>
+    <sys:String x:Key="Devices_Gamepad_PreferDirectInput">DirectInputを使用 (DUAL SHOCK 4を使う場合オン)</sys:String>
+    <sys:String x:Key="Devices_GamepadDeviceNumber">デバイス番号</sys:String>
+    
+    <sys:String x:Key="Devices_GamepadLean">キャラ傾き入力</sys:String>
+    <sys:String x:Key="Devices_GamepadLean_None">なし</sys:String>
+    <sys:String x:Key="Devices_GamepadLean_LeftButtons">左十字キー</sys:String>
+    <sys:String x:Key="Devices_GamepadLean_LeftStick">左スティック</sys:String>
+    <sys:String x:Key="Devices_GamepadLean_RightStick">右スティック</sys:String>
 
+    <sys:String x:Key="Devices_GamepadLean_Reverse">傾く方向を反転</sys:String>
+    <sys:String x:Key="Devices_GamepadLean_ReverseHorizontal">左右</sys:String>
+    <sys:String x:Key="Devices_GamepadLean_ReverseVertical">前後</sys:String>
+    
+    
     <!-- Light Setting -->
     <sys:String x:Key="Effect_Header">エフェクト</sys:String>       
 

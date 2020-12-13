@@ -141,6 +141,29 @@
         </TabItem>
         <TabItem>
             <TabItem.Header>
+                <vmm:TabHeaderIconText 
+                    Text="{DynamicResource TopBar_Setting_Devices}"                        
+                    IconKind="Devices"
+                    IconWidth="17"
+                    IconHeight="17"
+                    TextMargin="0,0,0,0"
+                    TranslateX="-4"
+                    Background="{Binding SelectedIndex,
+                                        ElementName=MainTabControl,
+                                        Converter={StaticResource SelectionToBackground},
+                                        ConverterParameter=2}"
+                    Foreground="{Binding SelectedIndex,
+                                        ElementName=MainTabControl,
+                                        Converter={StaticResource SelectionToForeground},
+                                        ConverterParameter=2}"                        
+                    />
+            </TabItem.Header>
+            <vmm:DeviceSettingPanel 
+                Background="White"
+                DataContext="{Binding LayoutSetting}" />
+        </TabItem>
+        <TabItem>
+            <TabItem.Header>
                 <!-- NOTE: "Word to Motion"が正式名だが、長すぎるのでアイコンにしておく-->
                 <UserControl
                     Width="82"

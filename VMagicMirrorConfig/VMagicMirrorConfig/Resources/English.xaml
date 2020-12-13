@@ -19,6 +19,7 @@
     <sys:String x:Key="TopBar_Setting_Window">Window</sys:String>
     <sys:String x:Key="TopBar_Setting_Motion">Motion</sys:String>
     <sys:String x:Key="TopBar_Setting_Layout">Layout</sys:String>
+    <sys:String x:Key="TopBar_Setting_Devices">Devices</sys:String>
     <sys:String x:Key="TopBar_Setting_Effects">Effects</sys:String>
         
     <!-- Home -->
@@ -227,47 +228,48 @@ camera movements following:
     <sys:String x:Key="Layout_DeviceFreeLayout">Free Layout</sys:String>
 
     <!-- Layout : Keyboard / Mouse Pad -->
-    <sys:String x:Key="Layout_Hid">Keyboard / MIDI</sys:String>
-    <sys:String x:Key="Layout_HidHeight">Height [cm]</sys:String>
-    <sys:String x:Key="Layout_HidHorizontalScale">Size [%]</sys:String>
-    <sys:String x:Key="Layout_HidHorizontalScale_Tooltip">Specify the size of keyboard. When smallen, the devices are close to the character.</sys:String>
-    <sys:String x:Key="Layout_HidVisible">Keyboard and Touch Pad Visible</sys:String>
-    <sys:String x:Key="Layout_MidiVisible">MIDI Controller Visible</sys:String>
-    <sys:String x:Key="Layout_MidiReadEnable">Use MIDI Controller for VMagicMirror</sys:String>
+    <sys:String x:Key="Layout_Hid">Device Visibility</sys:String>
+    <sys:String x:Key="Layout_HidVisible">Keyboard and Touch Pad</sys:String>
+    <sys:String x:Key="Layout_MidiVisible">MIDI Controller</sys:String>
+    <sys:String x:Key="Layout_GamepadVisible">Gamepad</sys:String>    
     <sys:String x:Key="Layout_Hid_Streaming">Keyboard</sys:String>
     <sys:String x:Key="Layout_Midi_Streaming">MIDI</sys:String>
         
-    <sys:String x:Key="Layout_HidReactToKeyboard">Enable keyboard motion</sys:String>
-    <sys:String x:Key="Layout_HidReactToMouse">Enable mouse motion</sys:String>
-
     <sys:String x:Key="Layout_Hid_TypingEffect_Header">Typing Effect</sys:String>
     <sys:String x:Key="Layout_Hid_TypingEffect_Header_Streaming">Typing Effect</sys:String>
     <sys:String x:Key="Layout_Hid_TypingEffect_None">None</sys:String>
     <sys:String x:Key="Layout_Hid_TypingEffect_Text">Text</sys:String>
     <sys:String x:Key="Layout_Hid_TypingEffect_Light">Light</sys:String>
-    
-    <!-- Layout : Gamepad -->
-    <sys:String x:Key="Layout_Gamepad">Gamepad</sys:String>
-    
-    <sys:String x:Key="Layout_GamepadEnable">Enable Input Capture</sys:String>
-    <sys:String x:Key="Layout_Gamepad_PreferDirectInput">Use DirectInput (check for DUAL SHOCK 4)</sys:String>
-    <sys:String x:Key="Layout_GamepadDeviceNumber">Device Number</sys:String>
-    
-    <sys:String x:Key="Layout_GamepadHeight">Height [cm]</sys:String>
-    <sys:String x:Key="Layout_GamepadHorizontalScale">Size [%]</sys:String>
-    <sys:String x:Key="Layout_GamepadVisible">Visible</sys:String>    
-    <sys:String x:Key="Layout_GamepadLeanMotion">Lean character by directional input</sys:String>    
 
-    <sys:String x:Key="Layout_GamepadLean">Lean by Stick</sys:String>
-    <sys:String x:Key="Layout_GamepadLean_None">None</sys:String>
-    <sys:String x:Key="Layout_GamepadLean_LeftButtons">Left Buttons</sys:String>
-    <sys:String x:Key="Layout_GamepadLean_LeftStick">Left Stick</sys:String>
-    <sys:String x:Key="Layout_GamepadLean_RightStick">Right Stick</sys:String>
+    <sys:String x:Key="Layout_Gamepad">Gamepad</sys:String>    
+    
+    <!-- Devices -->
+    <sys:String x:Key="Devices_Header">Devices</sys:String>
+    
+    <!-- Devices: Keyboard and mouse -->
+    <sys:String x:Key="Devices_Keyboard_Mouse_Header">Keyboard / Mouse</sys:String>
+    
+    <!-- Devices: MIDI -->
+    <sys:String x:Key="Devices_Midi_Header">MIDI</sys:String>
+    <sys:String x:Key="Devices_Midi_ReadEnable">Use MIDI Controller for VMagicMirror</sys:String>
+    
+    <!-- Devices: Gamepad -->
+    <sys:String x:Key="Devices_Gamepad">Gamepad</sys:String>
+    
+    <sys:String x:Key="Devices_GamepadEnable">Enable Input Capture</sys:String>
+    <sys:String x:Key="Devices_Gamepad_PreferDirectInput">Use DirectInput (check for DUAL SHOCK 4)</sys:String>
+    <sys:String x:Key="Devices_GamepadDeviceNumber">Device Number</sys:String>
+    
+    <sys:String x:Key="Devices_GamepadLean">Lean by Stick</sys:String>
+    <sys:String x:Key="Devices_GamepadLean_None">None</sys:String>
+    <sys:String x:Key="Devices_GamepadLean_LeftButtons">Left Buttons</sys:String>
+    <sys:String x:Key="Devices_GamepadLean_LeftStick">Left Stick</sys:String>
+    <sys:String x:Key="Devices_GamepadLean_RightStick">Right Stick</sys:String>
 
-    <sys:String x:Key="Layout_GamepadLean_Reverse">Reverse direction to lean</sys:String>
-    <sys:String x:Key="Layout_GamepadLean_ReverseHorizontal">Left / Right</sys:String>
-    <sys:String x:Key="Layout_GamepadLean_ReverseVertical">Forward / Backword</sys:String>
-        
+    <sys:String x:Key="Devices_GamepadLean_Reverse">Reverse direction to lean</sys:String>
+    <sys:String x:Key="Devices_GamepadLean_ReverseHorizontal">Left / Right</sys:String>
+    <sys:String x:Key="Devices_GamepadLean_ReverseVertical">Forward / Backword</sys:String>
+    
     
     <!-- Light Setting -->
     <sys:String x:Key="Effect_Header">Effect</sys:String>       
