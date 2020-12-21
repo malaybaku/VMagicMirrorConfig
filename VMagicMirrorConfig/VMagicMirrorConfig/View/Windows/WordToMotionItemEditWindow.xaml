@@ -129,11 +129,12 @@
                         Width="NaN"
                         HorizontalAlignment="Left"
                         />
-                <Button Style="{StaticResource MaterialDesignRaisedButton}"
+                <!-- 診断機能を検討してIPCまではも用意したものの、まだ仕組みがきちんとしてないので一旦隠します -->
+                <!--<Button Style="{StaticResource MaterialDesignRaisedButton}"
                         Content="{DynamicResource WordToMotion_Motion_Custom_Doctor}"
                         Command="{Binding CheckCustomMotionDataValidityCommand}"
                         Margin="10,5"
-                        />
+                        />-->
             </StackPanel>
         </Border>
 
