@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 
@@ -8,12 +7,12 @@ namespace Baku.VMagicMirrorConfig
 {
     //NOTE: Unity側のMotionRequestとプロパティ名を統一してます。片方だけいじらないように！
 
-    /// <summary>単一のBVHまたはビルトインモーション、および表情制御のリクエスト情報を表す。</summary>
+    /// <summary>ビルトインモーションまたはカスタムモーション、および表情制御のリクエスト情報を表す。</summary>
     public class MotionRequest
     {
         public const int MotionTypeNone = 0;
         public const int MotionTypeBuiltInClip = 1;
-        public const int MotionTypeBvhFile = 2;
+        public const int MotionTypeCustom = 2;
 
         public int MotionType { get; set; }
 
@@ -21,7 +20,7 @@ namespace Baku.VMagicMirrorConfig
 
         public string BuiltInAnimationClipName { get; set; } = "";
 
-        public string ExternalBvhFilePath { get; set; } = "";
+        public string CustomMotionClipName { get; set; } = "";
 
         public float DurationWhenOnlyBlendShape { get; set; } = 3.0f;
 

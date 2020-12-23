@@ -403,6 +403,7 @@ namespace Baku.VMagicMirrorConfig
 
             await MotionSetting.InitializeDeviceNamesAsync();
             await LightSetting.InitializeQualitySelectionsAsync();
+            await WordToMotionSetting.InitializeCustomMotionClipNamesAsync();
 
             Initializer.CameraPositionChecker.Start(
                 2000,

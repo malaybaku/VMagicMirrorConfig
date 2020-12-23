@@ -26,6 +26,8 @@ namespace Baku.VMagicMirrorConfig
         internal WordToMotionSettingViewModel(IMessageSender sender, IMessageReceiver receiver) : base(sender)
         {
             Items = new ReadOnlyObservableCollection<WordToMotionItemViewModel>(_items);
+            CustomMotionClipNames = new ReadOnlyObservableCollection<string>(_customMotionClipNames);
+
             Devices = WordToMotionDeviceItem.LoadAvailableItems();
             SelectedDevice = Devices.FirstOrDefault(d => d.Index == DeviceTypeKeyboardWord);
             _previewDataSender = new WordToMotionItemPreviewDataSender(sender);
@@ -89,6 +91,19 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
+        public async Task InitializeCustomMotionClipNamesAsync()
+        {
+            var rawClipNames = await SendQueryAsync(MessageFactory.Instance.GetAvailableCustomMotionClipNames());
+            var clipNames = rawClipNames.Split('\t');
+            foreach(var name in clipNames)
+            {
+                _customMotionClipNames.Add(name);
+            }
+        }
+
+        private readonly ObservableCollection<string> _customMotionClipNames = new ObservableCollection<string>();
+        [XmlIgnore]
+        public ReadOnlyObservableCollection<string> CustomMotionClipNames { get; }
 
         private bool _enableWordToMotion = true;
         [XmlIgnore]
@@ -471,6 +486,9 @@ namespace Baku.VMagicMirrorConfig
             EnablePreview = false;
             _dialogItem = null;
         }
+
+        public void RequestCustomMotionDoctor()
+            => SendMessage(MessageFactory.Instance.RequestCustomMotionDoctor());
     }
 
 

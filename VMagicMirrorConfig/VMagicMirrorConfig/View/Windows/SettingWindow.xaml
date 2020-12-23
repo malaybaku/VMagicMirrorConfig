@@ -151,11 +151,11 @@
                     Background="{Binding SelectedIndex,
                                         ElementName=MainTabControl,
                                         Converter={StaticResource SelectionToBackground},
-                                        ConverterParameter=2}"
+                                        ConverterParameter=4}"
                     Foreground="{Binding SelectedIndex,
                                         ElementName=MainTabControl,
                                         Converter={StaticResource SelectionToForeground},
-                                        ConverterParameter=2}"                        
+                                        ConverterParameter=4}"                        
                     />
             </TabItem.Header>
             <vmm:DeviceSettingPanel 
@@ -171,11 +171,11 @@
                     Background="{Binding SelectedIndex,
                                         ElementName=MainTabControl,
                                         Converter={StaticResource SelectionToBackground},
-                                        ConverterParameter=4}"
+                                        ConverterParameter=5}"
                     Foreground="{Binding SelectedIndex,
                                         ElementName=MainTabControl,
                                         Converter={StaticResource SelectionToForeground},
-                                        ConverterParameter=4}">
+                                        ConverterParameter=5}">
                         
                     <Grid>
                         <Grid.ColumnDefinitions>

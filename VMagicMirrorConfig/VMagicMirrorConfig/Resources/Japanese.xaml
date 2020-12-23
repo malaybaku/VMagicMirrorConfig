@@ -330,11 +330,15 @@
     <sys:String x:Key="WordToMotion_BodyMotion_Header">全身モーション</sys:String>
     <sys:String x:Key="WordToMotion_MotionType_None">なし</sys:String>
     <sys:String x:Key="WordToMotion_MotionType_BuiltIn">ビルトインモーション</sys:String>
-    <sys:String x:Key="WordToMotion_MotionType_BvhFile">BVHファイル</sys:String>
+    <sys:String x:Key="WordToMotion_MotionType_Custom">カスタムモーション</sys:String>
+    
     <sys:String x:Key="WordToMotion_Motion_BuiltIn_Label">モーション</sys:String>
     <sys:String x:Key="WordToMotion_Motion_BuiltIn_Hint">モーションを選択</sys:String>
-    <sys:String x:Key="WordToMotion_Motion_BvhFile_Label">ファイル</sys:String>
-    <sys:String x:Key="WordToMotion_Motion_BvhFile_Hint">File Path</sys:String>
+    
+    <sys:String x:Key="WordToMotion_Motion_Custom_Label">モーション</sys:String>
+    <sys:String x:Key="WordToMotion_Motion_Custom_Hint">モーションを選択</sys:String>
+    <sys:String x:Key="WordToMotion_Motion_Custom_HowTo">使い方 (Webページを開きます)</sys:String>
+    <sys:String x:Key="WordToMotion_Motion_Custom_Doctor">モーションデータを診断</sys:String>
 
     <sys:String x:Key="WordToMotion_Face_Header">表情</sys:String>
     <sys:String x:Key="WordToMotion_Face_Enable">表情の動作を有効化</sys:String>
@@ -354,5 +358,5 @@
     <sys:String x:Key="WordToMotion_MidiAssign_Current">現在のノート</sys:String>
     <sys:String x:Key="WordToMotion_MidiAssign_After">変更後のノート</sys:String>
     <sys:String x:Key="WordToMotion_MidiAssign_Clear">クリア</sys:String>
-    
+   
 </ResourceDictionary>
