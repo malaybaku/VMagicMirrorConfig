@@ -31,7 +31,7 @@
             <StackPanel Margin="10,10,10,5">
                 <TextBlock 
                     Style="{StaticResource MaterialDesignHeadline5TextBlock}"
-                    Text="VMagicMirror v1.5.0"
+                    Text="VMagicMirror v1.6.0"
                     Margin="0"                    
                     />
                 <vmm:AboutPanel />
