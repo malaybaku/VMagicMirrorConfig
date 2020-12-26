@@ -14,7 +14,9 @@ namespace Baku.VMagicMirrorConfig
             {
                 File.Delete(LogFilePath);
             }
-            if (Directory.Exists(LogFileDir))
+
+            //NOTE: 2つ目の条件で、F5実行した場合に発生する起動時エラーをガードしてます
+            if (Directory.Exists(LogFileDir) && !string.IsNullOrWhiteSpace(LogFilePath))
             {
                 File.WriteAllText(LogFilePath, "");
             }
