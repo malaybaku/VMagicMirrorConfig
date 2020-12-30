@@ -263,7 +263,7 @@ namespace Baku.VMagicMirrorConfig
         private ActionCommand? _openWordToMotionCustomHowToCommand;
         public ActionCommand OpenWordToMotionCustomHowToCommand
             => _openWordToMotionCustomHowToCommand ??= new ActionCommand(() => UrlNavigate.Open(
-                "https://malaybaku.github.io/VMagicMirror/docs/expressions_custom_motion"
+                "https://malaybaku.github.io/VMagicMirror/tips/use_custom_motion"
                 ));
 
         private ActionCommand? _checkCustomMotionDataValidityCommand;
