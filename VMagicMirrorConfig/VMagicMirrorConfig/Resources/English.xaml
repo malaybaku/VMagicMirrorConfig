@@ -5,7 +5,7 @@
                     >
 
     <!-- Window Title Bar -->
-    <sys:String x:Key="TitleBar_Visit_Official">Help</sys:String>
+    <sys:String x:Key="TitleBar_Help">Help</sys:String>
     <sys:String x:Key="TitleBar_Visit_OfficialPage">Web Page</sys:String>
     <sys:String x:Key="TitleBar_Visit_DownloadPage">Download Page (BOOTH)</sys:String>
     <sys:String x:Key="TitleBar_About">About VMagicMirror</sys:String>
