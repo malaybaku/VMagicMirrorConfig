@@ -1,17 +1,24 @@
-﻿<Window x:Class="Baku.VMagicMirrorConfig.WordToMotionItemEditWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:vmm="clr-namespace:Baku.VMagicMirrorConfig"
-        mc:Ignorable="d"
-        d:DataContext="{x:Type vmm:WordToMotionItemViewModel}"
-        Title="VMagicMirror - Word To Motion" 
-        Height="600" Width="750"
-        MinHeight="600" MinWidth="750"
-        WindowStartupLocation="CenterOwner"
-        >
+﻿<metro:MetroWindow x:Class="Baku.VMagicMirrorConfig.WordToMotionItemEditWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:vmm="clr-namespace:Baku.VMagicMirrorConfig"
+    mc:Ignorable="d"
+    d:DataContext="{x:Type vmm:WordToMotionItemViewModel}"
+    Title="VMagicMirror - Word To Motion" 
+    Height="600" Width="750"
+    MinHeight="600" MinWidth="750"
+    WindowStartupLocation="CenterOwner"
+    TitleCharacterCasing="Normal"
+    ShowDialogsOverTitleBar="False"
+    WindowTransitionsEnabled="False"
+    WindowTitleBrush="{StaticResource PrimaryHueMidBrush}"
+    NonActiveWindowTitleBrush="{StaticResource PrimaryHueMidBrush}"
+    Background="{StaticResource MaterialDesignBackground}"
+    >
     <Grid>
         <Grid.Resources>
             <Style TargetType="Slider" BasedOn="{StaticResource {x:Type Slider}}">
@@ -42,9 +49,10 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <md:Card Grid.Row="0" Grid.Column="0"
-                 Margin="8" Padding="10"
-                 >
+        <Border Style="{StaticResource SectionBorder}"
+                Grid.Row="0" Grid.Column="0"
+                Margin="8" Padding="10"
+                >
             <StackPanel>
                 <TextBlock Style="{StaticResource HeaderText}"
                            Text="{DynamicResource WordToMotion_Word_Header}" 
@@ -65,13 +73,14 @@
                            TextAlignment="Left"
                            />
             </StackPanel>
-        </md:Card>
-        
-        <md:Card Grid.Row="1" Grid.Column="0"
-                 VerticalAlignment="Stretch" 
-                 Margin="8"
-                 Padding="10"
-                 >
+        </Border>
+
+        <Border Style="{StaticResource SectionBorder}"
+                Grid.Row="1" Grid.Column="0"
+                VerticalAlignment="Stretch" 
+                Margin="8"
+                Padding="10"
+                >
             <StackPanel>
                 <TextBlock Style="{StaticResource HeaderText}"
                            Text="{DynamicResource WordToMotion_BodyMotion_Header}" 
@@ -103,47 +112,46 @@
                 </DockPanel>
 
 
-                <!--<RadioButton Content="{DynamicResource WordToMotion_MotionType_BvhFile}"
+                <RadioButton Content="{DynamicResource WordToMotion_MotionType_Custom}"
                              Margin="0,20,0,5"
                              VerticalContentAlignment="Center"
-                             IsChecked="{Binding IsMotionTypeBvhFile}"
+                             IsChecked="{Binding IsMotionTypeCustom}"
                              />
-                <DockPanel Margin="5"
-                           LastChildFill="True"
-                           >
-                    <TextBlock DockPanel.Dock="Left"
-                               Text="{DynamicResource WordToMotion_Motion_BvhFile_Label}"
-                               />
+                                
+                <DockPanel LastChildFill="True"
+                           Margin="5">
+                    <TextBlock Text="{DynamicResource WordToMotion_Motion_Custom_Label}" />
+                    <ComboBox ItemsSource="{Binding AvailableCustomMotionClipNames}"
+                              SelectedItem="{Binding CustomMotionClipName}"
+                              IsEnabled="{Binding IsMotionTypeCustomClip}"
+                              Margin="10,0"
+                              md:HintAssist.Hint="{DynamicResource WordToMotion_Motion_Custom_Hint}"
+                              />
+                </DockPanel>
 
-                    <Button DockPanel.Dock="Right"
-                            Style="{StaticResource MaterialDesignRaisedLightButton}"
-                            Content="..."
-                            Width="30"
-                            Height="25"
-                            Padding="0"
-                            Margin="0"
-                            Command="{Binding SelectBvhFileCommand}"
-                            IsEnabled="{Binding IsMotionTypeBvhFile}"
-                            />
-
-
-                    <TextBox Margin="5,0"
-                             Text="{Binding BvhFilePath}"
-                             IsEnabled="{Binding IsMotionTypeBvhFile}"
-                             md:HintAssist.Hint="{DynamicResource WordToMotion_Motion_BvhFile_Hint}"
-                             />
-
-                </DockPanel>-->
-
+                <Button Style="{StaticResource MaterialDesignOutlinedButton}"
+                        Content="{DynamicResource WordToMotion_Motion_Custom_HowTo}"
+                        Command="{Binding OpenWordToMotionCustomHowToCommand}"
+                        Margin="10,0"
+                        Width="NaN"
+                        HorizontalAlignment="Left"
+                        />
+                <!-- 診断機能を検討してIPCまではも用意したものの、まだ仕組みがきちんとしてないので一旦隠します -->
+                <!--<Button Style="{StaticResource MaterialDesignRaisedButton}"
+                        Content="{DynamicResource WordToMotion_Motion_Custom_Doctor}"
+                        Command="{Binding CheckCustomMotionDataValidityCommand}"
+                        Margin="10,5"
+                        />-->
             </StackPanel>
-        </md:Card>
+        </Border>
 
-        <md:Card Grid.Row="0" Grid.Column="1"
-                 Grid.RowSpan="2"
-                 VerticalAlignment="Stretch" 
-                 Margin="8"
-                 Padding="10"
-                 >
+        <Border Style="{StaticResource SectionBorder}"
+                Grid.Row="0" Grid.Column="1"
+                Grid.RowSpan="2"
+                VerticalAlignment="Stretch" 
+                Margin="8"
+                Padding="10"
+                >
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -250,7 +258,8 @@
                                         <Slider Grid.Column="1"
                                                     Value="{Binding ValuePercentage}" />
                                         <TextBox Grid.Column="2"
-                                                     Text="{Binding ValuePercentage}" />
+                                                     Text="{Binding ValuePercentage}"
+                                                 Margin="0"/>
                                     </Grid>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
@@ -278,6 +287,7 @@
                                         <TextBox Grid.Column="2"
                                                  Text="{Binding ValuePercentage}" 
                                                  IsEnabled="{Binding IsUsedWithThisAvatar}"
+                                                 Margin="0"
                                                  />
                                         <Button Grid.Column="3"
                                                 Style="{StaticResource MaterialDesignFlatButton}"
@@ -295,7 +305,7 @@
                     </Grid>
                 </ScrollViewer>
             </Grid>
-        </md:Card>
+        </Border>
         
         <CheckBox Grid.Row="2" Grid.Column="0"
                   Content="{DynamicResource WordToMotion_EnablePreview}"
@@ -311,4 +321,4 @@
             <Button Content="Cancel" Click="ButtonCancel_Click"/>
         </StackPanel>
     </Grid>
-</Window>
+</metro:MetroWindow>

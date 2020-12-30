@@ -1,9 +1,10 @@
-﻿using System;
+﻿using MahApps.Metro.Controls;
+using System;
 using System.Windows;
 
 namespace Baku.VMagicMirrorConfig
 {
-    public partial class SettingWindow : Window
+    public partial class SettingWindow : MetroWindow
     {
         public SettingWindow() => InitializeComponent();
 

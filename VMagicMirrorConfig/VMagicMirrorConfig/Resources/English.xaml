@@ -3,7 +3,13 @@
                     xmlns:sys="clr-namespace:System;assembly=mscorlib"
                     xml:space="preserve"
                     >
-    
+
+    <!-- Window Title Bar -->
+    <sys:String x:Key="TitleBar_Help">Help</sys:String>
+    <sys:String x:Key="TitleBar_Visit_OfficialPage">Web Page</sys:String>
+    <sys:String x:Key="TitleBar_Visit_DownloadPage">Download Page (BOOTH)</sys:String>
+    <sys:String x:Key="TitleBar_About">About VMagicMirror</sys:String>
+
     <!-- Top Tab -->
     <sys:String x:Key="TopBar_Home">Home</sys:String>
     <sys:String x:Key="TopBar_Streaming">Streaming</sys:String>
@@ -13,6 +19,7 @@
     <sys:String x:Key="TopBar_Setting_Window">Window</sys:String>
     <sys:String x:Key="TopBar_Setting_Motion">Motion</sys:String>
     <sys:String x:Key="TopBar_Setting_Layout">Layout</sys:String>
+    <sys:String x:Key="TopBar_Setting_Devices">Devices</sys:String>
     <sys:String x:Key="TopBar_Setting_Effects">Effects</sys:String>
         
     <!-- Home -->
@@ -89,8 +96,12 @@ During this mode, following features are disabled.
 Check "Keep LipSync" to make the lipsync continue.</sys:String>
     <sys:String x:Key="ExTracker_FaceSwitch_KeepLipSync">Keep LipSync</sys:String>
     
+    <!-- Settings General -->
+    <sys:String x:Key="Setting_Color_Expander_Header">Edit Color (Click to Expand)</sys:String>
     
     <!-- Window -->
+    <sys:String x:Key="Window_Header">Window</sys:String>
+    <sys:String x:Key="Window_Basics">Basic Settings</sys:String>
     <sys:String x:Key="Window_BackgroundColor">Background</sys:String>
     <sys:String x:Key="Window_Transparent">Transparent Window</sys:String>
     <sys:String x:Key="Window_Draggable">(When Transparent) Drag character</sys:String>
@@ -112,26 +123,10 @@ Check "Keep LipSync" to make the lipsync continue.</sys:String>
     <sys:String x:Key="Window_TransparencySupport_Level_2">Level 2: Transparent if mouse pointer is close to the character.</sys:String>
     <sys:String x:Key="Window_TransparencySupport_Level_3">Level 3: Transparent if "Drag character" is off.</sys:String>
     <sys:String x:Key="Window_TransparencySupport_Level_4">Level 4: Always transparent.</sys:String>
-    
-    <sys:String x:Key="Window_VirtualCamOutput">Virtual Camera Output</sys:String>
-    <sys:String x:Key="Window_VirtualCamOutput_Enable">Enable Camera Output</sys:String>
-    <sys:String x:Key="Window_VirtualCamOutput_Resolution">Size</sys:String>
-    <sys:String x:Key="Window_VirtualCamOutput_Width">Width</sys:String>
-    <sys:String x:Key="Window_VirtualCamOutput_Height">Height</sys:String>
-    <sys:String x:Key="Window_VirtualCamOutput_MatchWindowSize">Resize</sys:String>
-    <sys:String x:Key="Window_VirtualCamOutput_FirstTime_Header">*How to setup</sys:String>
-    <sys:String x:Key="Window_VirtualCamOutput_FirstTime_DialogTitle">Virtual Camera Installation Required</sys:String>    
-    <sys:String x:Key="Window_VirtualCamOutput_FirstTime_Expr" xml:space="preserve">Camera install is required for this feature.
- 
-  - Open "CameraInstall" folder.
-  - Double click "Install.bat" to execute installation.
-
-When you want to uninstall. double click "Uninstall.bat".</sys:String>        
-    <sys:String x:Key="Window_VirtualCamOutput_FirstTime_OpenFolder">Open Folder</sys:String>
-    <sys:String x:Key="Window_VirtualCamOutput_FirstTime_SeeMore">Read more (on web)</sys:String>
-    
+   
     <!-- Motion -->
-    
+    <sys:String x:Key="Motion_Header">Motion</sys:String>   
+
     <!-- Motion : Full Body -->
     <sys:String x:Key="Motion_FullBody">Upper Body</sys:String>
     <sys:String x:Key="Motion_FullBody_NoHandTrackMode">Always-Hands-Down Mode (*Increase body move)</sys:String>    
@@ -210,6 +205,7 @@ If the face tracking works correctly, please ignore this warning.
     <sys:String x:Key="Motion_Wait_WaitMotionPeriod">Period [sec]</sys:String>    
     
     <!-- Layout Setting -->
+    <sys:String x:Key="Layout_Header">Layout</sys:String>   
    
     <!-- Layout : Camera -->
     <sys:String x:Key="Layout_Camera">Camera</sys:String>
@@ -232,49 +228,52 @@ camera movements following:
     <sys:String x:Key="Layout_DeviceFreeLayout">Free Layout</sys:String>
 
     <!-- Layout : Keyboard / Mouse Pad -->
-    <sys:String x:Key="Layout_Hid">Keyboard / MIDI</sys:String>
-    <sys:String x:Key="Layout_HidHeight">Height [cm]</sys:String>
-    <sys:String x:Key="Layout_HidHorizontalScale">Size [%]</sys:String>
-    <sys:String x:Key="Layout_HidHorizontalScale_Tooltip">Specify the size of keyboard. When smallen, the devices are close to the character.</sys:String>
-    <sys:String x:Key="Layout_HidVisible">Keyboard and Touch Pad Visible</sys:String>
-    <sys:String x:Key="Layout_MidiVisible">MIDI Controller Visible</sys:String>
-    <sys:String x:Key="Layout_MidiReadEnable">Use MIDI Controller for VMagicMirror</sys:String>
+    <sys:String x:Key="Layout_Hid">Device Visibility</sys:String>
+    <sys:String x:Key="Layout_HidVisible">Keyboard and Touch Pad</sys:String>
+    <sys:String x:Key="Layout_MidiVisible">MIDI Controller</sys:String>
+    <sys:String x:Key="Layout_GamepadVisible">Gamepad</sys:String>    
     <sys:String x:Key="Layout_Hid_Streaming">Keyboard</sys:String>
     <sys:String x:Key="Layout_Midi_Streaming">MIDI</sys:String>
         
-    <sys:String x:Key="Layout_HidReactToKeyboard">Enable keyboard motion</sys:String>
-    <sys:String x:Key="Layout_HidReactToMouse">Enable mouse motion</sys:String>
-
     <sys:String x:Key="Layout_Hid_TypingEffect_Header">Typing Effect</sys:String>
     <sys:String x:Key="Layout_Hid_TypingEffect_Header_Streaming">Typing Effect</sys:String>
     <sys:String x:Key="Layout_Hid_TypingEffect_None">None</sys:String>
     <sys:String x:Key="Layout_Hid_TypingEffect_Text">Text</sys:String>
     <sys:String x:Key="Layout_Hid_TypingEffect_Light">Light</sys:String>
-    
-    <!-- Layout : Gamepad -->
-    <sys:String x:Key="Layout_Gamepad">Gamepad</sys:String>
-    
-    <sys:String x:Key="Layout_GamepadEnable">Enable Input Capture</sys:String>
-    <sys:String x:Key="Layout_Gamepad_PreferDirectInput">Use DirectInput (check for DUAL SHOCK 4)</sys:String>
-    <sys:String x:Key="Layout_GamepadDeviceNumber">Device Number</sys:String>
-    
-    <sys:String x:Key="Layout_GamepadHeight">Height [cm]</sys:String>
-    <sys:String x:Key="Layout_GamepadHorizontalScale">Size [%]</sys:String>
-    <sys:String x:Key="Layout_GamepadVisible">Visible</sys:String>    
-    <sys:String x:Key="Layout_GamepadLeanMotion">Lean character by directional input</sys:String>    
 
-    <sys:String x:Key="Layout_GamepadLean">Lean by Stick</sys:String>
-    <sys:String x:Key="Layout_GamepadLean_None">None</sys:String>
-    <sys:String x:Key="Layout_GamepadLean_LeftButtons">Left Buttons</sys:String>
-    <sys:String x:Key="Layout_GamepadLean_LeftStick">Left Stick</sys:String>
-    <sys:String x:Key="Layout_GamepadLean_RightStick">Right Stick</sys:String>
+    <sys:String x:Key="Layout_Gamepad">Gamepad</sys:String>    
+    
+    <!-- Devices -->
+    <sys:String x:Key="Devices_Header">Devices</sys:String>
+    
+    <!-- Devices: Keyboard and mouse -->
+    <sys:String x:Key="Devices_Keyboard_Mouse_Header">Keyboard / Mouse</sys:String>
+    
+    <!-- Devices: MIDI -->
+    <sys:String x:Key="Devices_Midi_Header">MIDI</sys:String>
+    <sys:String x:Key="Devices_Midi_ReadEnable">Use MIDI Controller for VMagicMirror</sys:String>
+    
+    <!-- Devices: Gamepad -->
+    <sys:String x:Key="Devices_Gamepad_Header">Gamepad</sys:String>
+    
+    <sys:String x:Key="Devices_GamepadEnable">Enable Input Capture</sys:String>
+    <sys:String x:Key="Devices_Gamepad_PreferDirectInput">Use DirectInput (check for DUAL SHOCK 4)</sys:String>
+    <sys:String x:Key="Devices_GamepadDeviceNumber">Device Number</sys:String>
+    
+    <sys:String x:Key="Devices_GamepadLean">Lean by Stick</sys:String>
+    <sys:String x:Key="Devices_GamepadLean_None">None</sys:String>
+    <sys:String x:Key="Devices_GamepadLean_LeftButtons">Left Buttons</sys:String>
+    <sys:String x:Key="Devices_GamepadLean_LeftStick">Left Stick</sys:String>
+    <sys:String x:Key="Devices_GamepadLean_RightStick">Right Stick</sys:String>
 
-    <sys:String x:Key="Layout_GamepadLean_Reverse">Reverse direction to lean</sys:String>
-    <sys:String x:Key="Layout_GamepadLean_ReverseHorizontal">Left / Right</sys:String>
-    <sys:String x:Key="Layout_GamepadLean_ReverseVertical">Forward / Backword</sys:String>
-        
+    <sys:String x:Key="Devices_GamepadLean_Reverse">Reverse direction to lean</sys:String>
+    <sys:String x:Key="Devices_GamepadLean_ReverseHorizontal">Left / Right</sys:String>
+    <sys:String x:Key="Devices_GamepadLean_ReverseVertical">Forward / Backword</sys:String>
+    
     
     <!-- Light Setting -->
+    <sys:String x:Key="Effect_Header">Effect</sys:String>       
+    
     <sys:String x:Key="ImageQuality">Image Quality</sys:String>
     <sys:String x:Key="ImageQuality_CurrentQuality">Quality</sys:String>
     
@@ -304,6 +303,8 @@ camera movements following:
         
     
     <!-- Word To Motion -->
+    <sys:String x:Key="WordToMotion_Header">Word to Motion</sys:String>   
+    
     <sys:String x:Key="WordToMotion_Enable">Enable Word to Motion</sys:String>
     <sys:String x:Key="WordToMotion_UseGamepadForInput">Use gamepad as launcher</sys:String>
     <sys:String x:Key="WordToMotion_Instruction" xml:space="preserve">This tab is `Word to Motion` tab.
@@ -327,11 +328,13 @@ Please test by typing "joy".</sys:String>
     <sys:String x:Key="WordToMotion_BodyMotion_Header">Body Motion</sys:String>
     <sys:String x:Key="WordToMotion_MotionType_None">None</sys:String>
     <sys:String x:Key="WordToMotion_MotionType_BuiltIn">Built-In Motion</sys:String>
-    <sys:String x:Key="WordToMotion_MotionType_BvhFile">BVH File</sys:String>
+    <sys:String x:Key="WordToMotion_MotionType_Custom">Custom Motion</sys:String>
     <sys:String x:Key="WordToMotion_Motion_BuiltIn_Label">Motion</sys:String>
     <sys:String x:Key="WordToMotion_Motion_BuiltIn_Hint">Choose Motion</sys:String>
-    <sys:String x:Key="WordToMotion_Motion_BvhFile_Label">File</sys:String>
-    <sys:String x:Key="WordToMotion_Motion_BvhFile_Hint">File Path</sys:String>
+    <sys:String x:Key="WordToMotion_Motion_Custom_Label">Motion</sys:String>
+    <sys:String x:Key="WordToMotion_Motion_Custom_Hint">Choose Motion</sys:String>
+    <sys:String x:Key="WordToMotion_Motion_Custom_HowTo">How to Use (open web)</sys:String>
+    <sys:String x:Key="WordToMotion_Motion_Custom_Doctor">Check Motion Data Validity</sys:String>
 
     <sys:String x:Key="WordToMotion_Face_Header">Face Expression</sys:String>
     <sys:String x:Key="WordToMotion_Face_Enable">Enable Face Expression</sys:String>
@@ -351,5 +354,7 @@ Please test by typing "joy".</sys:String>
     <sys:String x:Key="WordToMotion_MidiAssign_Current">Current Note</sys:String>
     <sys:String x:Key="WordToMotion_MidiAssign_After">Note to Change</sys:String>
     <sys:String x:Key="WordToMotion_MidiAssign_Clear">Clear</sys:String>
+    
+
 
 </ResourceDictionary>

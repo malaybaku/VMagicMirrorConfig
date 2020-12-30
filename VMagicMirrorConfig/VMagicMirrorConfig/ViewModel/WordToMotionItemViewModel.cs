@@ -28,6 +28,8 @@ namespace Baku.VMagicMirrorConfig
 
         private readonly WordToMotionSettingViewModel _parent;
 
+        public ReadOnlyObservableCollection<string> AvailableCustomMotionClipNames => _parent.CustomMotionClipNames;
+
         /// <summary>ファイルI/Oや通信のベースになるデータを取得します。</summary>
         public MotionRequest? MotionRequest { get; }
 
@@ -47,7 +49,7 @@ namespace Baku.VMagicMirrorConfig
                     0, 
                     _parent.LatestAvaterExtraClipNames.Contains(name)
                     ));
-                MotionRequest.ExtraBlendShapeValues.Add(new BlendShapePairItem()
+                MotionRequest?.ExtraBlendShapeValues.Add(new BlendShapePairItem()
                 {
                     Name = name,
                     Value = 0
@@ -126,7 +128,7 @@ namespace Baku.VMagicMirrorConfig
             {
                 return IsMotionTypeNone ? MotionRequest.MotionTypeNone :
                     IsMotionTypeBuiltInClip ? MotionRequest.MotionTypeBuiltInClip :
-                    IsMotionTypeBvhFile ? MotionRequest.MotionTypeBvhFile :
+                    IsMotionTypeCustom ? MotionRequest.MotionTypeCustom :
                     MotionRequest.MotionTypeNone;
             }
         }
@@ -142,7 +144,7 @@ namespace Baku.VMagicMirrorConfig
                 if (value)
                 {
                     IsMotionTypeBuiltInClip = false;
-                    IsMotionTypeBvhFile = false;
+                    IsMotionTypeCustom = false;
                 }
                 _isMotionTypeNone = value;
                 RaisePropertyChanged();
@@ -160,26 +162,26 @@ namespace Baku.VMagicMirrorConfig
                 if (value)
                 {
                     IsMotionTypeNone = false;
-                    IsMotionTypeBvhFile = false;
+                    IsMotionTypeCustom = false;
                 }
                 _isMotionTypeBuiltInClip = value;
                 RaisePropertyChanged();
             }
         }
 
-        private bool _isMotionTypeBvhFile = false;
-        public bool IsMotionTypeBvhFile
+        private bool _isMotionTypeCustom = false;
+        public bool IsMotionTypeCustom
         {
-            get => _isMotionTypeBvhFile;
+            get => _isMotionTypeCustom;
             set
             {
-                if (_isMotionTypeBvhFile == value) { return; }
+                if (_isMotionTypeCustom == value) { return; }
                 if (value)
                 {
                     IsMotionTypeNone = false;
                     IsMotionTypeBuiltInClip = false;
                 }
-                _isMotionTypeBvhFile = value;
+                _isMotionTypeCustom = value;
                 RaisePropertyChanged();
             }
         }
@@ -191,11 +193,11 @@ namespace Baku.VMagicMirrorConfig
             set => SetValue(ref _builtInClipName, value);
         }
 
-        private string _bvhFilePath = "";
-        public string BvhFilePath
+        private string _customMotionClipName = "";
+        public string CustomMotionClipName
         {
-            get => _bvhFilePath;
-            set => SetValue(ref _bvhFilePath, value);
+            get => _customMotionClipName;
+            set => SetValue(ref _customMotionClipName, value);
         }
 
         private bool _useBlendShape = false;
@@ -238,23 +240,6 @@ namespace Baku.VMagicMirrorConfig
 
         #region Commands
 
-        private ActionCommand? _selectBvhFileCommand;
-        public ActionCommand SelectBvhFileCommand
-            => _selectBvhFileCommand ??= new ActionCommand(SelectBvhFile);
-        private void SelectBvhFile()
-        {
-            var dialog = new OpenFileDialog()
-            {
-                Title = "Select Motion File",
-                Filter = "BVH file(*.bvh)|*.bvh",
-                Multiselect = false,
-            };
-            if (dialog.ShowDialog() == true)
-            {
-                BvhFilePath = System.IO.Path.GetFullPath(dialog.FileName);
-            }
-        }
-
         private ActionCommand? _moveUpCommand;
         public ActionCommand MoveUpCommand
             => _moveUpCommand ??= new ActionCommand(() => _parent.MoveUpItem(this));
@@ -275,6 +260,18 @@ namespace Baku.VMagicMirrorConfig
         public ActionCommand DeleteCommand
             => _deleteCommand ??= new ActionCommand(async () => await _parent.DeleteItem(this));
 
+        private ActionCommand? _openWordToMotionCustomHowToCommand;
+        public ActionCommand OpenWordToMotionCustomHowToCommand
+            => _openWordToMotionCustomHowToCommand ??= new ActionCommand(() => UrlNavigate.Open(
+                "https://malaybaku.github.io/VMagicMirror/tips/use_custom_motion"
+                ));
+
+        private ActionCommand? _checkCustomMotionDataValidityCommand;
+        public ActionCommand CheckCustomMotionDataValidityCommand
+            => _checkCustomMotionDataValidityCommand ??= new ActionCommand(
+                () => _parent.RequestCustomMotionDoctor()
+                );
+
         #endregion
 
         private ObservableCollection<string> _availableBuiltInClipNames
@@ -294,7 +291,7 @@ namespace Baku.VMagicMirrorConfig
             model.MotionType = MotionType;
 
             model.BuiltInAnimationClipName = BuiltInClipName;
-            model.ExternalBvhFilePath = BvhFilePath;
+            model.CustomMotionClipName = CustomMotionClipName;
             model.UseBlendShape = UseBlendShape;
             model.HoldBlendShape = HoldBlendShape;
             model.PreferLipSync = PreferLipSync;
@@ -332,8 +329,8 @@ namespace Baku.VMagicMirrorConfig
                 case MotionRequest.MotionTypeBuiltInClip:
                     IsMotionTypeBuiltInClip = true;
                     break;
-                case MotionRequest.MotionTypeBvhFile:
-                    IsMotionTypeBvhFile = true;
+                case MotionRequest.MotionTypeCustom:
+                    IsMotionTypeCustom = true;
                     break;
                 default:
                     IsMotionTypeNone = true;
@@ -341,7 +338,7 @@ namespace Baku.VMagicMirrorConfig
             }
 
             BuiltInClipName = model.BuiltInAnimationClipName;
-            BvhFilePath = model.ExternalBvhFilePath;
+            CustomMotionClipName = model.CustomMotionClipName;
 
             UseBlendShape = model.UseBlendShape;
             HoldBlendShape = model.HoldBlendShape;
@@ -366,7 +363,6 @@ namespace Baku.VMagicMirrorConfig
                 }
             }
         }
-
 
         private void InitializeBuiltInClipNames()
         {

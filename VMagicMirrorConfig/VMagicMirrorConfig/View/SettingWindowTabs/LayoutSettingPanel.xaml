@@ -24,7 +24,12 @@
                   >
         <StackPanel Margin="0,5">
 
-            <md:Card>
+            <TextBlock 
+                Text="{DynamicResource Layout_Header}"                 
+                Style="{StaticResource SectionHeaderText}"
+                />
+            
+            <Border Style="{StaticResource SideMarginSectionBorder}">
                 <StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="5">
@@ -150,9 +155,9 @@
                     </Button>
 
                 </StackPanel>
-            </md:Card>
+            </Border>
 
-            <md:Card>
+            <Border Style="{StaticResource SideMarginSectionBorder}">
                 <StackPanel>
 
                     <StackPanel Orientation="Horizontal"
@@ -180,15 +185,15 @@
                         </CheckBox.Content>
                     </CheckBox>
                 </StackPanel>
-            </md:Card>
+            </Border>
 
-            <md:Card>
+            <Border Style="{StaticResource SideMarginSectionBorder}">
                 <StackPanel>
 
                     <StackPanel Orientation="Horizontal"
                                 Margin="5"
                                 >
-                        <md:PackIcon Kind="Keyboard"
+                        <md:PackIcon Kind="Eye"
                                      Style="{StaticResource SettingHeaderPackIcon}"
                                      />
 
@@ -208,12 +213,12 @@
                         <TextBlock Text="{DynamicResource Layout_HidVisible}"/>
                     </CheckBox>
 
-                    <CheckBox Margin="20,0"
+                    <CheckBox Margin="20,2"
                               VerticalContentAlignment="Center"
-                              IsChecked="{Binding EnableMidiRead}">
-                        <TextBlock Text="{DynamicResource Layout_MidiReadEnable}"/>
+                              IsChecked="{Binding Gamepad.GamepadVisibility}">
+                        <TextBlock Text="{DynamicResource Layout_GamepadVisible}"/>
                     </CheckBox>
-
+                    
                     <CheckBox Margin="20,0"
                               VerticalContentAlignment="Center"
                               IsChecked="{Binding MidiControllerVisibility}">
@@ -257,85 +262,7 @@
                         </ComboBox>
                     </Grid>
                 </StackPanel>
-            </md:Card>
-
-            <md:Card>
-                <StackPanel>
-
-                    <StackPanel Orientation="Horizontal"
-                                Margin="5"
-                                >
-
-                        <md:PackIcon Kind="GamepadVariant"
-                                     Style="{StaticResource SettingHeaderPackIcon}"
-                                     />
-                        <TextBlock Text="{DynamicResource Layout_Gamepad}"
-                                   Style="{StaticResource HeaderText}"
-                                   Margin="5"
-                                   />
-                        <Button Style="{StaticResource CategorySettingResetButton}"
-                                Command="{Binding Gamepad.ResetSettingCommand}"
-                                />
-                    </StackPanel>
-                    
-
-                    <StackPanel>
-
-                        <CheckBox Margin="20,0"
-                                  VerticalAlignment="Center"
-                                  VerticalContentAlignment="Center"
-                                  IsChecked="{Binding Gamepad.GamepadEnabled}"
-                                  >
-                            <TextBlock Text="{DynamicResource Layout_GamepadEnable}"/>
-                        </CheckBox>
-                        <CheckBox Margin="40,0,0,0"
-                                  VerticalAlignment="Center"
-                                  VerticalContentAlignment="Center"
-                                  IsEnabled="{Binding Gamepad.GamepadEnabled}"
-                                  IsChecked="{Binding Gamepad.PreferDirectInputGamepad}"
-                                  >
-                            <TextBlock Text="{DynamicResource Layout_Gamepad_PreferDirectInput}"/>
-                        </CheckBox>
-
-                        <CheckBox Margin="20,2"
-                              VerticalContentAlignment="Center"
-                              IsChecked="{Binding Gamepad.GamepadVisibility}">
-                            <TextBlock Text="{DynamicResource Layout_GamepadVisible}"/>
-                        </CheckBox>
-
-                        <TextBlock Text="{DynamicResource Layout_GamepadLean}"/>
-
-                        <CheckBox Margin="20,0"
-                                  IsEnabled="{Binding Gamepad.GamepadEnabled}"
-                                  IsChecked="{Binding Gamepad.GamepadLeanNone}"
-                                  Content="{DynamicResource Layout_GamepadLean_None}"/>
-                        <CheckBox Margin="20,0"
-                                  IsEnabled="{Binding Gamepad.GamepadEnabled}"
-                                  IsChecked="{Binding Gamepad.GamepadLeanLeftButtons}"
-                                  Content="{DynamicResource Layout_GamepadLean_LeftButtons}"/>
-                        <CheckBox Margin="20,0"
-                                  IsEnabled="{Binding Gamepad.GamepadEnabled}"
-                                  IsChecked="{Binding Gamepad.GamepadLeanLeftStick}"
-                                  Content="{DynamicResource Layout_GamepadLean_LeftStick}"/>
-                        <CheckBox Margin="20,0"
-                                  IsEnabled="{Binding Gamepad.GamepadEnabled}"
-                                  IsChecked="{Binding Gamepad.GamepadLeanRightStick}"
-                                  Content="{DynamicResource Layout_GamepadLean_RightStick}"/>
-
-                        <TextBlock Text="{DynamicResource Layout_GamepadLean_Reverse}"/>
-
-                        <CheckBox Margin="20,0"
-                                  IsEnabled="{Binding Gamepad.GamepadEnabled}"
-                                  IsChecked="{Binding Gamepad.GamepadLeanReverseHorizontal}"
-                                  Content="{DynamicResource Layout_GamepadLean_ReverseHorizontal}"/>
-                        <CheckBox Margin="20,0"
-                                  IsEnabled="{Binding Gamepad.GamepadEnabled}"
-                                  IsChecked="{Binding Gamepad.GamepadLeanReverseVertical}"
-                                  Content="{DynamicResource Layout_GamepadLean_ReverseVertical}"/>
-
-                    </StackPanel>
-                </StackPanel>
-            </md:Card>
+            </Border>
 
         </StackPanel>
     </ScrollViewer>

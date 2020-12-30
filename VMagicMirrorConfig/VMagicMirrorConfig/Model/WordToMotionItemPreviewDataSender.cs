@@ -18,7 +18,7 @@ namespace Baku.VMagicMirrorConfig
         //あくまでプレビューが目当てなのでザツに。
         private const int DataSendIntervalMillisec = 500;
         private readonly IMessageSender _sender;
-        private CancellationTokenSource _cts = new CancellationTokenSource();
+        private CancellationTokenSource? _cts = new CancellationTokenSource();
 
         public event EventHandler? PrepareDataSend;
 
@@ -39,7 +39,7 @@ namespace Baku.VMagicMirrorConfig
 
         public void End()
         {
-            _cts.Cancel();
+            _cts?.Cancel();
             _cts = null;
         }
 

@@ -26,6 +26,8 @@ namespace Baku.VMagicMirrorConfig
         internal WordToMotionSettingViewModel(IMessageSender sender, IMessageReceiver receiver) : base(sender)
         {
             Items = new ReadOnlyObservableCollection<WordToMotionItemViewModel>(_items);
+            CustomMotionClipNames = new ReadOnlyObservableCollection<string>(_customMotionClipNames);
+
             Devices = WordToMotionDeviceItem.LoadAvailableItems();
             SelectedDevice = Devices.FirstOrDefault(d => d.Index == DeviceTypeKeyboardWord);
             _previewDataSender = new WordToMotionItemPreviewDataSender(sender);
@@ -89,6 +91,19 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
+        public async Task InitializeCustomMotionClipNamesAsync()
+        {
+            var rawClipNames = await SendQueryAsync(MessageFactory.Instance.GetAvailableCustomMotionClipNames());
+            var clipNames = rawClipNames.Split('\t');
+            foreach(var name in clipNames)
+            {
+                _customMotionClipNames.Add(name);
+            }
+        }
+
+        private readonly ObservableCollection<string> _customMotionClipNames = new ObservableCollection<string>();
+        [XmlIgnore]
+        public ReadOnlyObservableCollection<string> CustomMotionClipNames { get; }
 
         private bool _enableWordToMotion = true;
         [XmlIgnore]
@@ -207,6 +222,13 @@ namespace Baku.VMagicMirrorConfig
                     var requests = MotionRequestCollection.DeserializeFromJson(reader);
                     foreach (var item in requests.Requests)
                     {
+                        if (item == null)
+                        {
+                            //一応チェックしてるけど本来nullはあり得ない
+                            LogOutput.Instance.Write("Receive null MotionRequest");
+                            continue;
+                        }
+
                         //NOTE: 前処理として、この時点で読み込んだモデルに不足なExtraClipがある場合は差し込んでおく
                         //これは異バージョンとか考慮した処理です
                         foreach (var extraClip in ExtraBlendShapeClipNames)
@@ -324,10 +346,9 @@ namespace Baku.VMagicMirrorConfig
         {
             string name = blendShapeItem.BlendShapeName;
             var indication = MessageIndication.ForgetBlendShapeClip(LanguageSelector.Instance.LanguageName);
-            bool res = await MessageBoxWrapper.Instance.ShowAsync(
+            bool res = await MessageBoxWrapper.Instance.ShowAsyncOnWordToMotionItemEdit(
                 indication.Title,
-                string.Format(indication.Content, name),
-                MessageBoxWrapper.MessageBoxStyle.OKCancel
+                string.Format(indication.Content, name)
                 );
             if (res)
             {
@@ -464,6 +485,9 @@ namespace Baku.VMagicMirrorConfig
             EnablePreview = false;
             _dialogItem = null;
         }
+
+        public void RequestCustomMotionDoctor()
+            => SendMessage(MessageFactory.Instance.RequestCustomMotionDoctor());
     }
 
 

@@ -35,15 +35,24 @@ namespace Baku.VMagicMirrorConfig
             set => SetValue(IconHeightProperty, value);
         }
 
+        public Thickness TextMargin
+        {
+            get => (Thickness)GetValue(TextMarginProperty);
+            set => SetValue(TextMarginProperty, value);
+        }
+
+        public double TranslateX
+        {
+            get => (double)GetValue(TranslateXProperty);
+            set => SetValue(TranslateXProperty, value);
+        }
+
         public static readonly DependencyProperty TextProperty
             = DependencyProperty.Register(
                 nameof(Text),
                 typeof(string),
                 typeof(TabHeaderIconText),
-                new PropertyMetadata(
-                    "",
-                    OnTextChanged
-                    )
+                new PropertyMetadata("", OnTextChanged)
                 );
 
         public static readonly DependencyProperty IconKindProperty
@@ -51,10 +60,7 @@ namespace Baku.VMagicMirrorConfig
                 nameof(IconKind),
                 typeof(PackIconKind),
                 typeof(TabHeaderIconText),
-                new PropertyMetadata(
-                    PackIconKind.Abc,
-                    OnIconChanged
-                    )
+                new PropertyMetadata(PackIconKind.Abc, OnIconChanged)
                 );
 
         public static readonly DependencyProperty IconWidthProperty
@@ -62,10 +68,7 @@ namespace Baku.VMagicMirrorConfig
                 nameof(IconWidth),
                 typeof(double),
                 typeof(TabHeaderIconText),
-                new PropertyMetadata(
-                    22.0,
-                    OnIconWidthChanged
-                    )
+                new PropertyMetadata(22.0, OnIconWidthChanged)
                 );
 
         public static readonly DependencyProperty IconHeightProperty
@@ -73,10 +76,23 @@ namespace Baku.VMagicMirrorConfig
                 nameof(IconHeight),
                 typeof(double),
                 typeof(TabHeaderIconText),
-                new PropertyMetadata(
-                    22.0,
-                    OnIconHeightChanged
-                    )
+                new PropertyMetadata(22.0, OnIconHeightChanged)
+                );
+
+        public static readonly DependencyProperty TranslateXProperty =
+            DependencyProperty.Register(
+                nameof(TranslateX),
+                typeof(double),
+                typeof(TabHeaderIconText),
+                new PropertyMetadata(0.0, OnTranslateXChanged)
+                );
+
+        public static readonly DependencyProperty TextMarginProperty =
+            DependencyProperty.Register(
+                nameof(TextMargin),
+                typeof(Thickness),
+                typeof(TabHeaderIconText),
+                new PropertyMetadata(new Thickness(3, 0, 5, 0), OnTextMarginChanged)
                 );
 
         private static void OnIconWidthChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -108,6 +124,22 @@ namespace Baku.VMagicMirrorConfig
             if (d is TabHeaderIconText control)
             {
                 control.packIcon.Kind = (PackIconKind)e.NewValue;
+            }
+        }
+
+        private static void OnTextMarginChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is TabHeaderIconText control)
+            {
+                control.textBlock.Margin = (Thickness)e.NewValue;
+            }
+        }
+
+        private static void OnTranslateXChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is TabHeaderIconText control)
+            {
+                control.PositionTransform.X = (double)e.NewValue;
             }
         }
     }

@@ -152,7 +152,7 @@
         {
             GamepadEnabled = true;
             PreferDirectInputGamepad = false;
-            GamepadVisibility = false;
+            //NOTE: Visibilityは別のとこでいじるため、ここでは不要
 
             GamepadLeanNone = false;
             GamepadLeanLeftButtons = false;

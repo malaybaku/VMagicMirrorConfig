@@ -82,7 +82,7 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private bool _enableMidiRead = true;
+        private bool _enableMidiRead = false;
         public bool EnableMidiRead
         {
             get
@@ -396,8 +396,8 @@ namespace Baku.VMagicMirrorConfig
         private void ResetHidSetting()
         {
             HidVisibility = true;
-            EnableMidiRead = true;
             MidiControllerVisibility = false;
+            Gamepad.GamepadVisibility = false;
             SelectedTypingEffectId = TypingEffectIndexNone;
         }
 
@@ -417,11 +417,22 @@ namespace Baku.VMagicMirrorConfig
             ResetCameraPosition();
         }
 
+        private ActionCommand? _resetMidiSettingCommand = null;
+        public ActionCommand ResetMidiSettingCommand
+            => _resetMidiSettingCommand ??= new ActionCommand(
+                () => SettingResetUtils.ResetSingleCategorySettingAsync(ResetMidiSetting)
+                );
+        private void ResetMidiSetting()
+        {
+            EnableMidiRead = false;
+        }
+
         public override void ResetToDefault()
         {
             Gamepad.ResetToDefault();
 
             ResetHidSetting();
+            ResetMidiSetting();
             ResetCameraSetting();
         }
 

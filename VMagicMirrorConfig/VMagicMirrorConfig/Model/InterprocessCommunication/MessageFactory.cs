@@ -58,15 +58,6 @@ namespace Baku.VMagicMirrorConfig
 
         #endregion
 
-        #region 仮想カメラ
-
-        public Message SetVirtualCamEnable(bool enable) => WithArg($"{enable}");
-        public Message SetVirtualCamWidth(int width) => WithArg($"{width}");
-        public Message SetVirtualCamHeight(int height) => WithArg($"{height}");
-        public Message SetVirtualCamBasedWindowSize(int width, int height) => WithArg($"{width},{height}");
-
-        #endregion
-
         #region モーション
 
         public Message EnableNoHandTrackMode(bool enable) => WithArg($"{enable}");
@@ -242,6 +233,14 @@ namespace Baku.VMagicMirrorConfig
 
         public Message LoadMidiNoteToMotionMap(string content) => WithArg(content);
         public Message RequireMidiNoteOnMessage(bool require) => WithArg($"{require}");
+
+        public Message RequestCustomMotionDoctor() => NoArg();
+
+        /// <summary>
+        /// Query 
+        /// </summary>
+        /// <returns></returns>
+        public Message GetAvailableCustomMotionClipNames() => NoArg();
 
         #endregion
 

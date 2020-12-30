@@ -16,10 +16,9 @@ namespace Baku.VMagicMirrorConfig
             {
                 using (var regKey = Registry.CurrentUser.OpenSubKey(StartupRegistryKey, false))
                 {
-                    return (
+                    return regKey != null &&
                         regKey.GetValue(ProductName, "") is string s &&
-                        s == UnityAppPath
-                        );
+                        s == UnityAppPath;
                 }
             }
             catch(Exception)
@@ -32,13 +31,10 @@ namespace Baku.VMagicMirrorConfig
         {
             try
             {
-                using (var regKey = Registry.CurrentUser.OpenSubKey(StartupRegistryKey, false))
-                {
-                    return (
-                        regKey.GetValue(ProductName, UnityAppPath) is string s &&
-                        s != UnityAppPath
-                        );
-                }
+                using var regKey = Registry.CurrentUser.OpenSubKey(StartupRegistryKey, false);
+                return regKey != null &&
+                    regKey.GetValue(ProductName, UnityAppPath) is string s &&
+                    s != UnityAppPath;
             }
             catch (Exception)
             {
@@ -50,7 +46,8 @@ namespace Baku.VMagicMirrorConfig
         {
             try
             {
-                using (var regKey = Registry.CurrentUser.OpenSubKey(StartupRegistryKey, true))
+                using var regKey = Registry.CurrentUser.OpenSubKey(StartupRegistryKey, true);
+                if (regKey != null)
                 {
                     if (enable)
                     {

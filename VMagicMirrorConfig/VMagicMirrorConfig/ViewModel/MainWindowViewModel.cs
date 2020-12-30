@@ -21,8 +21,6 @@ namespace Baku.VMagicMirrorConfig
         public WordToMotionSettingViewModel WordToMotionSetting { get; private set; }
         public ExternalTrackerViewModel ExternalTrackerSetting { get; private set; }
 
-        public DialogHelperViewModel DialogHelper => DialogHelperViewModel.Instance;
-
         private DeviceFreeLayoutHelper? _deviceFreeLayoutHelper;
 
         private bool _activateOnStartup = false;
@@ -76,7 +74,7 @@ namespace Baku.VMagicMirrorConfig
             Initializer.MessageReceiver.ReceivedCommand += OnReceiveCommand;
         }
 
-        private void OnReceiveCommand(object sender, CommandReceivedEventArgs e)
+        private void OnReceiveCommand(object? sender, CommandReceivedEventArgs e)
         {
             switch (e.Command)
             {
@@ -85,7 +83,6 @@ namespace Baku.VMagicMirrorConfig
                     if (_isVRoidHubUiActive)
                     {
                         MessageBoxWrapper.Instance.SetDialogResult(false);
-                        DialogHelper.IsOpen = false;
                     }
 
                     //ファイルパスではなくモデルID側を最新情報として覚えておく
@@ -98,7 +95,6 @@ namespace Baku.VMagicMirrorConfig
                     if (_isVRoidHubUiActive)
                     {
                         MessageBoxWrapper.Instance.SetDialogResult(false);
-                        DialogHelper.IsOpen = false;
                     }
                     break;
             }
@@ -153,10 +149,6 @@ namespace Baku.VMagicMirrorConfig
         private ActionCommand? _openVRoidHubCommand;
         public ActionCommand OpenVRoidHubCommand
             => _openVRoidHubCommand ??= new ActionCommand(OpenVRoidHub);
-
-        private ActionCommand? _openManualUrlCommand;
-        public ActionCommand OpenManualUrlCommand
-            => _openManualUrlCommand ??= new ActionCommand(OpenManualUrl);
 
         private ActionCommand? _autoAdjustCommand;
         public ActionCommand AutoAdjustCommand
@@ -280,16 +272,6 @@ namespace Baku.VMagicMirrorConfig
         }
 
         private void OpenVRoidHub() => UrlNavigate.Open("https://hub.vroid.com/");
-
-        private void OpenManualUrl()
-        {
-            string url =
-                (LanguageName == "Japanese") ?
-                "https://malaybaku.github.io/VMagicMirror" :
-                "https://malaybaku.github.io/VMagicMirror/en";
-
-            UrlNavigate.Open(url);
-        }
 
         private void AutoAdjust() => MessageSender.SendMessage(MessageFactory.Instance.RequestAutoAdjust());
 
@@ -421,6 +403,7 @@ namespace Baku.VMagicMirrorConfig
 
             await MotionSetting.InitializeDeviceNamesAsync();
             await LightSetting.InitializeQualitySelectionsAsync();
+            await WordToMotionSetting.InitializeCustomMotionClipNamesAsync();
 
             Initializer.CameraPositionChecker.Start(
                 2000,
@@ -533,7 +516,7 @@ namespace Baku.VMagicMirrorConfig
             using (var sr = new StreamReader(path))
             {
                 var serializer = new XmlSerializer(typeof(SaveData));
-                var saveData = (SaveData)serializer.Deserialize(sr);
+                var saveData = (SaveData?)serializer.Deserialize(sr);
                 if (saveData == null)
                 {
                     return;
