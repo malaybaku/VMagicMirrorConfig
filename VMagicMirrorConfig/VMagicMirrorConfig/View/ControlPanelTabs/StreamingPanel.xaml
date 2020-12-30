@@ -165,8 +165,9 @@
                                     Value="{Binding MotionSetting.MicrophoneSensitivity, Mode=TwoWay}"
                                     />
                                 <TextBox Grid.Column="2"
-                                     Text="{Binding Value, ElementName=sliderMicrophoneSensitivity}"
-                                     />
+                                         Text="{Binding Value, ElementName=sliderMicrophoneSensitivity}"
+                                         Margin="0"
+                                         />
                             </Grid>
 
                             <Grid Grid.Row="2" Grid.Column="1"

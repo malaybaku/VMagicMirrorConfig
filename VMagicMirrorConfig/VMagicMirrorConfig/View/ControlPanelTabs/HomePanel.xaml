@@ -196,6 +196,9 @@
                     </Border>
 
                     <Border Style="{StaticResource SectionBorder}">
+                        <Border.DataContext>
+                            <vmm:HelpViewModel />
+                        </Border.DataContext>
                         <StackPanel>
                             <TextBlock Style="{StaticResource HeaderText}"
                                         Text="{DynamicResource Home_Manual_Header}"

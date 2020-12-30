@@ -144,6 +144,33 @@ namespace Baku.VMagicMirrorConfig
             _tcsProgress = null;
         }
 
+        /// <summary>
+        /// <see cref="ShowAsync(string, string, MessageBoxStyle)"/>と大体同じだが、Word To Motionのアイテム編集ウィンドウにだけ表示する。
+        /// 以下の点でかなり特殊なメソッドです。
+        /// - 対象ウィンドウが異なる
+        /// - OK / Cancelのケースだけ配慮すればいい
+        /// - 外部からのキャンセルは無視してよい
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="content"></param>
+        /// <returns></returns>
+        public async Task<bool> ShowAsyncOnWordToMotionItemEdit(string title, string content)
+        {
+            if (WordToMotionItemEditWindow.CurrentWindow is not MetroWindow metroWindow)
+            {
+                return false;
+            }
+
+            var emptyToken = new CancellationToken();
+            var result = await metroWindow.ShowMessageAsync(
+                title,
+                content,
+                MessageDialogStyle.AffirmativeAndNegative,
+                settings: SettingsForOkCancel(emptyToken)
+                );
+            return result == MessageDialogResult.Affirmative;
+        }
+
         private MetroDialogSettings SettingsForOkDialog(CancellationToken token)
         {
             return new MetroDialogSettings()
