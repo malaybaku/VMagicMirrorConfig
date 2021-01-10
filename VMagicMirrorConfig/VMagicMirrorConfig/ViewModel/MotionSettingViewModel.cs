@@ -308,7 +308,7 @@ namespace Baku.VMagicMirrorConfig
         public ReadOnlyObservableCollection<string> BlendShapeNames => _blendShapeNameStore.BlendShapeNames;
 
         private string? _faceNeutralClip = null;
-        private string? FaceNeutralClip
+        public string? FaceNeutralClip
         {
             get => _faceNeutralClip;
             set
@@ -323,7 +323,7 @@ namespace Baku.VMagicMirrorConfig
         }
 
         private string? _faceOffsetClip = null;
-        private string? FaceOffsetClip
+        public string? FaceOffsetClip
         {
             get => _faceOffsetClip;
             set
