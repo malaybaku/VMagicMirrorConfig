@@ -13,6 +13,7 @@
     <UserControl.Resources>
         <vmm:WhiteSpaceStringToNullConverter x:Key="WhiteSpaceStringToNullConverter"/>
         <vmm:Lv50Converter x:Key="Lv50Converter"/>
+        <vmm:EmptyToNoneTextConverter x:Key="EmptyToNoneTextConverter"/>
     </UserControl.Resources>
     <ScrollViewer VerticalScrollBarVisibility="Auto"
                   HorizontalScrollBarVisibility="Disabled"
@@ -344,6 +345,8 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="35"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -387,6 +390,52 @@
                         <TextBox Grid.Row="3" Grid.Column="2"
                                  Text="{Binding Value, ElementName=sliderFaceDefaultFun}"
                                  />
+
+                        <TextBlock Grid.Row="4" Grid.Column="0"
+                                   Text="{DynamicResource Motion_Face_NeutralClip}"
+                                   ToolTip="{DynamicResource Motion_Face_NeutralClip_Help}"
+                                   />
+
+                        <ComboBox Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"
+                                  HorizontalAlignment="Stretch"
+                                  Margin="5"
+                                  md:HintAssist.Hint="BlendShape"
+                                  ItemsSource="{Binding BlendShapeNames}"
+                                  SelectedItem="{Binding FaceNeutralClip}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <!-- 
+                                    表示上は(None)みたいなテキストを出すこともあるが、
+                                    入力の文字列自体をいじくるわけではない、という書き方
+                                    -->
+                                    <TextBlock Text="{Binding Converter={StaticResource EmptyToNoneTextConverter}}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+
+                        
+                        <TextBlock Grid.Row="5" Grid.Column="0"
+                                   Text="{DynamicResource Motion_Face_OffsetClip}"
+                                   ToolTip="{DynamicResource Motion_Face_OffsetClip_Help}"
+                                   />
+
+                        <ComboBox Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2"
+                                  HorizontalAlignment="Stretch"
+                                  Margin="5"
+                                  md:HintAssist.Hint="BlendShape"
+                                  ItemsSource="{Binding BlendShapeNames}"
+                                  SelectedItem="{Binding FaceOffsetClip}"
+                                  >
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <!-- 
+                                    表示上は(None)みたいなテキストを出すこともあるが、
+                                    入力の文字列自体をいじくるわけではない、という書き方
+                                    -->
+                                    <TextBlock Text="{Binding Converter={StaticResource EmptyToNoneTextConverter}}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
 
                     </Grid>
 

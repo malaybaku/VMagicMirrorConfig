@@ -138,6 +138,10 @@ Check "Keep LipSync" to make the lipsync continue.</sys:String>
     <sys:String x:Key="Motion_Face_CameraName">Camera</sys:String>    
     <sys:String x:Key="Motion_Face_Calibration">Calibrate position</sys:String>    
     <sys:String x:Key="Motion_Face_DefaultFun">Default Fun Blend Value [%]</sys:String>    
+    <sys:String x:Key="Motion_Face_NeutralClip">Neutral Clip</sys:String>    
+    <sys:String x:Key="Motion_Face_NeutralClip_Help">If you want to change neurtal face expression, then choose it. The clip is off during using perfect sync, or other expression running.</sys:String>    
+    <sys:String x:Key="Motion_Face_OffsetClip">Offset Clip</sys:String>
+    <sys:String x:Key="Motion_Face_OffsetClip_Help">Most case you do not choose it, as this is for body or face base shape adjust clip. This clip is always applied even when other expression is running.</sys:String>
     <sys:String x:Key="Motion_Face_EnableBodyLeanZ">Enable forward / backward motion</sys:String>    
     <sys:String x:Key="Motion_Face_AutoBlinkDuringFaceTracking">Auto blink during face tracking</sys:String>
     <sys:String x:Key="Motion_Face_DisableFaceTrackingHorizontalFlip">Disable horizontal flip</sys:String>
