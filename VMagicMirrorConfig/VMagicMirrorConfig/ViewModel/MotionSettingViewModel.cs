@@ -307,7 +307,7 @@ namespace Baku.VMagicMirrorConfig
         [XmlIgnore]
         public ReadOnlyObservableCollection<string> BlendShapeNames => _blendShapeNameStore.BlendShapeNames;
 
-        private string? _faceNeutralClip = null;
+        private string? _faceNeutralClip = "";
         public string? FaceNeutralClip
         {
             get => _faceNeutralClip;
@@ -316,13 +316,14 @@ namespace Baku.VMagicMirrorConfig
                 if (_faceNeutralClip != value)
                 {
                     _faceNeutralClip = value;
+                    RaisePropertyChanged();
                     _blendShapeNameStore.Refresh(FaceNeutralClip, FaceOffsetClip);
                     SendMessage(MessageFactory.Instance.FaceNeutralClip(FaceNeutralClip ?? ""));
                 }
             }
         }
 
-        private string? _faceOffsetClip = null;
+        private string? _faceOffsetClip = "";
         public string? FaceOffsetClip
         {
             get => _faceOffsetClip;
@@ -331,6 +332,7 @@ namespace Baku.VMagicMirrorConfig
                 if (_faceOffsetClip != value)
                 {
                     _faceOffsetClip = value;
+                    RaisePropertyChanged();
                     _blendShapeNameStore.Refresh(FaceNeutralClip, FaceOffsetClip);
                     SendMessage(MessageFactory.Instance.FaceOffsetClip(FaceOffsetClip ?? ""));
                 }
