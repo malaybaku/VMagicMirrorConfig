@@ -399,14 +399,13 @@
                         <ComboBox Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"
                                   HorizontalAlignment="Stretch"
                                   Margin="5"
-                                  md:HintAssist.Hint="BlendShape"
                                   ItemsSource="{Binding BlendShapeNames}"
                                   SelectedItem="{Binding FaceNeutralClip}">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <!-- 
-                                    表示上は(None)みたいなテキストを出すこともあるが、
-                                    入力の文字列自体をいじくるわけではない、という書き方
+                                    表示上は(None)みたいなテキストを出すこともありつつ、
+                                    入力された文字列自体をいじるわけではない(オフセットの方も同じ)
                                     -->
                                     <TextBlock Text="{Binding Converter={StaticResource EmptyToNoneTextConverter}}"/>
                                 </DataTemplate>
@@ -422,16 +421,11 @@
                         <ComboBox Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2"
                                   HorizontalAlignment="Stretch"
                                   Margin="5"
-                                  md:HintAssist.Hint="BlendShape"
                                   ItemsSource="{Binding BlendShapeNames}"
                                   SelectedItem="{Binding FaceOffsetClip}"
                                   >
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
-                                    <!-- 
-                                    表示上は(None)みたいなテキストを出すこともあるが、
-                                    入力の文字列自体をいじくるわけではない、という書き方
-                                    -->
                                     <TextBlock Text="{Binding Converter={StaticResource EmptyToNoneTextConverter}}"/>
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
