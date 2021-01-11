@@ -138,10 +138,12 @@ Check "Keep LipSync" to make the lipsync continue.</sys:String>
     <sys:String x:Key="Motion_Face_CameraName">Camera</sys:String>    
     <sys:String x:Key="Motion_Face_Calibration">Calibrate position</sys:String>    
     <sys:String x:Key="Motion_Face_DefaultFun">Default Fun Blend Value [%]</sys:String>    
-    <sys:String x:Key="Motion_Face_NeutralClip">Neutral Clip</sys:String>    
-    <sys:String x:Key="Motion_Face_NeutralClip_Help">If you want to change neurtal face expression, then choose it. The clip is off during using perfect sync, or other expression running.</sys:String>    
-    <sys:String x:Key="Motion_Face_OffsetClip">Offset Clip</sys:String>
-    <sys:String x:Key="Motion_Face_OffsetClip_Help">Most case you do not choose it, as this is for body or face base shape adjust clip. This clip is always applied even when other expression is running.</sys:String>
+    <sys:String x:Key="Motion_Face_NeutralClip">Default Face BlendShape</sys:String>    
+    <sys:String x:Key="Motion_Face_NeutralClip_Help" xml:space="preserve">* Neutral BlendShape is applied with blink, as default face.
+  Use it when the model has custom default face in Neutral BlendShape etc.</sys:String>
+    <sys:String x:Key="Motion_Face_OffsetClip">Offset BlendShape</sys:String>
+    <sys:String x:Key="Motion_Face_OffsetClip_Help" xml:space="preserve">* Offset BlendShape is always applied.
+  Use it when the model has BlendShape which is to adjust body shape.</sys:String>
     <sys:String x:Key="Motion_Face_EnableBodyLeanZ">Enable forward / backward motion</sys:String>    
     <sys:String x:Key="Motion_Face_AutoBlinkDuringFaceTracking">Auto blink during face tracking</sys:String>
     <sys:String x:Key="Motion_Face_DisableFaceTrackingHorizontalFlip">Disable horizontal flip</sys:String>

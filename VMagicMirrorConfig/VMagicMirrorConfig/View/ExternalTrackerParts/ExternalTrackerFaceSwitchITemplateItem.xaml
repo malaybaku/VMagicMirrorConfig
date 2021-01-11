@@ -10,7 +10,7 @@
              
              d:DesignWidth="450">
     <UserControl.Resources>
-        <vmm:EmptyToNoneTextConverter x:Key="EmptyToNoneTextConverter"/>
+        <vmm:EmptyToDoNothingTextConverter x:Key="EmptyToNoneTextConverter"/>
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>

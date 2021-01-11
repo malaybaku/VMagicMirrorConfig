@@ -347,6 +347,8 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -393,9 +395,13 @@
 
                         <TextBlock Grid.Row="4" Grid.Column="0"
                                    Text="{DynamicResource Motion_Face_NeutralClip}"
-                                   ToolTip="{DynamicResource Motion_Face_NeutralClip_Help}"
                                    />
 
+                        <TextBlock Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3"
+                                   Margin="15,5,15,10"
+                                   Text="{DynamicResource Motion_Face_NeutralClip_Help}"
+                                   TextWrapping="Wrap"
+                                   />
                         <ComboBox Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"
                                   HorizontalAlignment="Stretch"
                                   Margin="5"
@@ -413,12 +419,16 @@
                         </ComboBox>
 
                         
-                        <TextBlock Grid.Row="5" Grid.Column="0"
+                        <TextBlock Grid.Row="6" Grid.Column="0"
                                    Text="{DynamicResource Motion_Face_OffsetClip}"
-                                   ToolTip="{DynamicResource Motion_Face_OffsetClip_Help}"
                                    />
 
-                        <ComboBox Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2"
+                        <TextBlock Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3"
+                                   Margin="15,5"
+                                   Text="{DynamicResource Motion_Face_OffsetClip_Help}"
+                                   TextWrapping="Wrap"
+                                     />
+                        <ComboBox Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2"
                                   HorizontalAlignment="Stretch"
                                   Margin="5"
                                   ItemsSource="{Binding BlendShapeNames}"

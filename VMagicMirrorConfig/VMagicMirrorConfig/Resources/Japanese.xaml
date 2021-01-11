@@ -140,10 +140,12 @@
     <sys:String x:Key="Motion_Face_CameraName">カメラ</sys:String>    
     <sys:String x:Key="Motion_Face_Calibration">姿勢・表情を補正</sys:String>    
     <sys:String x:Key="Motion_Face_DefaultFun">Funブレンドのデフォルト値[%]</sys:String>
-    <sys:String x:Key="Motion_Face_NeutralClip">Neutralクリップ</sys:String>    
-    <sys:String x:Key="Motion_Face_NeutralClip_Help">ベースの表情をNeutral等で設定している場合、そのクリップを選択します。Word to Motionなどの表情制御が有効な場合、このクリップは適用されません。</sys:String>    
-    <sys:String x:Key="Motion_Face_OffsetClip">オフセットクリップ</sys:String>
-    <sys:String x:Key="Motion_Face_OffsetClip_Help">通常は設定不要ですが、もし体型や輪郭をつねに変更するためのクリップを適用したい場合、それを選択します。</sys:String>
+    <sys:String x:Key="Motion_Face_NeutralClip">Neutralブレンドシェイプ</sys:String>    
+    <sys:String x:Key="Motion_Face_NeutralClip_Help" xml:space="preserve">※Neutralブレンドシェイプは普段の表情として使用されます。
+　デフォルト表情をNeutralなどでカスタムしている場合に使用します。</sys:String>    
+    <sys:String x:Key="Motion_Face_OffsetClip">体型調整ブレンドシェイプ</sys:String>
+    <sys:String x:Key="Motion_Face_OffsetClip_Help" xml:space="preserve">※体型調整ブレンドシェイプはつねに適用されます。
+　体格や輪郭の調整をブレンドシェイプで行っている場合に使用します。</sys:String>
     <sys:String x:Key="Motion_Face_EnableBodyLeanZ">顔トラッキング中の前後移動を有効化</sys:String>    
     <sys:String x:Key="Motion_Face_AutoBlinkDuringFaceTracking">顔トラッキング中も自動でまばたき</sys:String>
     <sys:String x:Key="Motion_Face_DisableFaceTrackingHorizontalFlip">左右反転をオフにする</sys:String>
