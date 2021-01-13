@@ -544,6 +544,19 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
+        private bool _enableHandDownTimeout = true;
+        public bool EnableHandDownTimeout
+        {
+            get => _enableHandDownTimeout;
+            set
+            {
+                if (SetValue(ref _enableHandDownTimeout, value))
+                {
+                    SendMessage(MessageFactory.Instance.EnableTypingHandDownTimeout(EnableHandDownTimeout));
+                }
+            }
+        }
+
         private int _waistWidth = 30;
         public int WaistWidth
         {
@@ -776,6 +789,7 @@ namespace Baku.VMagicMirrorConfig
             EnableHidArmMotion = true;
             EnableHidRandomTyping = false;
             EnableShoulderMotionModify = true;
+            EnableHandDownTimeout = true;
             WaistWidth = 30;
             ElbowCloseStrength = 30;
             EnableFpsAssumedRightHand = false;
