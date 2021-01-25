@@ -481,9 +481,13 @@
                         </StackPanel>
                     </CheckBox>
 
-                    <CheckBox Margin="15,2.5,15,10" 
+                    <CheckBox Margin="15,5" 
                               Content="{DynamicResource Motion_Arm_EnableShoulderModify}"
                               IsChecked="{Binding EnableShoulderMotionModify}"
+                              />
+                    <CheckBox Margin="15,0,15,10" 
+                              Content="{DynamicResource Motion_Arm_EnableTypingAndMouseTimeout}"
+                              IsChecked="{Binding EnableHandDownTimeout}"
                               />
 
 
