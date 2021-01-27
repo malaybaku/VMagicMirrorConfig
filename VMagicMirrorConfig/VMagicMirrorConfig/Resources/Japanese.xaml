@@ -17,6 +17,7 @@
     
     <!-- Top Tab in Setting Window -->
     <sys:String x:Key="TopBar_Setting_Window">ウィンドウ</sys:String>
+    <sys:String x:Key="TopBar_Setting_FaceMotion">顔・表情</sys:String>
     <sys:String x:Key="TopBar_Setting_Motion">モーション</sys:String>
     <sys:String x:Key="TopBar_Setting_Layout">レイアウト</sys:String>
     <sys:String x:Key="TopBar_Setting_Devices">デバイス</sys:String>
@@ -134,55 +135,6 @@
     <sys:String x:Key="Motion_FullBody_NoHandTrackMode">つねに手下げモード (※体の動きが増えます)</sys:String>    
     <sys:String x:Key="Motion_FullBody_NoHandTrackMode_Streaming">つねに手下げモード</sys:String>    
     
-    <!-- Motion : Face -->
-    <sys:String x:Key="Motion_Face">顔・表情</sys:String>
-    <sys:String x:Key="Motion_Face_EnableFaceTracking">顔をトラッキング</sys:String>
-    <sys:String x:Key="Motion_Face_CameraName">カメラ</sys:String>    
-    <sys:String x:Key="Motion_Face_Calibration">姿勢・表情を補正</sys:String>    
-    <sys:String x:Key="Motion_Face_DefaultFun">Funブレンドのデフォルト値[%]</sys:String>
-    <sys:String x:Key="Motion_Face_NeutralClip">Neutralブレンドシェイプ</sys:String>    
-    <sys:String x:Key="Motion_Face_NeutralClip_Help" xml:space="preserve">※Neutralブレンドシェイプは普段の表情として使用されます。
-　デフォルト表情をNeutralなどでカスタムしている場合に使用します。</sys:String>    
-    <sys:String x:Key="Motion_Face_OffsetClip">体型調整ブレンドシェイプ</sys:String>
-    <sys:String x:Key="Motion_Face_OffsetClip_Help" xml:space="preserve">※体型調整ブレンドシェイプはつねに適用されます。
-　体格や輪郭の調整をブレンドシェイプで行っている場合に使用します。</sys:String>
-    <sys:String x:Key="Motion_Face_EnableBodyLeanZ">顔トラッキング中の前後移動を有効化</sys:String>    
-    <sys:String x:Key="Motion_Face_AutoBlinkDuringFaceTracking">顔トラッキング中も自動でまばたき</sys:String>
-    <sys:String x:Key="Motion_Face_DisableFaceTrackingHorizontalFlip">左右反転をオフにする</sys:String>
-    <sys:String x:Key="Motion_Face_EnableImageBasedHandTracking">顔とセットで手もトラッキング</sys:String>
-    <sys:String x:Key="Motion_Face_EnableWebCamHighPowerMode">高解像度モード(ベータ)</sys:String>
-    <sys:String x:Key="Motion_Face_FolderMaybeIncorrect_Header">※アプリフォルダの移動を検討してください！</sys:String>
-    <sys:String x:Key="Motion_Face_FolderMaybeIncorrect_Tooltip" xml:space="preserve">アプリの配置フォルダパスに全角文字が含まれています。
-この状態では顔トラッキングが正常動作しないかもしれません。
-
-顔トラッキングの挙動がおかしい場合、一度アプリケーションを終了し、
-フォルダ全体を半角文字のみのフォルダパス以下へ移動してください。
-
-顔トラッキングが正常に動作している場合、この警告を無視してかまいません。
-</sys:String>
-    <sys:String x:Key="Motion_Face_ExTrackerWorking_Header">※現在webカメラには反応しません。外部トラッキングが有効です。</sys:String>
-    <sys:String x:Key="Motion_Face_ExTrackerWorking_TurnOffExTracker">webカメラを使う場合はここをクリック</sys:String>
-    
-    <sys:String x:Key="Motion_Face_BlinkAdjust">顔の動きや声でまばたきを補正</sys:String>
-    <sys:String x:Key="Motion_Face_NoCamMotion">カメラ非使用時、音声ベースでアバターを動かす</sys:String>
-        
-    <!-- Motion : Eye -->
-    <sys:String x:Key="Motion_Eye">目・視線</sys:String>
-    <sys:String x:Key="Motion_Eye_LookAtPoint">視線の動き</sys:String>
-    <sys:String x:Key="Motion_Eye_LookAtPoint_None">固定</sys:String>
-    <sys:String x:Key="Motion_Eye_LookAtPoint_MousePointer">マウス</sys:String>
-    <sys:String x:Key="Motion_Eye_LookAtPoint_MainCamera">ユーザー</sys:String>
-    <sys:String x:Key="Motion_Eye_RotScale">目の動きの大きさ[%]</sys:String>
-    <sys:String x:Key="Motion_Eye_ApproxRotRangePrefix">(参考)目ボーンのおおよその可動範囲: </sys:String>
-    <sys:String x:Key="Motion_Eye_ApproxRotRangeSuffix"> [deg]</sys:String>
-    
-    <!-- Motion : Mouth -->
-    <sys:String x:Key="Motion_Mouth">口・リップシンク</sys:String>
-    <sys:String x:Key="Motion_Mouth_EnableLipSync">リップシンク</sys:String>
-    <sys:String x:Key="Motion_Mouth_MicrophoneName">マイク</sys:String>    
-    <sys:String x:Key="Motion_Mouth_Microphone_Sensitivity">マイク感度 [dB]</sys:String>
-    <sys:String x:Key="Motion_Mouth_Microphone_Visualize">音量をチェック</sys:String>
-    
     <!-- Motion : Arm -->
     <sys:String x:Key="Motion_Arm">腕・ひじ</sys:String>
     <sys:String x:Key="Motion_Arm_EnableHidMotion">タイピング / マウス動作を反映</sys:String>
@@ -212,6 +164,60 @@
     <sys:String x:Key="Motion_Wait_EnableWaitMotion">待機モーションを有効化</sys:String>
     <sys:String x:Key="Motion_Wait_WaitMotionScale">動きの大きさ [%]</sys:String>
     <sys:String x:Key="Motion_Wait_WaitMotionPeriod">周期 [sec]</sys:String>    
+    
+    <!-- NOTE: もともとMotionタブだったのを分断してる関係で命名ルールがちょっとアレです -->
+    <!-- Face Motion -->
+    <sys:String x:Key="Motion_Face">顔・表情</sys:String>
+    <sys:String x:Key="Motion_Face_Basics">基本の設定</sys:String>
+    <sys:String x:Key="Motion_Face_EnableFaceTracking">顔をトラッキング</sys:String>
+    <sys:String x:Key="Motion_Face_CameraName">カメラ</sys:String>    
+    <sys:String x:Key="Motion_Face_Calibration">姿勢・表情を補正</sys:String>    
+    <sys:String x:Key="Motion_Face_EnableBodyLeanZ">顔トラッキング中の前後移動を有効化</sys:String>    
+    <sys:String x:Key="Motion_Face_AutoBlinkDuringFaceTracking">顔トラッキング中も自動でまばたき</sys:String>
+    <sys:String x:Key="Motion_Face_DisableFaceTrackingHorizontalFlip">左右反転をオフにする</sys:String>
+    <sys:String x:Key="Motion_Face_EnableImageBasedHandTracking">顔とセットで手もトラッキング</sys:String>
+    <sys:String x:Key="Motion_Face_EnableWebCamHighPowerMode">高解像度モード(ベータ)</sys:String>
+    <sys:String x:Key="Motion_Face_FolderMaybeIncorrect_Header">※アプリフォルダの移動を検討してください！</sys:String>
+    <sys:String x:Key="Motion_Face_FolderMaybeIncorrect_Tooltip" xml:space="preserve">アプリの配置フォルダパスに全角文字が含まれています。
+この状態では顔トラッキングが正常動作しないかもしれません。
+
+顔トラッキングの挙動がおかしい場合、一度アプリケーションを終了し、
+フォルダ全体を半角文字のみのフォルダパス以下へ移動してください。
+
+顔トラッキングが正常に動作している場合、この警告を無視してかまいません。
+</sys:String>
+    <sys:String x:Key="Motion_Face_ExTrackerWorking_Header">※現在webカメラには反応しません。外部トラッキングが有効です。</sys:String>
+    <sys:String x:Key="Motion_Face_ExTrackerWorking_TurnOffExTracker">webカメラを使う場合はここをクリック</sys:String>
+    
+    <sys:String x:Key="Motion_Face_BlinkAdjust">顔の動きや声でまばたきを補正</sys:String>
+    <sys:String x:Key="Motion_Face_NoCamMotion">カメラ非使用時、音声ベースでアバターを動かす</sys:String>
+            
+    <!-- Face : Eye -->
+    <sys:String x:Key="Motion_Eye">目・視線</sys:String>
+    <sys:String x:Key="Motion_Eye_LookAtPoint">視線の動き</sys:String>
+    <sys:String x:Key="Motion_Eye_LookAtPoint_None">固定</sys:String>
+    <sys:String x:Key="Motion_Eye_LookAtPoint_MousePointer">マウス</sys:String>
+    <sys:String x:Key="Motion_Eye_LookAtPoint_MainCamera">ユーザー</sys:String>
+    <sys:String x:Key="Motion_Eye_RotScale">目の動きの大きさ[%]</sys:String>
+    <sys:String x:Key="Motion_Eye_ApproxRotRangePrefix">(参考)目ボーンのおおよその可動範囲: </sys:String>
+    <sys:String x:Key="Motion_Eye_ApproxRotRangeSuffix"> [deg]</sys:String>
+    
+    <!-- Face : Mouth -->
+    <sys:String x:Key="Motion_Mouth">口・リップシンク</sys:String>
+    <sys:String x:Key="Motion_Mouth_EnableLipSync">リップシンク</sys:String>
+    <sys:String x:Key="Motion_Mouth_MicrophoneName">マイク</sys:String>    
+    <sys:String x:Key="Motion_Mouth_Microphone_Sensitivity">マイク感度 [dB]</sys:String>
+    <sys:String x:Key="Motion_Mouth_Microphone_Visualize">音量をチェック</sys:String>
+    
+    <!-- Face : BlendShape -->
+    <sys:String x:Key="Motion_Face_BlendShape">ブレンドシェイプ</sys:String>
+    <sys:String x:Key="Motion_Face_DefaultFun">Funブレンドのデフォルト値[%]</sys:String>
+    <sys:String x:Key="Motion_Face_NeutralClip">Neutralブレンドシェイプ</sys:String>    
+    <sys:String x:Key="Motion_Face_NeutralClip_Help" xml:space="preserve">※Neutralブレンドシェイプは普段の表情として使用されます。
+　デフォルト表情をNeutralなどでカスタムしている場合に使用します。</sys:String>    
+    <sys:String x:Key="Motion_Face_OffsetClip">体型調整ブレンドシェイプ</sys:String>
+    <sys:String x:Key="Motion_Face_OffsetClip_Help" xml:space="preserve">※体型調整ブレンドシェイプはつねに適用されます。
+　体格や輪郭の調整をブレンドシェイプで行っている場合に使用します。</sys:String>
     
     <!-- Layout Setting -->
     <sys:String x:Key="Layout_Header">レイアウト</sys:String>   

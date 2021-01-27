@@ -17,6 +17,7 @@
 
     <!-- Top Tab In Setting -->
     <sys:String x:Key="TopBar_Setting_Window">Window</sys:String>
+    <sys:String x:Key="TopBar_Setting_FaceMotion">Face</sys:String>
     <sys:String x:Key="TopBar_Setting_Motion">Motion</sys:String>
     <sys:String x:Key="TopBar_Setting_Layout">Layout</sys:String>
     <sys:String x:Key="TopBar_Setting_Devices">Devices</sys:String>
@@ -132,55 +133,6 @@ Check "Keep LipSync" to make the lipsync continue.</sys:String>
     <sys:String x:Key="Motion_FullBody_NoHandTrackMode">Always-Hands-Down Mode (*Increase body move)</sys:String>    
     <sys:String x:Key="Motion_FullBody_NoHandTrackMode_Streaming">Hands-Down Mode</sys:String>    
     
-    <!-- Motion : Face -->
-    <sys:String x:Key="Motion_Face">Face</sys:String>
-    <sys:String x:Key="Motion_Face_EnableFaceTracking">Track Face</sys:String>
-    <sys:String x:Key="Motion_Face_CameraName">Camera</sys:String>    
-    <sys:String x:Key="Motion_Face_Calibration">Calibrate position</sys:String>    
-    <sys:String x:Key="Motion_Face_DefaultFun">Default Fun Blend Value [%]</sys:String>    
-    <sys:String x:Key="Motion_Face_NeutralClip">Default Face BlendShape</sys:String>    
-    <sys:String x:Key="Motion_Face_NeutralClip_Help" xml:space="preserve">* Neutral BlendShape is applied with blink, as default face.
-  Use it when the model has custom default face in Neutral BlendShape etc.</sys:String>
-    <sys:String x:Key="Motion_Face_OffsetClip">Offset BlendShape</sys:String>
-    <sys:String x:Key="Motion_Face_OffsetClip_Help" xml:space="preserve">* Offset BlendShape is always applied.
-  Use it when the model has BlendShape which is to adjust body shape.</sys:String>
-    <sys:String x:Key="Motion_Face_EnableBodyLeanZ">Enable forward / backward motion</sys:String>    
-    <sys:String x:Key="Motion_Face_AutoBlinkDuringFaceTracking">Auto blink during face tracking</sys:String>
-    <sys:String x:Key="Motion_Face_DisableFaceTrackingHorizontalFlip">Disable horizontal flip</sys:String>
-    <sys:String x:Key="Motion_Face_EnableImageBasedHandTracking">Enable image based hand tracking</sys:String>
-    <sys:String x:Key="Motion_Face_EnableWebCamHighPowerMode">High Power Mode (Beta)</sys:String>
-    <sys:String x:Key="Motion_Face_FolderMaybeIncorrect_Header">*Please check folder path!</sys:String>
-    <sys:String x:Key="Motion_Face_FolderMaybeIncorrect_Tooltip" xml:space="preserve">App installed folder path includes multi byte character.
-This might lead incorrect results for the face tracking.
-
-If you notice the avatar does not rotate theia neck, 
-please quit the app and move app folder to single byte character only path.
-
-If the face tracking works correctly, please ignore this warning.
-</sys:String>    
-    <sys:String x:Key="Motion_Face_ExTrackerWorking_Header">*Webcam tracking is disabled because External Tracker is enabled.</sys:String>
-    <sys:String x:Key="Motion_Face_ExTrackerWorking_TurnOffExTracker">Enable Webcam Tracking</sys:String>
-    
-    <sys:String x:Key="Motion_Face_BlinkAdjust">Blink adjust by head motion and lip sync</sys:String>
-    <sys:String x:Key="Motion_Face_NoCamMotion">Voice based motion when webcam not used</sys:String>
-
-    <!-- Motion : Eye -->
-    <sys:String x:Key="Motion_Eye">Eye</sys:String>
-    <sys:String x:Key="Motion_Eye_LookAtPoint">Eye Look Target</sys:String>
-    <sys:String x:Key="Motion_Eye_LookAtPoint_None">None</sys:String>
-    <sys:String x:Key="Motion_Eye_LookAtPoint_MousePointer">Mouse</sys:String>
-    <sys:String x:Key="Motion_Eye_LookAtPoint_MainCamera">User</sys:String>
-    <sys:String x:Key="Motion_Eye_RotScale">Eye Motion Scale[%]</sys:String>
-    <sys:String x:Key="Motion_Eye_ApproxRotRangePrefix">(Eye bones will move about: </sys:String>
-    <sys:String x:Key="Motion_Eye_ApproxRotRangeSuffix"> [deg])</sys:String>
-    
-    <!-- Motion : Mouth -->
-    <sys:String x:Key="Motion_Mouth">Mouth</sys:String>
-    <sys:String x:Key="Motion_Mouth_EnableLipSync">LipSync</sys:String>
-    <sys:String x:Key="Motion_Mouth_MicrophoneName">Microphone</sys:String>    
-    <sys:String x:Key="Motion_Mouth_Microphone_Sensitivity">Sensitivity [dB]</sys:String>
-    <sys:String x:Key="Motion_Mouth_Microphone_Visualize">Show Volume</sys:String>
-    
     <!-- Motion : Arm -->
     <sys:String x:Key="Motion_Arm">Arm</sys:String>    
     <sys:String x:Key="Motion_Arm_EnableHidMotion">Enable Typing / Mouse Motion</sys:String>
@@ -210,6 +162,60 @@ If the face tracking works correctly, please ignore this warning.
     <sys:String x:Key="Motion_Wait_EnableWaitMotion">Enable</sys:String>
     <sys:String x:Key="Motion_Wait_WaitMotionScale">Scale [%]</sys:String>
     <sys:String x:Key="Motion_Wait_WaitMotionPeriod">Period [sec]</sys:String>    
+    
+    <!-- Face -->
+    <sys:String x:Key="Motion_Face">Face</sys:String>
+    <sys:String x:Key="Motion_Face_Basics">Basic Settings</sys:String>
+    <sys:String x:Key="Motion_Face_EnableFaceTracking">Track Face</sys:String>
+    <sys:String x:Key="Motion_Face_CameraName">Camera</sys:String>    
+    <sys:String x:Key="Motion_Face_Calibration">Calibrate position</sys:String>    
+    <sys:String x:Key="Motion_Face_DefaultFun">Default Fun Blend Value [%]</sys:String>    
+    <sys:String x:Key="Motion_Face_EnableBodyLeanZ">Enable forward / backward motion</sys:String>    
+    <sys:String x:Key="Motion_Face_AutoBlinkDuringFaceTracking">Auto blink during face tracking</sys:String>
+    <sys:String x:Key="Motion_Face_DisableFaceTrackingHorizontalFlip">Disable horizontal flip</sys:String>
+    <sys:String x:Key="Motion_Face_EnableImageBasedHandTracking">Enable image based hand tracking</sys:String>
+    <sys:String x:Key="Motion_Face_EnableWebCamHighPowerMode">High Power Mode (Beta)</sys:String>
+    <sys:String x:Key="Motion_Face_FolderMaybeIncorrect_Header">*Please check folder path!</sys:String>
+    <sys:String x:Key="Motion_Face_FolderMaybeIncorrect_Tooltip" xml:space="preserve">App installed folder path includes multi byte character.
+This might lead incorrect results for the face tracking.
+
+If you notice the avatar does not rotate theia neck, 
+please quit the app and move app folder to single byte character only path.
+
+If the face tracking works correctly, please ignore this warning.
+</sys:String>    
+    <sys:String x:Key="Motion_Face_ExTrackerWorking_Header">*Webcam tracking is disabled because External Tracker is enabled.</sys:String>
+    <sys:String x:Key="Motion_Face_ExTrackerWorking_TurnOffExTracker">Enable Webcam Tracking</sys:String>
+    
+    <sys:String x:Key="Motion_Face_BlinkAdjust">Blink adjust by head motion and lip sync</sys:String>
+    <sys:String x:Key="Motion_Face_NoCamMotion">Voice based motion when webcam not used</sys:String>
+
+    <!-- Face : Eye -->
+    <sys:String x:Key="Motion_Eye">Eye</sys:String>
+    <sys:String x:Key="Motion_Eye_LookAtPoint">Eye Look Target</sys:String>
+    <sys:String x:Key="Motion_Eye_LookAtPoint_None">None</sys:String>
+    <sys:String x:Key="Motion_Eye_LookAtPoint_MousePointer">Mouse</sys:String>
+    <sys:String x:Key="Motion_Eye_LookAtPoint_MainCamera">User</sys:String>
+    <sys:String x:Key="Motion_Eye_RotScale">Eye Motion Scale[%]</sys:String>
+    <sys:String x:Key="Motion_Eye_ApproxRotRangePrefix">(Eye bones will move about: </sys:String>
+    <sys:String x:Key="Motion_Eye_ApproxRotRangeSuffix"> [deg])</sys:String>
+    
+    <!-- Face : Mouth -->
+    <sys:String x:Key="Motion_Mouth">Mouth</sys:String>
+    <sys:String x:Key="Motion_Mouth_EnableLipSync">LipSync</sys:String>
+    <sys:String x:Key="Motion_Mouth_MicrophoneName">Microphone</sys:String>    
+    <sys:String x:Key="Motion_Mouth_Microphone_Sensitivity">Sensitivity [dB]</sys:String>
+    <sys:String x:Key="Motion_Mouth_Microphone_Visualize">Show Volume</sys:String>
+
+    <!-- Face : BlendShape -->
+    <sys:String x:Key="Motion_Face_BlendShape">BlendShape</sys:String>
+    <sys:String x:Key="Motion_Face_NeutralClip">Default Face BlendShape</sys:String>    
+    <sys:String x:Key="Motion_Face_NeutralClip_Help" xml:space="preserve">* Neutral BlendShape is applied with blink, as default face.
+  Use it when the model has custom default face in Neutral BlendShape etc.</sys:String>
+    <sys:String x:Key="Motion_Face_OffsetClip">Offset BlendShape</sys:String>
+    <sys:String x:Key="Motion_Face_OffsetClip_Help" xml:space="preserve">* Offset BlendShape is always applied.
+  Use it when the model has BlendShape which is to adjust body shape.</sys:String>
+    
     
     <!-- Layout Setting -->
     <sys:String x:Key="Layout_Header">Layout</sys:String>   
