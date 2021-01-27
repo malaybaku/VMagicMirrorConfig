@@ -734,10 +734,22 @@ namespace Baku.VMagicMirrorConfig
 
         #region Reset API
 
-        private ActionCommand? _resetFaceMotionSettingCommand = null;
-        public ActionCommand ResetFaceMotionSettingCommand
-            => _resetFaceMotionSettingCommand ??= new ActionCommand(
-                () => SettingResetUtils.ResetSingleCategorySettingAsync(ResetFaceSetting)
+        private ActionCommand? _resetFaceBasicSettingCommand = null;
+        public ActionCommand ResetFaceBasicSettingCommand
+            => _resetFaceBasicSettingCommand ??= new ActionCommand(
+                () => SettingResetUtils.ResetSingleCategorySettingAsync(ResetFaceBasicSetting)
+                );
+
+        private ActionCommand? _resetFaceEyeSettingCommand = null;
+        public ActionCommand ResetFaceEyeSettingCommand
+            => _resetFaceEyeSettingCommand ??= new ActionCommand(
+                () => SettingResetUtils.ResetSingleCategorySettingAsync(ResetFaceEyeSetting)
+                );
+
+        private ActionCommand? _resetFaceBlendShapeSettingCommand = null;
+        public ActionCommand ResetFaceBlendShapeSettingCommand
+            => _resetFaceBlendShapeSettingCommand ??= new ActionCommand(
+                () => SettingResetUtils.ResetSingleCategorySettingAsync(ResetFaceBlendShapeSetting)
                 );
 
         private ActionCommand? _resetArmMotionSettingCommand = null;
@@ -758,14 +770,13 @@ namespace Baku.VMagicMirrorConfig
                 () => SettingResetUtils.ResetSingleCategorySettingAsync(ResetWaitMotionSetting)
                 );
 
-        private void ResetFaceSetting()
+        private void ResetFaceBasicSetting()
         {
             EnableFaceTracking = true;
             CameraDeviceName = "";
             AutoBlinkDuringFaceTracking = true;
             EnableBodyLeanZ = false;
 
-            EnableBlinkAdjust = true;
             EnableVoiceBasedMotion = true;
             DisableFaceTrackingHorizontalFlip = false;
             EnableImageBasedHandTracking = false;
@@ -773,12 +784,19 @@ namespace Baku.VMagicMirrorConfig
             EnableLipSync = true;
             LipSyncMicrophoneDeviceName = "";
             MicrophoneSensitivity = 0;
+        }
 
+        private void ResetFaceEyeSetting()
+        {
+            EnableBlinkAdjust = true;
             UseLookAtPointNone = false;
             UseLookAtPointMousePointer = true;
             UseLookAtPointMainCamera = false;
             EyeBoneRotationScale = 100;
+        }
 
+        private void ResetFaceBlendShapeSetting()
+        {
             FaceDefaultFun = 0;
             FaceNeutralClip = null;
             FaceOffsetClip = null;
@@ -815,7 +833,9 @@ namespace Baku.VMagicMirrorConfig
         public override void ResetToDefault()
         {
             EnableNoHandTrackMode = false;
-            ResetFaceSetting();
+            ResetFaceBasicSetting();
+            ResetFaceEyeSetting();
+            ResetFaceBlendShapeSetting();
             ResetArmSetting();
             ResetHandSetting();
             ResetWaitMotionSetting();
