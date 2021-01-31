@@ -70,6 +70,7 @@ namespace Baku.VMagicMirrorConfig
         public Message EnableHidArmMotion(bool enable) => WithArg($"{enable}");
         public Message EnableHidRandomTyping(bool enable) => WithArg($"{enable}");
         public Message EnableShoulderMotionModify(bool enable) => WithArg($"{enable}");
+        public Message EnableTypingHandDownTimeout(bool enable) => WithArg($"{enable}");
         public Message SetWaistWidth(int waistWidthCentimeter) => WithArg($"{waistWidthCentimeter}");
         public Message SetElbowCloseStrength(int strengthPercent) => WithArg($"{strengthPercent}");
 
@@ -95,9 +96,12 @@ namespace Baku.VMagicMirrorConfig
         //NOTE: falseのほうが普通だよ、という状態にするため、disable云々というやや面倒な言い方になってる事に注意
         public Message DisableFaceTrackingHorizontalFlip(bool disable) => WithArg($"{disable}");
         public Message EnableImageBasedHandTracking(bool enable) => WithArg($"{enable}");
-        public Message EnableWebCamHighPowerMode(bool enable) => WithArg($"{enable}");            
+        public Message EnableWebCamHighPowerMode(bool enable) => WithArg($"{enable}");
 
         public Message FaceDefaultFun(int percentage) => WithArg($"{percentage}");
+        public Message FaceNeutralClip(string clipName) => WithArg(clipName);
+        public Message FaceOffsetClip(string clipName) => WithArg(clipName);
+
 
         /// <summary>
         /// Query.

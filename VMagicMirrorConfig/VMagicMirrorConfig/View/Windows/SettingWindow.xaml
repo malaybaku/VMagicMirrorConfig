@@ -72,8 +72,8 @@
         <TabItem>
             <TabItem.Header>
                 <vmm:TabHeaderIconText 
-                    Text="{DynamicResource TopBar_Setting_Motion}"
-                    IconKind="HumanHandsup"
+                    Text="{DynamicResource TopBar_Setting_FaceMotion}"
+                    IconKind="Face"
                     IconWidth="18"
                     IconHeight="18"
                     TextMargin="0"
@@ -86,6 +86,30 @@
                                         ElementName=MainTabControl,
                                         Converter={StaticResource SelectionToForeground},
                                         ConverterParameter=1}"
+                    />
+            </TabItem.Header>
+            <vmm:FaceMotionSettingPanel
+                Background="White"
+                DataContext="{Binding MotionSetting}"
+                />
+        </TabItem>
+        <TabItem>
+            <TabItem.Header>
+                <vmm:TabHeaderIconText 
+                    Text="{DynamicResource TopBar_Setting_Motion}"
+                    IconKind="HumanHandsup"
+                    IconWidth="18"
+                    IconHeight="18"
+                    TextMargin="0"
+                    TranslateX="-5"
+                    Background="{Binding SelectedIndex,
+                                        ElementName=MainTabControl,
+                                        Converter={StaticResource SelectionToBackground},
+                                        ConverterParameter=2}"
+                    Foreground="{Binding SelectedIndex,
+                                        ElementName=MainTabControl,
+                                        Converter={StaticResource SelectionToForeground},
+                                        ConverterParameter=2}"
                     />
             </TabItem.Header>
             <vmm:MotionSettingPanel
@@ -105,11 +129,11 @@
                     Background="{Binding SelectedIndex,
                                         ElementName=MainTabControl,
                                         Converter={StaticResource SelectionToBackground},
-                                        ConverterParameter=2}"
+                                        ConverterParameter=3}"
                     Foreground="{Binding SelectedIndex,
                                         ElementName=MainTabControl,
                                         Converter={StaticResource SelectionToForeground},
-                                        ConverterParameter=2}"                        
+                                        ConverterParameter=3}"                        
                     />
             </TabItem.Header>
             <vmm:LayoutSettingPanel 
@@ -128,11 +152,11 @@
                     Background="{Binding SelectedIndex,
                                         ElementName=MainTabControl,
                                         Converter={StaticResource SelectionToBackground},
-                                        ConverterParameter=3}"
+                                        ConverterParameter=4}"
                     Foreground="{Binding SelectedIndex,
                                         ElementName=MainTabControl,
                                         Converter={StaticResource SelectionToForeground},
-                                        ConverterParameter=3}"                                
+                                        ConverterParameter=4}"                                
                     />
             </TabItem.Header>
             <vmm:LightSettingPanel
@@ -151,11 +175,11 @@
                     Background="{Binding SelectedIndex,
                                         ElementName=MainTabControl,
                                         Converter={StaticResource SelectionToBackground},
-                                        ConverterParameter=4}"
+                                        ConverterParameter=5}"
                     Foreground="{Binding SelectedIndex,
                                         ElementName=MainTabControl,
                                         Converter={StaticResource SelectionToForeground},
-                                        ConverterParameter=4}"                        
+                                        ConverterParameter=5}"                        
                     />
             </TabItem.Header>
             <vmm:DeviceSettingPanel 
@@ -171,11 +195,11 @@
                     Background="{Binding SelectedIndex,
                                         ElementName=MainTabControl,
                                         Converter={StaticResource SelectionToBackground},
-                                        ConverterParameter=5}"
+                                        ConverterParameter=6}"
                     Foreground="{Binding SelectedIndex,
                                         ElementName=MainTabControl,
                                         Converter={StaticResource SelectionToForeground},
-                                        ConverterParameter=5}">
+                                        ConverterParameter=6}">
                         
                     <Grid>
                         <Grid.ColumnDefinitions>

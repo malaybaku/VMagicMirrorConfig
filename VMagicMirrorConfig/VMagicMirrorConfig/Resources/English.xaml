@@ -17,6 +17,7 @@
 
     <!-- Top Tab In Setting -->
     <sys:String x:Key="TopBar_Setting_Window">Window</sys:String>
+    <sys:String x:Key="TopBar_Setting_FaceMotion">Face</sys:String>
     <sys:String x:Key="TopBar_Setting_Motion">Motion</sys:String>
     <sys:String x:Key="TopBar_Setting_Layout">Layout</sys:String>
     <sys:String x:Key="TopBar_Setting_Devices">Devices</sys:String>
@@ -132,8 +133,39 @@ Check "Keep LipSync" to make the lipsync continue.</sys:String>
     <sys:String x:Key="Motion_FullBody_NoHandTrackMode">Always-Hands-Down Mode (*Increase body move)</sys:String>    
     <sys:String x:Key="Motion_FullBody_NoHandTrackMode_Streaming">Hands-Down Mode</sys:String>    
     
-    <!-- Motion : Face -->
+    <!-- Motion : Arm -->
+    <sys:String x:Key="Motion_Arm">Arm</sys:String>    
+    <sys:String x:Key="Motion_Arm_EnableHidMotion">Enable Typing / Mouse Motion</sys:String>
+    <sys:String x:Key="Motion_Arm_EnableRandomTyping">Random typing to hide key input</sys:String>
+    <sys:String x:Key="Motion_Arm_EnableShoulderModify">Modify shoulder motion</sys:String>
+    <sys:String x:Key="Motion_Arm_EnableTypingAndMouseTimeout">(Keyboard/Mouse)Down hand when no input</sys:String>
+    <sys:String x:Key="Motion_Arm_FpsAssumedRightHand">Enable mouse motion to FPS assumed mode</sys:String>
+    <sys:String x:Key="Motion_Arm_FpsAssumedRightHand_Tooltip">When checked right hand motion during playing FPS become more natural, but screen touch or pen tablet operation become become slow</sys:String>
+    
+    <sys:String x:Key="Motion_Arm_WaistWidth">Waist width [cm]</sys:String>
+    <sys:String x:Key="Motion_Arm_ElbowCloseStrength">Strength to keep upper arm to body [%]</sys:String>
+    <sys:String x:Key="Motion_Arm_EnablePresenterMotion">Presentation-like hand</sys:String>
+    <sys:String x:Key="Motion_Arm_ShowPresentationPointer">Show Pointer Support</sys:String>
+    <sys:String x:Key="Motion_Arm_PresenterArmMotionScale">Presentation-like motion scale [%]</sys:String>
+    <sys:String x:Key="Motion_Arm_PresenterArmRadiusMin">Arm position radius min [cm]</sys:String>
+
+    <!-- Motion : Hand -->
+    <sys:String x:Key="Motion_Hand">Hand</sys:String>
+    <sys:String x:Key="Motion_Hand_CharacterHandMotion">Hand Motion</sys:String>
+    <sys:String x:Key="Motion_Hand_WristToHandTip">Wrist-Hand tip length [cm]</sys:String>
+    <sys:String x:Key="Motion_Hand_WristToPalm">Wrist-Palm length [cm]</sys:String>
+    <sys:String x:Key="Motion_Hand_HandYOffsetBasic">Hand height adjust [cm]</sys:String>
+    <sys:String x:Key="Motion_Hand_HandYOffsetAfterKeyDown">(Press key)Hand height adjust [cm]</sys:String>
+
+    <!-- Motion : Wait -->
+    <sys:String x:Key="Motion_Wait">Wait motion</sys:String>
+    <sys:String x:Key="Motion_Wait_EnableWaitMotion">Enable</sys:String>
+    <sys:String x:Key="Motion_Wait_WaitMotionScale">Scale [%]</sys:String>
+    <sys:String x:Key="Motion_Wait_WaitMotionPeriod">Period [sec]</sys:String>    
+    
+    <!-- Face -->
     <sys:String x:Key="Motion_Face">Face</sys:String>
+    <sys:String x:Key="Motion_Face_Basics">Basic Settings</sys:String>
     <sys:String x:Key="Motion_Face_EnableFaceTracking">Track Face</sys:String>
     <sys:String x:Key="Motion_Face_CameraName">Camera</sys:String>    
     <sys:String x:Key="Motion_Face_Calibration">Calibrate position</sys:String>    
@@ -158,7 +190,7 @@ If the face tracking works correctly, please ignore this warning.
     <sys:String x:Key="Motion_Face_BlinkAdjust">Blink adjust by head motion and lip sync</sys:String>
     <sys:String x:Key="Motion_Face_NoCamMotion">Voice based motion when webcam not used</sys:String>
 
-    <!-- Motion : Eye -->
+    <!-- Face : Eye -->
     <sys:String x:Key="Motion_Eye">Eye</sys:String>
     <sys:String x:Key="Motion_Eye_LookAtPoint">Eye Look Target</sys:String>
     <sys:String x:Key="Motion_Eye_LookAtPoint_None">None</sys:String>
@@ -168,41 +200,22 @@ If the face tracking works correctly, please ignore this warning.
     <sys:String x:Key="Motion_Eye_ApproxRotRangePrefix">(Eye bones will move about: </sys:String>
     <sys:String x:Key="Motion_Eye_ApproxRotRangeSuffix"> [deg])</sys:String>
     
-    <!-- Motion : Mouth -->
+    <!-- Face : Mouth -->
     <sys:String x:Key="Motion_Mouth">Mouth</sys:String>
     <sys:String x:Key="Motion_Mouth_EnableLipSync">LipSync</sys:String>
     <sys:String x:Key="Motion_Mouth_MicrophoneName">Microphone</sys:String>    
     <sys:String x:Key="Motion_Mouth_Microphone_Sensitivity">Sensitivity [dB]</sys:String>
     <sys:String x:Key="Motion_Mouth_Microphone_Visualize">Show Volume</sys:String>
-    
-    <!-- Motion : Arm -->
-    <sys:String x:Key="Motion_Arm">Arm</sys:String>    
-    <sys:String x:Key="Motion_Arm_EnableHidMotion">Enable Typing / Mouse Motion</sys:String>
-    <sys:String x:Key="Motion_Arm_EnableRandomTyping">Random typing to hide key input</sys:String>
-    <sys:String x:Key="Motion_Arm_EnableShoulderModify">Modify shoulder motion</sys:String>
-    <sys:String x:Key="Motion_Arm_FpsAssumedRightHand">Enable mouse motion to FPS assumed mode</sys:String>
-    <sys:String x:Key="Motion_Arm_FpsAssumedRightHand_Tooltip">When checked right hand motion during playing FPS become more natural, but screen touch or pen tablet operation become become slow</sys:String>
-    
-    <sys:String x:Key="Motion_Arm_WaistWidth">Waist width [cm]</sys:String>
-    <sys:String x:Key="Motion_Arm_ElbowCloseStrength">Strength to keep upper arm to body [%]</sys:String>
-    <sys:String x:Key="Motion_Arm_EnablePresenterMotion">Presentation-like hand</sys:String>
-    <sys:String x:Key="Motion_Arm_ShowPresentationPointer">Show Pointer Support</sys:String>
-    <sys:String x:Key="Motion_Arm_PresenterArmMotionScale">Presentation-like motion scale [%]</sys:String>
-    <sys:String x:Key="Motion_Arm_PresenterArmRadiusMin">Arm position radius min [cm]</sys:String>
 
-    <!-- Motion : Hand -->
-    <sys:String x:Key="Motion_Hand">Hand</sys:String>
-    <sys:String x:Key="Motion_Hand_CharacterHandMotion">Hand Motion</sys:String>
-    <sys:String x:Key="Motion_Hand_WristToHandTip">Wrist-Hand tip length [cm]</sys:String>
-    <sys:String x:Key="Motion_Hand_WristToPalm">Wrist-Palm length [cm]</sys:String>
-    <sys:String x:Key="Motion_Hand_HandYOffsetBasic">Hand height adjust [cm]</sys:String>
-    <sys:String x:Key="Motion_Hand_HandYOffsetAfterKeyDown">(Press key)Hand height adjust [cm]</sys:String>
-
-    <!-- Motion : Wait -->
-    <sys:String x:Key="Motion_Wait">Wait motion</sys:String>
-    <sys:String x:Key="Motion_Wait_EnableWaitMotion">Enable</sys:String>
-    <sys:String x:Key="Motion_Wait_WaitMotionScale">Scale [%]</sys:String>
-    <sys:String x:Key="Motion_Wait_WaitMotionPeriod">Period [sec]</sys:String>    
+    <!-- Face : BlendShape -->
+    <sys:String x:Key="Motion_Face_BlendShape">BlendShape</sys:String>
+    <sys:String x:Key="Motion_Face_NeutralClip">Default Face BlendShape</sys:String>    
+    <sys:String x:Key="Motion_Face_NeutralClip_Help" xml:space="preserve">* Neutral BlendShape is applied with blink, as default face.
+  Use it when the model has custom default face in Neutral BlendShape etc.</sys:String>
+    <sys:String x:Key="Motion_Face_OffsetClip">Offset BlendShape</sys:String>
+    <sys:String x:Key="Motion_Face_OffsetClip_Help" xml:space="preserve">* Offset BlendShape is always applied.
+  Use it when the model has BlendShape which is to adjust body shape.</sys:String>
+    
     
     <!-- Layout Setting -->
     <sys:String x:Key="Layout_Header">Layout</sys:String>   
