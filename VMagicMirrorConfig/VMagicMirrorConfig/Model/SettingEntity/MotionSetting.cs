@@ -1,7 +1,13 @@
 ﻿namespace Baku.VMagicMirrorConfig
 {
-    public class MotionSetting
+    public class MotionSetting : SettingEntityBase
     {
+        /// <summary>
+        /// NOTE: 規約としてこの値は書き換えません。
+        /// デフォルト値を参照したい人が、プロパティ読み込みのみの為だけに使います。
+        /// </summary>
+        public static MotionSetting Default { get; } = new MotionSetting();
+
         #region Full Body 
 
         public bool EnableNoHandTrackMode { get; set; } = false;
@@ -34,7 +40,6 @@
 
         public int FaceDefaultFun { get; set; } = 0;
 
-        private string? _faceNeutralClip = "";
         public string? FaceNeutralClip { get; set; } = "";
         public string? FaceOffsetClip { get; set; } = "";
 

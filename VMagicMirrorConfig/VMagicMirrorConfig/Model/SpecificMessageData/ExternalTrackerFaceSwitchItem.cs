@@ -111,10 +111,11 @@ namespace Baku.VMagicMirrorConfig
             return new ExternalTrackerFaceSwitchSetting(items);
         }
 
-        public static ExternalTrackerFaceSwitchSetting FromJson(string json)
+        //TODO: enableThrowを消して常時例外スローする方向に倒してしまいたい
+        public static ExternalTrackerFaceSwitchSetting FromJson(string json, bool enableThrow = false)
         {
             var result = LoadDefault();
-            try 
+            try
             {
                 var jobj = JObject.Parse(json);
                 if (jobj["items"] is JArray items && items.Count == result.Items.Length)
@@ -134,9 +135,13 @@ namespace Baku.VMagicMirrorConfig
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 LogOutput.Instance.Write(ex);
+                if (enableThrow)
+                {
+                    throw;
+                }
             }
 
             return result;

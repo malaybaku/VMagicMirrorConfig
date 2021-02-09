@@ -2,16 +2,26 @@
 
 namespace Baku.VMagicMirrorConfig
 {
-    public class WordToMotionSetting
-    {
-        internal const int DeviceTypeNone = -1;
-        internal const int DeviceTypeKeyboardWord = 0;
-        internal const int DeviceTypeGamepad = 1;
-        internal const int DeviceTypeKeyboardTenKey = 2;
-        internal const int DeviceTypeMidiController = 3;
-    
+    public class WordToMotionSetting : SettingEntityBase
+    { 
+        public static class DeviceTypes
+        {
+            public const int None = -1;
+            public const int KeyboardWord = 0;
+            public const int Gamepad = 1;
+            public const int KeyboardTenKey = 2;
+            public const int MidiController = 3;
+        }
+
+        /// <summary>
+        /// NOTE: 規約としてこの値は書き換えません。
+        /// デフォルト値を参照したい人が、プロパティ読み込みのみの為だけに使います。
+        /// </summary>
+        public static WordToMotionSetting Default { get; } = new WordToMotionSetting();
+
+
         //TODO: ここデフォルトはKeyboardWordじゃなかったっけ？要確認。
-        public int SelectedDeviceType { get; set; } = DeviceTypeNone;
+        public int SelectedDeviceType { get; set; } = DeviceTypes.None;
 
         //NOTE: 「UIに出さないけど保存はしたい」系のやつで、キャラロード時にUnityから勝手に送られてくる、という想定
         public List<string> ExtraBlendShapeClipNames { get; set; } = new List<string>();

@@ -1,10 +1,18 @@
 ﻿namespace Baku.VMagicMirrorConfig
 {
-    public class ExternalTrackerSetting
+    public class ExternalTrackerSetting : SettingEntityBase
     { 
         public const int TrackSourceNone = 0;
         public const int TrackSourceIFacialMocap = 1;
-     
+
+        /// <summary>
+        /// NOTE: 規約としてこの値は書き換えません。
+        /// デフォルト値を参照したい人が、プロパティ読み込みのみの為だけに使います。
+        /// TODO: ここでやはりデフォルト値の扱いが問題になる…
+        /// </summary>
+        public static ExternalTrackerSetting Default { get; } = new ExternalTrackerSetting();
+
+
         // 基本メニュー部分
         public bool EnableExternalTracking { get; set; } = false;
         public bool EnableExternalTrackerLipSync { get; set; } = true;
