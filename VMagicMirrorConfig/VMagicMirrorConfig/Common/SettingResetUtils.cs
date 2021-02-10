@@ -11,7 +11,7 @@ namespace Baku.VMagicMirrorConfig
         /// 確認ダイアログを出したうえで、個別カテゴリの設定をリセットします。
         /// </summary>
         /// <param name="resetAction"></param>
-        public static async void ResetSingleCategorySettingAsync(Action resetAction)
+        public static async void ResetSingleCategoryAsync(Action resetAction)
         {
             var indication = MessageIndication.ResetSingleCategoryConfirmation(
                 LanguageSelector.Instance.LanguageName

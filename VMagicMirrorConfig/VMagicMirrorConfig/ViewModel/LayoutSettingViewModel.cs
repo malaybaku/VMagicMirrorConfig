@@ -381,7 +381,7 @@ namespace Baku.VMagicMirrorConfig
         private ActionCommand? _resetDeviceLayoutCommand = null;
         public ActionCommand ResetDeviceLayoutCommand
             => _resetDeviceLayoutCommand ??= new ActionCommand(
-                () => SettingResetUtils.ResetSingleCategorySettingAsync(ResetDeviceLayout)
+                () => SettingResetUtils.ResetSingleCategoryAsync(ResetDeviceLayout)
                 );
         private void ResetDeviceLayout()
         {
@@ -391,7 +391,7 @@ namespace Baku.VMagicMirrorConfig
         private ActionCommand? _resetHidSettingCommand = null;
         public ActionCommand ResetHidSettingCommand
             => _resetHidSettingCommand ??= new ActionCommand(
-                () => SettingResetUtils.ResetSingleCategorySettingAsync(ResetHidSetting)
+                () => SettingResetUtils.ResetSingleCategoryAsync(ResetHidSetting)
                 );
         private void ResetHidSetting()
         {
@@ -404,7 +404,7 @@ namespace Baku.VMagicMirrorConfig
         private ActionCommand? _resetCameraSettingCommand = null;
         public ActionCommand ResetCameraSettingCommand
             => _resetCameraSettingCommand ??= new ActionCommand(
-                () => SettingResetUtils.ResetSingleCategorySettingAsync(ResetCameraSetting)
+                () => SettingResetUtils.ResetSingleCategoryAsync(ResetCameraSetting)
                 );
         private void ResetCameraSetting()
         {
@@ -420,7 +420,7 @@ namespace Baku.VMagicMirrorConfig
         private ActionCommand? _resetMidiSettingCommand = null;
         public ActionCommand ResetMidiSettingCommand
             => _resetMidiSettingCommand ??= new ActionCommand(
-                () => SettingResetUtils.ResetSingleCategorySettingAsync(ResetMidiSetting)
+                () => SettingResetUtils.ResetSingleCategoryAsync(ResetMidiSetting)
                 );
         private void ResetMidiSetting()
         {

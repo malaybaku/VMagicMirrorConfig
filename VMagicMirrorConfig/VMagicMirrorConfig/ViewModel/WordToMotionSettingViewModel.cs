@@ -415,7 +415,7 @@ namespace Baku.VMagicMirrorConfig
         private ActionCommand? _resetByDefaultItemsCommand = null;
         public ActionCommand ResetByDefaultItemsCommand
             => _resetByDefaultItemsCommand ??= new ActionCommand(
-                () => SettingResetUtils.ResetSingleCategorySettingAsync(LoadDefaultItems)
+                () => SettingResetUtils.ResetSingleCategoryAsync(LoadDefaultItems)
                 );
 
         public override void ResetToDefault()

@@ -737,37 +737,37 @@ namespace Baku.VMagicMirrorConfig
         private ActionCommand? _resetFaceBasicSettingCommand = null;
         public ActionCommand ResetFaceBasicSettingCommand
             => _resetFaceBasicSettingCommand ??= new ActionCommand(
-                () => SettingResetUtils.ResetSingleCategorySettingAsync(ResetFaceBasicSetting)
+                () => SettingResetUtils.ResetSingleCategoryAsync(ResetFaceBasicSetting)
                 );
 
         private ActionCommand? _resetFaceEyeSettingCommand = null;
         public ActionCommand ResetFaceEyeSettingCommand
             => _resetFaceEyeSettingCommand ??= new ActionCommand(
-                () => SettingResetUtils.ResetSingleCategorySettingAsync(ResetFaceEyeSetting)
+                () => SettingResetUtils.ResetSingleCategoryAsync(ResetFaceEyeSetting)
                 );
 
         private ActionCommand? _resetFaceBlendShapeSettingCommand = null;
         public ActionCommand ResetFaceBlendShapeSettingCommand
             => _resetFaceBlendShapeSettingCommand ??= new ActionCommand(
-                () => SettingResetUtils.ResetSingleCategorySettingAsync(ResetFaceBlendShapeSetting)
+                () => SettingResetUtils.ResetSingleCategoryAsync(ResetFaceBlendShapeSetting)
                 );
 
         private ActionCommand? _resetArmMotionSettingCommand = null;
         public ActionCommand ResetArmMotionSettingCommand
             => _resetArmMotionSettingCommand ??= new ActionCommand(
-                () => SettingResetUtils.ResetSingleCategorySettingAsync(ResetArmSetting)
+                () => SettingResetUtils.ResetSingleCategoryAsync(ResetArmSetting)
                 );
 
         private ActionCommand? _resetHandMotionSettingCommand = null;
         public ActionCommand ResetHandMotionSettingCommand
             => _resetHandMotionSettingCommand ??= new ActionCommand(
-                () => SettingResetUtils.ResetSingleCategorySettingAsync(ResetHandSetting)
+                () => SettingResetUtils.ResetSingleCategoryAsync(ResetHandSetting)
                 );
 
         private ActionCommand? _resetWaitMotionSettingCommand = null;
         public ActionCommand ResetWaitMotionSettingCommand
             => _resetWaitMotionSettingCommand ??= new ActionCommand(
-                () => SettingResetUtils.ResetSingleCategorySettingAsync(ResetWaitMotionSetting)
+                () => SettingResetUtils.ResetSingleCategoryAsync(ResetWaitMotionSetting)
                 );
 
         private void ResetFaceBasicSetting()

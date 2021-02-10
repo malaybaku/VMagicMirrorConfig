@@ -219,7 +219,7 @@ namespace Baku.VMagicMirrorConfig
         private ActionCommand? _resetSettingsCommand = null;
         public ActionCommand ResetSettingsCommand
             => _resetSettingsCommand ??= new ActionCommand(
-                () => SettingResetUtils.ResetSingleCategorySettingAsync(ResetToDefault)
+                () => SettingResetUtils.ResetSingleCategoryAsync(ResetToDefault)
                 );
 
         #endregion
