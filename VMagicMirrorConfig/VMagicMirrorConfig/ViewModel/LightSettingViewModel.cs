@@ -1,7 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Media;
-using System.Xml.Serialization;
 
 namespace Baku.VMagicMirrorConfig
 {
@@ -12,18 +11,54 @@ namespace Baku.VMagicMirrorConfig
     /// </summary>
     public class LightSettingViewModel : SettingViewModelBase
     {
-        public LightSettingViewModel() : base()
+        internal LightSettingViewModel(LightSettingModel model, IMessageSender sender) : base(sender)
         {
-            UpdateLightColor();
-            UpdateBloomColor();
+            _model = model;
+
+            _lightColor = Color.FromRgb((byte)model.LightR.Value, (byte)model.LightG.Value, (byte)model.LightB.Value);
+            model.LightR.PropertyChanged += (_, __) => UpdateLightColor();
+            model.LightG.PropertyChanged += (_, __) => UpdateLightColor();
+            model.LightB.PropertyChanged += (_, __) => UpdateLightColor();
+
+            _bloomColor = Color.FromRgb((byte)model.BloomR.Value, (byte)model.BloomG.Value, (byte)model.BloomB.Value);
+            model.BloomR.PropertyChanged += (_, __) => UpdateBloomColor();
+            model.BloomG.PropertyChanged += (_, __) => UpdateBloomColor();
+            model.BloomB.PropertyChanged += (_, __) => UpdateBloomColor();
+            
+
+            ResetLightSettingCommand = new ActionCommand(
+                () => SettingResetUtils.ResetSingleCategoryAsync(model.ResetLightSetting)
+                );
+            ResetShadowSettingCommand = new ActionCommand(
+                () => SettingResetUtils.ResetSingleCategoryAsync(_model.ResetShadowSetting)
+                );
+            ResetBloomSettingCommand = new ActionCommand(
+                () => SettingResetUtils.ResetSingleCategoryAsync(_model.ResetBloomSetting)
+                );
+            ResetWindSettingCommand = new ActionCommand(
+                () => SettingResetUtils.ResetSingleCategoryAsync(_model.ResetWindSetting)
+                );
+
             ImageQualityNames = new ReadOnlyObservableCollection<string>(_imageQualityNames);
         }
 
-        internal LightSettingViewModel(IMessageSender sender) : base(sender)
-        {
-            ImageQualityNames = new ReadOnlyObservableCollection<string>(_imageQualityNames);
-        }
+        private readonly LightSettingModel _model;
 
+        
+
+        //public LightSettingViewModel() : base()
+        //{
+        //    UpdateLightColor();
+        //    UpdateBloomColor();
+        //    ImageQualityNames = new ReadOnlyObservableCollection<string>(_imageQualityNames);
+        //}
+
+        //internal LightSettingViewModel(IMessageSender sender) : base(sender)
+        //{
+        //    ImageQualityNames = new ReadOnlyObservableCollection<string>(_imageQualityNames);
+        //}
+
+        //TODO: Loadの時点で色やら何やら保証されるようになったため、このInitializeはもう不要なはず
         public void Initialize()
         {
             UpdateLightColor();
@@ -53,7 +88,6 @@ namespace Baku.VMagicMirrorConfig
         //WPF側からは揮発性データのように扱う
 
         private string _imageQuality = "";
-        [XmlIgnore]
         public string ImageQuality
         {
             get => _imageQuality;
@@ -66,104 +100,23 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private readonly ObservableCollection<string> _imageQualityNames 
-            = new ObservableCollection<string>();
-        [XmlIgnore]
+        private readonly ObservableCollection<string> _imageQualityNames = new ObservableCollection<string>();
         public ReadOnlyObservableCollection<string> ImageQualityNames { get; }
 
         #endregion
 
         #region Light
 
-        private int _lightIntensity = 100;
-        public int LightIntensity
-        {
-            get => _lightIntensity;
-            set
-            {
-                if (SetValue(ref _lightIntensity, value))
-                {
-                    SendMessage(
-                        MessageFactory.Instance.LightIntensity(LightIntensity)
-                        );
-                }
-            }
-        }
+        public RPropertyMin<int> LightIntensity => _model.LightIntensity;
+        public RPropertyMin<int> LightYaw => _model.LightYaw;
+        public RPropertyMin<int> LightPitch => _model.LightPitch;
 
-        private int _lightYaw = -30;
-        public int LightYaw
-        {
-            get => _lightYaw;
-            set
-            {
-                if (SetValue(ref _lightYaw, value))
-                {
-                    SendMessage(
-                        MessageFactory.Instance.LightYaw(LightYaw)
-                        );
-                }
-            }
-        }
+        //TODO: ColorPickerの対応方法
+        public RPropertyMin<int> LightR => _model.LightR;
+        public RPropertyMin<int> LightG => _model.LightG;
+        public RPropertyMin<int> LightB => _model.LightB;
 
-        private int _lightPitch = 50;
-        public int LightPitch
-        {
-            get => _lightPitch;
-            set
-            {
-                if (SetValue(ref _lightPitch, value))
-                {
-                    SendMessage(
-                        MessageFactory.Instance.LightPitch(LightPitch)
-                        );
-                }
-            }
-        }
-
-        private int _lightR = 255;
-        public int LightR
-        {
-            get => _lightR;
-            set
-            {
-                if (SetValue(ref _lightR, value))
-                {
-                    UpdateLightColor();
-                    RaisePropertyChanged(nameof(LightColor));
-                }
-            }
-        }
-
-        private int _lightG = 255;
-        public int LightG
-        {
-            get => _lightG;
-            set
-            {
-                if (SetValue(ref _lightG, value))
-                {
-                    UpdateLightColor();
-                    RaisePropertyChanged(nameof(LightColor));
-                }
-            }
-        }
-
-        private int _lightB = 255;
-        public int LightB
-        {
-            get => _lightB;
-            set
-            {
-                if (SetValue(ref _lightB, value))
-                {
-                    UpdateLightColor();
-                    RaisePropertyChanged(nameof(LightColor));
-                }
-            }
-        }
-
-        private Color _lightColor = Color.FromRgb(255, 255, 255);
-        [XmlIgnore]
+        private Color _lightColor;
         public Color LightColor 
         {
             get => _lightColor;
@@ -171,176 +124,39 @@ namespace Baku.VMagicMirrorConfig
             {
                 if (SetValue(ref _lightColor, value))
                 {
-                    LightR = value.R;
-                    LightG = value.G;
-                    LightB = value.B;
+                    LightR.Value = value.R;
+                    LightG.Value = value.G;
+                    LightB.Value = value.B;
                 }
             }
         }
 
-        private void UpdateLightColor()
-        {
-            LightColor = Color.FromRgb((byte)LightR, (byte)LightG, (byte)LightB);
-            SendMessage(MessageFactory.Instance.LightColor(LightR, LightG, LightB));
-        }
+        //NOTE: 色が変わったら表示を追従させるだけでいいのがポイント。メッセージ送信自体はモデル側で行う
+        private void UpdateLightColor() 
+            => LightColor = Color.FromRgb((byte)LightR.Value, (byte)LightG.Value, (byte)LightB.Value);
 
         #endregion
 
         #region Shadow
 
-        private bool _enableShadow = true;
-        public bool EnableShadow
-        {
-            get => _enableShadow;
-            set
-            {
-                if (SetValue(ref _enableShadow, value))
-                {
-                    SendMessage(
-                        MessageFactory.Instance.ShadowEnable(EnableShadow)
-                        );
-                }
-            }
-        }
-
-        private int _shadowIntensity = 65;
-        public int ShadowIntensity
-        {
-            get => _shadowIntensity;
-            set
-            {
-                if (SetValue(ref _shadowIntensity, value))
-                {
-                    SendMessage(
-                        MessageFactory.Instance.ShadowIntensity(ShadowIntensity)
-                        );
-                }
-            }
-        }
-
-        private int _shadowYaw = -20;
-        public int ShadowYaw
-        {
-            get => _shadowYaw;
-            set
-            {
-                if (SetValue(ref _shadowYaw, value))
-                {
-                    SendMessage(
-                        MessageFactory.Instance.ShadowYaw(ShadowYaw)
-                        );
-                }
-            }
-        }
-
-        private int _shadowPitch = 8;
-        public int ShadowPitch
-        {
-            get => _shadowPitch;
-            set
-            {
-                if (SetValue(ref _shadowPitch, value))
-                {
-                    SendMessage(
-                        MessageFactory.Instance.ShadowPitch(ShadowPitch)
-                        );
-                }
-            }
-        }
-
-        private int _shadowDepthOffset = 40;
-        public int ShadowDepthOffset
-        {
-            get => _shadowDepthOffset;
-            set
-            {
-                if (SetValue(ref _shadowDepthOffset, value))
-                {
-                    SendMessage(
-                        MessageFactory.Instance.ShadowDepthOffset(ShadowDepthOffset)
-                        );
-                }
-            }
-        }
+        public RPropertyMin<bool> EnableShadow => _model.EnableShadow;
+        public RPropertyMin<int> ShadowIntensity => _model.ShadowIntensity;
+        public RPropertyMin<int> ShadowYaw => _model.ShadowYaw;
+        public RPropertyMin<int> ShadowPitch => _model.ShadowPitch;
+        public RPropertyMin<int> ShadowDepthOffset => _model.ShadowDepthOffset;
 
         #endregion
 
         #region Bloom
 
-        private int _bloomIntensity = 50;
-        public int BloomIntensity
-        {
-            get => _bloomIntensity;
-            set
-            {
-                if (SetValue(ref _bloomIntensity, value))
-                {
-                    SendMessage(
-                        MessageFactory.Instance.BloomIntensity(BloomIntensity)
-                        );
-                }
-            }
-        }
+        public RPropertyMin<int> BloomIntensity => _model.BloomIntensity;
+        public RPropertyMin<int> BloomThreshold => _model.BloomThreshold;
 
-        private int _bloomThreshold = 100;
-        public int BloomThreshold
-        {
-            get => _bloomThreshold;
-            set
-            {
-                if (SetValue(ref _bloomThreshold, value))
-                {
-                    SendMessage(
-                        MessageFactory.Instance.BloomThreshold(BloomThreshold)
-                        );
-                }
-            }
-        }
+        public RPropertyMin<int> BloomR => _model.BloomR;
+        public RPropertyMin<int> BloomG => _model.BloomG;
+        public RPropertyMin<int> BloomB => _model.BloomB;
 
-        private int _bloomR = 255;
-        public int BloomR
-        {
-            get => _bloomR;
-            set
-            {
-                if (SetValue(ref _bloomR, value))
-                {
-                    UpdateBloomColor();
-                    RaisePropertyChanged(nameof(BloomColor));
-                }
-            }
-        }
-
-        private int _bloomG = 255;
-        public int BloomG
-        {
-            get => _bloomG;
-            set
-            {
-                if (SetValue(ref _bloomG, value))
-                {
-                    UpdateBloomColor();
-                    RaisePropertyChanged(nameof(BloomColor));
-                }
-            }
-        }
-
-        private int _bloomB = 255;
-        public int BloomB
-        {
-            get => _bloomB;
-            set
-            {
-                if (SetValue(ref _bloomB, value))
-                {
-                    UpdateBloomColor();
-                    RaisePropertyChanged(nameof(BloomColor));
-                }
-            }
-        }
-
-        private Color _bloomColor = Color.FromRgb(255, 255, 255);
-        [XmlIgnore]
+        private Color _bloomColor;
         public Color BloomColor 
         {
             get => _bloomColor;
@@ -348,146 +164,37 @@ namespace Baku.VMagicMirrorConfig
             {
                 if (SetValue(ref _bloomColor, value))
                 {
-                    BloomR = value.R;
-                    BloomG = value.G;
-                    BloomB = value.B;
+                    BloomR.Value = value.R;
+                    BloomG.Value = value.G;
+                    BloomB.Value = value.B;
                 }
             }
         }
 
-        private void UpdateBloomColor()
-        {
-            BloomColor = Color.FromRgb((byte)BloomR, (byte)BloomG, (byte)BloomB);
-            SendMessage(MessageFactory.Instance.BloomColor(BloomR, BloomG, BloomB));
-        }
+        private void UpdateBloomColor() 
+            => BloomColor = Color.FromRgb((byte)BloomR.Value, (byte)BloomG.Value, (byte)BloomB.Value);
 
         #endregion
 
         #region Wind
 
-        private bool _enableWind = true;
-        public bool EnableWind
-        {
-            get => _enableWind;
-            set
-            {
-                if (SetValue(ref _enableWind, value))
-                {
-                    SendMessage(MessageFactory.Instance.WindEnable(EnableWind));
-                }
-            }
-        }
-
-        private int _windStrengh = 100;
-        public int WindStrength
-        {
-            get => _windStrengh;
-            set
-            {
-                if (SetValue(ref _windStrengh, value))
-                {
-                    SendMessage(MessageFactory.Instance.WindStrength(WindStrength));
-                }
-            }
-        }
-
-        private int _windInterval = 100;
-        public int WindInterval
-        {
-            get => _windInterval;
-            set
-            {
-                if (SetValue(ref _windInterval, value))
-                {
-                    SendMessage(MessageFactory.Instance.WindInterval(WindInterval));
-                }
-            }
-        }
-
-        private int _windYaw = 90;
-        public int WindYaw
-        {
-            get => _windYaw;
-            set
-            {
-                if (SetValue(ref _windYaw, value))
-                {
-                    SendMessage(
-                        MessageFactory.Instance.WindYaw(WindYaw)
-                        );
-                }
-            }
-        }
+        public RPropertyMin<bool> EnableWind => _model.EnableWind;
+        public RPropertyMin<int> WindStrength => _model.WindStrength;
+        public RPropertyMin<int> WindInterval => _model.WindInterval;
+        public RPropertyMin<int> WindYaw => _model.WindYaw;
 
         #endregion
 
         #region Reset API
 
-        private ActionCommand? _resetLightSettingCommand = null;
-        public ActionCommand ResetLightSettingCommand
-            => _resetLightSettingCommand ??= new ActionCommand(
-                () => SettingResetUtils.ResetSingleCategorySettingAsync(ResetLightSetting)
-                );
-
-        private ActionCommand? _resetShadowSettingCommand = null;
-        public ActionCommand ResetShadowSettingCommand
-            => _resetShadowSettingCommand ??= new ActionCommand(
-                () => SettingResetUtils.ResetSingleCategorySettingAsync(ResetShadowSetting)
-                );
-
-        private ActionCommand? _resetBloomSettingCommand = null;
-        public ActionCommand ResetBloomSettingCommand
-            => _resetBloomSettingCommand ??= new ActionCommand(
-                () => SettingResetUtils.ResetSingleCategorySettingAsync(ResetBloomSetting)
-                );
-
-        private ActionCommand? _resetWindSettingCommand = null;
-        public ActionCommand ResetWindSettingCommand
-            => _resetWindSettingCommand ??= new ActionCommand(
-                () => SettingResetUtils.ResetSingleCategorySettingAsync(ResetWindSetting)
-                );
-
-        private void ResetLightSetting()
-        {
-            LightR = 255;
-            LightG = 255;
-            LightB = 255;
-            LightIntensity = 100;
-            LightYaw = -30;
-            LightPitch = 50;
-        }
-
-        private void ResetShadowSetting()
-        {
-            EnableShadow = true;
-            ShadowIntensity = 65;
-            ShadowYaw = -20;
-            ShadowPitch = 8;
-            ShadowDepthOffset = 40;
-        }
-
-        private void ResetBloomSetting()
-        {
-            BloomR = 255;
-            BloomG = 255;
-            BloomB = 255;
-            BloomIntensity = 50;
-            BloomThreshold = 100;
-        }
-
-        private void ResetWindSetting()
-        {
-            EnableWind = true;
-            WindStrength = 100;
-            WindInterval = 100;
-            WindYaw = 90;
-        }
+        public ActionCommand ResetLightSettingCommand { get; }
+        public ActionCommand ResetShadowSettingCommand { get; }
+        public ActionCommand ResetBloomSettingCommand { get; }
+        public ActionCommand ResetWindSettingCommand { get; }
 
         public override void ResetToDefault()
         {
-            ResetLightSetting();
-            ResetShadowSetting();
-            ResetBloomSetting();
+            _model.ResetToDefault();
         }
 
         #endregion

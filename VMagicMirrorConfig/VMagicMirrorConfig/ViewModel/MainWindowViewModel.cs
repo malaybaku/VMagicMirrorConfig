@@ -11,6 +11,8 @@ namespace Baku.VMagicMirrorConfig
 {
     public class MainWindowViewModel : ViewModelBase, IWindowViewModel
     {
+        internal SettingModel Model { get; }
+        
         internal ModelInitializer Initializer { get; } = new ModelInitializer();
         internal IMessageSender MessageSender => Initializer.MessageSender;
 
@@ -61,11 +63,12 @@ namespace Baku.VMagicMirrorConfig
 
         public MainWindowViewModel()
         {
+            Model = new SettingModel(MessageSender, Initializer.MessageReceiver);
             _screenshotController = new ScreenshotController(MessageSender);
             WindowSetting = new WindowSettingViewModel(MessageSender);
             MotionSetting = new MotionSettingViewModel(MessageSender, Initializer.MessageReceiver);
             LayoutSetting = new LayoutSettingViewModel(MessageSender, Initializer.MessageReceiver);
-            LightSetting = new LightSettingViewModel(MessageSender);
+            LightSetting = new LightSettingViewModel(Model.LightSetting, MessageSender);
             WordToMotionSetting = new WordToMotionSettingViewModel(MessageSender, Initializer.MessageReceiver);
             ExternalTrackerSetting = new ExternalTrackerViewModel(MessageSender, Initializer.MessageReceiver);
 
