@@ -6,7 +6,7 @@ namespace Baku.VMagicMirrorConfig
     /// ReactivePropertyの機能めちゃくちゃ削減したようなもの。モデル層の簡略化を主目的とします。
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    class RPropertyMin<T> : NotifiableBase
+    public class RPropertyMin<T> : NotifiableBase
         where T : IEquatable<T>
     {
         /// <summary>

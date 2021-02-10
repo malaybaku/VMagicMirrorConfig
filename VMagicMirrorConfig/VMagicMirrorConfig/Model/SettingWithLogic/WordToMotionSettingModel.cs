@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace Baku.VMagicMirrorConfig
 {
@@ -27,13 +29,42 @@ namespace Baku.VMagicMirrorConfig
 
         public MotionRequestCollection? MotionRequests { get; private set; }
 
+        public MidiNoteToMotionMap? MidiNoteToMotionMap { get; private set; }
+
 
         protected override void PreSave()
         {
-            base.PreSave();
+            ItemsContentString.Value = MotionRequests?.ToJson() ?? "";
+            MidiNoteMapString.Value = MidiNoteToMotionMap?.ToJson() ?? "";
+        }
 
-            ItemsContentString.SilentSet()
-            
+        protected override void AfterLoad(WordToMotionSetting entity)
+        {
+            try
+            {
+                using (var reader = new StringReader(ItemsContentString.Value))
+                {
+                    MotionRequests = MotionRequestCollection.DeserializeFromJson(reader);
+                }
+            }
+            catch(Exception ex)
+            {
+                LogOutput.Instance.Write(ex);
+                MotionRequests = new MotionRequestCollection(MotionRequest.GetDefaultMotionRequestSet());
+            }
+
+            try
+            {
+                using (var reader = new StringReader(MidiNoteMapString.Value))
+                {
+                    MidiNoteToMotionMap = MidiNoteToMotionMap.DeserializeFromJson(reader);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogOutput.Instance.Write(ex);
+                MidiNoteToMotionMap = MidiNoteToMotionMap.LoadDefault();
+            }
         }
 
     }

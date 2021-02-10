@@ -30,6 +30,10 @@ namespace Baku.VMagicMirrorConfig
             CalibrateData = new RPropertyMin<string>(
                 setting.CalibrateData, s => SendMessage(factory.ExTrackerSetCalibrateData(s))
                 );
+
+            SerializedFaceSwitchSetting = new RPropertyMin<string>(
+                setting.SerializedFaceSwitchSetting, v => SendMessage(factory.ExTrackerSetFaceSwitchSetting(v))
+                );
         }
 
         // 基本メニュー部分
@@ -50,11 +54,12 @@ namespace Baku.VMagicMirrorConfig
 
         //TODO: ここにデフォルト値が入りやすいような仕掛けを作るのもアリかも、という問題があるが、
         //特に値が空だったときのリカバーをモデル層でやる形にするのも選択肢。
-        public string SerializedFaceSwitchSetting { get; set; } = "";
+        public RPropertyMin<string> SerializedFaceSwitchSetting { get; }
 
         protected override void PreSave()
         {
-            SerializedFaceSwitchSetting = FaceSwitchSetting?.ToJson() ?? "";
+            //NOTE: 想定挙動としてはセーブ前の時点で値が更新された時点でシリアライズされているため、この再シリアライズをしたからといって値は変わらない
+            SerializedFaceSwitchSetting.Value = FaceSwitchSetting?.ToJson() ?? "";
         }
 
         protected override void AfterLoad(ExternalTrackerSetting entity)
@@ -62,7 +67,7 @@ namespace Baku.VMagicMirrorConfig
             try
             {
                 FaceSwitchSetting = 
-                    ExternalTrackerFaceSwitchSetting.FromJson(SerializedFaceSwitchSetting, enableThrow: true);
+                    ExternalTrackerFaceSwitchSetting.FromJson(SerializedFaceSwitchSetting.Value, enableThrow: true);
             }
             catch (Exception ex)
             {
