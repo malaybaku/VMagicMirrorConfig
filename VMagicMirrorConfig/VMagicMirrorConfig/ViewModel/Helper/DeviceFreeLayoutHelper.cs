@@ -48,10 +48,10 @@ namespace Baku.VMagicMirrorConfig
             if (_layout.EnableDeviceFreeLayout.Value)
             {
                 _freeCameraWhenStartFreeLayout = _layout.EnableFreeCameraMode;
-                _transparentWhenStartFreeLayout = _window.IsTransparent;
+                _transparentWhenStartFreeLayout = _window.IsTransparent.Value;
 
                 _layout.EnableFreeCameraMode = true;
-                _window.IsTransparent = false;
+                _window.IsTransparent.Value = false;
             }
             else
             {
@@ -62,7 +62,7 @@ namespace Baku.VMagicMirrorConfig
 
                 if (_transparentWhenStartFreeLayout)
                 {
-                    _window.IsTransparent = true;
+                    _window.IsTransparent.Value = true;
                 }
             }
         }

@@ -65,7 +65,7 @@ namespace Baku.VMagicMirrorConfig
         {
             Model = new SettingModel(MessageSender, Initializer.MessageReceiver);
             _screenshotController = new ScreenshotController(MessageSender);
-            WindowSetting = new WindowSettingViewModel(MessageSender);
+            WindowSetting = new WindowSettingViewModel(Model.WindowSetting, MessageSender);
             MotionSetting = new MotionSettingViewModel(MessageSender, Initializer.MessageReceiver);
             LayoutSetting = new LayoutSettingViewModel(Model.LayoutSetting, Model.GamepadSetting, MessageSender, Initializer.MessageReceiver);
             LightSetting = new LightSettingViewModel(Model.LightSetting, MessageSender);
@@ -581,9 +581,9 @@ namespace Baku.VMagicMirrorConfig
         //Unity側でウィンドウを表示するとき、最前面と透過を無効にする必要があるため、その準備にあたる処理を行います。
         private void PrepareShowUiOnUnity()
         {
-            _windowTransparentBeforeLoadProcess = WindowSetting.IsTransparent;
-            WindowSetting.IsTransparent = false;
-            WindowSetting.TopMost = false;
+            _windowTransparentBeforeLoadProcess = WindowSetting.IsTransparent.Value;
+            WindowSetting.IsTransparent.Value = false;
+            WindowSetting.TopMost.Value = false;
         }
         
         //Unity側でのUI表示が終わったとき、最前面と透過の設定をもとの状態に戻します。
@@ -591,7 +591,7 @@ namespace Baku.VMagicMirrorConfig
         {
             if (_windowTransparentBeforeLoadProcess != null)
             {
-                WindowSetting.IsTransparent = _windowTransparentBeforeLoadProcess.GetValueOrDefault();
+                WindowSetting.IsTransparent.Value = _windowTransparentBeforeLoadProcess.GetValueOrDefault();
                 _windowTransparentBeforeLoadProcess = null;
             }
         }
