@@ -16,7 +16,7 @@
 
         #region Face
 
-        public bool EnableFaceTracking { get; set } = true;
+        public bool EnableFaceTracking { get; set; } = true;
 
         public bool AutoBlinkDuringFaceTracking { get; set; } = true;
 

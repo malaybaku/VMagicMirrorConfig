@@ -25,6 +25,8 @@
 
             HidVisibility = new RPropertyMin<bool>(s.HidVisibility, b => SendMessage(factory.HidVisibility(b)));
             SelectedTypingEffectId = new RPropertyMin<int>(s.SelectedTypingEffectId, i => SendMessage(factory.SetKeyboardTypingEffectType(i)));
+
+            EnableDeviceFreeLayout = new RPropertyMin<bool>(false, v => SendMessage(factory.EnableDeviceFreeLayout(v)));
         }
 
         //NOTE: Gamepadはモデルクラス的には関連づけしないでおく: 代わりにSave/Loadの関数内で調整してもらう感じにする
@@ -44,6 +46,9 @@
         public RPropertyMin<bool> HidVisibility { get; }
         public RPropertyMin<int> SelectedTypingEffectId { get; }
 
+        //NOTE: ファイルには保存しない
+        public RPropertyMin<bool> EnableDeviceFreeLayout { get; }
+
         #region Reset API
 
         public void ResetCameraSetting()
@@ -58,6 +63,12 @@
             //NOTE: カメラ位置を戻すようUnityにメッセージ投げる必要もある: この後にリセットされた値を拾うのはポーリングでいい
             SendMessage(MessageFactory.Instance.ResetCameraPosition());
         }
+
+        /// <summary>
+        /// NOTE: 設定ファイルは直ちには書き換わらない。この関数を呼び出すとUnity側がよろしくレイアウトを直し、
+        /// そのあと直したレイアウト情報を別途投げ返してくる
+        /// </summary>
+        public void ResetDeviceLayout() => SendMessage(MessageFactory.Instance.ResetDeviceLayout());
 
         public void ResetHidSetting()
         {

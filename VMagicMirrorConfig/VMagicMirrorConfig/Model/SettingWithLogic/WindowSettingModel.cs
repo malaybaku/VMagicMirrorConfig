@@ -111,7 +111,7 @@ namespace Baku.VMagicMirrorConfig
 
         #endregion
 
-        private void ResetWindowPosition()
+        public void ResetWindowPosition()
         {
             //NOTE: ウィンドウが被ると困るのを踏まえ、すぐ上ではなく右わきに寄せる点にご注目
             var pos = WindowPositionUtil.GetThisWindowRightTopPosition();

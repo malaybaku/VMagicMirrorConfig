@@ -67,7 +67,7 @@ namespace Baku.VMagicMirrorConfig
             _screenshotController = new ScreenshotController(MessageSender);
             WindowSetting = new WindowSettingViewModel(MessageSender);
             MotionSetting = new MotionSettingViewModel(MessageSender, Initializer.MessageReceiver);
-            LayoutSetting = new LayoutSettingViewModel(MessageSender, Initializer.MessageReceiver);
+            LayoutSetting = new LayoutSettingViewModel(Model.LayoutSetting, Model.GamepadSetting, MessageSender, Initializer.MessageReceiver);
             LightSetting = new LightSettingViewModel(Model.LightSetting, MessageSender);
             WordToMotionSetting = new WordToMotionSettingViewModel(MessageSender, Initializer.MessageReceiver);
             ExternalTrackerSetting = new ExternalTrackerViewModel(MessageSender, Initializer.MessageReceiver);
@@ -391,7 +391,6 @@ namespace Baku.VMagicMirrorConfig
 
             //NOTE: ここでコンポジットを開始することで、背景色/ライト/影のメッセージも統一してしまう
             Initializer.MessageSender.StartCommandComposite();
-            WindowSetting.Initialize();
             LightSetting.Initialize();
             LoadSetting(SpecialFilePath.AutoSaveSettingFilePath, true);
             //NOTE: ここのEndCommandCompositeはLoadSettingが(ファイル無いとかで)中断したときの対策

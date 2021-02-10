@@ -11,6 +11,7 @@
              d:DesignHeight="590"             
              >
     <UserControl.Resources>
+        <vmm:StringNotEmptyConverter x:Key="StringNotEmptyConverter"/>
         <vmm:WhiteSpaceStringToNullConverter x:Key="WhiteSpaceStringToNullConverter"/>
         <vmm:Lv50Converter x:Key="Lv50Converter"/>
         <Style TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}">
@@ -557,19 +558,19 @@
 
                             <Button Grid.Row="1" Grid.Column="1"
                                     Command="{Binding LayoutSetting.QuickLoadViewPointCommand}"
-                                    IsEnabled="{Binding LayoutSetting.HasQuickSaveItem1}"
+                                    IsEnabled="{Binding LayoutSetting.QuickSave1, Converter={StaticResource StringNotEmptyConverter}}"
                                     CommandParameter="1"
                                     Content="1"
                                     />
                             <Button Grid.Row="1" Grid.Column="2"
                                     Command="{Binding LayoutSetting.QuickLoadViewPointCommand}"
-                                    IsEnabled="{Binding LayoutSetting.HasQuickSaveItem2}"
+                                    IsEnabled="{Binding LayoutSetting.QuickSave2, Converter={StaticResource StringNotEmptyConverter}}"
                                     CommandParameter="2"
                                     Content="2"
                                     />
                             <Button Grid.Row="1" Grid.Column="3"
                                     Command="{Binding LayoutSetting.QuickLoadViewPointCommand}"
-                                    IsEnabled="{Binding LayoutSetting.HasQuickSaveItem3}"
+                                    IsEnabled="{Binding LayoutSetting.QuickSave3, Converter={StaticResource StringNotEmptyConverter}}"
                                     CommandParameter="3"
                                     Content="3"
                                     />

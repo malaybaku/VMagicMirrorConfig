@@ -16,7 +16,16 @@
             var factory = MessageFactory.Instance;
 
 
-            GamepadEnabled = new RPropertyMin<bool>(s.GamepadEnabled, b => SendMessage(factory.EnableGamepad(b)));
+            GamepadEnabled = new RPropertyMin<bool>(s.GamepadEnabled, b =>
+            {
+                SendMessage(factory.EnableGamepad(b));
+                if (!b && GamepadVisibility != null)
+                {
+                    //読み込み無効なら表示する価値は無いであろう、と判断
+                    GamepadVisibility.Value = false;
+                }
+            });
+            
             PreferDirectInputGamepad = new RPropertyMin<bool>(s.PreferDirectInputGamepad, b => SendMessage(factory.PreferDirectInputGamepad(b)));
             GamepadVisibility = new RPropertyMin<bool>(s.GamepadVisibility, b => SendMessage(factory.GamepadVisibility(b)));
 

@@ -22,7 +22,7 @@ namespace Baku.VMagicMirrorConfig
         /// <summary>
         /// プロパティの監視を開始します。初期ロードの完了後に呼び出します。
         /// </summary>
-        public void StartObserve() => _layout.PropertyChanged += OnLayoutPropertyChanged;
+        public void StartObserve() => _layout.EnableDeviceFreeLayout.PropertyChanged += OnLayoutPropertyChanged;
 
         /// <summary>
         /// プロパティの監視を終了します。
@@ -33,11 +33,6 @@ namespace Baku.VMagicMirrorConfig
 
         private void OnLayoutPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName != nameof(_layout.EnableDeviceFreeLayout))
-            {
-                return;
-            }
-
             //やること: 
             //フリーレイアウトが始まったとき、
             // - フリーカメラが無効なら有効にする(無効だとしんどいので)
@@ -50,7 +45,7 @@ namespace Baku.VMagicMirrorConfig
             //  フリーレイアウトにしたあとでカメラとか透過のUIをガチャガチャいじると
             //  動作がちょっと不自然になる可能性があるが、これは諦めます
 
-            if (_layout.EnableDeviceFreeLayout)
+            if (_layout.EnableDeviceFreeLayout.Value)
             {
                 _freeCameraWhenStartFreeLayout = _layout.EnableFreeCameraMode;
                 _transparentWhenStartFreeLayout = _window.IsTransparent;

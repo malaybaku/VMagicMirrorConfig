@@ -1,6 +1,7 @@
 ﻿using System;
-using System.Linq;
 using System.Xml.Serialization;
+using MaterialDesignThemes.Wpf;
+//TODO: ViewModelにこの2つのusingがあるのはけしからんですね～
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -8,24 +9,51 @@ namespace Baku.VMagicMirrorConfig
 {
     public class LayoutSettingViewModel : SettingViewModelBase
     {
-        //NOTE: Unity側に指定するIDのことで、コンボボックスとか配列のインデックスとは本質的には関係しない事に注意
-        private const int TypingEffectIndexNone = -1;
-        private const int TypingEffectIndexText = 0;
-        private const int TypingEffectIndexLight = 1;
-        //private const int TypingEffectIndexLaser = 2;
-        private const int TypingEffectIndexButtefly = 3;
+        internal LayoutSettingViewModel(LayoutSettingModel model, GamepadSettingModel gamepadModel, IMessageSender sender, IMessageReceiver receiver) : base(sender)
+        {
+            _model = model;
+            Gamepad = new GamepadSettingViewModel(gamepadModel, sender);
 
-        public LayoutSettingViewModel() : base()
-        {
-            Gamepad = new GamepadSettingViewModel();
-            _typingEffectItem = TypingEffectSelections[0];
-        }
-        internal LayoutSettingViewModel(IMessageSender sender, IMessageReceiver receiver) : base(sender)
-        {
-            Gamepad = new GamepadSettingViewModel(sender, receiver);
             _typingEffectItem = TypingEffectSelections[0];
             receiver.ReceivedCommand += OnReceiveCommand;
+
+            QuickSaveViewPointCommand = new ActionCommand<string>(QuickSaveViewPoint);
+            QuickLoadViewPointCommand = new ActionCommand<string>(QuickLoadViewPoint);
+            ResetCameraPositionCommand = new ActionCommand(() => SendMessage(MessageFactory.Instance.ResetCameraPosition()));
+
+            ResetCameraSettingCommand = new ActionCommand(
+                () => SettingResetUtils.ResetSingleCategoryAsync(_model.ResetCameraSetting)
+                );
+
+            ResetDeviceLayoutCommand = new ActionCommand(
+                () => SettingResetUtils.ResetSingleCategoryAsync(_model.ResetDeviceLayout)
+                );
+            
+            ResetHidSettingCommand = new ActionCommand(
+                () => SettingResetUtils.ResetSingleCategoryAsync(_model.ResetHidSetting)
+                );
+            ResetCameraSettingCommand = new ActionCommand(
+                () => SettingResetUtils.ResetSingleCategoryAsync(_model.ResetCameraSetting)
+                );
+            ResetMidiSettingCommand = new ActionCommand(
+                () => SettingResetUtils.ResetSingleCategoryAsync(_model.ResetMidiSetting)
+                );
+
         }
+
+        private readonly LayoutSettingModel _model;
+
+        //public LayoutSettingViewModel() : base()
+        //{
+        //    Gamepad = new GamepadSettingViewModel();
+        //    _typingEffectItem = TypingEffectSelections[0];
+        //}
+        //internal LayoutSettingViewModel(IMessageSender sender, IMessageReceiver receiver) : base(sender)
+        //{
+        //    Gamepad = new GamepadSettingViewModel(sender, receiver);
+        //    _typingEffectItem = TypingEffectSelections[0];
+        //    receiver.ReceivedCommand += OnReceiveCommand;
+        //}
 
         private void OnReceiveCommand(object? sender, CommandReceivedEventArgs e)
         {
@@ -51,20 +79,7 @@ namespace Baku.VMagicMirrorConfig
         /// </remarks>
         public GamepadSettingViewModel Gamepad { get; set; }
 
-        private int _cameraFov = 40;
-        public int CameraFov
-        {
-            get => _cameraFov;
-            set
-            {
-                if (SetValue(ref _cameraFov, value))
-                {
-                    {
-                        SendMessage(MessageFactory.Instance.CameraFov(CameraFov));
-                    }
-                }
-            }
-        }
+        public RPropertyMin<int> CameraFov => _model.CameraFov;
 
         private bool _enableFreeCameraMode = false;
         [XmlIgnore]
@@ -82,32 +97,8 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private bool _enableMidiRead = false;
-        public bool EnableMidiRead
-        {
-            get
-                  => _enableMidiRead;
-            set
-            {
-                if (SetValue(ref _enableMidiRead, value))
-                {
-                    SendMessage(MessageFactory.Instance.EnableMidiRead(EnableMidiRead));
-                }
-            }
-        }
-
-        private bool _midiControllerVisibility = false;
-        public bool MidiControllerVisibility
-        {
-            get => _midiControllerVisibility;
-            set
-            {
-                if (SetValue(ref _midiControllerVisibility, value))
-                {
-                    SendMessage(MessageFactory.Instance.MidiControllerVisibility(value));
-                }
-            }
-        }
+        public RPropertyMin<bool> EnableMidiRead => _model.EnableMidiRead;
+        public RPropertyMin<bool> MidiControllerVisibility => _model.MidiControllerVisibility;
 
         //NOTE: カメラ位置、デバイスレイアウト、クイックセーブした視点については、ユーザーが直接いじる想定ではない
 
@@ -151,63 +142,17 @@ namespace Baku.VMagicMirrorConfig
 
         #region 視点のクイックセーブ/ロード
 
-        //NOTE: 数が少ないので、ラクな方法ということでハードコーディングにしてます
-        //以下3つの文字列は"CameraPosition+視野角"というデータで構成されます
-        private string _quickSave1 = "";
-        public string QuickSave1
-        {
-            get => _quickSave1;
-            set
-            {
-                if (SetValue(ref _quickSave1, value))
-                {
-                    RaisePropertyChanged(nameof(HasQuickSaveItem1));
-                }
-            }
-        }
+        public RPropertyMin<string> QuickSave1 => _model.QuickSave1;
+        public RPropertyMin<string> QuickSave2 => _model.QuickSave2;
+        public RPropertyMin<string> QuickSave3 => _model.QuickSave3;
 
-        private string _quickSave2 = "";
-        public string QuickSave2
-        {
-            get => _quickSave2;
-            set
-            {
-                if (SetValue(ref _quickSave2, value))
-                {
-                    RaisePropertyChanged(nameof(HasQuickSaveItem2));
-                }
-            }
-        }
+        public ActionCommand<string> QuickSaveViewPointCommand { get; }
+        public ActionCommand<string> QuickLoadViewPointCommand { get; }
 
-        private string _quickSave3 = "";
-        public string QuickSave3
-        {
-            get => _quickSave3;
-            set
-            {
-                if (SetValue(ref _quickSave3, value))
-                {
-                    RaisePropertyChanged(nameof(HasQuickSaveItem3));
-                }
-            }
-        }
-
-        [XmlIgnore]
-        public bool HasQuickSaveItem1 => !string.IsNullOrWhiteSpace(QuickSave1);
-        [XmlIgnore]
-        public bool HasQuickSaveItem2 => !string.IsNullOrWhiteSpace(QuickSave2);
-        [XmlIgnore]
-        public bool HasQuickSaveItem3 => !string.IsNullOrWhiteSpace(QuickSave3);
-
-        private ActionCommand<string>? _quickSaveViewPointCommand;
-        public ActionCommand<string> QuickSaveViewPointCommand
-            => _quickSaveViewPointCommand ??= new ActionCommand<string>(QuickSaveViewPoint);
+        //TODO: この辺の処理はモデルに移動してよい
         private async void QuickSaveViewPoint(string? index)
         {
-            if (!(
-                int.TryParse(index, out int i) &&
-                i > 0 && i <= 3
-                ))
+            if (!(int.TryParse(index, out int i) && i > 0 && i <= 3))
             {
                 return;
             }
@@ -217,21 +162,24 @@ namespace Baku.VMagicMirrorConfig
                 string res = await SendQueryAsync(MessageFactory.Instance.CurrentCameraPosition());
                 string saveData = new JObject()
                 {
-                    ["fov"] = CameraFov,
+                    ["fov"] = CameraFov.Value,
                     ["pos"] = res,
                 }.ToString(Formatting.None);
 
-                if (i == 1)
+                switch (i)
                 {
-                    QuickSave1 = saveData;
-                }
-                else if (i == 2)
-                {
-                    QuickSave2 = saveData;
-                }
-                else
-                {
-                    QuickSave3 = saveData;
+                    case 1:
+                        QuickSave1.Value = saveData;
+                        break;
+                    case 2:
+                        QuickSave2.Value = saveData;
+                        break;
+                    case 3:
+                        QuickSave3.Value = saveData;
+                        break;
+                    default:
+                        //NOTE: ここは来ない
+                        break;
                 }
             }
             catch (Exception ex)
@@ -239,10 +187,6 @@ namespace Baku.VMagicMirrorConfig
                 LogOutput.Instance.Write(ex);
             }
         }
-
-        private ActionCommand<string>? _quickLoadViewPointCommand;
-        public ActionCommand<string> QuickLoadViewPointCommand
-            => _quickLoadViewPointCommand ??= new ActionCommand<string>(QuickLoadViewPoint);
         private void QuickLoadViewPoint(string? index)
         {
             if (!(int.TryParse(index, out int i) && i > 0 && i <= 3))
@@ -253,15 +197,15 @@ namespace Baku.VMagicMirrorConfig
             try
             {
                 string saveData =
-                (i == 1) ? QuickSave1 :
-                (i == 2) ? QuickSave2 :
-                QuickSave3;
+                    (i == 1) ? QuickSave1.Value :
+                    (i == 2) ? QuickSave2.Value :
+                    QuickSave3.Value;
 
                 var obj = JObject.Parse(saveData);
                 string cameraPos = (string?)obj["pos"] ?? "";
                 int fov = (int)(obj["fov"] ?? new JValue(40));
 
-                CameraFov = fov;
+                CameraFov.Value = fov;
                 //NOTE: CameraPositionには書き込まない。
                 //CameraPositionへの書き込みはCameraPositionCheckerのポーリングに任せとけばOK 
                 SendMessage(MessageFactory.Instance.QuickLoadViewPoint(cameraPos));
@@ -274,12 +218,8 @@ namespace Baku.VMagicMirrorConfig
 
         #endregion
 
-        private ActionCommand? _resetCameraPositionCommand;
-        public ActionCommand ResetCameraPositionCommand
-            => _resetCameraPositionCommand ??= new ActionCommand(ResetCameraPosition);
+        public ActionCommand ResetCameraPositionCommand { get; }
 
-        private void ResetCameraPosition()
-            => SendMessage(MessageFactory.Instance.ResetCameraPosition());
 
         private async void OnEnableFreeCameraModeChanged(bool value)
         {
@@ -298,149 +238,58 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private bool _hidVisibility = true;
-        /// <summary> Centimeter </summary>
-        public bool HidVisibility
-        {
-            get => _hidVisibility;
-            set
-            {
-                if (SetValue(ref _hidVisibility, value))
-                {
-                    SendMessage(MessageFactory.Instance.HidVisibility(HidVisibility));
-                }
-            }
-        }
+        public RPropertyMin<bool> HidVisibility => _model.HidVisibility;
 
-        private bool _enableDeviceFreeLayout = false;
-        [XmlIgnore]
-        public bool EnableDeviceFreeLayout
-        {
-            get => _enableDeviceFreeLayout;
-            set
-            {
-                if (SetValue(ref _enableDeviceFreeLayout, value))
-                {
-                    SendMessage(
-                        MessageFactory.Instance.EnableDeviceFreeLayout(EnableDeviceFreeLayout)
-                        );
-                }
-            }
-        }
+        public RPropertyMin<bool> EnableDeviceFreeLayout => _model.EnableDeviceFreeLayout;
 
         #region タイピングエフェクト
 
-        private int _selectedTypingEffectId = TypingEffectIndexNone;
-        //NOTE: v1.4.0まではboolを選択肢の数だけ保存していたが、スケールしないのでインデックス方式に切り替える。
-        //後方互換性については意図的に捨ててます(配信タブで復帰でき、気を使う意義が薄そうなため)
-        public int SelectedTypingEffectId
-        {
-            get => _selectedTypingEffectId;
-            set
-            {
-                if (SetValue(ref _selectedTypingEffectId, value))
-                {
-                    SendMessage(MessageFactory.Instance.SetKeyboardTypingEffectType(_selectedTypingEffectId));
-                    TypingEffectItem = TypingEffectSelections.FirstOrDefault(i => i.Id == value);
-                }
-            }
-        }
+        public RPropertyMin<int> SelectedTypingEffectId => _model.SelectedTypingEffectId;
 
         private TypingEffectSelectionItem? _typingEffectItem = null;
-        [XmlIgnore]
         public TypingEffectSelectionItem? TypingEffectItem
         {
             get => _typingEffectItem;
             set
             {
+                //ここのガード文はComboBoxを意識した書き方なことに注意
                 if (value == null || _typingEffectItem == value || (_typingEffectItem != null && _typingEffectItem.Id == value.Id))
                 {
                     return;
                 }
 
                 _typingEffectItem = value;
-                SelectedTypingEffectId = _typingEffectItem.Id;
+                SelectedTypingEffectId.Value = _typingEffectItem.Id;
                 RaisePropertyChanged();
             }
         }
 
-        [XmlIgnore]
         public TypingEffectSelectionItem[] TypingEffectSelections { get; } = new TypingEffectSelectionItem[]
         {
-            new TypingEffectSelectionItem(TypingEffectIndexNone, "None", MaterialDesignThemes.Wpf.PackIconKind.EyeOff),
-            new TypingEffectSelectionItem(TypingEffectIndexText, "Text", MaterialDesignThemes.Wpf.PackIconKind.Abc),
-            new TypingEffectSelectionItem(TypingEffectIndexLight, "Light", MaterialDesignThemes.Wpf.PackIconKind.FlashOn),
-            //new TypingEffectSelectionItem(TypingEffectIndexLaser, "Laser", MaterialDesignThemes.Wpf.PackIconKind.Wand),
-            new TypingEffectSelectionItem(TypingEffectIndexButtefly, "Butterfly", MaterialDesignThemes.Wpf.PackIconKind.DotsHorizontal),
+            new TypingEffectSelectionItem(LayoutSetting.TypingEffectIndexNone, "None", PackIconKind.EyeOff),
+            new TypingEffectSelectionItem(LayoutSetting.TypingEffectIndexText, "Text", PackIconKind.Abc),
+            new TypingEffectSelectionItem(LayoutSetting.TypingEffectIndexLight, "Light", PackIconKind.FlashOn),
+            //new TypingEffectSelectionItem(LayoutSetting.TypingEffectIndexLaser, "Laser", PackIconKind.Wand),
+            new TypingEffectSelectionItem(LayoutSetting.TypingEffectIndexButtefly, "Butterfly", PackIconKind.DotsHorizontal),
         };
 
         #endregion
 
         #region Reset API
 
-        private ActionCommand? _resetDeviceLayoutCommand = null;
-        public ActionCommand ResetDeviceLayoutCommand
-            => _resetDeviceLayoutCommand ??= new ActionCommand(
-                () => SettingResetUtils.ResetSingleCategoryAsync(ResetDeviceLayout)
-                );
-        private void ResetDeviceLayout()
-        {
-            SendMessage(MessageFactory.Instance.ResetDeviceLayout());
-        }
+        public ActionCommand ResetDeviceLayoutCommand { get; }
+        public ActionCommand ResetHidSettingCommand { get; }
+        public ActionCommand ResetCameraSettingCommand { get; }
+        public ActionCommand ResetMidiSettingCommand { get; }
 
-        private ActionCommand? _resetHidSettingCommand = null;
-        public ActionCommand ResetHidSettingCommand
-            => _resetHidSettingCommand ??= new ActionCommand(
-                () => SettingResetUtils.ResetSingleCategoryAsync(ResetHidSetting)
-                );
-        private void ResetHidSetting()
-        {
-            HidVisibility = true;
-            MidiControllerVisibility = false;
-            Gamepad.GamepadVisibility = false;
-            SelectedTypingEffectId = TypingEffectIndexNone;
-        }
-
-        private ActionCommand? _resetCameraSettingCommand = null;
-        public ActionCommand ResetCameraSettingCommand
-            => _resetCameraSettingCommand ??= new ActionCommand(
-                () => SettingResetUtils.ResetSingleCategoryAsync(ResetCameraSetting)
-                );
-        private void ResetCameraSetting()
-        {
-            //NOTE: フリーカメラモードについては、もともと揮発性の設定にしているのでココでは触らない
-            CameraFov = 40;
-            QuickSave1 = "";
-            QuickSave2 = "";
-            QuickSave3 = "";
-            //カメラ位置については、Unity側がカメラの基準位置を持っているのに任せる
-            ResetCameraPosition();
-        }
-
-        private ActionCommand? _resetMidiSettingCommand = null;
-        public ActionCommand ResetMidiSettingCommand
-            => _resetMidiSettingCommand ??= new ActionCommand(
-                () => SettingResetUtils.ResetSingleCategoryAsync(ResetMidiSetting)
-                );
-        private void ResetMidiSetting()
-        {
-            EnableMidiRead = false;
-        }
-
-        public override void ResetToDefault()
-        {
-            Gamepad.ResetToDefault();
-
-            ResetHidSetting();
-            ResetMidiSetting();
-            ResetCameraSetting();
-        }
+        public override void ResetToDefault() => _model.ResetToDefault();
 
         #endregion
 
+        //TODO: Recordで書きたい…
         public class TypingEffectSelectionItem
         {
-            public TypingEffectSelectionItem(int id, string name, MaterialDesignThemes.Wpf.PackIconKind iconKind)
+            public TypingEffectSelectionItem(int id, string name, PackIconKind iconKind)
             {
                 Id = id;
                 EffectName = name;
@@ -448,7 +297,7 @@ namespace Baku.VMagicMirrorConfig
             }
             public int Id { get; }
             public string EffectName { get; }
-            public MaterialDesignThemes.Wpf.PackIconKind IconKind { get; }
+            public PackIconKind IconKind { get; }
         }
     }
 
