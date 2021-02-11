@@ -59,7 +59,7 @@ namespace Baku.VMagicMirrorConfig
                 {
                     _model.ThresholdPercent = value;
                     RaisePropertyChanged();
-                    _parent.SaveFaceSwitchSettingAsString();
+                    _parent.SaveFaceSwitchSetting();
                 }
             }
         }
@@ -73,7 +73,7 @@ namespace Baku.VMagicMirrorConfig
                 {
                     _model.ClipName = value;
                     RaisePropertyChanged();
-                    _parent.SaveFaceSwitchSettingAsString();
+                    _parent.SaveFaceSwitchSetting();
                 }
             }
         }
@@ -87,7 +87,7 @@ namespace Baku.VMagicMirrorConfig
                 {
                     _model.KeepLipSync = value;
                     RaisePropertyChanged();
-                    _parent.SaveFaceSwitchSettingAsString();
+                    _parent.SaveFaceSwitchSetting();
                 }
             }
         }

@@ -70,7 +70,7 @@ namespace Baku.VMagicMirrorConfig
             LayoutSetting = new LayoutSettingViewModel(Model.LayoutSetting, Model.GamepadSetting, MessageSender, Initializer.MessageReceiver);
             LightSetting = new LightSettingViewModel(Model.LightSetting, MessageSender);
             WordToMotionSetting = new WordToMotionSettingViewModel(MessageSender, Initializer.MessageReceiver);
-            ExternalTrackerSetting = new ExternalTrackerViewModel(MessageSender, Initializer.MessageReceiver);
+            ExternalTrackerSetting = new ExternalTrackerViewModel(Model.ExternalTrackerSetting, MessageSender, Initializer.MessageReceiver);
 
             AvailableLanguageNames = new ReadOnlyObservableCollection<string>(_availableLanguageNames);
 
@@ -552,7 +552,7 @@ namespace Baku.VMagicMirrorConfig
                 {
                     ExternalTrackerSetting.CopyFrom(saveData.ExternalTrackerSetting);
                 }
-                ExternalTrackerSetting.LoadFaceSwitchSettingFromString();
+                ExternalTrackerSetting.LoadFaceSwitchSetting();
 
                 //顔キャリブデータはファイル読み込み時だけ送る特殊なデータなのでここに書いてます
                 MotionSetting.SendCalibrateFaceData();

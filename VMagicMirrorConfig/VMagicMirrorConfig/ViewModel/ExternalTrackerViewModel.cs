@@ -1,55 +1,69 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Xml.Serialization;
 
 namespace Baku.VMagicMirrorConfig
 {
     public class ExternalTrackerViewModel : SettingViewModelBase
     {
-        private const int TrackSourceNone = 0;
-        private const int TrackSourceIFacialMocap = 1;
-
-        private ExternalTrackerFaceSwitchSetting _settingModel
-            = ExternalTrackerFaceSwitchSetting.LoadDefault();
         private readonly ExternalTrackerBlendShapeNameStore _blendShapeNameStore
             = new ExternalTrackerBlendShapeNameStore();
 
-        public ExternalTrackerViewModel() : base() 
-        {
-        }
+        private readonly ExternalTrackerSettingModel _model;
 
-        internal ExternalTrackerViewModel(IMessageSender sender, IMessageReceiver receiver) : base(sender)
+        internal ExternalTrackerViewModel(ExternalTrackerSettingModel model, IMessageSender sender, IMessageReceiver receiver) : base(sender)
         {
-            RefreshReceiverSetting();
+            _model = model;
+
+            //この辺はModel/VMの接続とかコマンド周りの設定
+            UpdateTrackSourceType();
+            model.TrackSourceType.PropertyChanged += (_, __) => UpdateTrackSourceType();
+            model.EnableExternalTracking.PropertyChanged += (_, __) => UpdateShouldNotifyMissingBlendShapeClipNames();
+            MissingBlendShapeNames = new RPropertyMin<string>("", _ =>
+            {
+                UpdateShouldNotifyMissingBlendShapeClipNames();
+            });
+
+            RefreshIFacialMocapTargetCommand = new ActionCommand(
+                () => NetworkEnvironmentUtils.SendIFacialMocapDataReceiveRequest(IFacialMocapTargetIpAddress.Value)
+                );
+            OpenInstructionUrlCommand = new ActionCommand(OpenInstructionUrl);
+            OpenPerfectSyncTipsUrlCommand = new ActionCommand(OpenPerfectSyncTipsUrl);
+            OpenIFMTroubleShootCommand = new ActionCommand(OpenIFMTroubleShoot);
+            EndExTrackerIfNeededCommand = new ActionCommand(EndExTrackerIfNeeded);
+            ShowMissingBlendShapeNotificationCommand = new ActionCommand(ShowMissingBlendShapeNotification);
+            ResetSettingsCommand = new ActionCommand(
+                () => SettingResetUtils.ResetSingleCategoryAsync(ResetToDefault)
+                );
+
+            //TODO: メッセージ受信の処理もモデル側案件のはず…うーん…
             receiver.ReceivedCommand += OnMessageReceived;
 
-            //DEBUG: ひとまずガワを見てみたい。
-            _settingModel = ExternalTrackerFaceSwitchSetting.LoadDefault();
             FaceSwitchItems.Clear();
-            foreach (var item in _settingModel.Items)
+            foreach (var item in _model.FaceSwitchSetting.Items)
             {
-                FaceSwitchItems.Add(new ExternalTrackerFaceSwitchItemViewModel(this, item));
+                var vm = new ExternalTrackerFaceSwitchItemViewModel(this, item);
+                vm.SubscribeLanguageSelector();
+                FaceSwitchItems.Add(vm);
             }
         }
 
         /// <summary>
-        /// 顔スイッチングの設定について、シリアライズされた文字列からUIに表示するデータを復元します。
-        /// 設定ファイルをロードしたときや、設定をリセットしたときに呼び出します。
+        /// Face Switchの設定が更新されたときにViewModelに情報を反映します。
+        /// 設定ファイルをロードしたときや、設定をリセットしたときに呼び出される想定です。
         /// </summary>
-        internal void LoadFaceSwitchSettingFromString()
+        internal void LoadFaceSwitchSetting()
         {
-            _settingModel = ExternalTrackerFaceSwitchSetting.FromJson(SerializedFaceSwitchSetting);
             //NOTE: 先に名前を更新することで「ComboBoxに無い値をSelectedValueにしちゃう」みたいな不整合を防ぐのが狙い
-            _blendShapeNameStore.Refresh(_settingModel);
+            _blendShapeNameStore.Refresh(_model.FaceSwitchSetting);
 
             foreach (var item in FaceSwitchItems)
             {
                 item.UnsubscribeLanguageSelector();
             }
             FaceSwitchItems.Clear();
-            foreach(var item in _settingModel.Items)
+
+            foreach (var item in _model.FaceSwitchSetting.Items)
             {
                 var vm = new ExternalTrackerFaceSwitchItemViewModel(this, item);
                 vm.SubscribeLanguageSelector();
@@ -75,85 +89,29 @@ namespace Baku.VMagicMirrorConfig
                     LogOutput.Instance.Write(ex);
                 }
             }
-            else if(e.Command == ReceiveMessageNames.ExTrackerCalibrateComplete)
+            else if (e.Command == ReceiveMessageNames.ExTrackerCalibrateComplete)
             {
                 //キャリブレーション結果を向こうから受け取る: この場合は、ただ覚えてるだけでよい
-                _calibrateData = e.Args;
+                _model.CalibrateData.SilentSet(e.Args);
             }
             else if (e.Command == ReceiveMessageNames.ExTrackerSetPerfectSyncMissedClipNames)
             {
-                MissingBlendShapeNames = e.Args;
+                MissingBlendShapeNames.Value = e.Args;
             }
             else if (e.Command == ReceiveMessageNames.ExTrackerSetIFacialMocapTroubleMessage)
             {
-                IFacialMocapTroubleMessage = e.Args;
+                IFacialMocapTroubleMessage.Value = e.Args;
             }
         }
 
         #region 基本メニュー部分
 
-        private bool _enableExternalTracking = false;
-        public bool EnableExternalTracking
-        {
-            get => _enableExternalTracking;
-            set
-            {
-                if (SetValue(ref _enableExternalTracking, value))
-                {
-                    SendMessage(MessageFactory.Instance.ExTrackerEnable(EnableExternalTracking));
-                    ShouldNotifyMissingBlendShapeClipNames =
-                        EnableExternalTracking &&
-                        !string.IsNullOrEmpty(MissingBlendShapeNames);
-                }
-            }
-        }
+        public RPropertyMin<bool> EnableExternalTracking => _model.EnableExternalTracking;
+        public RPropertyMin<bool> EnableExternalTrackerLipSync => _model.EnableExternalTrackerLipSync;
+        public RPropertyMin<bool> EnableExternalTrackerPerfectSync => _model.EnableExternalTrackerPerfectSync;
+        public RPropertyMin<bool> UseVRoidDefaultForPerfectSync => _model.UseVRoidDefaultForPerfectSync;
 
-        private bool _enableExternalTrackerLipSync = true;
-        public bool EnableExternalTrackerLipSync
-        {
-            get => _enableExternalTrackerLipSync;
-            set
-            {
-                if (SetValue(ref _enableExternalTrackerLipSync, value))
-                {
-                    SendMessage(MessageFactory.Instance.ExTrackerEnableLipSync(EnableExternalTrackerLipSync));
-                }
-            }
-        }
-
-        private bool _enableExternalTrackerPerfectSync = false;
-        public bool EnableExternalTrackerPerfectSync
-        {
-            get => _enableExternalTrackerPerfectSync;
-            set
-            {
-                if (SetValue(ref _enableExternalTrackerPerfectSync, value))
-                {
-                    SendMessage(MessageFactory.Instance.ExTrackerEnablePerfectSync(
-                        EnableExternalTrackerPerfectSync
-                        ));
-                }
-            }
-        }
-
-        private bool _useVRoidDefaultForPerfectSync = false;
-        public bool UseVRoidDefaultForPerfectSync
-        {
-            get => _useVRoidDefaultForPerfectSync;
-            set
-            {
-                if (SetValue(ref _useVRoidDefaultForPerfectSync, value))
-                {
-                    SendMessage(MessageFactory.Instance.ExTrackerUseVRoidDefaultForPerfectSync(
-                        UseVRoidDefaultForPerfectSync
-                        ));
-                }
-            }
-        }
-
-        private ActionCommand? _openPerfectSyncTipsUrlCommand;
-        public ActionCommand OpenPerfectSyncTipsUrlCommand
-            => _openPerfectSyncTipsUrlCommand ??= new ActionCommand(OpenPerfectSyncTipsUrl);
+        public ActionCommand OpenPerfectSyncTipsUrlCommand { get; }
 
         private void OpenPerfectSyncTipsUrl()
         {
@@ -164,45 +122,30 @@ namespace Baku.VMagicMirrorConfig
             UrlNavigate.Open(url);
         }
 
+        public RPropertyMin<bool> ShouldNotifyMissingBlendShapeClipNames { get; } = new RPropertyMin<bool>(false);
 
-        private bool _shouldNotifyMissingBlendShapeClipNames = false;
-        [XmlIgnore]
-        public bool ShouldNotifyMissingBlendShapeClipNames
+        public RPropertyMin<string> MissingBlendShapeNames { get; }
+
+        private void UpdateShouldNotifyMissingBlendShapeClipNames()
         {
-            get => _shouldNotifyMissingBlendShapeClipNames;
-            set => SetValue(ref _shouldNotifyMissingBlendShapeClipNames, value);
+            ShouldNotifyMissingBlendShapeClipNames.Value =
+                EnableExternalTracking.Value &&
+                !string.IsNullOrEmpty(MissingBlendShapeNames.Value);
         }
 
-        private string _missingBlendShapeNames = "";
-        [XmlIgnore]
-        public string MissingBlendShapeNames
-        {
-            get => _missingBlendShapeNames;
-            set
-            {
-                if (SetValue(ref _missingBlendShapeNames, value))
-                {
-                    ShouldNotifyMissingBlendShapeClipNames =
-                        EnableExternalTracking &&
-                        !string.IsNullOrEmpty(MissingBlendShapeNames);
-                }
-            }
-        }
-
-        private ActionCommand? _showMissingBlendShapeNotificationCommand = null;
-        public ActionCommand ShowMissingBlendShapeNotificationCommand
-            => _showMissingBlendShapeNotificationCommand ??= new ActionCommand(ShowMissingBlendShapeNotification);
-        private void ShowMissingBlendShapeNotification()
+        public ActionCommand ShowMissingBlendShapeNotificationCommand { get; }
+        private async void ShowMissingBlendShapeNotification()
         {
             var indication = MessageIndication.ExTrackerMissingBlendShapeNames(LanguageSelector.Instance.LanguageName);
-            var lines = MissingBlendShapeNames.Split('\n').ToList();
+            var lines = MissingBlendShapeNames.Value.Split('\n').ToList();
             if (lines.Count > 8)
             {
                 //未定義ブレンドシェイプがあまりに多いとき、後ろを"…"で切る
                 lines = lines.Take(8).ToList();
                 lines.Add("…");
             }
-            MessageBoxWrapper.Instance.ShowAsync(
+
+            await MessageBoxWrapper.Instance.ShowAsync(
                 indication.Title,
                 indication.Content + string.Join("\n", lines),
                 MessageBoxWrapper.MessageBoxStyle.OK
@@ -216,91 +159,52 @@ namespace Baku.VMagicMirrorConfig
         private void Calibrate()
             => SendMessage(MessageFactory.Instance.ExTrackerCalibrate());
 
-        private ActionCommand? _resetSettingsCommand = null;
-        public ActionCommand ResetSettingsCommand
-            => _resetSettingsCommand ??= new ActionCommand(
-                () => SettingResetUtils.ResetSingleCategoryAsync(ResetToDefault)
-                );
+        public ActionCommand ResetSettingsCommand { get; }
 
         #endregion
 
         #region アプリ別のやつ(※今んとこIPを一方的に表示するだけなのであんまり難しい事はないです)
 
-        [XmlIgnore]
+        private bool _isTrackSourceNone;
         public bool IsTrackSourceNone
         {
-            get => _trackSourceType == TrackSourceNone;
+            get => _isTrackSourceNone;
             set
             {
-                if (!IsTrackSourceNone && value)
+                if (SetValue(ref _isTrackSourceNone, value) && value)
                 {
-                    TrackSourceType = TrackSourceNone;
-                    RaisePropertyChanged(nameof(IsTrackSourceIFacialMocap));
-                    RaisePropertyChanged(nameof(IsTrackSourceNone));
+                    _model.TrackSourceType.Value = ExternalTrackerSetting.TrackSourceNone;
                 }
             }
         }
 
-        [XmlIgnore]
+        private bool _isTrackSourceIFacialMocap;
         public bool IsTrackSourceIFacialMocap
         {
-            get => _trackSourceType == TrackSourceIFacialMocap;
+            get => _isTrackSourceIFacialMocap;
             set
             {
-                if (!IsTrackSourceIFacialMocap && value)
+                if (SetValue(ref _isTrackSourceIFacialMocap, value) && value)
                 {
-                    TrackSourceType = TrackSourceIFacialMocap;
-                    RaisePropertyChanged(nameof(IsTrackSourceNone));
-                    RaisePropertyChanged(nameof(IsTrackSourceIFacialMocap));
+                    _model.TrackSourceType.Value = ExternalTrackerSetting.TrackSourceIFacialMocap;
                 }
             }
         }
 
-        private int _trackSourceType = 0;
-        /// <summary>
-        /// NOTE: この値を保存するけど、UIから直接叩くわけではない。
-        /// </summary>
-        public int TrackSourceType
+        private void UpdateTrackSourceType()
         {
-            get => _trackSourceType;
-            set
-            {
-                if (SetValue(ref _trackSourceType, value))
-                {
-                    SendMessage(MessageFactory.Instance.ExTrackerSetSource(TrackSourceType));
-                    RaisePropertyChanged(nameof(IsTrackSourceNone));
-                    RaisePropertyChanged(nameof(IsTrackSourceIFacialMocap));
-                }
-            }
+            IsTrackSourceNone = _model.TrackSourceType.Value == ExternalTrackerSetting.TrackSourceNone;
+            IsTrackSourceIFacialMocap = _model.TrackSourceType.Value == ExternalTrackerSetting.TrackSourceIFacialMocap;
         }
 
-        private string _iFacialMocapTargetIpAddress = "";
-        public string IFacialMocapTargetIpAddress
-        {
-            get => _iFacialMocapTargetIpAddress;
-            set => SetValue(ref _iFacialMocapTargetIpAddress, value);
-        }
+        //NOTE: 上記のbool2つ+UpdateTrackSourceTypeを廃止し、この整数値を読み込んだViewがConverterで頑張るのでもよい。はず
+        public RPropertyMin<int> TrackSourceType => _model.TrackSourceType;
 
-        private ActionCommand? _refreshIFacialMocapTargetCommand = null;
-        public ActionCommand RefreshIFacialMocapTargetCommand
-            => _refreshIFacialMocapTargetCommand ??= new ActionCommand(RefreshIFacialMocapTarget);
+        public RPropertyMin<string> IFacialMocapTargetIpAddress => _model.IFacialMocapTargetIpAddress;
 
-        private void RefreshIFacialMocapTarget()
-        {
-            NetworkEnvironmentUtils.SendIFacialMocapDataReceiveRequest(IFacialMocapTargetIpAddress);
-        }
+        public ActionCommand RefreshIFacialMocapTargetCommand { get; }
 
-        private string _selfIpAddress = "(unknown)";
-        [XmlIgnore]
-        public string SelfIpAddress
-        {
-            get => _selfIpAddress;
-            set => SetValue(ref _selfIpAddress, value);
-        }
-
-        private ActionCommand? _openInstructionUrlCommand;
-        public ActionCommand OpenInstructionUrlCommand
-            => _openInstructionUrlCommand ??= new ActionCommand(OpenInstructionUrl);
+        public ActionCommand OpenInstructionUrlCommand { get; }
 
         private void OpenInstructionUrl()
         {
@@ -311,87 +215,42 @@ namespace Baku.VMagicMirrorConfig
             UrlNavigate.Open(url);
         }
 
-        private ActionCommand? _refreshReceiverSettingCommand;
-        public ActionCommand RefreshReceiverSettingCommand
-            => _refreshReceiverSettingCommand ??= new ActionCommand(RefreshReceiverSetting);
-        private void RefreshReceiverSetting() 
-            => SelfIpAddress = NetworkEnvironmentUtils.GetLocalIpAddressAsString();
-
-        private string _calibrateData = "";
-        public string CalibrateData
-        {
-            get => _calibrateData;
-            set
-            {
-                if (SetValue(ref _calibrateData, value))
-                {
-                    SendMessage(MessageFactory.Instance.ExTrackerSetCalibrateData(CalibrateData));
-                }
-            }
-        }
+        public RPropertyMin<string> CalibrateData => _model.CalibrateData;
 
         #endregion
 
         #region 表情スイッチのやつ
 
-        private string _serializedFaceSwitchSetting = "";
         //NOTE: setterはアプリ起動直後、およびそれ以降で表情スイッチ系の設定を変えたときに(UIではなくコードから)呼ばれます。
-        public string SerializedFaceSwitchSetting
-        {
-            get => _serializedFaceSwitchSetting;
-            set
-            {
-                if (SetValue(ref _serializedFaceSwitchSetting, value))
-                {
-                    SendMessage(MessageFactory.Instance.ExTrackerSetFaceSwitchSetting(SerializedFaceSwitchSetting));
-                }
-            }
-        }
+        public RPropertyMin<string> SerializedFaceSwitchSetting => _model.SerializedFaceSwitchSetting;
 
         /// <summary>
         /// 子要素になってる<see cref="ExternalTrackerFaceSwitchItemViewModel"/>から呼び出すことで、
         /// 現在の設定を保存した状態にします。
         /// </summary>
-        public void SaveFaceSwitchSettingAsString() 
-            => SerializedFaceSwitchSetting = _settingModel.ToJson();
+        public void SaveFaceSwitchSetting()
+        {
+            //文字列で保存 + 送信しつつ、手元の設定もリロードする。イベントハンドリング次第でもっとシンプルになるかも。
+            _model.SerializedFaceSwitchSetting.Value = _model.FaceSwitchSetting?.ToJson() ?? "";
+            //TODO?: モデルの挙動次第でここ不要かも
+            LoadFaceSwitchSetting();
+        }
 
         /// <summary> UIで個別設定として表示する、表情スイッチの要素です。 </summary>
-        [XmlIgnore]
         public ObservableCollection<ExternalTrackerFaceSwitchItemViewModel> FaceSwitchItems { get; }
             = new ObservableCollection<ExternalTrackerFaceSwitchItemViewModel>();
 
-        /// <summary>  </summary>
-        [XmlIgnore]
+        /// <summary> Face Switch機能で表示可能なブレンドシェイプ名の一覧です。 </summary>
         public ReadOnlyObservableCollection<string> BlendShapeNames => _blendShapeNameStore.BlendShapeNames;
 
         #endregion
 
         #region エラーまわり: iFMの設定が怪しそうなときのメッセージ + webカメラが止まる問題の対処
 
-        private string _iFacialMocapTroubleMessage = "";
-        [XmlIgnore]
-        public string IFacialMocapTroubleMessage
-        {
-            get => _iFacialMocapTroubleMessage;
-            set
-            {
-                if (SetValue(ref _iFacialMocapTroubleMessage, value))
-                {
-                    IFacialMocapHasTrouble = !string.IsNullOrEmpty(IFacialMocapTroubleMessage);
-                }
-            }
-        }
+        public RPropertyMin<string> IFacialMocapTroubleMessage { get; } = new RPropertyMin<string>("");
 
-        private bool _iFacialMocapHasTrouble = false;
-        [XmlIgnore]
-        public bool IFacialMocapHasTrouble
-        {
-            get => _iFacialMocapHasTrouble;
-            set => SetValue(ref _iFacialMocapHasTrouble, value);
-        }
-
-        private ActionCommand? _openIFMTroubleShootCommand;
-        public ActionCommand? OpenIFMTroubleShootCommand => _openIFMTroubleShootCommand ??= new ActionCommand(OpenIFMTroubleShoot);
+        public ActionCommand OpenIFMTroubleShootCommand  { get; }
+        
         private void OpenIFMTroubleShoot()
         {
             var url = LanguageSelector.StringToLanguage(LanguageSelector.Instance.LanguageName) switch
@@ -402,11 +261,11 @@ namespace Baku.VMagicMirrorConfig
             UrlNavigate.Open(url);
         }
 
-        private ActionCommand? _endExTrackerIfNeededCommand;
-        public ActionCommand EndExTrackerIfNeededCommand
-            => _endExTrackerIfNeededCommand ??= new ActionCommand(EndExTrackerIfNeeded);
+        public ActionCommand EndExTrackerIfNeededCommand { get; }
+
         private async void EndExTrackerIfNeeded()
         {
+            //NOTE: これもモデル層…いやメッセージボックス相当だからVMでいいのかな…？
             var indication = MessageIndication.ExTrackerCheckTurnOff(LanguageSelector.Instance.LanguageName);
             bool result = await MessageBoxWrapper.Instance.ShowAsync(
                 indication.Title,
@@ -416,23 +275,17 @@ namespace Baku.VMagicMirrorConfig
 
             if (result)
             {
-                EnableExternalTracking = false;
+                EnableExternalTracking.Value = false;
             }
         }
 
         #endregion
 
-        public override void ResetToDefault()
+        public override void ResetToDefault() 
         {
-            _settingModel = ExternalTrackerFaceSwitchSetting.LoadDefault();
-            LoadFaceSwitchSettingFromString();
-            SaveFaceSwitchSettingAsString();
-            CalibrateData = "";
-            TrackSourceType = TrackSourceNone;
-            EnableExternalTracking = false;
-            EnableExternalTrackerLipSync = true;
-            UseVRoidDefaultForPerfectSync = false;
-            EnableExternalTrackerPerfectSync = false;
+            _model.ResetToDefault();
+            //TODO?: モデルの挙動次第でここ不要かも
+            LoadFaceSwitchSetting();
         }
     }
 }

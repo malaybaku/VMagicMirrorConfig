@@ -49,7 +49,7 @@ namespace Baku.VMagicMirrorConfig
 
         // FaceSwitchの設定
 
-        //NOTE: ここを非null保証すべきか、というのがちょっと悩みどころ
+        //TODO: ここは非null保証すべきで、SerializedFaceSwitchSettingが無効な場合はデフォルト値を当てるようにしていい、と思う。
         public ExternalTrackerFaceSwitchSetting? FaceSwitchSetting { get; private set; }
 
         //TODO: ここにデフォルト値が入りやすいような仕掛けを作るのもアリかも、という問題があるが、
