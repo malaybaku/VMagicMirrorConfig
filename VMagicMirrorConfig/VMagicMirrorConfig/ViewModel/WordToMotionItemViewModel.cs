@@ -100,19 +100,8 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        //NOTE: ビューは同時に1つまでのItemしか表示しないので、コレだけで
-        public bool EnablePreview
-        {
-            get => _parent.EnablePreview;
-            set
-            {
-                if (_parent.EnablePreview != value)
-                {
-                    _parent.EnablePreview = value;
-                    RaisePropertyChanged();
-                }
-            }
-        }
+        //NOTE: ビューは同時に1つまでのItemしか表示しないので、コレだけで十分
+        public RPropertyMin<bool> EnablePreview => _parent.EnablePreview;
         
         private string _word = "";
         public string Word

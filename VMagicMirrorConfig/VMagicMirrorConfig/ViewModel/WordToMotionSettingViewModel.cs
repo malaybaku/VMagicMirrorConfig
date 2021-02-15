@@ -1,39 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Xml.Serialization;
 
 namespace Baku.VMagicMirrorConfig
 {
     public class WordToMotionSettingViewModel : SettingViewModelBase
     {
-        internal const int DeviceTypeNone = -1;
-        internal const int DeviceTypeKeyboardWord = 0;
-        internal const int DeviceTypeGamepad = 1;
-        internal const int DeviceTypeKeyboardTenKey = 2;
-        internal const int DeviceTypeMidiController = 3;
-
-        public WordToMotionSettingViewModel() : base()
+        internal WordToMotionSettingViewModel(WordToMotionSettingModel model, IMessageSender sender, IMessageReceiver receiver) : base(sender)
         {
-            Items = new ReadOnlyObservableCollection<WordToMotionItemViewModel>(_items);
-            Devices = WordToMotionDeviceItem.LoadAvailableItems();
-            SelectedDevice = Devices.FirstOrDefault(d => d.Index == DeviceTypeKeyboardWord);
-            _previewDataSender = new WordToMotionItemPreviewDataSender(Sender);
-        }
-        internal WordToMotionSettingViewModel(IMessageSender sender, IMessageReceiver receiver) : base(sender)
-        {
+            _model = model;
             Items = new ReadOnlyObservableCollection<WordToMotionItemViewModel>(_items);
             CustomMotionClipNames = new ReadOnlyObservableCollection<string>(_customMotionClipNames);
 
             Devices = WordToMotionDeviceItem.LoadAvailableItems();
-            SelectedDevice = Devices.FirstOrDefault(d => d.Index == DeviceTypeKeyboardWord);
-            _previewDataSender = new WordToMotionItemPreviewDataSender(sender);
-            _previewDataSender.PrepareDataSend += 
-                (_, __) => _dialogItem?.WriteToModel(_previewDataSender.MotionRequest);
+            SelectedDevice = Devices.FirstOrDefault(d => d.Index == WordToMotionSetting.DeviceTypes.KeyboardWord);
 
+            //TODO: この辺のSenderとかReceiverがモデル感あるよね
+            _previewDataSender = new WordToMotionItemPreviewDataSender(sender);
+            _previewDataSender.PrepareDataSend +=
+                (_, __) => _dialogItem?.WriteToModel(_previewDataSender.MotionRequest);
             receiver.ReceivedCommand += OnReceiveCommand;
             MidiNoteReceiver = new MidiNoteReceiver(receiver);
             MidiNoteReceiver.Start();
@@ -41,13 +27,13 @@ namespace Baku.VMagicMirrorConfig
             LoadDefaultItemsIfInitialStart();
         }
 
+        private readonly WordToMotionSettingModel _model;
         private readonly WordToMotionItemPreviewDataSender _previewDataSender;
         private WordToMotionItemViewModel? _dialogItem;
 
-        internal MidiNoteReceiver? MidiNoteReceiver { get; } = null;
+        internal MidiNoteReceiver MidiNoteReceiver { get; }
 
         /// <summary>直近で読み込んだモデルに指定されている、VRM標準以外のブレンドシェイプ名の一覧を取得します。</summary>
-        [XmlIgnore]
         public IReadOnlyList<string> LatestAvaterExtraClipNames => _latestAvaterExtraClipNames;
 
         private string[] _latestAvaterExtraClipNames = new string[0];
@@ -95,31 +81,22 @@ namespace Baku.VMagicMirrorConfig
         {
             var rawClipNames = await SendQueryAsync(MessageFactory.Instance.GetAvailableCustomMotionClipNames());
             var clipNames = rawClipNames.Split('\t');
-            foreach(var name in clipNames)
+            foreach (var name in clipNames)
             {
                 _customMotionClipNames.Add(name);
             }
         }
 
         private readonly ObservableCollection<string> _customMotionClipNames = new ObservableCollection<string>();
-        [XmlIgnore]
         public ReadOnlyObservableCollection<string> CustomMotionClipNames { get; }
 
-        private bool _enableWordToMotion = true;
-        [XmlIgnore]
-        public bool EnableWordToMotion
-        {
-            get => _enableWordToMotion;
-            set => SetValue(ref _enableWordToMotion, value);
-        }
+        public RPropertyMin<bool> EnableWordToMotion { get; } = new RPropertyMin<bool>(true);
 
         #region デバイスをWord to Motionに割り当てる設定
 
-        [XmlIgnore]
         public WordToMotionDeviceItem[] Devices { get; }
 
         private WordToMotionDeviceItem? _selectedDevice = null;
-        [XmlIgnore]
         public WordToMotionDeviceItem? SelectedDevice
         {
             get => _selectedDevice;
@@ -131,11 +108,12 @@ namespace Baku.VMagicMirrorConfig
                 }
                 _selectedDevice = value;
                 RaisePropertyChanged();
-                SelectedDeviceType = _selectedDevice?.Index ?? DeviceTypeNone;
+                SelectedDeviceType = _selectedDevice?.Index ?? WordToMotionSetting.DeviceTypes.None;
             }
         }
 
-        private int _selectedDeviceType = DeviceTypeNone;
+
+        private int _selectedDeviceType = WordToMotionSetting.DeviceTypes.None;
         public int SelectedDeviceType
         {
             get => _selectedDeviceType;
@@ -144,7 +122,7 @@ namespace Baku.VMagicMirrorConfig
                 if (SetValue(ref _selectedDeviceType, value))
                 {
                     SelectedDevice = Devices.FirstOrDefault(d => d.Index == SelectedDeviceType);
-                    EnableWordToMotion = (SelectedDeviceType != DeviceTypeNone);
+                    EnableWordToMotion.Value = (SelectedDeviceType != WordToMotionSetting.DeviceTypes.None);
                     SendMessage(MessageFactory.Instance.SetDeviceTypeToStartWordToMotion(SelectedDeviceType));
                 }
             }
@@ -155,51 +133,20 @@ namespace Baku.VMagicMirrorConfig
         //NOTE: 「UIに出さないけど保存はしたい」系のやつで、キャラロード時にUnityから勝手に送られてくる、という想定
         public List<string> ExtraBlendShapeClipNames { get; set; } = new List<string>();
 
-        [XmlIgnore]
         public ReadOnlyObservableCollection<WordToMotionItemViewModel> Items { get; }
-        private readonly ObservableCollection<WordToMotionItemViewModel> _items 
+        private readonly ObservableCollection<WordToMotionItemViewModel> _items
             = new ObservableCollection<WordToMotionItemViewModel>();
 
-        /// <summary>
-        /// <see cref="Items"/>をシリアライズした文字列。
-        /// </summary>
-        public string ItemsContentString { get; set; } = "";
-
-        [XmlIgnore]
         public MidiNoteToMotionMapViewModel MidiNoteMap { get; private set; }
             = new MidiNoteToMotionMapViewModel(MidiNoteToMotionMap.LoadDefault());
-         
-        public string MidiNoteMapString { get; set; } = "";
 
-        //NOTE: プレビュー関係の想定挙動
-        // EnablePreviewWhenStartEdit == trueなら、
-        private bool _enablePreview = false;
-        [XmlIgnore]
-        public bool EnablePreview
-        {
-            get => _enablePreview;
-            set
-            {
-                if (SetValue(ref _enablePreview, value))
-                {
-                    SendMessage(MessageFactory.Instance.EnableWordToMotionPreview(value));
-                    if (value)
-                    {
-                        _previewDataSender.Start();
-                    }
-                    else
-                    {
-                        _previewDataSender.End();
-                    }
-                }
-            }
-        }
+        public RPropertyMin<bool> EnablePreview => _model.EnablePreview;
 
-        [XmlIgnore]
+        /// <summary>Word to Motionのアイテム編集を開始した時すぐプレビューを開始するかどうか。普通は即スタートでよい</summary>
         public bool EnablePreviewWhenStartEdit { get; set; } = true;
 
         /// <summary>
-        /// <see cref="ItemsContentString"/>の内容を<see cref="Items"/>にコピーします。
+        /// モデルが持ってるWord to MotionなりMidiなりの情報をVMにコピーします。
         /// </summary>
         public void LoadSerializedItems()
         {
@@ -210,71 +157,50 @@ namespace Baku.VMagicMirrorConfig
         private void LoadMotionItems()
         {
             _items.Clear();
-            if (string.IsNullOrWhiteSpace(ItemsContentString))
+
+            var modelItems = _model.MotionRequests?.Requests;
+            if (modelItems == null || modelItems.Length == 0)
             {
                 return;
             }
 
-            try
+            foreach (var item in modelItems)
             {
-                using (var reader = new StringReader(ItemsContentString))
+                if (item == null)
                 {
-                    var requests = MotionRequestCollection.DeserializeFromJson(reader);
-                    foreach (var item in requests.Requests)
+                    //一応チェックしてるけど本来nullはあり得ない
+                    LogOutput.Instance.Write("Receive null MotionRequest");
+                    continue;
+                }
+
+                //NOTE: 前処理として、この時点で読み込んだモデルに不足なExtraClipがある場合は差し込んでおく
+                //これは異バージョンとか考慮した処理です
+                foreach (var extraClip in ExtraBlendShapeClipNames)
+                {
+                    if (!item.ExtraBlendShapeValues.Any(i => i.Name == extraClip))
                     {
-                        if (item == null)
+                        item.ExtraBlendShapeValues.Add(new BlendShapePairItem()
                         {
-                            //一応チェックしてるけど本来nullはあり得ない
-                            LogOutput.Instance.Write("Receive null MotionRequest");
-                            continue;
-                        }
-
-                        //NOTE: 前処理として、この時点で読み込んだモデルに不足なExtraClipがある場合は差し込んでおく
-                        //これは異バージョンとか考慮した処理です
-                        foreach (var extraClip in ExtraBlendShapeClipNames)
-                        {
-                            if (!item.ExtraBlendShapeValues.Any(i => i.Name == extraClip))
-                            {
-                                item.ExtraBlendShapeValues.Add(new BlendShapePairItem()
-                                {
-                                    Name = extraClip,
-                                    Value = 0,
-                                });
-                            }
-                        }
-
-                        _items.Add(new WordToMotionItemViewModel(this, item));
+                            Name = extraClip,
+                            Value = 0,
+                        });
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                LogOutput.Instance.Write(ex);
-                //諦める: ちょっとザツだが…
+
+                _items.Add(new WordToMotionItemViewModel(this, item));
             }
         }
 
         private void LoadMidiSettingItems()
         {
-            if (string.IsNullOrWhiteSpace(MidiNoteMapString))
+            var midiNoteMap = _model.MidiNoteToMotionMap;
+            if (midiNoteMap?.Items == null || midiNoteMap.Items.Count == 0)
             {
                 MidiNoteMap = new MidiNoteToMotionMapViewModel(MidiNoteToMotionMap.LoadDefault());
                 return;
             }
 
-            try
-            {
-                using (var reader = new StringReader(MidiNoteMapString))
-                {
-                    var model = MidiNoteToMotionMap.DeserializeFromJson(reader);
-                    MidiNoteMap = new MidiNoteToMotionMapViewModel(model);
-                }
-            }
-            catch (Exception ex)
-            {
-                LogOutput.Instance.Write(ex);
-                MidiNoteMap = new MidiNoteToMotionMapViewModel(MidiNoteToMotionMap.LoadDefault());
-            }
+            MidiNoteMap = new MidiNoteToMotionMapViewModel(midiNoteMap);
         }
 
 
@@ -283,12 +209,7 @@ namespace Baku.VMagicMirrorConfig
         /// </summary>
         public void SaveItems()
         {
-            ItemsContentString = new MotionRequestCollection(
-                _items.Select(i => i.MotionRequest).ToArray()
-                )
-                .ToJson();
-
-            MidiNoteMapString = MidiNoteMap.Save().ToJson();
+            _model.RequestSerializeItems();
         }
 
         public void Play(WordToMotionItemViewModel item)
@@ -368,9 +289,8 @@ namespace Baku.VMagicMirrorConfig
         /// <summary>モーション一覧の情報が変わったとき、Unity側に再読み込みをリクエストします。</summary>
         public void RequestReload()
         {
+            //NOTE: この結果シリアライズ文字列が変わるとモデル側でメッセージ送信もやってくれる
             SaveItems();
-            SendMessage(MessageFactory.Instance.ReloadMotionRequests(ItemsContentString));
-            SendMessage(MessageFactory.Instance.LoadMidiNoteToMotionMap(MidiNoteMapString));
         }
 
         private ActionCommand? _openKeyAssigmnentEditorCommand = null;
@@ -380,7 +300,7 @@ namespace Baku.VMagicMirrorConfig
         private void OpenKeyAssignmentEditor()
         {
             //note: 今のところMIDIコン以外は割り当て固定です
-            if (SelectedDeviceType != DeviceTypeMidiController)
+            if (SelectedDeviceType != WordToMotionSetting.DeviceTypes.MidiController)
             {
                 return;
             }
@@ -469,7 +389,7 @@ namespace Baku.VMagicMirrorConfig
 
             _dialogItem = item;
            
-            EnablePreview = EnablePreviewWhenStartEdit;
+            EnablePreview.Value = EnablePreviewWhenStartEdit;
 
             if (dialog.ShowDialog() == true)
             {
@@ -481,8 +401,8 @@ namespace Baku.VMagicMirrorConfig
                 item.ResetChanges();
             }
 
-            EnablePreviewWhenStartEdit = EnablePreview;
-            EnablePreview = false;
+            EnablePreviewWhenStartEdit = EnablePreview.Value;
+            EnablePreview.Value = false;
             _dialogItem = null;
         }
 
@@ -490,7 +410,7 @@ namespace Baku.VMagicMirrorConfig
             => SendMessage(MessageFactory.Instance.RequestCustomMotionDoctor());
     }
 
-
+    /// <summary> Word to Motion機能のコントロールに利用できるデバイスの選択肢1つに相当するViewModelです。 </summary>
     public class WordToMotionDeviceItem : ViewModelBase
     {
         private WordToMotionDeviceItem(int index, string enName, string jpName)
@@ -526,27 +446,27 @@ namespace Baku.VMagicMirrorConfig
 
         public static WordToMotionDeviceItem None()
             => new WordToMotionDeviceItem(
-                WordToMotionSettingViewModel.DeviceTypeNone, "None", "なし"
+                WordToMotionSetting.DeviceTypes.None, "None", "なし"
                 );
 
         public static WordToMotionDeviceItem KeyboardTyping()
             => new WordToMotionDeviceItem(
-                WordToMotionSettingViewModel.DeviceTypeKeyboardWord, "Keyboard (word)", "キーボード (単語入力)"
+                WordToMotionSetting.DeviceTypes.KeyboardWord, "Keyboard (word)", "キーボード (単語入力)"
                 );
 
         public static WordToMotionDeviceItem Gamepad() 
             => new WordToMotionDeviceItem(
-                WordToMotionSettingViewModel.DeviceTypeGamepad, "Gamepad", "ゲームパッド"
+                WordToMotionSetting.DeviceTypes.Gamepad, "Gamepad", "ゲームパッド"
                 );
 
         public static WordToMotionDeviceItem KeyboardNumKey()
             => new WordToMotionDeviceItem(
-                WordToMotionSettingViewModel.DeviceTypeKeyboardTenKey, "Keyboard (num 0-8)", "キーボード (数字の0-8)"
+                WordToMotionSetting.DeviceTypes.KeyboardTenKey, "Keyboard (num 0-8)", "キーボード (数字の0-8)"
                 );
 
         public static WordToMotionDeviceItem MidiController()
             => new WordToMotionDeviceItem(
-                WordToMotionSettingViewModel.DeviceTypeMidiController, "MIDI Controller", "MIDIコントローラ"
+                WordToMotionSetting.DeviceTypes.MidiController, "MIDI Controller", "MIDIコントローラ"
                 );
 
         public static WordToMotionDeviceItem[] LoadAvailableItems()

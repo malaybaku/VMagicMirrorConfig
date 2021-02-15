@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Baku.VMagicMirrorConfig
 {
-    /// <summary>
-    /// MIDIのNoteOnメッセージを受け取ってくれるすごいやつだよ
-    /// </summary>
+    /// <summary> MIDIのNoteOnメッセージを受け取ってくれるすごいやつだよ </summary>
     internal class MidiNoteReceiver
     {
         public MidiNoteReceiver(IMessageReceiver receiver)
