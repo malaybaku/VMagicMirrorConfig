@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using Microsoft.Win32;
 
 namespace Baku.VMagicMirrorConfig
 {
     public class WordToMotionItemViewModel : ViewModelBase
     {
-        //NOTE: エディタ用
-        public WordToMotionItemViewModel() : this(new WordToMotionSettingViewModel(), null) { }
-
-        public WordToMotionItemViewModel(WordToMotionSettingViewModel parent, MotionRequest? model)
+        public WordToMotionItemViewModel(WordToMotionSettingViewModel parent, MotionRequest model)
         {
             _parent = parent;
             MotionRequest = model;
@@ -31,7 +27,7 @@ namespace Baku.VMagicMirrorConfig
         public ReadOnlyObservableCollection<string> AvailableCustomMotionClipNames => _parent.CustomMotionClipNames;
 
         /// <summary>ファイルI/Oや通信のベースになるデータを取得します。</summary>
-        public MotionRequest? MotionRequest { get; }
+        public MotionRequest MotionRequest { get; }
 
         /// <summary>
         /// 親オブジェクト側でブレンドシェイプを新規に取得したとき、そのブレンドシェイプ名を追加します。
@@ -75,8 +71,7 @@ namespace Baku.VMagicMirrorConfig
         /// 指定されたブレンドシェイプを忘れることを親オブジェクトにリクエストします。
         /// </summary>
         /// <param name="item"></param>
-        public void RequestForgetClip(BlendShapeItemViewModel item)
-            => _parent.ForgetClip(item);
+        public void RequestForgetClip(BlendShapeItemViewModel item) => _parent.ForgetClip(item);
 
         /// <summary>
         /// 指定された名称のブレンドシェイプ情報を忘れます。
@@ -247,7 +242,7 @@ namespace Baku.VMagicMirrorConfig
 
         private ActionCommand? _deleteCommand;
         public ActionCommand DeleteCommand
-            => _deleteCommand ??= new ActionCommand(async () => await _parent.DeleteItem(this));
+            => _deleteCommand ??= new ActionCommand(() => _parent.DeleteItem(this));
 
         private ActionCommand? _openWordToMotionCustomHowToCommand;
         public ActionCommand OpenWordToMotionCustomHowToCommand

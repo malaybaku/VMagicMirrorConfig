@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
+using System.Linq;
 
 namespace Baku.VMagicMirrorConfig
 {
@@ -38,9 +40,106 @@ namespace Baku.VMagicMirrorConfig
 
         public void RequestSerializeItems()
         {
-            ItemsContentString.Value = MotionRequests?.ToJson() ?? "";
-            MidiNoteMapString.Value = MidiNoteToMotionMap?.ToJson() ?? "";
+            SaveMotionRequests();
+            SaveMidiNoteMap();
         }
+
+        public void SaveMotionRequests() => ItemsContentString.Value = MotionRequests?.ToJson() ?? "";
+        public void SaveMidiNoteMap() => MidiNoteMapString.Value = MidiNoteToMotionMap?.ToJson() ?? "";
+
+        /// <summary>
+        /// 指定したモーションを実行します。再生ボタンを押したときに呼び出す想定です
+        /// </summary>
+        /// <param name="item"></param>
+        public void Play(MotionRequest item)
+            => SendMessage(MessageFactory.Instance.PlayWordToMotionItem(item.ToJson()));
+
+        #region アイテムの並べ替えと削除
+
+        public void MoveUpItem(MotionRequest item)
+        {
+            if (MotionRequests?.Requests == null) { return; }
+
+            var requests = MotionRequests.Requests.ToList();
+            int index = requests.IndexOf(item);
+            if (index > 0)
+            {
+                requests.RemoveAt(index);
+                requests.Insert(index - 1, item);
+                MotionRequests = new MotionRequestCollection(requests.ToArray());
+                SaveMotionRequests();
+            }
+        }
+
+        public void MoveDownItem(MotionRequest item)
+        {
+            if (MotionRequests?.Requests == null) { return; }
+
+            var requests = MotionRequests.Requests.ToList();
+            int index = requests.IndexOf(item);
+            if (index < requests.Count - 1)
+            {
+                requests.RemoveAt(index);
+                requests.Insert(index + 1, item);
+                MotionRequests = new MotionRequestCollection(requests.ToArray());
+                SaveMotionRequests();
+            }
+        }
+
+        public async Task DeleteItem(MotionRequest item)
+        {
+            if (MotionRequests?.Requests?.Contains(item) != true) { return; }
+
+            var indication = MessageIndication.DeleteWordToMotionItem(LanguageSelector.Instance.LanguageName);
+            bool res = await MessageBoxWrapper.Instance.ShowAsync(
+                indication.Title,
+                string.Format(indication.Content, item.Word),
+                MessageBoxWrapper.MessageBoxStyle.OKCancel
+                );
+
+            if (res)
+            {
+                var requests = MotionRequests.Requests.ToList();
+                //ダイアログ表示を挟んでいるので再チェック
+                if (requests.Contains(item))
+                {
+                    requests.Remove(item);
+                    MotionRequests = new MotionRequestCollection(requests.ToArray());
+                    SaveMotionRequests();
+                }
+            }
+        }
+
+        public void AddNewItem()
+        {
+            if (MotionRequests == null) { return; }
+
+            var request = MotionRequests.Requests.ToList();
+            request.Add(MotionRequest.GetDefault());
+            SaveMotionRequests();
+        }
+
+        public void LoadDefaultMotionRequests() => LoadDefaultMotionRequests(new List<string>());
+
+        public void LoadDefaultMotionRequests(List<string> extraBlendShapeClipNames)
+        {
+            var items = MotionRequest.GetDefaultMotionRequestSet();
+            for (int i = 0; i < items.Length; i++)
+            {
+                foreach (var extraClip in extraBlendShapeClipNames)
+                {
+                    items[i].ExtraBlendShapeValues.Add(new BlendShapePairItem()
+                    {
+                        Name = extraClip,
+                        Value = 0,
+                    });
+                }
+            }
+            MotionRequests = new MotionRequestCollection(items);
+            SaveMotionRequests();
+        }
+
+        #endregion
 
         protected override void PreSave()
         {

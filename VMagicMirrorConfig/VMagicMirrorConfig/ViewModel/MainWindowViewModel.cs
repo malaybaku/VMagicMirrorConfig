@@ -69,7 +69,7 @@ namespace Baku.VMagicMirrorConfig
             MotionSetting = new MotionSettingViewModel(MessageSender, Initializer.MessageReceiver);
             LayoutSetting = new LayoutSettingViewModel(Model.LayoutSetting, Model.GamepadSetting, MessageSender, Initializer.MessageReceiver);
             LightSetting = new LightSettingViewModel(Model.LightSetting, MessageSender);
-            WordToMotionSetting = new WordToMotionSettingViewModel(MessageSender, Initializer.MessageReceiver);
+            WordToMotionSetting = new WordToMotionSettingViewModel(Model.WordToMotionSetting,  MessageSender, Initializer.MessageReceiver);
             ExternalTrackerSetting = new ExternalTrackerViewModel(Model.ExternalTrackerSetting, MessageSender, Initializer.MessageReceiver);
 
             AvailableLanguageNames = new ReadOnlyObservableCollection<string>(_availableLanguageNames);
@@ -544,6 +544,7 @@ namespace Baku.VMagicMirrorConfig
                 {
                     WordToMotionSetting.CopyFrom(saveData.WordToMotionSetting);
                 }
+                //NOTE: ここでの明示的なロードは不要になるはず
                 WordToMotionSetting.LoadSerializedItems();
                 WordToMotionSetting.RequestReload();
 
