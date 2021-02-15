@@ -553,9 +553,6 @@ namespace Baku.VMagicMirrorConfig
                     ExternalTrackerSetting.CopyFrom(saveData.ExternalTrackerSetting);
                 }
                 ExternalTrackerSetting.LoadFaceSwitchSetting();
-
-                //顔キャリブデータはファイル読み込み時だけ送る特殊なデータなのでここに書いてます
-                MotionSetting.SendCalibrateFaceData();
             }
         }
 

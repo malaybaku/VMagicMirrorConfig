@@ -1,4 +1,7 @@
-﻿namespace Baku.VMagicMirrorConfig
+﻿using Newtonsoft.Json;
+using System;
+
+namespace Baku.VMagicMirrorConfig
 {
     class MotionSettingModel : SettingModelBase<MotionSetting>
     {
@@ -100,9 +103,6 @@
             WaitMotionScale = new RPropertyMin<int>(setting.WaitMotionScale, v => SendMessage(factory.WaitMotionScale(v)));
             WaitMotionPeriod = new RPropertyMin<int>(setting.WaitMotionPeriod, v => SendMessage(factory.WaitMotionPeriod(v)));
         }
-
-
-
 
         #region Full Body 
 
@@ -277,6 +277,39 @@
         }
 
         #endregion
+
+        /// <summary>
+        /// AutoAdjustParametersがシリアライズされた文字列を渡すことで、自動調整パラメータのうち
+        /// モーションに関係のある値を適用します。
+        /// </summary>
+        /// <param name="data"></param>
+        /// <remarks>
+        /// ここで適用した値はUnityに対してメッセージ送信されません
+        /// (そもそもUnity側から来る値だから)
+        /// </remarks>
+        public void SetAutoAdjustResults(string data)
+        {
+            try
+            {
+                var parameters = JsonConvert.DeserializeObject<AutoAdjustParameters>(data);
+                LengthFromWristToTip.SilentSet(parameters.LengthFromWristToTip);
+            }
+            catch (Exception)
+            {
+                //何もしない: データ形式が悪いので諦める
+            }
+        }
+
+        protected override void AfterLoad(MotionSetting entity)
+        {
+            //ファイルに有効なキャリブレーション情報があれば送る。
+            //NOTE: これ以外のタイミングではキャリブレーション情報は基本送らないでよい
+            //(Unity側がすでにキャリブの値を知ってる状態でメッセージを投げてくるため)
+            if (!string.IsNullOrEmpty(CalibrateFaceData.Value))
+            {
+                SendMessage(MessageFactory.Instance.SetCalibrateFaceData(CalibrateFaceData.Value));
+            }
+        }
 
         private LargePointerController _largePointerController => LargePointerController.Instance;
 

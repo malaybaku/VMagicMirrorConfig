@@ -23,10 +23,20 @@ namespace Baku.VMagicMirrorConfig
         /// <param name="msg"></param>
         protected void SendMessage(Message msg) => _sender.SendMessage(msg);
 
+        /// <summary>Load()が完全に完了すると発火します。</summary>
+        public event EventHandler? Loaded;
+
+        /// <summary>
+        /// Load()を呼び出してから呼び出し完了するまでのあいだtrueになるフラグ。
+        /// ファイルロード中にViewModelが一部データのコピーを行えないタイミングがあるので、
+        /// それを避けたい場合に参照する
+        /// </summary>
+        public bool IsLoading { get; private set; }
+
         /// <summary>セーブ前に行いたい処理(主にJSONシリアライズ等)があればここで実装します。</summary>
         protected virtual void PreSave() { }
 
-        /// <summary>セーブ後に行う処理。値の代入漏れのカバーとかが可能です</summary>
+        /// <summary>セーブ後、かつLoadedイベントより前に行う処理。値の代入漏れのカバーやデータのデシリアライズが可能です</summary>
         protected virtual void AfterSave(TEntity entity) { }
 
         /// <summary>ロード直前に行いたい処理があれば実装します。</summary>
@@ -42,6 +52,7 @@ namespace Baku.VMagicMirrorConfig
         /// <param name="entity"></param>
         public void Load(TEntity entity)
         {
+            IsLoading = true;
             SearchPropertyRoutine((source, target) =>
             {
                 if (!(target.PropertyType.IsGenericType && target.PropertyType.GetGenericTypeDefinition() == typeof(RPropertyMin<>)))
@@ -68,6 +79,8 @@ namespace Baku.VMagicMirrorConfig
             });
 
             AfterLoad(entity);
+            IsLoading = false;
+            Loaded?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
