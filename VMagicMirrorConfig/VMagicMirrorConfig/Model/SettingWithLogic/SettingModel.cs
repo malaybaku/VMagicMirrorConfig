@@ -1,4 +1,6 @@
-﻿namespace Baku.VMagicMirrorConfig
+﻿using System.Collections.ObjectModel;
+
+namespace Baku.VMagicMirrorConfig
 {
     /// <summary>
     /// ファイルに保存すべき設定のモデル層を直接的に全部保持したクラス。
@@ -18,6 +20,15 @@
         }
 
         //TODO: ここにファイルのセクションと無関係な縦断的なモデル/コードを追加して良い気がする。ファイルのロード/セーブとかやるタイプの。
+
+        private readonly ObservableCollection<string> _availableLanguageNames
+            = new ObservableCollection<string>()
+        {
+            "Japanese",
+            "English",
+        };
+        public ReadOnlyObservableCollection<string> AvailableLanguageNames { get; }
+
 
         public WindowSettingModel WindowSetting { get; }
 

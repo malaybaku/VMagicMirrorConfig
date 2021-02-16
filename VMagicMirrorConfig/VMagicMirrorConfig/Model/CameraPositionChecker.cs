@@ -8,7 +8,6 @@ namespace Baku.VMagicMirrorConfig
     /// <remarks> 1インスタンスはStartとStopを1回ずつ呼び出したら使い終わり、という設計です </remarks>
     class CameraPositionChecker
     {
-
         public CameraPositionChecker(IMessageSender sender)
         {
             _sender = sender;
@@ -18,8 +17,7 @@ namespace Baku.VMagicMirrorConfig
         private readonly IMessageSender _sender;
         private readonly CancellationTokenSource _cts;
 
-        public void Start(int intervalMillisec, Action<string> onResult) 
-            => Task.Run(async () =>
+        public void Start(int intervalMillisec, Action<string> onResult) => Task.Run(async () =>
         {
             while (!_cts.Token.IsCancellationRequested)
             {

@@ -12,14 +12,7 @@
 
         private readonly IMessageSender _sender;
 
-        public void TakeScreenshot()
-        {
-            _sender.SendMessage(MessageFactory.Instance.TakeScreenshot());
-        }
-
-        public void OpenSavedFolder()
-        {
-            _sender.SendMessage(MessageFactory.Instance.OpenScreenshotFolder());
-        }
+        public void TakeScreenshot() => _sender.SendMessage(MessageFactory.Instance.TakeScreenshot());
+        public void OpenSavedFolder() => _sender.SendMessage(MessageFactory.Instance.OpenScreenshotFolder());
     }
 }

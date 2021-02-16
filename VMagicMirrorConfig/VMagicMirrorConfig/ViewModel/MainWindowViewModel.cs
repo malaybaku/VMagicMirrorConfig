@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Xml.Serialization;
 using Microsoft.Win32;
 
 namespace Baku.VMagicMirrorConfig
@@ -12,6 +11,7 @@ namespace Baku.VMagicMirrorConfig
     public class MainWindowViewModel : ViewModelBase, IWindowViewModel
     {
         internal SettingModel Model { get; }
+        internal SettingFileIo SettingFileIo { get; }
         
         internal ModelInitializer Initializer { get; } = new ModelInitializer();
         internal IMessageSender MessageSender => Initializer.MessageSender;
@@ -25,6 +25,8 @@ namespace Baku.VMagicMirrorConfig
         public ExternalTrackerViewModel ExternalTrackerSetting { get; private set; }
 
         private DeviceFreeLayoutHelper? _deviceFreeLayoutHelper;
+
+        //TODO: 自動スタート周りもモデルですね
 
         private bool _activateOnStartup = false;
         public bool ActivateOnStartup
@@ -65,6 +67,8 @@ namespace Baku.VMagicMirrorConfig
         public MainWindowViewModel()
         {
             Model = new SettingModel(MessageSender, Initializer.MessageReceiver);
+            SettingFileIo = new SettingFileIo(Model, MessageSender);
+
             _screenshotController = new ScreenshotController(MessageSender);
             WindowSetting = new WindowSettingViewModel(Model.WindowSetting, MessageSender);
             MotionSetting = new MotionSettingViewModel(Model.MotionSetting, MessageSender, Initializer.MessageReceiver);
@@ -73,8 +77,6 @@ namespace Baku.VMagicMirrorConfig
             LightSetting = new LightSettingViewModel(Model.LightSetting, MessageSender);
             WordToMotionSetting = new WordToMotionSettingViewModel(Model.WordToMotionSetting,  MessageSender, Initializer.MessageReceiver);
             ExternalTrackerSetting = new ExternalTrackerViewModel(Model.ExternalTrackerSetting, MessageSender, Initializer.MessageReceiver);
-
-            AvailableLanguageNames = new ReadOnlyObservableCollection<string>(_availableLanguageNames);
 
             Initializer.MessageReceiver.ReceivedCommand += OnReceiveCommand;
         }
@@ -114,13 +116,7 @@ namespace Baku.VMagicMirrorConfig
             set => SetValue(ref _autoLoadLastLoadedVrm, value);
         }
 
-        private readonly ObservableCollection<string> _availableLanguageNames
-            = new ObservableCollection<string>()
-        {
-            "Japanese",
-            "English",
-        };
-        public ReadOnlyObservableCollection<string> AvailableLanguageNames { get; }
+        public ReadOnlyObservableCollection<string> AvailableLanguageNames => Model.AvailableLanguageNames;
 
         private string _languageName = nameof(Languages.Japanese);
         public string LanguageName
@@ -294,7 +290,7 @@ namespace Baku.VMagicMirrorConfig
             };
             if (dialog.ShowDialog() == true)
             {
-                SaveSetting(dialog.FileName, false);
+                SettingFileIo.SaveSetting(dialog.FileName, false);
             }
         }
 
@@ -308,7 +304,7 @@ namespace Baku.VMagicMirrorConfig
             };
             if (dialog.ShowDialog() == true)
             {
-                LoadSetting(dialog.FileName, false);
+                SettingFileIo.LoadSetting(dialog.FileName, false);
             }
         }
 
@@ -355,7 +351,7 @@ namespace Baku.VMagicMirrorConfig
                     SpecialFilePath.AutoSaveSettingFileName
                     );
 
-                LoadSetting(savePath, true);
+                SettingFileIo.LoadSetting(savePath, true);
                 //NOTE: VRoidの自動ロード設定はちょっと概念的に重たいので引き継ぎ対象から除外する。
                 _lastLoadedVRoidModelId = "";
                 if (AutoLoadLastLoadedVrm)
@@ -391,11 +387,7 @@ namespace Baku.VMagicMirrorConfig
 
             Initializer.StartObserveRoutine();
 
-            //NOTE: ここでコンポジットを開始することで、背景色/ライト/影のメッセージも統一してしまう
-            Initializer.MessageSender.StartCommandComposite();
-            LoadSetting(SpecialFilePath.AutoSaveSettingFilePath, true);
-            //NOTE: ここのEndCommandCompositeはLoadSettingが(ファイル無いとかで)中断したときの対策
-            Initializer.MessageSender.EndCommandComposite();
+            SettingFileIo.LoadSetting(SpecialFilePath.AutoSaveSettingFilePath, true);
 
             //書いてる通りだが、ファイルから読んだ言語名があれば渡したのちvalidateされた結果でキレイにし、メッセージを送る。
             //メッセージを明示的に送るのは、タイミングの都合で上のLoadSetting中には言語設定メッセージが積まれないため。
@@ -440,7 +432,7 @@ namespace Baku.VMagicMirrorConfig
             if (!_isDisposed)
             {
                 _isDisposed = true;
-                SaveSetting(SpecialFilePath.AutoSaveSettingFilePath, true);
+                SettingFileIo.SaveSetting(SpecialFilePath.AutoSaveSettingFilePath, true);
                 Initializer.Dispose();
                 _deviceFreeLayoutHelper?.EndObserve();
                 MotionSetting.ClosePointer();
@@ -486,103 +478,11 @@ namespace Baku.VMagicMirrorConfig
             EndShowUiOnUnity();
         }
 
-        private void SaveSetting(string path, bool isInternalFile)
-        {
-            if (File.Exists(path))
-            {
-                File.Delete(path);
-            }
-
-            using (var sw = new StreamWriter(path))
-            {
-                //note: 動作設定の一覧は(Unityに投げる都合で)JSONになってるのでやや構造がめんどいです。
-                WordToMotionSetting.SaveItems();
-                new XmlSerializer(typeof(SaveData)).Serialize(sw, new SaveData()
-                {
-                    IsInternalSaveFile = isInternalFile,
-                    LastLoadedVrmFilePath = isInternalFile ? _lastVrmLoadFilePath : "",
-                    LastLoadedVRoidModelId = isInternalFile ? _lastLoadedVRoidModelId : "",
-                    AutoLoadLastLoadedVrm = isInternalFile ? AutoLoadLastLoadedVrm : false,
-                    PreferredLanguageName = isInternalFile ? LanguageName : "",
-                    WindowSetting = this.WindowSetting,
-                    MotionSetting = this.MotionSetting,
-                    LayoutSetting = this.LayoutSetting,
-                    LightSetting = this.LightSetting,
-                    WordToMotionSetting = this.WordToMotionSetting,
-                    ExternalTrackerSetting = this.ExternalTrackerSetting,
-                });
-            }
-        }
-
-        private void LoadSettingSub(string path, bool isInternalFile)
-        {
-            using (var sr = new StreamReader(path))
-            {
-                var serializer = new XmlSerializer(typeof(SaveData));
-                var saveData = (SaveData?)serializer.Deserialize(sr);
-                if (saveData == null)
-                {
-                    return;
-                } 
-
-                if (isInternalFile && saveData.IsInternalSaveFile)
-                {
-                    _lastVrmLoadFilePath = saveData.LastLoadedVrmFilePath ?? "";
-                    _lastLoadedVRoidModelId = saveData.LastLoadedVRoidModelId ?? "";
-                    AutoLoadLastLoadedVrm = saveData.AutoLoadLastLoadedVrm;
-                    LanguageName =
-                        AvailableLanguageNames.Contains(saveData.PreferredLanguageName ?? "") ?
-                        (saveData.PreferredLanguageName ?? "") :
-                        "";
-                }
-
-                WindowSetting.CopyFrom(saveData.WindowSetting);
-                MotionSetting.CopyFrom(saveData.MotionSetting);
-                LayoutSetting.CopyFrom(saveData.LayoutSetting);
-                LightSetting.CopyFrom(saveData.LightSetting);
-                //コレはv0.9.0で追加したので、それ以前のバージョンのデータを読み込むとnullになってる
-                if (saveData.WordToMotionSetting != null)
-                {
-                    WordToMotionSetting.CopyFrom(saveData.WordToMotionSetting);
-                }
-                //NOTE: ここでの明示的なロードは不要になるはず
-                WordToMotionSetting.LoadSerializedItems();
-                WordToMotionSetting.RequestReload();
-
-                //これも同様に、古いデータだとnullになる
-                if (saveData.ExternalTrackerSetting != null)
-                {
-                    ExternalTrackerSetting.CopyFrom(saveData.ExternalTrackerSetting);
-                }
-                ExternalTrackerSetting.LoadFaceSwitchSetting();
-            }
-        }
-
-        private void LoadSetting(string path, bool isInternalFile)
-        {
-            if (!File.Exists(path))
-            {
-                return;
-            }
-
-            try
-            {
-                Initializer.MessageSender.StartCommandComposite();
-                LoadSettingSub(path, isInternalFile);
-                Initializer.MessageSender.EndCommandComposite();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Failed to load setting file {path} : {ex.Message}");
-            }
-        }
-
         //Unity側でウィンドウを表示するとき、最前面と透過を無効にする必要があるため、その準備にあたる処理を行います。
         private void PrepareShowUiOnUnity()
         {
             _windowTransparentBeforeLoadProcess = WindowSetting.IsTransparent.Value;
             WindowSetting.IsTransparent.Value = false;
-            WindowSetting.TopMost.Value = false;
         }
         
         //Unity側でのUI表示が終わったとき、最前面と透過の設定をもとの状態に戻します。

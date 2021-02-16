@@ -58,8 +58,14 @@ namespace Baku.VMagicMirrorConfig
         /// ファイル等から読み込んだデータをロード、適用します。
         /// </summary>
         /// <param name="entity"></param>
-        public void Load(TEntity entity)
+        public void Load(TEntity? entity)
         {
+            if (entity == null) 
+            {
+                LogOutput.Instance.Write($"Load Requested for {typeof(TEntity).Name}, but entity is invalid");
+                return;
+            }
+
             IsLoading = true;
             SearchPropertyRoutine((source, target) =>
             {
