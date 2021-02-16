@@ -19,6 +19,7 @@ namespace Baku.VMagicMirrorConfig
         public WindowSettingViewModel WindowSetting { get; private set; }
         public MotionSettingViewModel MotionSetting { get; private set; }
         public LayoutSettingViewModel LayoutSetting { get; private set; }
+        public GamepadSettingViewModel GamepadSetting { get; private set; }
         public LightSettingViewModel LightSetting { get; private set; }
         public WordToMotionSettingViewModel WordToMotionSetting { get; private set; }
         public ExternalTrackerViewModel ExternalTrackerSetting { get; private set; }
@@ -66,8 +67,9 @@ namespace Baku.VMagicMirrorConfig
             Model = new SettingModel(MessageSender, Initializer.MessageReceiver);
             _screenshotController = new ScreenshotController(MessageSender);
             WindowSetting = new WindowSettingViewModel(Model.WindowSetting, MessageSender);
-            MotionSetting = new MotionSettingViewModel(MessageSender, Initializer.MessageReceiver);
-            LayoutSetting = new LayoutSettingViewModel(Model.LayoutSetting, Model.GamepadSetting, MessageSender, Initializer.MessageReceiver);
+            MotionSetting = new MotionSettingViewModel(Model.MotionSetting, MessageSender, Initializer.MessageReceiver);
+            LayoutSetting = new LayoutSettingViewModel(Model.LayoutSetting, MessageSender, Initializer.MessageReceiver);
+            GamepadSetting = new GamepadSettingViewModel(Model.GamepadSetting, MessageSender);
             LightSetting = new LightSettingViewModel(Model.LightSetting, MessageSender);
             WordToMotionSetting = new WordToMotionSettingViewModel(Model.WordToMotionSetting,  MessageSender, Initializer.MessageReceiver);
             ExternalTrackerSetting = new ExternalTrackerViewModel(Model.ExternalTrackerSetting, MessageSender, Initializer.MessageReceiver);
@@ -391,7 +393,6 @@ namespace Baku.VMagicMirrorConfig
 
             //NOTE: ここでコンポジットを開始することで、背景色/ライト/影のメッセージも統一してしまう
             Initializer.MessageSender.StartCommandComposite();
-            LightSetting.Initialize();
             LoadSetting(SpecialFilePath.AutoSaveSettingFilePath, true);
             //NOTE: ここのEndCommandCompositeはLoadSettingが(ファイル無いとかで)中断したときの対策
             Initializer.MessageSender.EndCommandComposite();
@@ -409,7 +410,7 @@ namespace Baku.VMagicMirrorConfig
 
             Initializer.CameraPositionChecker.Start(
                 2000,
-                data => LayoutSetting.SilentSetCameraPosition(data)
+                data => Model.LayoutSetting.CameraPosition.SilentSet(data)
                 );
 
             var regSetting = new StartupRegistrySetting();

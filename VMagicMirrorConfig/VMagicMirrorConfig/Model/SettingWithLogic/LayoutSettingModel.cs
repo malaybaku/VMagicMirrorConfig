@@ -1,4 +1,9 @@
-﻿namespace Baku.VMagicMirrorConfig
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
+using System.Threading.Tasks;
+
+namespace Baku.VMagicMirrorConfig
 {
     class LayoutSettingModel : SettingModelBase<LayoutSetting>
     {
@@ -48,6 +53,77 @@
 
         //NOTE: ファイルには保存しない
         public RPropertyMin<bool> EnableDeviceFreeLayout { get; }
+
+        #region API
+
+        public async Task QuickSaveViewPoint(string? index)
+        {
+            if (!(int.TryParse(index, out int i) && i > 0 && i <= 3))
+            {
+                return;
+            }
+
+            try
+            {
+                string res = await SendQueryAsync(MessageFactory.Instance.CurrentCameraPosition());
+                string saveData = new JObject()
+                {
+                    ["fov"] = CameraFov.Value,
+                    ["pos"] = res,
+                }.ToString(Formatting.None);
+
+                switch (i)
+                {
+                    case 1:
+                        QuickSave1.Value = saveData;
+                        break;
+                    case 2:
+                        QuickSave2.Value = saveData;
+                        break;
+                    case 3:
+                        QuickSave3.Value = saveData;
+                        break;
+                    default:
+                        //NOTE: ここは来ない
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogOutput.Instance.Write(ex);
+            }
+        }
+
+        public void QuickLoadViewPoint(string? index)
+        {
+            if (!(int.TryParse(index, out int i) && i > 0 && i <= 3))
+            {
+                return;
+            }
+
+            try
+            {
+                string saveData =
+                    (i == 1) ? QuickSave1.Value :
+                    (i == 2) ? QuickSave2.Value :
+                    QuickSave3.Value;
+
+                var obj = JObject.Parse(saveData);
+                string cameraPos = (string?)obj["pos"] ?? "";
+                int fov = (int)(obj["fov"] ?? new JValue(40));
+
+                CameraFov.Value = fov;
+                //NOTE: CameraPositionには書き込まない。
+                //CameraPositionへの書き込みはCameraPositionCheckerのポーリングに任せとけばOK 
+                SendMessage(MessageFactory.Instance.QuickLoadViewPoint(cameraPos));
+            }
+            catch (Exception ex)
+            {
+                LogOutput.Instance.Write(ex);
+            }
+        }
+
+        #endregion
 
         #region Reset API
 

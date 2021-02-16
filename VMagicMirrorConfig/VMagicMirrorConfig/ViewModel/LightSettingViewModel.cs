@@ -14,6 +14,7 @@ namespace Baku.VMagicMirrorConfig
         internal LightSettingViewModel(LightSettingModel model, IMessageSender sender) : base(sender)
         {
             _model = model;
+            ImageQualityNames = new ReadOnlyObservableCollection<string>(_imageQualityNames);
 
             _lightColor = Color.FromRgb((byte)model.LightR.Value, (byte)model.LightG.Value, (byte)model.LightB.Value);
             model.LightR.PropertyChanged += (_, __) => UpdateLightColor();
@@ -23,8 +24,7 @@ namespace Baku.VMagicMirrorConfig
             _bloomColor = Color.FromRgb((byte)model.BloomR.Value, (byte)model.BloomG.Value, (byte)model.BloomB.Value);
             model.BloomR.PropertyChanged += (_, __) => UpdateBloomColor();
             model.BloomG.PropertyChanged += (_, __) => UpdateBloomColor();
-            model.BloomB.PropertyChanged += (_, __) => UpdateBloomColor();
-            
+            model.BloomB.PropertyChanged += (_, __) => UpdateBloomColor();            
 
             ResetLightSettingCommand = new ActionCommand(
                 () => SettingResetUtils.ResetSingleCategoryAsync(model.ResetLightSetting)
@@ -39,31 +39,12 @@ namespace Baku.VMagicMirrorConfig
                 () => SettingResetUtils.ResetSingleCategoryAsync(_model.ResetWindSetting)
                 );
 
-            ImageQualityNames = new ReadOnlyObservableCollection<string>(_imageQualityNames);
-        }
-
-        private readonly LightSettingModel _model;
-
-        
-
-        //public LightSettingViewModel() : base()
-        //{
-        //    UpdateLightColor();
-        //    UpdateBloomColor();
-        //    ImageQualityNames = new ReadOnlyObservableCollection<string>(_imageQualityNames);
-        //}
-
-        //internal LightSettingViewModel(IMessageSender sender) : base(sender)
-        //{
-        //    ImageQualityNames = new ReadOnlyObservableCollection<string>(_imageQualityNames);
-        //}
-
-        //TODO: Loadの時点で色やら何やら保証されるようになったため、このInitializeはもう不要なはず
-        public void Initialize()
-        {
+            //最初の時点で不整合しなければ後は何でもOK
             UpdateLightColor();
             UpdateBloomColor();
         }
+
+        private readonly LightSettingModel _model;
 
         public async Task InitializeQualitySelectionsAsync()
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace Baku.VMagicMirrorConfig
 {
@@ -22,6 +23,13 @@ namespace Baku.VMagicMirrorConfig
         /// </summary>
         /// <param name="msg"></param>
         protected void SendMessage(Message msg) => _sender.SendMessage(msg);
+
+        /// <summary>
+        /// Unityにクエリを送り、戻り値を取得します。
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <returns></returns>
+        protected Task<string> SendQueryAsync(Message msg) => _sender.QueryMessageAsync(msg);
 
         /// <summary>Load()が完全に完了すると発火します。</summary>
         public event EventHandler? Loaded;
