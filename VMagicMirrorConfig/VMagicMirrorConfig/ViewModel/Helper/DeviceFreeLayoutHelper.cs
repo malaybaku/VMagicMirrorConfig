@@ -47,17 +47,17 @@ namespace Baku.VMagicMirrorConfig
 
             if (_layout.EnableDeviceFreeLayout.Value)
             {
-                _freeCameraWhenStartFreeLayout = _layout.EnableFreeCameraMode;
+                _freeCameraWhenStartFreeLayout = _layout.EnableFreeCameraMode.Value;
                 _transparentWhenStartFreeLayout = _window.IsTransparent.Value;
 
-                _layout.EnableFreeCameraMode = true;
+                _layout.EnableFreeCameraMode.Value = true;
                 _window.IsTransparent.Value = false;
             }
             else
             {
                 if (!_freeCameraWhenStartFreeLayout)
                 {
-                    _layout.EnableFreeCameraMode = false;
+                    _layout.EnableFreeCameraMode.Value = false;
                 }
 
                 if (_transparentWhenStartFreeLayout)
