@@ -99,6 +99,17 @@
 「リップシンクを続行」をオンにすると、表情を切り替えたままリップシンクを動かせます。</sys:String>
     <sys:String x:Key="ExTracker_FaceSwitch_KeepLipSync">リップシンクを続行</sys:String>
 
+    
+    <!-- ExTracker FaceSwitch Trigger -->
+    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_mouthSmile">口を笑顔にすると</sys:String>
+    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_eyeSquint">目を細めると</sys:String>
+    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_eyeWide">目を大きく見開くと</sys:String>
+    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_browUp">眉を上げると</sys:String>
+    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_browDown">眉を下げると</sys:String>
+    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_tongueOut">頬をふくらませると</sys:String>
+    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_cheekPuff">舌を出すと</sys:String>
+
+    
     <!-- Settings General -->
     <sys:String x:Key="Setting_Color_Expander_Header">色を編集 (クリックで展開)</sys:String>
     
@@ -372,6 +383,12 @@
     <sys:String x:Key="WordToMotion_MidiAssign_After">変更後のノート</sys:String>
     <sys:String x:Key="WordToMotion_MidiAssign_Clear">クリア</sys:String>
    
+    <sys:String x:Key="WortToMotion_DeviceItem_None">None</sys:String>
+    <sys:String x:Key="WortToMotion_DeviceItem_KeyboardWord">Keyboard (word)</sys:String>
+    <sys:String x:Key="WortToMotion_DeviceItem_Gamepad">Gamepad</sys:String>
+    <sys:String x:Key="WortToMotion_DeviceItem_KeyboardTenKey">Keyboard (num 0-8)</sys:String>
+    <sys:String x:Key="WortToMotion_DeviceItem_MidiController">MIDI Controller</sys:String>
+
     <!-- Dialog Messages -->
     <sys:String x:Key="DialogTitle_LoadLocalVrm">VRMの読み込み</sys:String>
     <sys:String x:Key="DialogMessage_LoadLocalVrm">ビューアー画面のライセンスを確認してください。読み込みますか？</sys:String>
@@ -407,5 +424,15 @@
 webカメラでの顔トラッキングを有効にする場合は
 'OK'を選択し、iPhone/iPadとの連携を終了してください。
 </sys:String>
+
+    <!-- Other: Not on Dialog, but used from code -->
+    <sys:String x:Key="CommonUi_DoNothing">(何もしない)</sys:String>
+    <sys:String x:Key="CommonUi_None">(なし)</sys:String>
+
+    <!-- Localize dependent URLs -->
+    <sys:String x:Key="URL_help_top">https://malaybaku.github.io/VMagicMirror/en</sys:String>
+    <sys:String x:Key="URL_docs_ex_tracker">https://malaybaku.github.io/VMagicMirror/en/docs/external_tracker</sys:String>
+    <sys:String x:Key="URL_tips_perfect_sync">https://malaybaku.github.io/VMagicMirror/en/tips/perfect_sync</sys:String>
+    <sys:String x:Key="URL_ifacialmocap_troubleshoot">https://malaybaku.github.io/VMagicMirror/docs/external_tracker_ifacialmocap#troubleshoot</sys:String>
     
 </ResourceDictionary>

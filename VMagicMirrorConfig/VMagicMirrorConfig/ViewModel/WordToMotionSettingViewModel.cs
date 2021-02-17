@@ -353,19 +353,18 @@ namespace Baku.VMagicMirrorConfig
     /// <summary> Word to Motion機能のコントロールに利用できるデバイスの選択肢1つに相当するViewModelです。 </summary>
     public class WordToMotionDeviceItem : ViewModelBase
     {
-        private WordToMotionDeviceItem(int index, string enName, string jpName)
+        private WordToMotionDeviceItem(int index, string displayNameKeySuffix)
         {
             Index = index;
-            _enName = enName;
-            _jpName = jpName;
-            SetLanguage(Languages.Japanese);
-            LanguageSelector.Instance.LanguageChanged += SetLanguage;
+            _displayNameKeySuffix = displayNameKeySuffix;
+            LanguageSelector.Instance.LanguageChanged += RefreshDisplayName;
+            RefreshDisplayName();
         }
 
         public int Index { get; }
 
-        private readonly string _jpName;
-        private readonly string _enName;
+        private const string DisplayNameKeyPrefix = "WordToMotion_DeviceItem_";
+        private readonly string _displayNameKeySuffix;
 
         private string _displayName = "";
         public string DisplayName
@@ -374,39 +373,32 @@ namespace Baku.VMagicMirrorConfig
             private set => SetValue(ref _displayName, value);
         }
 
-        internal void SetLanguage(Languages lang)
-        {
-            DisplayName = lang switch
-            {
-                Languages.Japanese => _jpName,
-                Languages.English => _enName,
-                _ => _enName,
-            };
-        }
+        internal void RefreshDisplayName() 
+            => DisplayName = LocalizedString.GetString(DisplayNameKeyPrefix + _displayNameKeySuffix);
 
         public static WordToMotionDeviceItem None()
             => new WordToMotionDeviceItem(
-                WordToMotionSetting.DeviceTypes.None, "None", "なし"
+                WordToMotionSetting.DeviceTypes.None, "None"
                 );
 
         public static WordToMotionDeviceItem KeyboardTyping()
             => new WordToMotionDeviceItem(
-                WordToMotionSetting.DeviceTypes.KeyboardWord, "Keyboard (word)", "キーボード (単語入力)"
+                WordToMotionSetting.DeviceTypes.KeyboardWord, "KeyboardWord"
                 );
 
         public static WordToMotionDeviceItem Gamepad() 
             => new WordToMotionDeviceItem(
-                WordToMotionSetting.DeviceTypes.Gamepad, "Gamepad", "ゲームパッド"
+                WordToMotionSetting.DeviceTypes.Gamepad, "Gamepad"
                 );
 
         public static WordToMotionDeviceItem KeyboardNumKey()
             => new WordToMotionDeviceItem(
-                WordToMotionSetting.DeviceTypes.KeyboardTenKey, "Keyboard (num 0-8)", "キーボード (数字の0-8)"
+                WordToMotionSetting.DeviceTypes.KeyboardTenKey, "KeyboardTenKey"
                 );
 
         public static WordToMotionDeviceItem MidiController()
             => new WordToMotionDeviceItem(
-                WordToMotionSetting.DeviceTypes.MidiController, "MIDI Controller", "MIDIコントローラ"
+                WordToMotionSetting.DeviceTypes.MidiController, "MidiController"
                 );
 
         public static WordToMotionDeviceItem[] LoadAvailableItems()

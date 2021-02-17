@@ -17,10 +17,7 @@
 
         private void OpenManualUrl()
         {
-            string url =
-                LanguageSelector.Instance.LanguageName == "Japanese" ?
-                "https://malaybaku.github.io/VMagicMirror" :
-                "https://malaybaku.github.io/VMagicMirror/en";
+            string url = LocalizedString.GetString("URL_help_top");
             UrlNavigate.Open(url);
         }
 

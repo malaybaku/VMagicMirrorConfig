@@ -39,6 +39,7 @@ namespace Baku.VMagicMirrorConfig
             //TODO: メッセージ受信の処理もモデル側案件のはず…うーん…
             receiver.ReceivedCommand += OnMessageReceived;
 
+            //TODO: モデル側が非null保証をしてくれたら相応に直したいとこ
             FaceSwitchItems.Clear();
             foreach (var item in _model.FaceSwitchSetting.Items)
             {
@@ -115,10 +116,7 @@ namespace Baku.VMagicMirrorConfig
 
         private void OpenPerfectSyncTipsUrl()
         {
-            string url =
-                (LanguageSelector.Instance.LanguageName == "Japanese") ?
-                "https://malaybaku.github.io/VMagicMirror/tips/perfect_sync" :
-                "https://malaybaku.github.io/VMagicMirror/en/tips/perfect_sync";
+            string url = LocalizedString.GetString("URL_tips_perfect_sync");
             UrlNavigate.Open(url);
         }
 
@@ -208,10 +206,7 @@ namespace Baku.VMagicMirrorConfig
 
         private void OpenInstructionUrl()
         {
-            string url =
-                (LanguageSelector.Instance.LanguageName == "Japanese") ?
-                "https://malaybaku.github.io/VMagicMirror/docs/external_tracker" :
-                "https://malaybaku.github.io/VMagicMirror/en/docs/external_tracker";
+            string url = LocalizedString.GetString("URL_docs_ex_tracker");
             UrlNavigate.Open(url);
         }
 
@@ -253,11 +248,7 @@ namespace Baku.VMagicMirrorConfig
         
         private void OpenIFMTroubleShoot()
         {
-            var url = LanguageSelector.StringToLanguage(LanguageSelector.Instance.LanguageName) switch
-            {
-                Languages.Japanese => "https://malaybaku.github.io/VMagicMirror/docs/external_tracker_ifacialmocap#troubleshoot",
-                _ => "https://malaybaku.github.io/VMagicMirror/en/docs/external_tracker_ifacialmocap#troubleshoot",
-            };
+            var url = LocalizedString.GetString("URL_ifacialmocap_troubleshoot");
             UrlNavigate.Open(url);
         }
 

@@ -9,7 +9,7 @@ namespace Baku.VMagicMirrorConfig
         public object? Convert(object value, Type targetType, object parameter, CultureInfo culture)
             => value switch
             {
-                string s when string.IsNullOrEmpty(s) => LanguageSelector.Instance.LanguageName == "Japanese" ? "(なし)" : "(None)",
+                string s when string.IsNullOrEmpty(s) => LocalizedString.GetString("CommonUi_None"),
                 string s => s,
                 _ => Binding.DoNothing,
             };

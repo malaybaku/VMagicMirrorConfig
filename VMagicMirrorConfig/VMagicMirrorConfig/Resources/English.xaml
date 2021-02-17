@@ -96,6 +96,16 @@ During this mode, following features are disabled.
     <sys:String x:Key="ExTracker_FaceSwitch_Instruction" xml:space="preserve">Activates seleceted BlendShape by making specific face expression.
 Check "Keep LipSync" to make the lipsync continue.</sys:String>
     <sys:String x:Key="ExTracker_FaceSwitch_KeepLipSync">Keep LipSync</sys:String>
+
+    <!-- ExTracker FaceSwitch Trigger -->
+    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_mouthSmile">Mouth smile</sys:String>
+    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_eyeSquint">Eye squint</sys:String>
+    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_eyeWide">Eye wide</sys:String>
+    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_browUp">Brow up</sys:String>
+    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_browDown">Brow down</sys:String>
+    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_tongueOut">Cheek puff</sys:String>
+    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_cheekPuff">Tongue out</sys:String>
+    
     
     <!-- Settings General -->
     <sys:String x:Key="Setting_Color_Expander_Header">Edit Color (Click to Expand)</sys:String>
@@ -368,6 +378,12 @@ Please test by typing "joy".</sys:String>
     <sys:String x:Key="WordToMotion_MidiAssign_After">Note to Change</sys:String>
     <sys:String x:Key="WordToMotion_MidiAssign_Clear">Clear</sys:String>
     
+    <sys:String x:Key="WortToMotion_DeviceItem_None">なし</sys:String>
+    <sys:String x:Key="WortToMotion_DeviceItem_KeyboardWord">キーボード (単語入力)</sys:String>
+    <sys:String x:Key="WortToMotion_DeviceItem_Gamepad">ゲームパッド</sys:String>
+    <sys:String x:Key="WortToMotion_DeviceItem_KeyboardTenKey">キーボード (数字の0-8)</sys:String>
+    <sys:String x:Key="WortToMotion_DeviceItem_MidiController">MIDIコントローラ</sys:String>
+    
     <!-- Dialog Messages -->
     <sys:String x:Key="DialogTitle_LoadLocalVrm">Load VRM</sys:String>
     <sys:String x:Key="DialogMessage_LoadLocalVrm">Please confirm the license in viewer window. Do you load the character?</sys:String>
@@ -402,5 +418,15 @@ Undefined BlendShaepClip names:
 
 Choose 'OK' to enable webcam based tracking.
 </sys:String>
-
+    
+    <!-- Other: Not on Dialog, but used from code -->
+    <sys:String x:Key="CommonUi_DoNothing">(Do Nothing)</sys:String>
+    <sys:String x:Key="CommonUi_None">(None)</sys:String>
+    
+    <!-- Localize dependent URLs -->
+    <sys:String x:Key="URL_help_top">https://malaybaku.github.io/VMagicMirror</sys:String>
+    <sys:String x:Key="URL_docs_ex_tracker">https://malaybaku.github.io/VMagicMirror/docs/external_tracker</sys:String>
+    <sys:String x:Key="URL_tips_perfect_sync">https://malaybaku.github.io/VMagicMirror/tips/perfect_sync</sys:String>
+    <sys:String x:Key="URL_ifacialmocap_troubleshoot">https://malaybaku.github.io/VMagicMirror/en/docs/external_tracker_ifacialmocap#troubleshoot</sys:String>
+    
 </ResourceDictionary>

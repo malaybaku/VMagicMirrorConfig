@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace Baku.VMagicMirrorConfig
@@ -11,17 +10,16 @@ namespace Baku.VMagicMirrorConfig
         {
             _parent = parent;
             _model = model;
-            SetLanguage(LanguageSelector.Instance.LanguageName == "Japanese" ? Languages.Japanese : Languages.English);
+            RefreshInstruction();
         }
 
-        private void SetLanguage(Languages lang)
-            => Instruction = ExTrackerFaceInfo.GetText(lang, _model.SourceName);
+        private void RefreshInstruction() => Instruction = GetInstructionText(_model.SourceName);
 
         internal void SubscribeLanguageSelector()
-            => LanguageSelector.Instance.LanguageChanged += SetLanguage;
+            => LanguageSelector.Instance.LanguageChanged += RefreshInstruction;
 
         internal void UnsubscribeLanguageSelector()
-            => LanguageSelector.Instance.LanguageChanged -= SetLanguage;
+            => LanguageSelector.Instance.LanguageChanged -= RefreshInstruction;
 
         private readonly ExternalTrackerViewModel _parent;
         private readonly ExternalTrackerFaceSwitchItem _model;
@@ -105,40 +103,12 @@ namespace Baku.VMagicMirrorConfig
             public int Value { get; }
             public string Text { get; }
         }
-    }
 
-    static class ExTrackerFaceInfo
-    {
-        public static string GetText(Languages lang, string key)
+        //NOTE: keyはWPFコード内で決め打ちしたものしか来ないはずなため、"-"にはならないはず(なったらコードのバグ)
+        private static string GetInstructionText(string key)
         {
-            var src = (lang == Languages.Japanese) ? _japanese : _english;
-            //NOTE: keyはWPFコード内で決め打ちしたものしか来ないハズなので"-"にはならないはず(なったらコードのバグ)
-            return src.ContainsKey(key) ? src[key] : "-";
+            var result = LocalizedString.GetString("ExTracker_FaceSwitch_Trigger_" + key);
+            return string.IsNullOrEmpty(result) ? "-" : result;
         }
-
-        private static Dictionary<string, string> _japanese = new Dictionary<string, string>()
-        {
-            //TODO: 目の開閉と眉の上下って筋肉的に連動しているので、片方だけ残すほうがよいかも。
-            //TODO: 口をすぼめる動きを入れてもいい…かもしれないが、喋りと両立しなさそうなので乗り気ではない。
-            [FaceSwitchKeys.MouthSmile] = "口を笑顔にすると",
-            [FaceSwitchKeys.EyeSquint] = "目を細めると",
-            [FaceSwitchKeys.EyeWide] = "目を大きく見開くと",
-            [FaceSwitchKeys.BrowUp] = "眉を上げると",
-            [FaceSwitchKeys.BrowDown] = "眉を下げると",
-            [FaceSwitchKeys.CheekPuff] = "頬をふくらませると",
-            [FaceSwitchKeys.TongueOut] = "舌を出すと",
-        };
-
-        private static Dictionary<string, string> _english = new Dictionary<string, string>()
-        {
-            [FaceSwitchKeys.MouthSmile] = "Mouth smile",
-            [FaceSwitchKeys.EyeSquint] = "Eye squint",
-            [FaceSwitchKeys.EyeWide] = "Eye wide",
-            [FaceSwitchKeys.BrowUp] = "Brow up",
-            [FaceSwitchKeys.BrowDown] = "Brow down",
-            [FaceSwitchKeys.CheekPuff] = "Cheek puff",
-            [FaceSwitchKeys.TongueOut] = "Tongue out",
-        };
-
     }
 }

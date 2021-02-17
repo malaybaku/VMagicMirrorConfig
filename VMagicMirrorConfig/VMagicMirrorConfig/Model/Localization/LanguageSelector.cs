@@ -7,13 +7,18 @@ namespace Baku.VMagicMirrorConfig
     class LanguageSelector
     {
         private static LanguageSelector? _instance;
-        public static LanguageSelector Instance
-            => _instance ??= new LanguageSelector();
+        public static LanguageSelector Instance => _instance ??= new LanguageSelector();
         private LanguageSelector() { }
 
         private IMessageSender? _sender = null;
 
-        public event Action<Languages>? LanguageChanged;
+        /// <summary>
+        /// <see cref="LanguageName"/>が変化すると発火します。
+        /// </summary>
+        /// <remarks>
+        /// 切り替わったあとの言語名は現状では不要。LocalizedStringで文字列取得する分には関知不要なため。
+        /// </remarks>
+        public event Action? LanguageChanged;
 
         private string _languageName = nameof(Languages.Japanese);
         public string LanguageName
@@ -27,9 +32,7 @@ namespace Baku.VMagicMirrorConfig
                 {
                     _languageName = value;
                     SetLanguage(LanguageName);
-                    LanguageChanged?.Invoke(
-                        value == nameof(Languages.Japanese) ? Languages.Japanese : Languages.English
-                        );
+                    LanguageChanged?.Invoke();
                 }
             }
         }
