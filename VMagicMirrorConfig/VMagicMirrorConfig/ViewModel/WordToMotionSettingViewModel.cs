@@ -235,7 +235,7 @@ namespace Baku.VMagicMirrorConfig
         public async void ForgetClip(BlendShapeItemViewModel blendShapeItem)
         {
             string name = blendShapeItem.BlendShapeName;
-            var indication = MessageIndication.ForgetBlendShapeClip(LanguageSelector.Instance.LanguageName);
+            var indication = MessageIndication.ForgetBlendShapeClip();
             bool res = await MessageBoxWrapper.Instance.ShowAsyncOnWordToMotionItemEdit(
                 indication.Title,
                 string.Format(indication.Content, name)

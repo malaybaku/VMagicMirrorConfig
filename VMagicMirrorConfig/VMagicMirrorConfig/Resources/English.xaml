@@ -368,6 +368,39 @@ Please test by typing "joy".</sys:String>
     <sys:String x:Key="WordToMotion_MidiAssign_After">Note to Change</sys:String>
     <sys:String x:Key="WordToMotion_MidiAssign_Clear">Clear</sys:String>
     
+    <!-- Dialog Messages -->
+    <sys:String x:Key="DialogTitle_LoadLocalVrm">Load VRM</sys:String>
+    <sys:String x:Key="DialogMessage_LoadLocalVrm">Please confirm the license in viewer window. Do you load the character?</sys:String>
+    <sys:String x:Key="DialogTitle_ResetAllSetting">Reset Setting</sys:String>
+    <sys:String x:Key="DialogMessage_ResetAllSetting">Are you sure you want to reset all settings in VMagicMirror?</sys:String>
+    <sys:String x:Key="DialogTitle_ResetCategorySetting">Reset Setting</sys:String>
+    <sys:String x:Key="DialogMessage_ResetCategorySetting">Are you sure you want to reset selected category setting?</sys:String>
+    <sys:String x:Key="DialogTitle_LoadSettingFileError">Load failed</sys:String>
+    <sys:String x:Key="DialogMessage_LoadSettingFileError">Failed to load setting file. Error: </sys:String>
+    <sys:String x:Key="DialogTitle_DeleteWtMItem">Delete Item</sys:String>
+    <sys:String x:Key="DialogMessage_DeleteWtmItem">Are you sure to delete this item '{0}'?</sys:String>
+    <sys:String x:Key="DialogTitle_ForgetBlendShapeInfo">Clear Blend Shape Setting</sys:String>
+    <sys:String x:Key="DialogMessage_ForgetBlendShapeInfo">Are you sure to clear the blend shape setting of '{0}'?</sys:String>
+    <sys:String x:Key="DialogTitle_InvalidIpAddress">Invalid IP Address</sys:String>
+    <sys:String x:Key="DialogMessage_InvalidIpAddress">Invalid IP Address is set, please check the input.</sys:String>
+    <sys:String x:Key="DialogTitle_ShowVRoidSDKUi">Connecting to VRoid Hub</sys:String>
+    <sys:String x:Key="DialogMessage_ShowVRoidSDKUi">Select model to load, or cancel operation.</sys:String>
+    <sys:String x:Key="DialogTitle_LoadPreviousVRoidModel">Connecting to VRoid Hub</sys:String>
+    <sys:String x:Key="DialogMessage_LoadPreviousVRoidModel">Trying to load avatar used in previous time. Select model or cancel operation.</sys:String>
+    <sys:String x:Key="DialogTitle_ExTrackerMissingBlendShape">Missing BlendShapeClip</sys:String>
+    <sys:String x:Key="DialogMessage_ExTrackerMissingBlendShape" xml:space="preserve">Detect missing BlendShapeClips for perfect sync.
 
+If your avatar looks normal, ignore this message. 
+Otherwise, close this dialog and see 'About Perfect Sync'
+to check how to setup the model.
+
+---
+Undefined BlendShaepClip names:
+</sys:String>
+    <sys:String x:Key="DialogTitle_ExTrackerCheckTurnOff">Turn Off External Tracker</sys:String>
+    <sys:String x:Key="DialogMessage_ExTrackerCheckTurnOff" xml:space="preserve">Do you want to turn off external tracker?.
+
+Choose 'OK' to enable webcam based tracking.
+</sys:String>
 
 </ResourceDictionary>

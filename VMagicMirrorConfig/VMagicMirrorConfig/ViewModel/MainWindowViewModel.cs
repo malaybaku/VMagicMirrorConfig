@@ -233,7 +233,7 @@ namespace Baku.VMagicMirrorConfig
 
             MessageSender.SendMessage(MessageFactory.Instance.OpenVrmPreview(filePath));
 
-            var indication = MessageIndication.LoadVrmConfirmation(LanguageName);
+            var indication = MessageIndication.LoadVrmConfirmation();
             bool res = await MessageBoxWrapper.Instance.ShowAsync(
                 indication.Title,
                 indication.Content,
@@ -262,7 +262,7 @@ namespace Baku.VMagicMirrorConfig
 
             //VRoidHub側の操作が終わるまでダイアログでガードをかける: モーダル的な管理状態をファイルロードの場合と揃える為
             _isVRoidHubUiActive = true;
-            var message = MessageIndication.ShowVRoidSdkUi(LanguageName);
+            var message = MessageIndication.ShowVRoidSdkUi();
             bool _ = await MessageBoxWrapper.Instance.ShowAsync(
                 message.Title, message.Content, MessageBoxWrapper.MessageBoxStyle.None
                 );
@@ -310,7 +310,7 @@ namespace Baku.VMagicMirrorConfig
 
         private async void ResetToDefault()
         {
-            var indication = MessageIndication.ResetSettingConfirmation(LanguageName);
+            var indication = MessageIndication.ResetSettingConfirmation();
             bool res = await MessageBoxWrapper.Instance.ShowAsync(
                 indication.Title,
                 indication.Content,
@@ -361,7 +361,7 @@ namespace Baku.VMagicMirrorConfig
             }
             catch (Exception ex)
             {
-                var indication = MessageIndication.ErrorLoadSetting(LanguageName);
+                var indication = MessageIndication.ErrorLoadSetting();
                 MessageBox.Show(
                     indication.Title,
                     indication.Content + ex.Message
@@ -468,7 +468,7 @@ namespace Baku.VMagicMirrorConfig
             MessageSender.SendMessage(MessageFactory.Instance.RequestLoadVRoidWithId(_lastLoadedVRoidModelId));
 
             _isVRoidHubUiActive = true;
-            var message = MessageIndication.ShowLoadingPreviousVRoid(LanguageName);
+            var message = MessageIndication.ShowLoadingPreviousVRoid();
             bool _ = await MessageBoxWrapper.Instance.ShowAsync(
                 message.Title, message.Content, MessageBoxWrapper.MessageBoxStyle.None
                 );

@@ -136,7 +136,7 @@ namespace Baku.VMagicMirrorConfig
         public ActionCommand ShowMissingBlendShapeNotificationCommand { get; }
         private async void ShowMissingBlendShapeNotification()
         {
-            var indication = MessageIndication.ExTrackerMissingBlendShapeNames(LanguageSelector.Instance.LanguageName);
+            var indication = MessageIndication.ExTrackerMissingBlendShapeNames();
             var lines = MissingBlendShapeNames.Value.Split('\n').ToList();
             if (lines.Count > 8)
             {
@@ -266,7 +266,7 @@ namespace Baku.VMagicMirrorConfig
         private async void EndExTrackerIfNeeded()
         {
             //NOTE: これもモデル層…いやメッセージボックス相当だからVMでいいのかな…？
-            var indication = MessageIndication.ExTrackerCheckTurnOff(LanguageSelector.Instance.LanguageName);
+            var indication = MessageIndication.ExTrackerCheckTurnOff();
             bool result = await MessageBoxWrapper.Instance.ShowAsync(
                 indication.Title,
                 indication.Content,

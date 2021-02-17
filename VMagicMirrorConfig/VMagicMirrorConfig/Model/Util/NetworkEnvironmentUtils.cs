@@ -36,7 +36,7 @@ namespace Baku.VMagicMirrorConfig
         {
             if (!IPAddress.TryParse(ipAddress, out var address))
             {
-                var indication = MessageIndication.InvalidIpAddress(LanguageSelector.Instance.LanguageName);
+                var indication = MessageIndication.InvalidIpAddress();
                 await MessageBoxWrapper.Instance.ShowAsync(indication.Title, indication.Content, MessageBoxWrapper.MessageBoxStyle.OK);
                 return;
             }

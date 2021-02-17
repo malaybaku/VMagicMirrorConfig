@@ -90,7 +90,7 @@ namespace Baku.VMagicMirrorConfig
         {
             if (MotionRequests?.Requests?.Contains(item) != true) { return; }
 
-            var indication = MessageIndication.DeleteWordToMotionItem(LanguageSelector.Instance.LanguageName);
+            var indication = MessageIndication.DeleteWordToMotionItem();
             bool res = await MessageBoxWrapper.Instance.ShowAsync(
                 indication.Title,
                 string.Format(indication.Content, item.Word),

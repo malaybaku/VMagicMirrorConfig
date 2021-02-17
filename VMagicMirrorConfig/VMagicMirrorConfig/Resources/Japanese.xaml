@@ -372,4 +372,40 @@
     <sys:String x:Key="WordToMotion_MidiAssign_After">変更後のノート</sys:String>
     <sys:String x:Key="WordToMotion_MidiAssign_Clear">クリア</sys:String>
    
+    <!-- Dialog Messages -->
+    <sys:String x:Key="DialogTitle_LoadLocalVrm">VRMの読み込み</sys:String>
+    <sys:String x:Key="DialogMessage_LoadLocalVrm">ビューアー画面のライセンスを確認してください。読み込みますか？</sys:String>
+    <sys:String x:Key="DialogTitle_ResetAllSetting">設定のリセット</sys:String>
+    <sys:String x:Key="DialogMessage_ResetAllSetting">リセットを実行すると全ての設定が初期状態に戻ります。リセットしますか？</sys:String>
+    <sys:String x:Key="DialogTitle_ResetCategorySetting">設定のリセット</sys:String>
+    <sys:String x:Key="DialogMessage_ResetCategorySetting">選択したカテゴリの設定をリセットしますか？</sys:String>
+    <sys:String x:Key="DialogTitle_LoadSettingFileError">ロード失敗</sys:String>
+    <sys:String x:Key="DialogMessage_LoadSettingFileError">設定ファイルのロードに失敗しました。エラー: </sys:String>
+    <sys:String x:Key="DialogTitle_DeleteWtMItem">モーションの削除</sys:String>
+    <sys:String x:Key="DialogMessage_DeleteWtmItem">このモーション'{0}'を削除しますか？</sys:String>
+    <sys:String x:Key="DialogTitle_ForgetBlendShapeInfo">ブレンドシェイプ情報のクリア</sys:String>
+    <sys:String x:Key="DialogMessage_ForgetBlendShapeInfo">このブレンドシェイプ'{0}'の設定を削除しますか？</sys:String>
+    <sys:String x:Key="DialogTitle_InvalidIpAddress">無効なIPアドレス</sys:String>
+    <sys:String x:Key="DialogMessage_InvalidIpAddress">無効なIPアドレスが指定されています。入力を確認して下さい。</sys:String>
+    <sys:String x:Key="DialogTitle_ShowVRoidSDKUi">VRoid Hubに接続中</sys:String>
+    <sys:String x:Key="DialogMessage_ShowVRoidSDKUi">キャラクターウィンドウ上でモデルを選択するか、またはキャンセルしてください。</sys:String>
+    <sys:String x:Key="DialogTitle_LoadPreviousVRoidModel">VRoid Hubに接続中</sys:String>
+    <sys:String x:Key="DialogMessage_LoadPreviousVRoidModel">前回使用したモデルのロードを試みています。モデルをロードするか、またはキャンセルしてください。</sys:String>
+    <sys:String x:Key="DialogTitle_ExTrackerMissingBlendShape">未定義のBlendShapeClipがあります</sys:String>
+    <sys:String x:Key="DialogMessage_ExTrackerMissingBlendShape" xml:space="preserve">パーフェクトシンクに必要なBlendShapeClipの一部が未定義です。
+
+モデルの見た目が正常であれば、この警告を無視して構いません。
+モデルの見た目がおかしい場合はこのダイアログを閉じてから
+「パーフェクトシンクとは？」をクリックし、
+モデルのセットアップ手順を確認して下さい。
+
+---
+定義されていないBlendShapeClipの名称:
+</sys:String>
+    <sys:String x:Key="DialogTitle_ExTrackerCheckTurnOff">外部トラッキング機能をオフ</sys:String>
+    <sys:String x:Key="DialogMessage_ExTrackerCheckTurnOff" xml:space="preserve">外部トラッキング機能をオフにしますか？
+webカメラでの顔トラッキングを有効にする場合は
+'OK'を選択し、iPhone/iPadとの連携を終了してください。
+</sys:String>
+    
 </ResourceDictionary>
