@@ -40,13 +40,13 @@
                     <CheckBox Margin="15,10,15,0" 
                                 VerticalContentAlignment="Center"
                                 Content="{DynamicResource ExTracker_Enable}" 
-                                IsChecked="{Binding EnableExternalTracking}"
+                                IsChecked="{Binding EnableExternalTracking.Value}"
                                 />
                     <CheckBox Margin="35,0,15,0" 
                                 VerticalContentAlignment="Center"
                                 Content="{DynamicResource ExTracker_Enable_ImageLipSync}" 
                                 IsEnabled="{Binding EnableExternalTracking}"
-                                IsChecked="{Binding EnableExternalTrackerLipSync}"
+                                IsChecked="{Binding EnableExternalTrackerLipSync.Value}"
                                 />
                 <Grid Margin="35,0,0,5"
                           IsEnabled="{Binding EnableExternalTracking}">
@@ -59,7 +59,7 @@
                                   Margin="0"
                                   VerticalContentAlignment="Center"
                                   Content="{DynamicResource ExTracker_Enable_PerfectSync}"                               
-                                  IsChecked="{Binding EnableExternalTrackerPerfectSync}"
+                                  IsChecked="{Binding EnableExternalTrackerPerfectSync.Value}"
                                   />
                     <Button Grid.Row="1"
                                 HorizontalAlignment="Left"
@@ -68,7 +68,7 @@
                                 Width="NaN"
                                 Style="{StaticResource MaterialDesignOutlinedButton}"
                                 Foreground="Black"
-                                Visibility="{Binding ShouldNotifyMissingBlendShapeClipNames,
+                                Visibility="{Binding ShouldNotifyMissingBlendShapeClipNames.Value,
                                                      Converter={StaticResource BooleanToVisibilityConverter}, 
                                                      FallbackValue=Collapsed}"
                                 Command="{Binding ShowMissingBlendShapeNotificationCommand}"                            
@@ -88,8 +88,8 @@
                                   Margin="20,0,0,0" 
                                   VerticalContentAlignment="Center"
                                   Content="{DynamicResource ExTracker_PerfectSync_UseVRoidDefault}" 
-                                  IsEnabled="{Binding EnableExternalTrackerPerfectSync}"
-                                  IsChecked="{Binding UseVRoidDefaultForPerfectSync}"
+                                  IsEnabled="{Binding EnableExternalTrackerPerfectSync.Value}"
+                                  IsChecked="{Binding UseVRoidDefaultForPerfectSync.Value}"
                                   />
                     <Button Grid.Row="0" Style="{StaticResource MaterialDesignOutlinedButton}"
                                 Padding="0"
@@ -154,7 +154,7 @@
                                     Margin="10,0"
                                     Orientation="Horizontal"
                                     >
-                            <TextBox Text="{Binding IFacialMocapTargetIpAddress}"
+                            <TextBox Text="{Binding IFacialMocapTargetIpAddress.Value}"
                                      md:HintAssist.Hint="{DynamicResource ExTracker_iFM_IpHint}"
                                      Width="150"
                                      />

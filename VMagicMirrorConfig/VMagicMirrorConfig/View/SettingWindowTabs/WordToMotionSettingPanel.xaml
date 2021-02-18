@@ -8,7 +8,7 @@
              xmlns:vmm="clr-namespace:Baku.VMagicMirrorConfig"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d"
-             d:DataContext="{x:Type vmm:WordToMotionSettingViewModel}"
+             d:DataContext="{d:DesignInstance Type={x:Type vmm:WordToMotionSettingViewModel}}"
              d:DesignWidth="400"
              d:DesignHeight="750">
     <UserControl.Resources>

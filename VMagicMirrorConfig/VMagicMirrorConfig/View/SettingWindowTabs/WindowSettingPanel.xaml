@@ -8,7 +8,7 @@
              mc:Ignorable="d"
              d:DesignWidth="400"
              d:DesignHeight="1050"
-             d:DataContext="{x:Type vmm:WindowSettingViewModel}"
+             d:DataContext="{d:DesignInstance Type={x:Type vmm:WindowSettingViewModel}}"
              >
     <UserControl.Resources>
         <Style TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}">
@@ -33,17 +33,17 @@
                                    />
 
                     <CheckBox Content="{DynamicResource Window_Transparent}"
-                              IsChecked="{Binding IsTransparent, Mode=TwoWay}"
+                              IsChecked="{Binding IsTransparent.Value, Mode=TwoWay}"
                               Margin="15,0"
                               />
 
                     <CheckBox Content="{DynamicResource Window_Draggable}"
-                              IsChecked="{Binding WindowDraggable, Mode=TwoWay}"
+                              IsChecked="{Binding WindowDraggable.Value, Mode=TwoWay}"
                               Margin="15,0"
                               />
 
                     <CheckBox Content="{DynamicResource Window_TopMost}"
-                              IsChecked="{Binding TopMost, Mode=TwoWay}"
+                              IsChecked="{Binding TopMost.Value, Mode=TwoWay}"
                               Margin="15,0"
                               />
 
@@ -121,7 +121,7 @@
                                            Text="R"/>
                                 <Slider Grid.Row="0" Grid.Column="1"
                                         x:Name="sliderR"
-                                        Value="{Binding R, Mode=TwoWay}"
+                                        Value="{Binding R.Value, Mode=TwoWay}"
                                         />
                                 <TextBox Grid.Row="0" Grid.Column="2"
                                          Text="{Binding Value, ElementName=sliderR}"
@@ -131,7 +131,7 @@
                                            Text="G"/>
                                 <Slider Grid.Row="1" Grid.Column="1"
                                         x:Name="sliderG"
-                                        Value="{Binding G, Mode=TwoWay}"
+                                        Value="{Binding G.Value, Mode=TwoWay}"
                                         />
                                 <TextBox Grid.Row="1" Grid.Column="2"
                                          Text="{Binding Value, ElementName=sliderG}"
@@ -141,7 +141,7 @@
                                            Text="B"/>
                                 <Slider Grid.Row="2" Grid.Column="1"
                                         x:Name="sliderB"
-                                        Value="{Binding B, Mode=TwoWay}"
+                                        Value="{Binding B.Value, Mode=TwoWay}"
                                         />
                                 <TextBox Grid.Row="2" Grid.Column="2"
                                          Text="{Binding Value, ElementName=sliderB}"
@@ -183,7 +183,7 @@
                     <Slider Minimum="0" Maximum="4"
                             Margin="15,0"
                             Style="{StaticResource MaterialDesignDiscreteSlider}"
-                            Value="{Binding WholeWindowTransparencyLevel, Mode=TwoWay}"
+                            Value="{Binding WholeWindowTransparencyLevel.Value, Mode=TwoWay}"
                             />
 
                     <Grid Margin="20,10">
@@ -240,7 +240,7 @@
                         <Slider Grid.Column="0"                                
                                 x:Name="sliderAlphaWhenTransparent"
                                 Minimum="32" Maximum="255"
-                                Value="{Binding AlphaValueOnTransparent, Mode=TwoWay}"
+                                Value="{Binding AlphaValueOnTransparent.Value, Mode=TwoWay}"
                                 />
                         <TextBox Grid.Column="2"
                                  Text="{Binding Value, ElementName=sliderAlphaWhenTransparent}"

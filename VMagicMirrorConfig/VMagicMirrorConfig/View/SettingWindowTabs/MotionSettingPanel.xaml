@@ -6,7 +6,7 @@
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:vmm="clr-namespace:Baku.VMagicMirrorConfig"
              mc:Ignorable="d"
-             d:DataContext="{x:Type vmm:MotionSettingViewModel}"
+             d:DataContext="{d:DesignInstance Type={x:Type vmm:MotionSettingViewModel}}"
              d:DesignWidth="400"
              d:DesignHeight="1100"
              >
@@ -41,7 +41,7 @@
                     </StackPanel>
 
                     <CheckBox Margin="15,0"
-                              IsChecked="{Binding EnableNoHandTrackMode}"
+                              IsChecked="{Binding EnableNoHandTrackMode.Value}"
                               >
                         <CheckBox.Content>
                             <TextBlock Text="{DynamicResource Motion_FullBody_NoHandTrackMode}"/>
@@ -73,12 +73,12 @@
 
                     <CheckBox Margin="15,5,15,2.5" 
                               Content="{DynamicResource Motion_Arm_EnableHidMotion}"
-                              IsChecked="{Binding EnableHidArmMotion}"
+                              IsChecked="{Binding EnableHidArmMotion.Value}"
                               />
 
                     <CheckBox Margin="25,5,15,2.5" 
-                              IsEnabled="{Binding EnableHidArmMotion}"
-                              IsChecked="{Binding EnableHidRandomTyping}">
+                              IsEnabled="{Binding EnableHidArmMotion.Value}"
+                              IsChecked="{Binding EnableHidRandomTyping.Value}">
                         <StackPanel Orientation="Horizontal">
                             <md:PackIcon Kind="Lock" VerticalAlignment="Center"/>
                             <TextBlock Text="{DynamicResource Motion_Arm_EnableRandomTyping}"/>
@@ -87,11 +87,11 @@
 
                     <CheckBox Margin="15,5" 
                               Content="{DynamicResource Motion_Arm_EnableShoulderModify}"
-                              IsChecked="{Binding EnableShoulderMotionModify}"
+                              IsChecked="{Binding EnableShoulderMotionModify.Value}"
                               />
                     <CheckBox Margin="15,0,15,10" 
                               Content="{DynamicResource Motion_Arm_EnableTypingAndMouseTimeout}"
-                              IsChecked="{Binding EnableHandDownTimeout}"
+                              IsChecked="{Binding EnableHandDownTimeout.Value}"
                               />
 
 
@@ -117,7 +117,7 @@
                                 x:Name="sliderSpineWaistWidth"
                                 Minimum="1"
                                 Maximum="100"
-                                Value="{Binding WaistWidth, Mode=TwoWay}"
+                                Value="{Binding WaistWidth.Value, Mode=TwoWay}"
                                 />
                         <TextBox Grid.Row="0" Grid.Column="2"
                                  Text="{Binding Value, ElementName=sliderSpineWaistWidth}"
@@ -129,7 +129,7 @@
                                 x:Name="sliderElbowCloseStrength"
                                 Minimum="0"
                                 Maximum="100"
-                                Value="{Binding ElbowCloseStrength, Mode=TwoWay}"
+                                Value="{Binding ElbowCloseStrength.Value, Mode=TwoWay}"
                                 />
                         <TextBox Grid.Row="1" Grid.Column="2"
                                  Text="{Binding Value, ElementName=sliderElbowCloseStrength}"
@@ -140,14 +140,14 @@
                                   Margin="5" 
                                   Content="{DynamicResource Motion_Arm_FpsAssumedRightHand}"
                                   ToolTip="{DynamicResource Motion_Arm_FpsAssumedRightHand_Tooltip}"
-                                  IsChecked="{Binding EnableFpsAssumedRightHand}"
+                                  IsChecked="{Binding EnableFpsAssumedRightHand.Value}"
                                   />
 
                         <CheckBox Grid.Row="3" Grid.Column="0"
                                   Grid.ColumnSpan="3"
                                   Margin="5" 
                                   Content="{DynamicResource Motion_Arm_EnablePresenterMotion}"
-                                  IsChecked="{Binding EnablePresenterMotion}"
+                                  IsChecked="{Binding EnablePresenterMotion.Value}"
                                   />
 
                         <CheckBox Grid.Row="4" Grid.Column="0"
@@ -155,7 +155,7 @@
                                   Margin="15,5" 
                                   IsEnabled="{Binding EnablePresenterMotion}"
                                   Content="{DynamicResource Motion_Arm_ShowPresentationPointer}"
-                                  IsChecked="{Binding ShowPresentationPointer}"
+                                  IsChecked="{Binding ShowPresentationPointer.Value}"
                                   />
                        
                         <TextBlock Grid.Row="6" Grid.Column="0"
@@ -166,7 +166,7 @@
                                 Minimum="1"
                                 Maximum="100"
                                 IsEnabled="{Binding EnablePresenterMotion}"
-                                Value="{Binding PresentationArmRadiusMin, Mode=TwoWay}"
+                                Value="{Binding PresentationArmRadiusMin.Value, Mode=TwoWay}"
                                 />
                         <TextBox Grid.Row="6" Grid.Column="2"
                                  IsEnabled="{Binding EnablePresenterMotion}"
@@ -214,7 +214,7 @@
                                 x:Name="sliderWristToTip"
                                 Minimum="0"
                                 Maximum="50"
-                                Value="{Binding LengthFromWristToTip, Mode=TwoWay}"
+                                Value="{Binding LengthFromWristToTip.Value, Mode=TwoWay}"
                                 />
                         <TextBox Grid.Row="0" Grid.Column="2"
                                  Text="{Binding Value, ElementName=sliderWristToTip}"
@@ -226,7 +226,7 @@
                                 x:Name="sliderHandYOffsetBasic"
                                 Minimum="0"
                                 Maximum="50"
-                                Value="{Binding HandYOffsetBasic, Mode=TwoWay}"
+                                Value="{Binding HandYOffsetBasic.Value, Mode=TwoWay}"
                                 />
                         <TextBox Grid.Row="2" Grid.Column="2"
                                  Text="{Binding Value, ElementName=sliderHandYOffsetBasic}"
@@ -238,7 +238,7 @@
                                 x:Name="sliderHandYOffsetAfterKeyDown"
                                 Minimum="0"
                                 Maximum="50"
-                                Value="{Binding HandYOffsetAfterKeyDown, Mode=TwoWay}"
+                                Value="{Binding HandYOffsetAfterKeyDown.Value, Mode=TwoWay}"
                                 />
                         <TextBox Grid.Row="3" Grid.Column="2"
                                  Text="{Binding Value, ElementName=sliderHandYOffsetAfterKeyDown}"
@@ -284,7 +284,7 @@
                                   Margin="10,0"
                                   VerticalAlignment="Center"
                                   VerticalContentAlignment="Center"
-                                  IsChecked="{Binding EnableWaitMotion}"
+                                  IsChecked="{Binding EnableWaitMotion.Value}"
                                   >
                             <CheckBox.Content>
                                 <TextBlock Text="{DynamicResource Motion_Wait_EnableWaitMotion}"/>
@@ -297,7 +297,7 @@
                                 x:Name="sliderWaitMotionScale"
                                 Minimum="1"
                                 Maximum="500"
-                                Value="{Binding WaitMotionScale, Mode=TwoWay}"
+                                Value="{Binding WaitMotionScale.Value, Mode=TwoWay}"
                                 />
                         <TextBox Grid.Row="1" Grid.Column="2"
                                  Text="{Binding Value, ElementName=sliderWaitMotionScale}"
@@ -310,7 +310,7 @@
                                 x:Name="sliderWaitMotionPeriod"
                                 Minimum="1"
                                 Maximum="30"
-                                Value="{Binding WaitMotionPeriod, Mode=TwoWay}"
+                                Value="{Binding WaitMotionPeriod.Value, Mode=TwoWay}"
                                 />
                         <TextBox Grid.Row="2" Grid.Column="2"
                                  Text="{Binding Value, ElementName=sliderWaitMotionPeriod}"

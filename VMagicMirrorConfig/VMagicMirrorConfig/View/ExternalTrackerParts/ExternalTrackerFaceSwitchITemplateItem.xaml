@@ -6,8 +6,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vmm="clr-namespace:Baku.VMagicMirrorConfig"
              mc:Ignorable="d" 
-             d:DataContext="{d:DesignInstance Type={x:Type vmm:ExternalTrackerFaceSwitchItemViewModel}}"
-             
+             d:DataContext="{d:DesignInstance Type={x:Type vmm:ExternalTrackerFaceSwitchItemViewModel}}"             
              d:DesignWidth="450">
     <UserControl.Resources>
         <vmm:EmptyToDoNothingTextConverter x:Key="EmptyToNoneTextConverter"/>

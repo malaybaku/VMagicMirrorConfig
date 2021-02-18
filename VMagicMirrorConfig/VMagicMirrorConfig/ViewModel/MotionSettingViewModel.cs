@@ -199,9 +199,9 @@ namespace Baku.VMagicMirrorConfig
 
         #region Eye
 
-        public RPropertyMin<bool> UseLookPointAtNone => _model.UseLookAtPointNone;
-        public RPropertyMin<bool> UseLookPointAtMousePointer => _model.UseLookAtPointMousePointer;
-        public RPropertyMin<bool> UseLookPointAtMainCamera => _model.UseLookAtPointMainCamera;
+        public RPropertyMin<bool> UseLookAtPointNone => _model.UseLookAtPointNone;
+        public RPropertyMin<bool> UseLookAtPointMousePointer => _model.UseLookAtPointMousePointer;
+        public RPropertyMin<bool> UseLookAtPointMainCamera => _model.UseLookAtPointMainCamera;
         public RPropertyMin<int> EyeBoneRotationScale => _model.EyeBoneRotationScale;
 
         //NOTE: ちょっと作法が悪いけど、「-7.0 ~ +7.0」のようなテキストでViewにわたす
