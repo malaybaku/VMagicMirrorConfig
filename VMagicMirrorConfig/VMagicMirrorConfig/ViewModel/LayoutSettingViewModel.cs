@@ -4,9 +4,12 @@ namespace Baku.VMagicMirrorConfig
 {
     public class LayoutSettingViewModel : SettingViewModelBase
     {
-        internal LayoutSettingViewModel(LayoutSettingModel model, IMessageSender sender, IMessageReceiver receiver) : base(sender)
+        internal LayoutSettingViewModel(
+            LayoutSettingModel model, GamepadSettingModel gamepadModel, IMessageSender sender, IMessageReceiver receiver
+            ) : base(sender)
         {
             _model = model;
+            _gamepadModel = gamepadModel;
 
             _typingEffectItem = TypingEffectSelections[0];
             receiver.ReceivedCommand += OnReceiveCommand;
@@ -37,6 +40,8 @@ namespace Baku.VMagicMirrorConfig
         }
 
         private readonly LayoutSettingModel _model;
+        //NOTE: ゲームパッド設定(表示/非表示)も使うため、ここに記載。ちょっと例外的な措置ではある
+        private readonly GamepadSettingModel _gamepadModel;
 
         private void OnReceiveCommand(object? sender, CommandReceivedEventArgs e)
         {
@@ -70,7 +75,6 @@ namespace Baku.VMagicMirrorConfig
         }
 
         public RPropertyMin<bool> EnableMidiRead => _model.EnableMidiRead;
-        public RPropertyMin<bool> MidiControllerVisibility => _model.MidiControllerVisibility;
 
         //NOTE: カメラ位置、デバイスレイアウト、クイックセーブした視点については、ユーザーが直接いじる想定ではない
 
@@ -84,14 +88,15 @@ namespace Baku.VMagicMirrorConfig
         public ActionCommand<string> QuickSaveViewPointCommand { get; }
         public ActionCommand<string> QuickLoadViewPointCommand { get; }
 
-        //TODO: この辺の処理はモデルに移動してよい
-        
-
         #endregion
 
         public ActionCommand ResetCameraPositionCommand { get; }
 
+
+        // デバイス類の表示/非表示
         public RPropertyMin<bool> HidVisibility => _model.HidVisibility;
+        public RPropertyMin<bool> MidiControllerVisibility => _model.MidiControllerVisibility;
+        public RPropertyMin<bool> GamepadVisibility => _gamepadModel.GamepadVisibility;
 
         public RPropertyMin<bool> EnableDeviceFreeLayout => _model.EnableDeviceFreeLayout;
 

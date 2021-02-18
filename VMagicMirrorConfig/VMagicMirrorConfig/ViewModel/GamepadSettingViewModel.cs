@@ -15,7 +15,6 @@
 
         public RPropertyMin<bool> GamepadEnabled => _model.GamepadEnabled;
         public RPropertyMin<bool> PreferDirectInput => _model.PreferDirectInputGamepad;
-        public RPropertyMin<bool> GamepadVisibility => _model.GamepadVisibility;
 
         //NOTE: 以下、本来ならEnum値1つで管理する方がよいが、TwoWayバインディングが簡便になるのでbool4つで代用。
         //というのをViewModel層でやってたのがModelに波及してしまった悪い例です…
