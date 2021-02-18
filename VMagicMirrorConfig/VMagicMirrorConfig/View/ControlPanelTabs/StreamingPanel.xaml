@@ -6,7 +6,7 @@
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:vmm="clr-namespace:Baku.VMagicMirrorConfig"
              mc:Ignorable="d" 
-             d:DataContext="{x:Type vmm:MainWindowViewModel}"
+             d:DataContext="{d:DesignInstance Type={x:Type vmm:MainWindowViewModel}}"
              d:DesignWidth="520"
              d:DesignHeight="590"             
              >
@@ -86,12 +86,12 @@
 
                         <CheckBox Style="{StaticResource SmallMarginCheckBox}"
                                   Content="{DynamicResource Window_Transparent}"
-                                  IsChecked="{Binding WindowSetting.IsTransparent, Mode=TwoWay}"
+                                  IsChecked="{Binding WindowSetting.IsTransparent.Value, Mode=TwoWay}"
                                   />
 
                         <CheckBox Style="{StaticResource SmallMarginCheckBox}"
                                   Content="{DynamicResource Window_Draggable}"
-                                  IsChecked="{Binding WindowSetting.WindowDraggable, Mode=TwoWay}"
+                                  IsChecked="{Binding WindowSetting.WindowDraggable.Value, Mode=TwoWay}"
                                   />
                     </StackPanel>
                 </Border>
@@ -132,7 +132,7 @@
 
                             <CheckBox Grid.Row="0" Grid.Column="1"
                                         Margin="5"
-                                        IsChecked="{Binding MotionSetting.EnableLipSync}">
+                                        IsChecked="{Binding MotionSetting.EnableLipSync.Value}">
                                 <CheckBox.Content>
                                     <TextBlock Text="{DynamicResource Motion_Mouth_EnableLipSync}"/>
                                 </CheckBox.Content>
@@ -141,7 +141,7 @@
                             <ComboBox Grid.Row="0" Grid.Column="2"
                                         HorizontalAlignment="Stretch"
                                         Margin="5,0"
-                                        IsEnabled="{Binding MotionSetting.EnableLipSync}"
+                                        IsEnabled="{Binding MotionSetting.EnableLipSync.Value}"
                                         ItemsSource="{Binding MotionSetting.MicrophoneDeviceNames}"
                                         SelectedItem="{Binding MotionSetting.LipSyncMicrophoneDeviceName, Converter={StaticResource WhiteSpaceStringToNullConverter}}"
                                         md:HintAssist.Hint="Microphone"
@@ -163,7 +163,7 @@
                                     Maximum="50"
                                     TickFrequency="1"
                                     IsSnapToTickEnabled="True"
-                                    Value="{Binding MotionSetting.MicrophoneSensitivity, Mode=TwoWay}"
+                                    Value="{Binding MotionSetting.MicrophoneSensitivity.Value, Mode=TwoWay}"
                                     />
                                 <TextBox Grid.Column="2"
                                          Text="{Binding Value, ElementName=sliderMicrophoneSensitivity}"
@@ -178,8 +178,8 @@
                                     <ColumnDefinition />
                                     <ColumnDefinition Width="100" />
                                 </Grid.ColumnDefinitions>
-                                <CheckBox IsEnabled="{Binding MotionSetting.EnableLipSync}"
-                                      IsChecked="{Binding MotionSetting.ShowMicrophoneVolume}"
+                                <CheckBox IsEnabled="{Binding MotionSetting.EnableLipSync.Value}"
+                                      IsChecked="{Binding MotionSetting.ShowMicrophoneVolume.Value}"
                                       HorizontalAlignment="Left"
                                       Margin="15,0,0,0"
                                       >
@@ -202,10 +202,10 @@
                                         <Grid.OpacityMask>
                                             <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
                                                 <GradientStop Offset="0" Color="White"/>
-                                                <GradientStop Offset="{Binding MotionSetting.MicrophoneVolumeValue,
+                                                <GradientStop Offset="{Binding MotionSetting.MicrophoneVolumeValue.Value,
                                                                                Converter={StaticResource Lv50Converter}}"
                                                           Color="White"/>
-                                                <GradientStop Offset="{Binding MotionSetting.MicrophoneVolumeValue,
+                                                <GradientStop Offset="{Binding MotionSetting.MicrophoneVolumeValue.Value,
                                                                                Converter={StaticResource Lv50Converter}}"
                                                           Color="Transparent"/>
                                             </LinearGradientBrush>
@@ -228,7 +228,7 @@
 
                             <CheckBox Grid.Row="3" Grid.Column="1"
                                         Margin="5"
-                                        IsChecked="{Binding MotionSetting.EnableFaceTracking}"
+                                        IsChecked="{Binding MotionSetting.EnableFaceTracking.Value}"
                                         >
                                 <CheckBox.Content>
                                     <TextBlock Text="{DynamicResource Motion_Face_EnableFaceTracking}"/>
@@ -238,9 +238,9 @@
                             <ComboBox Grid.Row="3" Grid.Column="2"
                                         HorizontalAlignment="Stretch"
                                         Margin="5,0"
-                                        IsEnabled="{Binding MotionSetting.EnableFaceTracking}"
+                                        IsEnabled="{Binding MotionSetting.EnableFaceTracking.Value}"
                                         ItemsSource="{Binding MotionSetting.CameraDeviceNames}"
-                                        SelectedItem="{Binding MotionSetting.CameraDeviceName, Converter={StaticResource WhiteSpaceStringToNullConverter}}"
+                                        SelectedItem="{Binding MotionSetting.CameraDeviceName.Value, Converter={StaticResource WhiteSpaceStringToNullConverter}}"
                                         md:HintAssist.Hint="Camera"
                                         />
                         </Grid>
@@ -286,8 +286,8 @@
                         </md:Card>
 
                         <CheckBox Margin="50,0,5,0"
-                                  IsEnabled="{Binding MotionSetting.EnableFaceTracking}"
-                                  IsChecked="{Binding MotionSetting.EnableWebCamHighPowerMode}"
+                                  IsEnabled="{Binding MotionSetting.EnableFaceTracking.Value}"
+                                  IsChecked="{Binding MotionSetting.EnableWebCamHighPowerMode.Value}"
                                   >
                             <CheckBox.Content>
                                 <TextBlock Text="{DynamicResource Motion_Face_EnableWebCamHighPowerMode}"/>
@@ -295,8 +295,8 @@
                         </CheckBox>
 
                         <CheckBox Margin="50,0,5,0"
-                                  IsEnabled="{Binding MotionSetting.EnableFaceTracking}"
-                                  IsChecked="{Binding MotionSetting.EnableImageBasedHandTracking}"
+                                  IsEnabled="{Binding MotionSetting.EnableFaceTracking.Value}"
+                                  IsChecked="{Binding MotionSetting.EnableImageBasedHandTracking.Value}"
                                   >
                             <CheckBox.Content>
                                 <TextBlock Text="{DynamicResource Motion_Face_EnableImageBasedHandTracking}"/>
@@ -331,17 +331,17 @@
                             <CheckBox Grid.Column="0"
                                         HorizontalAlignment="Left"
                                         Margin="5,0"
-                                        IsChecked="{Binding MotionSetting.UseLookAtPointMousePointer}"
+                                        IsChecked="{Binding MotionSetting.UseLookAtPointMousePointer.Value}"
                                         Content="{DynamicResource Motion_Eye_LookAtPoint_MousePointer}"/>
                             <CheckBox Grid.Column="1"
                                         HorizontalAlignment="Left"
                                         Margin="5,0"
-                                        IsChecked="{Binding MotionSetting.UseLookAtPointMainCamera}"
+                                        IsChecked="{Binding MotionSetting.UseLookAtPointMainCamera.Value}"
                                         Content="{DynamicResource Motion_Eye_LookAtPoint_MainCamera}"/>
                             <CheckBox Grid.Column="2"
                                         HorizontalAlignment="Left"
                                         Margin="5,0"
-                                        IsChecked="{Binding MotionSetting.UseLookAtPointNone}"
+                                        IsChecked="{Binding MotionSetting.UseLookAtPointNone.Value}"
                                         Content="{DynamicResource Motion_Eye_LookAtPoint_None}"/>
                         </Grid>
                     </StackPanel>
@@ -421,20 +421,20 @@
                         </StackPanel>
 
                         <CheckBox Style="{StaticResource SmallMarginCheckBox}"
-                                  IsChecked="{Binding LayoutSetting.HidVisibility}"
+                                  IsChecked="{Binding LayoutSetting.HidVisibility.Value}"
                                   Content="{DynamicResource Layout_Hid_Streaming}"
                                   />
                         <CheckBox Style="{StaticResource SmallMarginCheckBox}"
                                   Content="{DynamicResource Layout_Gamepad}"
-                                  IsChecked="{Binding LayoutSetting.Gamepad.GamepadVisibility}"
+                                  IsChecked="{Binding LayoutSetting.GamepadVisibility.Value}"
                                   />
                         <CheckBox Style="{StaticResource SmallMarginCheckBox}"
                                   Content="{DynamicResource Shadow_Enable_Streaming}"
-                                  IsChecked="{Binding LightSetting.EnableShadow}"
+                                  IsChecked="{Binding LightSetting.EnableShadow.Value}"
                                   />
                         <CheckBox Style="{StaticResource SmallMarginCheckBox}"
                                   Content="{DynamicResource Wind_Enable_Streaming}"
-                                  IsChecked="{Binding LightSetting.EnableWind}"
+                                  IsChecked="{Binding LightSetting.EnableWind.Value}"
                                   />
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -509,7 +509,7 @@
                         </Grid>
                         
                         <CheckBox Content="{DynamicResource Layout_EnableFreeCameraMode}" 
-                                    IsChecked="{Binding LayoutSetting.EnableFreeCameraMode}"
+                                    IsChecked="{Binding LayoutSetting.EnableFreeCameraMode.Value}"
                                     Margin="10,0" Height="25"
                                     />
 
@@ -613,7 +613,7 @@
                                     Grid.ColumnSpan="3"
                                     Margin="10,0" 
                                     Content="{DynamicResource Layout_DeviceFreeLayout}"
-                                    IsChecked="{Binding LayoutSetting.EnableDeviceFreeLayout}"
+                                    IsChecked="{Binding LayoutSetting.EnableDeviceFreeLayout.Value}"
                                     />
 
                         <Button HorizontalAlignment="Left"
@@ -650,11 +650,11 @@
 
                         <CheckBox Margin="10,3,10,0" 
                                   Content="{DynamicResource Motion_Arm_EnablePresenterMotion}"
-                                  IsChecked="{Binding MotionSetting.EnablePresenterMotion}"
+                                  IsChecked="{Binding MotionSetting.EnablePresenterMotion.Value}"
                                   />
 
                         <CheckBox Margin="10,0,10,3"
-                                  IsChecked="{Binding MotionSetting.EnableNoHandTrackMode}"                              >
+                                  IsChecked="{Binding MotionSetting.EnableNoHandTrackMode.Value}"                              >
                             <CheckBox.Content>
                                 <TextBlock Text="{DynamicResource Motion_FullBody_NoHandTrackMode_Streaming}"/>
                             </CheckBox.Content>
