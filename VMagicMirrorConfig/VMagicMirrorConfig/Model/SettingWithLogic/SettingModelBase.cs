@@ -9,7 +9,7 @@ namespace Baku.VMagicMirrorConfig
     /// 特にEntityとモデルクラス間のプロパティをいい感じにする役目を持つ
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
-    class SettingModelBase<TEntity> : NotifiableBase
+    abstract class SettingModelBase<TEntity> : NotifiableBase
         where TEntity : SettingEntityBase, new()
     {
         public SettingModelBase(IMessageSender sender)
@@ -33,6 +33,9 @@ namespace Baku.VMagicMirrorConfig
 
         /// <summary>Load()が完全に完了すると発火します。</summary>
         public event EventHandler? Loaded;
+
+        /// <summary>設定を初期状態に戻します。</summary>
+        public abstract void ResetToDefault();
 
         /// <summary>
         /// Load()を呼び出してから呼び出し完了するまでのあいだtrueになるフラグ。

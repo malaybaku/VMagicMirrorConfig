@@ -264,7 +264,7 @@ namespace Baku.VMagicMirrorConfig
             WaitMotionPeriod.Value = setting.WaitMotionPeriod;
         }
 
-        public void ResetToDefault()
+        public override void ResetToDefault()
         {
             var setting = MotionSetting.Default;
             EnableNoHandTrackMode.Value = setting.EnableNoHandTrackMode;

@@ -129,7 +129,7 @@ namespace Baku.VMagicMirrorConfig
             WindYaw.Value = setting.WindYaw;
         }
 
-        public void ResetToDefault()
+        public override void ResetToDefault()
         {
             ResetLightSetting();
             ResetShadowSetting();

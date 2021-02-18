@@ -20,6 +20,11 @@ namespace Baku.VMagicMirrorConfig
             EnablePreview = new RPropertyMin<bool>(false, b => SendMessage(factory.EnableWordToMotionPreview(b)));
         }
 
+        public override void ResetToDefault()
+        {
+            //何もしない: ここは複雑すぎるので…
+        }
+
         //TODO: ここデフォルトはKeyboardWordじゃなかったっけ？要確認。
         public RPropertyMin<int> SelectedDeviceType { get; }
 

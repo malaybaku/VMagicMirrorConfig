@@ -7,14 +7,14 @@ namespace Baku.VMagicMirrorConfig
     /// </summary>
     internal class DeviceFreeLayoutHelper
     {
-        public DeviceFreeLayoutHelper(LayoutSettingViewModel layout, WindowSettingViewModel window)
+        public DeviceFreeLayoutHelper(LayoutSettingModel layout, WindowSettingModel window)
         {
             _layout = layout;
             _window = window;
         }
 
-        private readonly LayoutSettingViewModel _layout;
-        private readonly WindowSettingViewModel _window;
+        private readonly LayoutSettingModel _layout;
+        private readonly WindowSettingModel _window;
 
         private bool _freeCameraWhenStartFreeLayout = false;
         private bool _transparentWhenStartFreeLayout = false;

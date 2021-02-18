@@ -166,18 +166,11 @@ namespace Baku.VMagicMirrorConfig
 
         #endregion
 
-        #region Reset API
 
         public ActionCommand ResetLightSettingCommand { get; }
         public ActionCommand ResetShadowSettingCommand { get; }
         public ActionCommand ResetBloomSettingCommand { get; }
         public ActionCommand ResetWindSettingCommand { get; }
 
-        public override void ResetToDefault()
-        {
-            _model.ResetToDefault();
-        }
-
-        #endregion
     }
 }

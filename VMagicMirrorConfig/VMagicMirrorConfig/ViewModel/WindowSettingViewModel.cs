@@ -56,7 +56,5 @@ namespace Baku.VMagicMirrorConfig
         public ActionCommand ResetWindowPositionCommand { get; }
         public ActionCommand ResetBackgroundColorSettingCommand { get; }
         public ActionCommand ResetOpacitySettingCommand { get; }
-
-        public override void ResetToDefault() => _model.ResetToDefault();
     }
 }

@@ -93,6 +93,6 @@
         public RPropertyMin<bool> GamepadLeanReverseHorizontal { get; } 
         public RPropertyMin<bool> GamepadLeanReverseVertical { get; }
 
-        public void ResetToDefault() => Load(GamepadSetting.Default);
+        public override void ResetToDefault() => Load(GamepadSetting.Default);
     }
 }

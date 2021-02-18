@@ -21,15 +21,6 @@ namespace Baku.VMagicMirrorConfig
         private readonly SettingModel _model;
         private readonly IMessageSender _sender;
 
-
-        //TODO: この辺の値はロード/セーブ時に加えてキャラロードとか設定改変でも変化するぞ！
-        //というかSettingModelに書いた方が良い気がする
-        private string _lastVrmLoadFilePath = "";
-        private string _lastLoadedVRoidModelId = "";
-        private bool AutoLoadLastLoadedVrm = false;
-        private string LanguageName = "Japanese";
-
-
         public void SaveSetting(string path, bool isInternalFile)
         {
             if (File.Exists(path))
@@ -39,13 +30,17 @@ namespace Baku.VMagicMirrorConfig
 
             using (var sw = new StreamWriter(path))
             {
+                var autoLoadEnabled = _model.AutoLoadLastLoadedVrm.Value;
+
                 var saveData = new EntityBasedSaveData()
                 {
                     IsInternalSaveFile = isInternalFile,
-                    LastLoadedVrmFilePath = isInternalFile ? _lastVrmLoadFilePath : "",
-                    LastLoadedVRoidModelId = isInternalFile ? _lastLoadedVRoidModelId : "",
-                    AutoLoadLastLoadedVrm = isInternalFile ? AutoLoadLastLoadedVrm : false,
-                    PreferredLanguageName = isInternalFile ? LanguageName : "",
+                    LastLoadedVrmFilePath = 
+                        (isInternalFile && autoLoadEnabled) ? _model.LastVrmLoadFilePath : "",
+                    LastLoadedVRoidModelId = 
+                        (isInternalFile && autoLoadEnabled) ? _model.LastLoadedVRoidModelId : "",
+                    AutoLoadLastLoadedVrm = isInternalFile ? autoLoadEnabled : false,
+                    PreferredLanguageName = isInternalFile ? _model.LanguageName.Value : "",
                     WindowSetting = _model.WindowSetting.Save(),
                     MotionSetting = _model.MotionSetting.Save(),
                     LayoutSetting = _model.LayoutSetting.Save(),
@@ -57,7 +52,7 @@ namespace Baku.VMagicMirrorConfig
                 //ここだけ互換性の都合で入れ子になってることに注意
                 saveData.LayoutSetting.Gamepad = _model.GamepadSetting.Save();
 
-                new XmlSerializer(typeof(SaveData)).Serialize(sw, saveData);
+                new XmlSerializer(typeof(EntityBasedSaveData)).Serialize(sw, saveData);
             }
         }
 
@@ -75,10 +70,10 @@ namespace Baku.VMagicMirrorConfig
 
                 if (isInternalFile && saveData.IsInternalSaveFile)
                 {
-                    _lastVrmLoadFilePath = saveData.LastLoadedVrmFilePath ?? "";
-                    _lastLoadedVRoidModelId = saveData.LastLoadedVRoidModelId ?? "";
-                    AutoLoadLastLoadedVrm = saveData.AutoLoadLastLoadedVrm;
-                    LanguageName =
+                    _model.LastVrmLoadFilePath = saveData.LastLoadedVrmFilePath ?? "";
+                    _model.LastLoadedVRoidModelId = saveData.LastLoadedVRoidModelId ?? "";
+                    _model.AutoLoadLastLoadedVrm.Value = saveData.AutoLoadLastLoadedVrm;
+                    _model.LanguageName.Value =
                         _model.AvailableLanguageNames.Contains(saveData.PreferredLanguageName ?? "") ?
                         (saveData.PreferredLanguageName ?? "") :
                         "";
@@ -104,7 +99,8 @@ namespace Baku.VMagicMirrorConfig
 
             try
             {
-                //NOTE: ファイルロードではメッセージが凄い量になるので、コンポジットして「1つの大きいメッセージ」扱いし、トータルでスピードを取る
+                //NOTE: ファイルロードではメッセージが凄い量になるので、
+                //コンポジットして「1つの大きいメッセージ」として書き込むためにこうしてます
                 _sender.StartCommandComposite();
                 LoadSettingSub(path, isInternalFile);
                 _sender.EndCommandComposite();

@@ -295,8 +295,6 @@ namespace Baku.VMagicMirrorConfig
             ShowMicrophoneVolume.Value = false;
         }
 
-        public override void ResetToDefault() => _model.ResetToDefault();
-
         #endregion
     }
 

@@ -24,9 +24,71 @@ namespace Baku.VMagicMirrorConfig
         public WordToMotionSettingViewModel WordToMotionSetting { get; private set; }
         public ExternalTrackerViewModel ExternalTrackerSetting { get; private set; }
 
-        private DeviceFreeLayoutHelper? _deviceFreeLayoutHelper;
+        private readonly RuntimeHelper _runtimeHelper;
+        private readonly DeviceFreeLayoutHelper _deviceFreeLayoutHelper;
 
-        //TODO: 自動スタート周りもモデルですね
+        private bool _isDisposed = false;
+        //VRoid Hubに接続中かどうか
+        private bool _isVRoidHubUiActive = false;
+
+        //NOTE: モデルのロード確認UI(ファイル/VRoidHubいずれか)を出す直前時点での値を保持するフラグで、UIが出てないときはnullになる
+        private bool? _windowTransparentBeforeLoadProcess = null;
+
+
+        public MainWindowViewModel()
+        {
+            Model = new SettingModel(MessageSender, Initializer.MessageReceiver);
+            SettingFileIo = new SettingFileIo(Model, MessageSender);
+
+            WindowSetting = new WindowSettingViewModel(Model.WindowSetting, MessageSender);
+            MotionSetting = new MotionSettingViewModel(Model.MotionSetting, MessageSender, Initializer.MessageReceiver);
+            GamepadSetting = new GamepadSettingViewModel(Model.GamepadSetting, MessageSender);
+            LayoutSetting = new LayoutSettingViewModel(Model.LayoutSetting, Model.GamepadSetting, MessageSender, Initializer.MessageReceiver);
+            LightSetting = new LightSettingViewModel(Model.LightSetting, MessageSender);
+            WordToMotionSetting = new WordToMotionSettingViewModel(Model.WordToMotionSetting,  MessageSender, Initializer.MessageReceiver);
+            ExternalTrackerSetting = new ExternalTrackerViewModel(Model.ExternalTrackerSetting, MessageSender, Initializer.MessageReceiver);
+
+            TakeScreenshotCommand = new ActionCommand(_runtimeHelper.TakeScreenshot);
+            OpenScreenshotFolderCommand = new ActionCommand(_runtimeHelper.OpenScreenshotSavedFolder);
+
+            _runtimeHelper = new RuntimeHelper(MessageSender, Initializer.MessageReceiver);
+            _deviceFreeLayoutHelper = new DeviceFreeLayoutHelper(Model.LayoutSetting, Model.WindowSetting);
+
+            Initializer.MessageReceiver.ReceivedCommand += OnReceiveCommand;
+
+        }
+
+        private void OnReceiveCommand(object? sender, CommandReceivedEventArgs e)
+        {
+            switch (e.Command)
+            {
+                case ReceiveMessageNames.VRoidModelLoadCompleted:
+                    //WPF側のダイアログによるUIガードを終了: _isVRoidHubUiActiveフラグは別のとこで折るのでここでは無視でOK
+                    if (_isVRoidHubUiActive)
+                    {
+                        MessageBoxWrapper.Instance.SetDialogResult(false);
+                    }
+
+                    //ファイルパスではなくモデルID側を最新情報として覚えておく
+                    Model.OnVRoidModelLoaded(e.Args);
+
+                    break;
+                case ReceiveMessageNames.VRoidModelLoadCanceled:
+                    //WPF側のダイアログによるUIガードを終了
+                    if (_isVRoidHubUiActive)
+                    {
+                        MessageBoxWrapper.Instance.SetDialogResult(false);
+                    }
+                    break;
+            }
+        }
+
+        #region Properties
+
+        public RPropertyMin<bool> AutoLoadLastLoadedVrm => Model.AutoLoadLastLoadedVrm;
+
+        public ReadOnlyObservableCollection<string> AvailableLanguageNames => Model.AvailableLanguageNames;
+        public RPropertyMin<string> LanguageName => Model.LanguageName;
 
         private bool _activateOnStartup = false;
         public bool ActivateOnStartup
@@ -50,85 +112,6 @@ namespace Baku.VMagicMirrorConfig
         {
             get => _otherVersionRegisteredOnStartup;
             private set => SetValue(ref _otherVersionRegisteredOnStartup, value);
-        }
-
-        private string _lastVrmLoadFilePath = "";
-        private string _lastLoadedVRoidModelId = "";
-
-        private bool _isDisposed = false;
-        //VRoid Hubに接続した時点でウィンドウが透過だったかどうか。
-        private bool _isVRoidHubUiActive = false;
-
-        //NOTE: モデルのロード確認UI(ファイル/VRoidHubいずれか)を出す直前時点での値を保持するフラグで、UIが出てないときはnullになる
-        private bool? _windowTransparentBeforeLoadProcess = null;
-
-        private readonly ScreenshotController _screenshotController;
-
-        public MainWindowViewModel()
-        {
-            Model = new SettingModel(MessageSender, Initializer.MessageReceiver);
-            SettingFileIo = new SettingFileIo(Model, MessageSender);
-
-            _screenshotController = new ScreenshotController(MessageSender);
-            WindowSetting = new WindowSettingViewModel(Model.WindowSetting, MessageSender);
-            MotionSetting = new MotionSettingViewModel(Model.MotionSetting, MessageSender, Initializer.MessageReceiver);
-            GamepadSetting = new GamepadSettingViewModel(Model.GamepadSetting, MessageSender);
-            LayoutSetting = new LayoutSettingViewModel(Model.LayoutSetting, Model.GamepadSetting, MessageSender, Initializer.MessageReceiver);
-            LightSetting = new LightSettingViewModel(Model.LightSetting, MessageSender);
-            WordToMotionSetting = new WordToMotionSettingViewModel(Model.WordToMotionSetting,  MessageSender, Initializer.MessageReceiver);
-            ExternalTrackerSetting = new ExternalTrackerViewModel(Model.ExternalTrackerSetting, MessageSender, Initializer.MessageReceiver);
-
-            Initializer.MessageReceiver.ReceivedCommand += OnReceiveCommand;
-        }
-
-        private void OnReceiveCommand(object? sender, CommandReceivedEventArgs e)
-        {
-            switch (e.Command)
-            {
-                case ReceiveMessageNames.VRoidModelLoadCompleted:
-                    //WPF側のダイアログによるUIガードを終了: _isVRoidHubUiActiveフラグは別のとこで折るのでここでは無視でOK
-                    if (_isVRoidHubUiActive)
-                    {
-                        MessageBoxWrapper.Instance.SetDialogResult(false);
-                    }
-
-                    //ファイルパスではなくモデルID側を最新情報として覚えておく
-                    _lastVrmLoadFilePath = "";
-                    _lastLoadedVRoidModelId = e.Args;
-
-                    break;
-                case ReceiveMessageNames.VRoidModelLoadCanceled:
-                    //WPF側のダイアログによるUIガードを終了
-                    if (_isVRoidHubUiActive)
-                    {
-                        MessageBoxWrapper.Instance.SetDialogResult(false);
-                    }
-                    break;
-            }
-        }
-
-        #region Properties for View
-
-        private bool _autoLoadLastLoadedVrm = false;
-        public bool AutoLoadLastLoadedVrm
-        {
-            get => _autoLoadLastLoadedVrm;
-            set => SetValue(ref _autoLoadLastLoadedVrm, value);
-        }
-
-        public ReadOnlyObservableCollection<string> AvailableLanguageNames => Model.AvailableLanguageNames;
-
-        private string _languageName = nameof(Languages.Japanese);
-        public string LanguageName
-        {
-            get => _languageName;
-            set
-            {
-                if (SetValue(ref _languageName, value))
-                {
-                    LanguageSelector.Instance.LanguageName = LanguageName;
-                }
-            }
         }
 
         #endregion
@@ -175,13 +158,8 @@ namespace Baku.VMagicMirrorConfig
         public ActionCommand LoadPrevSettingCommand
             => _loadPrevSettingCommand ??= new ActionCommand(LoadPrevSetting);
 
-        private ActionCommand? _takeScreenshotCommand;
-        public ActionCommand TakeScreenshotCommand
-            => _takeScreenshotCommand ??= new ActionCommand(TakeScreenshot);
-
-        private ActionCommand? _openScreenshotFolderCommand;
-        public ActionCommand OpenScreenshotFolderCommand
-            => _openScreenshotFolderCommand ??= new ActionCommand(OpenScreenshotFolder);
+        public ActionCommand TakeScreenshotCommand { get; }
+        public ActionCommand OpenScreenshotFolderCommand { get; }
 
         #endregion
 
@@ -243,8 +221,7 @@ namespace Baku.VMagicMirrorConfig
             if(res)
             {
                 MessageSender.SendMessage(MessageFactory.Instance.OpenVrm(filePath));
-                _lastVrmLoadFilePath = filePath;
-                _lastLoadedVRoidModelId = "";
+                Model.OnLocalModelLoaded(filePath);
             }
             else
             {
@@ -319,14 +296,17 @@ namespace Baku.VMagicMirrorConfig
 
             if (res)
             {
-                LightSetting.ResetToDefault();
-                MotionSetting.ResetToDefault();
-                LayoutSetting.ResetToDefault();
-                WindowSetting.ResetToDefault();
-                WordToMotionSetting.ResetToDefault();
-                ExternalTrackerSetting.ResetToDefault();
+                //NOTE: 元は個別のViewModelのResetToDefaultを呼んでたが、モデルのリセットで全部うまく行くのが正しいはず
+                Model.ResetToDefault();
 
-                _lastVrmLoadFilePath = "";
+
+                //LightSetting.ResetToDefault();
+                //MotionSetting.ResetToDefault();
+                //LayoutSetting.ResetToDefault();
+                //WindowSetting.ResetToDefault();
+                //WordToMotionSetting.ResetToDefault();
+                //ExternalTrackerSetting.ResetToDefault();
+                //_lastVrmLoadFilePath = "";
             }
         }
 
@@ -345,16 +325,16 @@ namespace Baku.VMagicMirrorConfig
 
             try
             {
-                string savePath = Path.Combine(
+                string prevFilePath = Path.Combine(
                     Path.GetDirectoryName(dialog.FileName) ?? "",
                     "ConfigApp",
                     SpecialFilePath.AutoSaveSettingFileName
                     );
 
-                SettingFileIo.LoadSetting(savePath, true);
-                //NOTE: VRoidの自動ロード設定はちょっと概念的に重たいので引き継ぎ対象から除外する。
-                _lastLoadedVRoidModelId = "";
-                if (AutoLoadLastLoadedVrm)
+                SettingFileIo.LoadSetting(prevFilePath, true);
+                //NOTE: VRoidの自動ロード設定はちょっと概念的に重たいので引き継ぎ対象から除外
+                Model.LastLoadedVRoidModelId = "";
+                if (Model.AutoLoadLastLoadedVrm.Value)
                 {
                     LoadLastLoadedVrm();
                 }
@@ -369,12 +349,6 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private void TakeScreenshot() 
-            => _screenshotController.TakeScreenshot();
-
-        private void OpenScreenshotFolder()
-            => _screenshotController.OpenSavedFolder();
-
         #endregion
 
         public async void Initialize()
@@ -388,18 +362,15 @@ namespace Baku.VMagicMirrorConfig
             Initializer.StartObserveRoutine();
 
             SettingFileIo.LoadSetting(SpecialFilePath.AutoSaveSettingFilePath, true);
-
-            //書いてる通りだが、ファイルから読んだ言語名があれば渡したのちvalidateされた結果でキレイにし、メッセージを送る。
-            //メッセージを明示的に送るのは、タイミングの都合で上のLoadSetting中には言語設定メッセージが積まれないため。
-            LanguageSelector.Instance.Initialize(MessageSender, LanguageName);
-            LanguageName = LanguageSelector.Instance.LanguageName;
-            MessageSender.SendMessage(MessageFactory.Instance.Language(LanguageName));
-
+            //TODO: ここで明示的な言語の初期化が必要なのだが、本当はModel側で捌き切ってほしい
+            LanguageSelector.Instance.Initialize(MessageSender, Model.LanguageName.Value);
+            MessageSender.SendMessage(MessageFactory.Instance.Language(Model.LanguageName.Value));
 
             await MotionSetting.InitializeDeviceNamesAsync();
             await LightSetting.InitializeQualitySelectionsAsync();
             await WordToMotionSetting.InitializeCustomMotionClipNamesAsync();
 
+            //TODO: InitializerとRuntimeHelperを統合したい
             Initializer.CameraPositionChecker.Start(
                 2000,
                 data => Model.LayoutSetting.CameraPosition.SilentSet(data)
@@ -413,15 +384,14 @@ namespace Baku.VMagicMirrorConfig
             }
             OtherVersionRegisteredOnStartup = regSetting.CheckOtherVersionRegistered();
 
-            if (AutoLoadLastLoadedVrm && !string.IsNullOrEmpty(_lastVrmLoadFilePath))
+            if (AutoLoadLastLoadedVrm.Value && !string.IsNullOrEmpty(Model.LastVrmLoadFilePath))
             {
                 LoadLastLoadedVrm();
             }            
 
-            _deviceFreeLayoutHelper = new DeviceFreeLayoutHelper(LayoutSetting, WindowSetting);
             _deviceFreeLayoutHelper.StartObserve();
 
-            if (AutoLoadLastLoadedVrm && !string.IsNullOrEmpty(_lastLoadedVRoidModelId))
+            if (AutoLoadLastLoadedVrm.Value && !string.IsNullOrEmpty(Model.LastLoadedVRoidModelId))
             {
                 LoadLastLoadedVRoid();
             }
@@ -442,22 +412,15 @@ namespace Baku.VMagicMirrorConfig
 
         private void LoadLastLoadedVrm()
         {
-            try
+            if (File.Exists(Model.LastVrmLoadFilePath))
             {
-                if (File.Exists(_lastVrmLoadFilePath))
-                {
-                    MessageSender.SendMessage(MessageFactory.Instance.OpenVrm(_lastVrmLoadFilePath));
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Failed to load last loaded VRM from {_lastVrmLoadFilePath}: {ex.Message}");
+                MessageSender.SendMessage(MessageFactory.Instance.OpenVrm(Model.LastVrmLoadFilePath));
             }
         }
 
         private async void LoadLastLoadedVRoid()
         {
-            if (string.IsNullOrEmpty(_lastLoadedVRoidModelId))
+            if (string.IsNullOrEmpty(Model.LastLoadedVRoidModelId))
             {
                 return;
             }
@@ -465,7 +428,7 @@ namespace Baku.VMagicMirrorConfig
             PrepareShowUiOnUnity();
 
             //NOTE: モデルIDを載せる以外は通常のUIオープンと同じフロー
-            MessageSender.SendMessage(MessageFactory.Instance.RequestLoadVRoidWithId(_lastLoadedVRoidModelId));
+            MessageSender.SendMessage(MessageFactory.Instance.RequestLoadVRoidWithId(Model.LastLoadedVRoidModelId));
 
             _isVRoidHubUiActive = true;
             var message = MessageIndication.ShowLoadingPreviousVRoid();

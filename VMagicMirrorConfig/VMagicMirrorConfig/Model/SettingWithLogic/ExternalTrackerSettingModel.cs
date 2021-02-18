@@ -76,9 +76,11 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        public void ResetToDefault()
+        public override void ResetToDefault()
         {
             Load(ExternalTrackerSetting.Default);
+            //TODO: このLoadによってFaceSwitchSettingのロードが保証されているかな、というのが気になるので要チェック。
+            //Viewの表示が更新されないかもしれないので。
         }
 
     }

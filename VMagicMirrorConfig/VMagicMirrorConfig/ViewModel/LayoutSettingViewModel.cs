@@ -35,8 +35,6 @@ namespace Baku.VMagicMirrorConfig
             ResetMidiSettingCommand = new ActionCommand(
                 () => SettingResetUtils.ResetSingleCategoryAsync(_model.ResetMidiSetting)
                 );
-
-            EnableFreeCameraMode = new RPropertyMin<bool>(false, b => OnEnableFreeCameraModeChanged(b));
         }
 
         private readonly LayoutSettingModel _model;
@@ -53,26 +51,7 @@ namespace Baku.VMagicMirrorConfig
         }
 
         public RPropertyMin<int> CameraFov => _model.CameraFov;
-
-        //NOTE: この値は揮発性が高いのでVMでもいいかな、という裁量。逆にモデルに実態があってもOK
-        public RPropertyMin<bool> EnableFreeCameraMode { get; }
-
-        private async void OnEnableFreeCameraModeChanged(bool value)
-        {
-            SendMessage(MessageFactory.Instance.EnableFreeCameraMode(EnableFreeCameraMode.Value));
-            //トグルさげた場合: 切った時点のカメラポジションを取得、保存する。
-            //TODO:
-            //フリーレイアウト中の切り替えと若干相性が悪いので、
-            //もう少し方法が洗練しているといい…のかもしれない。
-            if (!value)
-            {
-                string response = await SendQueryAsync(MessageFactory.Instance.CurrentCameraPosition());
-                if (!string.IsNullOrWhiteSpace(response))
-                {
-                    _model.CameraPosition.SilentSet(response);
-                }
-            }
-        }
+        public RPropertyMin<bool> EnableFreeCameraMode => _model.EnableFreeCameraMode;
 
         public RPropertyMin<bool> EnableMidiRead => _model.EnableMidiRead;
 
@@ -133,16 +112,11 @@ namespace Baku.VMagicMirrorConfig
 
         #endregion
 
-        #region Reset API
 
         public ActionCommand ResetDeviceLayoutCommand { get; }
         public ActionCommand ResetHidSettingCommand { get; }
         public ActionCommand ResetCameraSettingCommand { get; }
         public ActionCommand ResetMidiSettingCommand { get; }
-
-        public override void ResetToDefault() => _model.ResetToDefault();
-
-        #endregion
 
         //TODO: Recordで書きたい…
         public class TypingEffectSelectionItem

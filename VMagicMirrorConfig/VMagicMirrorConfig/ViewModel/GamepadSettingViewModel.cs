@@ -7,7 +7,7 @@
         {
             _model = model;
             ResetSettingCommand = new ActionCommand(
-                () => SettingResetUtils.ResetSingleCategoryAsync(ResetToDefault)
+                () => SettingResetUtils.ResetSingleCategoryAsync(_model.ResetToDefault)
                 );
         }
 
@@ -27,8 +27,5 @@
         public RPropertyMin<bool> GamepadLeanReverseVertical => _model.GamepadLeanReverseVertical;
 
         public ActionCommand ResetSettingCommand { get; }
-
-        //NOTE: Visibilityはいじらない。UI上の表示場所がちょっと違うため。
-        public override void ResetToDefault() => _model.ResetToDefault();
     }
 }

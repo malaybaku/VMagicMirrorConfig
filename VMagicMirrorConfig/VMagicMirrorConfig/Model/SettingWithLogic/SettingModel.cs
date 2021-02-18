@@ -10,6 +10,10 @@ namespace Baku.VMagicMirrorConfig
     {
         public SettingModel(IMessageSender sender, IMessageReceiver receiver)
         {
+            AvailableLanguageNames = new ReadOnlyObservableCollection<string>(_availableLanguageNames);
+
+            _sender = sender;
+
             WindowSetting = new WindowSettingModel(sender);
             MotionSetting = new MotionSettingModel(sender);
             LayoutSetting = new LayoutSettingModel(sender);
@@ -17,9 +21,16 @@ namespace Baku.VMagicMirrorConfig
             LightSetting = new LightSettingModel(sender);
             WordToMotionSetting = new WordToMotionSettingModel(sender);
             ExternalTrackerSetting = new ExternalTrackerSettingModel(sender);
+
+            //TODO?: ここの書き方からしてプロパティが二重に存在する感じがちょっと抵抗あるよね
+            LanguageName = new RPropertyMin<string>("Japanese", s =>
+            {
+                LanguageSelector.Instance.LanguageName = s;
+            });
+
         }
 
-        //TODO: ここにファイルのセクションと無関係な縦断的なモデル/コードを追加して良い気がする。ファイルのロード/セーブとかやるタイプの。
+        private readonly IMessageSender _sender;
 
         private readonly ObservableCollection<string> _availableLanguageNames
             = new ObservableCollection<string>()
@@ -29,6 +40,15 @@ namespace Baku.VMagicMirrorConfig
         };
         public ReadOnlyObservableCollection<string> AvailableLanguageNames { get; }
 
+        //NOTE: 自動ロードがオフなのにロードしたVRMのファイルパスが残ったりするのはメモリ上ではOK。
+        //SettingFileIoがセーブする時点において、自動ロードが無効だとファイルパスが転写されないようにガードがかかる。
+        public string LastVrmLoadFilePath { get; set; } = "";
+        public string LastLoadedVRoidModelId { get; set; } = "";
+        public RPropertyMin<bool> AutoLoadLastLoadedVrm { get; } = new RPropertyMin<bool>(false);
+
+        //TODO: モデルの自動ロードってここに書くのがいいのかな？？VMのままでもいい？
+
+        public RPropertyMin<string> LanguageName { get; }
 
         public WindowSettingModel WindowSetting { get; }
 
@@ -44,6 +64,25 @@ namespace Baku.VMagicMirrorConfig
 
         public ExternalTrackerSettingModel ExternalTrackerSetting { get; }
 
+        public void OnVRoidModelLoaded(string modelId)
+        {
+            LastVrmLoadFilePath = "";
+            LastLoadedVRoidModelId = modelId;
+        }
 
+        public void OnLocalModelLoaded(string filePath)
+        {
+            LastVrmLoadFilePath = filePath;
+            LastLoadedVRoidModelId = "";
+        }
+
+        public void ResetToDefault()
+        {
+            _sender.StartCommandComposite();
+
+
+
+            _sender.EndCommandComposite();
+        }
     }
 }

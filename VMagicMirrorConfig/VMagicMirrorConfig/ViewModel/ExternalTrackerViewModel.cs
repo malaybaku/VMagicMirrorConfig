@@ -33,7 +33,7 @@ namespace Baku.VMagicMirrorConfig
             EndExTrackerIfNeededCommand = new ActionCommand(EndExTrackerIfNeeded);
             ShowMissingBlendShapeNotificationCommand = new ActionCommand(ShowMissingBlendShapeNotification);
             ResetSettingsCommand = new ActionCommand(
-                () => SettingResetUtils.ResetSingleCategoryAsync(ResetToDefault)
+                () => SettingResetUtils.ResetSingleCategoryAsync(_model.ResetToDefault)
                 );
 
             //TODO: メッセージ受信の処理もモデル側案件のはず…うーん…
@@ -271,12 +271,5 @@ namespace Baku.VMagicMirrorConfig
         }
 
         #endregion
-
-        public override void ResetToDefault() 
-        {
-            _model.ResetToDefault();
-            //TODO?: モデルの挙動次第でここ不要かも
-            LoadFaceSwitchSetting();
-        }
     }
 }

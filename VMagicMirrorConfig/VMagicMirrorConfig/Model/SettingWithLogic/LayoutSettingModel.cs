@@ -31,6 +31,7 @@ namespace Baku.VMagicMirrorConfig
             HidVisibility = new RPropertyMin<bool>(s.HidVisibility, b => SendMessage(factory.HidVisibility(b)));
             SelectedTypingEffectId = new RPropertyMin<int>(s.SelectedTypingEffectId, i => SendMessage(factory.SetKeyboardTypingEffectType(i)));
 
+            EnableFreeCameraMode = new RPropertyMin<bool>(false, b => OnEnableFreeCameraModeChanged(b));
             EnableDeviceFreeLayout = new RPropertyMin<bool>(false, v => SendMessage(factory.EnableDeviceFreeLayout(v)));
         }
 
@@ -51,7 +52,8 @@ namespace Baku.VMagicMirrorConfig
         public RPropertyMin<bool> HidVisibility { get; }
         public RPropertyMin<int> SelectedTypingEffectId { get; }
 
-        //NOTE: ファイルには保存しない
+        //NOTE: この2つの値はファイルには保存しない
+        public RPropertyMin<bool> EnableFreeCameraMode { get; }
         public RPropertyMin<bool> EnableDeviceFreeLayout { get; }
 
         #region API
@@ -125,6 +127,23 @@ namespace Baku.VMagicMirrorConfig
 
         #endregion
 
+        private async void OnEnableFreeCameraModeChanged(bool value)
+        {
+            SendMessage(MessageFactory.Instance.EnableFreeCameraMode(EnableFreeCameraMode.Value));
+            //トグルさげた場合: 切った時点のカメラポジションを取得、保存する。
+            //TODO:
+            //フリーレイアウト中の切り替えと若干相性が悪いので、
+            //もう少し方法が洗練しているといい…のかもしれない。
+            if (!value)
+            {
+                string response = await SendQueryAsync(MessageFactory.Instance.CurrentCameraPosition());
+                if (!string.IsNullOrWhiteSpace(response))
+                {
+                    CameraPosition.SilentSet(response);
+                }
+            }
+        }
+
         #region Reset API
 
         public void ResetCameraSetting()
@@ -162,7 +181,7 @@ namespace Baku.VMagicMirrorConfig
             MidiControllerVisibility.Value = setting.MidiControllerVisibility;
         }
 
-        public void ResetToDefault()
+        public override void ResetToDefault()
         {
             //TODO: UI上必要だったら復活させる必要あり。
             //Gamepad.ResetToDefault();

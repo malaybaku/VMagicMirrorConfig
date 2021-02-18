@@ -295,12 +295,6 @@ namespace Baku.VMagicMirrorConfig
 
         public ActionCommand ResetByDefaultItemsCommand { get; }
 
-        public override void ResetToDefault()
-        {
-            //何もしない: ここは設定がフクザツなのでとりあえずいじらない方針で。
-            //(このパネル単体のリセットUIがちゃんとできたら何か考える)
-        }
-
         //このマシン上でこのバージョンのVMagicMirrorが初めて実行されたと推定できるとき、
         //デフォルトのWord To Motion一覧を生成して初期化します。
         public void LoadDefaultItemsIfInitialStart()

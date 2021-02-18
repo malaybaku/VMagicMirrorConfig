@@ -95,7 +95,7 @@ namespace Baku.VMagicMirrorConfig
             AlphaValueOnTransparent.Value = setting.AlphaValueOnTransparent;
         }
 
-        public void ResetToDefault()
+        public override void ResetToDefault()
         {
             var setting = WindowSetting.Default;
 
