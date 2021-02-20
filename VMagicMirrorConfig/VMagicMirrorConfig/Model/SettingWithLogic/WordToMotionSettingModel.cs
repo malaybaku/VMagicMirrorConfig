@@ -14,6 +14,9 @@ namespace Baku.VMagicMirrorConfig
             var settings = WordToMotionSetting.Default;
             var factory = MessageFactory.Instance;
 
+            MotionRequests = MotionRequestCollection.LoadDefault();
+            MidiNoteToMotionMap = MidiNoteToMotionMap.LoadDefault();
+
             SelectedDeviceType = new RPropertyMin<int>(settings.SelectedDeviceType, i => SendMessage(factory.SetDeviceTypeToStartWordToMotion(i)));
             ItemsContentString = new RPropertyMin<string>(settings.ItemsContentString, s => SendMessage(factory.ReloadMotionRequests(s)));
             MidiNoteMapString = new RPropertyMin<string>(settings.MidiNoteMapString, s => SendMessage(factory.LoadMidiNoteToMotionMap(s)));
@@ -39,9 +42,9 @@ namespace Baku.VMagicMirrorConfig
 
         //TODO: この辺を非null保証し、シリアライズ文字列が無効だったらデフォルト設定が入るようにしたい
 
-        public MotionRequestCollection? MotionRequests { get; private set; }
+        public MotionRequestCollection MotionRequests { get; private set; }
 
-        public MidiNoteToMotionMap? MidiNoteToMotionMap { get; private set; }
+        public MidiNoteToMotionMap MidiNoteToMotionMap { get; private set; }
 
         public void RequestSerializeItems()
         {
@@ -63,7 +66,7 @@ namespace Baku.VMagicMirrorConfig
 
         public void MoveUpItem(MotionRequest item)
         {
-            if (MotionRequests?.Requests == null) { return; }
+            if (!MotionRequests.Requests.Contains(item)) { return; }
 
             var requests = MotionRequests.Requests.ToList();
             int index = requests.IndexOf(item);
@@ -78,7 +81,7 @@ namespace Baku.VMagicMirrorConfig
 
         public void MoveDownItem(MotionRequest item)
         {
-            if (MotionRequests?.Requests == null) { return; }
+            if (!MotionRequests.Requests.Contains(item)) { return; }
 
             var requests = MotionRequests.Requests.ToList();
             int index = requests.IndexOf(item);
@@ -93,7 +96,7 @@ namespace Baku.VMagicMirrorConfig
 
         public async Task DeleteItem(MotionRequest item)
         {
-            if (MotionRequests?.Requests?.Contains(item) != true) { return; }
+            if (!MotionRequests.Requests.Contains(item)) { return; }
 
             var indication = MessageIndication.DeleteWordToMotionItem();
             bool res = await MessageBoxWrapper.Instance.ShowAsync(
@@ -117,10 +120,9 @@ namespace Baku.VMagicMirrorConfig
 
         public void AddNewItem()
         {
-            if (MotionRequests == null) { return; }
-
             var request = MotionRequests.Requests.ToList();
             request.Add(MotionRequest.GetDefault());
+            MotionRequests = new MotionRequestCollection(request.ToArray());
             SaveMotionRequests();
         }
 
@@ -157,13 +159,13 @@ namespace Baku.VMagicMirrorConfig
             {
                 using (var reader = new StringReader(ItemsContentString.Value))
                 {
-                    MotionRequests = MotionRequestCollection.DeserializeFromJson(reader);
+                    MotionRequests = MotionRequestCollection.FromJson(reader);
                 }
             }
             catch(Exception ex)
             {
                 LogOutput.Instance.Write(ex);
-                MotionRequests = new MotionRequestCollection(MotionRequest.GetDefaultMotionRequestSet());
+                MotionRequests = MotionRequestCollection.LoadDefault();
             }
 
             try

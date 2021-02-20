@@ -31,14 +31,15 @@
 
             //排他になるように制御
             //TODO: RadioButtonの要請により、「一瞬たりとてフラグが2つ同時に立つのは許さん」みたいな要件もありうるので試しておくこと。
+            //NOTE: nullableっぽい書き方を一部してるが実際はnullableではない
             GamepadLeanNone = new RPropertyMin<bool>(s.GamepadLeanNone, b =>
             {
                 if (b)
                 {
                     SendMessage(factory.GamepadLeanMode(LeanModeNames.GamepadLeanNone));
-                    GamepadLeanLeftStick.Value = false;
-                    GamepadLeanRightStick.Value = false;
-                    GamepadLeanLeftButtons.Value = false;
+                    GamepadLeanLeftStick?.Set(false);
+                    GamepadLeanRightStick?.Set(false);
+                    GamepadLeanLeftButtons?.Set(false);
                 }
             });
             GamepadLeanLeftStick = new RPropertyMin<bool>(s.GamepadLeanLeftStick, b =>
@@ -47,8 +48,8 @@
                 {
                     SendMessage(factory.GamepadLeanMode(LeanModeNames.GamepadLeanLeftStick));
                     GamepadLeanNone.Value = false;
-                    GamepadLeanRightStick.Value = false;
-                    GamepadLeanLeftButtons.Value = false;
+                    GamepadLeanRightStick?.Set(false);
+                    GamepadLeanLeftButtons?.Set(false);
                 }
             });
             GamepadLeanRightStick = new RPropertyMin<bool>(s.GamepadLeanRightStick, b =>
@@ -58,7 +59,7 @@
                     SendMessage(factory.GamepadLeanMode(LeanModeNames.GamepadLeanRightStick));
                     GamepadLeanNone.Value = false;
                     GamepadLeanLeftStick.Value = false;
-                    GamepadLeanLeftButtons.Value = false;
+                    GamepadLeanLeftButtons?.Set(false);
                 }
             });
             GamepadLeanLeftButtons = new RPropertyMin<bool>(s.GamepadLeanLeftButtons, b =>

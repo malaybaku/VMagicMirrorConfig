@@ -173,15 +173,10 @@ namespace Baku.VMagicMirrorConfig
             return sb.ToString();
         }
 
-        public static MotionRequestCollection DeserializeFromJson(string filePath)
-        {
-            using(var sr = new StreamReader(filePath))
-            {
-                return DeserializeFromJson(sr);
-            }
-        }
+        public static MotionRequestCollection LoadDefault() 
+            => new MotionRequestCollection(MotionRequest.GetDefaultMotionRequestSet());
 
-        public static MotionRequestCollection DeserializeFromJson(TextReader reader)
+        public static MotionRequestCollection FromJson(TextReader reader)
         {
             var serializer = new JsonSerializer();
             using (var jsonReader = new JsonTextReader(reader))

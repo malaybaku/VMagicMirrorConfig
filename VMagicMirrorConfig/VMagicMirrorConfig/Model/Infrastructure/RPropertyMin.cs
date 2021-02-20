@@ -45,6 +45,13 @@ namespace Baku.VMagicMirrorConfig
         }
 
         /// <summary>
+        /// NOTE: 初期化順とかの都合でnullableになってしまうような場面でSetterを呼びたいとき使う。
+        /// コレを使わざるを得ないのは循環参照が発生してるケースの可能性が高いため、ちょっと注意
+        /// </summary>
+        /// <param name="value"></param>
+        public void Set(T value) => Value = value;
+
+        /// <summary>
         /// 値は変更しますが、イベントやコールバックは呼びません。
         /// Unity側から値を受信し、その値がUI上で表示不要であるような、ごく一部のケースでのみ使います。
         /// </summary>

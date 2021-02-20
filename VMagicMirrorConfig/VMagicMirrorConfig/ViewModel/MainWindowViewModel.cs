@@ -166,9 +166,9 @@ namespace Baku.VMagicMirrorConfig
             });
         }
 
-        private async void LoadVrmByFilePath(string filePath)
+        private async void LoadVrmByFilePath(string? filePath)
         {
-            if (File.Exists(filePath) && Path.GetExtension(filePath) == ".vrm")
+            if (filePath != null && File.Exists(filePath) && Path.GetExtension(filePath) == ".vrm")
             {
                 await LoadVrmSub(() => filePath);
             }

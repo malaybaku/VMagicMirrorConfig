@@ -216,19 +216,13 @@ namespace Baku.VMagicMirrorConfig
 
         #region 表情スイッチのやつ
 
-        //NOTE: setterはアプリ起動直後、およびそれ以降で表情スイッチ系の設定を変えたときに(UIではなくコードから)呼ばれます。
-        public RPropertyMin<string> SerializedFaceSwitchSetting => _model.SerializedFaceSwitchSetting;
-
         /// <summary>
         /// 子要素になってる<see cref="ExternalTrackerFaceSwitchItemViewModel"/>から呼び出すことで、
         /// 現在の設定を保存した状態にします。
         /// </summary>
         public void SaveFaceSwitchSetting()
         {
-            //文字列で保存 + 送信しつつ、手元の設定もリロードする。イベントハンドリング次第でもっとシンプルになるかも。
-            _model.SerializedFaceSwitchSetting.Value = _model.FaceSwitchSetting?.ToJson() ?? "";
-            //TODO?: モデルの挙動次第でここ不要かも
-            LoadFaceSwitchSetting();
+            _model.SaveFaceSwitchSetting();
         }
 
         /// <summary> UIで個別設定として表示する、表情スイッチの要素です。 </summary>

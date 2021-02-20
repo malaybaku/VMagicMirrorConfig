@@ -38,8 +38,8 @@ namespace Baku.VMagicMirrorConfig
             CalibrateFaceData = new RPropertyMin<string>(setting.CalibrateFaceData, v => SendMessage(factory.SetCalibrateFaceData(v)));
 
             FaceDefaultFun = new RPropertyMin<int>(setting.FaceDefaultFun, v => SendMessage(factory.FaceDefaultFun(v)));
-            FaceNeutralClip = new RPropertyMin<string?>(setting.FaceNeutralClip, v => SendMessage(factory.FaceNeutralClip(v)));
-            FaceOffsetClip = new RPropertyMin<string?>(setting.FaceOffsetClip, v => SendMessage(factory.FaceOffsetClip(v)));
+            FaceNeutralClip = new RPropertyMin<string>(setting.FaceNeutralClip, v => SendMessage(factory.FaceNeutralClip(v)));
+            FaceOffsetClip = new RPropertyMin<string>(setting.FaceOffsetClip, v => SendMessage(factory.FaceOffsetClip(v)));
 
             //TODO: 排他のタイミング次第でRadioButtonが使えなくなってしまうので要検証
             UseLookAtPointNone = new RPropertyMin<bool>(setting.UseLookAtPointNone, v =>
@@ -47,8 +47,8 @@ namespace Baku.VMagicMirrorConfig
                 if (v)
                 {
                     SendMessage(factory.LookAtStyle(LookAtStyles.UseLookAtPointNone));
-                    UseLookAtPointMousePointer.Value = false;
-                    UseLookAtPointMainCamera.Value = false;
+                    UseLookAtPointMousePointer?.Set(false);
+                    UseLookAtPointMainCamera?.Set(false);
                 }
             });
 
@@ -58,7 +58,7 @@ namespace Baku.VMagicMirrorConfig
                 {
                     SendMessage(factory.LookAtStyle(LookAtStyles.UseLookAtPointMousePointer));
                     UseLookAtPointNone.Value = false;
-                    UseLookAtPointMainCamera.Value = false;
+                    UseLookAtPointMainCamera?.Set(false);
                 }
             });
 
@@ -136,8 +136,8 @@ namespace Baku.VMagicMirrorConfig
 
         public RPropertyMin<int> FaceDefaultFun { get; }
 
-        public RPropertyMin<string?> FaceNeutralClip { get; }
-        public RPropertyMin<string?> FaceOffsetClip { get; }
+        public RPropertyMin<string> FaceNeutralClip { get; }
+        public RPropertyMin<string> FaceOffsetClip { get; }
 
         #endregion
 

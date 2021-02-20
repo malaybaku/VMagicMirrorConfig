@@ -40,8 +40,8 @@
 
         public int FaceDefaultFun { get; set; } = 0;
 
-        public string? FaceNeutralClip { get; set; } = "";
-        public string? FaceOffsetClip { get; set; } = "";
+        public string FaceNeutralClip { get; set; } = "";
+        public string FaceOffsetClip { get; set; } = "";
 
         #endregion
 
@@ -130,8 +130,8 @@
         public void ResetFaceBlendShapeSetting()
         {
             FaceDefaultFun = 0;
-            FaceNeutralClip = null;
-            FaceOffsetClip = null;
+            FaceNeutralClip = "";
+            FaceOffsetClip = "";
         }
 
         public void ResetArmSetting()

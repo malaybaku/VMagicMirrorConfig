@@ -23,6 +23,10 @@ namespace Baku.VMagicMirrorConfig
     public class ActionCommand<T> : ICommand
         where T : class
     {
+        /// <summary>
+        /// NOTE: null許容が求められるのはViewがパラメータをnullにする可能性が実際あるため。ここは根本的に非null保証がない
+        /// </summary>
+        /// <param name="act"></param>
         public ActionCommand(Action<T?> act)
         {
             _act = act;

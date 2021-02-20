@@ -9,6 +9,9 @@ namespace Baku.VMagicMirrorConfig
             var setting = ExternalTrackerSetting.Default;
             var factory = MessageFactory.Instance;
 
+            //NOTE: ひとまず初期値を入れておくと非null保証できて都合がいい、という話
+            FaceSwitchSetting = ExternalTrackerFaceSwitchSetting.LoadDefault();
+
             EnableExternalTracking = new RPropertyMin<bool>(
                 setting.EnableExternalTracking, b => SendMessage(factory.ExTrackerEnable(b))
                 );
@@ -49,18 +52,22 @@ namespace Baku.VMagicMirrorConfig
 
         // FaceSwitchの設定
 
-        //TODO: ここは非null保証すべきで、SerializedFaceSwitchSettingが無効な場合はデフォルト値を当てるようにしていい、と思う。
-        public ExternalTrackerFaceSwitchSetting? FaceSwitchSetting { get; private set; }
+        public ExternalTrackerFaceSwitchSetting FaceSwitchSetting { get; private set; }
 
         //TODO: ここにデフォルト値が入りやすいような仕掛けを作るのもアリかも、という問題があるが、
         //特に値が空だったときのリカバーをモデル層でやる形にするのも選択肢。
         public RPropertyMin<string> SerializedFaceSwitchSetting { get; }
 
-        protected override void PreSave()
+        public void SaveFaceSwitchSetting()
         {
-            //NOTE: 想定挙動としてはセーブ前の時点で値が更新された時点でシリアライズされているため、この再シリアライズをしたからといって値は変わらない
-            SerializedFaceSwitchSetting.Value = FaceSwitchSetting?.ToJson() ?? "";
+            //文字列で保存 + 送信しつつ、手元の設定もリロードする。イベントハンドリング次第でもっとシンプルになるかも。
+            SerializedFaceSwitchSetting.Value = FaceSwitchSetting.ToJson();
         }
+
+        //NOTE: 想定挙動としてはセーブ前の時点で値が更新された時点でシリアライズされているため、
+        //この再シリアライズをしたからといって普通は値は変わらない。
+        //が、初期値そのままのケースとかが安全になって都合がよい
+        protected override void PreSave() => SaveFaceSwitchSetting();
 
         protected override void AfterLoad(ExternalTrackerSetting entity)
         {
