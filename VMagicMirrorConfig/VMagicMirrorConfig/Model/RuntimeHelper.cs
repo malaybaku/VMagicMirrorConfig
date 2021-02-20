@@ -7,15 +7,37 @@
     /// </summary>
     class RuntimeHelper
     {
-        public RuntimeHelper(IMessageSender sender, IMessageReceiver receiver)
+        public RuntimeHelper(IMessageSender sender, IMessageReceiver receiver, SettingModel mainModel)
         {
             _sender = sender;
             _receiver = receiver;
+            CameraPositionChecker = new CameraPositionChecker(sender, mainModel.LayoutSetting);
+            UnityAppCloser = new UnityAppCloser(receiver);
+            ErrorIndicator = new ErrorMessageIndicator(receiver);
+            FreeLayoutHelper = new DeviceFreeLayoutHelper(mainModel.LayoutSetting, mainModel.WindowSetting);
         }
 
         private readonly IMessageSender _sender;
         private readonly IMessageReceiver _receiver;
 
+        public CameraPositionChecker CameraPositionChecker { get; }
+        public UnityAppCloser UnityAppCloser { get; }
+        public ErrorMessageIndicator ErrorIndicator { get; }
+        public DeviceFreeLayoutHelper FreeLayoutHelper { get; }
+
+        public void Start()
+        {
+            FreeLayoutHelper.StartObserve();
+            CameraPositionChecker.Start(2000);
+        }
+        
+        public void Dispose()
+        {
+            FreeLayoutHelper.EndObserve();
+            CameraPositionChecker.Stop();
+            //NOTE: コイツによるプロセス閉じ処理はsender/receiverに依存しないことに注意。
+            UnityAppCloser.Close();
+        }
 
         /// <summary> スクリーンショットの撮影をUnity側に要求します。 </summary>
         public void TakeScreenshot() => _sender.SendMessage(MessageFactory.Instance.TakeScreenshot());

@@ -2,34 +2,27 @@
 
 namespace Baku.VMagicMirrorConfig
 {
-    class ModelInitializer : IDisposable
+    class MessageIo : IDisposable
     {
-        public ModelInitializer()
+        public MessageIo()
         {
             var mmfClient = new MmfClient();
-            MessageSender = mmfClient;
-            MessageReceiver = mmfClient;
-            CameraPositionChecker = new CameraPositionChecker(MessageSender);
-            UnityAppCloser = new UnityAppCloser(MessageReceiver);
-            ErrorIndicator = new ErrorMessageIndicator(MessageReceiver);
+            Sender = mmfClient;
+            Receiver = mmfClient;
         }
 
-        public void StartObserveRoutine()
+        public void Start()
         {
-            new AppExitFromUnityMessage().Initialize(MessageReceiver);
-            MessageReceiver.Start();
+            new AppExitFromUnityMessage().Initialize(Receiver);
+            Receiver.Start();
         }
 
-        public IMessageSender MessageSender { get; } 
-        public IMessageReceiver MessageReceiver { get; } 
-        public CameraPositionChecker CameraPositionChecker { get; }
-        public UnityAppCloser UnityAppCloser { get; }
-        public ErrorMessageIndicator ErrorIndicator { get; }
+        public IMessageSender Sender { get; } 
+        public IMessageReceiver Receiver { get; } 
 
         public void Dispose()
         {
-            MessageReceiver.Stop();
-            CameraPositionChecker.Stop();
+            Receiver.Stop();
         }
     }
 }

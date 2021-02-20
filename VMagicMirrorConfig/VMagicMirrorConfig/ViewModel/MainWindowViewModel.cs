@@ -13,8 +13,8 @@ namespace Baku.VMagicMirrorConfig
         internal SettingModel Model { get; }
         internal SettingFileIo SettingFileIo { get; }
         
-        internal ModelInitializer Initializer { get; } = new ModelInitializer();
-        internal IMessageSender MessageSender => Initializer.MessageSender;
+        internal MessageIo MessageIo { get; } = new MessageIo();
+        internal IMessageSender MessageSender => MessageIo.Sender;
 
         public WindowSettingViewModel WindowSetting { get; private set; }
         public MotionSettingViewModel MotionSetting { get; private set; }
@@ -25,8 +25,6 @@ namespace Baku.VMagicMirrorConfig
         public ExternalTrackerViewModel ExternalTrackerSetting { get; private set; }
 
         private readonly RuntimeHelper _runtimeHelper;
-        private readonly DeviceFreeLayoutHelper _deviceFreeLayoutHelper;
-
         private bool _isDisposed = false;
         //VRoid Hubに接続中かどうか
         private bool _isVRoidHubUiActive = false;
@@ -34,28 +32,38 @@ namespace Baku.VMagicMirrorConfig
         //NOTE: モデルのロード確認UI(ファイル/VRoidHubいずれか)を出す直前時点での値を保持するフラグで、UIが出てないときはnullになる
         private bool? _windowTransparentBeforeLoadProcess = null;
 
-
         public MainWindowViewModel()
         {
-            Model = new SettingModel(MessageSender, Initializer.MessageReceiver);
+            Model = new SettingModel(MessageSender, MessageIo.Receiver);
             SettingFileIo = new SettingFileIo(Model, MessageSender);
 
             WindowSetting = new WindowSettingViewModel(Model.WindowSetting, MessageSender);
-            MotionSetting = new MotionSettingViewModel(Model.MotionSetting, MessageSender, Initializer.MessageReceiver);
+            MotionSetting = new MotionSettingViewModel(Model.MotionSetting, MessageSender, MessageIo.Receiver);
             GamepadSetting = new GamepadSettingViewModel(Model.GamepadSetting, MessageSender);
-            LayoutSetting = new LayoutSettingViewModel(Model.LayoutSetting, Model.GamepadSetting, MessageSender, Initializer.MessageReceiver);
+            LayoutSetting = new LayoutSettingViewModel(Model.LayoutSetting, Model.GamepadSetting, MessageSender, MessageIo.Receiver);
             LightSetting = new LightSettingViewModel(Model.LightSetting, MessageSender);
-            WordToMotionSetting = new WordToMotionSettingViewModel(Model.WordToMotionSetting,  MessageSender, Initializer.MessageReceiver);
-            ExternalTrackerSetting = new ExternalTrackerViewModel(Model.ExternalTrackerSetting, MessageSender, Initializer.MessageReceiver);
+            WordToMotionSetting = new WordToMotionSettingViewModel(Model.WordToMotionSetting,  MessageSender, MessageIo.Receiver);
+            ExternalTrackerSetting = new ExternalTrackerViewModel(Model.ExternalTrackerSetting, MessageSender, MessageIo.Receiver);
+
+            _runtimeHelper = new RuntimeHelper(MessageSender, MessageIo.Receiver, Model);
+
+            LoadVrmCommand = new ActionCommand(LoadVrm);
+            LoadVrmByFilePathCommand = new ActionCommand<string>(LoadVrmByFilePath);
+            ConnectToVRoidHubCommand = new ActionCommand(ConnectToVRoidHubAsync);
+
+            OpenVRoidHubCommand = new ActionCommand(() => UrlNavigate.Open("https://hub.vroid.com/"));
+            AutoAdjustCommand = new ActionCommand(() => MessageSender.SendMessage(MessageFactory.Instance.RequestAutoAdjust()));
+            OpenSettingWindowCommand = new ActionCommand(() => SettingWindow.OpenOrActivateExistingWindow(this));
+
+            ResetToDefaultCommand = new ActionCommand(ResetToDefault);
+            SaveSettingToFileCommand = new ActionCommand(SaveSettingToFile);
+            LoadSettingFromFileCommand = new ActionCommand(LoadSettingFromFile);
+            LoadPrevSettingCommand = new ActionCommand(LoadPrevSetting);
 
             TakeScreenshotCommand = new ActionCommand(_runtimeHelper.TakeScreenshot);
             OpenScreenshotFolderCommand = new ActionCommand(_runtimeHelper.OpenScreenshotSavedFolder);
 
-            _runtimeHelper = new RuntimeHelper(MessageSender, Initializer.MessageReceiver);
-            _deviceFreeLayoutHelper = new DeviceFreeLayoutHelper(Model.LayoutSetting, Model.WindowSetting);
-
-            Initializer.MessageReceiver.ReceivedCommand += OnReceiveCommand;
-
+            MessageIo.Receiver.ReceivedCommand += OnReceiveCommand;
         }
 
         private void OnReceiveCommand(object? sender, CommandReceivedEventArgs e)
@@ -118,45 +126,18 @@ namespace Baku.VMagicMirrorConfig
 
         #region Commands
 
-        private ActionCommand? _loadVrmCommand;
-        public ActionCommand LoadVrmCommand
-            => _loadVrmCommand ??= new ActionCommand(LoadVrm);
+        public ActionCommand LoadVrmCommand { get; }
+        public ActionCommand<string> LoadVrmByFilePathCommand { get; }
+        public ActionCommand ConnectToVRoidHubCommand { get; }
 
-        private ActionCommand<string>? _loadVrmByPathCommand;
-        public ActionCommand<string> LoadVrmByFilePathCommand
-            => _loadVrmByPathCommand ??= new ActionCommand<string>(LoadVrmByFilePath);
+        public ActionCommand OpenVRoidHubCommand { get; }
+        public ActionCommand AutoAdjustCommand { get; }
+        public ActionCommand OpenSettingWindowCommand { get; }
 
-        private ActionCommand? _connectToVRoidHubCommand;
-        public ActionCommand ConnectToVRoidHubCommand
-            => _connectToVRoidHubCommand ??= new ActionCommand(ConnectToVRoidHubAsync);
-
-        private ActionCommand? _openVRoidHubCommand;
-        public ActionCommand OpenVRoidHubCommand
-            => _openVRoidHubCommand ??= new ActionCommand(OpenVRoidHub);
-
-        private ActionCommand? _autoAdjustCommand;
-        public ActionCommand AutoAdjustCommand
-            => _autoAdjustCommand ??= new ActionCommand(AutoAdjust);
-
-        private ActionCommand? _openSettingWindowCommand;
-        public ActionCommand OpenSettingWindowCommand
-            => _openSettingWindowCommand ??= new ActionCommand(OpenSettingWindow);
-
-        private ActionCommand? _resetToDefaultCommand;
-        public ActionCommand ResetToDefaultCommand
-            => _resetToDefaultCommand ??= new ActionCommand(ResetToDefault);
-
-        private ActionCommand? _saveSettingToFileCommand;
-        public ActionCommand SaveSettingToFileCommand
-            => _saveSettingToFileCommand ??= new ActionCommand(SaveSettingToFile);
-
-        private ActionCommand? _loadSettingFromFileCommand;
-        public ActionCommand LoadSettingFromFileCommand
-            => _loadSettingFromFileCommand ??= new ActionCommand(LoadSettingFromFile);
-
-        private ActionCommand? _loadPrevSettingCommand;
-        public ActionCommand LoadPrevSettingCommand
-            => _loadPrevSettingCommand ??= new ActionCommand(LoadPrevSetting);
+        public ActionCommand ResetToDefaultCommand { get; }
+        public ActionCommand SaveSettingToFileCommand { get; }
+        public ActionCommand LoadSettingFromFileCommand { get; }
+        public ActionCommand LoadPrevSettingCommand { get; }
 
         public ActionCommand TakeScreenshotCommand { get; }
         public ActionCommand OpenScreenshotFolderCommand { get; }
@@ -185,10 +166,9 @@ namespace Baku.VMagicMirrorConfig
             });
         }
 
-        private async void LoadVrmByFilePath(string? filePath)
+        private async void LoadVrmByFilePath(string filePath)
         {
-            if (!string.IsNullOrEmpty(filePath) &&
-                Path.GetExtension(filePath) == ".vrm")
+            if (File.Exists(filePath) && Path.GetExtension(filePath) == ".vrm")
             {
                 await LoadVrmSub(() => filePath);
             }
@@ -249,12 +229,6 @@ namespace Baku.VMagicMirrorConfig
             EndShowUiOnUnity();
         }
 
-        private void OpenVRoidHub() => UrlNavigate.Open("https://hub.vroid.com/");
-
-        private void AutoAdjust() => MessageSender.SendMessage(MessageFactory.Instance.RequestAutoAdjust());
-
-        private void OpenSettingWindow() 
-            => SettingWindow.OpenOrActivateExistingWindow(this);
 
         private void SaveSettingToFile()
         {
@@ -296,17 +270,8 @@ namespace Baku.VMagicMirrorConfig
 
             if (res)
             {
-                //NOTE: 元は個別のViewModelのResetToDefaultを呼んでたが、モデルのリセットで全部うまく行くのが正しいはず
+                //NOTE: 元は個別のViewModelでResetToDefaultを呼んでたが、モデルのリセットで全部うまく行くのが正しいはず
                 Model.ResetToDefault();
-
-
-                //LightSetting.ResetToDefault();
-                //MotionSetting.ResetToDefault();
-                //LayoutSetting.ResetToDefault();
-                //WindowSetting.ResetToDefault();
-                //WordToMotionSetting.ResetToDefault();
-                //ExternalTrackerSetting.ResetToDefault();
-                //_lastVrmLoadFilePath = "";
             }
         }
 
@@ -334,7 +299,7 @@ namespace Baku.VMagicMirrorConfig
                 SettingFileIo.LoadSetting(prevFilePath, true);
                 //NOTE: VRoidの自動ロード設定はちょっと概念的に重たいので引き継ぎ対象から除外
                 Model.LastLoadedVRoidModelId = "";
-                if (Model.AutoLoadLastLoadedVrm.Value)
+                if (Model.AutoLoadLastLoadedVrm.Value && !string.IsNullOrEmpty(Model.LastVrmLoadFilePath))
                 {
                     LoadLastLoadedVrm();
                 }
@@ -359,22 +324,15 @@ namespace Baku.VMagicMirrorConfig
                 return;
             }
 
-            Initializer.StartObserveRoutine();
-
+            MessageIo.Start();
+            LanguageSelector.Instance.Initialize(MessageSender);
             SettingFileIo.LoadSetting(SpecialFilePath.AutoSaveSettingFilePath, true);
-            //TODO: ここで明示的な言語の初期化が必要なのだが、本当はModel側で捌き切ってほしい
-            LanguageSelector.Instance.Initialize(MessageSender, Model.LanguageName.Value);
-            MessageSender.SendMessage(MessageFactory.Instance.Language(Model.LanguageName.Value));
+            //NOTE: 初回起動時だけカルチャベースで言語を設定するための処理がコレです
+            Model.InitializeLanguageIfNeeded();
 
             await MotionSetting.InitializeDeviceNamesAsync();
             await LightSetting.InitializeQualitySelectionsAsync();
             await WordToMotionSetting.InitializeCustomMotionClipNamesAsync();
-
-            //TODO: InitializerとRuntimeHelperを統合したい
-            Initializer.CameraPositionChecker.Start(
-                2000,
-                data => Model.LayoutSetting.CameraPosition.SilentSet(data)
-                );
 
             var regSetting = new StartupRegistrySetting();
             _activateOnStartup = regSetting.CheckThisVersionRegistered();
@@ -384,14 +342,13 @@ namespace Baku.VMagicMirrorConfig
             }
             OtherVersionRegisteredOnStartup = regSetting.CheckOtherVersionRegistered();
 
+            _runtimeHelper.Start();
+
             if (AutoLoadLastLoadedVrm.Value && !string.IsNullOrEmpty(Model.LastVrmLoadFilePath))
             {
                 LoadLastLoadedVrm();
-            }            
-
-            _deviceFreeLayoutHelper.StartObserve();
-
-            if (AutoLoadLastLoadedVrm.Value && !string.IsNullOrEmpty(Model.LastLoadedVRoidModelId))
+            }
+            else if (AutoLoadLastLoadedVrm.Value && !string.IsNullOrEmpty(Model.LastLoadedVRoidModelId))
             {
                 LoadLastLoadedVRoid();
             }
@@ -403,10 +360,9 @@ namespace Baku.VMagicMirrorConfig
             {
                 _isDisposed = true;
                 SettingFileIo.SaveSetting(SpecialFilePath.AutoSaveSettingFilePath, true);
-                Initializer.Dispose();
-                _deviceFreeLayoutHelper?.EndObserve();
+                MessageIo.Dispose();
+                _runtimeHelper.Dispose();
                 MotionSetting.ClosePointer();
-                Initializer.UnityAppCloser.Close();
             }
         }
 

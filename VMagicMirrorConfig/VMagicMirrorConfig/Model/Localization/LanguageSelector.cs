@@ -37,10 +37,13 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        public void Initialize(IMessageSender sender, string preferredLanguageName)
+        public void Initialize(IMessageSender sender)
         {
             _sender = sender;
+        }
 
+        public void InitializePreferredLanguage(string preferredLanguageName)
+        {
             if (preferredLanguageName == "Japanese" || 
                 preferredLanguageName == "English")
             {
@@ -48,6 +51,7 @@ namespace Baku.VMagicMirrorConfig
             }
             else
             {
+                //NOTE: 普通はここには来ない
                 LanguageName =
                     (CultureInfo.CurrentCulture.Name == "ja-JP") ?
                     "Japanese" :

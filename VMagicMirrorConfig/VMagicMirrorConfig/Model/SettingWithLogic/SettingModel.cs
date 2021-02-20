@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Globalization;
 
 namespace Baku.VMagicMirrorConfig
 {
@@ -22,8 +23,9 @@ namespace Baku.VMagicMirrorConfig
             WordToMotionSetting = new WordToMotionSettingModel(sender);
             ExternalTrackerSetting = new ExternalTrackerSettingModel(sender);
 
-            //TODO?: ここの書き方からしてプロパティが二重に存在する感じがちょっと抵抗あるよね
-            LanguageName = new RPropertyMin<string>("Japanese", s =>
+            //NOTE; LanguageSelectorとの二重管理っぽくて若干アレだがこのままで行く
+            //初期値Defaultを入れることで、起動直後にPCのカルチャベースで言語を指定しなきゃダメかどうか判別する
+            LanguageName = new RPropertyMin<string>("Default", s =>
             {
                 LanguageSelector.Instance.LanguageName = s;
             });
@@ -46,7 +48,7 @@ namespace Baku.VMagicMirrorConfig
         public string LastLoadedVRoidModelId { get; set; } = "";
         public RPropertyMin<bool> AutoLoadLastLoadedVrm { get; } = new RPropertyMin<bool>(false);
 
-        //TODO: モデルの自動ロードってここに書くのがいいのかな？？VMのままでもいい？
+        //NOTE: VRMのロード処理はUI依存の処理が多すぎるためViewModel実装のままにしている
 
         public RPropertyMin<string> LanguageName { get; }
 
@@ -63,6 +65,21 @@ namespace Baku.VMagicMirrorConfig
         public WordToMotionSettingModel WordToMotionSetting { get; }
 
         public ExternalTrackerSettingModel ExternalTrackerSetting { get; }
+
+        /// <summary>
+        /// 自動保存される設定ファイルに言語設定が保存されていなかった場合、
+        /// 現在のカルチャに応じた初期言語を設定します。
+        /// </summary>
+        public void InitializeLanguageIfNeeded()
+        {
+            if (LanguageName.Value == "Default")
+            {
+                LanguageName.Value =
+                    (CultureInfo.CurrentCulture.Name == "ja-JP") ?
+                    "Japanese" :
+                    "English";
+            }
+        }
 
         public void OnVRoidModelLoaded(string modelId)
         {
