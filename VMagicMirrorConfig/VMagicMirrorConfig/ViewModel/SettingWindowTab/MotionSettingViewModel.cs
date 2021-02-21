@@ -51,8 +51,11 @@ namespace Baku.VMagicMirrorConfig
                 }
             };
 
+            //両方trueのときだけポインターを表示したいので、それのチェック
             _model.EnablePresenterMotion.PropertyChanged += (_, __) => UpdatePointerVisibility();
             _model.ShowPresentationPointer.PropertyChanged += (_, __) => UpdatePointerVisibility();
+            //通常発生しないが、VMの初期化時点でポインター表示が必要ならそうする
+            UpdatePointerVisibility();
 
             UpdateEyeRotRangeText();
 
@@ -61,8 +64,6 @@ namespace Baku.VMagicMirrorConfig
         }
 
         private readonly MotionSettingSync _model;
-
-        private LargePointerController _largePointerController => LargePointerController.Instance;
 
         private void OnReceivedCommand(object? sender, CommandReceivedEventArgs e)
         {
@@ -123,8 +124,6 @@ namespace Baku.VMagicMirrorConfig
                 }
             });
         }
-
-        public void ClosePointer() => _largePointerController.Close();
 
         #region Full Body 
 
@@ -254,12 +253,8 @@ namespace Baku.VMagicMirrorConfig
         public RPropertyMin<bool> ShowPresentationPointer => _model.ShowPresentationPointer;
         public RPropertyMin<int> PresentationArmRadiusMin => _model.PresentationArmRadiusMin;
 
-        private void UpdatePointerVisibility()
-        {
-            _largePointerController.UpdateVisibility(
-                EnablePresenterMotion.Value && ShowPresentationPointer.Value
-                );
-        }
+        private void UpdatePointerVisibility() 
+            => LargePointerController.Instance.UpdateVisibility(_model.PointerVisible);
 
         #endregion
 

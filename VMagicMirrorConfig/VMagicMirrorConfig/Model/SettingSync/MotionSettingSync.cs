@@ -90,9 +90,8 @@ namespace Baku.VMagicMirrorConfig
             EnablePresenterMotion = new RPropertyMin<bool>(setting.EnablePresenterMotion, v =>
             {
                 SendMessage(factory.EnablePresenterMotion(v));
-                UpdatePointerVisibility();
             });
-            ShowPresentationPointer = new RPropertyMin<bool>(setting.ShowPresentationPointer, v => UpdatePointerVisibility());            
+            ShowPresentationPointer = new RPropertyMin<bool>(setting.ShowPresentationPointer);
             PresentationArmRadiusMin = new RPropertyMin<int>(setting.PresentationArmRadiusMin, v => SendMessage(factory.PresentationArmRadiusMin(v)));
 
             LengthFromWristToTip = new RPropertyMin<int>(setting.LengthFromWristToTip, v => SendMessage(factory.LengthFromWristToTip(v)));
@@ -176,6 +175,8 @@ namespace Baku.VMagicMirrorConfig
 
         public RPropertyMin<bool> ShowPresentationPointer { get; }
         public RPropertyMin<int> PresentationArmRadiusMin { get; }
+
+        public bool PointerVisible => EnablePresenterMotion.Value && ShowPresentationPointer.Value;
 
         #endregion
 
@@ -311,13 +312,5 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private LargePointerController _largePointerController => LargePointerController.Instance;
-
-        private void UpdatePointerVisibility()
-        {
-            _largePointerController.UpdateVisibility(
-                EnablePresenterMotion.Value && ShowPresentationPointer.Value
-                );
-        }
     }
 }

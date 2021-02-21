@@ -362,7 +362,7 @@ namespace Baku.VMagicMirrorConfig
                 SettingFileIo.SaveSetting(SpecialFilePath.AutoSaveSettingFilePath, true);
                 MessageIo.Dispose();
                 _runtimeHelper.Dispose();
-                MotionSetting.ClosePointer();
+                LargePointerController.Instance.Close();
             }
         }
 
