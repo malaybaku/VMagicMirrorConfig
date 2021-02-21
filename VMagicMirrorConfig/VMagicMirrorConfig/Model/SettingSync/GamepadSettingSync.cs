@@ -16,7 +16,7 @@
             var factory = MessageFactory.Instance;
 
 
-            GamepadEnabled = new RPropertyMin<bool>(s.GamepadEnabled, b =>
+            GamepadEnabled = new RProperty<bool>(s.GamepadEnabled, b =>
             {
                 SendMessage(factory.EnableGamepad(b));
                 if (!b && GamepadVisibility != null)
@@ -26,13 +26,13 @@
                 }
             });
             
-            PreferDirectInputGamepad = new RPropertyMin<bool>(s.PreferDirectInputGamepad, b => SendMessage(factory.PreferDirectInputGamepad(b)));
-            GamepadVisibility = new RPropertyMin<bool>(s.GamepadVisibility, b => SendMessage(factory.GamepadVisibility(b)));
+            PreferDirectInputGamepad = new RProperty<bool>(s.PreferDirectInputGamepad, b => SendMessage(factory.PreferDirectInputGamepad(b)));
+            GamepadVisibility = new RProperty<bool>(s.GamepadVisibility, b => SendMessage(factory.GamepadVisibility(b)));
 
             //排他になるように制御
             //TODO: RadioButtonの要請により、「一瞬たりとてフラグが2つ同時に立つのは許さん」みたいな要件もありうるので試しておくこと。
             //NOTE: nullableっぽい書き方を一部してるが実際はnullableではない
-            GamepadLeanNone = new RPropertyMin<bool>(s.GamepadLeanNone, b =>
+            GamepadLeanNone = new RProperty<bool>(s.GamepadLeanNone, b =>
             {
                 if (b)
                 {
@@ -42,7 +42,7 @@
                     GamepadLeanLeftButtons?.Set(false);
                 }
             });
-            GamepadLeanLeftStick = new RPropertyMin<bool>(s.GamepadLeanLeftStick, b =>
+            GamepadLeanLeftStick = new RProperty<bool>(s.GamepadLeanLeftStick, b =>
             {
                 if (b)
                 {
@@ -52,7 +52,7 @@
                     GamepadLeanLeftButtons?.Set(false);
                 }
             });
-            GamepadLeanRightStick = new RPropertyMin<bool>(s.GamepadLeanRightStick, b =>
+            GamepadLeanRightStick = new RProperty<bool>(s.GamepadLeanRightStick, b =>
             {
                 if (b)
                 {
@@ -62,7 +62,7 @@
                     GamepadLeanLeftButtons?.Set(false);
                 }
             });
-            GamepadLeanLeftButtons = new RPropertyMin<bool>(s.GamepadLeanLeftButtons, b =>
+            GamepadLeanLeftButtons = new RProperty<bool>(s.GamepadLeanLeftButtons, b =>
             {
                 if (b)
                 {
@@ -73,26 +73,26 @@
                 }
             });
 
-            GamepadLeanReverseHorizontal = new RPropertyMin<bool>(
+            GamepadLeanReverseHorizontal = new RProperty<bool>(
                 s.GamepadLeanReverseHorizontal, b => SendMessage(factory.GamepadLeanReverseHorizontal(b))
                 );
-            GamepadLeanReverseVertical = new RPropertyMin<bool>(s.GamepadLeanReverseVertical, b => SendMessage(factory.GamepadLeanReverseVertical(b)));
+            GamepadLeanReverseVertical = new RProperty<bool>(s.GamepadLeanReverseVertical, b => SendMessage(factory.GamepadLeanReverseVertical(b)));
         }
 
-        public RPropertyMin<bool> GamepadEnabled { get; } 
-        public RPropertyMin<bool> PreferDirectInputGamepad { get; } 
-        public RPropertyMin<bool> GamepadVisibility { get; } 
+        public RProperty<bool> GamepadEnabled { get; } 
+        public RProperty<bool> PreferDirectInputGamepad { get; } 
+        public RProperty<bool> GamepadVisibility { get; } 
 
         //NOTE: 本来ならEnum値1つで管理する方がよいが、TwoWayバインディングが簡便になるのでbool4つで代用していた経緯があり、こういう持ち方。
 
         //モデル層では「1つの値がtrueになるとき他を全部falseにする」という措置を行わないといけないため、RPropertyを使わずに捌く
-        public RPropertyMin<bool> GamepadLeanNone { get; } 
-        public RPropertyMin<bool> GamepadLeanLeftButtons { get; } 
-        public RPropertyMin<bool> GamepadLeanLeftStick { get; } 
-        public RPropertyMin<bool> GamepadLeanRightStick { get; } 
+        public RProperty<bool> GamepadLeanNone { get; } 
+        public RProperty<bool> GamepadLeanLeftButtons { get; } 
+        public RProperty<bool> GamepadLeanLeftStick { get; } 
+        public RProperty<bool> GamepadLeanRightStick { get; } 
 
-        public RPropertyMin<bool> GamepadLeanReverseHorizontal { get; } 
-        public RPropertyMin<bool> GamepadLeanReverseVertical { get; }
+        public RProperty<bool> GamepadLeanReverseHorizontal { get; } 
+        public RProperty<bool> GamepadLeanReverseVertical { get; }
 
         public override void ResetToDefault() => Load(GamepadSetting.Default);
     }

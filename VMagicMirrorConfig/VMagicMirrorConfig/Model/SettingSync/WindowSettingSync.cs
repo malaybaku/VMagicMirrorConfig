@@ -16,11 +16,11 @@ namespace Baku.VMagicMirrorConfig
                 B?.Value ?? 255
                 ));
 
-            R = new RPropertyMin<int>(setting.R, _ => sendBackgroundColor());
-            G = new RPropertyMin<int>(setting.G, _ => sendBackgroundColor());
-            B = new RPropertyMin<int>(setting.B, _ => sendBackgroundColor());
+            R = new RProperty<int>(setting.R, _ => sendBackgroundColor());
+            G = new RProperty<int>(setting.G, _ => sendBackgroundColor());
+            B = new RProperty<int>(setting.B, _ => sendBackgroundColor());
 
-            IsTransparent = new RPropertyMin<bool>(setting.IsTransparent, b =>
+            IsTransparent = new RProperty<bool>(setting.IsTransparent, b =>
             {
                 //ここで透明or不透明の背景を送りつけるとUnity側がよろしく背景透過にしてくれる
                 sendBackgroundColor();
@@ -43,7 +43,7 @@ namespace Baku.VMagicMirrorConfig
                 }
             });
 
-            WindowDraggable = new RPropertyMin<bool>(setting.WindowDraggable, b =>
+            WindowDraggable = new RProperty<bool>(setting.WindowDraggable, b =>
             {
                 SendMessage(factory.WindowDraggable(b));
                 //すでにウィンドウが透明ならばクリックスルーもついでにやる。不透明の場合、絶対にクリックスルーにはしない
@@ -54,29 +54,29 @@ namespace Baku.VMagicMirrorConfig
                 }
             });
 
-            TopMost = new RPropertyMin<bool>(setting.TopMost, b => SendMessage(factory.TopMost(b)));
+            TopMost = new RProperty<bool>(setting.TopMost, b => SendMessage(factory.TopMost(b)));
 
-            WholeWindowTransparencyLevel = new RPropertyMin<int>(
+            WholeWindowTransparencyLevel = new RProperty<int>(
                 setting.WholeWindowTransparencyLevel, 
                 i => SendMessage(factory.SetWholeWindowTransparencyLevel(i))
                 );
 
-            AlphaValueOnTransparent = new RPropertyMin<int>(
+            AlphaValueOnTransparent = new RProperty<int>(
                 setting.AlphaValueOnTransparent, 
                 i => SendMessage(factory.SetAlphaValueOnTransparent(i))
                 );
         }
 
-        public RPropertyMin<int> R { get; }
-        public RPropertyMin<int> G { get; }
-        public RPropertyMin<int> B { get; }
+        public RProperty<int> R { get; }
+        public RProperty<int> G { get; }
+        public RProperty<int> B { get; }
 
-        public RPropertyMin<bool> IsTransparent { get; }
-        public RPropertyMin<bool> WindowDraggable { get; }
-        public RPropertyMin<bool> TopMost { get; }
+        public RProperty<bool> IsTransparent { get; }
+        public RProperty<bool> WindowDraggable { get; }
+        public RProperty<bool> TopMost { get; }
 
-        public RPropertyMin<int> WholeWindowTransparencyLevel { get; }
-        public RPropertyMin<int> AlphaValueOnTransparent { get; }
+        public RProperty<int> WholeWindowTransparencyLevel { get; }
+        public RProperty<int> AlphaValueOnTransparent { get; }
 
         #region Reset API
 

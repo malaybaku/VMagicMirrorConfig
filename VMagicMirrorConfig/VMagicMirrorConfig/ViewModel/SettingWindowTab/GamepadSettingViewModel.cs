@@ -13,18 +13,18 @@
 
         private readonly GamepadSettingSync _model;
 
-        public RPropertyMin<bool> GamepadEnabled => _model.GamepadEnabled;
-        public RPropertyMin<bool> PreferDirectInput => _model.PreferDirectInputGamepad;
+        public RProperty<bool> GamepadEnabled => _model.GamepadEnabled;
+        public RProperty<bool> PreferDirectInput => _model.PreferDirectInputGamepad;
 
         //NOTE: 以下、本来ならEnum値1つで管理する方がよいが、TwoWayバインディングが簡便になるのでbool4つで代用。
         //というのをViewModel層でやってたのがModelに波及してしまった悪い例です…
-        public RPropertyMin<bool> GamepadLeanNone => _model.GamepadLeanNone;
-        public RPropertyMin<bool> GamepadLeanLeftStick => _model.GamepadLeanLeftStick;
-        public RPropertyMin<bool> GamepadLeanRightStick => _model.GamepadLeanRightStick;
-        public RPropertyMin<bool> GamepadLeanLeftButtons => _model.GamepadLeanLeftButtons;
+        public RProperty<bool> GamepadLeanNone => _model.GamepadLeanNone;
+        public RProperty<bool> GamepadLeanLeftStick => _model.GamepadLeanLeftStick;
+        public RProperty<bool> GamepadLeanRightStick => _model.GamepadLeanRightStick;
+        public RProperty<bool> GamepadLeanLeftButtons => _model.GamepadLeanLeftButtons;
 
-        public RPropertyMin<bool> GamepadLeanReverseHorizontal => _model.GamepadLeanReverseHorizontal;
-        public RPropertyMin<bool> GamepadLeanReverseVertical => _model.GamepadLeanReverseVertical;
+        public RProperty<bool> GamepadLeanReverseHorizontal => _model.GamepadLeanReverseHorizontal;
+        public RProperty<bool> GamepadLeanReverseVertical => _model.GamepadLeanReverseVertical;
 
         public ActionCommand ResetSettingCommand { get; }
     }

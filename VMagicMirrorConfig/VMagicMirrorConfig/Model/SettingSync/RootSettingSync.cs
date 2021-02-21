@@ -25,7 +25,7 @@ namespace Baku.VMagicMirrorConfig
 
             //NOTE; LanguageSelectorとの二重管理っぽくて若干アレだがこのままで行く
             //初期値Defaultを入れることで、起動直後にPCのカルチャベースで言語を指定しなきゃダメかどうか判別する
-            LanguageName = new RPropertyMin<string>("Default", s =>
+            LanguageName = new RProperty<string>("Default", s =>
             {
                 LanguageSelector.Instance.LanguageName = s;
             });
@@ -46,11 +46,11 @@ namespace Baku.VMagicMirrorConfig
         //SettingFileIoがセーブする時点において、自動ロードが無効だとファイルパスが転写されないようにガードがかかる。
         public string LastVrmLoadFilePath { get; set; } = "";
         public string LastLoadedVRoidModelId { get; set; } = "";
-        public RPropertyMin<bool> AutoLoadLastLoadedVrm { get; } = new RPropertyMin<bool>(false);
+        public RProperty<bool> AutoLoadLastLoadedVrm { get; } = new RProperty<bool>(false);
 
         //NOTE: VRMのロード処理はUI依存の処理が多すぎるためViewModel実装のままにしている
 
-        public RPropertyMin<string> LanguageName { get; }
+        public RProperty<string> LanguageName { get; }
 
         public WindowSettingSync WindowSetting { get; }
 

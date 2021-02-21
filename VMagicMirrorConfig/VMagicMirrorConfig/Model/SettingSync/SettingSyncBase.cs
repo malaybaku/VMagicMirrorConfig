@@ -72,7 +72,7 @@ namespace Baku.VMagicMirrorConfig
             IsLoading = true;
             SearchPropertyRoutine((source, target) =>
             {
-                if (!(target.PropertyType.IsGenericType && target.PropertyType.GetGenericTypeDefinition() == typeof(RPropertyMin<>)))
+                if (!(target.PropertyType.IsGenericType && target.PropertyType.GetGenericTypeDefinition() == typeof(RProperty<>)))
                 {
                     //モデル側が組み込み型で値を持っているケース: 単に代入でOK
                     target.SetValue(this, source.GetValue(entity));
@@ -82,7 +82,7 @@ namespace Baku.VMagicMirrorConfig
                 //TargetがRPropertyMin<T>であると考えられるケース: Valueに向かって値を入れる
                 var rProperty = target.GetValue(this);
                 //NOTE: nameofの中のintに意味はない(型名を入れないとコンパイラが怒るから入れてるだけです)
-                var valueProperty = rProperty?.GetType()?.GetProperty(nameof(RPropertyMin<int>.Value));
+                var valueProperty = rProperty?.GetType()?.GetProperty(nameof(RProperty<int>.Value));
 
                 if (rProperty == null || valueProperty == null)
                 {
@@ -113,7 +113,7 @@ namespace Baku.VMagicMirrorConfig
             {
                 //TargetがRPropertyMin<T>ならValueに向かって値を入れる。
                 //そうでなければ直接Setterを呼ぶ
-                if (!(modelProp.PropertyType.IsGenericType && modelProp.PropertyType.GetGenericTypeDefinition() == typeof(RPropertyMin<>)))
+                if (!(modelProp.PropertyType.IsGenericType && modelProp.PropertyType.GetGenericTypeDefinition() == typeof(RProperty<>)))
                 {
                     //モデル側も組み込み型で値を持っている: 単に代入
                     entityProp.SetValue(entity, modelProp.GetValue(this));
@@ -123,7 +123,7 @@ namespace Baku.VMagicMirrorConfig
                 //TargetがRPropertyMin<T>であると考えられるケース: Valueから値をとってEntityに代入
                 var rProperty = modelProp.GetValue(this);
                 //NOTE: nameofの中のintに意味はない(型名を入れないとコンパイラが怒るから入れてるだけです)
-                var valueProperty = rProperty?.GetType()?.GetProperty(nameof(RPropertyMin<int>.Value));
+                var valueProperty = rProperty?.GetType()?.GetProperty(nameof(RProperty<int>.Value));
 
                 if (rProperty == null || valueProperty == null)
                 {

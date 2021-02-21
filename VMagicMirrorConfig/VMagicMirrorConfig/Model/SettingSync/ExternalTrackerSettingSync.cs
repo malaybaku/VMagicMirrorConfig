@@ -12,43 +12,43 @@ namespace Baku.VMagicMirrorConfig
             //NOTE: ひとまず初期値を入れておくと非null保証できて都合がいい、という話
             FaceSwitchSetting = ExternalTrackerFaceSwitchSetting.LoadDefault();
 
-            EnableExternalTracking = new RPropertyMin<bool>(
+            EnableExternalTracking = new RProperty<bool>(
                 setting.EnableExternalTracking, b => SendMessage(factory.ExTrackerEnable(b))
                 );
-            EnableExternalTrackerLipSync = new RPropertyMin<bool>(
+            EnableExternalTrackerLipSync = new RProperty<bool>(
                 setting.EnableExternalTrackerLipSync, b => SendMessage(factory.ExTrackerEnableLipSync(b))
                 );
-            EnableExternalTrackerPerfectSync = new RPropertyMin<bool>(
+            EnableExternalTrackerPerfectSync = new RProperty<bool>(
                 setting.EnableExternalTrackerPerfectSync, b => SendMessage(factory.ExTrackerEnablePerfectSync(b))
                 );
 
-            UseVRoidDefaultForPerfectSync = new RPropertyMin<bool>(
+            UseVRoidDefaultForPerfectSync = new RProperty<bool>(
                 setting.UseVRoidDefaultForPerfectSync, b => SendMessage(factory.ExTrackerUseVRoidDefaultForPerfectSync(b))
                 );
 
-            TrackSourceType = new RPropertyMin<int>(setting.TrackSourceType, i => SendMessage(factory.ExTrackerSetSource(i)));
+            TrackSourceType = new RProperty<int>(setting.TrackSourceType, i => SendMessage(factory.ExTrackerSetSource(i)));
             //NOTE: このアドレスはコマンド実行時に使うため、書き換わってもメッセージは送らない
-            IFacialMocapTargetIpAddress = new RPropertyMin<string>(setting.IFacialMocapTargetIpAddress);
+            IFacialMocapTargetIpAddress = new RProperty<string>(setting.IFacialMocapTargetIpAddress);
             
-            CalibrateData = new RPropertyMin<string>(
+            CalibrateData = new RProperty<string>(
                 setting.CalibrateData, s => SendMessage(factory.ExTrackerSetCalibrateData(s))
                 );
 
-            SerializedFaceSwitchSetting = new RPropertyMin<string>(
+            SerializedFaceSwitchSetting = new RProperty<string>(
                 setting.SerializedFaceSwitchSetting, v => SendMessage(factory.ExTrackerSetFaceSwitchSetting(v))
                 );
         }
 
         // 基本メニュー部分
-        public RPropertyMin<bool> EnableExternalTracking { get; }
-        public RPropertyMin<bool> EnableExternalTrackerLipSync { get; }
-        public RPropertyMin<bool> EnableExternalTrackerPerfectSync { get; }
-        public RPropertyMin<bool> UseVRoidDefaultForPerfectSync { get; }
+        public RProperty<bool> EnableExternalTracking { get; }
+        public RProperty<bool> EnableExternalTrackerLipSync { get; }
+        public RProperty<bool> EnableExternalTrackerPerfectSync { get; }
+        public RProperty<bool> UseVRoidDefaultForPerfectSync { get; }
 
         // アプリ別設定
-        public RPropertyMin<int> TrackSourceType { get; }
-        public RPropertyMin<string> IFacialMocapTargetIpAddress { get; }
-        public RPropertyMin<string> CalibrateData { get; }
+        public RProperty<int> TrackSourceType { get; }
+        public RProperty<string> IFacialMocapTargetIpAddress { get; }
+        public RProperty<string> CalibrateData { get; }
 
         // FaceSwitchの設定
 
@@ -56,7 +56,7 @@ namespace Baku.VMagicMirrorConfig
 
         //TODO: ここにデフォルト値が入りやすいような仕掛けを作るのもアリかも、という問題があるが、
         //特に値が空だったときのリカバーをモデル層でやる形にするのも選択肢。
-        public RPropertyMin<string> SerializedFaceSwitchSetting { get; }
+        public RProperty<string> SerializedFaceSwitchSetting { get; }
 
         public void SaveFaceSwitchSetting()
         {

@@ -50,19 +50,19 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        public RPropertyMin<int> CameraFov => _model.CameraFov;
-        public RPropertyMin<bool> EnableFreeCameraMode => _model.EnableFreeCameraMode;
+        public RProperty<int> CameraFov => _model.CameraFov;
+        public RProperty<bool> EnableFreeCameraMode => _model.EnableFreeCameraMode;
 
-        public RPropertyMin<bool> EnableMidiRead => _model.EnableMidiRead;
+        public RProperty<bool> EnableMidiRead => _model.EnableMidiRead;
 
         //NOTE: カメラ位置、デバイスレイアウト、クイックセーブした視点については、ユーザーが直接いじる想定ではない
 
         #region 視点のクイックセーブ/ロード
 
         //NOTE: これらの値はUIで「有効なデータを持ってるかどうか」という間接的な情報として使う
-        public RPropertyMin<string> QuickSave1 => _model.QuickSave1;
-        public RPropertyMin<string> QuickSave2 => _model.QuickSave2;
-        public RPropertyMin<string> QuickSave3 => _model.QuickSave3;
+        public RProperty<string> QuickSave1 => _model.QuickSave1;
+        public RProperty<string> QuickSave2 => _model.QuickSave2;
+        public RProperty<string> QuickSave3 => _model.QuickSave3;
 
         public ActionCommand<string> QuickSaveViewPointCommand { get; }
         public ActionCommand<string> QuickLoadViewPointCommand { get; }
@@ -73,15 +73,15 @@ namespace Baku.VMagicMirrorConfig
 
 
         // デバイス類の表示/非表示
-        public RPropertyMin<bool> HidVisibility => _model.HidVisibility;
-        public RPropertyMin<bool> MidiControllerVisibility => _model.MidiControllerVisibility;
-        public RPropertyMin<bool> GamepadVisibility => _gamepadModel.GamepadVisibility;
+        public RProperty<bool> HidVisibility => _model.HidVisibility;
+        public RProperty<bool> MidiControllerVisibility => _model.MidiControllerVisibility;
+        public RProperty<bool> GamepadVisibility => _gamepadModel.GamepadVisibility;
 
-        public RPropertyMin<bool> EnableDeviceFreeLayout => _model.EnableDeviceFreeLayout;
+        public RProperty<bool> EnableDeviceFreeLayout => _model.EnableDeviceFreeLayout;
 
         #region タイピングエフェクト
 
-        public RPropertyMin<int> SelectedTypingEffectId => _model.SelectedTypingEffectId;
+        public RProperty<int> SelectedTypingEffectId => _model.SelectedTypingEffectId;
 
         private TypingEffectSelectionItem? _typingEffectItem = null;
         public TypingEffectSelectionItem? TypingEffectItem

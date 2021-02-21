@@ -15,75 +15,75 @@ namespace Baku.VMagicMirrorConfig
             //モデルのプロパティ変更=Unityへの変更通知としてバインド。
             //エフェクト関係は設定項目がシンプルなため、例外はほぼ無い(色関係のメッセージ送信がちょっと特殊なくらい)
 
-            LightIntensity = new RPropertyMin<int>(s.LightIntensity, i => SendMessage(factory.LightIntensity(i)));
-            LightYaw = new RPropertyMin<int>(s.LightYaw, i => SendMessage(factory.LightYaw(i)));
-            LightPitch = new RPropertyMin<int>(s.LightPitch, i => SendMessage(factory.LightPitch(i)));
+            LightIntensity = new RProperty<int>(s.LightIntensity, i => SendMessage(factory.LightIntensity(i)));
+            LightYaw = new RProperty<int>(s.LightYaw, i => SendMessage(factory.LightYaw(i)));
+            LightPitch = new RProperty<int>(s.LightPitch, i => SendMessage(factory.LightPitch(i)));
 
             Action sendLightColor = () =>
                 SendMessage(factory.LightColor(LightR?.Value ?? 255, LightG?.Value ?? 255, LightB?.Value ?? 255));
-            LightR = new RPropertyMin<int>(s.LightR, _ => sendLightColor());
-            LightG = new RPropertyMin<int>(s.LightG, _ => sendLightColor());
-            LightB = new RPropertyMin<int>(s.LightB, _ => sendLightColor());
+            LightR = new RProperty<int>(s.LightR, _ => sendLightColor());
+            LightG = new RProperty<int>(s.LightG, _ => sendLightColor());
+            LightB = new RProperty<int>(s.LightB, _ => sendLightColor());
 
-            EnableShadow = new RPropertyMin<bool>(s.EnableShadow, b => SendMessage(factory.ShadowEnable(b)));
-            ShadowIntensity = new RPropertyMin<int>(s.ShadowIntensity, i => SendMessage(factory.ShadowIntensity(i)));
-            ShadowYaw = new RPropertyMin<int>(s.ShadowYaw, i => SendMessage(factory.ShadowYaw(i)));
-            ShadowPitch = new RPropertyMin<int>(s.ShadowPitch, i => SendMessage(factory.ShadowPitch(i)));
-            ShadowDepthOffset = new RPropertyMin<int>(s.ShadowDepthOffset, i => SendMessage(factory.ShadowDepthOffset(i)));
+            EnableShadow = new RProperty<bool>(s.EnableShadow, b => SendMessage(factory.ShadowEnable(b)));
+            ShadowIntensity = new RProperty<int>(s.ShadowIntensity, i => SendMessage(factory.ShadowIntensity(i)));
+            ShadowYaw = new RProperty<int>(s.ShadowYaw, i => SendMessage(factory.ShadowYaw(i)));
+            ShadowPitch = new RProperty<int>(s.ShadowPitch, i => SendMessage(factory.ShadowPitch(i)));
+            ShadowDepthOffset = new RProperty<int>(s.ShadowDepthOffset, i => SendMessage(factory.ShadowDepthOffset(i)));
 
-            BloomIntensity = new RPropertyMin<int>(s.BloomIntensity, i => SendMessage(factory.BloomIntensity(i)));
-            BloomThreshold = new RPropertyMin<int>(s.BloomThreshold, i => SendMessage(factory.BloomThreshold(i)));
+            BloomIntensity = new RProperty<int>(s.BloomIntensity, i => SendMessage(factory.BloomIntensity(i)));
+            BloomThreshold = new RProperty<int>(s.BloomThreshold, i => SendMessage(factory.BloomThreshold(i)));
             Action sendBloomColor = () =>
                 SendMessage(factory.BloomColor(BloomR?.Value ?? 255, BloomG?.Value ?? 255, BloomB?.Value ?? 255));
-            BloomR = new RPropertyMin<int>(s.BloomR, _ => sendBloomColor());
-            BloomG = new RPropertyMin<int>(s.BloomG, _ => sendBloomColor());
-            BloomB = new RPropertyMin<int>(s.BloomB, _ => sendBloomColor());
+            BloomR = new RProperty<int>(s.BloomR, _ => sendBloomColor());
+            BloomG = new RProperty<int>(s.BloomG, _ => sendBloomColor());
+            BloomB = new RProperty<int>(s.BloomB, _ => sendBloomColor());
 
-            EnableWind = new RPropertyMin<bool>(s.EnableWind, b => SendMessage(factory.WindEnable(b)));
-            WindStrength = new RPropertyMin<int>(s.WindStrength, i => SendMessage(factory.WindStrength(i)));
-            WindInterval = new RPropertyMin<int>(s.WindInterval, i => SendMessage(factory.WindInterval(i)));
-            WindYaw = new RPropertyMin<int>(s.WindYaw, i => SendMessage(factory.WindYaw(i)));
+            EnableWind = new RProperty<bool>(s.EnableWind, b => SendMessage(factory.WindEnable(b)));
+            WindStrength = new RProperty<int>(s.WindStrength, i => SendMessage(factory.WindStrength(i)));
+            WindInterval = new RProperty<int>(s.WindInterval, i => SendMessage(factory.WindInterval(i)));
+            WindYaw = new RProperty<int>(s.WindYaw, i => SendMessage(factory.WindYaw(i)));
         }
 
         #region Light
 
-        public RPropertyMin<int> LightIntensity { get; }
-        public RPropertyMin<int> LightYaw { get; }
-        public RPropertyMin<int> LightPitch { get; }
+        public RProperty<int> LightIntensity { get; }
+        public RProperty<int> LightYaw { get; }
+        public RProperty<int> LightPitch { get; }
 
-        public RPropertyMin<int> LightR { get; }
-        public RPropertyMin<int> LightG { get; }
-        public RPropertyMin<int> LightB { get; }
+        public RProperty<int> LightR { get; }
+        public RProperty<int> LightG { get; }
+        public RProperty<int> LightB { get; }
 
         #endregion
 
         #region Shadow
 
-        public RPropertyMin<bool> EnableShadow { get; }
-        public RPropertyMin<int> ShadowIntensity { get; }
-        public RPropertyMin<int> ShadowYaw { get; }
-        public RPropertyMin<int> ShadowPitch { get; }
-        public RPropertyMin<int> ShadowDepthOffset { get; }
+        public RProperty<bool> EnableShadow { get; }
+        public RProperty<int> ShadowIntensity { get; }
+        public RProperty<int> ShadowYaw { get; }
+        public RProperty<int> ShadowPitch { get; }
+        public RProperty<int> ShadowDepthOffset { get; }
 
         #endregion
 
         #region Bloom
 
-        public RPropertyMin<int> BloomIntensity { get; } 
-        public RPropertyMin<int> BloomThreshold { get; } 
+        public RProperty<int> BloomIntensity { get; } 
+        public RProperty<int> BloomThreshold { get; } 
 
-        public RPropertyMin<int> BloomR { get; } 
-        public RPropertyMin<int> BloomG { get; } 
-        public RPropertyMin<int> BloomB { get; } 
+        public RProperty<int> BloomR { get; } 
+        public RProperty<int> BloomG { get; } 
+        public RProperty<int> BloomB { get; } 
 
         #endregion
 
         #region Wind
 
-        public RPropertyMin<bool> EnableWind { get; } 
-        public RPropertyMin<int> WindStrength { get; }
-        public RPropertyMin<int> WindInterval { get; }
-        public RPropertyMin<int> WindYaw { get; }
+        public RProperty<bool> EnableWind { get; } 
+        public RProperty<int> WindStrength { get; }
+        public RProperty<int> WindInterval { get; }
+        public RProperty<int> WindYaw { get; }
 
         #endregion
 

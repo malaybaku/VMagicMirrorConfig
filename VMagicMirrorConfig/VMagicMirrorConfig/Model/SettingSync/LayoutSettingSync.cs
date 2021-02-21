@@ -12,49 +12,49 @@ namespace Baku.VMagicMirrorConfig
             var s = LayoutSetting.Default;
             var factory = MessageFactory.Instance;
 
-            CameraFov = new RPropertyMin<int>(s.CameraFov, i => SendMessage(factory.CameraFov(i)));
-            EnableMidiRead = new RPropertyMin<bool>(
+            CameraFov = new RProperty<int>(s.CameraFov, i => SendMessage(factory.CameraFov(i)));
+            EnableMidiRead = new RProperty<bool>(
                 s.EnableMidiRead, b => SendMessage(factory.EnableMidiRead(b))
                 );
-            MidiControllerVisibility = new RPropertyMin<bool>(
+            MidiControllerVisibility = new RProperty<bool>(
                 s.MidiControllerVisibility, b => SendMessage(factory.MidiControllerVisibility(b))
                 );
 
-            CameraPosition = new RPropertyMin<string>(s.CameraPosition, v => SendMessage(factory.SetCustomCameraPosition(v)));
-            DeviceLayout = new RPropertyMin<string>(s.DeviceLayout, v => SendMessage(factory.SetDeviceLayout(v)));
+            CameraPosition = new RProperty<string>(s.CameraPosition, v => SendMessage(factory.SetCustomCameraPosition(v)));
+            DeviceLayout = new RProperty<string>(s.DeviceLayout, v => SendMessage(factory.SetDeviceLayout(v)));
 
             //NOTE: ここは初期値が空なのであんまり深い意味はない。
-            QuickSave1 = new RPropertyMin<string>(s.QuickSave1);
-            QuickSave2 = new RPropertyMin<string>(s.QuickSave2);
-            QuickSave3 = new RPropertyMin<string>(s.QuickSave3);
+            QuickSave1 = new RProperty<string>(s.QuickSave1);
+            QuickSave2 = new RProperty<string>(s.QuickSave2);
+            QuickSave3 = new RProperty<string>(s.QuickSave3);
 
-            HidVisibility = new RPropertyMin<bool>(s.HidVisibility, b => SendMessage(factory.HidVisibility(b)));
-            SelectedTypingEffectId = new RPropertyMin<int>(s.SelectedTypingEffectId, i => SendMessage(factory.SetKeyboardTypingEffectType(i)));
+            HidVisibility = new RProperty<bool>(s.HidVisibility, b => SendMessage(factory.HidVisibility(b)));
+            SelectedTypingEffectId = new RProperty<int>(s.SelectedTypingEffectId, i => SendMessage(factory.SetKeyboardTypingEffectType(i)));
 
-            EnableFreeCameraMode = new RPropertyMin<bool>(false, b => OnEnableFreeCameraModeChanged(b));
-            EnableDeviceFreeLayout = new RPropertyMin<bool>(false, v => SendMessage(factory.EnableDeviceFreeLayout(v)));
+            EnableFreeCameraMode = new RProperty<bool>(false, b => OnEnableFreeCameraModeChanged(b));
+            EnableDeviceFreeLayout = new RProperty<bool>(false, v => SendMessage(factory.EnableDeviceFreeLayout(v)));
         }
 
         //NOTE: Gamepadはモデルクラス的には関連づけしないでおく: 代わりにSave/Loadの関数内で調整してもらう感じにする
 
-        public RPropertyMin<int> CameraFov { get; }
-        public RPropertyMin<bool> EnableMidiRead { get; }
-        public RPropertyMin<bool> MidiControllerVisibility { get; }
+        public RProperty<int> CameraFov { get; }
+        public RProperty<bool> EnableMidiRead { get; }
+        public RProperty<bool> MidiControllerVisibility { get; }
 
-        public RPropertyMin<string> CameraPosition { get; }
-        public RPropertyMin<string> DeviceLayout { get; }
+        public RProperty<string> CameraPosition { get; }
+        public RProperty<string> DeviceLayout { get; }
 
         //NOTE: この辺にカメラ、フリーレイアウトのフラグも用意した方がいいかも。揮発フラグだがViewModelで保持するのも違和感あるため。
-        public RPropertyMin<string> QuickSave1 { get; }
-        public RPropertyMin<string> QuickSave2 { get; }
-        public RPropertyMin<string> QuickSave3 { get; }
+        public RProperty<string> QuickSave1 { get; }
+        public RProperty<string> QuickSave2 { get; }
+        public RProperty<string> QuickSave3 { get; }
 
-        public RPropertyMin<bool> HidVisibility { get; }
-        public RPropertyMin<int> SelectedTypingEffectId { get; }
+        public RProperty<bool> HidVisibility { get; }
+        public RProperty<int> SelectedTypingEffectId { get; }
 
         //NOTE: この2つの値はファイルには保存しない
-        public RPropertyMin<bool> EnableFreeCameraMode { get; }
-        public RPropertyMin<bool> EnableDeviceFreeLayout { get; }
+        public RProperty<bool> EnableFreeCameraMode { get; }
+        public RProperty<bool> EnableDeviceFreeLayout { get; }
 
         #region API
 

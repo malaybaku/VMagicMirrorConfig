@@ -33,7 +33,7 @@ namespace Baku.VMagicMirrorConfig
 
             CalibrateFaceCommand = new ActionCommand(() => SendMessage(MessageFactory.Instance.CalibrateFace()));
 
-            ShowMicrophoneVolume = new RPropertyMin<bool>(false, b =>
+            ShowMicrophoneVolume = new RProperty<bool>(false, b =>
             {
                 SendMessage(MessageFactory.Instance.SetMicrophoneVolumeVisibility(b));
                 if (!b)
@@ -127,25 +127,25 @@ namespace Baku.VMagicMirrorConfig
 
         #region Full Body 
 
-        public RPropertyMin<bool> EnableNoHandTrackMode => _model.EnableNoHandTrackMode;
+        public RProperty<bool> EnableNoHandTrackMode => _model.EnableNoHandTrackMode;
 
         #endregion
 
         #region Face
 
-        public RPropertyMin<bool> EnableFaceTracking => _model.EnableFaceTracking;
+        public RProperty<bool> EnableFaceTracking => _model.EnableFaceTracking;
 
-        public RPropertyMin<bool> ShowInstallPathWarning { get; } = new RPropertyMin<bool>(false);
+        public RProperty<bool> ShowInstallPathWarning { get; } = new RProperty<bool>(false);
 
-        public RPropertyMin<bool> AutoBlinkDuringFaceTracking => _model.AutoBlinkDuringFaceTracking;
-        public RPropertyMin<bool> EnableBodyLeanZ => _model.EnableBodyLeanZ;
-        public RPropertyMin<bool> EnableBlinkAdjust => _model.EnableBlinkAdjust;
-        public RPropertyMin<bool> EnableVoiceBasedMotion => _model.EnableVoiceBasedMotion;
-        public RPropertyMin<bool> DisableFaceHorizontalFlip => _model.DisableFaceTrackingHorizontalFlip;
-        public RPropertyMin<bool> EnableWebCamHighPowerMode => _model.EnableWebCamHighPowerMode;
-        public RPropertyMin<bool> EnableImageBasedHandTracking => _model.EnableImageBasedHandTracking;
+        public RProperty<bool> AutoBlinkDuringFaceTracking => _model.AutoBlinkDuringFaceTracking;
+        public RProperty<bool> EnableBodyLeanZ => _model.EnableBodyLeanZ;
+        public RProperty<bool> EnableBlinkAdjust => _model.EnableBlinkAdjust;
+        public RProperty<bool> EnableVoiceBasedMotion => _model.EnableVoiceBasedMotion;
+        public RProperty<bool> DisableFaceHorizontalFlip => _model.DisableFaceTrackingHorizontalFlip;
+        public RProperty<bool> EnableWebCamHighPowerMode => _model.EnableWebCamHighPowerMode;
+        public RProperty<bool> EnableImageBasedHandTracking => _model.EnableImageBasedHandTracking;
 
-        public RPropertyMin<string> CameraDeviceName => _model.CameraDeviceName;
+        public RProperty<string> CameraDeviceName => _model.CameraDeviceName;
 
         private readonly ObservableCollection<string> _writableCameraDeviceNames
             = new ObservableCollection<string>();
@@ -155,8 +155,8 @@ namespace Baku.VMagicMirrorConfig
 
         public ActionCommand CalibrateFaceCommand { get; }
 
-        public RPropertyMin<string> CalibrateFaceData => _model.CalibrateFaceData;
-        public RPropertyMin<int> FaceDefaultFun => _model.FaceDefaultFun;
+        public RProperty<string> CalibrateFaceData => _model.CalibrateFaceData;
+        public RProperty<int> FaceDefaultFun => _model.FaceDefaultFun;
 
         private readonly FaceMotionBlendShapeNameStore _blendShapeNameStore = new FaceMotionBlendShapeNameStore();
         public ReadOnlyObservableCollection<string> BlendShapeNames => _blendShapeNameStore.BlendShapeNames;
@@ -198,10 +198,10 @@ namespace Baku.VMagicMirrorConfig
 
         #region Eye
 
-        public RPropertyMin<bool> UseLookAtPointNone => _model.UseLookAtPointNone;
-        public RPropertyMin<bool> UseLookAtPointMousePointer => _model.UseLookAtPointMousePointer;
-        public RPropertyMin<bool> UseLookAtPointMainCamera => _model.UseLookAtPointMainCamera;
-        public RPropertyMin<int> EyeBoneRotationScale => _model.EyeBoneRotationScale;
+        public RProperty<bool> UseLookAtPointNone => _model.UseLookAtPointNone;
+        public RProperty<bool> UseLookAtPointMousePointer => _model.UseLookAtPointMousePointer;
+        public RProperty<bool> UseLookAtPointMainCamera => _model.UseLookAtPointMainCamera;
+        public RProperty<int> EyeBoneRotationScale => _model.EyeBoneRotationScale;
 
         //NOTE: ちょっと作法が悪いけど、「-7.0 ~ +7.0」のようなテキストでViewにわたす
         private const double EyeRotDefaultRange = 7.0;
@@ -221,14 +221,14 @@ namespace Baku.VMagicMirrorConfig
 
         #region Mouth
 
-        public RPropertyMin<bool> EnableLipSync => _model.EnableLipSync;
-        public RPropertyMin<string> LipSyncMicrophoneDeviceName => _model.LipSyncMicrophoneDeviceName;
-        public RPropertyMin<int> MicrophoneSensitivity => _model.MicrophoneSensitivity;
+        public RProperty<bool> EnableLipSync => _model.EnableLipSync;
+        public RProperty<string> LipSyncMicrophoneDeviceName => _model.LipSyncMicrophoneDeviceName;
+        public RProperty<int> MicrophoneSensitivity => _model.MicrophoneSensitivity;
 
-        public RPropertyMin<bool> ShowMicrophoneVolume { get; }
+        public RProperty<bool> ShowMicrophoneVolume { get; }
 
         //NOTE: 0 ~ 20が無音、21~40が適正、41~50がデカすぎになる。これはUnity側がそういう整形をしてくれる
-        public RPropertyMin<int> MicrophoneVolumeValue { get; } = new RPropertyMin<int>(0);  
+        public RProperty<int> MicrophoneVolumeValue { get; } = new RProperty<int>(0);  
 
         private readonly ObservableCollection<string> _writableMicrophoneDeviceNames
             = new ObservableCollection<string>();
@@ -240,18 +240,18 @@ namespace Baku.VMagicMirrorConfig
 
         #region Arm
 
-        public RPropertyMin<bool> EnableHidArmMotion => _model.EnableHidArmMotion;
-        public RPropertyMin<bool> EnableHidRandomTyping => _model.EnableHidRandomTyping;
-        public RPropertyMin<bool> EnableShoulderMotionModify => _model.EnableShoulderMotionModify;
-        public RPropertyMin<bool> EnableHandDownTimeout => _model.EnableHandDownTimeout;
-        public RPropertyMin<int> WaistWidth => _model.WaistWidth;
-        public RPropertyMin<int> ElbowCloseStrength => _model.ElbowCloseStrength;
+        public RProperty<bool> EnableHidArmMotion => _model.EnableHidArmMotion;
+        public RProperty<bool> EnableHidRandomTyping => _model.EnableHidRandomTyping;
+        public RProperty<bool> EnableShoulderMotionModify => _model.EnableShoulderMotionModify;
+        public RProperty<bool> EnableHandDownTimeout => _model.EnableHandDownTimeout;
+        public RProperty<int> WaistWidth => _model.WaistWidth;
+        public RProperty<int> ElbowCloseStrength => _model.ElbowCloseStrength;
 
-        public RPropertyMin<bool> EnableFpsAssumedRightHand => _model.EnableFpsAssumedRightHand;
+        public RProperty<bool> EnableFpsAssumedRightHand => _model.EnableFpsAssumedRightHand;
 
-        public RPropertyMin<bool> EnablePresenterMotion => _model.EnablePresenterMotion;
-        public RPropertyMin<bool> ShowPresentationPointer => _model.ShowPresentationPointer;
-        public RPropertyMin<int> PresentationArmRadiusMin => _model.PresentationArmRadiusMin;
+        public RProperty<bool> EnablePresenterMotion => _model.EnablePresenterMotion;
+        public RProperty<bool> ShowPresentationPointer => _model.ShowPresentationPointer;
+        public RProperty<int> PresentationArmRadiusMin => _model.PresentationArmRadiusMin;
 
         private void UpdatePointerVisibility() 
             => LargePointerController.Instance.UpdateVisibility(_model.PointerVisible);
@@ -260,17 +260,17 @@ namespace Baku.VMagicMirrorConfig
 
         #region Hand
 
-        public RPropertyMin<int> LengthFromWristToTip => _model.LengthFromWristToTip;
-        public RPropertyMin<int> HandYOffsetBasic => _model.HandYOffsetBasic;
-        public RPropertyMin<int> HandYOffsetAfterKeyDown => _model.HandYOffsetAfterKeyDown;
+        public RProperty<int> LengthFromWristToTip => _model.LengthFromWristToTip;
+        public RProperty<int> HandYOffsetBasic => _model.HandYOffsetBasic;
+        public RProperty<int> HandYOffsetAfterKeyDown => _model.HandYOffsetAfterKeyDown;
 
         #endregion
 
         #region Wait
 
-        public RPropertyMin<bool> EnableWaitMotion => _model.EnableWaitMotion;
-        public RPropertyMin<int> WaitMotionScale => _model.WaitMotionScale;
-        public RPropertyMin<int> WaitMotionPeriod => _model.WaitMotionPeriod;
+        public RProperty<bool> EnableWaitMotion => _model.EnableWaitMotion;
+        public RProperty<int> WaitMotionScale => _model.WaitMotionScale;
+        public RProperty<int> WaitMotionPeriod => _model.WaitMotionPeriod;
 
         #endregion
 

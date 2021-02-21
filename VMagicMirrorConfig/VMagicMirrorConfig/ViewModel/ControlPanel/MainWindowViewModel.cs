@@ -93,10 +93,10 @@ namespace Baku.VMagicMirrorConfig
 
         #region Properties
 
-        public RPropertyMin<bool> AutoLoadLastLoadedVrm => Model.AutoLoadLastLoadedVrm;
+        public RProperty<bool> AutoLoadLastLoadedVrm => Model.AutoLoadLastLoadedVrm;
 
         public ReadOnlyObservableCollection<string> AvailableLanguageNames => Model.AvailableLanguageNames;
-        public RPropertyMin<string> LanguageName => Model.LanguageName;
+        public RProperty<string> LanguageName => Model.LanguageName;
 
         private bool _activateOnStartup = false;
         public bool ActivateOnStartup

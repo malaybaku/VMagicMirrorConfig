@@ -26,9 +26,9 @@ namespace Baku.VMagicMirrorConfig
 
         private readonly WindowSettingSync _model;
 
-        public RPropertyMin<int> R => _model.R;
-        public RPropertyMin<int> G => _model.G;
-        public RPropertyMin<int> B => _model.B;
+        public RProperty<int> R => _model.R;
+        public RProperty<int> G => _model.G;
+        public RProperty<int> B => _model.B;
 
         private Color _pickerColor;
         /// <summary> ColorPickerに表示する、Alphaを考慮しない背景色を取得、設定します。 </summary>
@@ -46,12 +46,12 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        public RPropertyMin<bool> IsTransparent => _model.IsTransparent;
-        public RPropertyMin<bool> WindowDraggable => _model.WindowDraggable;
-        public RPropertyMin<bool> TopMost => _model.TopMost;
+        public RProperty<bool> IsTransparent => _model.IsTransparent;
+        public RProperty<bool> WindowDraggable => _model.WindowDraggable;
+        public RProperty<bool> TopMost => _model.TopMost;
 
-        public RPropertyMin<int> WholeWindowTransparencyLevel => _model.WholeWindowTransparencyLevel;
-        public RPropertyMin<int> AlphaValueOnTransparent => _model.AlphaValueOnTransparent;
+        public RProperty<int> WholeWindowTransparencyLevel => _model.WholeWindowTransparencyLevel;
+        public RProperty<int> AlphaValueOnTransparent => _model.AlphaValueOnTransparent;
 
         public ActionCommand ResetWindowPositionCommand { get; }
         public ActionCommand ResetBackgroundColorSettingCommand { get; }

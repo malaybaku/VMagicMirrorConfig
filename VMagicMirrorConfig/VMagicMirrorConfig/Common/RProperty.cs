@@ -3,10 +3,10 @@
 namespace Baku.VMagicMirrorConfig
 {
     /// <summary>
-    /// ReactivePropertyの機能めちゃくちゃ削減したようなもの。モデル層の簡略化を主目的とします。
+    /// ReactivePropertyの機能をめちゃくちゃ削減したもの。
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class RPropertyMin<T> : NotifiableBase
+    public class RProperty<T> : NotifiableBase
         where T : IEquatable<T>
     {
         /// <summary>
@@ -14,7 +14,7 @@ namespace Baku.VMagicMirrorConfig
         /// </summary>
         /// <param name="value"></param>
         /// <param name="onChanged"></param>
-        public RPropertyMin(T value, Action<T> onChanged)
+        public RProperty(T value, Action<T> onChanged)
         {
             _onChanged = onChanged;
             _value = value;
@@ -24,7 +24,7 @@ namespace Baku.VMagicMirrorConfig
         /// 初期値のみを指定してインスタンスを初期化します。
         /// </summary>
         /// <param name="value"></param>
-        public RPropertyMin(T value) : this(value, _ => { })
+        public RProperty(T value) : this(value, _ => { })
         {
         }
 
@@ -45,15 +45,15 @@ namespace Baku.VMagicMirrorConfig
         }
 
         /// <summary>
-        /// NOTE: 初期化順とかの都合でnullableになってしまうような場面でSetterを呼びたいとき使う。
+        /// NOTE: nullableなRPropertyに対してValueのSetterを呼びたいときに使う。
         /// コレを使わざるを得ないのは循環参照が発生してるケースの可能性が高いため、ちょっと注意
         /// </summary>
         /// <param name="value"></param>
         public void Set(T value) => Value = value;
 
         /// <summary>
-        /// 値は変更しますが、イベントやコールバックは呼びません。
-        /// Unity側から値を受信し、その値がUI上で表示不要であるような、ごく一部のケースでのみ使います。
+        /// 値は変更しますが、イベントやコールバックは呼ばない。
+        /// Unity側から値を受信し、その値がUI上で表示不要であるような、ごく一部のケースでのみ使う
         /// </summary>
         /// <param name="value"></param>
         public void SilentSet(T value) { _value = value; }

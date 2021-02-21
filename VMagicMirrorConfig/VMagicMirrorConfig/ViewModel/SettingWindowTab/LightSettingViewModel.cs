@@ -88,14 +88,14 @@ namespace Baku.VMagicMirrorConfig
 
         #region Light
 
-        public RPropertyMin<int> LightIntensity => _model.LightIntensity;
-        public RPropertyMin<int> LightYaw => _model.LightYaw;
-        public RPropertyMin<int> LightPitch => _model.LightPitch;
+        public RProperty<int> LightIntensity => _model.LightIntensity;
+        public RProperty<int> LightYaw => _model.LightYaw;
+        public RProperty<int> LightPitch => _model.LightPitch;
 
         //TODO: ColorPickerの対応方法
-        public RPropertyMin<int> LightR => _model.LightR;
-        public RPropertyMin<int> LightG => _model.LightG;
-        public RPropertyMin<int> LightB => _model.LightB;
+        public RProperty<int> LightR => _model.LightR;
+        public RProperty<int> LightG => _model.LightG;
+        public RProperty<int> LightB => _model.LightB;
 
         private Color _lightColor;
         public Color LightColor 
@@ -120,22 +120,22 @@ namespace Baku.VMagicMirrorConfig
 
         #region Shadow
 
-        public RPropertyMin<bool> EnableShadow => _model.EnableShadow;
-        public RPropertyMin<int> ShadowIntensity => _model.ShadowIntensity;
-        public RPropertyMin<int> ShadowYaw => _model.ShadowYaw;
-        public RPropertyMin<int> ShadowPitch => _model.ShadowPitch;
-        public RPropertyMin<int> ShadowDepthOffset => _model.ShadowDepthOffset;
+        public RProperty<bool> EnableShadow => _model.EnableShadow;
+        public RProperty<int> ShadowIntensity => _model.ShadowIntensity;
+        public RProperty<int> ShadowYaw => _model.ShadowYaw;
+        public RProperty<int> ShadowPitch => _model.ShadowPitch;
+        public RProperty<int> ShadowDepthOffset => _model.ShadowDepthOffset;
 
         #endregion
 
         #region Bloom
 
-        public RPropertyMin<int> BloomIntensity => _model.BloomIntensity;
-        public RPropertyMin<int> BloomThreshold => _model.BloomThreshold;
+        public RProperty<int> BloomIntensity => _model.BloomIntensity;
+        public RProperty<int> BloomThreshold => _model.BloomThreshold;
 
-        public RPropertyMin<int> BloomR => _model.BloomR;
-        public RPropertyMin<int> BloomG => _model.BloomG;
-        public RPropertyMin<int> BloomB => _model.BloomB;
+        public RProperty<int> BloomR => _model.BloomR;
+        public RProperty<int> BloomG => _model.BloomG;
+        public RProperty<int> BloomB => _model.BloomB;
 
         private Color _bloomColor;
         public Color BloomColor 
@@ -159,10 +159,10 @@ namespace Baku.VMagicMirrorConfig
 
         #region Wind
 
-        public RPropertyMin<bool> EnableWind => _model.EnableWind;
-        public RPropertyMin<int> WindStrength => _model.WindStrength;
-        public RPropertyMin<int> WindInterval => _model.WindInterval;
-        public RPropertyMin<int> WindYaw => _model.WindYaw;
+        public RProperty<bool> EnableWind => _model.EnableWind;
+        public RProperty<int> WindStrength => _model.WindStrength;
+        public RProperty<int> WindInterval => _model.WindInterval;
+        public RProperty<int> WindYaw => _model.WindYaw;
 
         #endregion
 

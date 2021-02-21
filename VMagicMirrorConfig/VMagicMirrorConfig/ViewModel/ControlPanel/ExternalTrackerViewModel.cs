@@ -19,7 +19,7 @@ namespace Baku.VMagicMirrorConfig
             UpdateTrackSourceType();
             model.TrackSourceType.PropertyChanged += (_, __) => UpdateTrackSourceType();
             model.EnableExternalTracking.PropertyChanged += (_, __) => UpdateShouldNotifyMissingBlendShapeClipNames();
-            MissingBlendShapeNames = new RPropertyMin<string>("", _ =>
+            MissingBlendShapeNames = new RProperty<string>("", _ =>
             {
                 UpdateShouldNotifyMissingBlendShapeClipNames();
             });
@@ -107,10 +107,10 @@ namespace Baku.VMagicMirrorConfig
 
         #region 基本メニュー部分
 
-        public RPropertyMin<bool> EnableExternalTracking => _model.EnableExternalTracking;
-        public RPropertyMin<bool> EnableExternalTrackerLipSync => _model.EnableExternalTrackerLipSync;
-        public RPropertyMin<bool> EnableExternalTrackerPerfectSync => _model.EnableExternalTrackerPerfectSync;
-        public RPropertyMin<bool> UseVRoidDefaultForPerfectSync => _model.UseVRoidDefaultForPerfectSync;
+        public RProperty<bool> EnableExternalTracking => _model.EnableExternalTracking;
+        public RProperty<bool> EnableExternalTrackerLipSync => _model.EnableExternalTrackerLipSync;
+        public RProperty<bool> EnableExternalTrackerPerfectSync => _model.EnableExternalTrackerPerfectSync;
+        public RProperty<bool> UseVRoidDefaultForPerfectSync => _model.UseVRoidDefaultForPerfectSync;
 
         public ActionCommand OpenPerfectSyncTipsUrlCommand { get; }
 
@@ -120,9 +120,9 @@ namespace Baku.VMagicMirrorConfig
             UrlNavigate.Open(url);
         }
 
-        public RPropertyMin<bool> ShouldNotifyMissingBlendShapeClipNames { get; } = new RPropertyMin<bool>(false);
+        public RProperty<bool> ShouldNotifyMissingBlendShapeClipNames { get; } = new RProperty<bool>(false);
 
-        public RPropertyMin<string> MissingBlendShapeNames { get; }
+        public RProperty<string> MissingBlendShapeNames { get; }
 
         private void UpdateShouldNotifyMissingBlendShapeClipNames()
         {
@@ -196,9 +196,9 @@ namespace Baku.VMagicMirrorConfig
         }
 
         //NOTE: 上記のbool2つ+UpdateTrackSourceTypeを廃止し、この整数値を読み込んだViewがConverterで頑張るのでもよい。はず
-        public RPropertyMin<int> TrackSourceType => _model.TrackSourceType;
+        public RProperty<int> TrackSourceType => _model.TrackSourceType;
 
-        public RPropertyMin<string> IFacialMocapTargetIpAddress => _model.IFacialMocapTargetIpAddress;
+        public RProperty<string> IFacialMocapTargetIpAddress => _model.IFacialMocapTargetIpAddress;
 
         public ActionCommand RefreshIFacialMocapTargetCommand { get; }
 
@@ -210,7 +210,7 @@ namespace Baku.VMagicMirrorConfig
             UrlNavigate.Open(url);
         }
 
-        public RPropertyMin<string> CalibrateData => _model.CalibrateData;
+        public RProperty<string> CalibrateData => _model.CalibrateData;
 
         #endregion
 
@@ -236,7 +236,7 @@ namespace Baku.VMagicMirrorConfig
 
         #region エラーまわり: iFMの設定が怪しそうなときのメッセージ + webカメラが止まる問題の対処
 
-        public RPropertyMin<string> IFacialMocapTroubleMessage { get; } = new RPropertyMin<string>("");
+        public RProperty<string> IFacialMocapTroubleMessage { get; } = new RProperty<string>("");
 
         public ActionCommand OpenIFMTroubleShootCommand  { get; }
         

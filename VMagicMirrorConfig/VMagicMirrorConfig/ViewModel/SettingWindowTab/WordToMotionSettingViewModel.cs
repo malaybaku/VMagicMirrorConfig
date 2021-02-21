@@ -124,7 +124,7 @@ namespace Baku.VMagicMirrorConfig
         private readonly ObservableCollection<string> _customMotionClipNames = new ObservableCollection<string>();
         public ReadOnlyObservableCollection<string> CustomMotionClipNames { get; }
 
-        public RPropertyMin<bool> EnableWordToMotion { get; } = new RPropertyMin<bool>(true);
+        public RProperty<bool> EnableWordToMotion { get; } = new RProperty<bool>(true);
 
         #region デバイスをWord to Motionに割り当てる設定
 
@@ -158,7 +158,7 @@ namespace Baku.VMagicMirrorConfig
         public MidiNoteToMotionMapViewModel MidiNoteMap { get; private set; }
             = new MidiNoteToMotionMapViewModel(MidiNoteToMotionMap.LoadDefault());
 
-        public RPropertyMin<bool> EnablePreview => _model.EnablePreview;
+        public RProperty<bool> EnablePreview => _model.EnablePreview;
 
         /// <summary>Word to Motionのアイテム編集を開始した時すぐプレビューを開始するかどうか。普通は即スタートでよい</summary>
         public bool EnablePreviewWhenStartEdit { get; set; } = true;
