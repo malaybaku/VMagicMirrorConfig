@@ -11,14 +11,13 @@ namespace Baku.VMagicMirrorConfig
             Receiver = mmfClient;
         }
 
+        public IMessageSender Sender { get; } 
+        public IMessageReceiver Receiver { get; }
+
         public void Start()
         {
-            new AppExitFromUnityMessage().Initialize(Receiver);
             Receiver.Start();
         }
-
-        public IMessageSender Sender { get; } 
-        public IMessageReceiver Receiver { get; } 
 
         public void Dispose()
         {

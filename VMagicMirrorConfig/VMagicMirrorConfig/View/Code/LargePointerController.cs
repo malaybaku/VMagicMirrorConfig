@@ -2,7 +2,7 @@
 
 namespace Baku.VMagicMirrorConfig
 {
-    /// <summary>ポインターを表示したり隠したりするクラス。</summary>
+    /// <summary> ポインターを表示したり隠したりする、Windowのラッパーみたいなクラス。 </summary>
     class LargePointerController
     {
         private LargePointerController() { }

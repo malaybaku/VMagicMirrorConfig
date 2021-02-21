@@ -29,8 +29,9 @@
         {
             FreeLayoutHelper.StartObserve();
             CameraPositionChecker.Start(2000);
+            new AppExitFromUnityMessage().Initialize(_receiver);
         }
-        
+
         public void Dispose()
         {
             FreeLayoutHelper.EndObserve();

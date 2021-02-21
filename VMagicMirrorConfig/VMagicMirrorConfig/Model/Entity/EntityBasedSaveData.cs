@@ -1,7 +1,7 @@
 ﻿namespace Baku.VMagicMirrorConfig
 {
     /// <summary>
-    /// SaveDataのリファクタ版。旧版のSaveDataとXML的に等価になってないといけない事に注意
+    /// SaveDataのリファクタ版。旧版のSaveDataとXML的に等価になる必要があるため、プロパティ名をいじってはならないことに注意
     /// </summary>
     public class EntityBasedSaveData
     {
