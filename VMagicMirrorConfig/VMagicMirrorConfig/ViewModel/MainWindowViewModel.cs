@@ -10,7 +10,7 @@ namespace Baku.VMagicMirrorConfig
 {
     public class MainWindowViewModel : ViewModelBase, IWindowViewModel
     {
-        internal SettingModel Model { get; }
+        internal RootSettingSync Model { get; }
         internal SettingFileIo SettingFileIo { get; }
         
         internal MessageIo MessageIo { get; } = new MessageIo();
@@ -34,7 +34,7 @@ namespace Baku.VMagicMirrorConfig
 
         public MainWindowViewModel()
         {
-            Model = new SettingModel(MessageSender, MessageIo.Receiver);
+            Model = new RootSettingSync(MessageSender, MessageIo.Receiver);
             SettingFileIo = new SettingFileIo(Model, MessageSender);
 
             WindowSetting = new WindowSettingViewModel(Model.WindowSetting, MessageSender);

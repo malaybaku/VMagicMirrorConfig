@@ -5,14 +5,14 @@ using System.Threading.Tasks;
 namespace Baku.VMagicMirrorConfig
 {
     /// <summary>
-    /// 設定Entityに生やしたモデルの機能がまとまってるクラス
-    /// 特にEntityとモデルクラス間のプロパティをいい感じにする役目を持つ
+    /// Entityのデータ読み書きを、Unity側とのデータ同期もしながら実行するクラス。
+    /// Entityのデータだけでなく、設定ファイルに保存しないような一時的なフラグも扱える。
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
-    abstract class SettingModelBase<TEntity> : NotifiableBase
+    abstract class SettingSyncBase<TEntity> : NotifiableBase
         where TEntity : SettingEntityBase, new()
     {
-        public SettingModelBase(IMessageSender sender)
+        public SettingSyncBase(IMessageSender sender)
         {
             _sender = sender;
         }

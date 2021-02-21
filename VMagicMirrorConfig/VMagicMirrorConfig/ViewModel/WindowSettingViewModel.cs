@@ -4,7 +4,7 @@ namespace Baku.VMagicMirrorConfig
 {
     public class WindowSettingViewModel : SettingViewModelBase
     {
-        internal WindowSettingViewModel(WindowSettingModel model, IMessageSender sender) : base(sender)
+        internal WindowSettingViewModel(WindowSettingSync model, IMessageSender sender) : base(sender)
         {
             _model = model;
 
@@ -24,7 +24,7 @@ namespace Baku.VMagicMirrorConfig
                 );
         }
 
-        private readonly WindowSettingModel _model;
+        private readonly WindowSettingSync _model;
 
         public RPropertyMin<int> R => _model.R;
         public RPropertyMin<int> G => _model.G;

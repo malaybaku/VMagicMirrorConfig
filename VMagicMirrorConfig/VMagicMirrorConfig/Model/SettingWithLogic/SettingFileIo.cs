@@ -12,13 +12,13 @@ namespace Baku.VMagicMirrorConfig
         /// ファイルI/Oを行うときに操作対象とするモデルを指定してインスタンスを初期化します。
         /// </summary>
         /// <param name="model"></param>
-        public SettingFileIo(SettingModel model, IMessageSender sender)
+        public SettingFileIo(RootSettingSync model, IMessageSender sender)
         {
             _model = model;
             _sender = sender;
         }
 
-        private readonly SettingModel _model;
+        private readonly RootSettingSync _model;
         private readonly IMessageSender _sender;
 
         public void SaveSetting(string path, bool isInternalFile)

@@ -11,7 +11,7 @@ namespace Baku.VMagicMirrorConfig
     /// </summary>
     public class LightSettingViewModel : SettingViewModelBase
     {
-        internal LightSettingViewModel(LightSettingModel model, IMessageSender sender) : base(sender)
+        internal LightSettingViewModel(LightSettingSync model, IMessageSender sender) : base(sender)
         {
             _model = model;
             ImageQualityNames = new ReadOnlyObservableCollection<string>(_imageQualityNames);
@@ -44,7 +44,7 @@ namespace Baku.VMagicMirrorConfig
             UpdateBloomColor();
         }
 
-        private readonly LightSettingModel _model;
+        private readonly LightSettingSync _model;
 
         public async Task InitializeQualitySelectionsAsync()
         {

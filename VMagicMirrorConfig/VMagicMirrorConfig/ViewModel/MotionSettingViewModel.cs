@@ -8,7 +8,7 @@ namespace Baku.VMagicMirrorConfig
 {
     public class MotionSettingViewModel : SettingViewModelBase
     {
-        internal MotionSettingViewModel(MotionSettingModel model, IMessageSender sender, IMessageReceiver receiver) : base(sender)
+        internal MotionSettingViewModel(MotionSettingSync model, IMessageSender sender, IMessageReceiver receiver) : base(sender)
         {
             _model = model;
 
@@ -60,7 +60,7 @@ namespace Baku.VMagicMirrorConfig
             ShowInstallPathWarning.Value = InstallPathChecker.HasMultiByteCharInInstallPath();
         }
 
-        private readonly MotionSettingModel _model;
+        private readonly MotionSettingSync _model;
 
         private LargePointerController _largePointerController => LargePointerController.Instance;
 

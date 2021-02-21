@@ -7,7 +7,7 @@ namespace Baku.VMagicMirrorConfig
 {
     public class WordToMotionSettingViewModel : SettingViewModelBase
     {
-        internal WordToMotionSettingViewModel(WordToMotionSettingModel model, IMessageSender sender, IMessageReceiver receiver) : base(sender)
+        internal WordToMotionSettingViewModel(WordToMotionSettingSync model, IMessageSender sender, IMessageReceiver receiver) : base(sender)
         {
             _model = model;
             Items = new ReadOnlyObservableCollection<WordToMotionItemViewModel>(_items);
@@ -61,7 +61,7 @@ namespace Baku.VMagicMirrorConfig
             //TODO: しょっぱなで一回モデルのシリアライズされたデータをロードしようと試みる方が健全かも
         }
 
-        private readonly WordToMotionSettingModel _model;
+        private readonly WordToMotionSettingSync _model;
         private readonly WordToMotionItemPreviewDataSender _previewDataSender;
         private WordToMotionItemViewModel? _dialogItem;
 
@@ -210,7 +210,8 @@ namespace Baku.VMagicMirrorConfig
         private void LoadMidiSettingItems()
         {
             var midiNoteMapModel = _model.MidiNoteToMotionMap;
-            MidiNoteMap = (midiNoteMapModel?.Items == null || midiNoteMapModel.Items.Count == 0)
+            //TODO: ここは個数チェック不要な気がする。モデル側が個数も保証すればいいような
+            MidiNoteMap = midiNoteMapModel.Items.Count == 0
                 ? new MidiNoteToMotionMapViewModel(MidiNoteToMotionMap.LoadDefault())
                 : new MidiNoteToMotionMapViewModel(midiNoteMapModel);
         }

@@ -6,10 +6,10 @@ using System.Linq;
 
 namespace Baku.VMagicMirrorConfig
 {
-    class WordToMotionSettingModel : SettingModelBase<WordToMotionSetting>
+    class WordToMotionSettingSync : SettingSyncBase<WordToMotionSetting>
     {
 
-        public WordToMotionSettingModel(IMessageSender sender) : base(sender)
+        public WordToMotionSettingSync(IMessageSender sender) : base(sender)
         {
             var settings = WordToMotionSetting.Default;
             var factory = MessageFactory.Instance;
@@ -52,8 +52,8 @@ namespace Baku.VMagicMirrorConfig
             SaveMidiNoteMap();
         }
 
-        public void SaveMotionRequests() => ItemsContentString.Value = MotionRequests?.ToJson() ?? "";
-        public void SaveMidiNoteMap() => MidiNoteMapString.Value = MidiNoteToMotionMap?.ToJson() ?? "";
+        public void SaveMotionRequests() => ItemsContentString.Value = MotionRequests.ToJson();
+        public void SaveMidiNoteMap() => MidiNoteMapString.Value = MidiNoteToMotionMap.ToJson();
 
         /// <summary>
         /// 指定したモーションを実行します。再生ボタンを押したときに呼び出す想定です

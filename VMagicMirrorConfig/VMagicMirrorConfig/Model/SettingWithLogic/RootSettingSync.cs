@@ -7,21 +7,21 @@ namespace Baku.VMagicMirrorConfig
     /// ファイルに保存すべき設定のモデル層を直接的に全部保持したクラス。
     /// MainWindowの裏にあり、アプリの生存期間中つねに単一のインスタンスがあるような使い方をします。
     /// </summary>
-    class SettingModel
+    class RootSettingSync
     {
-        public SettingModel(IMessageSender sender, IMessageReceiver receiver)
+        public RootSettingSync(IMessageSender sender, IMessageReceiver receiver)
         {
             AvailableLanguageNames = new ReadOnlyObservableCollection<string>(_availableLanguageNames);
 
             _sender = sender;
 
-            WindowSetting = new WindowSettingModel(sender);
-            MotionSetting = new MotionSettingModel(sender);
-            LayoutSetting = new LayoutSettingModel(sender);
-            GamepadSetting = new GamepadSettingModel(sender);
-            LightSetting = new LightSettingModel(sender);
-            WordToMotionSetting = new WordToMotionSettingModel(sender);
-            ExternalTrackerSetting = new ExternalTrackerSettingModel(sender);
+            WindowSetting = new WindowSettingSync(sender);
+            MotionSetting = new MotionSettingSync(sender);
+            LayoutSetting = new LayoutSettingSync(sender);
+            GamepadSetting = new GamepadSettingSync(sender);
+            LightSetting = new LightSettingSync(sender);
+            WordToMotionSetting = new WordToMotionSettingSync(sender);
+            ExternalTrackerSetting = new ExternalTrackerSettingSync(sender);
 
             //NOTE; LanguageSelectorとの二重管理っぽくて若干アレだがこのままで行く
             //初期値Defaultを入れることで、起動直後にPCのカルチャベースで言語を指定しなきゃダメかどうか判別する
@@ -52,19 +52,19 @@ namespace Baku.VMagicMirrorConfig
 
         public RPropertyMin<string> LanguageName { get; }
 
-        public WindowSettingModel WindowSetting { get; }
+        public WindowSettingSync WindowSetting { get; }
 
-        public MotionSettingModel MotionSetting { get; }
+        public MotionSettingSync MotionSetting { get; }
 
-        public LayoutSettingModel LayoutSetting { get; }
+        public LayoutSettingSync LayoutSetting { get; }
 
-        public GamepadSettingModel GamepadSetting { get; }
+        public GamepadSettingSync GamepadSetting { get; }
 
-        public LightSettingModel LightSetting { get; }
+        public LightSettingSync LightSetting { get; }
 
-        public WordToMotionSettingModel WordToMotionSetting { get; }
+        public WordToMotionSettingSync WordToMotionSetting { get; }
 
-        public ExternalTrackerSettingModel ExternalTrackerSetting { get; }
+        public ExternalTrackerSettingSync ExternalTrackerSetting { get; }
 
         /// <summary>
         /// 自動保存される設定ファイルに言語設定が保存されていなかった場合、
