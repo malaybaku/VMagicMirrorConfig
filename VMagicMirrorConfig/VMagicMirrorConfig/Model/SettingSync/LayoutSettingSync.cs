@@ -131,9 +131,8 @@ namespace Baku.VMagicMirrorConfig
         {
             SendMessage(MessageFactory.Instance.EnableFreeCameraMode(EnableFreeCameraMode.Value));
             //トグルさげた場合: 切った時点のカメラポジションを取得、保存する。
-            //TODO:
-            //フリーレイアウト中の切り替えと若干相性が悪いので、
-            //もう少し方法が洗練しているといい…のかもしれない。
+            //NOTE: フリーレイアウトの終了時にも同じ処理をすることが考えられるが、
+            //まあCameraPositionCheckerも別で走っているので、そこまではケアしないことにする。
             if (!value)
             {
                 string response = await SendQueryAsync(MessageFactory.Instance.CurrentCameraPosition());
@@ -183,8 +182,6 @@ namespace Baku.VMagicMirrorConfig
 
         public override void ResetToDefault()
         {
-            //TODO: UI上必要だったら復活させる必要あり。
-            //Gamepad.ResetToDefault();
             ResetHidSetting();
             ResetMidiSetting();
             ResetCameraSetting();

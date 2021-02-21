@@ -37,13 +37,13 @@ namespace Baku.VMagicMirrorConfig
             Model = new RootSettingSync(MessageSender, MessageIo.Receiver);
             SettingFileIo = new SettingFileIo(Model, MessageSender);
 
-            WindowSetting = new WindowSettingViewModel(Model.WindowSetting, MessageSender);
-            MotionSetting = new MotionSettingViewModel(Model.MotionSetting, MessageSender, MessageIo.Receiver);
-            GamepadSetting = new GamepadSettingViewModel(Model.GamepadSetting, MessageSender);
-            LayoutSetting = new LayoutSettingViewModel(Model.LayoutSetting, Model.GamepadSetting, MessageSender, MessageIo.Receiver);
-            LightSetting = new LightSettingViewModel(Model.LightSetting, MessageSender);
-            WordToMotionSetting = new WordToMotionSettingViewModel(Model.WordToMotionSetting,  MessageSender, MessageIo.Receiver);
-            ExternalTrackerSetting = new ExternalTrackerViewModel(Model.ExternalTrackerSetting, MessageSender, MessageIo.Receiver);
+            WindowSetting = new WindowSettingViewModel(Model.Window, MessageSender);
+            MotionSetting = new MotionSettingViewModel(Model.Motion, MessageSender, MessageIo.Receiver);
+            GamepadSetting = new GamepadSettingViewModel(Model.Gamepad, MessageSender);
+            LayoutSetting = new LayoutSettingViewModel(Model.Layout, Model.Gamepad, MessageSender, MessageIo.Receiver);
+            LightSetting = new LightSettingViewModel(Model.Light, MessageSender);
+            WordToMotionSetting = new WordToMotionSettingViewModel(Model.WordToMotion,  MessageSender, MessageIo.Receiver);
+            ExternalTrackerSetting = new ExternalTrackerViewModel(Model.ExternalTracker, MessageSender, MessageIo.Receiver);
 
             _runtimeHelper = new RuntimeHelper(MessageSender, MessageIo.Receiver, Model);
 

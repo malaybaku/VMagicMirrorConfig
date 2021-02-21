@@ -111,39 +111,38 @@ namespace Baku.VMagicMirrorConfig
             return new ExternalTrackerFaceSwitchSetting(items);
         }
 
-        //TODO: enableThrowを消して常時例外スローする方向に倒してしまいたい
-        public static ExternalTrackerFaceSwitchSetting FromJson(string json, bool enableThrow = false)
+        /// <summary>
+        /// JSON文字列からFaceSwitchの設定を読み込みます。
+        /// このメソッドはパースやデシリアライズ時に例外スローする場合があることに注意して下さい。
+        /// </summary>
+        /// <param name="json"></param>
+        /// <returns></returns>
+        public static ExternalTrackerFaceSwitchSetting FromJson(string json)
         {
-            var result = LoadDefault();
-            try
+            //NOTE: 初起動時とかは積極的にここを通るはず
+            if (string.IsNullOrEmpty(json))
             {
-                var jobj = JObject.Parse(json);
-                if (jobj["items"] is JArray items && items.Count == result.Items.Length)
+                throw new ArgumentException(nameof(json));
+            }
+
+            var result = LoadDefault();
+            var jobj = JObject.Parse(json);
+            if (jobj["items"] is JArray items && items.Count == result.Items.Length)
+            {
+                //NOTE: 読み込むときにsourceを見ないが、コレは「どうせWPFでしか管理してないし…」というナメた態度です
+                for (int i = 0; i < items.Count; i++)
                 {
-                    //NOTE: 読み込むときにsourceを見ないが、コレは「どうせWPFでしか管理してないし…」というナメた態度です
-                    for (int i = 0; i < items.Count; i++)
+                    if (items[i]["threshold"] is JValue threshold &&
+                        items[i]["clipName"] is JValue clipName &&
+                        items[i]["keepLipSync"] is JValue keepLipSync
+                        )
                     {
-                        if (items[i]["threshold"] is JValue threshold &&
-                            items[i]["clipName"] is JValue clipName &&
-                            items[i]["keepLipSync"] is JValue keepLipSync
-                            )
-                        {
-                            result.Items[i].ThresholdPercent = (int)threshold;
-                            result.Items[i].ClipName = (string?)clipName ?? "";
-                            result.Items[i].KeepLipSync = (bool)keepLipSync;
-                        }
+                        result.Items[i].ThresholdPercent = (int)threshold;
+                        result.Items[i].ClipName = (string?)clipName ?? "";
+                        result.Items[i].KeepLipSync = (bool)keepLipSync;
                     }
                 }
             }
-            catch (Exception ex)
-            {
-                LogOutput.Instance.Write(ex);
-                if (enableThrow)
-                {
-                    throw;
-                }
-            }
-
             return result;
         }
 

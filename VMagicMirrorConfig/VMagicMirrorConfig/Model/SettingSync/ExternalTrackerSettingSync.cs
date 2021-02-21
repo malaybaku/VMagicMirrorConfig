@@ -37,6 +37,9 @@ namespace Baku.VMagicMirrorConfig
             SerializedFaceSwitchSetting = new RProperty<string>(
                 setting.SerializedFaceSwitchSetting, v => SendMessage(factory.ExTrackerSetFaceSwitchSetting(v))
                 );
+
+            //NOTE: この時点で、とりあえずデフォルト設定がUnityに送られる
+            SaveFaceSwitchSetting();
         }
 
         // 基本メニュー部分
@@ -54,8 +57,7 @@ namespace Baku.VMagicMirrorConfig
 
         public ExternalTrackerFaceSwitchSetting FaceSwitchSetting { get; private set; }
 
-        //TODO: ここにデフォルト値が入りやすいような仕掛けを作るのもアリかも、という問題があるが、
-        //特に値が空だったときのリカバーをモデル層でやる形にするのも選択肢。
+        //NOTE: コンストラクタが終了した時点でちゃんとしたデータが入った状態になる
         public RProperty<string> SerializedFaceSwitchSetting { get; }
 
         public void SaveFaceSwitchSetting()
@@ -74,7 +76,7 @@ namespace Baku.VMagicMirrorConfig
             try
             {
                 FaceSwitchSetting = 
-                    ExternalTrackerFaceSwitchSetting.FromJson(SerializedFaceSwitchSetting.Value, enableThrow: true);
+                    ExternalTrackerFaceSwitchSetting.FromJson(SerializedFaceSwitchSetting.Value);
             }
             catch (Exception ex)
             {
@@ -86,8 +88,10 @@ namespace Baku.VMagicMirrorConfig
         public override void ResetToDefault()
         {
             Load(ExternalTrackerSetting.Default);
-            //TODO: このLoadによってFaceSwitchSettingのロードが保証されているかな、というのが気になるので要チェック。
-            //Viewの表示が更新されないかもしれないので。
+
+            //NOTE: Entityのデフォルト値ではFaceSwitch設定が空になっているため、明示的にデフォルトを読み直す
+            FaceSwitchSetting = ExternalTrackerFaceSwitchSetting.LoadDefault();
+            SaveFaceSwitchSetting();
         }
 
     }

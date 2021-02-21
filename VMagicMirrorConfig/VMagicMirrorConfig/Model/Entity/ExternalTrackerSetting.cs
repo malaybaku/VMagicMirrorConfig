@@ -8,7 +8,6 @@
         /// <summary>
         /// NOTE: 規約としてこの値は書き換えません。
         /// デフォルト値を参照したい人が、プロパティ読み込みのみの為だけに使います。
-        /// TODO: ここでやはりデフォルト値の扱いが問題になる…
         /// </summary>
         public static ExternalTrackerSetting Default { get; } = new ExternalTrackerSetting();
 
@@ -26,20 +25,8 @@
         
         // FaceSwitchの設定
 
-        //TODO: ここにデフォルト値が入りやすいような仕掛けを作るのもアリかも
         //NOTE1: この値は単体でJSONシリアライズされます(Unityにもそのまんま渡すため)
-        //NOTE2: setterはアプリ起動直後、およびそれ以降で表情スイッチ系の設定を変えたときに(UIではなくコードから)呼ばれます。
+        //NOTE2: setterはアプリ起動直後、およびそれ以降で表情スイッチ系の設定を変えるたびに呼ばれます。
         public string SerializedFaceSwitchSetting { get; set; } = "";
-
-        public void ResetToDefault()
-        {
-            //TODO: SerializedFaceSwitchSettingの取り扱い
-            CalibrateData = "";
-            TrackSourceType = TrackSourceNone;
-            EnableExternalTracking = false;
-            EnableExternalTrackerLipSync = true;
-            UseVRoidDefaultForPerfectSync = false;
-            EnableExternalTrackerPerfectSync = false;
-        }
     }
 }

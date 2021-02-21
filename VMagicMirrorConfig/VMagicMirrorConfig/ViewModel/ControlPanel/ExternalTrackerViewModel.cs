@@ -19,10 +19,10 @@ namespace Baku.VMagicMirrorConfig
             UpdateTrackSourceType();
             model.TrackSourceType.PropertyChanged += (_, __) => UpdateTrackSourceType();
             model.EnableExternalTracking.PropertyChanged += (_, __) => UpdateShouldNotifyMissingBlendShapeClipNames();
-            MissingBlendShapeNames = new RProperty<string>("", _ =>
-            {
-                UpdateShouldNotifyMissingBlendShapeClipNames();
-            });
+            MissingBlendShapeNames = new RProperty<string>(
+                "", _ => UpdateShouldNotifyMissingBlendShapeClipNames()
+                );
+            model.SerializedFaceSwitchSetting.PropertyChanged += (_, __) => LoadFaceSwitchSetting();
 
             RefreshIFacialMocapTargetCommand = new ActionCommand(
                 () => NetworkEnvironmentUtils.SendIFacialMocapDataReceiveRequest(IFacialMocapTargetIpAddress.Value)
@@ -39,14 +39,7 @@ namespace Baku.VMagicMirrorConfig
             //TODO: メッセージ受信の処理もモデル側案件のはず…うーん…
             receiver.ReceivedCommand += OnMessageReceived;
 
-            //TODO: モデル側が非null保証をしてくれたら相応に直したいとこ
-            FaceSwitchItems.Clear();
-            foreach (var item in _model.FaceSwitchSetting.Items)
-            {
-                var vm = new ExternalTrackerFaceSwitchItemViewModel(this, item);
-                vm.SubscribeLanguageSelector();
-                FaceSwitchItems.Add(vm);
-            }
+            LoadFaceSwitchSetting();
         }
 
         /// <summary>

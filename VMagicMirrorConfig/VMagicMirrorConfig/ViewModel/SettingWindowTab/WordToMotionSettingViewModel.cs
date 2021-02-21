@@ -48,24 +48,22 @@ namespace Baku.VMagicMirrorConfig
                 LoadMotionItems();
             };
 
-            //TODO: この辺のSenderとかReceiverがモデル感あるよね
             _previewDataSender = new WordToMotionItemPreviewDataSender(sender);
             _previewDataSender.PrepareDataSend +=
                 (_, __) => _dialogItem?.WriteToModel(_previewDataSender.MotionRequest);
             receiver.ReceivedCommand += OnReceiveCommand;
-            MidiNoteReceiver = new MidiNoteReceiver(receiver);
-            MidiNoteReceiver.Start();
 
             LoadDefaultItemsIfInitialStart();
 
-            //TODO: しょっぱなで一回モデルのシリアライズされたデータをロードしようと試みる方が健全かも
+            LoadMotionItems();
+            LoadMidiSettingItems();
         }
 
         private readonly WordToMotionSettingSync _model;
         private readonly WordToMotionItemPreviewDataSender _previewDataSender;
         private WordToMotionItemViewModel? _dialogItem;
 
-        internal MidiNoteReceiver MidiNoteReceiver { get; }
+        internal MidiNoteReceiver MidiNoteReceiver => _model.MidiNoteReceiver;
 
         /// <summary>直近で読み込んだモデルに指定されている、VRM標準以外のブレンドシェイプ名の一覧を取得します。</summary>
         public IReadOnlyList<string> LatestAvaterExtraClipNames => _latestAvaterExtraClipNames;
@@ -148,8 +146,7 @@ namespace Baku.VMagicMirrorConfig
 
         #endregion
 
-        //NOTE: 「UIに出さないけど保存はしたい」系のやつで、キャラロード時にUnityから勝手に送られてくる、という想定
-        public List<string> ExtraBlendShapeClipNames { get; set; } = new List<string>();
+        public List<string> ExtraBlendShapeClipNames => _model.ExtraBlendShapeClipNames;
 
         public ReadOnlyObservableCollection<WordToMotionItemViewModel> Items { get; }
         private readonly ObservableCollection<WordToMotionItemViewModel> _items
@@ -163,19 +160,12 @@ namespace Baku.VMagicMirrorConfig
         /// <summary>Word to Motionのアイテム編集を開始した時すぐプレビューを開始するかどうか。普通は即スタートでよい</summary>
         public bool EnablePreviewWhenStartEdit { get; set; } = true;
 
-        /// <summary>モデルが持ってるWord to MotionなりMidiキーマッピングなりの情報をVMにコピーします。</summary>
-        public void LoadSerializedItems()
-        {
-            LoadMotionItems();
-            LoadMidiSettingItems();
-        }
-
         private void LoadMotionItems()
         {
             _items.Clear();
 
-            var modelItems = _model.MotionRequests?.Requests;
-            if (modelItems == null || modelItems.Length == 0)
+            var modelItems = _model.MotionRequests.Requests;
+            if (modelItems.Length == 0)
             {
                 return;
             }
@@ -209,13 +199,8 @@ namespace Baku.VMagicMirrorConfig
 
         private void LoadMidiSettingItems()
         {
-            var midiNoteMapModel = _model.MidiNoteToMotionMap;
-            //TODO: ここは個数チェック不要な気がする。モデル側が個数も保証すればいいような
-            MidiNoteMap = midiNoteMapModel.Items.Count == 0
-                ? new MidiNoteToMotionMapViewModel(MidiNoteToMotionMap.LoadDefault())
-                : new MidiNoteToMotionMapViewModel(midiNoteMapModel);
+            MidiNoteMap = new MidiNoteToMotionMapViewModel(_model.MidiNoteToMotionMap);
         }
-
 
         /// <summary>
         /// <see cref="ItemsContentString"/>に、現在の<see cref="Items"/>の内容をシリアライズした文字列を設定します。
@@ -230,7 +215,7 @@ namespace Baku.VMagicMirrorConfig
         public async void DeleteItem(WordToMotionItemViewModel item) => await _model.DeleteItem(item.MotionRequest);
 
         /// <summary>
-        /// 指定されたアイテムについて、必要ならアプリの設定から忘却させる処理をします。
+        /// 確認ダイアログを出したのち，指定されたブレンドシェイプをアプリの設定から除去します。
         /// </summary>
         /// <param name="blendShapeItem"></param>
         public async void ForgetClip(BlendShapeItemViewModel blendShapeItem)
@@ -259,7 +244,7 @@ namespace Baku.VMagicMirrorConfig
         /// <summary>モーション一覧の情報が変わったとき、Unity側に再読み込みをリクエストします。</summary>
         public void RequestReload()
         {
-            //NOTE: この結果シリアライズ文字列が変わるとモデル側でメッセージ送信もやってくれる
+            //NOTE: この結果シリアライズ文字列が変わると、モデル側でメッセージ送信もやってくれる
             SaveItems();
         }
 

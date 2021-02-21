@@ -15,13 +15,13 @@ namespace Baku.VMagicMirrorConfig
 
             _sender = sender;
 
-            WindowSetting = new WindowSettingSync(sender);
-            MotionSetting = new MotionSettingSync(sender);
-            LayoutSetting = new LayoutSettingSync(sender);
-            GamepadSetting = new GamepadSettingSync(sender);
-            LightSetting = new LightSettingSync(sender);
-            WordToMotionSetting = new WordToMotionSettingSync(sender);
-            ExternalTrackerSetting = new ExternalTrackerSettingSync(sender);
+            Window = new WindowSettingSync(sender);
+            Motion = new MotionSettingSync(sender);
+            Layout = new LayoutSettingSync(sender);
+            Gamepad = new GamepadSettingSync(sender);
+            Light = new LightSettingSync(sender);
+            WordToMotion = new WordToMotionSettingSync(sender, receiver);
+            ExternalTracker = new ExternalTrackerSettingSync(sender);
 
             //NOTE; LanguageSelectorとの二重管理っぽくて若干アレだがこのままで行く
             //初期値Defaultを入れることで、起動直後にPCのカルチャベースで言語を指定しなきゃダメかどうか判別する
@@ -52,19 +52,19 @@ namespace Baku.VMagicMirrorConfig
 
         public RProperty<string> LanguageName { get; }
 
-        public WindowSettingSync WindowSetting { get; }
+        public WindowSettingSync Window { get; }
 
-        public MotionSettingSync MotionSetting { get; }
+        public MotionSettingSync Motion { get; }
 
-        public LayoutSettingSync LayoutSetting { get; }
+        public LayoutSettingSync Layout { get; }
 
-        public GamepadSettingSync GamepadSetting { get; }
+        public GamepadSettingSync Gamepad { get; }
 
-        public LightSettingSync LightSetting { get; }
+        public LightSettingSync Light { get; }
 
-        public WordToMotionSettingSync WordToMotionSetting { get; }
+        public WordToMotionSettingSync WordToMotion { get; }
 
-        public ExternalTrackerSettingSync ExternalTrackerSetting { get; }
+        public ExternalTrackerSettingSync ExternalTracker { get; }
 
         /// <summary>
         /// 自動保存される設定ファイルに言語設定が保存されていなかった場合、
@@ -97,7 +97,17 @@ namespace Baku.VMagicMirrorConfig
         {
             _sender.StartCommandComposite();
 
+            AutoLoadLastLoadedVrm.Value = false;
+            LastVrmLoadFilePath = "";
+            LastLoadedVRoidModelId = "";
 
+            Window.ResetToDefault();
+            Motion.ResetToDefault();
+            Layout.ResetToDefault();
+            Gamepad.ResetToDefault();
+            Light.ResetToDefault();
+            WordToMotion.ResetToDefault();
+            ExternalTracker.ResetToDefault();
 
             _sender.EndCommandComposite();
         }

@@ -19,11 +19,9 @@ namespace Baku.VMagicMirrorConfig
         /// </summary>
         public static WordToMotionSetting Default { get; } = new WordToMotionSetting();
 
+        public int SelectedDeviceType { get; set; } = DeviceTypes.KeyboardWord;
 
-        //TODO: ここデフォルトはKeyboardWordじゃなかったっけ？要確認。
-        public int SelectedDeviceType { get; set; } = DeviceTypes.None;
-
-        //NOTE: 「UIに出さないけど保存はしたい」系のやつで、キャラロード時にUnityから勝手に送られてくる、という想定
+        //NOTE: 「UIに出さないけど保存はしたい」系のデータで、キャラロード時にUnityから勝手に送られてくる
         public List<string> ExtraBlendShapeClipNames { get; set; } = new List<string>();
 
         /// <summary>

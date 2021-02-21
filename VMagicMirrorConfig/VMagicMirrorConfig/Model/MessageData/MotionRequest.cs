@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using Newtonsoft.Json;
@@ -155,12 +156,12 @@ namespace Baku.VMagicMirrorConfig
     /// </summary>
     public class MotionRequestCollection
     {
-        public MotionRequestCollection(MotionRequest?[] requests)
+        public MotionRequestCollection(MotionRequest[] requests)
         {
             Requests = requests;
         }
 
-        public MotionRequest?[] Requests { get; }
+        public MotionRequest[] Requests { get; }
 
         public string ToJson()
         {
@@ -181,9 +182,9 @@ namespace Baku.VMagicMirrorConfig
             var serializer = new JsonSerializer();
             using (var jsonReader = new JsonTextReader(reader))
             {
-                return 
-                    serializer.Deserialize<MotionRequestCollection>(jsonReader) ?? 
-                    new MotionRequestCollection(new MotionRequest[0]);
+                return
+                    serializer.Deserialize<MotionRequestCollection>(jsonReader) ??
+                    throw new InvalidOperationException();
             }
         }
     }

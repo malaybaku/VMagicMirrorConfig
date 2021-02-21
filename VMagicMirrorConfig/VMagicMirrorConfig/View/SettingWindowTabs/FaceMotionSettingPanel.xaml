@@ -292,7 +292,6 @@
                                    Style="{StaticResource HeaderText}"
                                    Margin="5"
                                    />
-                        <!-- TODO: 目だけリセットするコマンド -->
                         <Button Style="{StaticResource CategorySettingResetButton}"
                                 Command="{Binding ResetFaceEyeSettingCommand}"
                                 />
@@ -389,7 +388,6 @@
                                    Style="{StaticResource HeaderText}"
                                    Margin="5"
                                    />
-                        <!-- TODO: ブレンドシェイプ周りだけリセットするコマンド -->
                         <Button Style="{StaticResource CategorySettingResetButton}"
                                 Command="{Binding ResetFaceBlendShapeSettingCommand}"
                                 />

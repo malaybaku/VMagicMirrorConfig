@@ -91,8 +91,7 @@ namespace Baku.VMagicMirrorConfig
         public RProperty<int> LightIntensity => _model.LightIntensity;
         public RProperty<int> LightYaw => _model.LightYaw;
         public RProperty<int> LightPitch => _model.LightPitch;
-
-        //TODO: ColorPickerの対応方法
+        
         public RProperty<int> LightR => _model.LightR;
         public RProperty<int> LightG => _model.LightG;
         public RProperty<int> LightB => _model.LightB;

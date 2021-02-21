@@ -11,10 +11,10 @@
         {
             _sender = sender;
             _receiver = receiver;
-            CameraPositionChecker = new CameraPositionChecker(sender, mainModel.LayoutSetting);
+            CameraPositionChecker = new CameraPositionChecker(sender, mainModel.Layout);
             UnityAppCloser = new UnityAppCloser(receiver);
             ErrorIndicator = new ErrorMessageIndicator(receiver);
-            FreeLayoutHelper = new DeviceFreeLayoutHelper(mainModel.LayoutSetting, mainModel.WindowSetting);
+            FreeLayoutHelper = new DeviceFreeLayoutHelper(mainModel.Layout, mainModel.Window);
         }
 
         private readonly IMessageSender _sender;

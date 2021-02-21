@@ -9,7 +9,7 @@ namespace Baku.VMagicMirrorConfig
     class WordToMotionSettingSync : SettingSyncBase<WordToMotionSetting>
     {
 
-        public WordToMotionSettingSync(IMessageSender sender) : base(sender)
+        public WordToMotionSettingSync(IMessageSender sender, IMessageReceiver receiver) : base(sender)
         {
             var settings = WordToMotionSetting.Default;
             var factory = MessageFactory.Instance;
@@ -21,6 +21,14 @@ namespace Baku.VMagicMirrorConfig
             ItemsContentString = new RProperty<string>(settings.ItemsContentString, s => SendMessage(factory.ReloadMotionRequests(s)));
             MidiNoteMapString = new RProperty<string>(settings.MidiNoteMapString, s => SendMessage(factory.LoadMidiNoteToMotionMap(s)));
             EnablePreview = new RProperty<bool>(false, b => SendMessage(factory.EnableWordToMotionPreview(b)));
+
+            MidiNoteReceiver = new MidiNoteReceiver(receiver);
+            //NOTE: このStartは通信とかではないので、すぐ始めちゃってOK
+            MidiNoteReceiver.Start();
+
+            //NOTE: この2つの呼び出しにより、必ずデフォルト設定をUnity側に通知する+シリアライズ文字列が空ではなくなる
+            SaveMidiNoteMap();
+            SaveMotionRequests();
         }
 
         public override void ResetToDefault()
@@ -28,10 +36,12 @@ namespace Baku.VMagicMirrorConfig
             //何もしない: ここは複雑すぎるので…
         }
 
-        //TODO: ここデフォルトはKeyboardWordじゃなかったっけ？要確認。
+        /// <summary> NOTE: これはSyncというより一方的に情報を受け取るやつ </summary>
+        internal MidiNoteReceiver MidiNoteReceiver { get; }
+
         public RProperty<int> SelectedDeviceType { get; }
 
-        //NOTE: 「UIに出さないけど保存はしたい」系のやつで、キャラロード時にUnityから勝手に送られてくる
+        //NOTE: setterがpublicなのはLoadの都合なので、普通のコードからは使用しないこと。
         public List<string> ExtraBlendShapeClipNames { get; set; } = new List<string>();
 
         public RProperty<bool> EnablePreview { get; }
@@ -39,8 +49,6 @@ namespace Baku.VMagicMirrorConfig
         public RProperty<string> ItemsContentString { get; }
 
         public RProperty<string> MidiNoteMapString { get; }
-
-        //TODO: この辺を非null保証し、シリアライズ文字列が無効だったらデフォルト設定が入るようにしたい
 
         public MotionRequestCollection MotionRequests { get; private set; }
 
@@ -155,6 +163,19 @@ namespace Baku.VMagicMirrorConfig
 
         protected override void AfterLoad(WordToMotionSetting entity)
         {
+            LoadMotionRequests();
+            LoadMidiNoteToMotionMap();   
+        }
+
+        private void LoadMotionRequests()
+        {
+            if (string.IsNullOrEmpty(ItemsContentString.Value))
+            {
+                //TODO: こういう時ってExtraBlendShapeClip渡す方がいいのかな
+                MotionRequests = MotionRequestCollection.LoadDefault();
+                return;
+            }
+
             try
             {
                 using (var reader = new StringReader(ItemsContentString.Value))
@@ -162,10 +183,20 @@ namespace Baku.VMagicMirrorConfig
                     MotionRequests = MotionRequestCollection.FromJson(reader);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 LogOutput.Instance.Write(ex);
                 MotionRequests = MotionRequestCollection.LoadDefault();
+            }
+
+        }
+
+        private void LoadMidiNoteToMotionMap()
+        {
+            if (string.IsNullOrEmpty(MidiNoteMapString.Value))
+            {
+                MidiNoteToMotionMap = MidiNoteToMotionMap.LoadDefault();
+                return;
             }
 
             try

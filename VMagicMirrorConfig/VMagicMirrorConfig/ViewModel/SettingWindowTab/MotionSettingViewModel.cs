@@ -161,7 +161,7 @@ namespace Baku.VMagicMirrorConfig
         private readonly FaceMotionBlendShapeNameStore _blendShapeNameStore = new FaceMotionBlendShapeNameStore();
         public ReadOnlyObservableCollection<string> BlendShapeNames => _blendShapeNameStore.BlendShapeNames;
 
-        //TODO: この2つはnullableにしたうえでモデルとうまくくっつけたい、ような。ほんとはnull自体不許可にしたいけど…
+        //TODO: もしnullableじゃなくてもComboBoxの動作に支障なければ非nullにしたい
         private string? _faceNeutralClip = "";
         public string? FaceNeutralClip
         {

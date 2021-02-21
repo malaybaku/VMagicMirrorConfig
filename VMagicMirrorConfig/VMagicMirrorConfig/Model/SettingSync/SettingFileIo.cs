@@ -41,16 +41,16 @@ namespace Baku.VMagicMirrorConfig
                         (isInternalFile && autoLoadEnabled) ? _model.LastLoadedVRoidModelId : "",
                     AutoLoadLastLoadedVrm = isInternalFile ? autoLoadEnabled : false,
                     PreferredLanguageName = isInternalFile ? _model.LanguageName.Value : "",
-                    WindowSetting = _model.WindowSetting.Save(),
-                    MotionSetting = _model.MotionSetting.Save(),
-                    LayoutSetting = _model.LayoutSetting.Save(),
-                    LightSetting = _model.LightSetting.Save(),
-                    WordToMotionSetting = _model.WordToMotionSetting.Save(),
-                    ExternalTrackerSetting = _model.ExternalTrackerSetting.Save(),
+                    WindowSetting = _model.Window.Save(),
+                    MotionSetting = _model.Motion.Save(),
+                    LayoutSetting = _model.Layout.Save(),
+                    LightSetting = _model.Light.Save(),
+                    WordToMotionSetting = _model.WordToMotion.Save(),
+                    ExternalTrackerSetting = _model.ExternalTracker.Save(),
                 };
 
                 //ここだけ互換性の都合で入れ子になってることに注意
-                saveData.LayoutSetting.Gamepad = _model.GamepadSetting.Save();
+                saveData.LayoutSetting.Gamepad = _model.Gamepad.Save();
 
                 new XmlSerializer(typeof(EntityBasedSaveData)).Serialize(sw, saveData);
             }
@@ -79,13 +79,13 @@ namespace Baku.VMagicMirrorConfig
                         "";
                 }
 
-                _model.WindowSetting.Load(saveData.WindowSetting);
-                _model.MotionSetting.Load(saveData.MotionSetting);
-                _model.LayoutSetting.Load(saveData.LayoutSetting);
-                _model.GamepadSetting.Load(saveData.LayoutSetting?.Gamepad);
-                _model.LightSetting.Load(saveData.LightSetting);
-                _model.WordToMotionSetting.Load(saveData.WordToMotionSetting);
-                _model.ExternalTrackerSetting.Load(saveData.ExternalTrackerSetting);
+                _model.Window.Load(saveData.WindowSetting);
+                _model.Motion.Load(saveData.MotionSetting);
+                _model.Layout.Load(saveData.LayoutSetting);
+                _model.Gamepad.Load(saveData.LayoutSetting?.Gamepad);
+                _model.Light.Load(saveData.LightSetting);
+                _model.WordToMotion.Load(saveData.WordToMotionSetting);
+                _model.ExternalTracker.Load(saveData.ExternalTrackerSetting);
             }
         }
 
