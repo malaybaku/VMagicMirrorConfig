@@ -378,11 +378,11 @@ Please test by typing "joy".</sys:String>
     <sys:String x:Key="WordToMotion_MidiAssign_After">Note to Change</sys:String>
     <sys:String x:Key="WordToMotion_MidiAssign_Clear">Clear</sys:String>
     
-    <sys:String x:Key="WortToMotion_DeviceItem_None">なし</sys:String>
-    <sys:String x:Key="WortToMotion_DeviceItem_KeyboardWord">キーボード (単語入力)</sys:String>
-    <sys:String x:Key="WortToMotion_DeviceItem_Gamepad">ゲームパッド</sys:String>
-    <sys:String x:Key="WortToMotion_DeviceItem_KeyboardTenKey">キーボード (数字の0-8)</sys:String>
-    <sys:String x:Key="WortToMotion_DeviceItem_MidiController">MIDIコントローラ</sys:String>
+    <sys:String x:Key="WordToMotion_DeviceItem_None">なし</sys:String>
+    <sys:String x:Key="WordToMotion_DeviceItem_KeyboardWord">キーボード (単語入力)</sys:String>
+    <sys:String x:Key="WordToMotion_DeviceItem_Gamepad">ゲームパッド</sys:String>
+    <sys:String x:Key="WordToMotion_DeviceItem_KeyboardTenKey">キーボード (数字の0-8)</sys:String>
+    <sys:String x:Key="WordToMotion_DeviceItem_MidiController">MIDIコントローラ</sys:String>
     
     <!-- Dialog Messages -->
     <sys:String x:Key="DialogTitle_LoadLocalVrm">Load VRM</sys:String>
