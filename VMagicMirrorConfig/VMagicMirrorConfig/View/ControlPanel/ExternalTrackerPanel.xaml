@@ -45,11 +45,11 @@
                     <CheckBox Margin="35,0,15,0" 
                                 VerticalContentAlignment="Center"
                                 Content="{DynamicResource ExTracker_Enable_ImageLipSync}" 
-                                IsEnabled="{Binding EnableExternalTracking}"
+                                IsEnabled="{Binding EnableExternalTracking.Value}"
                                 IsChecked="{Binding EnableExternalTrackerLipSync.Value}"
                                 />
                 <Grid Margin="35,0,0,5"
-                          IsEnabled="{Binding EnableExternalTracking}">
+                          IsEnabled="{Binding EnableExternalTracking.Value}">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition Height="Auto"/>
@@ -129,7 +129,7 @@
                     <TextBlock Margin="15,5" 
                                Text="{DynamicResource ExTracker_SourceSelect_Instruction}"/>
                     <Grid Margin="15,10"                      
-                          IsEnabled="{Binding EnableExternalTracking}">
+                          IsEnabled="{Binding EnableExternalTracking.Value}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="50"/>
                             <RowDefinition Height="50"/>
@@ -167,7 +167,7 @@
                     </Grid>
 
                     <md:Card Padding="3"
-                             Visibility="{Binding IFacialMocapTroubleMessage, 
+                             Visibility="{Binding IFacialMocapTroubleMessage.Value, 
                                                   Converter={StaticResource StringNotEmptyToVisibilityConverter}, 
                                                   FallbackValue=Collapsed}"
                              >
@@ -180,7 +180,7 @@
                                        Text="{DynamicResource ExTracker_iFM_HasTrouble_Header}"
                                        />
                             </StackPanel>
-                            <TextBlock Text="{Binding IFacialMocapTroubleMessage}"
+                            <TextBlock Text="{Binding IFacialMocapTroubleMessage.Value}"
                                        Margin="10,0"
                                        TextWrapping="Wrap"                                       
                                        />
@@ -199,7 +199,7 @@
                     <Button Width="NaN" 
                             HorizontalAlignment="Left"
                             Margin="25,5,15,10"
-                            IsEnabled="{Binding EnableExternalTracking}"
+                            IsEnabled="{Binding EnableExternalTracking.Value}"
                             Command="{Binding CalibrateCommand}"
                             >
                         <StackPanel Orientation="Horizontal">
@@ -212,7 +212,7 @@
 
             <!-- 「表情筋でブレンドシェイプクリップを発動する」という設定のUIがここに来ます。カオスになったら別ウィンドウに分けます。 -->
             <Border Style="{StaticResource SectionBorder}"
-                    IsEnabled="{Binding EnableExternalTracking}">
+                    IsEnabled="{Binding EnableExternalTracking.Value}">
 
                 <StackPanel>
                     <StackPanel Orientation="Horizontal"

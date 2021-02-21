@@ -118,7 +118,7 @@
 
                             <CheckBox Content="{DynamicResource Home_LoadVrmOnNextStartup}"
                                       Margin="10,10,5,0"
-                                      IsChecked="{Binding AutoLoadLastLoadedVrm, Mode=TwoWay}"
+                                      IsChecked="{Binding AutoLoadLastLoadedVrm.Value, Mode=TwoWay}"
                                       />
 
                             <Button HorizontalAlignment="Left"
@@ -153,7 +153,7 @@
                                 <TextBlock Text="Language"/>
 
                                 <ComboBox ItemsSource="{Binding AvailableLanguageNames}"
-                                          SelectedItem="{Binding LanguageName, Mode=TwoWay}"
+                                          SelectedItem="{Binding LanguageName.Value, Mode=TwoWay}"
                                           Margin="10,0"
                                           HorizontalAlignment="Stretch"
                                           MinWidth="100"

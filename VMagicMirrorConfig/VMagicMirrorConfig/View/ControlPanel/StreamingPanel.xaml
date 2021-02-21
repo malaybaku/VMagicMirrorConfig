@@ -143,7 +143,7 @@
                                         Margin="5,0"
                                         IsEnabled="{Binding MotionSetting.EnableLipSync.Value}"
                                         ItemsSource="{Binding MotionSetting.MicrophoneDeviceNames}"
-                                        SelectedItem="{Binding MotionSetting.LipSyncMicrophoneDeviceName, Converter={StaticResource WhiteSpaceStringToNullConverter}}"
+                                        SelectedItem="{Binding MotionSetting.LipSyncMicrophoneDeviceName.Value, Converter={StaticResource WhiteSpaceStringToNullConverter}}"
                                         md:HintAssist.Hint="Microphone"
                                         />
 
