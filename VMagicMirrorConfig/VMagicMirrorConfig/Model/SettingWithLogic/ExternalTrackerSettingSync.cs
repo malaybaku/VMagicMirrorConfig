@@ -27,7 +27,7 @@ namespace Baku.VMagicMirrorConfig
                 );
 
             TrackSourceType = new RPropertyMin<int>(setting.TrackSourceType, i => SendMessage(factory.ExTrackerSetSource(i)));
-            //NOTE: このアドレスはコマンドベースで使うため、このフェーズではSendMessage不要
+            //NOTE: このアドレスはコマンド実行時に使うため、書き換わってもメッセージは送らない
             IFacialMocapTargetIpAddress = new RPropertyMin<string>(setting.IFacialMocapTargetIpAddress);
             
             CalibrateData = new RPropertyMin<string>(
