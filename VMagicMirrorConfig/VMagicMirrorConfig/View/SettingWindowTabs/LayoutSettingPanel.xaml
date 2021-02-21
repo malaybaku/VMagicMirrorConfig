@@ -70,7 +70,7 @@
                                 x:Name="sliderCameraFov"
                                 Minimum="1"
                                 Maximum="179"
-                                Value="{Binding CameraFov, Mode=TwoWay}"
+                                Value="{Binding CameraFov.Value, Mode=TwoWay}"
                                 />
                         <TextBox Grid.Column="2"
                                  Text="{Binding Value, ElementName=sliderCameraFov}"

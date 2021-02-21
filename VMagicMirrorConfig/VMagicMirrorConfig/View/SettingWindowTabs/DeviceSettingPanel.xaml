@@ -4,7 +4,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:sys="clr-namespace:System"
              xmlns:vmm="clr-namespace:Baku.VMagicMirrorConfig"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type={x:Type vmm:MainWindowViewModel}}"
@@ -45,7 +44,7 @@
                                    Margin="5"
                                    />
                         <Button Style="{StaticResource CategorySettingResetButton}"
-                                Command="{Binding Gamepad.ResetSettingCommand}"
+                                Command="{Binding ResetSettingCommand}"
                                 />
                     </StackPanel>
 
@@ -63,7 +62,7 @@
                                   VerticalAlignment="Center"
                                   VerticalContentAlignment="Center"
                                   IsEnabled="{Binding GamepadEnabled.Value}"
-                                  IsChecked="{Binding PreferDirectInputGamepad.Value}"
+                                  IsChecked="{Binding PreferDirectInput.Value}"
                                   >
                             <TextBlock Text="{DynamicResource Devices_Gamepad_PreferDirectInput}"/>
                         </CheckBox>

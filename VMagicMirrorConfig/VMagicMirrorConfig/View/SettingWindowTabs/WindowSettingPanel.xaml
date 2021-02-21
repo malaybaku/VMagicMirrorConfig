@@ -79,7 +79,7 @@
                                  Margin="10,5,5,0">
                             <Rectangle>
                                 <Rectangle.Fill>
-                                    <SolidColorBrush Color="{Binding Color}"/>
+                                    <SolidColorBrush Color="{Binding PickerColor}"/>
                                 </Rectangle.Fill>
                             </Rectangle>
                         </md:Card>
@@ -195,31 +195,31 @@
                             <vmm:IntegerEqualityToVisibilityConverter x:Key="IntToVisibilityConverter"/>
                         </Grid.Resources>
                         <TextBlock Text="{DynamicResource Window_TransparencySupport_Level_0}"
-                                   Visibility="{Binding WholeWindowTransparencyLevel, 
+                                   Visibility="{Binding WholeWindowTransparencyLevel.Value, 
                                                         Converter={StaticResource IntToVisibilityConverter},
                                                         ConverterParameter=0
                                                         }"
                                    />
                         <TextBlock Text="{DynamicResource Window_TransparencySupport_Level_1}" 
-                                   Visibility="{Binding WholeWindowTransparencyLevel, 
+                                   Visibility="{Binding WholeWindowTransparencyLevel.Value, 
                                                         Converter={StaticResource IntToVisibilityConverter},
                                                         ConverterParameter=1
                                                         }"
                                    />
                         <TextBlock Text="{DynamicResource Window_TransparencySupport_Level_2}" 
-                                   Visibility="{Binding WholeWindowTransparencyLevel, 
+                                   Visibility="{Binding WholeWindowTransparencyLevel.Value, 
                                                         Converter={StaticResource IntToVisibilityConverter},
                                                         ConverterParameter=2
                                                         }"
                                    />
                         <TextBlock Text="{DynamicResource Window_TransparencySupport_Level_3}" 
-                                   Visibility="{Binding WholeWindowTransparencyLevel, 
+                                   Visibility="{Binding WholeWindowTransparencyLevel.Value, 
                                                         Converter={StaticResource IntToVisibilityConverter},
                                                         ConverterParameter=3
                                                         }"
                                    />
                         <TextBlock Text="{DynamicResource Window_TransparencySupport_Level_4}" 
-                                   Visibility="{Binding WholeWindowTransparencyLevel, 
+                                   Visibility="{Binding WholeWindowTransparencyLevel.Value, 
                                                         Converter={StaticResource IntToVisibilityConverter},
                                                         ConverterParameter=4
                                                         }"

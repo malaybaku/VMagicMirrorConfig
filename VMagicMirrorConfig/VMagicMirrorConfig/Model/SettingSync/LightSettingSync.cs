@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace Baku.VMagicMirrorConfig
 {
@@ -88,6 +89,13 @@ namespace Baku.VMagicMirrorConfig
         #endregion
 
         #region Reset API
+
+        /// <summary>
+        /// Unity側で画質をデフォルトにリセットさせたのち、そのリセット後の画質の名称を取得する
+        /// </summary>
+        /// <returns></returns>
+        public Task<string> ResetImageQualityAsync()
+            => SendQueryAsync(MessageFactory.Instance.ApplyDefaultImageQuality());
 
         public void ResetLightSetting()
         {

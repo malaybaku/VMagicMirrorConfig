@@ -202,6 +202,11 @@ namespace Baku.VMagicMirrorConfig
         /// <returns></returns>
         public Message GetQualitySettingsInfo() => NoArg();
         public Message SetImageQuality(string name) => WithArg(name);
+        /// <summary>
+        /// Query
+        /// </summary>
+        /// <returns></returns>
+        public Message ApplyDefaultImageQuality() => NoArg();
 
         public Message LightColor(int r, int g, int b) => WithArg($"{r},{g},{b}");
         public Message LightIntensity(int intensityPercent) => WithArg($"{intensityPercent}");

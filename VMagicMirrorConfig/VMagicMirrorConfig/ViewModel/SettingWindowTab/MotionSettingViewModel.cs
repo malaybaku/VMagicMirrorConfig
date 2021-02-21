@@ -141,7 +141,7 @@ namespace Baku.VMagicMirrorConfig
         public RProperty<bool> EnableBodyLeanZ => _model.EnableBodyLeanZ;
         public RProperty<bool> EnableBlinkAdjust => _model.EnableBlinkAdjust;
         public RProperty<bool> EnableVoiceBasedMotion => _model.EnableVoiceBasedMotion;
-        public RProperty<bool> DisableFaceHorizontalFlip => _model.DisableFaceTrackingHorizontalFlip;
+        public RProperty<bool> DisableFaceTrackingHorizontalFlip => _model.DisableFaceTrackingHorizontalFlip;
         public RProperty<bool> EnableWebCamHighPowerMode => _model.EnableWebCamHighPowerMode;
         public RProperty<bool> EnableImageBasedHandTracking => _model.EnableImageBasedHandTracking;
 

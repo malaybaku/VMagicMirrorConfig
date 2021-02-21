@@ -38,6 +38,7 @@ namespace Baku.VMagicMirrorConfig
             ResetWindSettingCommand = new ActionCommand(
                 () => SettingResetUtils.ResetSingleCategoryAsync(_model.ResetWindSetting)
                 );
+            ResetImageQualitySettingCommand = new ActionCommand(ResetImageQuality);
 
             //最初の時点で不整合しなければ後は何でもOK
             UpdateLightColor();
@@ -165,11 +166,28 @@ namespace Baku.VMagicMirrorConfig
 
         #endregion
 
+        public ActionCommand ResetImageQualitySettingCommand { get; }
 
         public ActionCommand ResetLightSettingCommand { get; }
         public ActionCommand ResetShadowSettingCommand { get; }
         public ActionCommand ResetBloomSettingCommand { get; }
         public ActionCommand ResetWindSettingCommand { get; }
 
+        private void ResetImageQuality()
+        {
+            SettingResetUtils.ResetSingleCategoryAsync(async () =>
+            {
+                var appliedImageQualityName = await _model.ResetImageQualityAsync();
+                if (ImageQualityNames.Contains(appliedImageQualityName))
+                {
+                    ImageQuality = appliedImageQualityName;
+                }
+                else
+                {
+                    LogOutput.Instance.Write($"Invalid image quality `{appliedImageQualityName}` applied");
+                }
+            });
+
+        }
     }
 }

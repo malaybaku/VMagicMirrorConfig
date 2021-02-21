@@ -153,7 +153,7 @@
                         <CheckBox Grid.Row="4" Grid.Column="0"
                                   Grid.ColumnSpan="3"
                                   Margin="15,5" 
-                                  IsEnabled="{Binding EnablePresenterMotion}"
+                                  IsEnabled="{Binding EnablePresenterMotion.Value}"
                                   Content="{DynamicResource Motion_Arm_ShowPresentationPointer}"
                                   IsChecked="{Binding ShowPresentationPointer.Value}"
                                   />
@@ -165,11 +165,11 @@
                                 x:Name="sliderPresentationArmRadiusMin"
                                 Minimum="1"
                                 Maximum="100"
-                                IsEnabled="{Binding EnablePresenterMotion}"
+                                IsEnabled="{Binding EnablePresenterMotion.Value}"
                                 Value="{Binding PresentationArmRadiusMin.Value, Mode=TwoWay}"
                                 />
                         <TextBox Grid.Row="6" Grid.Column="2"
-                                 IsEnabled="{Binding EnablePresenterMotion}"
+                                 IsEnabled="{Binding EnablePresenterMotion.Value}"
                                  Text="{Binding Value, ElementName=sliderPresentationArmRadiusMin}"
                                  />
 

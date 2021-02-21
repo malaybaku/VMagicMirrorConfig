@@ -143,6 +143,7 @@ namespace Baku.VMagicMirrorConfig
                 _model.SelectedDeviceType.Value = _selectedDevice?.Index ?? WordToMotionSetting.DeviceTypes.None;
             }
         }
+        public RProperty<int> SelectedDeviceType => _model.SelectedDeviceType;
 
         #endregion
 
