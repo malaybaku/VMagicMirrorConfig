@@ -399,8 +399,8 @@ Please test by typing "joy".</sys:String>
     <sys:String x:Key="DialogMessage_ForgetBlendShapeInfo">Are you sure to clear the blend shape setting of '{0}'?</sys:String>
     <sys:String x:Key="DialogTitle_InvalidIpAddress">Invalid IP Address</sys:String>
     <sys:String x:Key="DialogMessage_InvalidIpAddress">Invalid IP Address is set, please check the input.</sys:String>
-    <sys:String x:Key="DialogTitle_ShowVRoidSDKUi">Connecting to VRoid Hub</sys:String>
-    <sys:String x:Key="DialogMessage_ShowVRoidSDKUi">Select model to load, or cancel operation.</sys:String>
+    <sys:String x:Key="DialogTitle_ShowVRoidSdkUi">Connecting to VRoid Hub</sys:String>
+    <sys:String x:Key="DialogMessage_ShowVRoidSdkUi">Select model to load, or cancel operation.</sys:String>
     <sys:String x:Key="DialogTitle_LoadPreviousVRoidModel">Connecting to VRoid Hub</sys:String>
     <sys:String x:Key="DialogMessage_LoadPreviousVRoidModel">Trying to load avatar used in previous time. Select model or cancel operation.</sys:String>
     <sys:String x:Key="DialogTitle_ExTrackerMissingBlendShape">Missing BlendShapeClip</sys:String>

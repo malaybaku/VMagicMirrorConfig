@@ -404,8 +404,8 @@
     <sys:String x:Key="DialogMessage_ForgetBlendShapeInfo">このブレンドシェイプ'{0}'の設定を削除しますか？</sys:String>
     <sys:String x:Key="DialogTitle_InvalidIpAddress">無効なIPアドレス</sys:String>
     <sys:String x:Key="DialogMessage_InvalidIpAddress">無効なIPアドレスが指定されています。入力を確認して下さい。</sys:String>
-    <sys:String x:Key="DialogTitle_ShowVRoidSDKUi">VRoid Hubに接続中</sys:String>
-    <sys:String x:Key="DialogMessage_ShowVRoidSDKUi">キャラクターウィンドウ上でモデルを選択するか、またはキャンセルしてください。</sys:String>
+    <sys:String x:Key="DialogTitle_ShowVRoidSdkUi">VRoid Hubに接続中</sys:String>
+    <sys:String x:Key="DialogMessage_ShowVRoidSdkUi">キャラクターウィンドウ上でモデルを選択するか、またはキャンセルしてください。</sys:String>
     <sys:String x:Key="DialogTitle_LoadPreviousVRoidModel">VRoid Hubに接続中</sys:String>
     <sys:String x:Key="DialogMessage_LoadPreviousVRoidModel">前回使用したモデルのロードを試みています。モデルをロードするか、またはキャンセルしてください。</sys:String>
     <sys:String x:Key="DialogTitle_ExTrackerMissingBlendShape">未定義のBlendShapeClipがあります</sys:String>
