@@ -13,7 +13,7 @@
         #region Light
 
         public int LightIntensity { get; set; } = 100;
-        public int LightYaw { get; set; } = 30;
+        public int LightYaw { get; set; } = -30;
         public int LightPitch { get; set; } = 50;
 
         public int LightR { get; set; } = 255;
