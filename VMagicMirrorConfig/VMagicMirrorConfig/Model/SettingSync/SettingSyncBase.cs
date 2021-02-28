@@ -92,7 +92,7 @@ namespace Baku.VMagicMirrorConfig
                     return;
                 }
 
-                valueProperty.SetValue(this, source.GetValue(entity));
+                valueProperty.SetValue(rProperty, source.GetValue(entity));
             });
 
             AfterLoad(entity);
@@ -127,6 +127,7 @@ namespace Baku.VMagicMirrorConfig
 
                 if (rProperty == null || valueProperty == null)
                 {
+                    //NOTE: ここを通過した場合、モデル層のプロパティが足りてないはず
                     LogOutput.Instance.Write(
                         $"WARN: Property '{entityProp.Name}' is defined in model, and not RPropertyMin<> but some generics type"
                         );
@@ -134,7 +135,7 @@ namespace Baku.VMagicMirrorConfig
                 }
 
                 //Entityの値(組み込み型)をRPropertyMinのValueに代入
-                entityProp.SetValue(entity, valueProperty.GetValue(this));
+                entityProp.SetValue(entity, valueProperty.GetValue(rProperty));
             });
 
             AfterSave(entity);
