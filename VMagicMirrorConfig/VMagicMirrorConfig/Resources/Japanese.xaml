@@ -430,9 +430,9 @@ webカメラでの顔トラッキングを有効にする場合は
     <sys:String x:Key="CommonUi_None">(なし)</sys:String>
 
     <!-- Localize dependent URLs -->
-    <sys:String x:Key="URL_help_top">https://malaybaku.github.io/VMagicMirror/en</sys:String>
-    <sys:String x:Key="URL_docs_ex_tracker">https://malaybaku.github.io/VMagicMirror/en/docs/external_tracker</sys:String>
-    <sys:String x:Key="URL_tips_perfect_sync">https://malaybaku.github.io/VMagicMirror/en/tips/perfect_sync</sys:String>
+    <sys:String x:Key="URL_help_top">https://malaybaku.github.io/VMagicMirror</sys:String>
+    <sys:String x:Key="URL_docs_ex_tracker">https://malaybaku.github.io/VMagicMirror/docs/external_tracker</sys:String>
+    <sys:String x:Key="URL_tips_perfect_sync">https://malaybaku.github.io/VMagicMirror/tips/perfect_sync</sys:String>
     <sys:String x:Key="URL_ifacialmocap_troubleshoot">https://malaybaku.github.io/VMagicMirror/docs/external_tracker_ifacialmocap#troubleshoot</sys:String>
     
 </ResourceDictionary>
