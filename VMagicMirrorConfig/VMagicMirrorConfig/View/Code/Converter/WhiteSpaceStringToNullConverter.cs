@@ -15,9 +15,12 @@ namespace Baku.VMagicMirrorConfig
             _ => Binding.DoNothing,
         };
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object? ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+            => value switch
         {
-            return (value is string s) ? s : Binding.DoNothing;
-        }
+            string s => s,
+            null => null,
+            _ => Binding.DoNothing,
+        };
     }
 }

@@ -13,7 +13,6 @@
     <UserControl.Resources>
         <vmm:WhiteSpaceStringToNullConverter x:Key="WhiteSpaceStringToNullConverter"/>
         <vmm:Lv50Converter x:Key="Lv50Converter"/>
-        <vmm:EmptyToNoneTextConverter x:Key="EmptyToNoneTextConverter"/>
     </UserControl.Resources>
     <ScrollViewer VerticalScrollBarVisibility="Auto"
                   HorizontalScrollBarVisibility="Disabled"
