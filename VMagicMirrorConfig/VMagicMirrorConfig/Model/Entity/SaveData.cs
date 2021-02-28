@@ -1,9 +1,15 @@
 ﻿namespace Baku.VMagicMirrorConfig
 {
     /// <summary>
-    /// SaveDataのリファクタ版。旧版のSaveDataとXML的に等価になる必要があるため、プロパティ名をいじってはならないことに注意
+    /// セーブデータ
     /// </summary>
-    public class EntityBasedSaveData
+    /// <remarks>
+    /// リフレクションベースでシリアライズしている関係 + 後方互換性の関係で
+    /// - クラス名はSaveDataでなければならない
+    /// - このクラスのプロパティ名は安易に変えてはいけない
+    /// という制限があります。(LightSettingに実際はエフェクトの設定が入ってるのもそれのせいです)
+    /// </remarks>
+    public class SaveData
     {
         public bool IsInternalSaveFile { get; set; } = false;
 

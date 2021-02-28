@@ -32,7 +32,7 @@ namespace Baku.VMagicMirrorConfig
             {
                 var autoLoadEnabled = _model.AutoLoadLastLoadedVrm.Value;
 
-                var saveData = new EntityBasedSaveData()
+                var saveData = new SaveData()
                 {
                     IsInternalSaveFile = isInternalFile,
                     LastLoadedVrmFilePath = 
@@ -52,7 +52,7 @@ namespace Baku.VMagicMirrorConfig
                 //ここだけ互換性の都合で入れ子になってることに注意
                 saveData.LayoutSetting.Gamepad = _model.Gamepad.Save();
 
-                new XmlSerializer(typeof(EntityBasedSaveData)).Serialize(sw, saveData);
+                new XmlSerializer(typeof(SaveData)).Serialize(sw, saveData);
             }
         }
 
@@ -60,8 +60,8 @@ namespace Baku.VMagicMirrorConfig
         {
             using (var sr = new StreamReader(path))
             {
-                var serializer = new XmlSerializer(typeof(EntityBasedSaveData));
-                var saveData = (EntityBasedSaveData?)serializer.Deserialize(sr);
+                var serializer = new XmlSerializer(typeof(SaveData));
+                var saveData = (SaveData?)serializer.Deserialize(sr);
                 if (saveData == null)
                 {
                     LogOutput.Instance.Write("Setting file loaded, but result was not EntityBasedSaveData.");
