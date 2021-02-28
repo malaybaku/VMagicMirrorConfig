@@ -9,12 +9,21 @@ namespace Baku.VMagicMirrorConfig
             var setting = WindowSetting.Default;
             var factory = MessageFactory.Instance;
 
-            Action sendBackgroundColor = () => SendMessage(factory.Chromakey(
-                (IsTransparent?.Value == true) ? 0 : 255,
-                R?.Value ?? 255,
-                G?.Value ?? 255,
-                B?.Value ?? 255
-                ));
+            Action sendBackgroundColor = () => {
+                if (IsTransparent?.Value == true)
+                {
+                    SendMessage(factory.Chromakey(0, 0, 0, 0));
+                }
+                else
+                {
+                    SendMessage(factory.Chromakey(
+                        255,
+                        R?.Value ?? 255,
+                        G?.Value ?? 255,
+                        B?.Value ?? 255
+                        ));
+                }
+            };
 
             R = new RProperty<int>(setting.R, _ => sendBackgroundColor());
             G = new RProperty<int>(setting.G, _ => sendBackgroundColor());
@@ -22,11 +31,14 @@ namespace Baku.VMagicMirrorConfig
 
             IsTransparent = new RProperty<bool>(setting.IsTransparent, b =>
             {
+                //透明 = ウィンドウフレーム不要。逆も然り
+                //NOTE: 後方互換性の都合で必ず背景色の変更の前にフレームの有無を変える。
+                //逆にするとウィンドウサイズを維持するための処理が正しく走らない。
+                SendMessage(factory.WindowFrameVisibility(!b));
+
                 //ここで透明or不透明の背景を送りつけるとUnity側がよろしく背景透過にしてくれる
                 sendBackgroundColor();
 
-                //透明 = ウィンドウフレーム不要。逆も然り
-                SendMessage(factory.WindowFrameVisibility(!b));
 
                 if (b)
                 {
