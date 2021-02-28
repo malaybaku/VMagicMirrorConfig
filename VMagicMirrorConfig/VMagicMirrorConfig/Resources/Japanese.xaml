@@ -383,11 +383,11 @@
     <sys:String x:Key="WordToMotion_MidiAssign_After">変更後のノート</sys:String>
     <sys:String x:Key="WordToMotion_MidiAssign_Clear">クリア</sys:String>
    
-    <sys:String x:Key="WordToMotion_DeviceItem_None">None</sys:String>
-    <sys:String x:Key="WordToMotion_DeviceItem_KeyboardWord">Keyboard (word)</sys:String>
-    <sys:String x:Key="WordToMotion_DeviceItem_Gamepad">Gamepad</sys:String>
-    <sys:String x:Key="WordToMotion_DeviceItem_KeyboardTenKey">Keyboard (num 0-8)</sys:String>
-    <sys:String x:Key="WordToMotion_DeviceItem_MidiController">MIDI Controller</sys:String>
+    <sys:String x:Key="WordToMotion_DeviceItem_None">なし</sys:String>
+    <sys:String x:Key="WordToMotion_DeviceItem_KeyboardWord">キーボード (単語入力)</sys:String>
+    <sys:String x:Key="WordToMotion_DeviceItem_Gamepad">ゲームパッド</sys:String>
+    <sys:String x:Key="WordToMotion_DeviceItem_KeyboardTenKey">キーボード (数字の0-8)</sys:String>
+    <sys:String x:Key="WordToMotion_DeviceItem_MidiController">MIDIコントローラ</sys:String>
 
     <!-- Dialog Messages -->
     <sys:String x:Key="DialogTitle_LoadLocalVrm">VRMの読み込み</sys:String>
