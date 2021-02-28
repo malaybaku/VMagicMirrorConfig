@@ -4,7 +4,7 @@ using System.Windows;
 
 namespace Baku.VMagicMirrorConfig
 {
-    class LanguageSelector
+    class LanguageSelector : NotifiableBase
     {
         private static LanguageSelector? _instance;
         public static LanguageSelector Instance => _instance ??= new LanguageSelector();
@@ -33,6 +33,8 @@ namespace Baku.VMagicMirrorConfig
                     _languageName = value;
                     SetLanguage(LanguageName);
                     LanguageChanged?.Invoke();
+                    //NOTE: Bindingしたい人向け
+                    RaisePropertyChanged();
                 }
             }
         }
