@@ -9,7 +9,7 @@ namespace Baku.VMagicMirrorConfig
         {
             public const string UseLookAtPointNone = nameof(UseLookAtPointNone);
             public const string UseLookAtPointMousePointer = nameof(UseLookAtPointMousePointer);
-            public const string UseLookAtpointMainCamera = nameof(UseLookAtpointMainCamera);
+            public const string UseLookAtPointMainCamera = nameof(UseLookAtPointMainCamera);
         }
 
         public MotionSettingSync(IMessageSender sender) : base(sender)
@@ -66,7 +66,7 @@ namespace Baku.VMagicMirrorConfig
             {
                 if (v)
                 {
-                    SendMessage(factory.LookAtStyle(LookAtStyles.UseLookAtpointMainCamera));
+                    SendMessage(factory.LookAtStyle(LookAtStyles.UseLookAtPointMainCamera));
                     UseLookAtPointNone.Value = false;
                     UseLookAtPointMousePointer.Value = false;
                 }
