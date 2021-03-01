@@ -246,7 +246,7 @@
                         </Grid>
 
                         <md:Card Margin="15,5,5,0" 
-                                 Visibility="{Binding MotionSetting.ShowInstallPathWarning,
+                                 Visibility="{Binding MotionSetting.ShowInstallPathWarning.Value,
                                                       Converter={StaticResource BooleanToVisibilityConverter}, 
                                                       FallbackValue=Collapsed}"
                                  ToolTip="{DynamicResource Motion_Face_FolderMaybeIncorrect_Tooltip}"

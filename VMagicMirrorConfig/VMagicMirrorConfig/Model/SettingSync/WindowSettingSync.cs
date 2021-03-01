@@ -9,25 +9,9 @@ namespace Baku.VMagicMirrorConfig
             var setting = WindowSetting.Default;
             var factory = MessageFactory.Instance;
 
-            Action sendBackgroundColor = () => {
-                if (IsTransparent?.Value == true)
-                {
-                    SendMessage(factory.Chromakey(0, 0, 0, 0));
-                }
-                else
-                {
-                    SendMessage(factory.Chromakey(
-                        255,
-                        R?.Value ?? 255,
-                        G?.Value ?? 255,
-                        B?.Value ?? 255
-                        ));
-                }
-            };
-
-            R = new RProperty<int>(setting.R, _ => sendBackgroundColor());
-            G = new RProperty<int>(setting.G, _ => sendBackgroundColor());
-            B = new RProperty<int>(setting.B, _ => sendBackgroundColor());
+            R = new RProperty<int>(setting.R, _ => SendBackgroundColor());
+            G = new RProperty<int>(setting.G, _ => SendBackgroundColor());
+            B = new RProperty<int>(setting.B, _ => SendBackgroundColor());
 
             IsTransparent = new RProperty<bool>(setting.IsTransparent, b =>
             {
@@ -37,7 +21,7 @@ namespace Baku.VMagicMirrorConfig
                 SendMessage(factory.WindowFrameVisibility(!b));
 
                 //ここで透明or不透明の背景を送りつけるとUnity側がよろしく背景透過にしてくれる
-                sendBackgroundColor();
+                SendBackgroundColor();
 
 
                 if (b)
@@ -130,6 +114,25 @@ namespace Baku.VMagicMirrorConfig
             SendMessage(MessageFactory.Instance.MoveWindow(pos.X, pos.Y));
             SendMessage(MessageFactory.Instance.ResetWindowSize());
         }
+
+
+        /// <summary>
+        /// 背景色をリフレッシュします。
+        /// </summary>
+        private void SendBackgroundColor()
+        {
+            if (IsTransparent.Value == true)
+            {
+                SendMessage(MessageFactory.Instance.Chromakey(0, 0, 0, 0));
+            }
+            else
+            {
+                SendMessage(MessageFactory.Instance.Chromakey(
+                    255, R.Value, G.Value, B.Value
+                    ));
+            }
+        }
+
 
     }
 }

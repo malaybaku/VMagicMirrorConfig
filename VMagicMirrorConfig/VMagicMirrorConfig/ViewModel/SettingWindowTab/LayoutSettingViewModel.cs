@@ -1,4 +1,5 @@
 ﻿using MaterialDesignThemes.Wpf;
+using System.Linq;
 
 namespace Baku.VMagicMirrorConfig
 {
@@ -10,9 +11,6 @@ namespace Baku.VMagicMirrorConfig
         {
             _model = model;
             _gamepadModel = gamepadModel;
-
-            _typingEffectItem = TypingEffectSelections[0];
-            receiver.ReceivedCommand += OnReceiveCommand;
 
             QuickSaveViewPointCommand = new ActionCommand<string>(async s => await _model.QuickSaveViewPoint(s));
             QuickLoadViewPointCommand = new ActionCommand<string>(_model.QuickLoadViewPoint);
@@ -35,6 +33,16 @@ namespace Baku.VMagicMirrorConfig
             ResetMidiSettingCommand = new ActionCommand(
                 () => SettingResetUtils.ResetSingleCategoryAsync(_model.ResetMidiSetting)
                 );
+
+            _model.SelectedTypingEffectId.PropertyChanged += (_, __) =>
+            {
+                TypingEffectItem = TypingEffectSelections
+                    .FirstOrDefault(v => v.Id == _model.SelectedTypingEffectId.Value);                
+            };
+
+            _typingEffectItem = TypingEffectSelections[0];
+            receiver.ReceivedCommand += OnReceiveCommand;
+
         }
 
         private readonly LayoutSettingSync _model;
