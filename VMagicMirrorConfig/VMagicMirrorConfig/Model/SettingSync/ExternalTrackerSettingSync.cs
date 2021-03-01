@@ -10,7 +10,7 @@ namespace Baku.VMagicMirrorConfig
             var factory = MessageFactory.Instance;
 
             //NOTE: ひとまず初期値を入れておくと非null保証できて都合がいい、という話
-            FaceSwitchSetting = ExternalTrackerFaceSwitchSetting.LoadDefault();
+            _faceSwitchSetting = ExternalTrackerFaceSwitchSetting.LoadDefault();
 
             EnableExternalTracking = new RProperty<bool>(
                 setting.EnableExternalTracking, b => SendMessage(factory.ExTrackerEnable(b))
@@ -55,7 +55,28 @@ namespace Baku.VMagicMirrorConfig
 
         // FaceSwitchの設定
 
-        public ExternalTrackerFaceSwitchSetting FaceSwitchSetting { get; private set; }
+        private ExternalTrackerFaceSwitchSetting _faceSwitchSetting;
+        public ExternalTrackerFaceSwitchSetting FaceSwitchSetting
+        {
+            get => _faceSwitchSetting;
+            private set
+            {
+                //NOTE: モデル層では設定を細かくいじる事はなくて、必ず設定まるごとガッとリロードする。
+                //このガッとリロードしたのをイベント検出できるべき、というモチベから、こう書いている
+                if (_faceSwitchSetting != value)
+                {
+                    _faceSwitchSetting = value;
+                    RaisePropertyChanged();
+                    FaceSwitchSettingReloaded?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// <see cref="FaceSwitchSetting"/>がファイルロードやリセット処理によってリロードされたとき発火
+        /// </summary>
+        public event EventHandler? FaceSwitchSettingReloaded;
+        
 
         //NOTE: コンストラクタが終了した時点でちゃんとしたデータが入った状態になる
         public RProperty<string> SerializedFaceSwitchSetting { get; }

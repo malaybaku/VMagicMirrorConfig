@@ -19,10 +19,19 @@ namespace Baku.VMagicMirrorConfig
             UpdateTrackSourceType();
             model.TrackSourceType.PropertyChanged += (_, __) => UpdateTrackSourceType();
             model.EnableExternalTracking.PropertyChanged += (_, __) => UpdateShouldNotifyMissingBlendShapeClipNames();
+
             MissingBlendShapeNames = new RProperty<string>(
                 "", _ => UpdateShouldNotifyMissingBlendShapeClipNames()
                 );
-            model.SerializedFaceSwitchSetting.PropertyChanged += (_, __) => LoadFaceSwitchSetting();
+
+            model.FaceSwitchSettingReloaded += (_, __) =>
+            {
+                if (!model.IsLoading)
+                {
+                    LoadFaceSwitchSetting();
+                }
+            };
+            model.Loaded += (_, __) => LoadFaceSwitchSetting();
 
             RefreshIFacialMocapTargetCommand = new ActionCommand(
                 () => NetworkEnvironmentUtils.SendIFacialMocapDataReceiveRequest(IFacialMocapTargetIpAddress.Value)
@@ -213,10 +222,7 @@ namespace Baku.VMagicMirrorConfig
         /// 子要素になってる<see cref="ExternalTrackerFaceSwitchItemViewModel"/>から呼び出すことで、
         /// 現在の設定を保存した状態にします。
         /// </summary>
-        public void SaveFaceSwitchSetting()
-        {
-            _model.SaveFaceSwitchSetting();
-        }
+        public void SaveFaceSwitchSetting() => _model.SaveFaceSwitchSetting();
 
         /// <summary> UIで個別設定として表示する、表情スイッチの要素です。 </summary>
         public ObservableCollection<ExternalTrackerFaceSwitchItemViewModel> FaceSwitchItems { get; }
