@@ -28,20 +28,21 @@ namespace Baku.VMagicMirrorConfig
             SelectedDevice = Devices.FirstOrDefault(d => d.Index == _model.SelectedDeviceType.Value);
             //NOTE: シリアライズ文字列はどのみち頻繁に更新せねばならない
             //(並び替えた時とかもUnityにデータ送るために更新がかかる)ので、そのタイミングを使う
-            _model.MidiNoteMapString.PropertyChanged += (_, __) =>
+            _model.MidiNoteToMotionMapReloaded += (_, __) =>
             {
                 if (!_model.IsLoading)
                 {
                     LoadMidiSettingItems();
                 }
             };
-            _model.ItemsContentString.PropertyChanged += (_, __) =>
+            _model.MotionRequestsReloaded += (_, __) =>
             {
                 if (!_model.IsLoading)
                 {
                     LoadMotionItems();
                 }
             };
+
             _model.Loaded += (_, __) =>
             {
                 LoadMidiSettingItems();

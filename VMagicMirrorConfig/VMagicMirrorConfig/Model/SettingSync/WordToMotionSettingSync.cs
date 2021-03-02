@@ -14,8 +14,8 @@ namespace Baku.VMagicMirrorConfig
             var settings = WordToMotionSetting.Default;
             var factory = MessageFactory.Instance;
 
-            MotionRequests = MotionRequestCollection.LoadDefault();
-            MidiNoteToMotionMap = MidiNoteToMotionMap.LoadDefault();
+            _motionRequests = MotionRequestCollection.LoadDefault();
+            _midiNoteToMotionMap = MidiNoteToMotionMap.LoadDefault();
 
             PreviewDataSender = new WordToMotionItemPreviewDataSender(sender);
 
@@ -66,9 +66,37 @@ namespace Baku.VMagicMirrorConfig
 
         public RProperty<string> MidiNoteMapString { get; }
 
-        public MotionRequestCollection MotionRequests { get; private set; }
+        private MotionRequestCollection _motionRequests;
+        public MotionRequestCollection MotionRequests 
+        {
+            get => _motionRequests;
+            private set
+            {
+                if (_motionRequests != value)
+                {
+                    _motionRequests = value;
+                    RaisePropertyChanged();
+                    MotionRequestsReloaded?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+        public event EventHandler? MotionRequestsReloaded;
 
-        public MidiNoteToMotionMap MidiNoteToMotionMap { get; private set; }
+        private MidiNoteToMotionMap _midiNoteToMotionMap;
+        public MidiNoteToMotionMap MidiNoteToMotionMap 
+        {
+            get => _midiNoteToMotionMap;
+            private set
+            {
+                if (_midiNoteToMotionMap != value)
+                {
+                    _midiNoteToMotionMap = value;
+                    RaisePropertyChanged();
+                    MidiNoteToMotionMapReloaded?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+        public event EventHandler? MidiNoteToMotionMapReloaded;
 
         public void RequestSerializeItems()
         {
