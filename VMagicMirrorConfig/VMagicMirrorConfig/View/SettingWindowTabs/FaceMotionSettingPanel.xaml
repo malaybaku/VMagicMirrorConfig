@@ -435,11 +435,15 @@
                                   SelectedItem="{Binding FaceNeutralClip}">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
-                                    <!-- 
-                                    表示上は(None)みたいなテキストを出すこともありつつ、
-                                    入力された文字列自体をいじるわけではない(オフセットの方も同じ)
-                                    -->
-                                    <TextBlock Text="{Binding Converter={StaticResource EmptyToNoneTextConverter}}"/>
+                                    <!-- NOTE: 言語と入力値の2つから表示が決まるため、MultiBindingしている -->
+                                    <TextBlock>
+                                        <TextBlock.Text>
+                                            <MultiBinding Converter="{StaticResource EmptyToNoneTextConverter}">
+                                                <Binding Path=""/>
+                                                <Binding Path="LanguageName" Source="{x:Static vmm:LanguageSelector.Instance}"/>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>
@@ -462,7 +466,14 @@
                                   >
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Converter={StaticResource EmptyToNoneTextConverter}}"/>
+                                    <TextBlock>
+                                        <TextBlock.Text>
+                                            <MultiBinding Converter="{StaticResource EmptyToNoneTextConverter}">
+                                                <Binding Path=""/>
+                                                <Binding Path="LanguageName" Source="{x:Static vmm:LanguageSelector.Instance}"/>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>
