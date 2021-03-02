@@ -48,9 +48,8 @@ namespace Baku.VMagicMirrorConfig
                 LoadMotionItems();
             };
 
-            _previewDataSender = new WordToMotionItemPreviewDataSender(sender);
-            _previewDataSender.PrepareDataSend +=
-                (_, __) => _dialogItem?.WriteToModel(_previewDataSender.MotionRequest);
+            _model.PreviewDataSender.PrepareDataSend +=
+                (_, __) => _dialogItem?.WriteToModel(_model.PreviewDataSender.MotionRequest);
             receiver.ReceivedCommand += OnReceiveCommand;
 
             LoadDefaultItemsIfInitialStart();
@@ -60,10 +59,7 @@ namespace Baku.VMagicMirrorConfig
         }
 
         private readonly WordToMotionSettingSync _model;
-        private readonly WordToMotionItemPreviewDataSender _previewDataSender;
         private WordToMotionItemViewModel? _dialogItem;
-
-        internal MidiNoteReceiver MidiNoteReceiver => _model.MidiNoteReceiver;
 
         /// <summary>直近で読み込んだモデルに指定されている、VRM標準以外のブレンドシェイプ名の一覧を取得します。</summary>
         public IReadOnlyList<string> LatestAvaterExtraClipNames => _latestAvaterExtraClipNames;
@@ -259,7 +255,7 @@ namespace Baku.VMagicMirrorConfig
                 return;
             }
 
-            var vm = new MidiNoteToMotionEditorViewModel(MidiNoteMap, MidiNoteReceiver);
+            var vm = new MidiNoteToMotionEditorViewModel(MidiNoteMap, _model.MidiNoteReceiver);
 
             SendMessage(MessageFactory.Instance.RequireMidiNoteOnMessage(true));
             var window = new MidiNoteAssignEditorWindow()

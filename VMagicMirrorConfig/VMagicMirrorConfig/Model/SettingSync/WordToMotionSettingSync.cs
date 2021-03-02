@@ -17,14 +17,28 @@ namespace Baku.VMagicMirrorConfig
             MotionRequests = MotionRequestCollection.LoadDefault();
             MidiNoteToMotionMap = MidiNoteToMotionMap.LoadDefault();
 
+            PreviewDataSender = new WordToMotionItemPreviewDataSender(sender);
+
             SelectedDeviceType = new RProperty<int>(settings.SelectedDeviceType, i => SendMessage(factory.SetDeviceTypeToStartWordToMotion(i)));
             ItemsContentString = new RProperty<string>(settings.ItemsContentString, s => SendMessage(factory.ReloadMotionRequests(s)));
             MidiNoteMapString = new RProperty<string>(settings.MidiNoteMapString, s => SendMessage(factory.LoadMidiNoteToMotionMap(s)));
-            EnablePreview = new RProperty<bool>(false, b => SendMessage(factory.EnableWordToMotionPreview(b)));
+            EnablePreview = new RProperty<bool>(false, b =>
+            {
+                SendMessage(factory.EnableWordToMotionPreview(b));
+                if (b)
+                {
+                    PreviewDataSender.Start();
+                }
+                else
+                {
+                    PreviewDataSender.End();
+                }
+            });
 
             MidiNoteReceiver = new MidiNoteReceiver(receiver);
             //NOTE: このStartは通信とかではないので、すぐ始めちゃってOK
             MidiNoteReceiver.Start();
+
 
             //NOTE: この2つの呼び出しにより、必ずデフォルト設定をUnity側に通知する+シリアライズ文字列が空ではなくなる
             SaveMidiNoteMap();
@@ -38,6 +52,8 @@ namespace Baku.VMagicMirrorConfig
 
         /// <summary> NOTE: これはSyncというより一方的に情報を受け取るやつ </summary>
         internal MidiNoteReceiver MidiNoteReceiver { get; }
+
+        internal WordToMotionItemPreviewDataSender PreviewDataSender { get; }
 
         public RProperty<int> SelectedDeviceType { get; }
 
