@@ -162,38 +162,8 @@ namespace Baku.VMagicMirrorConfig
         private readonly FaceMotionBlendShapeNameStore _blendShapeNameStore = new FaceMotionBlendShapeNameStore();
         public ReadOnlyObservableCollection<string> BlendShapeNames => _blendShapeNameStore.BlendShapeNames;
 
-        //TODO: もしnullableじゃなくてもComboBoxの動作に支障なければ非nullにしたい
-        private string? _faceNeutralClip = "";
-        public string? FaceNeutralClip
-        {
-            get => _faceNeutralClip;
-            set
-            {
-                if (_faceNeutralClip != value)
-                {
-                    _faceNeutralClip = value;
-                    RaisePropertyChanged();
-                    _blendShapeNameStore.Refresh(FaceNeutralClip, FaceOffsetClip);
-                    SendMessage(MessageFactory.Instance.FaceNeutralClip(FaceNeutralClip ?? ""));
-                }
-            }
-        }
-
-        private string? _faceOffsetClip = "";
-        public string? FaceOffsetClip
-        {
-            get => _faceOffsetClip;
-            set
-            {
-                if (_faceOffsetClip != value)
-                {
-                    _faceOffsetClip = value;
-                    RaisePropertyChanged();
-                    _blendShapeNameStore.Refresh(FaceNeutralClip, FaceOffsetClip);
-                    SendMessage(MessageFactory.Instance.FaceOffsetClip(FaceOffsetClip ?? ""));
-                }
-            }
-        }
+        public RProperty<string> FaceNeutralClip => _model.FaceNeutralClip;
+        public RProperty<string> FaceOffsetClip => _model.FaceOffsetClip;
 
         #endregion
 

@@ -432,7 +432,7 @@
                                   HorizontalAlignment="Stretch"
                                   Margin="5"
                                   ItemsSource="{Binding BlendShapeNames}"
-                                  SelectedItem="{Binding FaceNeutralClip}">
+                                  SelectedItem="{Binding FaceNeutralClip.Value}">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <!-- NOTE: 言語と入力値の2つから表示が決まるため、MultiBindingしている -->
@@ -462,7 +462,7 @@
                                   HorizontalAlignment="Stretch"
                                   Margin="5"
                                   ItemsSource="{Binding BlendShapeNames}"
-                                  SelectedItem="{Binding FaceOffsetClip}"
+                                  SelectedItem="{Binding FaceOffsetClip.Value}"
                                   >
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
