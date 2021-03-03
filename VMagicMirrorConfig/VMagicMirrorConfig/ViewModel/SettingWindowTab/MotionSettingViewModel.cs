@@ -52,6 +52,11 @@ namespace Baku.VMagicMirrorConfig
                 }
             };
 
+            _model.FaceNeutralClip.PropertyChanged += (_, __) =>
+                _blendShapeNameStore.Refresh(_model.FaceNeutralClip.Value, _model.FaceOffsetClip.Value);
+            _model.FaceOffsetClip.PropertyChanged += (_, __) =>
+                _blendShapeNameStore.Refresh(_model.FaceNeutralClip.Value, _model.FaceOffsetClip.Value);
+
             //両方trueのときだけポインターを表示したいので、それのチェック
             _model.EnablePresenterMotion.PropertyChanged += (_, __) => UpdatePointerVisibility();
             _model.ShowPresentationPointer.PropertyChanged += (_, __) => UpdatePointerVisibility();
