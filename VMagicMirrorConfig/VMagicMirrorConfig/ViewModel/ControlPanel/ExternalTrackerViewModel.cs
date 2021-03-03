@@ -231,6 +231,12 @@ namespace Baku.VMagicMirrorConfig
         /// <summary> Face Switch機能で表示可能なブレンドシェイプ名の一覧です。 </summary>
         public ReadOnlyObservableCollection<string> BlendShapeNames => _blendShapeNameStore.BlendShapeNames;
 
+        /// <summary>
+        /// 個別のFace Switchで使っているブレンドシェイプ名が変わったとき呼び出すことで、
+        /// 使用中のブレンドシェイプ名の情報を実態に合わせます。
+        /// </summary>
+        internal void RefreshUsedBlendshapeNames() => _blendShapeNameStore.Refresh(_model.FaceSwitchSetting);
+
         #endregion
 
         #region エラーまわり: iFMの設定が怪しそうなときのメッセージ + webカメラが止まる問題の対処

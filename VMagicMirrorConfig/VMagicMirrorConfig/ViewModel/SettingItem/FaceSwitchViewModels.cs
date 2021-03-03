@@ -71,6 +71,7 @@ namespace Baku.VMagicMirrorConfig
                 {
                     _model.ClipName = value;
                     RaisePropertyChanged();
+                    _parent.RefreshUsedBlendshapeNames();
                     _parent.SaveFaceSwitchSetting();
                 }
             }
