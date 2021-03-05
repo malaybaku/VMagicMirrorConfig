@@ -6,11 +6,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vmm="clr-namespace:Baku.VMagicMirrorConfig"
              mc:Ignorable="d" 
-             d:DataContext="{d:DesignInstance Type={x:Type vmm:ExternalTrackerFaceSwitchItemViewModel}}"
-             
+             d:DataContext="{d:DesignInstance Type={x:Type vmm:ExternalTrackerFaceSwitchItemViewModel}}"             
              d:DesignWidth="450">
     <UserControl.Resources>
-        <vmm:EmptyToDoNothingTextConverter x:Key="EmptyToNoneTextConverter"/>
+        <vmm:EmptyToDoNothingTextConverter x:Key="EmptyToDoNothingTextConverter"/>
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -43,8 +42,16 @@
                   SelectedItem="{Binding ClipName}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Margin="0"
-                               Text="{Binding Converter={StaticResource EmptyToNoneTextConverter}}"/>
+                    <TextBlock Margin="0">
+                        <TextBlock.Text>
+                            <MultiBinding Converter="{StaticResource EmptyToDoNothingTextConverter}">
+                                <Binding Path=""/>
+                                <Binding Path="LanguageName" Source="{x:Static vmm:LanguageSelector.Instance}" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                        
+                    </TextBlock>
+                               <!--Text="{Binding Converter={StaticResource EmptyToDoNothingTextConverter}}"/>-->
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>

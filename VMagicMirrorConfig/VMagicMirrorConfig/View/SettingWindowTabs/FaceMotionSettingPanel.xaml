@@ -6,7 +6,7 @@
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:vmm="clr-namespace:Baku.VMagicMirrorConfig"
              mc:Ignorable="d"
-             d:DataContext="{x:Type vmm:MotionSettingViewModel}"
+             d:DataContext="{d:DesignInstance Type={x:Type vmm:MotionSettingViewModel}}"
              d:DesignWidth="400"
              d:DesignHeight="1200"
              >
@@ -69,7 +69,7 @@
                         
                         <CheckBox Grid.Row="0" Grid.Column="1"
                                   Margin="5"
-                                  IsChecked="{Binding EnableLipSync}">
+                                  IsChecked="{Binding EnableLipSync.Value}">
                             <CheckBox.Content>
                                 <TextBlock Text="{DynamicResource Motion_Mouth_EnableLipSync}"/>
                             </CheckBox.Content>
@@ -79,9 +79,9 @@
                                   HorizontalAlignment="Left"
                                   Margin="5,0"
                                   Width="200"
-                                  IsEnabled="{Binding EnableLipSync}"
+                                  IsEnabled="{Binding EnableLipSync.Value}"
                                   ItemsSource="{Binding MicrophoneDeviceNames}"
-                                  SelectedItem="{Binding LipSyncMicrophoneDeviceName, Converter={StaticResource WhiteSpaceStringToNullConverter}}"
+                                  SelectedItem="{Binding LipSyncMicrophoneDeviceName.Value, Converter={StaticResource WhiteSpaceStringToNullConverter}}"
                                   md:HintAssist.Hint="Microphone"
                                   />
 
@@ -101,7 +101,7 @@
                                     Maximum="50"
                                     TickFrequency="1"
                                     IsSnapToTickEnabled="True"
-                                    Value="{Binding MicrophoneSensitivity, Mode=TwoWay}"
+                                    Value="{Binding MicrophoneSensitivity.Value, Mode=TwoWay}"
                                     />
                             <TextBox Grid.Column="2"
                                      Text="{Binding Value, ElementName=sliderMicrophoneSensitivity}"
@@ -115,8 +115,8 @@
                                 <ColumnDefinition />
                                 <ColumnDefinition Width="150" />
                             </Grid.ColumnDefinitions>
-                            <CheckBox IsEnabled="{Binding EnableLipSync}"
-                                      IsChecked="{Binding ShowMicrophoneVolume}"
+                            <CheckBox IsEnabled="{Binding EnableLipSync.Value}"
+                                      IsChecked="{Binding ShowMicrophoneVolume.Value}"
                                       HorizontalAlignment="Left"
                                       Margin="15,0,0,0"
                                       >
@@ -137,10 +137,10 @@
                                     <Grid.OpacityMask>
                                         <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
                                             <GradientStop Offset="0" Color="White"/>
-                                            <GradientStop Offset="{Binding MicrophoneVolumeValue,
+                                            <GradientStop Offset="{Binding MicrophoneVolumeValue.Value,
                                                                            Converter={StaticResource Lv50Converter}}"
                                                           Color="White"/>
-                                            <GradientStop Offset="{Binding MicrophoneVolumeValue,
+                                            <GradientStop Offset="{Binding MicrophoneVolumeValue.Value,
                                                                            Converter={StaticResource Lv50Converter}}"
                                                           Color="Transparent"/>
                                         </LinearGradientBrush>
@@ -163,7 +163,7 @@
 
                         <CheckBox Grid.Row="3" Grid.Column="1"
                                   Margin="5"
-                                  IsChecked="{Binding EnableFaceTracking}"
+                                  IsChecked="{Binding EnableFaceTracking.Value}"
                                   >
                             <CheckBox.Content>
                                 <TextBlock Text="{DynamicResource Motion_Face_EnableFaceTracking}"/>
@@ -174,17 +174,17 @@
                                   HorizontalAlignment="Left"
                                   Margin="5,0"
                                   Width="200"
-                                  IsEnabled="{Binding EnableFaceTracking}"
+                                  IsEnabled="{Binding EnableFaceTracking.Value}"
                                   ItemsSource="{Binding CameraDeviceNames}"
-                                  SelectedItem="{Binding CameraDeviceName, Converter={StaticResource WhiteSpaceStringToNullConverter}}"
+                                  SelectedItem="{Binding CameraDeviceName.Value, Converter={StaticResource WhiteSpaceStringToNullConverter}}"
                                   md:HintAssist.Hint="Camera"
                                   />
 
                         <CheckBox Grid.Row="4" Grid.Column="1"                            
                                   Grid.ColumnSpan="2"
                                   Margin="15,0,0,0"
-                                  IsEnabled="{Binding EnableFaceTracking}"
-                                  IsChecked="{Binding EnableWebCamHighPowerMode}"
+                                  IsEnabled="{Binding EnableFaceTracking.Value}"
+                                  IsChecked="{Binding EnableWebCamHighPowerMode.Value}"
                                   >
                             <CheckBox.Content>
                                 <TextBlock Text="{DynamicResource Motion_Face_EnableWebCamHighPowerMode}"/>
@@ -193,8 +193,8 @@
                         <CheckBox Grid.Row="5" Grid.Column="1"
                                   Grid.ColumnSpan="2"
                                   Margin="15,0,0,0"
-                                  IsEnabled="{Binding EnableFaceTracking}"
-                                  IsChecked="{Binding EnableImageBasedHandTracking}"
+                                  IsEnabled="{Binding EnableFaceTracking.Value}"
+                                  IsChecked="{Binding EnableImageBasedHandTracking.Value}"
                                   >
                             <CheckBox.Content>
                                 <TextBlock Text="{DynamicResource Motion_Face_EnableImageBasedHandTracking}"/>
@@ -203,8 +203,8 @@
                         <CheckBox Grid.Row="6" Grid.Column="1"
                                   Grid.ColumnSpan="2"
                                   Margin="15,0,0,0"
-                                  IsEnabled="{Binding EnableFaceTracking}"
-                                  IsChecked="{Binding AutoBlinkDuringFaceTracking}"
+                                  IsEnabled="{Binding EnableFaceTracking.Value}"
+                                  IsChecked="{Binding AutoBlinkDuringFaceTracking.Value}"
                                   >
                             <CheckBox.Content>
                                 <TextBlock Text="{DynamicResource Motion_Face_AutoBlinkDuringFaceTracking}"/>
@@ -213,8 +213,8 @@
                         <CheckBox Grid.Row="7" Grid.Column="1"
                                   Grid.ColumnSpan="2"
                                   Margin="15,0,0,0"
-                                  IsEnabled="{Binding EnableFaceTracking}"
-                                  IsChecked="{Binding EnableBodyLeanZ}"
+                                  IsEnabled="{Binding EnableFaceTracking.Value}"
+                                  IsChecked="{Binding EnableBodyLeanZ.Value}"
                                   >
                             <CheckBox.Content>
                                 <TextBlock Text="{DynamicResource Motion_Face_EnableBodyLeanZ}"/>
@@ -223,8 +223,8 @@
                         <CheckBox Grid.Row="8" Grid.Column="1"
                                   Grid.ColumnSpan="2"
                                   Margin="15,0,0,0"
-                                  IsEnabled="{Binding EnableFaceTracking}"
-                                  IsChecked="{Binding DisableFaceTrackingHorizontalFlip}"
+                                  IsEnabled="{Binding EnableFaceTracking.Value}"
+                                  IsChecked="{Binding DisableFaceTrackingHorizontalFlip.Value}"
                                   >
                             <CheckBox.Content>
                                 <TextBlock Text="{DynamicResource Motion_Face_DisableFaceTrackingHorizontalFlip}"/>
@@ -233,7 +233,7 @@
                     </Grid>
 
                     <md:Card Margin="15,5,5,5" 
-                             Visibility="{Binding ShowInstallPathWarning, 
+                             Visibility="{Binding ShowInstallPathWarning.Value, 
                                                   Converter={StaticResource BooleanToVisibilityConverter}}"
                              ToolTip="{DynamicResource Motion_Face_FolderMaybeIncorrect_Tooltip}"
                              HorizontalAlignment="Center"
@@ -270,7 +270,7 @@
                     </Button>
 
                     <CheckBox Margin="15,0,0,5"
-                              IsChecked="{Binding EnableVoiceBasedMotion}"
+                              IsChecked="{Binding EnableVoiceBasedMotion.Value}"
                               >
                         <CheckBox.Content>
                             <TextBlock Text="{DynamicResource Motion_Face_NoCamMotion}"/>
@@ -292,14 +292,13 @@
                                    Style="{StaticResource HeaderText}"
                                    Margin="5"
                                    />
-                        <!-- TODO: 目だけリセットするコマンド -->
                         <Button Style="{StaticResource CategorySettingResetButton}"
                                 Command="{Binding ResetFaceEyeSettingCommand}"
                                 />
                     </StackPanel>
 
                     <CheckBox Margin="15,5,0,0"
-                              IsChecked="{Binding EnableBlinkAdjust}"
+                              IsChecked="{Binding EnableBlinkAdjust.Value}"
                               >
                         <CheckBox.Content>
                             <TextBlock Text="{DynamicResource Motion_Face_BlinkAdjust}"/>
@@ -320,17 +319,17 @@
                         <CheckBox Grid.Column="0"
                                   HorizontalAlignment="Left"
                                   Margin="5"
-                                  IsChecked="{Binding UseLookAtPointMousePointer}"
+                                  IsChecked="{Binding UseLookAtPointMousePointer.Value}"
                                   Content="{DynamicResource Motion_Eye_LookAtPoint_MousePointer}"/>
                         <CheckBox Grid.Column="1"
                                   HorizontalAlignment="Left"
                                   Margin="5"
-                                  IsChecked="{Binding UseLookAtPointMainCamera}"
+                                  IsChecked="{Binding UseLookAtPointMainCamera.Value}"
                                   Content="{DynamicResource Motion_Eye_LookAtPoint_MainCamera}"/>
                         <CheckBox Grid.Column="2"
                                   HorizontalAlignment="Left"
                                   Margin="5"
-                                  IsChecked="{Binding UseLookAtPointNone}"
+                                  IsChecked="{Binding UseLookAtPointNone.Value}"
                                   Content="{DynamicResource Motion_Eye_LookAtPoint_None}"/>
                     </Grid>
 
@@ -355,7 +354,7 @@
                                 Maximum="500"
                                 TickFrequency="1"
                                 IsSnapToTickEnabled="True"
-                                Value="{Binding EyeBoneRotationScale, Mode=TwoWay}"
+                                Value="{Binding EyeBoneRotationScale.Value, Mode=TwoWay}"
                                 />
                         <TextBox Grid.Row="0" Grid.Column="2"
                                  Text="{Binding Value, ElementName=sliderEyeRotationScale}"
@@ -389,7 +388,6 @@
                                    Style="{StaticResource HeaderText}"
                                    Margin="5"
                                    />
-                        <!-- TODO: ブレンドシェイプ周りだけリセットするコマンド -->
                         <Button Style="{StaticResource CategorySettingResetButton}"
                                 Command="{Binding ResetFaceBlendShapeSettingCommand}"
                                 />
@@ -415,7 +413,7 @@
                                 x:Name="sliderFaceDefaultFun"
                                 Minimum="0"
                                 Maximum="100"
-                                Value="{Binding FaceDefaultFun, Mode=TwoWay}"
+                                Value="{Binding FaceDefaultFun.Value, Mode=TwoWay}"
                                 />
                         <TextBox Grid.Row="0" Grid.Column="2"
                                  Text="{Binding Value, ElementName=sliderFaceDefaultFun}"
@@ -434,14 +432,18 @@
                                   HorizontalAlignment="Stretch"
                                   Margin="5"
                                   ItemsSource="{Binding BlendShapeNames}"
-                                  SelectedItem="{Binding FaceNeutralClip}">
+                                  SelectedItem="{Binding FaceNeutralClip.Value}">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
-                                    <!-- 
-                                    表示上は(None)みたいなテキストを出すこともありつつ、
-                                    入力された文字列自体をいじるわけではない(オフセットの方も同じ)
-                                    -->
-                                    <TextBlock Text="{Binding Converter={StaticResource EmptyToNoneTextConverter}}"/>
+                                    <!-- NOTE: 言語と入力値の2つから表示が決まるため、MultiBindingしている -->
+                                    <TextBlock>
+                                        <TextBlock.Text>
+                                            <MultiBinding Converter="{StaticResource EmptyToNoneTextConverter}">
+                                                <Binding Path=""/>
+                                                <Binding Path="LanguageName" Source="{x:Static vmm:LanguageSelector.Instance}"/>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>
@@ -460,11 +462,18 @@
                                   HorizontalAlignment="Stretch"
                                   Margin="5"
                                   ItemsSource="{Binding BlendShapeNames}"
-                                  SelectedItem="{Binding FaceOffsetClip}"
+                                  SelectedItem="{Binding FaceOffsetClip.Value}"
                                   >
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Converter={StaticResource EmptyToNoneTextConverter}}"/>
+                                    <TextBlock>
+                                        <TextBlock.Text>
+                                            <MultiBinding Converter="{StaticResource EmptyToNoneTextConverter}">
+                                                <Binding Path=""/>
+                                                <Binding Path="LanguageName" Source="{x:Static vmm:LanguageSelector.Instance}"/>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>

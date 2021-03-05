@@ -182,9 +182,10 @@
                                         ConverterParameter=5}"                        
                     />
             </TabItem.Header>
+            <!-- DeviceSettingは2つのVMをつまみ食いするため、MainWindowViewModel自体を割り当てる -->
             <vmm:DeviceSettingPanel 
                 Background="White"
-                DataContext="{Binding LayoutSetting}" />
+                />
         </TabItem>
         <TabItem>
             <TabItem.Header>

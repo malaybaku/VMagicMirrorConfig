@@ -99,6 +99,17 @@
 「リップシンクを続行」をオンにすると、表情を切り替えたままリップシンクを動かせます。</sys:String>
     <sys:String x:Key="ExTracker_FaceSwitch_KeepLipSync">リップシンクを続行</sys:String>
 
+    
+    <!-- ExTracker FaceSwitch Trigger -->
+    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_mouthSmile">口を笑顔にすると</sys:String>
+    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_eyeSquint">目を細めると</sys:String>
+    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_eyeWide">目を大きく見開くと</sys:String>
+    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_browUp">眉を上げると</sys:String>
+    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_browDown">眉を下げると</sys:String>
+    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_tongueOut">頬をふくらませると</sys:String>
+    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_cheekPuff">舌を出すと</sys:String>
+
+    
     <!-- Settings General -->
     <sys:String x:Key="Setting_Color_Expander_Header">色を編集 (クリックで展開)</sys:String>
     
@@ -372,4 +383,56 @@
     <sys:String x:Key="WordToMotion_MidiAssign_After">変更後のノート</sys:String>
     <sys:String x:Key="WordToMotion_MidiAssign_Clear">クリア</sys:String>
    
+    <sys:String x:Key="WordToMotion_DeviceItem_None">なし</sys:String>
+    <sys:String x:Key="WordToMotion_DeviceItem_KeyboardWord">キーボード (単語入力)</sys:String>
+    <sys:String x:Key="WordToMotion_DeviceItem_Gamepad">ゲームパッド</sys:String>
+    <sys:String x:Key="WordToMotion_DeviceItem_KeyboardTenKey">キーボード (数字の0-8)</sys:String>
+    <sys:String x:Key="WordToMotion_DeviceItem_MidiController">MIDIコントローラ</sys:String>
+
+    <!-- Dialog Messages -->
+    <sys:String x:Key="DialogTitle_LoadLocalVrm">VRMの読み込み</sys:String>
+    <sys:String x:Key="DialogMessage_LoadLocalVrm">ビューアー画面のライセンスを確認してください。読み込みますか？</sys:String>
+    <sys:String x:Key="DialogTitle_ResetAllSetting">設定のリセット</sys:String>
+    <sys:String x:Key="DialogMessage_ResetAllSetting">リセットを実行すると全ての設定が初期状態に戻ります。リセットしますか？</sys:String>
+    <sys:String x:Key="DialogTitle_ResetCategorySetting">設定のリセット</sys:String>
+    <sys:String x:Key="DialogMessage_ResetCategorySetting">選択したカテゴリの設定をリセットしますか？</sys:String>
+    <sys:String x:Key="DialogTitle_LoadSettingFileError">ロード失敗</sys:String>
+    <sys:String x:Key="DialogMessage_LoadSettingFileError">設定ファイルのロードに失敗しました。エラー: </sys:String>
+    <sys:String x:Key="DialogTitle_DeleteWtMItem">モーションの削除</sys:String>
+    <sys:String x:Key="DialogMessage_DeleteWtmItem">このモーション'{0}'を削除しますか？</sys:String>
+    <sys:String x:Key="DialogTitle_ForgetBlendShapeInfo">ブレンドシェイプ情報のクリア</sys:String>
+    <sys:String x:Key="DialogMessage_ForgetBlendShapeInfo">このブレンドシェイプ'{0}'の設定を削除しますか？</sys:String>
+    <sys:String x:Key="DialogTitle_InvalidIpAddress">無効なIPアドレス</sys:String>
+    <sys:String x:Key="DialogMessage_InvalidIpAddress">無効なIPアドレスが指定されています。入力を確認して下さい。</sys:String>
+    <sys:String x:Key="DialogTitle_ShowVRoidSdkUi">VRoid Hubに接続中</sys:String>
+    <sys:String x:Key="DialogMessage_ShowVRoidSdkUi">キャラクターウィンドウ上でモデルを選択するか、またはキャンセルしてください。</sys:String>
+    <sys:String x:Key="DialogTitle_LoadPreviousVRoidModel">VRoid Hubに接続中</sys:String>
+    <sys:String x:Key="DialogMessage_LoadPreviousVRoidModel">前回使用したモデルのロードを試みています。モデルをロードするか、またはキャンセルしてください。</sys:String>
+    <sys:String x:Key="DialogTitle_ExTrackerMissingBlendShape">未定義のBlendShapeClipがあります</sys:String>
+    <sys:String x:Key="DialogMessage_ExTrackerMissingBlendShape" xml:space="preserve">パーフェクトシンクに必要なBlendShapeClipの一部が未定義です。
+
+モデルの見た目が正常であれば、この警告を無視して構いません。
+モデルの見た目がおかしい場合はこのダイアログを閉じてから
+「パーフェクトシンクとは？」をクリックし、
+モデルのセットアップ手順を確認して下さい。
+
+---
+定義されていないBlendShapeClipの名称:
+</sys:String>
+    <sys:String x:Key="DialogTitle_ExTrackerCheckTurnOff">外部トラッキング機能をオフ</sys:String>
+    <sys:String x:Key="DialogMessage_ExTrackerCheckTurnOff" xml:space="preserve">外部トラッキング機能をオフにしますか？
+webカメラでの顔トラッキングを有効にする場合は
+'OK'を選択し、iPhone/iPadとの連携を終了してください。
+</sys:String>
+
+    <!-- Other: Not on Dialog, but used from code -->
+    <sys:String x:Key="CommonUi_DoNothing">(何もしない)</sys:String>
+    <sys:String x:Key="CommonUi_None">(なし)</sys:String>
+
+    <!-- Localize dependent URLs -->
+    <sys:String x:Key="URL_help_top">https://malaybaku.github.io/VMagicMirror</sys:String>
+    <sys:String x:Key="URL_docs_ex_tracker">https://malaybaku.github.io/VMagicMirror/docs/external_tracker</sys:String>
+    <sys:String x:Key="URL_tips_perfect_sync">https://malaybaku.github.io/VMagicMirror/tips/perfect_sync</sys:String>
+    <sys:String x:Key="URL_ifacialmocap_troubleshoot">https://malaybaku.github.io/VMagicMirror/docs/external_tracker_ifacialmocap#troubleshoot</sys:String>
+    
 </ResourceDictionary>

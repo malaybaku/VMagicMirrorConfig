@@ -7,12 +7,13 @@
              xmlns:sys="clr-namespace:System"
              xmlns:vmm="clr-namespace:Baku.VMagicMirrorConfig"
              mc:Ignorable="d"
-             d:DataContext="{x:Type vmm:LayoutSettingViewModel}"
+             d:DataContext="{d:DesignInstance Type={x:Type vmm:LayoutSettingViewModel}}"
              d:DesignWidth="400"
              d:DesignHeight="1050"
              >
     <UserControl.Resources>
         <vmm:BooleanReverseConverter x:Key="BooleanReverseConverter"/>
+        <vmm:StringNotEmptyConverter x:Key="StringNotEmptyConverter"/>
         <Style TargetType="md:PackIcon" x:Key="HeaderPackIcon">
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Width" Value="20"/>
@@ -51,7 +52,7 @@
                     
 
                     <CheckBox Content="{DynamicResource Layout_EnableFreeCameraMode}" 
-                              IsChecked="{Binding EnableFreeCameraMode}"
+                              IsChecked="{Binding EnableFreeCameraMode.Value}"
                               Margin="10,5"
                               />
 
@@ -69,7 +70,7 @@
                                 x:Name="sliderCameraFov"
                                 Minimum="1"
                                 Maximum="179"
-                                Value="{Binding CameraFov, Mode=TwoWay}"
+                                Value="{Binding CameraFov.Value, Mode=TwoWay}"
                                 />
                         <TextBox Grid.Column="2"
                                  Text="{Binding Value, ElementName=sliderCameraFov}"
@@ -121,19 +122,19 @@
 
                         <Button Grid.Row="1" Grid.Column="1"
                                 Command="{Binding QuickLoadViewPointCommand}"
-                                IsEnabled="{Binding HasQuickSaveItem1}"
+                                IsEnabled="{Binding QuickSave1.Value, Converter={StaticResource StringNotEmptyConverter}}"
                                 CommandParameter="1"
                                 Content="1"
                                 />
                         <Button Grid.Row="1" Grid.Column="2"
                                 Command="{Binding QuickLoadViewPointCommand}"
-                                IsEnabled="{Binding HasQuickSaveItem2}"
+                                IsEnabled="{Binding QuickSave2.Value, Converter={StaticResource StringNotEmptyConverter}}"
                                 CommandParameter="2"
                                 Content="2"
                                 />
                         <Button Grid.Row="1" Grid.Column="3"
                                 Command="{Binding QuickLoadViewPointCommand}"
-                                IsEnabled="{Binding HasQuickSaveItem3}"
+                                IsEnabled="{Binding QuickSave3.Value, Converter={StaticResource StringNotEmptyConverter}}"
                                 CommandParameter="3"
                                 Content="3"
                                 />
@@ -179,7 +180,7 @@
 
                     <CheckBox Margin="20,2"
                               VerticalContentAlignment="Center"
-                              IsChecked="{Binding EnableDeviceFreeLayout}">
+                              IsChecked="{Binding EnableDeviceFreeLayout.Value}">
                         <CheckBox.Content>
                             <TextBlock Text="{DynamicResource Layout_DeviceFreeLayout}"/>
                         </CheckBox.Content>
@@ -209,19 +210,19 @@
 
                     <CheckBox Margin="20,0"
                               VerticalContentAlignment="Center"
-                              IsChecked="{Binding HidVisibility}">
+                              IsChecked="{Binding HidVisibility.Value}">
                         <TextBlock Text="{DynamicResource Layout_HidVisible}"/>
                     </CheckBox>
 
                     <CheckBox Margin="20,2"
                               VerticalContentAlignment="Center"
-                              IsChecked="{Binding Gamepad.GamepadVisibility}">
+                              IsChecked="{Binding GamepadVisibility.Value}">
                         <TextBlock Text="{DynamicResource Layout_GamepadVisible}"/>
                     </CheckBox>
                     
                     <CheckBox Margin="20,0"
                               VerticalContentAlignment="Center"
-                              IsChecked="{Binding MidiControllerVisibility}">
+                              IsChecked="{Binding MidiControllerVisibility.Value}">
                         <TextBlock Text="{DynamicResource Layout_MidiVisible}"/>
                     </CheckBox>
 
