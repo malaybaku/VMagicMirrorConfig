@@ -150,7 +150,7 @@ namespace Baku.VMagicMirrorConfig
         private readonly ObservableCollection<WordToMotionItemViewModel> _items
             = new ObservableCollection<WordToMotionItemViewModel>();
 
-        public MidiNoteToMotionMapViewModel MidiNoteMap { get; private set; }
+        public MidiNoteToMotionMapViewModel MidiNoteMap { get; }
             = new MidiNoteToMotionMapViewModel(MidiNoteToMotionMap.LoadDefault());
 
         public RProperty<bool> EnablePreview => _model.EnablePreview;
@@ -197,7 +197,7 @@ namespace Baku.VMagicMirrorConfig
 
         private void LoadMidiSettingItems()
         {
-            MidiNoteMap = new MidiNoteToMotionMapViewModel(_model.MidiNoteToMotionMap);
+            MidiNoteMap.Load(_model.MidiNoteToMotionMap);
         }
 
         /// <summary>
@@ -266,13 +266,10 @@ namespace Baku.VMagicMirrorConfig
             bool? res = window.ShowDialog();
             SendMessage(MessageFactory.Instance.RequireMidiNoteOnMessage(false));
 
-            if (res != true)
+            if (res == true)
             {
-                return;
+                _model.RefreshMidiNoteMap(vm.Result);
             }
-
-            MidiNoteMap.Load(vm.Result);
-            RequestReload();
         }
 
         public ActionCommand AddNewItemCommand { get; }

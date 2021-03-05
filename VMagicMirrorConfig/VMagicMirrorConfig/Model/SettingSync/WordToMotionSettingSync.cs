@@ -8,7 +8,6 @@ namespace Baku.VMagicMirrorConfig
 {
     class WordToMotionSettingSync : SettingSyncBase<WordToMotionSetting>
     {
-
         public WordToMotionSettingSync(IMessageSender sender, IMessageReceiver receiver) : base(sender)
         {
             var settings = WordToMotionSetting.Default;
@@ -107,12 +106,19 @@ namespace Baku.VMagicMirrorConfig
         public void SaveMotionRequests() => ItemsContentString.Value = MotionRequests.ToJson();
         public void SaveMidiNoteMap() => MidiNoteMapString.Value = MidiNoteToMotionMap.ToJson();
 
+        public void RefreshMidiNoteMap(MidiNoteToMotionMap result)
+        {
+            MidiNoteToMotionMap = result;
+            SaveMidiNoteMap();
+        }
+
         /// <summary>
         /// 指定したモーションを実行します。再生ボタンを押したときに呼び出す想定です
         /// </summary>
         /// <param name="item"></param>
         public void Play(MotionRequest item)
             => SendMessage(MessageFactory.Instance.PlayWordToMotionItem(item.ToJson()));
+
 
         #region アイテムの並べ替えと削除
 
@@ -256,6 +262,5 @@ namespace Baku.VMagicMirrorConfig
                 MidiNoteToMotionMap = MidiNoteToMotionMap.LoadDefault();
             }
         }
-
     }
 }
