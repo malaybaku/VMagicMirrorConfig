@@ -52,6 +52,11 @@ namespace Baku.VMagicMirrorConfig
 
             TopMost = new RProperty<bool>(setting.TopMost, b => SendMessage(factory.TopMost(b)));
 
+            BackgroundImagePath = new RProperty<string>(
+                setting.BackgroundImagePath,
+                s => SendMessage(factory.SetBackgroundImagePath(s))
+                );
+
             WholeWindowTransparencyLevel = new RProperty<int>(
                 setting.WholeWindowTransparencyLevel, 
                 i => SendMessage(factory.SetWholeWindowTransparencyLevel(i))
@@ -71,8 +76,11 @@ namespace Baku.VMagicMirrorConfig
         public RProperty<bool> WindowDraggable { get; }
         public RProperty<bool> TopMost { get; }
 
+        public RProperty<string> BackgroundImagePath { get; }
+
         public RProperty<int> WholeWindowTransparencyLevel { get; }
         public RProperty<int> AlphaValueOnTransparent { get; }
+
 
         #region Reset API
 
@@ -100,6 +108,8 @@ namespace Baku.VMagicMirrorConfig
             IsTransparent.Value = setting.IsTransparent;
             WindowDraggable.Value = setting.WindowDraggable;
             TopMost.Value = setting.TopMost;
+
+            BackgroundImagePath.Value = setting.BackgroundImagePath;
 
             ResetOpacity();
             ResetWindowPosition();

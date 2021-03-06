@@ -11,6 +11,7 @@
              d:DataContext="{d:DesignInstance Type={x:Type vmm:WindowSettingViewModel}}"
              >
     <UserControl.Resources>
+        <vmm:BooleanReverseConverter x:Key="BooleanReverseConverter"/>
         <Style TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}">
             <Setter Property="Margin" Value="5"/>
         </Style>
@@ -36,6 +37,20 @@
                               IsChecked="{Binding IsTransparent.Value, Mode=TwoWay}"
                               Margin="15,0"
                               />
+                    <StackPanel Orientation="Horizontal"
+                                    Margin="25,0,5,5"
+                                    IsEnabled="{Binding IsTransparent.Value,
+                                                        Converter={StaticResource BooleanReverseConverter}}">
+                        <TextBlock Text="{DynamicResource Window_BackgroundImage}"/>
+                        <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                    Content="{DynamicResource Window_BackgroundImage_Load}"
+                                    Command="{Binding BackgroundImageSetCommand}"
+                                    />
+                        <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                    Content="{DynamicResource Window_BackgroundImage_Clear}"
+                                    Command="{Binding BackgroundImageClearCommand}"
+                                    />
+                    </StackPanel>
 
                     <CheckBox Content="{DynamicResource Window_Draggable}"
                               IsChecked="{Binding WindowDraggable.Value, Mode=TwoWay}"
