@@ -49,6 +49,13 @@ namespace Baku.VMagicMirrorConfig
         public Message TopMost(bool v) => WithArg($"{v}");
         public Message WindowDraggable(bool v) => WithArg($"{v}");
 
+        /// <summary>
+        /// NOTE: 空文字列なら背景画像を外す処理をやる。
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public Message SetBackgroundImagePath(string path) => WithArg(path);
+
         public Message MoveWindow(int x, int y) => WithArg($"{x},{y}");
         public Message ResetWindowSize() => NoArg();
 

@@ -1,4 +1,6 @@
-﻿using System.Windows.Media;
+﻿using Microsoft.Win32;
+using System.IO;
+using System.Windows.Media;
 
 namespace Baku.VMagicMirrorConfig
 {
@@ -14,6 +16,10 @@ namespace Baku.VMagicMirrorConfig
             _model.G.PropertyChanged += (_, __) => UpdatePickerColor(); 
             _model.B.PropertyChanged += (_, __) => UpdatePickerColor();
 
+            BackgroundImageSetCommand = new ActionCommand(SetBackgroundImage);
+            BackgroundImageClearCommand = new ActionCommand(
+                () => _model.BackgroundImagePath.Value = ""
+                );
 
             ResetBackgroundColorSettingCommand = new ActionCommand(
                 () => SettingResetUtils.ResetSingleCategoryAsync(_model.ResetBackgroundColor)
@@ -53,8 +59,27 @@ namespace Baku.VMagicMirrorConfig
         public RProperty<int> WholeWindowTransparencyLevel => _model.WholeWindowTransparencyLevel;
         public RProperty<int> AlphaValueOnTransparent => _model.AlphaValueOnTransparent;
 
+        public ActionCommand BackgroundImageSetCommand { get; }
+        public ActionCommand BackgroundImageClearCommand { get; }
+
         public ActionCommand ResetWindowPositionCommand { get; }
         public ActionCommand ResetBackgroundColorSettingCommand { get; }
         public ActionCommand ResetOpacitySettingCommand { get; }
+
+        private void SetBackgroundImage()
+        {
+            //NOTE: 画像形式を絞らないと辛いのでAll Filesとかは無しです。
+            var dialog = new OpenFileDialog()
+            {
+                Title = "Select Background Image",
+                Filter = "Image files (*.png;*.jpg)|*.png;*.jpg",
+                Multiselect = false,
+            };
+
+            if (dialog.ShowDialog() == true && File.Exists(dialog.FileName)) 
+            {
+                _model.BackgroundImagePath.Value = Path.GetFullPath(dialog.FileName);
+            }
+        }
     }
 }

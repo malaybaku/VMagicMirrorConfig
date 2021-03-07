@@ -11,6 +11,7 @@
              d:DesignHeight="590"             
              >
     <UserControl.Resources>
+        <vmm:BooleanReverseConverter x:Key="BooleanReverseConverter"/>
         <vmm:StringNotEmptyConverter x:Key="StringNotEmptyConverter"/>
         <vmm:WhiteSpaceStringToNullConverter x:Key="WhiteSpaceStringToNullConverter"/>
         <vmm:Lv50Converter x:Key="Lv50Converter"/>
@@ -88,6 +89,21 @@
                                   Content="{DynamicResource Window_Transparent}"
                                   IsChecked="{Binding WindowSetting.IsTransparent.Value, Mode=TwoWay}"
                                   />
+
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="15,0,5,2"
+                                    IsEnabled="{Binding WindowSetting.IsTransparent.Value,
+                                                        Converter={StaticResource BooleanReverseConverter}}">
+                            <TextBlock Text="{DynamicResource Window_BackgroundImage}"/>
+                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                    Content="{DynamicResource Window_BackgroundImage_Load}"
+                                    Command="{Binding WindowSetting.BackgroundImageSetCommand}"
+                                    />
+                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                    Content="{DynamicResource Window_BackgroundImage_Clear}"
+                                    Command="{Binding WindowSetting.BackgroundImageClearCommand}"
+                                    />
+                        </StackPanel>
 
                         <CheckBox Style="{StaticResource SmallMarginCheckBox}"
                                   Content="{DynamicResource Window_Draggable}"
@@ -318,31 +334,37 @@
                             </StackPanel>
                         </Button>
 
-                        <TextBlock Text="{DynamicResource Motion_Eye_LookAtPoint}"
-                                    Margin="10,13,5,5"
-                                    />
-
-                        <Grid Margin="10,3">
+                        <Grid Margin="10,5">
                             <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <CheckBox Grid.Column="0"
-                                        HorizontalAlignment="Left"
-                                        Margin="5,0"
-                                        IsChecked="{Binding MotionSetting.UseLookAtPointMousePointer.Value}"
-                                        Content="{DynamicResource Motion_Eye_LookAtPoint_MousePointer}"/>
+
+                            <TextBlock Grid.Column="0"
+                                       Margin="10,5"
+                                       Text="{DynamicResource Motion_Eye_LookAtPoint_Streaming}"
+                                    />
+
                             <CheckBox Grid.Column="1"
-                                        HorizontalAlignment="Left"
-                                        Margin="5,0"
-                                        IsChecked="{Binding MotionSetting.UseLookAtPointMainCamera.Value}"
-                                        Content="{DynamicResource Motion_Eye_LookAtPoint_MainCamera}"/>
+                                      HorizontalAlignment="Left"
+                                      Margin="3,0"
+                                      Padding="0"
+                                      IsChecked="{Binding MotionSetting.UseLookAtPointMousePointer.Value}"
+                                      Content="{DynamicResource Motion_Eye_LookAtPoint_MousePointer}"/>
                             <CheckBox Grid.Column="2"
-                                        HorizontalAlignment="Left"
-                                        Margin="5,0"
-                                        IsChecked="{Binding MotionSetting.UseLookAtPointNone.Value}"
-                                        Content="{DynamicResource Motion_Eye_LookAtPoint_None}"/>
+                                      HorizontalAlignment="Left"
+                                      Margin="3,0"
+                                      Padding="0"
+                                      IsChecked="{Binding MotionSetting.UseLookAtPointMainCamera.Value}"
+                                      Content="{DynamicResource Motion_Eye_LookAtPoint_MainCamera}"/>
+                            <CheckBox Grid.Column="3"
+                                      HorizontalAlignment="Left"
+                                      Margin="3,0"
+                                      Padding="0"
+                                      IsChecked="{Binding MotionSetting.UseLookAtPointNone.Value}"
+                                      Content="{DynamicResource Motion_Eye_LookAtPoint_None}"/>
                         </Grid>
                     </StackPanel>
                 </Border>

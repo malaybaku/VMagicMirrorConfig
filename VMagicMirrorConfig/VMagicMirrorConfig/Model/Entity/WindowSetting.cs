@@ -16,6 +16,9 @@
         public bool WindowDraggable { get; set; } = true;
         public bool TopMost { get; set; } = true;
 
+        /// <summary> ここVRMのパスと同じくローカルPCの情報を思いっきり掴むので注意。 </summary>
+        public string BackgroundImagePath { get; set; } = "";
+
         public int WholeWindowTransparencyLevel { get; set; } = 2;
         public int AlphaValueOnTransparent { get; set; } = 128;
 
