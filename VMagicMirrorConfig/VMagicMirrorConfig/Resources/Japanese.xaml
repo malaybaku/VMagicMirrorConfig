@@ -394,6 +394,19 @@
     <sys:String x:Key="WordToMotion_DeviceItem_KeyboardTenKey">キーボード (数字の0-8)</sys:String>
     <sys:String x:Key="WordToMotion_DeviceItem_MidiController">MIDIコントローラ</sys:String>
 
+    <!-- Automation -->
+    <sys:String x:Key="AutomationSupport_Header">オートメーション</sys:String>
+    <sys:String x:Key="AutomationSupport_MainSection">設定</sys:String>
+    <sys:String x:Key="AutomationSupport_Instruction" xml:space="preserve">注意:
+この機能ではローカルファイルのVRMロード時にライセンスの確認をスキップします。
+あらかじめライセンスを確認したモデルのみを使用して下さい。
+
+また、VRoid Hubのモデルは本機能では使用できません。</sys:String>
+    <sys:String x:Key="AutomationSupport_Enable">オートメーションを有効化</sys:String>
+    <sys:String x:Key="AutomationSupport_PortNumber">割り当てポート番号:</sys:String>
+    <sys:String x:Key="AutomationSupport_SeeMore">使い方をチェック (Webページへ移動)</sys:String>
+
+
     <!-- Dialog Messages -->
     <sys:String x:Key="DialogTitle_LoadLocalVrm">VRMの読み込み</sys:String>
     <sys:String x:Key="DialogMessage_LoadLocalVrm">ビューアー画面のライセンスを確認してください。読み込みますか？</sys:String>

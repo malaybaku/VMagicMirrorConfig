@@ -389,6 +389,18 @@ Please test by typing "joy".</sys:String>
     <sys:String x:Key="WordToMotion_DeviceItem_KeyboardTenKey">Keyboard (num 0-8)</sys:String>
     <sys:String x:Key="WordToMotion_DeviceItem_MidiController">MIDI Controller</sys:String>
     
+    <!-- Automation Support -->
+    <sys:String x:Key="AutomationSupport_Header">Automation</sys:String>
+    <sys:String x:Key="AutomationSupport_MainSection">Settings</sys:String>
+    <sys:String x:Key="AutomationSupport_Instruction" xml:space="preserve">WARNING:
+This feature skips license check for local file VRM loading.
+You must confirm the models' license beforehand.
+
+VRoid Hub model is not supported.</sys:String>
+    <sys:String x:Key="AutomationSupport_Enable">Enable Automation Support</sys:String>
+    <sys:String x:Key="AutomationSupport_PortNumber">Port Number:</sys:String>
+    <sys:String x:Key="AutomationSupport_SeeMore">See How to Use (Open Web Page)</sys:String>
+
     <!-- Dialog Messages -->
     <sys:String x:Key="DialogTitle_LoadLocalVrm">Load VRM</sys:String>
     <sys:String x:Key="DialogMessage_LoadLocalVrm">Please confirm the license in viewer window. Do you load the character?</sys:String>
