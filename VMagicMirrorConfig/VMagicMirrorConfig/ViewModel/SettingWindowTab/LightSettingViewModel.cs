@@ -14,7 +14,6 @@ namespace Baku.VMagicMirrorConfig
         internal LightSettingViewModel(LightSettingSync model, IMessageSender sender) : base(sender)
         {
             _model = model;
-            ImageQualityNames = new ReadOnlyObservableCollection<string>(_imageQualityNames);
 
             _lightColor = Color.FromRgb((byte)model.LightR.Value, (byte)model.LightG.Value, (byte)model.LightB.Value);
             model.LightR.PropertyChanged += (_, __) => UpdateLightColor();
@@ -47,45 +46,11 @@ namespace Baku.VMagicMirrorConfig
 
         private readonly LightSettingSync _model;
 
-        public async Task InitializeQualitySelectionsAsync()
-        {
-            string res = await SendQueryAsync(MessageFactory.Instance.GetQualitySettingsInfo());
-            var info = ImageQualityInfo.ParseFromJson(res);
-            if (info.ImageQualityNames != null &&
-                info.CurrentQualityIndex >= 0 &&
-                info.CurrentQualityIndex < info.ImageQualityNames.Length
-                )
-            {
-                foreach (var name in info.ImageQualityNames)
-                {
-                    _imageQualityNames.Add(name);
-                }
-                ImageQuality = info.ImageQualityNames[info.CurrentQualityIndex];
-            }
-        }
+        public async Task InitializeQualitySelectionsAsync() 
+            => await _model.InitializeQualitySelectionsAsync();
 
-        #region ImageQuality
-
-        //NOTE: 画質設定はもともとUnityが持っており、かつShift+ダブルクリックの起動によって書き換えられる可能性があるので、
-        //WPF側からは揮発性データのように扱う
-
-        private string _imageQuality = "";
-        public string ImageQuality
-        {
-            get => _imageQuality;
-            set
-            {
-                if (SetValue(ref _imageQuality, value))
-                {
-                    SendMessage(MessageFactory.Instance.SetImageQuality(ImageQuality));
-                }
-            }
-        }
-
-        private readonly ObservableCollection<string> _imageQualityNames = new ObservableCollection<string>();
-        public ReadOnlyObservableCollection<string> ImageQualityNames { get; }
-
-        #endregion
+        public RProperty<string> ImageQuality => _model.ImageQuality;
+        public ReadOnlyObservableCollection<string> ImageQualityNames => _model.ImageQualityNames;
 
         #region Light
 
@@ -175,19 +140,9 @@ namespace Baku.VMagicMirrorConfig
 
         private void ResetImageQuality()
         {
-            SettingResetUtils.ResetSingleCategoryAsync(async () =>
-            {
-                var appliedImageQualityName = await _model.ResetImageQualityAsync();
-                if (ImageQualityNames.Contains(appliedImageQualityName))
-                {
-                    ImageQuality = appliedImageQualityName;
-                }
-                else
-                {
-                    LogOutput.Instance.Write($"Invalid image quality `{appliedImageQualityName}` applied");
-                }
-            });
-
+            SettingResetUtils.ResetSingleCategoryAsync(
+                async () => await _model.ResetImageQualityAsync()
+                );
         }
     }
 }

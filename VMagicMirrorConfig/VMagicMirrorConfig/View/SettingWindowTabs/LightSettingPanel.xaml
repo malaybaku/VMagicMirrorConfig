@@ -58,7 +58,7 @@
                         <ComboBox Grid.Column="1"
                                   Margin="5,0"
                                   ItemsSource="{Binding ImageQualityNames}"
-                                  SelectedItem="{Binding ImageQuality, Converter={StaticResource WhiteSpaceStringToNullConverter}}"
+                                  SelectedItem="{Binding ImageQuality.Value, Converter={StaticResource WhiteSpaceStringToNullConverter}}"
                                   md:HintAssist.Hint="Quality"
                                   />
                     </Grid>

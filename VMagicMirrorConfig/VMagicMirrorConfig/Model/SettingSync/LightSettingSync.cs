@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
 namespace Baku.VMagicMirrorConfig
@@ -15,6 +16,9 @@ namespace Baku.VMagicMirrorConfig
 
             //モデルのプロパティ変更=Unityへの変更通知としてバインド。
             //エフェクト関係は設定項目がシンプルなため、例外はほぼ無い(色関係のメッセージ送信がちょっと特殊なくらい)
+
+            ImageQualityNames = new ReadOnlyObservableCollection<string>(_imageQualityNames);
+            ImageQuality = new RProperty<string>("", s => SendMessage(factory.SetImageQuality(s)));
 
             LightIntensity = new RProperty<int>(s.LightIntensity, i => SendMessage(factory.LightIntensity(i)));
             LightYaw = new RProperty<int>(s.LightYaw, i => SendMessage(factory.LightYaw(i)));
@@ -45,6 +49,34 @@ namespace Baku.VMagicMirrorConfig
             WindInterval = new RProperty<int>(s.WindInterval, i => SendMessage(factory.WindInterval(i)));
             WindYaw = new RProperty<int>(s.WindYaw, i => SendMessage(factory.WindYaw(i)));
         }
+
+        #region Image Quality
+
+        //NOTE: 画質設定はもともとUnityが持っており、かつShift+ダブルクリックの起動によって書き換えられる可能性があるので、
+        //WPF側からは揮発性データのように扱う 
+        public RProperty<string> ImageQuality { get; }
+
+        private readonly ObservableCollection<string> _imageQualityNames = new ObservableCollection<string>();
+        public ReadOnlyObservableCollection<string> ImageQualityNames { get; }
+
+        public async Task InitializeQualitySelectionsAsync()
+        {
+            string res = await SendQueryAsync(MessageFactory.Instance.GetQualitySettingsInfo());
+            var info = ImageQualityInfo.ParseFromJson(res);
+            if (info.ImageQualityNames != null &&
+                info.CurrentQualityIndex >= 0 &&
+                info.CurrentQualityIndex < info.ImageQualityNames.Length
+                )
+            {
+                foreach (var name in info.ImageQualityNames)
+                {
+                    _imageQualityNames.Add(name);
+                }
+                ImageQuality.Value = info.ImageQualityNames[info.CurrentQualityIndex];
+            }
+        }
+
+        #endregion
 
         #region Light
 
@@ -91,11 +123,21 @@ namespace Baku.VMagicMirrorConfig
         #region Reset API
 
         /// <summary>
-        /// Unity側で画質をデフォルトにリセットさせたのち、そのリセット後の画質の名称を取得する
+        /// Unity側で画質をデフォルトにリセットさせたのち、そのリセット後の画質の名称を適用します。
         /// </summary>
         /// <returns></returns>
-        public Task<string> ResetImageQualityAsync()
-            => SendQueryAsync(MessageFactory.Instance.ApplyDefaultImageQuality());
+        public async Task ResetImageQualityAsync()
+        {
+            var qualityName = await SendQueryAsync(MessageFactory.Instance.ApplyDefaultImageQuality());
+            if (ImageQualityNames.Contains(qualityName))
+            {
+                ImageQuality.Value = qualityName;
+            }
+            else
+            {
+                LogOutput.Instance.Write($"Invalid image quality `{qualityName}` applied");
+            }
+        }
 
         public void ResetLightSetting()
         {
@@ -143,6 +185,9 @@ namespace Baku.VMagicMirrorConfig
             ResetShadowSetting();
             ResetBloomSetting();
             ResetWindSetting();
+           
+            //NOTE: ここだけ非同期なのが何だかな～という感じなんだけど、実害が無いはずなのでOKとします
+            Task.Run(async () => await ResetImageQualityAsync());
         }
 
         #endregion
