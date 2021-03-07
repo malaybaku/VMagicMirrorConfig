@@ -29,7 +29,6 @@ namespace Baku.VMagicMirrorConfig
             {
                 LanguageSelector.Instance.LanguageName = s;
             });
-
         }
 
         private readonly IMessageSender _sender;
@@ -37,8 +36,8 @@ namespace Baku.VMagicMirrorConfig
         private readonly ObservableCollection<string> _availableLanguageNames
             = new ObservableCollection<string>()
         {
-            "Japanese",
-            "English",
+            LanguageSelector.LangNameJapanese,
+            LanguageSelector.LangNameEnglish,
         };
         public ReadOnlyObservableCollection<string> AvailableLanguageNames { get; }
 
@@ -66,6 +65,14 @@ namespace Baku.VMagicMirrorConfig
 
         public ExternalTrackerSettingSync ExternalTracker { get; }
 
+        public void InitializeAvailableLanguage(string[] languageNames)
+        {
+            foreach(var name in languageNames)
+            {
+                _availableLanguageNames.Add(name);
+            }
+        }
+
         /// <summary>
         /// 自動保存される設定ファイルに言語設定が保存されていなかった場合、
         /// 現在のカルチャに応じた初期言語を設定します。
@@ -76,8 +83,8 @@ namespace Baku.VMagicMirrorConfig
             {
                 LanguageName.Value =
                     (CultureInfo.CurrentCulture.Name == "ja-JP") ?
-                    "Japanese" :
-                    "English";
+                    LanguageSelector.LangNameJapanese :
+                    LanguageSelector.LangNameEnglish;
             }
         }
 

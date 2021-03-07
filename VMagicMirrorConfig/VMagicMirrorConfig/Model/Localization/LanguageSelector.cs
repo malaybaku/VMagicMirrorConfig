@@ -1,16 +1,22 @@
 ﻿using System;
 using System.Globalization;
+using System.Linq;
 using System.Windows;
 
 namespace Baku.VMagicMirrorConfig
 {
     class LanguageSelector : NotifiableBase
     {
+        //NOTE: 外部ファイルで他の名前も指定できることに注意
+        public const string LangNameJapanese = "Japanese";
+        public const string LangNameEnglish = "English";
+
         private static LanguageSelector? _instance;
         public static LanguageSelector Instance => _instance ??= new LanguageSelector();
         private LanguageSelector() { }
 
         private IMessageSender? _sender = null;
+        private readonly LocalizationDictionaryLoader _dictionaryLoader = new LocalizationDictionaryLoader();
 
         /// <summary>
         /// <see cref="LanguageName"/>が変化すると発火します。
@@ -20,15 +26,13 @@ namespace Baku.VMagicMirrorConfig
         /// </remarks>
         public event Action? LanguageChanged;
 
-        private string _languageName = nameof(Languages.Japanese);
+        private string _languageName = nameof(LangNameJapanese);
         public string LanguageName
         {
             get => _languageName;
             set
             {
-                if (_languageName != value && 
-                    (value == nameof(Languages.Japanese) || value == nameof(Languages.English))
-                    )
+                if (_languageName != value && IsValidLanguageName(value))
                 {
                     _languageName = value;
                     SetLanguage(LanguageName);
@@ -39,9 +43,17 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
+        public string[] GetAdditionalSupportedLanguageNames() => _dictionaryLoader
+            .GetLoadedDictionaries()
+            .Keys
+            //NOTE: 順番が不変じゃなくなってると嫌なので、名前順で不変にしておく
+            .OrderBy(v => v)
+            .ToArray();
+
         public void Initialize(IMessageSender sender)
         {
             _sender = sender;
+            _dictionaryLoader.LoadFromDefaultLocation();
         }
 
         public void InitializePreferredLanguage(string preferredLanguageName)
@@ -61,28 +73,30 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        public static Languages StringToLanguage(string languageName) => languageName switch
+        private bool IsValidLanguageName(string languageName)
         {
-            "Japanese" => Languages.Japanese,
-            _ => Languages.English,
-        };
+            return
+                languageName == LangNameJapanese ||
+                languageName == LangNameEnglish ||
+                _dictionaryLoader.GetLoadedDictionaries().ContainsKey(languageName);
+        }
 
         private void SetLanguage(string languageName)
         {
-            Application.Current.Resources.MergedDictionaries[0] = new ResourceDictionary()
-            {
-                Source = new Uri(
+            //NOTE: 日本語と英語についてはexe内部から読み込む。わざわざ外に配置して壊すのも嫌なので
+            var dict =
+                (languageName == LangNameJapanese || languageName == LangNameEnglish)
+                ? new ResourceDictionary()
+                {
+                    Source = new Uri(
                   $"/VMagicMirrorConfig;component/Resources/{languageName}.xaml",
                   UriKind.Relative
                   ),
-            };
+                }
+                : _dictionaryLoader.GetLoadedDictionaries()[languageName];
+
+            Application.Current.Resources.MergedDictionaries[0] = dict;
             _sender?.SendMessage(MessageFactory.Instance.Language(languageName));
         }
-    }
-
-    enum Languages
-    {
-        Japanese,
-        English
     }
 }

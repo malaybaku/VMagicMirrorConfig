@@ -326,8 +326,13 @@ namespace Baku.VMagicMirrorConfig
 
             MessageIo.Start();
             LanguageSelector.Instance.Initialize(MessageSender);
+            Model.InitializeAvailableLanguage(
+                LanguageSelector.Instance.GetAdditionalSupportedLanguageNames()
+                );
+
             SettingFileIo.LoadSetting(SpecialFilePath.AutoSaveSettingFilePath, true);
-            //NOTE: 初回起動時だけカルチャベースで言語を設定するための処理がコレです
+
+            //NOTE: 初回起動時だけカルチャベースで言語を設定するための処理がコレ
             Model.InitializeLanguageIfNeeded();
 
             await MotionSetting.InitializeDeviceNamesAsync();

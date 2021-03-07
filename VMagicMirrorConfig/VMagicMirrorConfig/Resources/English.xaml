@@ -45,12 +45,9 @@
     <sys:String x:Key="Home_SettingManagement">Setting Management</sys:String>
     <sys:String x:Key="Home_Reset">Reset</sys:String>
     <sys:String x:Key="Home_LoadPrevSetting">Load from Prev ver.</sys:String>
-
-    <sys:String x:Key="Home_OssLicense">OSS License</sys:String>
     
     <sys:String x:Key="Home_OtherSettings_Header">Other Preferences</sys:String>
     <sys:String x:Key="Home_ActivateOnStartupHeader">Start on Windows startup</sys:String>
-    <sys:String x:Key="Home_ActivateOnStartup_OtherVerRegistered">*Other version VMagicMirror is already registered. If you check it, setting will be overwritten to start this version.</sys:String>
     
     <!-- Streaming -->
     <sys:String x:Key="Streaming_Window">Window</sys:String>
@@ -58,10 +55,11 @@
     <sys:String x:Key="Streaming_Motion">Motion</sys:String>       
     <sys:String x:Key="Streaming_WordToMotion">Word to Motion</sys:String>
     <sys:String x:Key="Streaming_View">View</sys:String>
+    
     <sys:String x:Key="Streaming_DeviceLayout">Device Layout</sys:String>
     <sys:String x:Key="Streaming_DeviceLayout_Reset">Reset</sys:String>
+
     <sys:String x:Key="Streaming_Screenshot">Screenshot</sys:String>
-    <sys:String x:Key="Streaming_Screenshot_Take">Take</sys:String>
     <sys:String x:Key="Streaming_Screenshot_OpenSaveFolder">Saved Folder...</sys:String>
     
      <!-- Ex.Tracker -->
@@ -87,7 +85,6 @@ During this mode, following features are disabled.
     <sys:String x:Key="ExTracker_Source_iFacialMocap">iFacialMocap</sys:String>
     <sys:String x:Key="ExTracker_iFM_IpHint">iPhone IP Address...</sys:String>
     <sys:String x:Key="ExTracker_Source_HowToCollaborate">*See how to connect (open web page)</sys:String>
-    <sys:String x:Key="ExTracker_Source_RefreshReceiverSetting">Check network setting again</sys:String>
 
     <sys:String x:Key="ExTracker_iFM_HasTrouble_Header">Please check connected app setting</sys:String>
     <sys:String x:Key="ExTracker_iFM_HasTrouble_OpenUrl">Open Troubleshoot web page</sys:String>    
@@ -123,12 +120,6 @@ Check "Keep LipSync" to make the lipsync continue.</sys:String>
     <sys:String x:Key="Window_BackgroundImage_Load">Load...</sys:String>
     <sys:String x:Key="Window_BackgroundImage_Clear">Clear</sys:String>
 
-    <sys:String x:Key="Window_EnableInitialPlacement">Move window to specific position on startup</sys:String>
-    <sys:String x:Key="Window_InitialPositionX">X(Left = 0)</sys:String>
-    <sys:String x:Key="Window_InitialPositionY">Y(Top = 0)</sys:String>
-    <sys:String x:Key="Window_FetchUnityWindowPos">Check current window position</sys:String>
-    <sys:String x:Key="Window_MoveWindow">Move to specified position</sys:String>
-
     <sys:String x:Key="Window_TransparencySupport">Character Transparency Support</sys:String>
     <sys:String x:Key="Window_TransparencySupport_Level">Transparency Level</sys:String>
     <sys:String x:Key="Window_TransparencySupport_Alpha">Alpha when Transparent(32-255)</sys:String>
@@ -160,14 +151,11 @@ Check "Keep LipSync" to make the lipsync continue.</sys:String>
     <sys:String x:Key="Motion_Arm_ElbowCloseStrength">Strength to keep upper arm to body [%]</sys:String>
     <sys:String x:Key="Motion_Arm_EnablePresenterMotion">Presentation-like hand</sys:String>
     <sys:String x:Key="Motion_Arm_ShowPresentationPointer">Show Pointer Support</sys:String>
-    <sys:String x:Key="Motion_Arm_PresenterArmMotionScale">Presentation-like motion scale [%]</sys:String>
     <sys:String x:Key="Motion_Arm_PresenterArmRadiusMin">Arm position radius min [cm]</sys:String>
 
     <!-- Motion : Hand -->
     <sys:String x:Key="Motion_Hand">Hand</sys:String>
-    <sys:String x:Key="Motion_Hand_CharacterHandMotion">Hand Motion</sys:String>
     <sys:String x:Key="Motion_Hand_WristToHandTip">Wrist-Hand tip length [cm]</sys:String>
-    <sys:String x:Key="Motion_Hand_WristToPalm">Wrist-Palm length [cm]</sys:String>
     <sys:String x:Key="Motion_Hand_HandYOffsetBasic">Hand height adjust [cm]</sys:String>
     <sys:String x:Key="Motion_Hand_HandYOffsetAfterKeyDown">(Press key)Hand height adjust [cm]</sys:String>
 
@@ -179,7 +167,16 @@ Check "Keep LipSync" to make the lipsync continue.</sys:String>
     
     <!-- Face -->
     <sys:String x:Key="Motion_Face">Face</sys:String>
+
+    <!-- Face : Basic -->
     <sys:String x:Key="Motion_Face_Basics">Basic Settings</sys:String>
+    
+    <sys:String x:Key="Motion_Mouth">Mouth</sys:String>
+    <sys:String x:Key="Motion_Mouth_EnableLipSync">LipSync</sys:String>
+    <sys:String x:Key="Motion_Mouth_MicrophoneName">Microphone</sys:String>    
+    <sys:String x:Key="Motion_Mouth_Microphone_Sensitivity">Sensitivity [dB]</sys:String>
+    <sys:String x:Key="Motion_Mouth_Microphone_Visualize">Show Volume</sys:String>
+    
     <sys:String x:Key="Motion_Face_EnableFaceTracking">Track Face</sys:String>
     <sys:String x:Key="Motion_Face_CameraName">Camera</sys:String>    
     <sys:String x:Key="Motion_Face_Calibration">Calibrate position</sys:String>    
@@ -215,13 +212,6 @@ If the face tracking works correctly, please ignore this warning.
     <sys:String x:Key="Motion_Eye_ApproxRotRangePrefix">(Eye bones will move about: </sys:String>
     <sys:String x:Key="Motion_Eye_ApproxRotRangeSuffix"> [deg])</sys:String>
     
-    <!-- Face : Mouth -->
-    <sys:String x:Key="Motion_Mouth">Mouth</sys:String>
-    <sys:String x:Key="Motion_Mouth_EnableLipSync">LipSync</sys:String>
-    <sys:String x:Key="Motion_Mouth_MicrophoneName">Microphone</sys:String>    
-    <sys:String x:Key="Motion_Mouth_Microphone_Sensitivity">Sensitivity [dB]</sys:String>
-    <sys:String x:Key="Motion_Mouth_Microphone_Visualize">Show Volume</sys:String>
-
     <!-- Face : BlendShape -->
     <sys:String x:Key="Motion_Face_BlendShape">BlendShape</sys:String>
     <sys:String x:Key="Motion_Face_NeutralClip">Default Face BlendShape</sys:String>    
@@ -245,7 +235,6 @@ camera movements following:
 - Mid click + drag: translate
 - Mouse wheel: forward/backward</sys:String>
     <sys:String x:Key="Layout_EnableFreeCameraMode">Free Camera Mode</sys:String>
-    <sys:String x:Key="Layout_CurrentCameraPosition">Camera Position (x, y, z, rx, ry, rz)</sys:String>
     <sys:String x:Key="Layout_Camera_ResetPosition">Reset Position</sys:String>
     <sys:String x:Key="Layout_Camera_Fov">FOV [deg]</sys:String>
     <sys:String x:Key="Layout_Camera_QuickSave">Quick Save</sys:String>
@@ -273,10 +262,7 @@ camera movements following:
     
     <!-- Devices -->
     <sys:String x:Key="Devices_Header">Devices</sys:String>
-    
-    <!-- Devices: Keyboard and mouse -->
-    <sys:String x:Key="Devices_Keyboard_Mouse_Header">Keyboard / Mouse</sys:String>
-    
+        
     <!-- Devices: MIDI -->
     <sys:String x:Key="Devices_Midi_Header">MIDI</sys:String>
     <sys:String x:Key="Devices_Midi_ReadEnable">Use MIDI Controller for VMagicMirror</sys:String>
