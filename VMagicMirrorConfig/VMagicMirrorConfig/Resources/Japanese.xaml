@@ -46,11 +46,8 @@
     <sys:String x:Key="Home_Reset">リセット</sys:String>
     <sys:String x:Key="Home_LoadPrevSetting">旧バージョンの設定をロード</sys:String>
         
-    <sys:String x:Key="Home_OssLicense">OSS License</sys:String>
-
     <sys:String x:Key="Home_OtherSettings_Header">その他の設定</sys:String>
     <sys:String x:Key="Home_ActivateOnStartupHeader">Windowsの起動後にスタート</sys:String>
-    <sys:String x:Key="Home_ActivateOnStartup_OtherVerRegistered">※他バージョンのVMagicMirrorが自動で起動するように登録されています。チェックをオンにすると、このバージョンを起動するよう設定を上書きします。</sys:String>
     
     <!-- Streaming -->
     <sys:String x:Key="Streaming_Window">ウィンドウ</sys:String>
@@ -63,7 +60,6 @@
     <sys:String x:Key="Streaming_DeviceLayout_Reset">リセット</sys:String>
 
     <sys:String x:Key="Streaming_Screenshot">スクリーンショット</sys:String>
-    <sys:String x:Key="Streaming_Screenshot_Take">撮影</sys:String>
     <sys:String x:Key="Streaming_Screenshot_OpenSaveFolder">保存フォルダ...</sys:String>
     
     <!-- Ex.Tracker -->
@@ -89,7 +85,6 @@
     <sys:String x:Key="ExTracker_Source_iFacialMocap">iFacialMocap</sys:String>
     <sys:String x:Key="ExTracker_iFM_IpHint">iPhoneのIP Address...</sys:String>
     <sys:String x:Key="ExTracker_Source_HowToCollaborate">※アプリとの連携方法をチェック (Webページを開きます)</sys:String>
-    <sys:String x:Key="ExTracker_Source_RefreshReceiverSetting">ネットワーク環境を再チェック</sys:String>
 
     <sys:String x:Key="ExTracker_iFM_HasTrouble_Header">連携先アプリの設定を確認して下さい</sys:String>
     <sys:String x:Key="ExTracker_iFM_HasTrouble_OpenUrl">トラブルシューティングを開く(webページへ)</sys:String>
@@ -126,12 +121,6 @@
     <sys:String x:Key="Window_BackgroundImage_Load">ロード...</sys:String>
     <sys:String x:Key="Window_BackgroundImage_Clear">クリア</sys:String>
     
-    <sys:String x:Key="Window_EnableInitialPlacement">起動時に特定の位置へウィンドウを動かす</sys:String>
-    <sys:String x:Key="Window_InitialPositionX">X(画面左 = 0)</sys:String>
-    <sys:String x:Key="Window_InitialPositionY">Y(画面上 = 0)</sys:String>
-    <sys:String x:Key="Window_FetchUnityWindowPos">いまのウィンドウ位置を記憶</sys:String>
-    <sys:String x:Key="Window_MoveWindow">指定した位置へ移動</sys:String>
-    
     <sys:String x:Key="Window_TransparencySupport">キャラ透明化の詳細</sys:String>
     <sys:String x:Key="Window_TransparencySupport_Level">キャラの透明化レベル</sys:String>
     <sys:String x:Key="Window_TransparencySupport_Alpha">透明になるときの透明度(32-255)</sys:String>
@@ -163,14 +152,11 @@
     <sys:String x:Key="Motion_Arm_ElbowCloseStrength">脇をしめる強さ [%]</sys:String>
     <sys:String x:Key="Motion_Arm_EnablePresenterMotion">プレゼン風に右手を動かす</sys:String>
     <sys:String x:Key="Motion_Arm_ShowPresentationPointer">補助ポインターを表示</sys:String>    
-    <sys:String x:Key="Motion_Arm_PresenterArmMotionScale">プレゼン動作サイズ[%]</sys:String>
     <sys:String x:Key="Motion_Arm_PresenterArmRadiusMin">プレゼン動作の最小半径 [cm]</sys:String>    
 
     <!-- Motion : Hand -->
     <sys:String x:Key="Motion_Hand">手・指</sys:String>
-    <sys:String x:Key="Motion_Hand_CharacterHandMotion">手の動き</sys:String>
     <sys:String x:Key="Motion_Hand_WristToHandTip">手首から指先までの長さ[cm]</sys:String>
-    <sys:String x:Key="Motion_Hand_WristToPalm">手首から手のひらまでの長さ[cm]</sys:String>
     <sys:String x:Key="Motion_Hand_HandYOffsetBasic">手の高さ調整[cm]</sys:String>
     <sys:String x:Key="Motion_Hand_HandYOffsetAfterKeyDown">(打鍵後)手の高さ調整[cm]</sys:String>
     
@@ -183,7 +169,16 @@
     <!-- NOTE: もともとMotionタブだったのを分断してる関係で命名ルールがちょっとアレです -->
     <!-- Face Motion -->
     <sys:String x:Key="Motion_Face">顔・表情</sys:String>
+
+    <!-- Face : Basic -->
     <sys:String x:Key="Motion_Face_Basics">基本の設定</sys:String>
+    
+    <sys:String x:Key="Motion_Mouth">口・リップシンク</sys:String>
+    <sys:String x:Key="Motion_Mouth_EnableLipSync">リップシンク</sys:String>
+    <sys:String x:Key="Motion_Mouth_MicrophoneName">マイク</sys:String>    
+    <sys:String x:Key="Motion_Mouth_Microphone_Sensitivity">マイク感度 [dB]</sys:String>
+    <sys:String x:Key="Motion_Mouth_Microphone_Visualize">音量をチェック</sys:String>
+
     <sys:String x:Key="Motion_Face_EnableFaceTracking">顔をトラッキング</sys:String>
     <sys:String x:Key="Motion_Face_CameraName">カメラ</sys:String>    
     <sys:String x:Key="Motion_Face_Calibration">姿勢・表情を補正</sys:String>    
@@ -218,12 +213,6 @@
     <sys:String x:Key="Motion_Eye_ApproxRotRangePrefix">(参考)目ボーンのおおよその可動範囲: </sys:String>
     <sys:String x:Key="Motion_Eye_ApproxRotRangeSuffix"> [deg]</sys:String>
     
-    <!-- Face : Mouth -->
-    <sys:String x:Key="Motion_Mouth">口・リップシンク</sys:String>
-    <sys:String x:Key="Motion_Mouth_EnableLipSync">リップシンク</sys:String>
-    <sys:String x:Key="Motion_Mouth_MicrophoneName">マイク</sys:String>    
-    <sys:String x:Key="Motion_Mouth_Microphone_Sensitivity">マイク感度 [dB]</sys:String>
-    <sys:String x:Key="Motion_Mouth_Microphone_Visualize">音量をチェック</sys:String>
     
     <!-- Face : BlendShape -->
     <sys:String x:Key="Motion_Face_BlendShape">ブレンドシェイプ</sys:String>
@@ -248,7 +237,6 @@
 - 中クリック + ドラッグ: 並行移動
 - マウスホイール: 前後に移動</sys:String>    
     <sys:String x:Key="Layout_EnableFreeCameraMode">フリーカメラモード</sys:String>
-    <sys:String x:Key="Layout_CurrentCameraPosition">カメラの位置(x, y, z, rx, ry, rz)</sys:String>
     <sys:String x:Key="Layout_Camera_ResetPosition">位置をリセット</sys:String>
     <sys:String x:Key="Layout_Camera_Fov">視野角 [deg]</sys:String>
     <sys:String x:Key="Layout_Camera_QuickSave">クイックセーブ</sys:String>
@@ -277,10 +265,7 @@
 
     <!-- Devices -->
     <sys:String x:Key="Devices_Header">デバイス接続</sys:String>
-    
-    <!-- Devices: Keyboard and mouse -->
-    <sys:String x:Key="Devices_Keyboard_Mouse_Header">キーボード・マウス</sys:String>
-    
+        
     <!-- Devices: MIDI -->
     <sys:String x:Key="Devices_Midi_Header">MIDI</sys:String>
     <sys:String x:Key="Devices_Midi_ReadEnable">MIDIコントローラ入力をVMagicMirrorで取得する</sys:String>
