@@ -20,7 +20,7 @@
     WindowTitleBrush="{StaticResource PrimaryHueMidBrush}"
     NonActiveWindowTitleBrush="{StaticResource PrimaryHueMidBrush}"
     Background="{StaticResource TabAreaBackground}"
-    d:DataContext="{x:Type vmm:MainWindowViewModel}"
+    d:DataContext="{d:DesignInstance Type=vmm:MainWindowViewModel}"
     >
     <Window.Resources>
         <vmm:TabSelectionToForegroundConverter x:Key="SelectionToForeground"/>
@@ -201,7 +201,7 @@
                                         ElementName=MainTabControl,
                                         Converter={StaticResource SelectionToForeground},
                                         ConverterParameter=6}">
-                        
+
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -230,6 +230,30 @@
             <vmm:WordToMotionSettingPanel 
                 Background="White"                     
                 DataContext="{Binding WordToMotionSetting}"
+                />
+        </TabItem>
+        <TabItem>
+            <TabItem.Header>
+                <vmm:TabHeaderIconText 
+                    Text="{DynamicResource TopBar_Setting_FileIo}"                        
+                    IconKind="ContentSave"
+                    IconWidth="17"
+                    IconHeight="17"
+                    TextMargin="0,0,0,0"
+                    TranslateX="-4"
+                    Background="{Binding SelectedIndex,
+                                        ElementName=MainTabControl,
+                                        Converter={StaticResource SelectionToBackground},
+                                        ConverterParameter=7}"
+                    Foreground="{Binding SelectedIndex,
+                                        ElementName=MainTabControl,
+                                        Converter={StaticResource SelectionToForeground},
+                                        ConverterParameter=7}"                        
+                    />
+            </TabItem.Header>
+            <vmm:SettingIoPanel
+                Background="White"                     
+                DataContext="{Binding SettingIo}"
                 />
         </TabItem>
     </dragablz:TabablzControl>

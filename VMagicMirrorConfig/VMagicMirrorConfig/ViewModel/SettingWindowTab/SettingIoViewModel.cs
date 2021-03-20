@@ -49,26 +49,54 @@
         public RProperty<bool> Save2Exist { get; } = new RProperty<bool>(false);
         public RProperty<bool> Save3Exist { get; } = new RProperty<bool>(false);
 
-        private void SaveCurrentSetting(string? s)
+        private async void SaveCurrentSetting(string? s)
         {
-            if (int.TryParse(s, out var index) && index > 0 && index <= 3)
+            if (!(int.TryParse(s, out var index) && index > 0 && index <= 3))
             {
-                _saveFileManager.SaveCurrentSetting(index);
-                //面倒なのでインデックスは見ずに全部リフレッシュしておく
-                Save1Exist.Value = _saveFileManager.CheckFileExist(1);
-                Save2Exist.Value = _saveFileManager.CheckFileExist(2);
-                Save3Exist.Value = _saveFileManager.CheckFileExist(3);
+                return;
             }
+            
+            //上書き保存があり得るので確認を挟む。
+            //初セーブの場合は上書きにならないが、「次から上書きになるで」の意味で出しておく
+            var indication = MessageIndication.ConfirmSettingFileSave();
+            var result = await MessageBoxWrapper.Instance.ShowAsync(
+                indication.Title, 
+                string.Format(indication.Content, index), 
+                MessageBoxWrapper.MessageBoxStyle.OKCancel
+                );
+            if (!result)
+            {
+                return;
+            }
+
+            _saveFileManager.SaveCurrentSetting(index);
+            //面倒なのでインデックスは見ずに全部リフレッシュしておく
+            Save1Exist.Value = _saveFileManager.CheckFileExist(1);
+            Save2Exist.Value = _saveFileManager.CheckFileExist(2);
+            Save3Exist.Value = _saveFileManager.CheckFileExist(3);
         }
 
-        private void LoadSetting(string? s)
+        private async void LoadSetting(string? s)
         {
-            if (int.TryParse(s, out var index) && index > 0 && index <= 3)
+            if (!(int.TryParse(s, out var index) && index > 0 && index <= 3))
             {
-                _saveFileManager.LoadSetting(
-                    index, LoadCharacterWhenSettingLoaded.Value, LoadNonCharacterWhenSettingLoaded.Value
-                    );
+                return;
             }
+
+            var indication = MessageIndication.ConfirmSettingFileLoad();
+            var result = await MessageBoxWrapper.Instance.ShowAsync(
+                indication.Title,
+                string.Format(indication.Content, index),
+                MessageBoxWrapper.MessageBoxStyle.OKCancel
+                );
+            if (!result)
+            {
+                return;
+            }
+
+            _saveFileManager.LoadSetting(
+                index, LoadCharacterWhenSettingLoaded.Value, LoadNonCharacterWhenSettingLoaded.Value
+                );
         }
 
         #endregion

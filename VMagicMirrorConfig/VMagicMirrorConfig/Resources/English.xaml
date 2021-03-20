@@ -22,6 +22,7 @@
     <sys:String x:Key="TopBar_Setting_Layout">Layout</sys:String>
     <sys:String x:Key="TopBar_Setting_Devices">Devices</sys:String>
     <sys:String x:Key="TopBar_Setting_Effects">Effects</sys:String>
+    <sys:String x:Key="TopBar_Setting_FileIo">Files</sys:String>
         
     <!-- Home -->
     <sys:String x:Key="Home_LoadVrm">Load VRM</sys:String>
@@ -435,6 +436,14 @@ Undefined BlendShaepClip names:
 Choose 'OK' to enable webcam based tracking.
 </sys:String>
     
+    <sys:String x:Key="DialogTitle_ConfirmSettingFileSave">Setting File Save</sys:String>
+    <sys:String x:Key="DialogMessage_ConfirmSettingFileSave">Are you sure to save current setting to `{0}`? If the setting already exists, it will be overwritten.</sys:String>
+
+    <sys:String x:Key="DialogTitle_ConfirmSettingFileLoad">Setting File Load</sys:String>
+    <sys:String x:Key="DialogMessage_ConfirmSettingFileLoad" xml:space="preserve">Are you sure to load setting `{0}`?
+
+If you load with non-character option, it also overwrites auto saved settings.</sys:String>    
+
     <sys:String x:Key="DialogTitle_EnableAutomation">Enable Automation</sys:String>
     <sys:String x:Key="DialogMessage_EnableAutomation" xml:space="preserve">Are you sure to enable automation feature?
 

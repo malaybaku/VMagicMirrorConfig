@@ -71,6 +71,18 @@
         public static MessageIndication ExTrackerCheckTurnOff() => Load("ExTrackerCheckTurnOff");
 
         /// <summary>
+        /// 設定ファイルを1,2,3のスロットに保存するときの確認。Content側は番号入れるぶんの{0}のプレースホルダーがあるので注意。
+        /// </summary>
+        /// <returns></returns>
+        public static MessageIndication ConfirmSettingFileSave() => Load("ConfirmSettingFileSave");
+
+        /// <summary>
+        /// 設定ファイルを1,2,3のスロットからロードするときの確認。Content側は番号入れるぶんの{0}のプレースホルダーがあるので注意。
+        /// </summary>
+        /// <returns></returns>
+        public static MessageIndication ConfirmSettingFileLoad() => Load("ConfirmSettingFileLoad");
+
+        /// <summary>
         /// オートメーション機能を有効にしたい人向けの確認ダイアログ
         /// </summary>
         /// <returns></returns>

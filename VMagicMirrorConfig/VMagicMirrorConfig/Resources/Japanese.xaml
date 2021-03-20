@@ -22,6 +22,7 @@
     <sys:String x:Key="TopBar_Setting_Layout">レイアウト</sys:String>
     <sys:String x:Key="TopBar_Setting_Devices">デバイス</sys:String>
     <sys:String x:Key="TopBar_Setting_Effects">エフェクト</sys:String>
+    <sys:String x:Key="TopBar_Setting_FileIo">ファイル</sys:String>
     
     <!-- Home -->
     <sys:String x:Key="Home_LoadVrm">VRMロード</sys:String>
@@ -439,7 +440,15 @@
 webカメラでの顔トラッキングを有効にする場合は
 'OK'を選択し、iPhone/iPadとの連携を終了してください。
 </sys:String>
+
+    <sys:String x:Key="DialogTitle_ConfirmSettingFileSave">設定を保存</sys:String>
+    <sys:String x:Key="DialogMessage_ConfirmSettingFileSave">現在の設定を`{0}`に保存しますか？現在保存済みの設定がある場合、上書きされます。</sys:String>
     
+    <sys:String x:Key="DialogTitle_ConfirmSettingFileLoad">設定をロード</sys:String>
+    <sys:String x:Key="DialogMessage_ConfirmSettingFileLoad" xml:space="preserve">設定`{0}`をロードしますか？
+        
+キャラ以外の設定をロードすると、自動セーブの内容も上書きされます。</sys:String>
+
     <sys:String x:Key="DialogTitle_EnableAutomation">オートメーションの有効化</sys:String>
     <sys:String x:Key="DialogMessage_EnableAutomation" xml:space="preserve">オートメーションを有効化しますか？
 
