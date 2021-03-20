@@ -23,7 +23,7 @@ namespace Baku.VMagicMirrorConfig
             _bloomColor = Color.FromRgb((byte)model.BloomR.Value, (byte)model.BloomG.Value, (byte)model.BloomB.Value);
             model.BloomR.PropertyChanged += (_, __) => UpdateBloomColor();
             model.BloomG.PropertyChanged += (_, __) => UpdateBloomColor();
-            model.BloomB.PropertyChanged += (_, __) => UpdateBloomColor();            
+            model.BloomB.PropertyChanged += (_, __) => UpdateBloomColor();
 
             ResetLightSettingCommand = new ActionCommand(
                 () => SettingResetUtils.ResetSingleCategoryAsync(model.ResetLightSetting)
@@ -46,7 +46,7 @@ namespace Baku.VMagicMirrorConfig
 
         private readonly LightSettingSync _model;
 
-        public async Task InitializeQualitySelectionsAsync() 
+        public async Task InitializeQualitySelectionsAsync()
             => await _model.InitializeQualitySelectionsAsync();
 
         public RProperty<string> ImageQuality => _model.ImageQuality;
@@ -57,13 +57,13 @@ namespace Baku.VMagicMirrorConfig
         public RProperty<int> LightIntensity => _model.LightIntensity;
         public RProperty<int> LightYaw => _model.LightYaw;
         public RProperty<int> LightPitch => _model.LightPitch;
-        
+
         public RProperty<int> LightR => _model.LightR;
         public RProperty<int> LightG => _model.LightG;
         public RProperty<int> LightB => _model.LightB;
 
         private Color _lightColor;
-        public Color LightColor 
+        public Color LightColor
         {
             get => _lightColor;
             set
@@ -78,7 +78,7 @@ namespace Baku.VMagicMirrorConfig
         }
 
         //NOTE: 色が変わったら表示を追従させるだけでいいのがポイント。メッセージ送信自体はモデル側で行う
-        private void UpdateLightColor() 
+        private void UpdateLightColor()
             => LightColor = Color.FromRgb((byte)LightR.Value, (byte)LightG.Value, (byte)LightB.Value);
 
         #endregion
@@ -103,7 +103,7 @@ namespace Baku.VMagicMirrorConfig
         public RProperty<int> BloomB => _model.BloomB;
 
         private Color _bloomColor;
-        public Color BloomColor 
+        public Color BloomColor
         {
             get => _bloomColor;
             set
@@ -117,7 +117,7 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private void UpdateBloomColor() 
+        private void UpdateBloomColor()
             => BloomColor = Color.FromRgb((byte)BloomR.Value, (byte)BloomG.Value, (byte)BloomB.Value);
 
         #endregion

@@ -8,19 +8,19 @@ namespace Baku.VMagicMirrorConfig
     {
         public object? Convert(object value, Type targetType, object parameter, CultureInfo culture)
             => value switch
-        {
-            //""をnullにするのがポイント
-            string s when string.IsNullOrEmpty(s) => null,
-            string s => s,
-            _ => Binding.DoNothing,
-        };
+            {
+                //""をnullにするのがポイント
+                string s when string.IsNullOrEmpty(s) => null,
+                string s => s,
+                _ => Binding.DoNothing,
+            };
 
         public object? ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
             => value switch
-        {
-            string s => s,
-            null => null,
-            _ => Binding.DoNothing,
-        };
+            {
+                string s => s,
+                null => null,
+                _ => Binding.DoNothing,
+            };
     }
 }

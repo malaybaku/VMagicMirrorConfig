@@ -101,7 +101,7 @@
         #endregion
 
         #region Reset API
-      
+
         public void ResetFaceBasicSetting()
         {
             EnableFaceTracking = true;

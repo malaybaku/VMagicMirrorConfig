@@ -12,8 +12,8 @@ namespace Baku.VMagicMirrorConfig
 
             void UpdatePickerColor() =>
                 PickerColor = Color.FromRgb((byte)_model.R.Value, (byte)_model.G.Value, (byte)_model.B.Value);
-            _model.R.PropertyChanged += (_, __) => UpdatePickerColor();                 
-            _model.G.PropertyChanged += (_, __) => UpdatePickerColor(); 
+            _model.R.PropertyChanged += (_, __) => UpdatePickerColor();
+            _model.G.PropertyChanged += (_, __) => UpdatePickerColor();
             _model.B.PropertyChanged += (_, __) => UpdatePickerColor();
 
             BackgroundImageSetCommand = new ActionCommand(SetBackgroundImage);
@@ -76,7 +76,7 @@ namespace Baku.VMagicMirrorConfig
                 Multiselect = false,
             };
 
-            if (dialog.ShowDialog() == true && File.Exists(dialog.FileName)) 
+            if (dialog.ShowDialog() == true && File.Exists(dialog.FileName))
             {
                 _model.BackgroundImagePath.Value = Path.GetFullPath(dialog.FileName);
             }

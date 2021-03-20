@@ -39,11 +39,11 @@
 
     <sys:String x:Key="Home_SettingFileIo">Setting</sys:String>    
     <sys:String x:Key="Home_OpenSetting">Open Setting Window</sys:String>
-    <sys:String x:Key="Home_LoadSettingFile">Load</sys:String>
-    <sys:String x:Key="Home_SaveSettingFile">Save</sys:String>
+    <sys:String x:Key="Home_LoadSettingFile">Export</sys:String>
+    <sys:String x:Key="Home_SaveSettingFile">Import</sys:String>
 
-    <sys:String x:Key="Home_SettingManagement">Setting Management</sys:String>
-    <sys:String x:Key="Home_Reset">Reset</sys:String>
+    <sys:String x:Key="Home_SettingManagement">Setting Files</sys:String>
+    <sys:String x:Key="Home_Reset">Reset Settings</sys:String>
     <sys:String x:Key="Home_LoadPrevSetting">Load from Prev ver.</sys:String>
     
     <sys:String x:Key="Home_OtherSettings_Header">Other Preferences</sys:String>
@@ -375,23 +375,36 @@ Please test by typing "joy".</sys:String>
     <sys:String x:Key="WordToMotion_DeviceItem_KeyboardTenKey">Keyboard (num 0-8)</sys:String>
     <sys:String x:Key="WordToMotion_DeviceItem_MidiController">MIDI Controller</sys:String>
     
-    <!-- Automation Support -->
-    <sys:String x:Key="AutomationSupport_Header">Automation</sys:String>
-    <sys:String x:Key="AutomationSupport_MainSection">Settings</sys:String>
-    <sys:String x:Key="AutomationSupport_Instruction" xml:space="preserve">WARNING:
+    <!-- Save/Load -->
+    <sys:String x:Key="SettingFile_Header">Setting File</sys:String>
+    <sys:String x:Key="SettingFile_SaveAndLoad">Save / Load</sys:String>
+    <sys:String x:Key="SettingFile_SaveArea">Save Current Setting</sys:String>
+    <sys:String x:Key="SettingFile_LoadArea">Load Setting</sys:String>
+    <sys:String x:Key="SettingFile_LoadCharacter">Load Character (*local file only)</sys:String>
+    <sys:String x:Key="SettingFile_LoadCharacter_Streaming">Load Character (*local file only)</sys:String>
+    <sys:String x:Key="SettingFile_LoadNonCharacter">Load Non-Character Settings</sys:String>
+
+    <sys:String x:Key="SettingFile_Automation">Automation</sys:String>
+    <sys:String x:Key="SettingFile_Instruction" xml:space="preserve">WARNING:
 This feature skips license check for local file VRM loading.
 You must confirm the models' license beforehand.
 
 VRoid Hub model is not supported.</sys:String>
-    <sys:String x:Key="AutomationSupport_Enable">Enable Automation Support</sys:String>
-    <sys:String x:Key="AutomationSupport_PortNumber">Port Number:</sys:String>
-    <sys:String x:Key="AutomationSupport_SeeMore">See How to Use (Open Web Page)</sys:String>
-
+    <sys:String x:Key="SettingFile_Enable">Enable Automation Support</sys:String>
+    <sys:String x:Key="SettingFile_Disable">Disable Automation Support</sys:String>
+    <sys:String x:Key="SettingFile_PortNumber">Port Number:</sys:String>
+    <sys:String x:Key="SettingFile_PortNumber_Warning">Port Number is invalid. Input number between 0 - 65535.</sys:String>
+    <sys:String x:Key="SettingFile_ApplyPortNumber">Apply</sys:String>
+    <sys:String x:Key="SettingFile_SeeMore">See How to Use (Open Web Page)</sys:String>
+    
+    
     <!-- Dialog Messages -->
     <sys:String x:Key="DialogTitle_LoadLocalVrm">Load VRM</sys:String>
     <sys:String x:Key="DialogMessage_LoadLocalVrm">Please confirm the license in viewer window. Do you load the character?</sys:String>
     <sys:String x:Key="DialogTitle_ResetAllSetting">Reset Setting</sys:String>
-    <sys:String x:Key="DialogMessage_ResetAllSetting">Are you sure you want to reset all settings in VMagicMirror?</sys:String>
+    <sys:String x:Key="DialogMessage_ResetAllSetting" xml:space="preserve">Are you sure you want to reset current settings?
+        
+This operation does not change saved files (save 1,2,3).</sys:String>
     <sys:String x:Key="DialogTitle_ResetCategorySetting">Reset Setting</sys:String>
     <sys:String x:Key="DialogMessage_ResetCategorySetting">Are you sure you want to reset selected category setting?</sys:String>
     <sys:String x:Key="DialogTitle_LoadSettingFileError">Load failed</sys:String>
@@ -421,6 +434,15 @@ Undefined BlendShaepClip names:
 
 Choose 'OK' to enable webcam based tracking.
 </sys:String>
+    
+    <sys:String x:Key="DialogTitle_EnableAutomation">Enable Automation</sys:String>
+    <sys:String x:Key="DialogMessage_EnableAutomation" xml:space="preserve">Are you sure to enable automation feature?
+
+This feature enable switch setting and change character without GUI operation.
+Use this only after checking the licenses of VRM you will use.
+</sys:String>    
+    <sys:String x:Key="DialogTitle_DisableAutomation">Disable Automation</sys:String>
+    <sys:String x:Key="DialogMessage_DisableAutomation">Are you sure to disable automation feature?</sys:String>
     
     <!-- Other: Not on Dialog, but used from code -->
     <sys:String x:Key="CommonUi_DoNothing">(Do Nothing)</sys:String>

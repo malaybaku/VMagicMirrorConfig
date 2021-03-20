@@ -102,18 +102,18 @@ namespace Baku.VMagicMirrorConfig
 
         #region Bloom
 
-        public RProperty<int> BloomIntensity { get; } 
-        public RProperty<int> BloomThreshold { get; } 
+        public RProperty<int> BloomIntensity { get; }
+        public RProperty<int> BloomThreshold { get; }
 
-        public RProperty<int> BloomR { get; } 
-        public RProperty<int> BloomG { get; } 
-        public RProperty<int> BloomB { get; } 
+        public RProperty<int> BloomR { get; }
+        public RProperty<int> BloomG { get; }
+        public RProperty<int> BloomB { get; }
 
         #endregion
 
         #region Wind
 
-        public RProperty<bool> EnableWind { get; } 
+        public RProperty<bool> EnableWind { get; }
         public RProperty<int> WindStrength { get; }
         public RProperty<int> WindInterval { get; }
         public RProperty<int> WindYaw { get; }
@@ -185,7 +185,7 @@ namespace Baku.VMagicMirrorConfig
             ResetShadowSetting();
             ResetBloomSetting();
             ResetWindSetting();
-           
+
             //NOTE: ここだけ非同期なのが何だかな～という感じなんだけど、実害が無いはずなのでOKとします
             Task.Run(async () => await ResetImageQualityAsync());
         }

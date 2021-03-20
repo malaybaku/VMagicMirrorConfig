@@ -10,10 +10,15 @@ namespace Baku.VMagicMirrorConfig
         private const string LogTextName = "log_config.txt";
         private const string UnityAppFileName = "VMagicMirror.exe";
 
+        private const string SaveSlotFileNamePrefix = "_save";
+
         public static string LogFileDir { get; }
         public static string LogFilePath { get; }
         public static string UnityAppPath { get; }
         public static string AutoSaveSettingFilePath { get; }
+
+        private static string _exeDir;
+        public static string GetSaveFilePath(int index) => Path.Combine(_exeDir, SaveSlotFileNamePrefix + index.ToString());
 
         static SpecialFilePath()
         {
@@ -21,6 +26,7 @@ namespace Baku.VMagicMirrorConfig
             string exePath = Process.GetCurrentProcess().MainModule?.FileName ?? "";
             string exeDir = Path.GetDirectoryName(exePath) ?? "";
             AutoSaveSettingFilePath = Path.Combine(exeDir, AutoSaveSettingFileName);
+            _exeDir = exeDir;
 
             string unityAppDir = Path.GetDirectoryName(exeDir) ?? "";
             UnityAppPath = Path.Combine(unityAppDir, UnityAppFileName);

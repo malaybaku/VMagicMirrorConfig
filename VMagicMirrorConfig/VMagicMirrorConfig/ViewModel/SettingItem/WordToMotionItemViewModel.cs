@@ -12,9 +12,9 @@ namespace Baku.VMagicMirrorConfig
             MotionRequest = model;
             InitializeBuiltInClipNames();
             InitializeBlendShapeItems(parent);
-            AvailableBuiltInClipNames = 
+            AvailableBuiltInClipNames =
                 new ReadOnlyObservableCollection<string>(_availableBuiltInClipNames);
-            BlendShapeItems = 
+            BlendShapeItems =
                 new ReadOnlyObservableCollection<BlendShapeItemViewModel>(_blendShapeItems);
             ExtraBlendShapeItems =
                 new ReadOnlyObservableCollection<BlendShapeItemViewModel>(_extraBlendShapeItems);
@@ -42,7 +42,7 @@ namespace Baku.VMagicMirrorConfig
                 _extraBlendShapeItems.Add(new BlendShapeItemViewModel(
                     this,
                     name,
-                    0, 
+                    0,
                     _parent.LatestAvaterExtraClipNames.Contains(name)
                     ));
                 MotionRequest?.ExtraBlendShapeValues.Add(new BlendShapePairItem()
@@ -61,7 +61,7 @@ namespace Baku.VMagicMirrorConfig
         public void CheckAvatarExtraClips()
         {
             var names = _parent.LatestAvaterExtraClipNames;
-            foreach(var item in _extraBlendShapeItems)
+            foreach (var item in _extraBlendShapeItems)
             {
                 item.IsUsedWithThisAvatar = names.Contains(item.BlendShapeName);
             }
@@ -88,7 +88,7 @@ namespace Baku.VMagicMirrorConfig
 
             if (MotionRequest
                 ?.ExtraBlendShapeValues
-                ?.FirstOrDefault(i => i.Name == blendShapeName) 
+                ?.FirstOrDefault(i => i.Name == blendShapeName)
                 is BlendShapePairItem itemToRemove)
             {
                 MotionRequest.ExtraBlendShapeValues.Remove(itemToRemove);
@@ -97,7 +97,7 @@ namespace Baku.VMagicMirrorConfig
 
         //NOTE: ビューは同時に1つまでのItemしか表示しないので、コレだけで十分
         public RProperty<bool> EnablePreview => _parent.EnablePreview;
-        
+
         private string _word = "";
         public string Word
         {
@@ -282,7 +282,7 @@ namespace Baku.VMagicMirrorConfig
 
             model.DurationWhenOnlyBlendShape = DurationWhenOnlyBlendShape;
 
-            model.BlendShapeValues.Clear();            
+            model.BlendShapeValues.Clear();
             foreach (var item in BlendShapeItems)
             {
                 model.BlendShapeValues[item.BlendShapeName] = item.ValuePercentage;
@@ -384,7 +384,7 @@ namespace Baku.VMagicMirrorConfig
                 _extraBlendShapeItems.Add(new BlendShapeItemViewModel(
                     this,
                     name,
-                    0, 
+                    0,
                     parent.LatestAvaterExtraClipNames.Contains(name)
                     ));
             }

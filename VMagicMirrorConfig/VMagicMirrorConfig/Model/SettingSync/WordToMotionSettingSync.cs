@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Threading.Tasks;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Baku.VMagicMirrorConfig
 {
@@ -66,7 +66,7 @@ namespace Baku.VMagicMirrorConfig
         public RProperty<string> MidiNoteMapString { get; }
 
         private MotionRequestCollection _motionRequests;
-        public MotionRequestCollection MotionRequests 
+        public MotionRequestCollection MotionRequests
         {
             get => _motionRequests;
             private set
@@ -82,7 +82,7 @@ namespace Baku.VMagicMirrorConfig
         public event EventHandler? MotionRequestsReloaded;
 
         private MidiNoteToMotionMap _midiNoteToMotionMap;
-        public MidiNoteToMotionMap MidiNoteToMotionMap 
+        public MidiNoteToMotionMap MidiNoteToMotionMap
         {
             get => _midiNoteToMotionMap;
             private set
@@ -214,7 +214,7 @@ namespace Baku.VMagicMirrorConfig
         protected override void AfterLoad(WordToMotionSetting entity)
         {
             LoadMotionRequests();
-            LoadMidiNoteToMotionMap();   
+            LoadMidiNoteToMotionMap();
         }
 
         private void LoadMotionRequests()

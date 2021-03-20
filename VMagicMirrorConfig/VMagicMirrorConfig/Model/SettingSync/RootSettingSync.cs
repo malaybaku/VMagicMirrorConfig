@@ -22,6 +22,7 @@ namespace Baku.VMagicMirrorConfig
             Light = new LightSettingSync(sender);
             WordToMotion = new WordToMotionSettingSync(sender, receiver);
             ExternalTracker = new ExternalTrackerSettingSync(sender);
+            Automation = new AutomationSettingSync(sender);
 
             //NOTE; LanguageSelectorとの二重管理っぽくて若干アレだがこのままで行く
             //初期値Defaultを入れることで、起動直後にPCのカルチャベースで言語を指定しなきゃダメかどうか判別する
@@ -65,9 +66,11 @@ namespace Baku.VMagicMirrorConfig
 
         public ExternalTrackerSettingSync ExternalTracker { get; }
 
+        public AutomationSettingSync Automation { get; }
+
         public void InitializeAvailableLanguage(string[] languageNames)
         {
-            foreach(var name in languageNames)
+            foreach (var name in languageNames)
             {
                 _availableLanguageNames.Add(name);
             }

@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using Newtonsoft.Json;
 
 namespace Baku.VMagicMirrorConfig
 {
@@ -13,7 +13,7 @@ namespace Baku.VMagicMirrorConfig
     {
         internal static readonly int InvalidNoteNumber = -1;
 
-        public List<MidiNoteToMotionItem> Items { get; set; } 
+        public List<MidiNoteToMotionItem> Items { get; set; }
             = new List<MidiNoteToMotionItem>();
 
         public string ToJson()

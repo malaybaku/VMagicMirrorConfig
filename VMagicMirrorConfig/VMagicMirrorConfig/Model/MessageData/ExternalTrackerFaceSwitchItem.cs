@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using Newtonsoft.Json.Linq;
 
 namespace Baku.VMagicMirrorConfig
 {
@@ -174,7 +174,7 @@ namespace Baku.VMagicMirrorConfig
     /// </summary>
     public class ExternalTrackerBlendShapeNameStore
     {
-        public ExternalTrackerBlendShapeNameStore() 
+        public ExternalTrackerBlendShapeNameStore()
         {
             BlendShapeNames = new ReadOnlyObservableCollection<string>(_blendShapeNames);
             var defaultNames = LoadDefaultNames();

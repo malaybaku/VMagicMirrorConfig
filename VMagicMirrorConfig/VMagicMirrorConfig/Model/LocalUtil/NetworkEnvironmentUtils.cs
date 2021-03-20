@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -23,7 +22,7 @@ namespace Baku.VMagicMirrorConfig
                 .Where(ip => ip.AddressFamily == AddressFamily.InterNetwork)
                 .Select(ip => ip.ToString())
                 .Where(s => !string.IsNullOrEmpty(s))
-                .FirstOrDefault() 
+                .FirstOrDefault()
                 ?? "(unknown)";
         }
 

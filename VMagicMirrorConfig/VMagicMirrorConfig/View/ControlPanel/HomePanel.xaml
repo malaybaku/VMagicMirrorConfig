@@ -7,7 +7,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vmm="clr-namespace:Baku.VMagicMirrorConfig"
              mc:Ignorable="d"
-             d:DataContext="{x:Type vmm:MainWindowViewModel}"
+             d:DataContext="{d:DesignInstance Type=vmm:MainWindowViewModel}"
              d:DesignWidth="550"
              d:DesignHeight="600"
              AllowDrop="True"
@@ -263,33 +263,121 @@
                                        Margin="0"
                                        />
 
+                            <Grid Margin="10,0">
+                                <Grid.Resources>
+                                    <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                                        <Setter Property="Padding" Value="0"/>
+                                        <Setter Property="Width" Value="25"/>
+                                        <Setter Property="Height" Value="25"/>
+                                        <Setter Property="Margin" Value="2"/>
+                                    </Style>
+                                </Grid.Resources>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Row="0" Grid.Column="0" 
+                                       Margin="0"
+                                       Text="{DynamicResource SettingFile_SaveArea}"/>
+                                <TextBlock Grid.Row="1" Grid.Column="0"
+                                       Margin="0"
+                                       Text="{DynamicResource SettingFile_LoadArea}"/>
 
-                            <Button Width="NaN"
-                                    Margin="10,15,10,10"
-                                    Content="{DynamicResource Home_SaveSettingFile}" 
-                                    Command="{Binding SaveSettingToFileCommand}"
+                                <Button Grid.Row="0" Grid.Column="1"
+                                    Command="{Binding SettingIo.SaveCurrentSettingCommand}"
+                                    CommandParameter="1"
+                                    Content="1"
                                     />
-                            <Button Width="NaN"
-                                    Margin="10"
-                                    Content="{DynamicResource Home_LoadSettingFile}" 
-                                    Command="{Binding LoadSettingFromFileCommand}"
+                                <Button Grid.Row="0" Grid.Column="2"
+                                    Command="{Binding SettingIo.SaveCurrentSettingCommand}"
+                                    CommandParameter="2"
+                                    Content="2"
                                     />
-
-                            <Button Width="NaN"
-                                    Margin="10"
-                                    Content="{DynamicResource Home_LoadPrevSetting}" 
-                                    Command="{Binding LoadPrevSettingCommand}"
-                                    />
-
-                            <Button Width="NaN"
-                                    Margin="10"
-                                    Content="{DynamicResource Home_Reset}" 
-                                    Command="{Binding ResetToDefaultCommand}"
+                                <Button Grid.Row="0" Grid.Column="3"
+                                    Command="{Binding SettingIo.SaveCurrentSettingCommand}"
+                                    CommandParameter="3"
+                                    Content="3"
                                     />
 
+                                <Button Grid.Row="1" Grid.Column="1"
+                                    Command="{Binding SettingIo.LoadSettingCommand}"
+                                    IsEnabled="{Binding SettingIo.Save1Exist}"
+                                    CommandParameter="1"
+                                    Content="1"
+                                    />
+                                <Button Grid.Row="1" Grid.Column="2"
+                                    Command="{Binding SettingIo.LoadSettingCommand}"
+                                    IsEnabled="{Binding SettingIo.Save2Exist}"
+                                    CommandParameter="2"
+                                    Content="2"
+                                    />
+                                <Button Grid.Row="1" Grid.Column="3"
+                                    Command="{Binding SettingIo.LoadSettingCommand}"
+                                    IsEnabled="{Binding SettingIo.Save3Exist}"
+                                    CommandParameter="3"
+                                    Content="3"
+                                    />
+                            </Grid>
+
+                            <CheckBox Margin="15,5,15,0" 
+                                      Padding="0"
+                                      Content="{DynamicResource SettingFile_LoadCharacter_Streaming}"
+                                      IsChecked="{Binding SettingIo.LoadCharacterWhenSettingLoaded}"
+                                      />    
+                            <CheckBox Margin="15,0,15,5" 
+                                      Padding="0"
+                                      Content="{DynamicResource SettingFile_LoadNonCharacter}"
+                                      IsChecked="{Binding SettingIo.LoadCharacterWhenSettingLoaded}"
+                                      />
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Button Grid.Row="0" Grid.Column="0"
+                                        Width="NaN"
+                                        Margin="5"
+                                        Content="{DynamicResource Home_SaveSettingFile}" 
+                                        Command="{Binding SaveSettingToFileCommand}"
+                                        />
+                                <Button Grid.Row="0" Grid.Column="1"
+                                        Width="NaN"
+                                        Margin="5"
+                                        Content="{DynamicResource Home_LoadSettingFile}" 
+                                        Command="{Binding LoadSettingFromFileCommand}"
+                                        />
+
+                                <Button Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                                        Width="NaN"
+                                        Margin="5"
+                                        Content="{DynamicResource Home_LoadPrevSetting}" 
+                                        Command="{Binding LoadPrevSettingCommand}"
+                                        />
+
+                            </Grid>
                         </StackPanel>
                     </Border>
+                    <Button Width="NaN"
+                        Margin="15,5"
+                        Content="{DynamicResource Home_Reset}" 
+                        Command="{Binding ResetToDefaultCommand}"
+                        />
                 </StackPanel>
+
+
             </Grid>
         </ScrollViewer>
         <Border x:Name="DragDropIndicator" 

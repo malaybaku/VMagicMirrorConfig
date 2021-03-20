@@ -68,6 +68,19 @@
         /// </summary>
         /// <param name="languageName"></param>
         /// <returns></returns>
-        public static MessageIndication ExTrackerCheckTurnOff() => Load("ExTrackerCheckTurnOff"); 
+        public static MessageIndication ExTrackerCheckTurnOff() => Load("ExTrackerCheckTurnOff");
+
+        /// <summary>
+        /// オートメーション機能を有効にしたい人向けの確認ダイアログ
+        /// </summary>
+        /// <returns></returns>
+        public static MessageIndication EnableAutomation() => Load("EnableAutomation");
+
+        /// <summary>
+        /// オートメーション機能を無効にしたい人向けの確認ダイアログ
+        /// </summary>
+        /// <returns></returns>
+        public static MessageIndication DisableAutomation() => Load("DisableAutomation");
+
     }
 }

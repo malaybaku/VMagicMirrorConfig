@@ -243,8 +243,8 @@ namespace Baku.VMagicMirrorConfig
 
         public RProperty<string> IFacialMocapTroubleMessage { get; } = new RProperty<string>("");
 
-        public ActionCommand OpenIFMTroubleShootCommand  { get; }
-        
+        public ActionCommand OpenIFMTroubleShootCommand { get; }
+
         private void OpenIFMTroubleShoot()
         {
             var url = LocalizedString.GetString("URL_ifacialmocap_troubleshoot");

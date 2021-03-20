@@ -22,7 +22,7 @@
         public MidiNoteToMotionMapViewModel Current { get; }
         public MidiNoteToMotionMapViewModel After { get; }
         public MidiNoteToMotionMap Result => After.Save();
-        
+
         public ActionCommand ResetToCurrentSettingCommand { get; }
         private void ResetToCurrentSetting()
         {

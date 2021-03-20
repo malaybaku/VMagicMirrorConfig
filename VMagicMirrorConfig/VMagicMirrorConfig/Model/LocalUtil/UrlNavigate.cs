@@ -19,7 +19,7 @@ namespace Baku.VMagicMirrorConfig
                     UseShellExecute = true,
                 });
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 LogOutput.Instance.Write(ex);
             }

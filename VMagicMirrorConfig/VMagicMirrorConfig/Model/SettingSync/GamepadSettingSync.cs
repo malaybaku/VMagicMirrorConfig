@@ -25,7 +25,7 @@
                     GamepadVisibility.Value = false;
                 }
             });
-            
+
             PreferDirectInputGamepad = new RProperty<bool>(s.PreferDirectInputGamepad, b => SendMessage(factory.PreferDirectInputGamepad(b)));
             GamepadVisibility = new RProperty<bool>(s.GamepadVisibility, b => SendMessage(factory.GamepadVisibility(b)));
 
@@ -79,19 +79,19 @@
             GamepadLeanReverseVertical = new RProperty<bool>(s.GamepadLeanReverseVertical, b => SendMessage(factory.GamepadLeanReverseVertical(b)));
         }
 
-        public RProperty<bool> GamepadEnabled { get; } 
-        public RProperty<bool> PreferDirectInputGamepad { get; } 
-        public RProperty<bool> GamepadVisibility { get; } 
+        public RProperty<bool> GamepadEnabled { get; }
+        public RProperty<bool> PreferDirectInputGamepad { get; }
+        public RProperty<bool> GamepadVisibility { get; }
 
         //NOTE: 本来ならEnum値1つで管理する方がよいが、TwoWayバインディングが簡便になるのでbool4つで代用していた経緯があり、こういう持ち方。
 
         //モデル層では「1つの値がtrueになるとき他を全部falseにする」という措置を行わないといけないため、RPropertyを使わずに捌く
-        public RProperty<bool> GamepadLeanNone { get; } 
-        public RProperty<bool> GamepadLeanLeftButtons { get; } 
-        public RProperty<bool> GamepadLeanLeftStick { get; } 
-        public RProperty<bool> GamepadLeanRightStick { get; } 
+        public RProperty<bool> GamepadLeanNone { get; }
+        public RProperty<bool> GamepadLeanLeftButtons { get; }
+        public RProperty<bool> GamepadLeanLeftStick { get; }
+        public RProperty<bool> GamepadLeanRightStick { get; }
 
-        public RProperty<bool> GamepadLeanReverseHorizontal { get; } 
+        public RProperty<bool> GamepadLeanReverseHorizontal { get; }
         public RProperty<bool> GamepadLeanReverseVertical { get; }
 
         public override void ResetToDefault() => Load(GamepadSetting.Default);

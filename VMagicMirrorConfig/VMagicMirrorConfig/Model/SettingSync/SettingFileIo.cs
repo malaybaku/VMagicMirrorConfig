@@ -21,7 +21,7 @@ namespace Baku.VMagicMirrorConfig
         private readonly RootSettingSync _model;
         private readonly IMessageSender _sender;
 
-        public void SaveSetting(string path, bool isInternalFile)
+        public void SaveSetting(string path, SettingFileReadWriteModes mode)
         {
             if (File.Exists(path))
             {
@@ -34,13 +34,18 @@ namespace Baku.VMagicMirrorConfig
 
                 var saveData = new SaveData()
                 {
-                    IsInternalSaveFile = isInternalFile,
-                    LastLoadedVrmFilePath = 
-                        (isInternalFile && autoLoadEnabled) ? _model.LastVrmLoadFilePath : "",
-                    LastLoadedVRoidModelId = 
-                        (isInternalFile && autoLoadEnabled) ? _model.LastLoadedVRoidModelId : "",
-                    AutoLoadLastLoadedVrm = isInternalFile ? autoLoadEnabled : false,
-                    PreferredLanguageName = isInternalFile ? _model.LanguageName.Value : "",
+                    //ここ若干名前がややこしいが、歴史的経緯によるものです
+                    IsInternalSaveFile = (mode == SettingFileReadWriteModes.AutoSave),
+                    LastLoadedVrmFilePath = mode switch
+                    {
+                        SettingFileReadWriteModes.AutoSave => autoLoadEnabled ? _model.LastVrmLoadFilePath : "",
+                        SettingFileReadWriteModes.Internal => _model.LastVrmLoadFilePath,
+                        _ => "",
+                    },
+                    LastLoadedVRoidModelId =
+                        (mode == SettingFileReadWriteModes.AutoSave && autoLoadEnabled) ? _model.LastLoadedVRoidModelId : "",
+                    AutoLoadLastLoadedVrm = (mode == SettingFileReadWriteModes.AutoSave) ? autoLoadEnabled : false,
+                    PreferredLanguageName = (mode == SettingFileReadWriteModes.AutoSave) ? _model.LanguageName.Value : "",
                     WindowSetting = _model.Window.Save(),
                     MotionSetting = _model.Motion.Save(),
                     LayoutSetting = _model.Layout.Save(),
@@ -56,7 +61,7 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private void LoadSettingSub(string path, bool isInternalFile)
+        private void LoadSettingSub(string path, SettingFileReadWriteModes mode, SettingFileReadContent content)
         {
             using (var sr = new StreamReader(path))
             {
@@ -68,8 +73,9 @@ namespace Baku.VMagicMirrorConfig
                     return;
                 }
 
-                if (isInternalFile && saveData.IsInternalSaveFile)
+                if (mode == SettingFileReadWriteModes.AutoSave && saveData.IsInternalSaveFile)
                 {
+                    //NOTE: AutoSaveの場合、Content == Allのケースしかないため、いちいち調べない
                     _model.LastVrmLoadFilePath = saveData.LastLoadedVrmFilePath ?? "";
                     _model.LastLoadedVRoidModelId = saveData.LastLoadedVRoidModelId ?? "";
                     _model.AutoLoadLastLoadedVrm.Value = saveData.AutoLoadLastLoadedVrm;
@@ -78,22 +84,42 @@ namespace Baku.VMagicMirrorConfig
                         (saveData.PreferredLanguageName ?? "") :
                         "";
                 }
+                else if (mode == SettingFileReadWriteModes.Internal &&
+                    (content == SettingFileReadContent.Character || content == SettingFileReadContent.All)
+                    )
+                {
+                    //このケースでは最後に使ったローカルVRMのデータは見に行ってもOKなのだが、
+                    //存在しないVRMで上書きするのはちょっと問題あるので避けておく
+                    if (File.Exists(saveData.LastLoadedVrmFilePath))
+                    {
+                        _model.LastVrmLoadFilePath = saveData.LastLoadedVrmFilePath ?? "";
+                    }
+                    else
+                    {
+                        LogOutput.Instance.Write(
+                            $"Tried to load vrm path, but file seems not exist at: {saveData.LastLoadedVrmFilePath}"
+                            );
+                    }
+                }
 
-                _model.Window.Load(saveData.WindowSetting);
-                _model.Motion.Load(saveData.MotionSetting);
-                _model.Layout.Load(saveData.LayoutSetting);
-                _model.Gamepad.Load(saveData.LayoutSetting?.Gamepad);
-                _model.Light.Load(saveData.LightSetting);
-                _model.WordToMotion.Load(saveData.WordToMotionSetting);
-                _model.ExternalTracker.Load(saveData.ExternalTrackerSetting);
+                if (content == SettingFileReadContent.All || content == SettingFileReadContent.NonCharacter)
+                {
+                    _model.Window.Load(saveData.WindowSetting);
+                    _model.Motion.Load(saveData.MotionSetting);
+                    _model.Layout.Load(saveData.LayoutSetting);
+                    _model.Gamepad.Load(saveData.LayoutSetting?.Gamepad);
+                    _model.Light.Load(saveData.LightSetting);
+                    _model.WordToMotion.Load(saveData.WordToMotionSetting);
+                    _model.ExternalTracker.Load(saveData.ExternalTrackerSetting);
+                }
             }
         }
 
-        public void LoadSetting(string path, bool isInternalFile)
+        public void LoadSetting(string path, SettingFileReadWriteModes mode, SettingFileReadContent content = SettingFileReadContent.All)
         {
             if (!File.Exists(path))
             {
-                LogOutput.Instance.Write($"Setting file load requested (internalFile={isInternalFile}, but file does not exist at: {path}");
+                LogOutput.Instance.Write($"Setting file load requested (mode={mode}, but file does not exist at: {path}");
                 return;
             }
 
@@ -102,7 +128,7 @@ namespace Baku.VMagicMirrorConfig
                 //NOTE: ファイルロードではメッセージが凄い量になるので、
                 //コンポジットして「1つの大きいメッセージ」として書き込むためにこうしてます
                 _sender.StartCommandComposite();
-                LoadSettingSub(path, isInternalFile);
+                LoadSettingSub(path, mode, content);
                 _sender.EndCommandComposite();
             }
             catch (Exception ex)
@@ -111,4 +137,33 @@ namespace Baku.VMagicMirrorConfig
             }
         }
     }
+
+    /// <summary>
+    /// 設定ファイルをどこから読み書きしているかのパターンです。
+    /// </summary>
+    internal enum SettingFileReadWriteModes
+    {
+        /// <summary> 自動セーブ </summary>
+        AutoSave,
+        /// <summary> 自動ではないが内部的に"_save1"みたいな名前で持つやつ </summary>
+        Internal,
+        /// <summary> 「設定を保存」でユーザーが好きなファイルに書き出すやつ </summary>
+        Exported,
+    }
+
+    /// <summary>
+    /// 設定ファイルを読み込むときの内容
+    /// </summary>
+    internal enum SettingFileReadContent
+    {
+        /// <summary>何も読み込まない: 普通ありえない</summary>
+        None,
+        /// <summary>ローカルVRMの情報だけ読み込む</summary>
+        Character,
+        /// <summary>キャラ以外の情報だけ読み込む</summary>
+        NonCharacter,
+        /// <summary>全て読み込む: 普通はこれ</summary>
+        All,
+    }
+
 }

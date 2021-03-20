@@ -34,7 +34,7 @@ namespace Baku.VMagicMirrorConfig
                     SendData(MotionRequest);
                     await Task.Delay(DataSendIntervalMillisec, _cts.Token);
                 }
-            });            
+            });
         }
 
         public void End()

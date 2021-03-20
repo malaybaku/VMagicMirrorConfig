@@ -21,7 +21,7 @@ namespace Baku.VMagicMirrorConfig
         {
             Model = model;
             _items.Clear();
-            foreach(var i in model.Items)
+            foreach (var i in model.Items)
             {
                 _items.Add(new MidiNoteToMotionItemViewModel()
                 {
@@ -34,7 +34,7 @@ namespace Baku.VMagicMirrorConfig
         public MidiNoteToMotionMap Save()
         {
             var result = new MidiNoteToMotionMap();
-            foreach(var i in Items)
+            foreach (var i in Items)
             {
                 result.Items.Add(new MidiNoteToMotionItem()
                 {
@@ -65,7 +65,7 @@ namespace Baku.VMagicMirrorConfig
             {
                 bool validNow = HasValidNoteNumber;
 
-                if (SetValue(ref _noteNumber, value) && 
+                if (SetValue(ref _noteNumber, value) &&
                     validNow != HasValidNoteNumber
                     )
                 {

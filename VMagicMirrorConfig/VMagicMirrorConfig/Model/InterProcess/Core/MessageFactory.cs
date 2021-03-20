@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
 namespace Baku.VMagicMirrorConfig
@@ -7,15 +6,15 @@ namespace Baku.VMagicMirrorConfig
     class MessageFactory
     {
         private static MessageFactory? _instance;
-        public static MessageFactory Instance 
+        public static MessageFactory Instance
             => _instance ??= new MessageFactory();
         private MessageFactory() { }
 
         //メッセージのCommandには呼び出した関数の名前が入る: もともとnameof(Hoge)のように関数名を入れていたが、その必要が無くなった
-        private static Message NoArg([CallerMemberName]string command = "")
+        private static Message NoArg([CallerMemberName] string command = "")
             => new Message(command);
 
-        private static Message WithArg(string content, [CallerMemberName]string command = "")
+        private static Message WithArg(string content, [CallerMemberName] string command = "")
             => new Message(command, content);
 
         public Message Language(string langName) => WithArg(langName);
@@ -281,7 +280,7 @@ namespace Baku.VMagicMirrorConfig
         //共通: 表情スイッチ機能
         //NOTE: 設計を安全にするため、全設定をガッと送る機能しか認めていません。
         public Message ExTrackerSetFaceSwitchSetting(string settingJson) => WithArg(settingJson);
-            
+
         #endregion
 
         #region その他
@@ -311,7 +310,7 @@ namespace Baku.VMagicMirrorConfig
 
         public Message OpenVRoidSdkUi() => NoArg();
         public Message RequestLoadVRoidWithId(string modelId) => WithArg(modelId);
-        
+
         #endregion
 
     }

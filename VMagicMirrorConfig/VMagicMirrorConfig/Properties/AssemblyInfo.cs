@@ -1,7 +1,4 @@
-﻿using System.Reflection;
-using System.Resources;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 using System.Windows;
 
 // ComVisible を false に設定すると、このアセンブリ内の型は COM コンポーネントから

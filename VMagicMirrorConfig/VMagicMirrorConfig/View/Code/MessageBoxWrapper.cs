@@ -1,8 +1,8 @@
-﻿using System.Threading;
+﻿using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using MahApps.Metro.Controls;
-using MahApps.Metro.Controls.Dialogs;
 
 namespace Baku.VMagicMirrorConfig
 {
@@ -46,7 +46,7 @@ namespace Baku.VMagicMirrorConfig
                 if (settingWindow != null)
                 {
                     await Task.WhenAny(
-                        mainWindowTask,                        
+                        mainWindowTask,
                         settingWindow.ShowMessageAsync(
                             title,
                             content,
@@ -90,7 +90,7 @@ namespace Baku.VMagicMirrorConfig
                 else
                 {
                     var result = await mainWindowTask;
-                    return result == MessageDialogResult.Affirmative;                    
+                    return result == MessageDialogResult.Affirmative;
                 }
             }
             else if (style == MessageBoxStyle.None)

@@ -14,9 +14,9 @@ namespace Baku.VMagicMirrorConfig
             }
 
             //NOTE: values[1]には言語名が入ってる想定だが、Localized.GetStringで間接的に使うので直接参照しないでよい
-            return string.IsNullOrEmpty(mainValue) 
+            return string.IsNullOrEmpty(mainValue)
                 ? LocalizedString.GetString("CommonUi_DoNothing")
-                : mainValue;        
+                : mainValue;
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)

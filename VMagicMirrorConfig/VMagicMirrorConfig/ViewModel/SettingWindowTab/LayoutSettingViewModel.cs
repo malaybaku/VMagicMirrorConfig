@@ -23,7 +23,7 @@ namespace Baku.VMagicMirrorConfig
             ResetDeviceLayoutCommand = new ActionCommand(
                 () => SettingResetUtils.ResetSingleCategoryAsync(_model.ResetDeviceLayout)
                 );
-            
+
             ResetHidSettingCommand = new ActionCommand(
                 () => SettingResetUtils.ResetSingleCategoryAsync(_model.ResetHidSetting)
                 );
@@ -37,7 +37,7 @@ namespace Baku.VMagicMirrorConfig
             _model.SelectedTypingEffectId.PropertyChanged += (_, __) =>
             {
                 TypingEffectItem = TypingEffectSelections
-                    .FirstOrDefault(v => v.Id == _model.SelectedTypingEffectId.Value);                
+                    .FirstOrDefault(v => v.Id == _model.SelectedTypingEffectId.Value);
             };
 
             _typingEffectItem = TypingEffectSelections[0];

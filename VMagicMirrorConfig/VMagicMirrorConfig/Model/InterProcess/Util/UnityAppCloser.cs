@@ -11,7 +11,7 @@ namespace Baku.VMagicMirrorConfig
         {
             receiver.ReceivedCommand += (sender, e) =>
             {
-                if (e.Command == ReceiveMessageNames.SetUnityProcessId && 
+                if (e.Command == ReceiveMessageNames.SetUnityProcessId &&
                     int.TryParse(e.Args, out int processId)
                     )
                 {
