@@ -28,6 +28,9 @@ namespace Baku.VMagicMirrorConfig
             ResetOpacitySettingCommand = new ActionCommand(
                 () => SettingResetUtils.ResetSingleCategoryAsync(_model.ResetOpacity)
                 );
+
+            //初期値を反映しないと変な事になるので注意
+            UpdatePickerColor();
         }
 
         private readonly WindowSettingSync _model;
