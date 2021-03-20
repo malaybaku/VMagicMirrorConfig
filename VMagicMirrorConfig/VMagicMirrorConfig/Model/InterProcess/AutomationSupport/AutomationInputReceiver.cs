@@ -55,18 +55,27 @@ namespace Baku.VMagicMirrorConfig
 
         private void HandleTextMessage(string message)
         {
-            //NOTE: この実装時点では設定ファイルのロードにしか対応しないため、原始的にパースする
+            //NOTE: この実装時点では設定ファイルのロードにしか対応しないため、原始的にパースする。
+            //条件文のところはnullableに配慮してワチャワチャしています(増えてきたら必ずサブルーチン化して下さい)
             var jobj = JObject.Parse(message);
-            if ((string)jobj["command"] == "load_setting_file")
-            {
-                var args = jobj["args"] as JObject;
-                int index = (int)args["index"];
+            if (jobj.Property("command")?.Value is JValue commandValue &&
+                commandValue.Type == JTokenType.String && 
+                commandValue.Value<string>() == "load_setting_file" &&
+                jobj["args"] is JObject args
+                )
+            {       
+                //NOTE: indexが拾えなくて0になると無効値になるため、ロードは走らない
+                int index = 
+                    (args.Property("index")?.Value is JValue indexValue && indexValue.Type == JTokenType.Integer) 
+                    ? indexValue.Value<int>() 
+                    : 0;
                 bool loadCharacter =
                     args.Property("load_character")?.Value is JValue v && v.Type == JTokenType.Boolean
                     ? (bool)v : false; 
                 bool loadNonCharacter =
                     args.Property("load_non_character")?.Value is JValue v2 && v2.Type == JTokenType.Boolean
                     ? (bool)v2 : false;
+
                 LoadSettingFileRequested?.Invoke(new LoadSettingFileArgs(index, loadCharacter, loadNonCharacter));
             }
         }
@@ -81,7 +90,7 @@ namespace Baku.VMagicMirrorConfig
                 await client.ReceiveAsync();
                 try
                 {
-                    IPEndPoint remoteEndPoint = null;
+                    IPEndPoint? remoteEndPoint = null;
                     byte[] data = client.Receive(ref remoteEndPoint);
                     try
                     {
