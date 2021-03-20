@@ -424,6 +424,8 @@
     <sys:String x:Key="DialogMessage_ShowVRoidSdkUi">キャラクターウィンドウ上でモデルを選択するか、またはキャンセルしてください。</sys:String>
     <sys:String x:Key="DialogTitle_LoadPreviousVRoidModel">VRoid Hubに接続中</sys:String>
     <sys:String x:Key="DialogMessage_LoadPreviousVRoidModel">前回使用したモデルのロードを試みています。モデルをロードするか、またはキャンセルしてください。</sys:String>
+    <sys:String x:Key="DialogTitle_LoadSavedVRoidModel">VRoid Hubに接続中</sys:String>
+    <sys:String x:Key="DialogMessage_LoadSavedVRoidModel">設定ファイルで指定されたモデルのロードを試みています。モデルをロードするか、またはキャンセルしてください。</sys:String>
     <sys:String x:Key="DialogTitle_ExTrackerMissingBlendShape">未定義のBlendShapeClipがあります</sys:String>
     <sys:String x:Key="DialogMessage_ExTrackerMissingBlendShape" xml:space="preserve">パーフェクトシンクに必要なBlendShapeClipの一部が未定義です。
 

@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace Baku.VMagicMirrorConfig
 {
@@ -17,6 +18,8 @@ namespace Baku.VMagicMirrorConfig
         private readonly SettingFileIo _fileIo;
         private readonly RootSettingSync _setting;
         private readonly IMessageSender _sender;
+
+        public event Action<string>? VRoidModelLoadRequested;
 
         /// <summary>
         /// 指定した番号のファイルを保存します。
@@ -39,7 +42,8 @@ namespace Baku.VMagicMirrorConfig
         /// <param name="index"></param>
         /// <param name="loadCharacter"></param>
         /// <param name="loadNonCharacter"></param>
-        public void LoadSetting(int index, bool loadCharacter, bool loadNonCharacter)
+        /// <param name="fromAutomation"></param>
+        public void LoadSetting(int index, bool loadCharacter, bool loadNonCharacter, bool fromAutomation)
         {
             if (!CheckFileExist(index))
             {
@@ -54,13 +58,14 @@ namespace Baku.VMagicMirrorConfig
             }
 
             var currentVrmPath = _setting.LastVrmLoadFilePath;
+            var currentVRoidModelId = _setting.LastLoadedVRoidModelId;
 
             var content =
                 (loadCharacter && loadNonCharacter) ? SettingFileReadContent.All :
                 loadCharacter ? SettingFileReadContent.Character :
                 SettingFileReadContent.NonCharacter;
 
-            _fileIo.LoadSetting(SpecialFilePath.GetSaveFilePath(index), SettingFileReadWriteModes.Internal, content);
+            _fileIo.LoadSetting(SpecialFilePath.GetSaveFilePath(index), SettingFileReadWriteModes.Internal, content, fromAutomation);
 
             if (content != SettingFileReadContent.NonCharacter &&
                 _setting.LastVrmLoadFilePath != currentVrmPath &&
@@ -68,6 +73,13 @@ namespace Baku.VMagicMirrorConfig
                 )
             {
                 _sender.SendMessage(MessageFactory.Instance.OpenVrm(_setting.LastVrmLoadFilePath));
+            }
+            else if(content != SettingFileReadContent.NonCharacter && 
+                _setting.LastLoadedVRoidModelId != currentVRoidModelId && 
+                !fromAutomation
+                )
+            {
+                VRoidModelLoadRequested?.Invoke(_setting.LastLoadedVRoidModelId);
             }
         }
 

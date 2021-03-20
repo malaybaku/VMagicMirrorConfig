@@ -42,8 +42,13 @@ namespace Baku.VMagicMirrorConfig
                         SettingFileReadWriteModes.Internal => _model.LastVrmLoadFilePath,
                         _ => "",
                     },
-                    LastLoadedVRoidModelId =
-                        (mode == SettingFileReadWriteModes.AutoSave && autoLoadEnabled) ? _model.LastLoadedVRoidModelId : "",
+                    LastLoadedVRoidModelId = mode switch
+                    {
+                        SettingFileReadWriteModes.AutoSave => autoLoadEnabled ? _model.LastLoadedVRoidModelId : "",
+                        SettingFileReadWriteModes.Internal => _model.LastLoadedVRoidModelId,
+                        _ => "",
+                    },
+                    
                     AutoLoadLastLoadedVrm = (mode == SettingFileReadWriteModes.AutoSave) ? autoLoadEnabled : false,
                     PreferredLanguageName = (mode == SettingFileReadWriteModes.AutoSave) ? _model.LanguageName.Value : "",
                     WindowSetting = _model.Window.Save(),
@@ -62,7 +67,7 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private void LoadSettingSub(string path, SettingFileReadWriteModes mode, SettingFileReadContent content)
+        private void LoadSettingSub(string path, SettingFileReadWriteModes mode, SettingFileReadContent content, bool fromAutomation)
         {
             using (var sr = new StreamReader(path))
             {
@@ -101,6 +106,13 @@ namespace Baku.VMagicMirrorConfig
                             $"Tried to load vrm path, but file seems not exist at: {saveData.LastLoadedVrmFilePath}"
                             );
                     }
+                                      
+                    //NOTE: オートメーションではVRoid Hubモデルのロード情報は触らない。
+                    //どのみちユーザーによるライセンス確認が必要で、オートメーションとして完結しないからです。
+                    if (!fromAutomation)
+                    {
+                        _model.LastLoadedVRoidModelId = saveData.LastLoadedVRoidModelId ?? "";
+                    }
                 }
 
                 if (content == SettingFileReadContent.All || content == SettingFileReadContent.NonCharacter)
@@ -117,7 +129,19 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        public void LoadSetting(string path, SettingFileReadWriteModes mode, SettingFileReadContent content = SettingFileReadContent.All)
+        /// <summary>
+        /// 指定したファイルパスから設定をロードします。
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="mode"></param>
+        /// <param name="content"></param>
+        /// <param name="fromAutomation"></param>
+        public void LoadSetting(
+            string path, 
+            SettingFileReadWriteModes mode, 
+            SettingFileReadContent content = SettingFileReadContent.All,
+            bool fromAutomation = false
+            )
         {
             if (!File.Exists(path))
             {
@@ -130,7 +154,7 @@ namespace Baku.VMagicMirrorConfig
                 //NOTE: ファイルロードではメッセージが凄い量になるので、
                 //コンポジットして「1つの大きいメッセージ」として書き込むためにこうしてます
                 _sender.StartCommandComposite();
-                LoadSettingSub(path, mode, content);
+                LoadSettingSub(path, mode, content, fromAutomation);
                 _sender.EndCommandComposite();
             }
             catch (Exception ex)

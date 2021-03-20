@@ -50,7 +50,7 @@ namespace Baku.VMagicMirrorConfig
             SettingIo = new SettingIoViewModel(Model.Automation, SaveFileManager, MessageSender);
             //オートメーションの配線: 1つしかないのでザツにやっちゃう
             Model.Automation.LoadSettingFileRequested += 
-                v => SaveFileManager.LoadSetting(v.Index, v.LoadCharacter, v.LoadNonCharacter);
+                v => SaveFileManager.LoadSetting(v.Index, v.LoadCharacter, v.LoadNonCharacter, true);
 
             _runtimeHelper = new RuntimeHelper(MessageSender, MessageIo.Receiver, Model);
 
@@ -71,6 +71,7 @@ namespace Baku.VMagicMirrorConfig
             OpenScreenshotFolderCommand = new ActionCommand(_runtimeHelper.OpenScreenshotSavedFolder);
 
             MessageIo.Receiver.ReceivedCommand += OnReceiveCommand;
+            SaveFileManager.VRoidModelLoadRequested += _ => LoadSavedVRoidModel(false);
         }
 
         private void OnReceiveCommand(object? sender, CommandReceivedEventArgs e)
@@ -308,7 +309,7 @@ namespace Baku.VMagicMirrorConfig
                 Model.LastLoadedVRoidModelId = "";
                 if (Model.AutoLoadLastLoadedVrm.Value && !string.IsNullOrEmpty(Model.LastVrmLoadFilePath))
                 {
-                    LoadLastLoadedVrm();
+                    LoadLastLoadedLocalVrm();
                 }
             }
             catch (Exception ex)
@@ -358,11 +359,11 @@ namespace Baku.VMagicMirrorConfig
 
             if (AutoLoadLastLoadedVrm.Value && !string.IsNullOrEmpty(Model.LastVrmLoadFilePath))
             {
-                LoadLastLoadedVrm();
+                LoadLastLoadedLocalVrm();
             }
             else if (AutoLoadLastLoadedVrm.Value && !string.IsNullOrEmpty(Model.LastLoadedVRoidModelId))
             {
-                LoadLastLoadedVRoid();
+                LoadSavedVRoidModel(true);
             }
         }
 
@@ -379,7 +380,7 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private void LoadLastLoadedVrm()
+        private void LoadLastLoadedLocalVrm()
         {
             if (File.Exists(Model.LastVrmLoadFilePath))
             {
@@ -387,7 +388,7 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private async void LoadLastLoadedVRoid()
+        private async void LoadSavedVRoidModel(bool fromAutoSave)
         {
             if (string.IsNullOrEmpty(Model.LastLoadedVRoidModelId))
             {
@@ -400,7 +401,10 @@ namespace Baku.VMagicMirrorConfig
             MessageSender.SendMessage(MessageFactory.Instance.RequestLoadVRoidWithId(Model.LastLoadedVRoidModelId));
 
             _isVRoidHubUiActive = true;
-            var message = MessageIndication.ShowLoadingPreviousVRoid();
+            //自動セーブなら「前回のモデル」だしそれ以外なら「設定ファイルに乗ってたモデル」となる。分けといたほうがわかりやすいので分ける。
+            var message = fromAutoSave 
+                ? MessageIndication.ShowLoadingPreviousVRoid() 
+                : MessageIndication.ShowLoadingSavedVRoidModel();
             bool _ = await MessageBoxWrapper.Instance.ShowAsync(
                 message.Title, message.Content, MessageBoxWrapper.MessageBoxStyle.None
                 );

@@ -420,6 +420,8 @@ This operation does not change saved files (save 1,2,3).</sys:String>
     <sys:String x:Key="DialogMessage_ShowVRoidSdkUi">Select model to load, or cancel operation.</sys:String>
     <sys:String x:Key="DialogTitle_LoadPreviousVRoidModel">Connecting to VRoid Hub</sys:String>
     <sys:String x:Key="DialogMessage_LoadPreviousVRoidModel">Trying to load avatar used in previous time. Select model or cancel operation.</sys:String>
+    <sys:String x:Key="DialogTitle_LoadSavedVRoidModel">Connecting to VRoid Hub</sys:String>
+    <sys:String x:Key="DialogMessage_LoadSavedVRoidModel">Trying to load avatar saved in setting file. Select model or cancel operation.</sys:String>
     <sys:String x:Key="DialogTitle_ExTrackerMissingBlendShape">Missing BlendShapeClip</sys:String>
     <sys:String x:Key="DialogMessage_ExTrackerMissingBlendShape" xml:space="preserve">Detect missing BlendShapeClips for perfect sync.
 

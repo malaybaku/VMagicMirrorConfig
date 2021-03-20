@@ -96,7 +96,7 @@
             }
 
             _saveFileManager.LoadSetting(
-                index, LoadCharacterWhenSettingLoaded.Value, LoadNonCharacterWhenSettingLoaded.Value
+                index, LoadCharacterWhenSettingLoaded.Value, LoadNonCharacterWhenSettingLoaded.Value, false
                 );
         }
 

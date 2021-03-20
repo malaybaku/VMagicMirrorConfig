@@ -23,6 +23,7 @@
         public static MessageIndication ResetSingleCategoryConfirmation() => Load("ResetCategorySetting");
         public static MessageIndication ShowVRoidSdkUi() => Load("ShowVRoidSdkUi");
         public static MessageIndication ShowLoadingPreviousVRoid() => Load("LoadPreviousVRoidModel");
+        public static MessageIndication ShowLoadingSavedVRoidModel() => Load("LoadSavedVRoidModel");
 
         /// <summary>
         /// NOTE: Contentのほうがフォーマット文字列なのでstring.Formatで消すアイテムの名前を指定して完成させること！
