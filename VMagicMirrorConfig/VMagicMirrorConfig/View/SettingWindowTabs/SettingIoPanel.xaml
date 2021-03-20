@@ -110,7 +110,7 @@
                               IsChecked="{Binding LoadCharacterWhenSettingLoaded.Value}"
                               />
                     <CheckBox Margin="15,0,15,5" Content="{DynamicResource SettingFile_LoadNonCharacter}"
-                              IsChecked="{Binding LoadCharacterWhenSettingLoaded.Value}"
+                              IsChecked="{Binding LoadNonCharacterWhenSettingLoaded.Value}"
                               />
                 </StackPanel>
             </Border>

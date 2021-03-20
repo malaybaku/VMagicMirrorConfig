@@ -9,6 +9,7 @@
             _model = model;
             _saveFileManager = saveFileManager;
 
+            OpenInstructionUrlCommand = new ActionCommand(OpenInstructionUrl);
             RequestEnableAutomationCommand = new ActionCommand(OnEnableAutomationRequested);
             RequestDisableAutomationCommand = new ActionCommand(OnDisableAutomationRequested);
             ApplyPortNumberCommand = new ActionCommand(ApplyPortNumber);
@@ -109,6 +110,7 @@
         //NOTE: Converter使うのも違う気がするのでViewModel層でやってしまう
         public RProperty<bool> PortNumberIsInvalid { get; } = new RProperty<bool>(false);
 
+        public ActionCommand OpenInstructionUrlCommand { get; }
         public ActionCommand RequestEnableAutomationCommand { get; }
         public ActionCommand RequestDisableAutomationCommand { get; }
         public ActionCommand ApplyPortNumberCommand { get; }
@@ -147,6 +149,10 @@
             }
         }
 
+        //NOTE: オートメーションの説明ではあるけど設定ファイルタブ全体の設定に飛ばす。
+        //どのみちファイルI/Oがどうなってるか説明する必要あるので
+        private void OpenInstructionUrl()
+            => UrlNavigate.Open(LocalizedString.GetString("URL_docs_setting_files"));
 
         #endregion
 

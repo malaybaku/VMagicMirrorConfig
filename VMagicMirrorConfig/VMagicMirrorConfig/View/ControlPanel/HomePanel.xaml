@@ -334,7 +334,7 @@
                             <CheckBox Margin="15,0,15,5" 
                                       Padding="0"
                                       Content="{DynamicResource SettingFile_LoadNonCharacter}"
-                                      IsChecked="{Binding SettingIo.LoadCharacterWhenSettingLoaded.Value}"
+                                      IsChecked="{Binding SettingIo.LoadNonCharacterWhenSettingLoaded.Value}"
                                       />
 
                             <Grid>
