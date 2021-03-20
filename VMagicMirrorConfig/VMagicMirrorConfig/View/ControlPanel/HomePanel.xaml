@@ -308,19 +308,19 @@
 
                                 <Button Grid.Row="1" Grid.Column="1"
                                     Command="{Binding SettingIo.LoadSettingCommand}"
-                                    IsEnabled="{Binding SettingIo.Save1Exist}"
+                                    IsEnabled="{Binding SettingIo.Save1Exist.Value}"
                                     CommandParameter="1"
                                     Content="1"
                                     />
                                 <Button Grid.Row="1" Grid.Column="2"
                                     Command="{Binding SettingIo.LoadSettingCommand}"
-                                    IsEnabled="{Binding SettingIo.Save2Exist}"
+                                    IsEnabled="{Binding SettingIo.Save2Exist.Value}"
                                     CommandParameter="2"
                                     Content="2"
                                     />
                                 <Button Grid.Row="1" Grid.Column="3"
                                     Command="{Binding SettingIo.LoadSettingCommand}"
-                                    IsEnabled="{Binding SettingIo.Save3Exist}"
+                                    IsEnabled="{Binding SettingIo.Save3Exist.Value}"
                                     CommandParameter="3"
                                     Content="3"
                                     />
@@ -329,12 +329,12 @@
                             <CheckBox Margin="15,5,15,0" 
                                       Padding="0"
                                       Content="{DynamicResource SettingFile_LoadCharacter_Streaming}"
-                                      IsChecked="{Binding SettingIo.LoadCharacterWhenSettingLoaded}"
+                                      IsChecked="{Binding SettingIo.LoadCharacterWhenSettingLoaded.Value}"
                                       />    
                             <CheckBox Margin="15,0,15,5" 
                                       Padding="0"
                                       Content="{DynamicResource SettingFile_LoadNonCharacter}"
-                                      IsChecked="{Binding SettingIo.LoadCharacterWhenSettingLoaded}"
+                                      IsChecked="{Binding SettingIo.LoadCharacterWhenSettingLoaded.Value}"
                                       />
 
                             <Grid>

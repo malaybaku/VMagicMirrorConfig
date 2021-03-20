@@ -88,29 +88,29 @@
 
                             <Button Grid.Row="1" Grid.Column="1"
                                     Command="{Binding LoadSettingCommand}"
-                                    IsEnabled="{Binding Save1Exist}"
+                                    IsEnabled="{Binding Save1Exist.Value}"
                                     CommandParameter="1"
                                     Content="1"
                                     />
                             <Button Grid.Row="1" Grid.Column="2"
                                     Command="{Binding LoadSettingCommand}"
-                                    IsEnabled="{Binding Save2Exist}"
+                                    IsEnabled="{Binding Save2Exist.Value}"
                                     CommandParameter="2"
                                     Content="2"
                                     />
                             <Button Grid.Row="1" Grid.Column="3"
                                     Command="{Binding LoadSettingCommand}"
-                                    IsEnabled="{Binding Save3Exist}"
+                                    IsEnabled="{Binding Save3Exist.Value}"
                                     CommandParameter="3"
                                     Content="3"
                                     />
                         </Grid>
 
                     <CheckBox Margin="15,5,15,0" Content="{DynamicResource SettingFile_LoadCharacter}"
-                              IsChecked="{Binding LoadCharacterWhenSettingLoaded}"
+                              IsChecked="{Binding LoadCharacterWhenSettingLoaded.Value}"
                               />
                     <CheckBox Margin="15,0,15,5" Content="{DynamicResource SettingFile_LoadNonCharacter}"
-                              IsChecked="{Binding LoadCharacterWhenSettingLoaded}"
+                              IsChecked="{Binding LoadCharacterWhenSettingLoaded.Value}"
                               />
                 </StackPanel>
             </Border>
@@ -175,7 +175,7 @@
                                    />
 
                         <TextBox Grid.Column="1"
-                                 Text="{Binding AutomationPortNumber}"
+                                 Text="{Binding AutomationPortNumberText.Value}"
                                  md:HintAssist.Hint="Port Number (0-65535)"
                                  Margin="10,0"
                                  />

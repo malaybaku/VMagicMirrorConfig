@@ -1,6 +1,6 @@
 ﻿namespace Baku.VMagicMirrorConfig
 {
-    class AutomationSetting : SettingEntityBase
+    public class AutomationSetting : SettingEntityBase
     {
         /// <summary>
         /// NOTE: 規約としてこの値は書き換えません。

@@ -52,6 +52,7 @@ namespace Baku.VMagicMirrorConfig
                     LightSetting = _model.Light.Save(),
                     WordToMotionSetting = _model.WordToMotion.Save(),
                     ExternalTrackerSetting = _model.ExternalTracker.Save(),
+                    AutomationSetting = _model.Automation.Save(),
                 };
 
                 //ここだけ互換性の都合で入れ子になってることに注意
@@ -111,6 +112,7 @@ namespace Baku.VMagicMirrorConfig
                     _model.Light.Load(saveData.LightSetting);
                     _model.WordToMotion.Load(saveData.WordToMotionSetting);
                     _model.ExternalTracker.Load(saveData.ExternalTrackerSetting);
+                    _model.Automation.Load(saveData.AutomationSetting);
                 }
             }
         }
