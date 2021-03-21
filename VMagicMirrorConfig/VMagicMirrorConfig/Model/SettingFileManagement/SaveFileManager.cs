@@ -57,8 +57,8 @@ namespace Baku.VMagicMirrorConfig
                 return;
             }
 
-            var currentVrmPath = _setting.LastVrmLoadFilePath;
-            var currentVRoidModelId = _setting.LastLoadedVRoidModelId;
+            var prevVrmPath = _setting.LastVrmLoadFilePath;
+            var prevVRoidModelId = _setting.LastLoadedVRoidModelId;
 
             var content =
                 (loadCharacter && loadNonCharacter) ? SettingFileReadContent.All :
@@ -70,23 +70,25 @@ namespace Baku.VMagicMirrorConfig
             var loadedVRoidModelId = _setting.LastLoadedVRoidModelId;
 
             //NOTE: この時点ではキャラを切り替えたわけではないので、実態に合わすため元に戻してから続ける。
-            _setting.LastVrmLoadFilePath = currentVrmPath;
-            _setting.LastLoadedVRoidModelId = currentVRoidModelId;
+            _setting.LastVrmLoadFilePath = prevVrmPath;
+            _setting.LastLoadedVRoidModelId = prevVRoidModelId;
 
             if (content != SettingFileReadContent.NonCharacter &&
-                loadedVrmPath != currentVrmPath &&
+                loadedVrmPath != prevVrmPath &&
                 File.Exists(loadedVrmPath)
                 )
             {
+                LogOutput.Instance.Write($"Load Local VRM, setting no={index}, automation={fromAutomation}, path={loadedVrmPath}");
                 _sender.SendMessage(MessageFactory.Instance.OpenVrm(loadedVrmPath));
                 _setting.OnLocalModelLoaded(loadedVrmPath);
             }
             else if(content != SettingFileReadContent.NonCharacter && 
-                loadedVRoidModelId != currentVRoidModelId && 
+                loadedVRoidModelId != prevVRoidModelId && 
                 !string.IsNullOrEmpty(loadedVRoidModelId) && 
                 !fromAutomation
                 )
             {
+                LogOutput.Instance.Write($"Load VRoid, setting no={index}, automation={fromAutomation},  id={loadedVRoidModelId}");
                 VRoidModelLoadRequested?.Invoke(loadedVRoidModelId);
             }
         }

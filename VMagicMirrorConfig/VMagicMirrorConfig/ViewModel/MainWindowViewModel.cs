@@ -69,7 +69,7 @@ namespace Baku.VMagicMirrorConfig
             OpenScreenshotFolderCommand = new ActionCommand(_runtimeHelper.OpenScreenshotSavedFolder);
 
             MessageIo.Receiver.ReceivedCommand += OnReceiveCommand;
-            SaveFileManager.VRoidModelLoadRequested += _ => LoadSavedVRoidModel(false);
+            SaveFileManager.VRoidModelLoadRequested += id => LoadSavedVRoidModel(id, false);
         }
 
         private void OnReceiveCommand(object? sender, CommandReceivedEventArgs e)
@@ -333,7 +333,7 @@ namespace Baku.VMagicMirrorConfig
             }
             else if (AutoLoadLastLoadedVrm.Value && !string.IsNullOrEmpty(Model.LastLoadedVRoidModelId))
             {
-                LoadSavedVRoidModel(true);
+                LoadSavedVRoidModel(Model.LastLoadedVRoidModelId, true);
             }
         }
 
@@ -358,9 +358,9 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private async void LoadSavedVRoidModel(bool fromAutoSave)
+        private async void LoadSavedVRoidModel(string modelId, bool fromAutoSave)
         {
-            if (string.IsNullOrEmpty(Model.LastLoadedVRoidModelId))
+            if (string.IsNullOrEmpty(modelId))
             {
                 return;
             }
@@ -368,7 +368,7 @@ namespace Baku.VMagicMirrorConfig
             PrepareShowUiOnUnity();
 
             //NOTE: モデルIDを載せる以外は通常のUIオープンと同じフロー
-            MessageSender.SendMessage(MessageFactory.Instance.RequestLoadVRoidWithId(Model.LastLoadedVRoidModelId));
+            MessageSender.SendMessage(MessageFactory.Instance.RequestLoadVRoidWithId(modelId));
 
             _isVRoidHubUiActive = true;
             //自動セーブなら「前回のモデル」だしそれ以外なら「設定ファイルに乗ってたモデル」となる。分けといたほうがわかりやすいので分ける。
