@@ -349,13 +349,13 @@
                                 <Button Grid.Row="0" Grid.Column="0"
                                         Width="NaN"
                                         Margin="5"
-                                        Content="{DynamicResource Home_SaveSettingFile}" 
+                                        Content="{DynamicResource SettingFile_Export}" 
                                         Command="{Binding SettingIo.ExportSettingToFileCommand}"
                                         />
                                 <Button Grid.Row="0" Grid.Column="1"
                                         Width="NaN"
                                         Margin="5"
-                                        Content="{DynamicResource Home_LoadSettingFile}" 
+                                        Content="{DynamicResource SettingFile_Import}" 
                                         Command="{Binding SettingIo.ImportSettingFromFileCommand}"
                                         />
 

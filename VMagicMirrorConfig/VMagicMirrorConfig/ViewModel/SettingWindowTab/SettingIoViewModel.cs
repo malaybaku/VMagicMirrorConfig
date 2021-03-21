@@ -112,7 +112,7 @@ namespace Baku.VMagicMirrorConfig
                 );
             //NOTE: コケる事も考えられるんだけど判別がムズいんですよね…
             SnackbarWrapper.Enqueue(string.Format(
-                LocalizedString.GetString("SettingFiles_LoadCompleted"), index
+                LocalizedString.GetString("SettingFile_LoadCompleted"), index
                 ));
         }
 
