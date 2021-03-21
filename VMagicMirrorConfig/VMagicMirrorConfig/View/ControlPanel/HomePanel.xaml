@@ -341,7 +341,6 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
@@ -351,13 +350,13 @@
                                         Width="NaN"
                                         Margin="5"
                                         Content="{DynamicResource Home_SaveSettingFile}" 
-                                        Command="{Binding SaveSettingToFileCommand}"
+                                        Command="{Binding SettingIo.ExportSettingToFileCommand}"
                                         />
                                 <Button Grid.Row="0" Grid.Column="1"
                                         Width="NaN"
                                         Margin="5"
                                         Content="{DynamicResource Home_LoadSettingFile}" 
-                                        Command="{Binding LoadSettingFromFileCommand}"
+                                        Command="{Binding SettingIo.ImportSettingFromFileCommand}"
                                         />
 
                                 <Button Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"

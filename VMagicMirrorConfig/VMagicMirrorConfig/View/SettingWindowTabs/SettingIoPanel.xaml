@@ -112,6 +112,31 @@
                     <CheckBox Margin="15,0,15,5" Content="{DynamicResource SettingFile_LoadNonCharacter}"
                               IsChecked="{Binding LoadNonCharacterWhenSettingLoaded.Value}"
                               />
+
+                    <Grid Margin="20,5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Row="0" Grid.Column="0"
+                                        Width="NaN"
+                                        Margin="5"
+                                        Content="{DynamicResource SettingFile_Export}" 
+                                        Command="{Binding ExportSettingToFileCommand}"
+                                        />
+                        <Button Grid.Row="0" Grid.Column="1"
+                                        Width="NaN"
+                                        Margin="5"
+                                        Content="{DynamicResource SettingFile_Import}" 
+                                        Command="{Binding ImportSettingFromFileCommand}"
+                                        />
+
+                    </Grid>
+
                 </StackPanel>
             </Border>
 

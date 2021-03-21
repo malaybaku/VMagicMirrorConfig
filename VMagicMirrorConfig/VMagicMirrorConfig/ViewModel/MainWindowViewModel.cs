@@ -63,8 +63,6 @@ namespace Baku.VMagicMirrorConfig
             OpenSettingWindowCommand = new ActionCommand(() => SettingWindow.OpenOrActivateExistingWindow(this));
 
             ResetToDefaultCommand = new ActionCommand(ResetToDefault);
-            SaveSettingToFileCommand = new ActionCommand(SaveSettingToFile);
-            LoadSettingFromFileCommand = new ActionCommand(LoadSettingFromFile);
             LoadPrevSettingCommand = new ActionCommand(LoadPrevSetting);
 
             TakeScreenshotCommand = new ActionCommand(_runtimeHelper.TakeScreenshot);
@@ -143,8 +141,7 @@ namespace Baku.VMagicMirrorConfig
         public ActionCommand OpenSettingWindowCommand { get; }
 
         public ActionCommand ResetToDefaultCommand { get; }
-        public ActionCommand SaveSettingToFileCommand { get; }
-        public ActionCommand LoadSettingFromFileCommand { get; }
+
         public ActionCommand LoadPrevSettingCommand { get; }
 
         public ActionCommand TakeScreenshotCommand { get; }
@@ -238,34 +235,7 @@ namespace Baku.VMagicMirrorConfig
         }
 
 
-        private void SaveSettingToFile()
-        {
-            var dialog = new SaveFileDialog()
-            {
-                Title = "Save VMagicMirror Setting",
-                Filter = "VMagicMirror Setting File(*.vmm)|*.vmm",
-                DefaultExt = ".vmm",
-                AddExtension = true,
-            };
-            if (dialog.ShowDialog() == true)
-            {
-                SettingFileIo.SaveSetting(dialog.FileName, SettingFileReadWriteModes.Exported);
-            }
-        }
-
-        private void LoadSettingFromFile()
-        {
-            var dialog = new OpenFileDialog()
-            {
-                Title = "Load VMagicMirror Setting",
-                Filter = "VMagicMirror Setting File (*.vmm)|*.vmm",
-                Multiselect = false,
-            };
-            if (dialog.ShowDialog() == true)
-            {
-                SettingFileIo.LoadSetting(dialog.FileName, SettingFileReadWriteModes.Exported);
-            }
-        }
+     
 
         private async void ResetToDefault()
         {

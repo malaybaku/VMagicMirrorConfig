@@ -40,8 +40,6 @@
 
     <sys:String x:Key="Home_SettingFileIo">Setting</sys:String>    
     <sys:String x:Key="Home_OpenSetting">Open Setting Window</sys:String>
-    <sys:String x:Key="Home_LoadSettingFile">Export</sys:String>
-    <sys:String x:Key="Home_SaveSettingFile">Import</sys:String>
 
     <sys:String x:Key="Home_SettingManagement">Setting Files</sys:String>
     <sys:String x:Key="Home_Reset">Reset Settings</sys:String>
@@ -381,9 +379,11 @@ Please test by typing "joy".</sys:String>
     <sys:String x:Key="SettingFile_SaveAndLoad">Save / Load</sys:String>
     <sys:String x:Key="SettingFile_SaveArea">Save Current Setting</sys:String>
     <sys:String x:Key="SettingFile_LoadArea">Load Setting</sys:String>
-    <sys:String x:Key="SettingFile_LoadCharacter">Load Character (*local file only)</sys:String>
-    <sys:String x:Key="SettingFile_LoadCharacter_Streaming">Load Character (*local file only)</sys:String>
+    <sys:String x:Key="SettingFile_LoadCharacter">Load Character</sys:String>
+    <sys:String x:Key="SettingFile_LoadCharacter_Streaming">Load Character</sys:String>
     <sys:String x:Key="SettingFile_LoadNonCharacter">Load Non-Character Settings</sys:String>
+    <sys:String x:Key="SettingFile_Export">Export</sys:String>
+    <sys:String x:Key="SettingFile_Import">Import</sys:String>
 
     <sys:String x:Key="SettingFile_Automation">Automation</sys:String>
     <sys:String x:Key="SettingFile_Instruction" xml:space="preserve">WARNING:
@@ -401,7 +401,9 @@ VRoid Hub model is not supported.</sys:String>
     <!-- NOTE: used from ViewModel code. -->
     <sys:String x:Key="SettingFile_SaveCompleted">Saved Current Setting to No.{0}.</sys:String>
     <sys:String x:Key="SettingFile_LoadCompleted">Loaded Setting No.{0}.</sys:String>
-       
+    <sys:String x:Key="SettingFile_SaveCompleted_ExportedFile">設定をファイルに保存しました。</sys:String>
+    <sys:String x:Key="SettingFile_LoadCompleted_ExportedFile">設定をファイルからロードしました。</sys:String>
+
     <!-- Dialog Messages -->
     <sys:String x:Key="DialogTitle_LoadLocalVrm">Load VRM</sys:String>
     <sys:String x:Key="DialogMessage_LoadLocalVrm">Please confirm the license in viewer window. Do you load the character?</sys:String>

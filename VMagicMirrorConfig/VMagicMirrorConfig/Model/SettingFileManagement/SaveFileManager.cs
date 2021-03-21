@@ -11,11 +11,11 @@ namespace Baku.VMagicMirrorConfig
 
         public SaveFileManager(SettingFileIo fileIo, RootSettingSync setting, IMessageSender sender)
         {
-            _fileIo = fileIo;
+            SettingFileIo = fileIo;
             _setting = setting;
             _sender = sender;
         }
-        private readonly SettingFileIo _fileIo;
+        public SettingFileIo SettingFileIo { get; }
         private readonly RootSettingSync _setting;
         private readonly IMessageSender _sender;
 
@@ -32,7 +32,7 @@ namespace Baku.VMagicMirrorConfig
                 return;
             }
 
-            _fileIo.SaveSetting(SpecialFilePath.GetSaveFilePath(index), SettingFileReadWriteModes.Internal);
+            SettingFileIo.SaveSetting(SpecialFilePath.GetSaveFilePath(index), SettingFileReadWriteModes.Internal);
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace Baku.VMagicMirrorConfig
                 loadCharacter ? SettingFileReadContent.Character :
                 SettingFileReadContent.NonCharacter;
 
-            _fileIo.LoadSetting(SpecialFilePath.GetSaveFilePath(index), SettingFileReadWriteModes.Internal, content, fromAutomation);
+            SettingFileIo.LoadSetting(SpecialFilePath.GetSaveFilePath(index), SettingFileReadWriteModes.Internal, content, fromAutomation);
 
             if (content != SettingFileReadContent.NonCharacter &&
                 _setting.LastVrmLoadFilePath != currentVrmPath &&

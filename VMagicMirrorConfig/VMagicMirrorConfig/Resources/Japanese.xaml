@@ -40,8 +40,6 @@
 
     <sys:String x:Key="Home_SettingFileIo">詳細設定</sys:String>    
     <sys:String x:Key="Home_OpenSetting">設定ウィンドウを開く</sys:String>
-    <sys:String x:Key="Home_SaveSettingFile">エクスポート</sys:String>
-    <sys:String x:Key="Home_LoadSettingFile">インポート</sys:String>
 
     <sys:String x:Key="Home_SettingManagement">設定ファイル</sys:String>
     <sys:String x:Key="Home_Reset">現在の設定をリセット</sys:String>
@@ -385,9 +383,11 @@
     <sys:String x:Key="SettingFile_SaveAndLoad">セーブ・ロード</sys:String>
     <sys:String x:Key="SettingFile_SaveArea">現在の設定を保存</sys:String>
     <sys:String x:Key="SettingFile_LoadArea">設定をロード</sys:String>
-    <sys:String x:Key="SettingFile_LoadCharacter">ロード時にキャラを切り替える(※ローカルファイルのみ有効)</sys:String>
-    <sys:String x:Key="SettingFile_LoadCharacter_Streaming">キャラをロード(※ローカルファイルのみ)</sys:String>
-    <sys:String x:Key="SettingFile_LoadNonCharacter">キャラ以外の情報もロード</sys:String>
+    <sys:String x:Key="SettingFile_LoadCharacter">ロード時にキャラを切り替える</sys:String>
+    <sys:String x:Key="SettingFile_LoadCharacter_Streaming">キャラをロード</sys:String>
+    <sys:String x:Key="SettingFile_LoadNonCharacter">キャラ以外の情報をロード</sys:String>
+    <sys:String x:Key="SettingFile_Export">エクスポート</sys:String>
+    <sys:String x:Key="SettingFile_Import">インポート</sys:String>
     
     <sys:String x:Key="SettingFile_Automation">オートメーション</sys:String>
     <sys:String x:Key="SettingFile_Instruction" xml:space="preserve">注意:
@@ -405,6 +405,8 @@
     <!-- NOTE: used from ViewModel code. -->
     <sys:String x:Key="SettingFile_SaveCompleted">設定を No.{0} に保存しました。</sys:String>
     <sys:String x:Key="SettingFile_LoadCompleted">設定 No.{0} をロードしました。</sys:String>
+    <sys:String x:Key="SettingFile_SaveCompleted_ExportedFile">設定をファイルに保存しました。</sys:String>
+    <sys:String x:Key="SettingFile_LoadCompleted_ExportedFile">設定をファイルからロードしました。</sys:String>
    
     <!-- Dialog Messages -->
     <sys:String x:Key="DialogTitle_LoadLocalVrm">VRMの読み込み</sys:String>

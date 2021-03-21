@@ -1,4 +1,6 @@
-﻿namespace Baku.VMagicMirrorConfig
+﻿using Microsoft.Win32;
+
+namespace Baku.VMagicMirrorConfig
 {
     public class SettingIoViewModel : SettingViewModelBase
     {
@@ -15,6 +17,11 @@
             ApplyPortNumberCommand = new ActionCommand(ApplyPortNumber);
             SaveCurrentSettingCommand = new ActionCommand<string>(SaveCurrentSetting);
             LoadSettingCommand = new ActionCommand<string>(LoadSetting);
+
+
+
+            ExportSettingToFileCommand = new ActionCommand(SaveSettingToFile);
+            ImportSettingFromFileCommand = new ActionCommand(LoadSettingFromFile);
 
             AutomationPortNumberText = new RProperty<string>(
                 _model.AutomationPortNumber.Value.ToString(), v =>
@@ -76,9 +83,9 @@
             Save2Exist.Value = _saveFileManager.CheckFileExist(2);
             Save3Exist.Value = _saveFileManager.CheckFileExist(3);
 
-            //ファイルレベルの処理なので流石にスナックバーくらい出しておく(ロードのほうも同様)
+            //ファイルレベルの処理なので流石にスナックバーくらい出しておく(ロードとかインポート/エクスポートも同様)
             SnackbarWrapper.Enqueue(string.Format(
-                LocalizedString.GetString("SettingFiles_SaveCompleted"), index
+                LocalizedString.GetString("SettingFile_SaveCompleted"), index
                 ));
         }
 
@@ -103,9 +110,48 @@
             _saveFileManager.LoadSetting(
                 index, LoadCharacterWhenSettingLoaded.Value, LoadNonCharacterWhenSettingLoaded.Value, false
                 );
+            //NOTE: コケる事も考えられるんだけど判別がムズいんですよね…
             SnackbarWrapper.Enqueue(string.Format(
-                LocalizedString.GetString("SettingFiles_SaveCompleted"), index
+                LocalizedString.GetString("SettingFiles_LoadCompleted"), index
                 ));
+        }
+
+        #endregion
+
+        #region エクスポート/インポート
+
+        public ActionCommand ExportSettingToFileCommand { get; }
+        public ActionCommand ImportSettingFromFileCommand { get; }
+
+        private void SaveSettingToFile()
+        {
+            var dialog = new SaveFileDialog()
+            {
+                Title = "Save VMagicMirror Setting",
+                Filter = "VMagicMirror Setting File(*.vmm)|*.vmm",
+                DefaultExt = ".vmm",
+                AddExtension = true,
+            };
+            if (dialog.ShowDialog() == true)
+            {
+                _saveFileManager.SettingFileIo.SaveSetting(dialog.FileName, SettingFileReadWriteModes.Exported);
+                SnackbarWrapper.Enqueue(LocalizedString.GetString("SettingFile_SaveCompleted_ExportedFile"));
+            }
+        }
+
+        private void LoadSettingFromFile()
+        {
+            var dialog = new OpenFileDialog()
+            {
+                Title = "Load VMagicMirror Setting",
+                Filter = "VMagicMirror Setting File (*.vmm)|*.vmm",
+                Multiselect = false,
+            };
+            if (dialog.ShowDialog() == true)
+            {
+                _saveFileManager.SettingFileIo.LoadSetting(dialog.FileName, SettingFileReadWriteModes.Exported);
+                SnackbarWrapper.Enqueue(LocalizedString.GetString("SettingFile_LoadCompleted_ExportedFile"));
+            }
         }
 
         #endregion
