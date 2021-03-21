@@ -402,6 +402,10 @@
     <sys:String x:Key="SettingFile_ApplyPortNumber">適用</sys:String>
     <sys:String x:Key="SettingFile_SeeMore">使い方をチェック (Webページへ移動)</sys:String>
 
+    <!-- NOTE: used from ViewModel code. -->
+    <sys:String x:Key="SettingFile_SaveCompleted">設定を No.{0} に保存しました。</sys:String>
+    <sys:String x:Key="SettingFile_LoadCompleted">設定 No.{0} をロードしました。</sys:String>
+   
     <!-- Dialog Messages -->
     <sys:String x:Key="DialogTitle_LoadLocalVrm">VRMの読み込み</sys:String>
     <sys:String x:Key="DialogMessage_LoadLocalVrm">ビューアー画面のライセンスを確認してください。読み込みますか？</sys:String>
@@ -444,10 +448,12 @@ webカメラでの顔トラッキングを有効にする場合は
 </sys:String>
 
     <sys:String x:Key="DialogTitle_ConfirmSettingFileSave">設定を保存</sys:String>
-    <sys:String x:Key="DialogMessage_ConfirmSettingFileSave">現在の設定を`{0}`に保存しますか？現在保存済みの設定がある場合、上書きされます。</sys:String>
+    <sys:String x:Key="DialogMessage_ConfirmSettingFileSave" xml:space="preserve">現在の設定を No.{0} に保存しますか？
+        
+現在保存済みの設定がある場合、上書きされます。</sys:String>
     
     <sys:String x:Key="DialogTitle_ConfirmSettingFileLoad">設定をロード</sys:String>
-    <sys:String x:Key="DialogMessage_ConfirmSettingFileLoad" xml:space="preserve">設定`{0}`をロードしますか？
+    <sys:String x:Key="DialogMessage_ConfirmSettingFileLoad" xml:space="preserve">設定 No.{0} をロードしますか？
         
 キャラ以外の設定をロードすると、自動セーブの内容も上書きされます。</sys:String>
 

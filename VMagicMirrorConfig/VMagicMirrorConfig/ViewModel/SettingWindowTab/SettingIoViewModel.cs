@@ -75,6 +75,11 @@
             Save1Exist.Value = _saveFileManager.CheckFileExist(1);
             Save2Exist.Value = _saveFileManager.CheckFileExist(2);
             Save3Exist.Value = _saveFileManager.CheckFileExist(3);
+
+            //ファイルレベルの処理なので流石にスナックバーくらい出しておく(ロードのほうも同様)
+            SnackbarWrapper.Enqueue(string.Format(
+                LocalizedString.GetString("SettingFiles_SaveCompleted"), index
+                ));
         }
 
         private async void LoadSetting(string? s)
@@ -98,6 +103,9 @@
             _saveFileManager.LoadSetting(
                 index, LoadCharacterWhenSettingLoaded.Value, LoadNonCharacterWhenSettingLoaded.Value, false
                 );
+            SnackbarWrapper.Enqueue(string.Format(
+                LocalizedString.GetString("SettingFiles_SaveCompleted"), index
+                ));
         }
 
         #endregion
