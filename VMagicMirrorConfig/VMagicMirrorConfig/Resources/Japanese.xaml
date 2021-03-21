@@ -391,10 +391,10 @@
     
     <sys:String x:Key="SettingFile_Automation">オートメーション</sys:String>
     <sys:String x:Key="SettingFile_Instruction" xml:space="preserve">注意:
-この機能ではローカルファイルのVRMロード時にライセンスの確認をスキップします。
-あらかじめライセンスを確認したモデルのみを使用して下さい。
+この機能を使うとGUIを操作せずにキャラクターを切り替えられます。
+ライセンスを十分確認したモデルでのみ、この機能を使用して下さい。
 
-また、VRoid Hubのモデルは本機能では使用できません。</sys:String>
+また、本機能ではVRoid Hubモデルへの自動切り替えはできません。</sys:String>
     <sys:String x:Key="SettingFile_Enable">オートメーションを有効化</sys:String>
     <sys:String x:Key="SettingFile_Disable">オートメーションを無効化</sys:String>
     <sys:String x:Key="SettingFile_PortNumber">ポート番号:</sys:String>
@@ -413,7 +413,7 @@
     <sys:String x:Key="DialogMessage_LoadLocalVrm">ビューアー画面のライセンスを確認してください。読み込みますか？</sys:String>
     <sys:String x:Key="DialogTitle_ResetAllSetting">設定のリセット</sys:String>
     <sys:String x:Key="DialogMessage_ResetAllSetting" xml:space="preserve">リセットを行うと現在の設定が初期状態に戻ります。
-セーブ欄1,2,3に保存済みの設定は変更されません。
+セーブ1,2,3に保存済みの設定は変更されません。
 
 リセットしますか？</sys:String>
     <sys:String x:Key="DialogTitle_ResetCategorySetting">設定のリセット</sys:String>

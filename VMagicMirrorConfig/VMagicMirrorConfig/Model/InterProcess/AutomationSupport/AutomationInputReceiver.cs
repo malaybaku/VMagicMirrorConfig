@@ -35,6 +35,7 @@ namespace Baku.VMagicMirrorConfig
                 return;
             }
 
+            LogOutput.Instance.Write($"Start UDP receive on port {portNumber}");
             IsRunning = true;
             _cts = new CancellationTokenSource();
             Task.Run(() => ReceiveRoutineAsync(_cts.Token, portNumber));
@@ -59,35 +60,37 @@ namespace Baku.VMagicMirrorConfig
             //条件文のところはnullableに配慮してワチャワチャしています(増えてきたら必ずサブルーチン化して下さい)
             var jobj = JObject.Parse(message);
             if (jobj.Property("command")?.Value is JValue commandValue &&
-                commandValue.Type == JTokenType.String && 
+                commandValue.Type == JTokenType.String &&
                 commandValue.Value<string>() == "load_setting_file" &&
                 jobj["args"] is JObject args
                 )
-            {       
+            {
                 //NOTE: indexが拾えなくて0になると無効値になるため、ロードは走らない
-                int index = 
-                    (args.Property("index")?.Value is JValue indexValue && indexValue.Type == JTokenType.Integer) 
-                    ? indexValue.Value<int>() 
+                int index =
+                    (args.Property("index")?.Value is JValue indexValue && indexValue.Type == JTokenType.Integer)
+                    ? indexValue.Value<int>()
                     : 0;
                 bool loadCharacter =
                     args.Property("load_character")?.Value is JValue v && v.Type == JTokenType.Boolean
-                    ? (bool)v : false; 
+                    ? (bool)v : false;
                 bool loadNonCharacter =
                     args.Property("load_non_character")?.Value is JValue v2 && v2.Type == JTokenType.Boolean
                     ? (bool)v2 : false;
 
                 LoadSettingFileRequested?.Invoke(new LoadSettingFileArgs(index, loadCharacter, loadNonCharacter));
             }
+            else
+            {
+                LogOutput.Instance.Write("receive json style UDP message, but command format is not correct");
+            }
         }
 
-        private async void ReceiveRoutineAsync(CancellationToken token, int portNumber)
+        private void ReceiveRoutineAsync(CancellationToken token, int portNumber)
         {
             var client = new UdpClient(portNumber);
             client.Client.ReceiveTimeout = 500;
             while (!token.IsCancellationRequested)
             {
-                //TODO:受信して待つやつ
-                await client.ReceiveAsync();
                 try
                 {
                     IPEndPoint? remoteEndPoint = null;

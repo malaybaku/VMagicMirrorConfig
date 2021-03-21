@@ -66,20 +66,28 @@ namespace Baku.VMagicMirrorConfig
                 SettingFileReadContent.NonCharacter;
 
             SettingFileIo.LoadSetting(SpecialFilePath.GetSaveFilePath(index), SettingFileReadWriteModes.Internal, content, fromAutomation);
+            var loadedVrmPath = _setting.LastVrmLoadFilePath;
+            var loadedVRoidModelId = _setting.LastLoadedVRoidModelId;
+
+            //NOTE: この時点ではキャラを切り替えたわけではないので、実態に合わすため元に戻してから続ける。
+            _setting.LastVrmLoadFilePath = currentVrmPath;
+            _setting.LastLoadedVRoidModelId = currentVRoidModelId;
 
             if (content != SettingFileReadContent.NonCharacter &&
-                _setting.LastVrmLoadFilePath != currentVrmPath &&
-                File.Exists(_setting.LastVrmLoadFilePath)
+                loadedVrmPath != currentVrmPath &&
+                File.Exists(loadedVrmPath)
                 )
             {
-                _sender.SendMessage(MessageFactory.Instance.OpenVrm(_setting.LastVrmLoadFilePath));
+                _sender.SendMessage(MessageFactory.Instance.OpenVrm(loadedVrmPath));
+                _setting.OnLocalModelLoaded(loadedVrmPath);
             }
             else if(content != SettingFileReadContent.NonCharacter && 
-                _setting.LastLoadedVRoidModelId != currentVRoidModelId && 
+                loadedVRoidModelId != currentVRoidModelId && 
+                !string.IsNullOrEmpty(loadedVRoidModelId) && 
                 !fromAutomation
                 )
             {
-                VRoidModelLoadRequested?.Invoke(_setting.LastLoadedVRoidModelId);
+                VRoidModelLoadRequested?.Invoke(loadedVRoidModelId);
             }
         }
 

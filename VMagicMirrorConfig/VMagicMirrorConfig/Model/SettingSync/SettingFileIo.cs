@@ -94,6 +94,10 @@ namespace Baku.VMagicMirrorConfig
                     (content == SettingFileReadContent.Character || content == SettingFileReadContent.All)
                     )
                 {
+                    //NOTE: ここ若干ぎこちない処理。
+                    //モデルのロード情報を書き込むが、書き込んだデータは実態に合ってるとは限らないため、
+                    //呼び出し元のSaveFileManagerがデータをすぐ元に戻してくれる、という前提で書かれてます
+
                     //このケースでは最後に使ったローカルVRMのデータは見に行ってもOKなのだが、
                     //存在しないVRMで上書きするのはちょっと問題あるので避けておく
                     if (File.Exists(saveData.LastLoadedVrmFilePath))
@@ -102,15 +106,17 @@ namespace Baku.VMagicMirrorConfig
                     }
                     else
                     {
-                        LogOutput.Instance.Write(
-                            $"Tried to load vrm path, but file seems not exist at: {saveData.LastLoadedVrmFilePath}"
-                            );
+                        _model.LastVrmLoadFilePath = "";
                     }
-                                      
+
                     //NOTE: オートメーションではVRoid Hubモデルのロード情報は触らない。
-                    //どのみちユーザーによるライセンス確認が必要で、オートメーションとして完結しないからです。
-                    if (!fromAutomation)
+                    //どのみちユーザーによるライセンス確認が必要で、オートメーションとして完結しないから。
+                    if (fromAutomation)
                     {
+                        _model.LastLoadedVRoidModelId = "";
+                    }
+                    else 
+                    { 
                         _model.LastLoadedVRoidModelId = saveData.LastLoadedVRoidModelId ?? "";
                     }
                 }
