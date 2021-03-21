@@ -35,10 +35,10 @@ namespace Baku.VMagicMirrorConfig
                 return;
             }
 
-            LogOutput.Instance.Write($"Start UDP receive on port {portNumber}");
+            LogOutput.Instance.Write($"Start Automation Receive on port {portNumber}");
             IsRunning = true;
             _cts = new CancellationTokenSource();
-            Task.Run(() => ReceiveRoutineAsync(_cts.Token, portNumber));
+            Task.Run(() => ReceiveRoutine(_cts.Token, portNumber));
         }
 
         /// <summary>
@@ -50,6 +50,10 @@ namespace Baku.VMagicMirrorConfig
             {
                 return;
             }
+
+            //NOTE: スレッド側でIsRunningを折らせるとタイミング問題が生じるため、ここで即座に折ってしまう
+            LogOutput.Instance.Write("Stopped Automation Receive");
+            IsRunning = false;
             _cts?.Cancel();
             _cts = null;
         }
@@ -85,7 +89,7 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private void ReceiveRoutineAsync(CancellationToken token, int portNumber)
+        private void ReceiveRoutine(CancellationToken token, int portNumber)
         {
             var client = new UdpClient(portNumber);
             client.Client.ReceiveTimeout = 500;
@@ -111,10 +115,8 @@ namespace Baku.VMagicMirrorConfig
                     //通信待ちや通信終了による例外スローに関してはログ無し。
                 }
             }
-
-            IsRunning = false;
+            client.Close();
         }
-
     }
 
     internal class LoadSettingFileArgs
