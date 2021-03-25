@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 using System.Windows;
 using System.Xml.Serialization;
 
@@ -28,44 +29,126 @@ namespace Baku.VMagicMirrorConfig
                 File.Delete(path);
             }
 
+            //データを作ったらXMLで保存してるだけ
             using (var sw = new StreamWriter(path))
             {
-                var autoLoadEnabled = _model.AutoLoadLastLoadedVrm.Value;
-
-                var saveData = new SaveData()
-                {
-                    //ここ若干名前がややこしいが、歴史的経緯によるものです
-                    IsInternalSaveFile = (mode == SettingFileReadWriteModes.AutoSave),
-                    LastLoadedVrmFilePath = mode switch
-                    {
-                        SettingFileReadWriteModes.AutoSave => autoLoadEnabled ? _model.LastVrmLoadFilePath : "",
-                        SettingFileReadWriteModes.Internal => _model.LastVrmLoadFilePath,
-                        _ => "",
-                    },
-                    LastLoadedVRoidModelId = mode switch
-                    {
-                        SettingFileReadWriteModes.AutoSave => autoLoadEnabled ? _model.LastLoadedVRoidModelId : "",
-                        SettingFileReadWriteModes.Internal => _model.LastLoadedVRoidModelId,
-                        _ => "",
-                    },
-                    
-                    AutoLoadLastLoadedVrm = (mode == SettingFileReadWriteModes.AutoSave) ? autoLoadEnabled : false,
-                    PreferredLanguageName = (mode == SettingFileReadWriteModes.AutoSave) ? _model.LanguageName.Value : "",
-                    WindowSetting = _model.Window.Save(),
-                    MotionSetting = _model.Motion.Save(),
-                    LayoutSetting = _model.Layout.Save(),
-                    LightSetting = _model.Light.Save(),
-                    WordToMotionSetting = _model.WordToMotion.Save(),
-                    ExternalTrackerSetting = _model.ExternalTracker.Save(),
-                    AutomationSetting = _model.Automation.Save(),
-                };
-
-                //ここだけ互換性の都合で入れ子になってることに注意
-                saveData.LayoutSetting.Gamepad = _model.Gamepad.Save();
-
-                new XmlSerializer(typeof(SaveData)).Serialize(sw, saveData);
+                SaveSettingSub(
+                    mode,
+                    saveData => new XmlSerializer(typeof(SaveData)).Serialize(sw, saveData)
+                    );
             }
         }
+
+        /// <summary>
+        /// 指定したファイルパスから設定をロードします。
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="mode"></param>
+        /// <param name="content"></param>
+        /// <param name="fromAutomation"></param>
+        public void LoadSetting(
+            string path,
+            SettingFileReadWriteModes mode,
+            SettingFileReadContent content = SettingFileReadContent.All,
+            bool fromAutomation = false
+            )
+        {
+            if (!File.Exists(path))
+            {
+                LogOutput.Instance.Write($"Setting file load requested (mode={mode}, but file does not exist at: {path}");
+                return;
+            }
+
+            try
+            {
+                //NOTE: ファイルロードではメッセージが凄い量になるので、
+                //コンポジットして「1つの大きいメッセージ」として書き込むためにこうしてます
+                _sender.StartCommandComposite();
+                LoadSettingSub(path, mode, content, fromAutomation);
+                _sender.EndCommandComposite();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Failed to load setting file {path} : {ex.Message}");
+            }
+        }
+
+
+        /// <summary>
+        /// いま指定したファイルにセーブを行ったらそのファイルの中身が書き換わるかどうかをチェックします。
+        /// ファイルがないばあいtrueを返します。
+        /// よくあるDirty判定と違い、「設定ファイルの文字列を試しに作って書き込み対象ファイルの中身と比べる」
+        /// という非常に強引な実装であることに注意して下さい。
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="mode"></param>
+        /// <returns></returns>
+        public bool CheckSettingIsDifferent(string path, SettingFileReadWriteModes mode)
+        {
+            if (!File.Exists(path)) 
+            {
+                return true;
+            }
+
+            var settingInFile = File.ReadAllText(path);
+
+            var sb = new StringBuilder();
+            using (var sw = new StringWriter(sb))
+            {
+                SaveSettingSub(
+                    mode, 
+                    saveData => new XmlSerializer(typeof(SaveData)).Serialize(sw, saveData)
+                );
+            }
+            var settingToSave = sb.ToString();
+
+            return settingInFile != settingToSave;
+        }
+
+        private void SaveSettingSub(SettingFileReadWriteModes mode, Action<SaveData> act)
+        {
+            var autoLoadEnabled = _model.AutoLoadLastLoadedVrm.Value;
+
+            var saveData = new SaveData()
+            {
+                //ここ若干名前がややこしいが、歴史的経緯によるものです
+                IsInternalSaveFile = (mode == SettingFileReadWriteModes.AutoSave),
+                LastLoadedVrmFilePath = mode switch
+                {
+                    SettingFileReadWriteModes.AutoSave => autoLoadEnabled ? _model.LastVrmLoadFilePath : "",
+                    SettingFileReadWriteModes.Internal => _model.LastVrmLoadFilePath,
+                    _ => "",
+                },
+                LastLoadedVRoidModelId = mode switch
+                {
+                    SettingFileReadWriteModes.AutoSave => autoLoadEnabled ? _model.LastLoadedVRoidModelId : "",
+                    SettingFileReadWriteModes.Internal => _model.LastLoadedVRoidModelId,
+                    _ => "",
+                },
+
+                AutoLoadLastLoadedVrm = (mode == SettingFileReadWriteModes.AutoSave) ? autoLoadEnabled : false,
+                PreferredLanguageName = (mode == SettingFileReadWriteModes.AutoSave) ? _model.LanguageName.Value : "",
+                WindowSetting = _model.Window.Save(),
+                MotionSetting = _model.Motion.Save(),
+                LayoutSetting = _model.Layout.Save(),
+                LightSetting = _model.Light.Save(),
+                WordToMotionSetting = _model.WordToMotion.Save(),
+                ExternalTrackerSetting = _model.ExternalTracker.Save(),
+                AutomationSetting = _model.Automation.Save(),
+            };
+
+            saveData.LastLoadedVrmName =
+                (!string.IsNullOrEmpty(saveData.LastLoadedVrmFilePath) ||
+                !string.IsNullOrEmpty(saveData.LastLoadedVRoidModelId))
+                ? _model.LoadedModelName
+                : "";
+
+            //ここだけ互換性の都合で入れ子になってることに注意
+            saveData.LayoutSetting.Gamepad = _model.Gamepad.Save();
+
+            act(saveData);
+        }
+
 
         private void LoadSettingSub(string path, SettingFileReadWriteModes mode, SettingFileReadContent content, bool fromAutomation)
         {
@@ -142,39 +225,6 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        /// <summary>
-        /// 指定したファイルパスから設定をロードします。
-        /// </summary>
-        /// <param name="path"></param>
-        /// <param name="mode"></param>
-        /// <param name="content"></param>
-        /// <param name="fromAutomation"></param>
-        public void LoadSetting(
-            string path, 
-            SettingFileReadWriteModes mode, 
-            SettingFileReadContent content = SettingFileReadContent.All,
-            bool fromAutomation = false
-            )
-        {
-            if (!File.Exists(path))
-            {
-                LogOutput.Instance.Write($"Setting file load requested (mode={mode}, but file does not exist at: {path}");
-                return;
-            }
-
-            try
-            {
-                //NOTE: ファイルロードではメッセージが凄い量になるので、
-                //コンポジットして「1つの大きいメッセージ」として書き込むためにこうしてます
-                _sender.StartCommandComposite();
-                LoadSettingSub(path, mode, content, fromAutomation);
-                _sender.EndCommandComposite();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Failed to load setting file {path} : {ex.Message}");
-            }
-        }
     }
 
     /// <summary>

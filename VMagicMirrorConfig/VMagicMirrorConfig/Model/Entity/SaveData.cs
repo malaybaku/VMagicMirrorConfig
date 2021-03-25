@@ -17,6 +17,10 @@
 
         public string? LastLoadedVRoidModelId { get; set; } = "";
 
+        //NOTE: ファイルでもVRoid Hubでもモデルの表示名を引っ張ってきて代入するような場所。
+        //Unityのほうで、モデルをロードしたときに表示名を投げつけてくれる。
+        public string? LastLoadedVrmName { get; set; } = "";
+
         public bool AutoLoadLastLoadedVrm { get; set; } = false;
 
         public string? PreferredLanguageName { get; set; } = "";

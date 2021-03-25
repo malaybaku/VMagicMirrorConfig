@@ -46,6 +46,10 @@ namespace Baku.VMagicMirrorConfig
         //SettingFileIoがセーブする時点において、自動ロードが無効だとファイルパスが転写されないようにガードがかかる。
         public string LastVrmLoadFilePath { get; set; } = "";
         public string LastLoadedVRoidModelId { get; set; } = "";
+        //NOTE: このモデル名は保存したデータの内訳を示すために用いる。
+        //そのため、主にファイルセーブ + セーブしたファイルのプレビュー目的で使い、ロードでは読み込まない
+        public string LoadedModelName { get; set; } = "";
+
         public RProperty<bool> AutoLoadLastLoadedVrm { get; } = new RProperty<bool>(false);
 
         //NOTE: VRMのロード処理はUI依存の処理が多すぎるためViewModel実装のままにしている

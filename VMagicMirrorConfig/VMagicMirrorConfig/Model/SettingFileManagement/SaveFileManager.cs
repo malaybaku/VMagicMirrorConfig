@@ -21,6 +21,13 @@ namespace Baku.VMagicMirrorConfig
 
         public event Action<string>? VRoidModelLoadRequested;
 
+        /// <summary> 
+        /// <see cref="LoadSetting(int, bool, bool, bool)"/>を最後に呼び出して成功したときのindexを取得します。
+        /// 一度も呼び出してなければ0を取得します。
+        /// 「未保存の変更」みたいなのをお知らせするために使えます。
+        /// </summary>
+        public int LatestLoadedFileIndex { get; private set; } = 0;
+
         /// <summary>
         /// 指定した番号のファイルを保存します。
         /// </summary>

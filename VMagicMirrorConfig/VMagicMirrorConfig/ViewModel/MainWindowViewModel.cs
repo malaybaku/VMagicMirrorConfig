@@ -96,6 +96,10 @@ namespace Baku.VMagicMirrorConfig
                         MessageBoxWrapper.Instance.SetDialogResult(false);
                     }
                     break;
+                case ReceiveMessageNames.ModelNameConfirmedOnLoad:
+                    //ともかくモデルがロードされているため、実態に合わせておく
+                    Model.LoadedModelName = e.Args;
+                    break;
             }
         }
 
