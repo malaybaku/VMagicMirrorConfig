@@ -49,10 +49,35 @@ namespace Baku.VMagicMirrorConfig
         /// </summary>
         public string ModelName { get; }
 
-        public string ModelNameWithPrefix => string.IsNullOrEmpty(ModelName) ? "VRM File : - " : ModelName;
+        //NOTE: VRoid Hubでモデル名とサブ名称が両方あるものについてはサブ名を分けよう、という話
+        //Unityからくる文字列でサブ名称がついてるものの例:
+        //  VRoid Hub: ModelName\tアクセサリーつき
+
+        /// <summary>
+        /// 'VRM File: 'または'VRoid Hub: 'で始まるモデル名のメイン表記の文字列を取得します。
+        /// </summary>
+        public string ModelNameWithPrefix =>
+            string.IsNullOrEmpty(ModelName) ? "VRM File : - " :
+            ModelName.Split('\t')[0];
+
+        /// <summary>
+        /// モデルにサブ名称があればそれを取得し、なければ空文字列
+        /// </summary>
+        public string ModelNameSubTitle
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(ModelName))
+                {
+                    return "";
+                }
+                var split = ModelName.Split('\t');
+                return split.Length > 1 ? split[1] : "";
+            }
+        }
 
         public DateTime LastUpdatedDate { get; }
-        public string LastUpdatedDateOrDash => IsExist ? $"{LastUpdatedDate:yyyy/MM/dd HH:mm}" : " - ";
+        public string LastUpdatedDateOrDash => IsExist ? $"Date: {LastUpdatedDate:yyyy/MM/dd HH:mm}" : "Date: -";
 
         public ActionCommand SelectThisCommand { get; }
 

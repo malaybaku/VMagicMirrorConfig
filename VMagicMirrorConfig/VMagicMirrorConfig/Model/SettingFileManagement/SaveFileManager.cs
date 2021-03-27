@@ -40,7 +40,6 @@ namespace Baku.VMagicMirrorConfig
             }
 
             SettingFileIo.SaveSetting(SpecialFilePath.GetSaveFilePath(index), SettingFileReadWriteModes.Internal);
-            LatestLoadedFileIndex = index;
         }
 
         /// <summary>
@@ -98,6 +97,12 @@ namespace Baku.VMagicMirrorConfig
             {
                 LogOutput.Instance.Write($"Load VRoid, setting no={index}, automation={fromAutomation},  id={loadedVRoidModelId}");
                 VRoidModelLoadRequested?.Invoke(loadedVRoidModelId);
+            }
+
+            //NOTE: キャラだけ切り替えるのはファイルロード扱いせず、前のファイルがロードされているように見なす。
+            if (loadNonCharacter)
+            {
+                LatestLoadedFileIndex = index;
             }
         }
 

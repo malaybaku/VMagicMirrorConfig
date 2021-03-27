@@ -453,7 +453,7 @@ Choose 'OK' to enable webcam based tracking.
     <sys:String x:Key="DialogTitle_ConfirmSettingFileLoad">Setting File Load</sys:String>
     <sys:String x:Key="DialogMessage_ConfirmSettingFileLoad" xml:space="preserve">Are you sure to load setting No.{0}?
 
-If you load with non-character option, it also overwrites auto saved settings.</sys:String>    
+If you load with non-character option, most of the settings will be overwritten.</sys:String>    
 
     <sys:String x:Key="DialogTitle_GuardSettingWindowDuringSaveLoad">Save / Load Process Running</sys:String>
     <sys:String x:Key="DialogMessage_GuardSettingWindowDuringSaveLoad">Setting window is locked during save and load process.</sys:String>

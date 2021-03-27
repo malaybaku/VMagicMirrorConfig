@@ -46,7 +46,7 @@ namespace Baku.VMagicMirrorConfig
 
         public async Task ExecuteLoad(int index)
         {
-            if (index < 0 || index > SaveFileManager.FileCount)
+            if (index < 0 || index > SaveFileManager.FileCount || !_model.CheckFileExist(index))
             {
                 return;
             }

@@ -461,7 +461,7 @@ webカメラでの顔トラッキングを有効にする場合は
     <sys:String x:Key="DialogTitle_ConfirmSettingFileLoad">設定をロード</sys:String>
     <sys:String x:Key="DialogMessage_ConfirmSettingFileLoad" xml:space="preserve">設定 No.{0} をロードしますか？
         
-キャラ以外の設定をロードすると、自動セーブの内容も上書きされます。</sys:String>
+キャラ以外の設定をロードすると、現在の設定が上書きされます。</sys:String>
 
     <sys:String x:Key="DialogTitle_GuardSettingWindowDuringSaveLoad">セーブ/ロード操作中</sys:String>
     <sys:String x:Key="DialogMessage_GuardSettingWindowDuringSaveLoad">設定ファイルのセーブ/ロード中は設定ウィンドウは操作できません。</sys:String>

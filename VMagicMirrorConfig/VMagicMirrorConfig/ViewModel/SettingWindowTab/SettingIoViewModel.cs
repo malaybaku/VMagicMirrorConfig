@@ -72,7 +72,9 @@ namespace Baku.VMagicMirrorConfig
             dialog.DataContext = vm;
             await window.ShowMetroDialogAsync(dialog, new MetroDialogSettings()
             {
-                MaximumBodyHeight = 300,
+                AnimateShow = true,
+                AnimateHide = false,
+                OwnerCanCloseWithDialog = true,
             });
             await dialog.WaitUntilUnloadedAsync();
         }
@@ -97,7 +99,12 @@ namespace Baku.VMagicMirrorConfig
             });
 
             dialog.DataContext = vm;
-            await window.ShowMetroDialogAsync(dialog);
+            await window.ShowMetroDialogAsync(dialog, new MetroDialogSettings()
+            {
+                AnimateShow = true,
+                AnimateHide = false,
+                OwnerCanCloseWithDialog = true,
+            });
             await dialog.WaitUntilUnloadedAsync();
         }
 

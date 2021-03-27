@@ -7,7 +7,7 @@
              xmlns:vmm="clr-namespace:Baku.VMagicMirrorConfig"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance Type=vmm:SaveLoadDataViewModel}"
-             Height="450"
+             Height="520"
              d:DesignWidth="400"
              HorizontalAlignment="Stretch">
     <UserControl.Resources>
@@ -39,7 +39,7 @@
                 Margin="5"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Top"
-                Content="{DynamicResource Common_Cancel}"
+                Content="{DynamicResource Common_Close}"
                 Command="{Binding CancelCommand}"
                 />
 
@@ -67,24 +67,31 @@
                           >
                 <ItemsControl.ItemTemplate>
                     <DataTemplate DataType="{x:Type vmm:SaveLoadFileItemViewModel}">
-                        <Button Style="{StaticResource MaterialDesignOutlinedButton}"
+                        <Button x:Name="saveButton"
+                                Style="{StaticResource MaterialDesignOutlinedButton}"
                                 Command="{Binding SelectThisCommand}"
-                                Width="350"
-                                Height="80"
+                                IsEnabled="{Binding CanChooseThisItem}"
+                                Width="400"
+                                Height="70"
                                 Padding="0"
                                 Margin="5"
                                 HorizontalContentAlignment="Stretch"
                                 VerticalContentAlignment="Stretch"
                                 >
                             <Grid>
+                                <Rectangle x:Name="mouseOverRect"
+                                           Fill="#80E0E0E0"
+                                           Visibility="Collapsed"
+                                           />
                                 <Rectangle Width="5" HorizontalAlignment="Left"
                                    Fill="{DynamicResource PrimaryHueLightBrush}"
                                    Visibility="{Binding IsCurrent, Converter={StaticResource BooleanToVisibilityConverter}}"
                                    />
 
-                                <Grid Margin="15,10,10,10">
+                                <Grid Margin="15,5,5,5">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="20"/>
+                                        <RowDefinition/>
                                         <RowDefinition/>
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
@@ -95,24 +102,43 @@
                                     <TextBlock 
                                             Grid.Row="0" Grid.Column="0"
                                             FontSize="11"
+                                            FontWeight="Normal"
                                             Foreground="{StaticResource MaterialDesignBody}"
                                             Text="{Binding IndexString}"
-                                            />
-                                    <TextBlock 
-                                            Grid.Row="1" Grid.Column="0"
-                                            Margin="10,0"
-                                            Foreground="{StaticResource MaterialDesignBody}"
-                                            Text="{Binding ModelNameWithPrefix}"
                                             />
                                     <TextBlock
                                             Grid.Row="0" Grid.Column="1"
                                             FontSize="11"
+                                            FontWeight="Normal"
                                             Foreground="{StaticResource MaterialDesignBody}"
                                             Text="{Binding LastUpdatedDateOrDash}"
+                                            />
+                                    <TextBlock 
+                                            Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                                            Margin="10,0"
+                                            Foreground="{StaticResource MaterialDesignBody}"
+                                            Text="{Binding ModelNameWithPrefix}"
+                                            />
+                                    <TextBlock 
+                                            Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                                            Margin="80,0,10,0"
+                                            FontSize="11"
+                                            FontWeight="Normal"
+                                            Foreground="{StaticResource MaterialDesignBodyLight}"
+                                            Text="{Binding ModelNameSubTitle}"
                                             />
                                 </Grid>
                             </Grid>
                         </Button>
+                        <DataTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition SourceName="saveButton" Property="IsEnabled" Value="True"/>
+                                    <Condition Property="IsMouseOver" Value="True"/>
+                                </MultiTrigger.Conditions>
+                                <Setter TargetName="mouseOverRect" Property="Visibility" Value="Visible"/>
+                            </MultiTrigger>
+                        </DataTemplate.Triggers>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
