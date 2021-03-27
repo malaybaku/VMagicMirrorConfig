@@ -3,6 +3,9 @@
                     xmlns:sys="clr-namespace:System;assembly=mscorlib"
                     xml:space="preserve"
                     >
+    <!-- Common -->
+    <sys:String x:Key="Common_Cancel">Cancel</sys:String>
+    <sys:String x:Key="Common_Close">Close</sys:String>
 
     <!-- Window Title Bar -->
     <sys:String x:Key="TitleBar_Help">Help</sys:String>
@@ -375,12 +378,13 @@ Please test by typing "joy".</sys:String>
     <sys:String x:Key="WordToMotion_DeviceItem_MidiController">MIDI Controller</sys:String>
     
     <!-- Save/Load -->
-    <sys:String x:Key="SettingFile_Header">Setting File</sys:String>
+    <sys:String x:Key="SettingFile_Header">Setting File Control</sys:String>
     <sys:String x:Key="SettingFile_SaveAndLoad">Save / Load</sys:String>
-    <sys:String x:Key="SettingFile_SaveArea">Save Current Setting</sys:String>
-    <sys:String x:Key="SettingFile_LoadArea">Load Setting</sys:String>
+    <sys:String x:Key="SettingFile_Save">Save</sys:String>
+    <sys:String x:Key="SettingFile_Load">Load</sys:String>
+    <sys:String x:Key="SettingFile_Save_Instruction">Select target to save.</sys:String>
+    <sys:String x:Key="SettingFile_Load_Instruction">Select data to load.</sys:String>
     <sys:String x:Key="SettingFile_LoadCharacter">Load Character</sys:String>
-    <sys:String x:Key="SettingFile_LoadCharacter_Streaming">Load Character</sys:String>
     <sys:String x:Key="SettingFile_LoadNonCharacter">Load Non-Character Settings</sys:String>
     <sys:String x:Key="SettingFile_Export">Export</sys:String>
     <sys:String x:Key="SettingFile_Import">Import</sys:String>
@@ -409,8 +413,8 @@ VRoid Hub model is not supported in this feature.</sys:String>
     <sys:String x:Key="DialogMessage_LoadLocalVrm">Please confirm the license in viewer window. Do you load the character?</sys:String>
     <sys:String x:Key="DialogTitle_ResetAllSetting">Reset Setting</sys:String>
     <sys:String x:Key="DialogMessage_ResetAllSetting" xml:space="preserve">Are you sure you want to reset current settings?
-        
-This operation does not change already saved settings in No.1, 2, and 3.</sys:String>
+
+If you want to save current setting, cancel this dialog and save before reset.</sys:String>
     <sys:String x:Key="DialogTitle_ResetCategorySetting">Reset Setting</sys:String>
     <sys:String x:Key="DialogMessage_ResetCategorySetting">Are you sure you want to reset selected category setting?</sys:String>
     <sys:String x:Key="DialogTitle_LoadSettingFileError">Load failed</sys:String>
@@ -451,6 +455,9 @@ Choose 'OK' to enable webcam based tracking.
 
 If you load with non-character option, it also overwrites auto saved settings.</sys:String>    
 
+    <sys:String x:Key="DialogTitle_GuardSettingWindowDuringSaveLoad">Save / Load Process Running</sys:String>
+    <sys:String x:Key="DialogMessage_GuardSettingWindowDuringSaveLoad">Setting window is locked during save and load process.</sys:String>
+    
     <sys:String x:Key="DialogTitle_EnableAutomation">Enable Automation</sys:String>
     <sys:String x:Key="DialogMessage_EnableAutomation" xml:space="preserve">Are you sure to enable automation feature?
 

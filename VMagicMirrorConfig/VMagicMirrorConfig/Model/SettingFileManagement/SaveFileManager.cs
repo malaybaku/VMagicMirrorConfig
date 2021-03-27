@@ -6,8 +6,8 @@ namespace Baku.VMagicMirrorConfig
     /// <summary> 設定ファイルをスロット的に管理するクラス </summary>
     class SaveFileManager
     {
-        /// <summary>保存できるファイルの数。1始まりで管理するため、indexとしては1,2,3のみを許可する</summary>
-        public const int FileCount = 3;
+        /// <summary>保存できるファイルの数。1始まりで管理し、状況次第で0はオートセーブ扱いする。</summary>
+        public const int FileCount = 15;
 
         public SaveFileManager(SettingFileIo fileIo, RootSettingSync setting, IMessageSender sender)
         {
@@ -22,7 +22,7 @@ namespace Baku.VMagicMirrorConfig
         public event Action<string>? VRoidModelLoadRequested;
 
         /// <summary> 
-        /// <see cref="LoadSetting(int, bool, bool, bool)"/>を最後に呼び出して成功したときのindexを取得します。
+        /// ソフト起動以降で<see cref="LoadSetting(int, bool, bool, bool)"/>を最後に呼び出して成功したときのindexを取得します。
         /// 一度も呼び出してなければ0を取得します。
         /// 「未保存の変更」みたいなのをお知らせするために使えます。
         /// </summary>
@@ -40,6 +40,7 @@ namespace Baku.VMagicMirrorConfig
             }
 
             SettingFileIo.SaveSetting(SpecialFilePath.GetSaveFilePath(index), SettingFileReadWriteModes.Internal);
+            LatestLoadedFileIndex = index;
         }
 
         /// <summary>

@@ -18,7 +18,15 @@ namespace Baku.VMagicMirrorConfig
         public static string AutoSaveSettingFilePath { get; }
 
         private static string _exeDir;
-        public static string GetSaveFilePath(int index) => Path.Combine(_exeDir, SaveSlotFileNamePrefix + index.ToString());
+
+        /// <summary>
+        /// スロット番号を指定して保存ファイル名を指定します。0を指定した場合は特別にオートセーブファイルのパスを返します。
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public static string GetSaveFilePath(int index) => index == 0 
+            ? AutoSaveSettingFilePath 
+            : Path.Combine(_exeDir, SaveSlotFileNamePrefix + index.ToString());
 
         static SpecialFilePath()
         {
@@ -40,7 +48,7 @@ namespace Baku.VMagicMirrorConfig
         /// <see cref="GetSettingFilePath"/>のパスに設定ファイルがあるかどうかを確認します。
         /// </summary>
         /// <returns></returns>
-        public static bool SettingFileExists() => File.Exists(AutoSaveSettingFilePath);
+        public static bool IsAutoSaveFileExist() => File.Exists(AutoSaveSettingFilePath);
 
 
     }

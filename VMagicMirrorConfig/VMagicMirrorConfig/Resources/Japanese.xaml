@@ -3,7 +3,10 @@
                     xmlns:sys="clr-namespace:System;assembly=mscorlib"
                     xml:space="preserve"
                     >
-    
+    <!-- Common -->
+    <sys:String x:Key="Common_Cancel">キャンセル</sys:String>
+    <sys:String x:Key="Common_Close">閉じる</sys:String>
+
     <!-- Window Title Bar -->
     <sys:String x:Key="TitleBar_Help">ヘルプ</sys:String>
     <sys:String x:Key="TitleBar_Visit_OfficialPage">ウェブサイト</sys:String>
@@ -379,12 +382,13 @@
     <sys:String x:Key="WordToMotion_DeviceItem_MidiController">MIDIコントローラ</sys:String>
 
     <!-- Save/Load -->
-    <sys:String x:Key="SettingFile_Header">設定ファイル</sys:String>
+    <sys:String x:Key="SettingFile_Header">設定ファイルの操作</sys:String>
     <sys:String x:Key="SettingFile_SaveAndLoad">セーブ・ロード</sys:String>
-    <sys:String x:Key="SettingFile_SaveArea">現在の設定を保存</sys:String>
-    <sys:String x:Key="SettingFile_LoadArea">設定をロード</sys:String>
-    <sys:String x:Key="SettingFile_LoadCharacter">ロード時にキャラを切り替える</sys:String>
-    <sys:String x:Key="SettingFile_LoadCharacter_Streaming">キャラをロード</sys:String>
+    <sys:String x:Key="SettingFile_Save">セーブ</sys:String>
+    <sys:String x:Key="SettingFile_Load">ロード</sys:String>
+    <sys:String x:Key="SettingFile_Save_Instruction">保存先を選択して下さい。</sys:String>
+    <sys:String x:Key="SettingFile_Load_Instruction">ロードするデータを選択して下さい。</sys:String>
+    <sys:String x:Key="SettingFile_LoadCharacter">キャラをロード</sys:String>
     <sys:String x:Key="SettingFile_LoadNonCharacter">キャラ以外の情報をロード</sys:String>
     <sys:String x:Key="SettingFile_Export">エクスポート</sys:String>
     <sys:String x:Key="SettingFile_Import">インポート</sys:String>
@@ -413,7 +417,7 @@
     <sys:String x:Key="DialogMessage_LoadLocalVrm">ビューアー画面のライセンスを確認してください。読み込みますか？</sys:String>
     <sys:String x:Key="DialogTitle_ResetAllSetting">設定のリセット</sys:String>
     <sys:String x:Key="DialogMessage_ResetAllSetting" xml:space="preserve">リセットを行うと現在の設定が初期状態に戻ります。
-セーブ1,2,3に保存済みの設定は変更されません。
+オートセーブの内容をバックアップする場合、事前にセーブを行ってください。
 
 リセットしますか？</sys:String>
     <sys:String x:Key="DialogTitle_ResetCategorySetting">設定のリセット</sys:String>
@@ -459,6 +463,9 @@ webカメラでの顔トラッキングを有効にする場合は
         
 キャラ以外の設定をロードすると、自動セーブの内容も上書きされます。</sys:String>
 
+    <sys:String x:Key="DialogTitle_GuardSettingWindowDuringSaveLoad">セーブ/ロード操作中</sys:String>
+    <sys:String x:Key="DialogMessage_GuardSettingWindowDuringSaveLoad">設定ファイルのセーブ/ロード中は設定ウィンドウは操作できません。</sys:String>
+    
     <sys:String x:Key="DialogTitle_EnableAutomation">オートメーションの有効化</sys:String>
     <sys:String x:Key="DialogMessage_EnableAutomation" xml:space="preserve">オートメーションを有効化しますか？
 

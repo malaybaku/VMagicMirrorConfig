@@ -39,4 +39,10 @@
 
         public AutomationSetting? AutomationSetting { get; set; }
     }
+
+    //NOTE: メタデータ的にモデル名だけ読み込むときのシリアライズで使うクラスです
+    public class SaveDataOnlyModelName
+    {
+        public string? LastLoadedVrmName { get; set; } = "";
+    }
 }

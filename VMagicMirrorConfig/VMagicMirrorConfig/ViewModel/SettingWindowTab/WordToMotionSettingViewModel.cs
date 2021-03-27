@@ -280,7 +280,7 @@ namespace Baku.VMagicMirrorConfig
         //デフォルトのWord To Motion一覧を生成して初期化します。
         public void LoadDefaultItemsIfInitialStart()
         {
-            if (!SpecialFilePath.SettingFileExists())
+            if (!SpecialFilePath.IsAutoSaveFileExist())
             {
                 LoadDefaultItems();
             }

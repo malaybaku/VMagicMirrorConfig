@@ -1,4 +1,9 @@
-﻿using Microsoft.Win32;
+﻿using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
+using Microsoft.Win32;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows;
 
 namespace Baku.VMagicMirrorConfig
 {
@@ -15,8 +20,9 @@ namespace Baku.VMagicMirrorConfig
             RequestEnableAutomationCommand = new ActionCommand(OnEnableAutomationRequested);
             RequestDisableAutomationCommand = new ActionCommand(OnDisableAutomationRequested);
             ApplyPortNumberCommand = new ActionCommand(ApplyPortNumber);
-            SaveCurrentSettingCommand = new ActionCommand<string>(SaveCurrentSetting);
-            LoadSettingCommand = new ActionCommand<string>(LoadSetting);
+
+            ShowSaveModalCommand = new ActionCommand(ShowSaveModal);
+            ShowLoadModalCommand = new ActionCommand(ShowLoadModal);
 
 
 
@@ -30,10 +36,6 @@ namespace Baku.VMagicMirrorConfig
                     PortNumberIsInvalid.Value = !(int.TryParse(v, out int i) && i >= 0 && i < 65536);
                 });
 
-            Save1Exist.Value = _saveFileManager.CheckFileExist(1);
-            Save2Exist.Value = _saveFileManager.CheckFileExist(2);
-            Save3Exist.Value = _saveFileManager.CheckFileExist(3);
-
             _model.AutomationPortNumber.PropertyChanged += (_, __) =>
             {
                 AutomationPortNumberText.Value = _model.AutomationPortNumber.Value.ToString();
@@ -43,80 +45,81 @@ namespace Baku.VMagicMirrorConfig
         private readonly AutomationSettingSync _model;
         private readonly SaveFileManager _saveFileManager;
 
+        #region セーブ/ロード
 
-        #region ファイル1,2,3のセーブ/ロードするとこ
+        public ActionCommand ShowSaveModalCommand { get; }
+        public ActionCommand ShowLoadModalCommand { get; }
 
-        public ActionCommand<string> SaveCurrentSettingCommand { get; }
-        public ActionCommand<string> LoadSettingCommand { get; }
-
-        //デフォルトではキャラロードだけ有効にして、「同じモデルで服が違うのをパッと切り替えます」みたいなUXを重視しておく。
-        public RProperty<bool> LoadCharacterWhenSettingLoaded { get; } = new RProperty<bool>(true);
-        public RProperty<bool> LoadNonCharacterWhenSettingLoaded { get; } = new RProperty<bool>(false);
-
-        public RProperty<bool> Save1Exist { get; } = new RProperty<bool>(false);
-        public RProperty<bool> Save2Exist { get; } = new RProperty<bool>(false);
-        public RProperty<bool> Save3Exist { get; } = new RProperty<bool>(false);
-
-        private async void SaveCurrentSetting(string? s)
+        private async void ShowSaveModal()
         {
-            if (!(int.TryParse(s, out var index) && index > 0 && index <= 3))
-            {
-                return;
-            }
-            
-            //上書き保存があり得るので確認を挟む。
-            //初セーブの場合は上書きにならないが、「次から上書きになるで」の意味で出しておく
-            var indication = MessageIndication.ConfirmSettingFileSave();
-            var result = await MessageBoxWrapper.Instance.ShowAsync(
-                indication.Title, 
-                string.Format(indication.Content, index), 
-                MessageBoxWrapper.MessageBoxStyle.OKCancel
-                );
-            if (!result)
+            if (Application.Current.MainWindow is not MetroWindow window)
             {
                 return;
             }
 
-            _saveFileManager.SaveCurrentSetting(index);
-            //面倒なのでインデックスは見ずに全部リフレッシュしておく
-            Save1Exist.Value = _saveFileManager.CheckFileExist(1);
-            Save2Exist.Value = _saveFileManager.CheckFileExist(2);
-            Save3Exist.Value = _saveFileManager.CheckFileExist(3);
+            var progress = await GuardSettingWindowIfNeeded();
 
-            //ファイルレベルの処理なので流石にスナックバーくらい出しておく(ロードとかインポート/エクスポートも同様)
-            SnackbarWrapper.Enqueue(string.Format(
-                LocalizedString.GetString("SettingFile_SaveCompleted"), index
-                ));
+            var dialog = new SaveLoadMetroDialog();
+            var vm = new SaveLoadDataViewModel(_saveFileManager, false, async () =>
+            {
+                await window.HideMetroDialogAsync(dialog);
+                if (progress != null)
+                {
+                    await progress.CloseAsync();
+                }
+            });
+
+            dialog.DataContext = vm;
+            await window.ShowMetroDialogAsync(dialog, new MetroDialogSettings()
+            {
+                MaximumBodyHeight = 300,
+            });
+            await dialog.WaitUntilUnloadedAsync();
         }
 
-        private async void LoadSetting(string? s)
+        private async void ShowLoadModal()
         {
-            if (!(int.TryParse(s, out var index) && index > 0 && index <= 3))
+            if (Application.Current.MainWindow is not MetroWindow window)
             {
                 return;
             }
 
-            var indication = MessageIndication.ConfirmSettingFileLoad();
-            var result = await MessageBoxWrapper.Instance.ShowAsync(
-                indication.Title,
-                string.Format(indication.Content, index),
-                MessageBoxWrapper.MessageBoxStyle.OKCancel
-                );
-            if (!result)
+            var progress = await GuardSettingWindowIfNeeded();
+
+            var dialog = new SaveLoadMetroDialog();
+            var vm = new SaveLoadDataViewModel(_saveFileManager, true, async () =>
             {
-                return;
+                await window.HideMetroDialogAsync(dialog);
+                if (progress != null)
+                {
+                    await progress.CloseAsync();
+                }
+            });
+
+            dialog.DataContext = vm;
+            await window.ShowMetroDialogAsync(dialog);
+            await dialog.WaitUntilUnloadedAsync();
+        }
+
+        private async Task<ProgressDialogController?> GuardSettingWindowIfNeeded()
+        {
+            if (SettingWindow.CurrentWindow is not SettingWindow settingWindow)
+            {
+                return null;
             }
 
-            _saveFileManager.LoadSetting(
-                index, LoadCharacterWhenSettingLoaded.Value, LoadNonCharacterWhenSettingLoaded.Value, false
-                );
-            //NOTE: コケる事も考えられるんだけど判別がムズいんですよね…
-            SnackbarWrapper.Enqueue(string.Format(
-                LocalizedString.GetString("SettingFile_LoadCompleted"), index
-                ));
+            var indication = MessageIndication.GuardSettingWindowDuringSaveLoad();
+            return await settingWindow.ShowProgressAsync(indication.Title, indication.Content, settings: new MetroDialogSettings()
+            {
+                DialogResultOnCancel = MessageDialogResult.Negative,
+                AnimateShow = true,
+                AnimateHide = false,
+                OwnerCanCloseWithDialog = true,
+            });            
         }
 
         #endregion
+
 
         #region エクスポート/インポート
 
