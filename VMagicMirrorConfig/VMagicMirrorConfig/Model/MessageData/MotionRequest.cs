@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using Newtonsoft.Json;
 
 namespace Baku.VMagicMirrorConfig
 {
@@ -174,7 +174,7 @@ namespace Baku.VMagicMirrorConfig
             return sb.ToString();
         }
 
-        public static MotionRequestCollection LoadDefault() 
+        public static MotionRequestCollection LoadDefault()
             => new MotionRequestCollection(MotionRequest.GetDefaultMotionRequestSet());
 
         public static MotionRequestCollection FromJson(TextReader reader)

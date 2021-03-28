@@ -2,6 +2,8 @@
 {
     static class ReceiveMessageNames
     {
+        public const string ModelNameConfirmedOnLoad = nameof(ModelNameConfirmedOnLoad);
+
         public const string RequestShowError = nameof(RequestShowError);
         public const string SetUnityProcessId = nameof(SetUnityProcessId);
         public const string CloseConfigWindow = nameof(CloseConfigWindow);

@@ -19,7 +19,7 @@ namespace Baku.VMagicMirrorConfig
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            if(!(value is string s))
+            if (!(value is string s))
             {
                 return new ValidationResult(false, "The input is not a text");
             }

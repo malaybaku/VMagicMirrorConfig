@@ -3,6 +3,9 @@
                     xmlns:sys="clr-namespace:System;assembly=mscorlib"
                     xml:space="preserve"
                     >
+    <!-- Common -->
+    <sys:String x:Key="Common_Cancel">Cancel</sys:String>
+    <sys:String x:Key="Common_Close">Close</sys:String>
 
     <!-- Window Title Bar -->
     <sys:String x:Key="TitleBar_Help">Help</sys:String>
@@ -22,6 +25,7 @@
     <sys:String x:Key="TopBar_Setting_Layout">Layout</sys:String>
     <sys:String x:Key="TopBar_Setting_Devices">Devices</sys:String>
     <sys:String x:Key="TopBar_Setting_Effects">Effects</sys:String>
+    <sys:String x:Key="TopBar_Setting_FileIo">Files</sys:String>
         
     <!-- Home -->
     <sys:String x:Key="Home_LoadVrm">Load VRM</sys:String>
@@ -39,11 +43,9 @@
 
     <sys:String x:Key="Home_SettingFileIo">Setting</sys:String>    
     <sys:String x:Key="Home_OpenSetting">Open Setting Window</sys:String>
-    <sys:String x:Key="Home_LoadSettingFile">Load</sys:String>
-    <sys:String x:Key="Home_SaveSettingFile">Save</sys:String>
 
-    <sys:String x:Key="Home_SettingManagement">Setting Management</sys:String>
-    <sys:String x:Key="Home_Reset">Reset</sys:String>
+    <sys:String x:Key="Home_SettingManagement">Setting Files</sys:String>
+    <sys:String x:Key="Home_Reset">Reset Settings</sys:String>
     <sys:String x:Key="Home_LoadPrevSetting">Load from Prev ver.</sys:String>
     
     <sys:String x:Key="Home_OtherSettings_Header">Other Preferences</sys:String>
@@ -375,11 +377,44 @@ Please test by typing "joy".</sys:String>
     <sys:String x:Key="WordToMotion_DeviceItem_KeyboardTenKey">Keyboard (num 0-8)</sys:String>
     <sys:String x:Key="WordToMotion_DeviceItem_MidiController">MIDI Controller</sys:String>
     
+    <!-- Save/Load -->
+    <sys:String x:Key="SettingFile_Header">Setting File Control</sys:String>
+    <sys:String x:Key="SettingFile_SaveAndLoad">Save / Load</sys:String>
+    <sys:String x:Key="SettingFile_Save">Save</sys:String>
+    <sys:String x:Key="SettingFile_Load">Load</sys:String>
+    <sys:String x:Key="SettingFile_Save_Instruction">Select target to save.</sys:String>
+    <sys:String x:Key="SettingFile_Load_Instruction">Select data to load.</sys:String>
+    <sys:String x:Key="SettingFile_LoadCharacter">Load Character</sys:String>
+    <sys:String x:Key="SettingFile_LoadNonCharacter">Load Non-Character Settings</sys:String>
+    <sys:String x:Key="SettingFile_Export">Export</sys:String>
+    <sys:String x:Key="SettingFile_Import">Import</sys:String>
+
+    <sys:String x:Key="SettingFile_Automation">Automation</sys:String>
+    <sys:String x:Key="SettingFile_Instruction" xml:space="preserve">WARNING:
+This feature enables to skip license check when loading local file VRM.
+You must confirm the models' license beforehand.
+
+VRoid Hub model is not supported in this feature.</sys:String>
+    <sys:String x:Key="SettingFile_Enable">Enable Automation Support</sys:String>
+    <sys:String x:Key="SettingFile_Disable">Disable Automation Support</sys:String>
+    <sys:String x:Key="SettingFile_PortNumber">Port Number:</sys:String>
+    <sys:String x:Key="SettingFile_PortNumber_Warning">Port Number is invalid. Input number between 0 - 65535.</sys:String>
+    <sys:String x:Key="SettingFile_ApplyPortNumber">Apply</sys:String>
+    <sys:String x:Key="SettingFile_SeeMore">See How to Use (Open Web Page)</sys:String>
+
+    <!-- NOTE: used from ViewModel code. -->
+    <sys:String x:Key="SettingFile_SaveCompleted">Saved Current Setting to No.{0}.</sys:String>
+    <sys:String x:Key="SettingFile_LoadCompleted">Loaded Setting No.{0}.</sys:String>
+    <sys:String x:Key="SettingFile_SaveCompleted_ExportedFile">Saved Current Setting to File.</sys:String>
+    <sys:String x:Key="SettingFile_LoadCompleted_ExportedFile">Loaded Setting from File.</sys:String>
+
     <!-- Dialog Messages -->
     <sys:String x:Key="DialogTitle_LoadLocalVrm">Load VRM</sys:String>
     <sys:String x:Key="DialogMessage_LoadLocalVrm">Please confirm the license in viewer window. Do you load the character?</sys:String>
     <sys:String x:Key="DialogTitle_ResetAllSetting">Reset Setting</sys:String>
-    <sys:String x:Key="DialogMessage_ResetAllSetting">Are you sure you want to reset all settings in VMagicMirror?</sys:String>
+    <sys:String x:Key="DialogMessage_ResetAllSetting" xml:space="preserve">Are you sure you want to reset current settings?
+
+If you want to save current setting, cancel this dialog and save before reset.</sys:String>
     <sys:String x:Key="DialogTitle_ResetCategorySetting">Reset Setting</sys:String>
     <sys:String x:Key="DialogMessage_ResetCategorySetting">Are you sure you want to reset selected category setting?</sys:String>
     <sys:String x:Key="DialogTitle_LoadSettingFileError">Load failed</sys:String>
@@ -394,6 +429,8 @@ Please test by typing "joy".</sys:String>
     <sys:String x:Key="DialogMessage_ShowVRoidSdkUi">Select model to load, or cancel operation.</sys:String>
     <sys:String x:Key="DialogTitle_LoadPreviousVRoidModel">Connecting to VRoid Hub</sys:String>
     <sys:String x:Key="DialogMessage_LoadPreviousVRoidModel">Trying to load avatar used in previous time. Select model or cancel operation.</sys:String>
+    <sys:String x:Key="DialogTitle_LoadSavedVRoidModel">Connecting to VRoid Hub</sys:String>
+    <sys:String x:Key="DialogMessage_LoadSavedVRoidModel">Trying to load avatar saved in setting file. Select model or cancel operation.</sys:String>
     <sys:String x:Key="DialogTitle_ExTrackerMissingBlendShape">Missing BlendShapeClip</sys:String>
     <sys:String x:Key="DialogMessage_ExTrackerMissingBlendShape" xml:space="preserve">Detect missing BlendShapeClips for perfect sync.
 
@@ -410,6 +447,26 @@ Undefined BlendShaepClip names:
 Choose 'OK' to enable webcam based tracking.
 </sys:String>
     
+    <sys:String x:Key="DialogTitle_ConfirmSettingFileSave">Setting File Save</sys:String>
+    <sys:String x:Key="DialogMessage_ConfirmSettingFileSave">Are you sure to save current setting to No.{0}? If the setting already exists, it will be overwritten.</sys:String>
+
+    <sys:String x:Key="DialogTitle_ConfirmSettingFileLoad">Setting File Load</sys:String>
+    <sys:String x:Key="DialogMessage_ConfirmSettingFileLoad" xml:space="preserve">Are you sure to load setting No.{0}?
+
+If you load with non-character option, most of the settings will be overwritten.</sys:String>    
+
+    <sys:String x:Key="DialogTitle_GuardSettingWindowDuringSaveLoad">Save / Load Process Running</sys:String>
+    <sys:String x:Key="DialogMessage_GuardSettingWindowDuringSaveLoad">Setting window is locked during save and load process.</sys:String>
+    
+    <sys:String x:Key="DialogTitle_EnableAutomation">Enable Automation</sys:String>
+    <sys:String x:Key="DialogMessage_EnableAutomation" xml:space="preserve">Are you sure to enable automation feature?
+
+This feature enable switch setting and change character without GUI operation.
+Use this only after checking the licenses of VRM you will use.
+</sys:String>    
+    <sys:String x:Key="DialogTitle_DisableAutomation">Disable Automation</sys:String>
+    <sys:String x:Key="DialogMessage_DisableAutomation">Are you sure to disable automation feature?</sys:String>
+    
     <!-- Other: Not on Dialog, but used from code -->
     <sys:String x:Key="CommonUi_DoNothing">(Do Nothing)</sys:String>
     <sys:String x:Key="CommonUi_None">(None)</sys:String>
@@ -417,6 +474,7 @@ Choose 'OK' to enable webcam based tracking.
     <!-- Localize dependent URLs -->
     <sys:String x:Key="URL_help_top">https://malaybaku.github.io/VMagicMirror/en</sys:String>
     <sys:String x:Key="URL_docs_ex_tracker">https://malaybaku.github.io/VMagicMirror/en/docs/external_tracker</sys:String>
+    <sys:String x:Key="URL_docs_setting_files">https://malaybaku.github.io/VMagicMirror/en/docs/setting_files</sys:String>
     <sys:String x:Key="URL_tips_perfect_sync">https://malaybaku.github.io/VMagicMirror/en/tips/perfect_sync</sys:String>
     <sys:String x:Key="URL_ifacialmocap_troubleshoot">https://malaybaku.github.io/VMagicMirror/en/docs/external_tracker_ifacialmocap#troubleshoot</sys:String>
     

@@ -1,4 +1,6 @@
-﻿namespace Baku.VMagicMirrorConfig
+﻿using System;
+
+namespace Baku.VMagicMirrorConfig
 {
     //メッセージボックスで表示するテキストの言語別対応。
     //リソースに書くほどでもないのでベタに書く
@@ -23,6 +25,7 @@
         public static MessageIndication ResetSingleCategoryConfirmation() => Load("ResetCategorySetting");
         public static MessageIndication ShowVRoidSdkUi() => Load("ShowVRoidSdkUi");
         public static MessageIndication ShowLoadingPreviousVRoid() => Load("LoadPreviousVRoidModel");
+        public static MessageIndication ShowLoadingSavedVRoidModel() => Load("LoadSavedVRoidModel");
 
         /// <summary>
         /// NOTE: Contentのほうがフォーマット文字列なのでstring.Formatで消すアイテムの名前を指定して完成させること！
@@ -68,6 +71,37 @@
         /// </summary>
         /// <param name="languageName"></param>
         /// <returns></returns>
-        public static MessageIndication ExTrackerCheckTurnOff() => Load("ExTrackerCheckTurnOff"); 
+        public static MessageIndication ExTrackerCheckTurnOff() => Load("ExTrackerCheckTurnOff");
+
+        /// <summary>
+        /// 設定ファイルをのスロットに保存するときの確認。Content側は番号入れるぶんの{0}のプレースホルダーがあるので注意。
+        /// </summary>
+        /// <returns></returns>
+        public static MessageIndication ConfirmSettingFileSave() => Load("ConfirmSettingFileSave");
+
+        /// <summary>
+        /// 設定ファイルをスロットからロードするときの確認。Content側は番号入れるぶんの{0}のプレースホルダーがあるので注意。
+        /// </summary>
+        /// <returns></returns>
+        public static MessageIndication ConfirmSettingFileLoad() => Load("ConfirmSettingFileLoad");
+
+        /// <summary>
+        /// セーブ/ロード中に詳細設定ウィンドウを開いてたらガードするための文言
+        /// </summary>
+        /// <returns></returns>
+        public static MessageIndication GuardSettingWindowDuringSaveLoad() => Load("GuardSettingWindowDuringSaveLoad");
+
+        /// <summary>
+        /// オートメーション機能を有効にしたい人向けの確認ダイアログ
+        /// </summary>
+        /// <returns></returns>
+        public static MessageIndication EnableAutomation() => Load("EnableAutomation");
+
+        /// <summary>
+        /// オートメーション機能を無効にしたい人向けの確認ダイアログ
+        /// </summary>
+        /// <returns></returns>
+        public static MessageIndication DisableAutomation() => Load("DisableAutomation");
+
     }
 }

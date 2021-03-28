@@ -46,7 +46,7 @@ namespace Baku.VMagicMirrorConfig
                     var dict = XamlServices.Load(reader) as ResourceDictionary;
                     if (dict != null)
                     {
-                        
+
                         _dictionaries[key] = dict;
                         LogOutput.Instance.Write("Localization file loaded: " + key);
                     }

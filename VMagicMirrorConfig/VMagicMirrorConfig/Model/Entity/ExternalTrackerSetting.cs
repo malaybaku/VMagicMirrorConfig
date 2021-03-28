@@ -1,7 +1,7 @@
 ﻿namespace Baku.VMagicMirrorConfig
 {
     public class ExternalTrackerSetting : SettingEntityBase
-    { 
+    {
         public const int TrackSourceNone = 0;
         public const int TrackSourceIFacialMocap = 1;
 
@@ -22,7 +22,7 @@
         public int TrackSourceType { get; set; } = 0;
         public string IFacialMocapTargetIpAddress { get; set; } = "";
         public string CalibrateData { get; set; } = "";
-        
+
         // FaceSwitchの設定
 
         //NOTE1: この値は単体でJSONシリアライズされます(Unityにもそのまんま渡すため)

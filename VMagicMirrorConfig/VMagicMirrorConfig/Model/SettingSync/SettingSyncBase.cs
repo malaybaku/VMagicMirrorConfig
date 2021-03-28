@@ -52,7 +52,7 @@ namespace Baku.VMagicMirrorConfig
 
         /// <summary>ロード直前に行いたい処理があれば実装します。</summary>
         protected virtual void PreLoad() { }
-        
+
         /// <summary>ロード直後に行いたい処理(デシリアライズや処理漏れの対処)があれば実装します。</summary>
         /// <param name="entity"></param>
         protected virtual void AfterLoad(TEntity entity) { }
@@ -63,7 +63,7 @@ namespace Baku.VMagicMirrorConfig
         /// <param name="entity"></param>
         public void Load(TEntity? entity)
         {
-            if (entity == null) 
+            if (entity == null)
             {
                 LogOutput.Instance.Write($"Load Requested for {typeof(TEntity).Name}, but entity is invalid");
                 return;

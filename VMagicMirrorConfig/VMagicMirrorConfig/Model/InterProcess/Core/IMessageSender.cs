@@ -18,7 +18,7 @@ namespace Baku.VMagicMirrorConfig
         /// </summary>
         /// <param name="message"></param>
         void SendMessage(Message message);
-        
+
         /// <summary>
         /// 返信を取得するメッセージを送信し、結果を取得します。
         /// </summary>

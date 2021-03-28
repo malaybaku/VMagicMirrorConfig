@@ -154,7 +154,7 @@ namespace Baku.VMagicMirrorConfig
 
         public RProperty<bool> EnableLipSync { get; }
 
-        public RProperty<string> LipSyncMicrophoneDeviceName { get; } 
+        public RProperty<string> LipSyncMicrophoneDeviceName { get; }
 
         //NOTE: dB単位なので0がデフォルト。対数ベースのほうがレンジ取りやすい
         public RProperty<int> MicrophoneSensitivity { get; }

@@ -25,7 +25,7 @@ namespace Baku.VMagicMirrorConfig
             DialogResult = true;
             Close();
         }
-        
+
         protected override void OnContentRendered(EventArgs e)
         {
             base.OnContentRendered(e);

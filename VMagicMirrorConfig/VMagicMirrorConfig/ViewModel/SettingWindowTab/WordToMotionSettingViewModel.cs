@@ -280,7 +280,7 @@ namespace Baku.VMagicMirrorConfig
         //デフォルトのWord To Motion一覧を生成して初期化します。
         public void LoadDefaultItemsIfInitialStart()
         {
-            if (!SpecialFilePath.SettingFileExists()) 
+            if (!SpecialFilePath.IsAutoSaveFileExist())
             {
                 LoadDefaultItems();
             }
@@ -304,7 +304,7 @@ namespace Baku.VMagicMirrorConfig
             };
 
             _dialogItem = item;
-           
+
             EnablePreview.Value = EnablePreviewWhenStartEdit;
 
             if (dialog.ShowDialog() == true)
@@ -348,7 +348,7 @@ namespace Baku.VMagicMirrorConfig
             private set => SetValue(ref _displayName, value);
         }
 
-        internal void RefreshDisplayName() 
+        internal void RefreshDisplayName()
             => DisplayName = LocalizedString.GetString(DisplayNameKeyPrefix + _displayNameKeySuffix);
 
         public static WordToMotionDeviceItem None()
@@ -361,7 +361,7 @@ namespace Baku.VMagicMirrorConfig
                 WordToMotionSetting.DeviceTypes.KeyboardWord, "KeyboardWord"
                 );
 
-        public static WordToMotionDeviceItem Gamepad() 
+        public static WordToMotionDeviceItem Gamepad()
             => new WordToMotionDeviceItem(
                 WordToMotionSetting.DeviceTypes.Gamepad, "Gamepad"
                 );

@@ -1,6 +1,6 @@
-﻿using System.Windows;
+﻿using MaterialDesignThemes.Wpf;
+using System.Windows;
 using System.Windows.Controls;
-using MaterialDesignThemes.Wpf;
 
 namespace Baku.VMagicMirrorConfig
 {

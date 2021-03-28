@@ -3,7 +3,10 @@
                     xmlns:sys="clr-namespace:System;assembly=mscorlib"
                     xml:space="preserve"
                     >
-    
+    <!-- Common -->
+    <sys:String x:Key="Common_Cancel">キャンセル</sys:String>
+    <sys:String x:Key="Common_Close">閉じる</sys:String>
+
     <!-- Window Title Bar -->
     <sys:String x:Key="TitleBar_Help">ヘルプ</sys:String>
     <sys:String x:Key="TitleBar_Visit_OfficialPage">ウェブサイト</sys:String>
@@ -22,6 +25,7 @@
     <sys:String x:Key="TopBar_Setting_Layout">レイアウト</sys:String>
     <sys:String x:Key="TopBar_Setting_Devices">デバイス</sys:String>
     <sys:String x:Key="TopBar_Setting_Effects">エフェクト</sys:String>
+    <sys:String x:Key="TopBar_Setting_FileIo">ファイル</sys:String>
     
     <!-- Home -->
     <sys:String x:Key="Home_LoadVrm">VRMロード</sys:String>
@@ -39,11 +43,9 @@
 
     <sys:String x:Key="Home_SettingFileIo">詳細設定</sys:String>    
     <sys:String x:Key="Home_OpenSetting">設定ウィンドウを開く</sys:String>
-    <sys:String x:Key="Home_SaveSettingFile">セーブ</sys:String>
-    <sys:String x:Key="Home_LoadSettingFile">ロード</sys:String>
 
-    <sys:String x:Key="Home_SettingManagement">設定の管理</sys:String>
-    <sys:String x:Key="Home_Reset">リセット</sys:String>
+    <sys:String x:Key="Home_SettingManagement">設定ファイル</sys:String>
+    <sys:String x:Key="Home_Reset">現在の設定をリセット</sys:String>
     <sys:String x:Key="Home_LoadPrevSetting">旧バージョンの設定をロード</sys:String>
         
     <sys:String x:Key="Home_OtherSettings_Header">その他の設定</sys:String>
@@ -379,11 +381,45 @@
     <sys:String x:Key="WordToMotion_DeviceItem_KeyboardTenKey">キーボード (数字の0-8)</sys:String>
     <sys:String x:Key="WordToMotion_DeviceItem_MidiController">MIDIコントローラ</sys:String>
 
+    <!-- Save/Load -->
+    <sys:String x:Key="SettingFile_Header">設定ファイルの操作</sys:String>
+    <sys:String x:Key="SettingFile_SaveAndLoad">セーブ・ロード</sys:String>
+    <sys:String x:Key="SettingFile_Save">セーブ</sys:String>
+    <sys:String x:Key="SettingFile_Load">ロード</sys:String>
+    <sys:String x:Key="SettingFile_Save_Instruction">保存先を選択して下さい。</sys:String>
+    <sys:String x:Key="SettingFile_Load_Instruction">ロードするデータを選択して下さい。</sys:String>
+    <sys:String x:Key="SettingFile_LoadCharacter">キャラをロード</sys:String>
+    <sys:String x:Key="SettingFile_LoadNonCharacter">キャラ以外の情報をロード</sys:String>
+    <sys:String x:Key="SettingFile_Export">エクスポート</sys:String>
+    <sys:String x:Key="SettingFile_Import">インポート</sys:String>
+    
+    <sys:String x:Key="SettingFile_Automation">オートメーション</sys:String>
+    <sys:String x:Key="SettingFile_Instruction" xml:space="preserve">注意:
+この機能を使うとGUIを操作せずにキャラクターを切り替えられます。
+ライセンスを十分確認したモデルでのみ、この機能を使用して下さい。
+
+また、本機能ではVRoid Hubモデルへの自動切り替えはできません。</sys:String>
+    <sys:String x:Key="SettingFile_Enable">オートメーションを有効化</sys:String>
+    <sys:String x:Key="SettingFile_Disable">オートメーションを無効化</sys:String>
+    <sys:String x:Key="SettingFile_PortNumber">ポート番号:</sys:String>
+    <sys:String x:Key="SettingFile_PortNumber_Warning">ポート番号が不適切です。0以上、65535以下の数値を指定して下さい。</sys:String>
+    <sys:String x:Key="SettingFile_ApplyPortNumber">適用</sys:String>
+    <sys:String x:Key="SettingFile_SeeMore">使い方をチェック (Webページへ移動)</sys:String>
+
+    <!-- NOTE: used from ViewModel code. -->
+    <sys:String x:Key="SettingFile_SaveCompleted">設定を No.{0} に保存しました。</sys:String>
+    <sys:String x:Key="SettingFile_LoadCompleted">設定 No.{0} をロードしました。</sys:String>
+    <sys:String x:Key="SettingFile_SaveCompleted_ExportedFile">設定をファイルに保存しました。</sys:String>
+    <sys:String x:Key="SettingFile_LoadCompleted_ExportedFile">設定をファイルからロードしました。</sys:String>
+   
     <!-- Dialog Messages -->
     <sys:String x:Key="DialogTitle_LoadLocalVrm">VRMの読み込み</sys:String>
     <sys:String x:Key="DialogMessage_LoadLocalVrm">ビューアー画面のライセンスを確認してください。読み込みますか？</sys:String>
     <sys:String x:Key="DialogTitle_ResetAllSetting">設定のリセット</sys:String>
-    <sys:String x:Key="DialogMessage_ResetAllSetting">リセットを実行すると全ての設定が初期状態に戻ります。リセットしますか？</sys:String>
+    <sys:String x:Key="DialogMessage_ResetAllSetting" xml:space="preserve">リセットを行うと現在の設定が初期状態に戻ります。
+オートセーブの内容をバックアップする場合、事前にセーブを行ってください。
+
+リセットしますか？</sys:String>
     <sys:String x:Key="DialogTitle_ResetCategorySetting">設定のリセット</sys:String>
     <sys:String x:Key="DialogMessage_ResetCategorySetting">選択したカテゴリの設定をリセットしますか？</sys:String>
     <sys:String x:Key="DialogTitle_LoadSettingFileError">ロード失敗</sys:String>
@@ -398,6 +434,8 @@
     <sys:String x:Key="DialogMessage_ShowVRoidSdkUi">キャラクターウィンドウ上でモデルを選択するか、またはキャンセルしてください。</sys:String>
     <sys:String x:Key="DialogTitle_LoadPreviousVRoidModel">VRoid Hubに接続中</sys:String>
     <sys:String x:Key="DialogMessage_LoadPreviousVRoidModel">前回使用したモデルのロードを試みています。モデルをロードするか、またはキャンセルしてください。</sys:String>
+    <sys:String x:Key="DialogTitle_LoadSavedVRoidModel">VRoid Hubに接続中</sys:String>
+    <sys:String x:Key="DialogMessage_LoadSavedVRoidModel">設定ファイルで指定されたモデルのロードを試みています。モデルをロードするか、またはキャンセルしてください。</sys:String>
     <sys:String x:Key="DialogTitle_ExTrackerMissingBlendShape">未定義のBlendShapeClipがあります</sys:String>
     <sys:String x:Key="DialogMessage_ExTrackerMissingBlendShape" xml:space="preserve">パーフェクトシンクに必要なBlendShapeClipの一部が未定義です。
 
@@ -415,6 +453,28 @@ webカメラでの顔トラッキングを有効にする場合は
 'OK'を選択し、iPhone/iPadとの連携を終了してください。
 </sys:String>
 
+    <sys:String x:Key="DialogTitle_ConfirmSettingFileSave">設定を保存</sys:String>
+    <sys:String x:Key="DialogMessage_ConfirmSettingFileSave" xml:space="preserve">現在の設定を No.{0} に保存しますか？
+        
+現在保存済みの設定がある場合、上書きされます。</sys:String>
+    
+    <sys:String x:Key="DialogTitle_ConfirmSettingFileLoad">設定をロード</sys:String>
+    <sys:String x:Key="DialogMessage_ConfirmSettingFileLoad" xml:space="preserve">設定 No.{0} をロードしますか？
+        
+キャラ以外の設定をロードすると、現在の設定が上書きされます。</sys:String>
+
+    <sys:String x:Key="DialogTitle_GuardSettingWindowDuringSaveLoad">セーブ/ロード操作中</sys:String>
+    <sys:String x:Key="DialogMessage_GuardSettingWindowDuringSaveLoad">設定ファイルのセーブ/ロード中は設定ウィンドウは操作できません。</sys:String>
+    
+    <sys:String x:Key="DialogTitle_EnableAutomation">オートメーションの有効化</sys:String>
+    <sys:String x:Key="DialogMessage_EnableAutomation" xml:space="preserve">オートメーションを有効化しますか？
+
+オートメーション機能ではGUIを操作せずにキャラクター、設定を切り替えられます。
+ライセンスを十分よく確認したモデルに対してのみ、この機能を使用して下さい。
+</sys:String>
+
+    <sys:String x:Key="DialogTitle_DisableAutomation">オートメーションの無効化</sys:String>
+    <sys:String x:Key="DialogMessage_DisableAutomation">オートメーションを無効化しますか？</sys:String>
     <!-- Other: Not on Dialog, but used from code -->
     <sys:String x:Key="CommonUi_DoNothing">(何もしない)</sys:String>
     <sys:String x:Key="CommonUi_None">(なし)</sys:String>
@@ -422,6 +482,7 @@ webカメラでの顔トラッキングを有効にする場合は
     <!-- Localize dependent URLs -->
     <sys:String x:Key="URL_help_top">https://malaybaku.github.io/VMagicMirror</sys:String>
     <sys:String x:Key="URL_docs_ex_tracker">https://malaybaku.github.io/VMagicMirror/docs/external_tracker</sys:String>
+    <sys:String x:Key="URL_docs_setting_files">https://malaybaku.github.io/VMagicMirror/docs/setting_files</sys:String>
     <sys:String x:Key="URL_tips_perfect_sync">https://malaybaku.github.io/VMagicMirror/tips/perfect_sync</sys:String>
     <sys:String x:Key="URL_ifacialmocap_troubleshoot">https://malaybaku.github.io/VMagicMirror/docs/external_tracker_ifacialmocap#troubleshoot</sys:String>
     

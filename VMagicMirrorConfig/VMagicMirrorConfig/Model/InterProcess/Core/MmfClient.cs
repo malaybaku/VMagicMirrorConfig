@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Baku.VMagicMirrorConfig.Mmf;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Baku.VMagicMirrorConfig.Mmf;
 
 namespace Baku.VMagicMirrorConfig
 {
@@ -108,7 +108,7 @@ namespace Baku.VMagicMirrorConfig
 
         /// <summary> コマンド受信時に、UIスレッド上で発火する。 </summary>
         public event EventHandler<CommandReceivedEventArgs>? ReceivedCommand;
-        
+
         /// <summary> クエリ受信時に、UIスレッド上で発火する。 </summary>
         public event EventHandler<QueryReceivedEventArgs>? ReceivedQuery;
 
@@ -152,7 +152,7 @@ namespace Baku.VMagicMirrorConfig
             }
             return -1;
         }
-        
+
         #endregion
 
     }

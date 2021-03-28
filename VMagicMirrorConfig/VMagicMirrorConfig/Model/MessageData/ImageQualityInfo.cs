@@ -9,7 +9,7 @@ namespace Baku.VMagicMirrorConfig
     /// </summary>
     public class ImageQualityInfo
     {
-        public string[]? ImageQualityNames { get; set; } 
+        public string[]? ImageQualityNames { get; set; }
         public int CurrentQualityIndex { get; set; }
 
         public static ImageQualityInfo ParseFromJson(string json)
@@ -19,8 +19,8 @@ namespace Baku.VMagicMirrorConfig
                 using (var sReader = new StringReader(json))
                 using (var jReader = new JsonTextReader(sReader))
                 {
-                    return 
-                        new JsonSerializer().Deserialize<ImageQualityInfo>(jReader) ?? 
+                    return
+                        new JsonSerializer().Deserialize<ImageQualityInfo>(jReader) ??
                         new ImageQualityInfo();
                 }
             }

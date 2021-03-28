@@ -15,7 +15,7 @@ namespace Baku.VMagicMirrorConfig
         {
             var indication = MessageIndication.ResetSingleCategoryConfirmation();
             bool res = await MessageBoxWrapper.Instance.ShowAsync(
-                indication.Title, 
+                indication.Title,
                 indication.Content,
                 MessageBoxWrapper.MessageBoxStyle.OKCancel
                 );

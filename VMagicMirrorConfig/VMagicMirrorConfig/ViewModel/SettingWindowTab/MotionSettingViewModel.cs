@@ -98,7 +98,7 @@ namespace Baku.VMagicMirrorConfig
                             .ToArray();
                         _blendShapeNameStore.Refresh(names);
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         LogOutput.Instance.Write(ex);
                     }
@@ -190,7 +190,7 @@ namespace Baku.VMagicMirrorConfig
         private void UpdateEyeRotRangeText()
         {
             double range = EyeRotDefaultRange * EyeBoneRotationScale.Value * 0.01;
-            EyeRotRangeText =  $"-{range:0.00} ~ +{range:0.00}";
+            EyeRotRangeText = $"-{range:0.00} ~ +{range:0.00}";
         }
 
         #endregion
@@ -204,7 +204,7 @@ namespace Baku.VMagicMirrorConfig
         public RProperty<bool> ShowMicrophoneVolume { get; }
 
         //NOTE: 0 ~ 20が無音、21~40が適正、41~50がデカすぎになる。これはUnity側がそういう整形をしてくれる
-        public RProperty<int> MicrophoneVolumeValue { get; } = new RProperty<int>(0);  
+        public RProperty<int> MicrophoneVolumeValue { get; } = new RProperty<int>(0);
 
         private readonly ObservableCollection<string> _writableMicrophoneDeviceNames
             = new ObservableCollection<string>();
@@ -229,7 +229,7 @@ namespace Baku.VMagicMirrorConfig
         public RProperty<bool> ShowPresentationPointer => _model.ShowPresentationPointer;
         public RProperty<int> PresentationArmRadiusMin => _model.PresentationArmRadiusMin;
 
-        private void UpdatePointerVisibility() 
+        private void UpdatePointerVisibility()
             => LargePointerController.Instance.UpdateVisibility(_model.PointerVisible);
 
         #endregion
@@ -259,7 +259,7 @@ namespace Baku.VMagicMirrorConfig
         public ActionCommand ResetHandMotionSettingCommand { get; }
         public ActionCommand ResetWaitMotionSettingCommand { get; }
 
-        private void ResetFaceBasicSetting()   
+        private void ResetFaceBasicSetting()
         {
             _model.ResetFaceBasicSetting();
             //NOTE: 保存されない値だけど一応やる

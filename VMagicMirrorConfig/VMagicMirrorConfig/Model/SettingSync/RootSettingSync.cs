@@ -22,6 +22,7 @@ namespace Baku.VMagicMirrorConfig
             Light = new LightSettingSync(sender);
             WordToMotion = new WordToMotionSettingSync(sender, receiver);
             ExternalTracker = new ExternalTrackerSettingSync(sender);
+            Automation = new AutomationSettingSync(sender);
 
             //NOTE; LanguageSelectorとの二重管理っぽくて若干アレだがこのままで行く
             //初期値Defaultを入れることで、起動直後にPCのカルチャベースで言語を指定しなきゃダメかどうか判別する
@@ -45,6 +46,10 @@ namespace Baku.VMagicMirrorConfig
         //SettingFileIoがセーブする時点において、自動ロードが無効だとファイルパスが転写されないようにガードがかかる。
         public string LastVrmLoadFilePath { get; set; } = "";
         public string LastLoadedVRoidModelId { get; set; } = "";
+        //NOTE: このモデル名は保存したデータの内訳を示すために用いる。
+        //そのため、主にファイルセーブ + セーブしたファイルのプレビュー目的で使い、ロードでは読み込まない
+        public string LoadedModelName { get; set; } = "";
+
         public RProperty<bool> AutoLoadLastLoadedVrm { get; } = new RProperty<bool>(false);
 
         //NOTE: VRMのロード処理はUI依存の処理が多すぎるためViewModel実装のままにしている
@@ -65,9 +70,11 @@ namespace Baku.VMagicMirrorConfig
 
         public ExternalTrackerSettingSync ExternalTracker { get; }
 
+        public AutomationSettingSync Automation { get; }
+
         public void InitializeAvailableLanguage(string[] languageNames)
         {
-            foreach(var name in languageNames)
+            foreach (var name in languageNames)
             {
                 _availableLanguageNames.Add(name);
             }

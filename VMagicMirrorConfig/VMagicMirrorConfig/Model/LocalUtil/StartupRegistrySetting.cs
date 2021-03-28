@@ -1,5 +1,5 @@
-﻿using System;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
+using System;
 
 namespace Baku.VMagicMirrorConfig
 {
@@ -29,7 +29,7 @@ namespace Baku.VMagicMirrorConfig
                         s == UnityAppPath;
                 }
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return false;
             }

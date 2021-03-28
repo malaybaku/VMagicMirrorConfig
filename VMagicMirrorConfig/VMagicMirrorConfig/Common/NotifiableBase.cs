@@ -7,7 +7,7 @@ namespace Baku.VMagicMirrorConfig
 {
     public abstract class NotifiableBase : INotifyPropertyChanged
     {
-        protected bool SetValue<T>(ref T target, T value, [CallerMemberName]string pname="")
+        protected bool SetValue<T>(ref T target, T value, [CallerMemberName] string pname = "")
             where T : IEquatable<T>
         {
             if (!EqualityComparer<T>.Default.Equals(target, value))
@@ -19,7 +19,7 @@ namespace Baku.VMagicMirrorConfig
             return false;
         }
 
-        protected void RaisePropertyChanged([CallerMemberName]string pname = "")
+        protected void RaisePropertyChanged([CallerMemberName] string pname = "")
             => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(pname));
 
         public event PropertyChangedEventHandler? PropertyChanged;

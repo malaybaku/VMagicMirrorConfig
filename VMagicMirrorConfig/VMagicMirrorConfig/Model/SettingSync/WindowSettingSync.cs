@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Baku.VMagicMirrorConfig
+﻿namespace Baku.VMagicMirrorConfig
 {
     class WindowSettingSync : SettingSyncBase<WindowSetting>
     {
@@ -58,12 +56,12 @@ namespace Baku.VMagicMirrorConfig
                 );
 
             WholeWindowTransparencyLevel = new RProperty<int>(
-                setting.WholeWindowTransparencyLevel, 
+                setting.WholeWindowTransparencyLevel,
                 i => SendMessage(factory.SetWholeWindowTransparencyLevel(i))
                 );
 
             AlphaValueOnTransparent = new RProperty<int>(
-                setting.AlphaValueOnTransparent, 
+                setting.AlphaValueOnTransparent,
                 i => SendMessage(factory.SetAlphaValueOnTransparent(i))
                 );
         }
@@ -91,7 +89,7 @@ namespace Baku.VMagicMirrorConfig
             G.Value = setting.G;
             B.Value = setting.B;
         }
-        
+
         public void ResetOpacity()
         {
             var setting = WindowSetting.Default;

@@ -3,7 +3,7 @@
 namespace Baku.VMagicMirrorConfig
 {
     public class WordToMotionSetting : SettingEntityBase
-    { 
+    {
         public static class DeviceTypes
         {
             public const int None = -1;

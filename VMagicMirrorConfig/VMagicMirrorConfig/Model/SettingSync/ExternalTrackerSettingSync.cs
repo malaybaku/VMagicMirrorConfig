@@ -4,7 +4,7 @@ namespace Baku.VMagicMirrorConfig
 {
     class ExternalTrackerSettingSync : SettingSyncBase<ExternalTrackerSetting>
     {
-        public ExternalTrackerSettingSync(IMessageSender sender) : base(sender) 
+        public ExternalTrackerSettingSync(IMessageSender sender) : base(sender)
         {
             var setting = ExternalTrackerSetting.Default;
             var factory = MessageFactory.Instance;
@@ -29,7 +29,7 @@ namespace Baku.VMagicMirrorConfig
             TrackSourceType = new RProperty<int>(setting.TrackSourceType, i => SendMessage(factory.ExTrackerSetSource(i)));
             //NOTE: このアドレスはコマンド実行時に使うため、書き換わってもメッセージは送らない
             IFacialMocapTargetIpAddress = new RProperty<string>(setting.IFacialMocapTargetIpAddress);
-            
+
             CalibrateData = new RProperty<string>(
                 setting.CalibrateData, s => SendMessage(factory.ExTrackerSetCalibrateData(s))
                 );
@@ -71,12 +71,12 @@ namespace Baku.VMagicMirrorConfig
                 }
             }
         }
-    
+
         /// <summary>
         /// <see cref="FaceSwitchSetting"/>がファイルロードやリセット処理によってリロードされたとき発火
         /// </summary>
         public event EventHandler? FaceSwitchSettingReloaded;
-        
+
 
         //NOTE: コンストラクタが終了した時点でちゃんとしたデータが入った状態になる
         public RProperty<string> SerializedFaceSwitchSetting { get; }
@@ -96,7 +96,7 @@ namespace Baku.VMagicMirrorConfig
         {
             try
             {
-                FaceSwitchSetting = 
+                FaceSwitchSetting =
                     ExternalTrackerFaceSwitchSetting.FromJson(SerializedFaceSwitchSetting.Value);
             }
             catch (Exception ex)

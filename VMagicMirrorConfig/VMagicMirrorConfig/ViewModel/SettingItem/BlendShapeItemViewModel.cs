@@ -46,7 +46,7 @@
         /// アバターが一度もロードされていない場合はtrueでよいものとします。
         /// </summary>
         public bool IsUsedWithThisAvatar
-        { 
+        {
             get => _isUsedWithThisAvatar;
             set => SetValue(ref _isUsedWithThisAvatar, value);
         }

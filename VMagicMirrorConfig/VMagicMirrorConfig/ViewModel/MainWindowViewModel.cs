@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
-using Microsoft.Win32;
 
 namespace Baku.VMagicMirrorConfig
 {
@@ -12,7 +12,8 @@ namespace Baku.VMagicMirrorConfig
     {
         internal RootSettingSync Model { get; }
         internal SettingFileIo SettingFileIo { get; }
-        
+        internal SaveFileManager SaveFileManager { get; }
+
         internal MessageIo MessageIo { get; } = new MessageIo();
         internal IMessageSender MessageSender => MessageIo.Sender;
 
@@ -23,6 +24,7 @@ namespace Baku.VMagicMirrorConfig
         public LightSettingViewModel LightSetting { get; private set; }
         public WordToMotionSettingViewModel WordToMotionSetting { get; private set; }
         public ExternalTrackerViewModel ExternalTrackerSetting { get; private set; }
+        public SettingIoViewModel SettingIo { get; private set; }
 
         private readonly RuntimeHelper _runtimeHelper;
         private bool _isDisposed = false;
@@ -36,14 +38,21 @@ namespace Baku.VMagicMirrorConfig
         {
             Model = new RootSettingSync(MessageSender, MessageIo.Receiver);
             SettingFileIo = new SettingFileIo(Model, MessageSender);
+            SaveFileManager = new SaveFileManager(SettingFileIo, Model, MessageSender);
 
             WindowSetting = new WindowSettingViewModel(Model.Window, MessageSender);
             MotionSetting = new MotionSettingViewModel(Model.Motion, MessageSender, MessageIo.Receiver);
             GamepadSetting = new GamepadSettingViewModel(Model.Gamepad, MessageSender);
             LayoutSetting = new LayoutSettingViewModel(Model.Layout, Model.Gamepad, MessageSender, MessageIo.Receiver);
             LightSetting = new LightSettingViewModel(Model.Light, MessageSender);
-            WordToMotionSetting = new WordToMotionSettingViewModel(Model.WordToMotion,  MessageSender, MessageIo.Receiver);
+            WordToMotionSetting = new WordToMotionSettingViewModel(Model.WordToMotion, MessageSender, MessageIo.Receiver);
             ExternalTrackerSetting = new ExternalTrackerViewModel(Model.ExternalTracker, MessageSender, MessageIo.Receiver);
+            SettingIo = new SettingIoViewModel(Model.Automation, SaveFileManager, MessageSender);
+            //オートメーションの配線: 1つしかないのでザツにやる。OC<T>をいじる関係でUIスレッド必須なことに注意
+            Model.Automation.LoadSettingFileRequested += v => 
+                Application.Current.Dispatcher.BeginInvoke(new Action(
+                    () => SaveFileManager.LoadSetting(v.Index, v.LoadCharacter, v.LoadNonCharacter, true))
+                    );
 
             _runtimeHelper = new RuntimeHelper(MessageSender, MessageIo.Receiver, Model);
 
@@ -56,14 +65,13 @@ namespace Baku.VMagicMirrorConfig
             OpenSettingWindowCommand = new ActionCommand(() => SettingWindow.OpenOrActivateExistingWindow(this));
 
             ResetToDefaultCommand = new ActionCommand(ResetToDefault);
-            SaveSettingToFileCommand = new ActionCommand(SaveSettingToFile);
-            LoadSettingFromFileCommand = new ActionCommand(LoadSettingFromFile);
             LoadPrevSettingCommand = new ActionCommand(LoadPrevSetting);
 
             TakeScreenshotCommand = new ActionCommand(_runtimeHelper.TakeScreenshot);
             OpenScreenshotFolderCommand = new ActionCommand(_runtimeHelper.OpenScreenshotSavedFolder);
 
             MessageIo.Receiver.ReceivedCommand += OnReceiveCommand;
+            SaveFileManager.VRoidModelLoadRequested += id => LoadSavedVRoidModel(id, false);
         }
 
         private void OnReceiveCommand(object? sender, CommandReceivedEventArgs e)
@@ -87,6 +95,10 @@ namespace Baku.VMagicMirrorConfig
                     {
                         MessageBoxWrapper.Instance.SetDialogResult(false);
                     }
+                    break;
+                case ReceiveMessageNames.ModelNameConfirmedOnLoad:
+                    //ともかくモデルがロードされているため、実態に合わせておく
+                    Model.LoadedModelName = e.Args;
                     break;
             }
         }
@@ -135,8 +147,7 @@ namespace Baku.VMagicMirrorConfig
         public ActionCommand OpenSettingWindowCommand { get; }
 
         public ActionCommand ResetToDefaultCommand { get; }
-        public ActionCommand SaveSettingToFileCommand { get; }
-        public ActionCommand LoadSettingFromFileCommand { get; }
+
         public ActionCommand LoadPrevSettingCommand { get; }
 
         public ActionCommand TakeScreenshotCommand { get; }
@@ -198,7 +209,7 @@ namespace Baku.VMagicMirrorConfig
                 MessageBoxWrapper.MessageBoxStyle.OKCancel
                 );
 
-            if(res)
+            if (res)
             {
                 MessageSender.SendMessage(MessageFactory.Instance.OpenVrm(filePath));
                 Model.OnLocalModelLoaded(filePath);
@@ -230,34 +241,7 @@ namespace Baku.VMagicMirrorConfig
         }
 
 
-        private void SaveSettingToFile()
-        {
-            var dialog = new SaveFileDialog()
-            {
-                Title = "Save VMagicMirror Setting",
-                Filter = "VMagicMirror Setting File(*.vmm)|*.vmm",
-                DefaultExt = ".vmm",
-                AddExtension = true,
-            };
-            if (dialog.ShowDialog() == true)
-            {
-                SettingFileIo.SaveSetting(dialog.FileName, false);
-            }
-        }
-
-        private void LoadSettingFromFile()
-        {
-            var dialog = new OpenFileDialog()
-            {
-                Title = "Load VMagicMirror Setting",
-                Filter = "VMagicMirror Setting File (*.vmm)|*.vmm",
-                Multiselect = false,
-            };
-            if (dialog.ShowDialog() == true)
-            {
-                SettingFileIo.LoadSetting(dialog.FileName, false);
-            }
-        }
+     
 
         private async void ResetToDefault()
         {
@@ -296,12 +280,12 @@ namespace Baku.VMagicMirrorConfig
                     SpecialFilePath.AutoSaveSettingFileName
                     );
 
-                SettingFileIo.LoadSetting(prevFilePath, true);
+                SettingFileIo.LoadSetting(prevFilePath, SettingFileReadWriteModes.AutoSave);
                 //NOTE: VRoidの自動ロード設定はちょっと概念的に重たいので引き継ぎ対象から除外
                 Model.LastLoadedVRoidModelId = "";
                 if (Model.AutoLoadLastLoadedVrm.Value && !string.IsNullOrEmpty(Model.LastVrmLoadFilePath))
                 {
-                    LoadLastLoadedVrm();
+                    LoadLastLoadedLocalVrm();
                 }
             }
             catch (Exception ex)
@@ -330,7 +314,7 @@ namespace Baku.VMagicMirrorConfig
                 LanguageSelector.Instance.GetAdditionalSupportedLanguageNames()
                 );
 
-            SettingFileIo.LoadSetting(SpecialFilePath.AutoSaveSettingFilePath, true);
+            SettingFileIo.LoadSetting(SpecialFilePath.AutoSaveSettingFilePath, SettingFileReadWriteModes.AutoSave);
 
             //NOTE: 初回起動時だけカルチャベースで言語を設定するための処理がコレ
             Model.InitializeLanguageIfNeeded();
@@ -351,11 +335,11 @@ namespace Baku.VMagicMirrorConfig
 
             if (AutoLoadLastLoadedVrm.Value && !string.IsNullOrEmpty(Model.LastVrmLoadFilePath))
             {
-                LoadLastLoadedVrm();
+                LoadLastLoadedLocalVrm();
             }
             else if (AutoLoadLastLoadedVrm.Value && !string.IsNullOrEmpty(Model.LastLoadedVRoidModelId))
             {
-                LoadLastLoadedVRoid();
+                LoadSavedVRoidModel(Model.LastLoadedVRoidModelId, true);
             }
         }
 
@@ -364,14 +348,15 @@ namespace Baku.VMagicMirrorConfig
             if (!_isDisposed)
             {
                 _isDisposed = true;
-                SettingFileIo.SaveSetting(SpecialFilePath.AutoSaveSettingFilePath, true);
+                SettingFileIo.SaveSetting(SpecialFilePath.AutoSaveSettingFilePath, SettingFileReadWriteModes.AutoSave);
+                Model.Automation.Dispose();
                 MessageIo.Dispose();
                 _runtimeHelper.Dispose();
                 LargePointerController.Instance.Close();
             }
         }
 
-        private void LoadLastLoadedVrm()
+        private void LoadLastLoadedLocalVrm()
         {
             if (File.Exists(Model.LastVrmLoadFilePath))
             {
@@ -379,9 +364,9 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
-        private async void LoadLastLoadedVRoid()
+        private async void LoadSavedVRoidModel(string modelId, bool fromAutoSave)
         {
-            if (string.IsNullOrEmpty(Model.LastLoadedVRoidModelId))
+            if (string.IsNullOrEmpty(modelId))
             {
                 return;
             }
@@ -389,10 +374,13 @@ namespace Baku.VMagicMirrorConfig
             PrepareShowUiOnUnity();
 
             //NOTE: モデルIDを載せる以外は通常のUIオープンと同じフロー
-            MessageSender.SendMessage(MessageFactory.Instance.RequestLoadVRoidWithId(Model.LastLoadedVRoidModelId));
+            MessageSender.SendMessage(MessageFactory.Instance.RequestLoadVRoidWithId(modelId));
 
             _isVRoidHubUiActive = true;
-            var message = MessageIndication.ShowLoadingPreviousVRoid();
+            //自動セーブなら「前回のモデル」だしそれ以外なら「設定ファイルに乗ってたモデル」となる。分けといたほうがわかりやすいので分ける。
+            var message = fromAutoSave 
+                ? MessageIndication.ShowLoadingPreviousVRoid() 
+                : MessageIndication.ShowLoadingSavedVRoidModel();
             bool _ = await MessageBoxWrapper.Instance.ShowAsync(
                 message.Title, message.Content, MessageBoxWrapper.MessageBoxStyle.None
                 );
@@ -408,7 +396,7 @@ namespace Baku.VMagicMirrorConfig
             _windowTransparentBeforeLoadProcess = WindowSetting.IsTransparent.Value;
             WindowSetting.IsTransparent.Value = false;
         }
-        
+
         //Unity側でのUI表示が終わったとき、最前面と透過の設定をもとの状態に戻します。
         private void EndShowUiOnUnity()
         {
