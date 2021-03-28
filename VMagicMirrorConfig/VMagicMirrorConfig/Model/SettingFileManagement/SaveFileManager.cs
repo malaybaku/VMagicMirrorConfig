@@ -112,7 +112,7 @@ namespace Baku.VMagicMirrorConfig
         /// <param name="index"></param>
         /// <returns></returns>
         public bool CheckFileExist(int index) =>
-            index > 0 &&
+            index >= 0 &&
             index <= FileCount &&
             File.Exists(SpecialFilePath.GetSaveFilePath(index));
     }
