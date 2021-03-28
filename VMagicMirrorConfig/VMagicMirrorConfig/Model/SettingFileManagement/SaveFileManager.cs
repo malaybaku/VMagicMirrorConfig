@@ -22,11 +22,12 @@ namespace Baku.VMagicMirrorConfig
         public event Action<string>? VRoidModelLoadRequested;
 
         /// <summary> 
-        /// ソフト起動以降で<see cref="LoadSetting(int, bool, bool, bool)"/>を最後に呼び出して成功したときのindexを取得します。
-        /// 一度も呼び出してなければ0を取得します。
-        /// 「未保存の変更」みたいなのをお知らせするために使えます。
+        /// ユーザーがフォーカスしていると考えられるファイルのインデックスを取得します。
+        /// ソフト起動以降でファイルをセーブするか、あるいはキャラ情報以外をロードしたときに、
+        /// そのファイルのインデックスになります。
+        /// キャラのみをロードした場合、インデックスは変更されません。
         /// </summary>
-        public int LatestLoadedFileIndex { get; private set; } = 0;
+        public int FocusedFileIndex { get; private set; } = 0;
 
         /// <summary>
         /// 指定した番号のファイルを保存します。
@@ -40,6 +41,7 @@ namespace Baku.VMagicMirrorConfig
             }
 
             SettingFileIo.SaveSetting(SpecialFilePath.GetSaveFilePath(index), SettingFileReadWriteModes.Internal);
+            FocusedFileIndex = index;
         }
 
         /// <summary>
@@ -102,7 +104,7 @@ namespace Baku.VMagicMirrorConfig
             //NOTE: キャラだけ切り替えるのはファイルロード扱いせず、前のファイルがロードされているように見なす。
             if (loadNonCharacter)
             {
-                LatestLoadedFileIndex = index;
+                FocusedFileIndex = index;
             }
         }
 

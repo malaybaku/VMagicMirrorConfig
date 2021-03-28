@@ -39,7 +39,7 @@ namespace Baku.VMagicMirrorConfig
             {
                 var meta = SettingFileOverview.CreateOverviewFromFile(SpecialFilePath.GetSaveFilePath(i), i);
                 _items.Add(new SaveLoadFileItemViewModel(
-                    IsLoadMode, i == _model.LatestLoadedFileIndex, meta, this
+                    IsLoadMode, i == _model.FocusedFileIndex, meta, this
                     ));
             }
         }
