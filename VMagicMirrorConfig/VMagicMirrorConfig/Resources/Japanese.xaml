@@ -3,7 +3,10 @@
                     xmlns:sys="clr-namespace:System;assembly=mscorlib"
                     xml:space="preserve"
                     >
-    
+    <!-- Common -->
+    <sys:String x:Key="Common_Cancel">キャンセル</sys:String>
+    <sys:String x:Key="Common_Close">閉じる</sys:String>
+
     <!-- Window Title Bar -->
     <sys:String x:Key="TitleBar_Help">ヘルプ</sys:String>
     <sys:String x:Key="TitleBar_Visit_OfficialPage">ウェブサイト</sys:String>
@@ -22,6 +25,7 @@
     <sys:String x:Key="TopBar_Setting_Layout">レイアウト</sys:String>
     <sys:String x:Key="TopBar_Setting_Devices">デバイス</sys:String>
     <sys:String x:Key="TopBar_Setting_Effects">エフェクト</sys:String>
+    <sys:String x:Key="TopBar_Setting_FileIo">ファイル</sys:String>
     
     <!-- Home -->
     <sys:String x:Key="Home_LoadVrm">VRMロード</sys:String>
@@ -39,18 +43,13 @@
 
     <sys:String x:Key="Home_SettingFileIo">詳細設定</sys:String>    
     <sys:String x:Key="Home_OpenSetting">設定ウィンドウを開く</sys:String>
-    <sys:String x:Key="Home_SaveSettingFile">セーブ</sys:String>
-    <sys:String x:Key="Home_LoadSettingFile">ロード</sys:String>
 
-    <sys:String x:Key="Home_SettingManagement">設定の管理</sys:String>
-    <sys:String x:Key="Home_Reset">リセット</sys:String>
+    <sys:String x:Key="Home_SettingManagement">設定ファイル</sys:String>
+    <sys:String x:Key="Home_Reset">現在の設定をリセット</sys:String>
     <sys:String x:Key="Home_LoadPrevSetting">旧バージョンの設定をロード</sys:String>
         
-    <sys:String x:Key="Home_OssLicense">OSS License</sys:String>
-
     <sys:String x:Key="Home_OtherSettings_Header">その他の設定</sys:String>
     <sys:String x:Key="Home_ActivateOnStartupHeader">Windowsの起動後にスタート</sys:String>
-    <sys:String x:Key="Home_ActivateOnStartup_OtherVerRegistered">※他バージョンのVMagicMirrorが自動で起動するように登録されています。チェックをオンにすると、このバージョンを起動するよう設定を上書きします。</sys:String>
     
     <!-- Streaming -->
     <sys:String x:Key="Streaming_Window">ウィンドウ</sys:String>
@@ -63,7 +62,6 @@
     <sys:String x:Key="Streaming_DeviceLayout_Reset">リセット</sys:String>
 
     <sys:String x:Key="Streaming_Screenshot">スクリーンショット</sys:String>
-    <sys:String x:Key="Streaming_Screenshot_Take">撮影</sys:String>
     <sys:String x:Key="Streaming_Screenshot_OpenSaveFolder">保存フォルダ...</sys:String>
     
     <!-- Ex.Tracker -->
@@ -89,7 +87,6 @@
     <sys:String x:Key="ExTracker_Source_iFacialMocap">iFacialMocap</sys:String>
     <sys:String x:Key="ExTracker_iFM_IpHint">iPhoneのIP Address...</sys:String>
     <sys:String x:Key="ExTracker_Source_HowToCollaborate">※アプリとの連携方法をチェック (Webページを開きます)</sys:String>
-    <sys:String x:Key="ExTracker_Source_RefreshReceiverSetting">ネットワーク環境を再チェック</sys:String>
 
     <sys:String x:Key="ExTracker_iFM_HasTrouble_Header">連携先アプリの設定を確認して下さい</sys:String>
     <sys:String x:Key="ExTracker_iFM_HasTrouble_OpenUrl">トラブルシューティングを開く(webページへ)</sys:String>
@@ -99,6 +96,17 @@
 「リップシンクを続行」をオンにすると、表情を切り替えたままリップシンクを動かせます。</sys:String>
     <sys:String x:Key="ExTracker_FaceSwitch_KeepLipSync">リップシンクを続行</sys:String>
 
+    
+    <!-- ExTracker FaceSwitch Trigger -->
+    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_mouthSmile">口を笑顔にすると</sys:String>
+    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_eyeSquint">目を細めると</sys:String>
+    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_eyeWide">目を大きく見開くと</sys:String>
+    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_browUp">眉を上げると</sys:String>
+    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_browDown">眉を下げると</sys:String>
+    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_tongueOut">頬をふくらませると</sys:String>
+    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_cheekPuff">舌を出すと</sys:String>
+
+    
     <!-- Settings General -->
     <sys:String x:Key="Setting_Color_Expander_Header">色を編集 (クリックで展開)</sys:String>
     
@@ -111,11 +119,9 @@
     <sys:String x:Key="Window_TopMost">(透過中)キャラクターをつねに最前面で表示</sys:String>
     <sys:String x:Key="Window_ResetPosition">キャラクター位置のリセット</sys:String>
     
-    <sys:String x:Key="Window_EnableInitialPlacement">起動時に特定の位置へウィンドウを動かす</sys:String>
-    <sys:String x:Key="Window_InitialPositionX">X(画面左 = 0)</sys:String>
-    <sys:String x:Key="Window_InitialPositionY">Y(画面上 = 0)</sys:String>
-    <sys:String x:Key="Window_FetchUnityWindowPos">いまのウィンドウ位置を記憶</sys:String>
-    <sys:String x:Key="Window_MoveWindow">指定した位置へ移動</sys:String>
+    <sys:String x:Key="Window_BackgroundImage">背景画像:</sys:String>
+    <sys:String x:Key="Window_BackgroundImage_Load">ロード...</sys:String>
+    <sys:String x:Key="Window_BackgroundImage_Clear">クリア</sys:String>
     
     <sys:String x:Key="Window_TransparencySupport">キャラ透明化の詳細</sys:String>
     <sys:String x:Key="Window_TransparencySupport_Level">キャラの透明化レベル</sys:String>
@@ -148,14 +154,11 @@
     <sys:String x:Key="Motion_Arm_ElbowCloseStrength">脇をしめる強さ [%]</sys:String>
     <sys:String x:Key="Motion_Arm_EnablePresenterMotion">プレゼン風に右手を動かす</sys:String>
     <sys:String x:Key="Motion_Arm_ShowPresentationPointer">補助ポインターを表示</sys:String>    
-    <sys:String x:Key="Motion_Arm_PresenterArmMotionScale">プレゼン動作サイズ[%]</sys:String>
     <sys:String x:Key="Motion_Arm_PresenterArmRadiusMin">プレゼン動作の最小半径 [cm]</sys:String>    
 
     <!-- Motion : Hand -->
     <sys:String x:Key="Motion_Hand">手・指</sys:String>
-    <sys:String x:Key="Motion_Hand_CharacterHandMotion">手の動き</sys:String>
     <sys:String x:Key="Motion_Hand_WristToHandTip">手首から指先までの長さ[cm]</sys:String>
-    <sys:String x:Key="Motion_Hand_WristToPalm">手首から手のひらまでの長さ[cm]</sys:String>
     <sys:String x:Key="Motion_Hand_HandYOffsetBasic">手の高さ調整[cm]</sys:String>
     <sys:String x:Key="Motion_Hand_HandYOffsetAfterKeyDown">(打鍵後)手の高さ調整[cm]</sys:String>
     
@@ -168,7 +171,16 @@
     <!-- NOTE: もともとMotionタブだったのを分断してる関係で命名ルールがちょっとアレです -->
     <!-- Face Motion -->
     <sys:String x:Key="Motion_Face">顔・表情</sys:String>
+
+    <!-- Face : Basic -->
     <sys:String x:Key="Motion_Face_Basics">基本の設定</sys:String>
+    
+    <sys:String x:Key="Motion_Mouth">口・リップシンク</sys:String>
+    <sys:String x:Key="Motion_Mouth_EnableLipSync">リップシンク</sys:String>
+    <sys:String x:Key="Motion_Mouth_MicrophoneName">マイク</sys:String>    
+    <sys:String x:Key="Motion_Mouth_Microphone_Sensitivity">マイク感度 [dB]</sys:String>
+    <sys:String x:Key="Motion_Mouth_Microphone_Visualize">音量をチェック</sys:String>
+
     <sys:String x:Key="Motion_Face_EnableFaceTracking">顔をトラッキング</sys:String>
     <sys:String x:Key="Motion_Face_CameraName">カメラ</sys:String>    
     <sys:String x:Key="Motion_Face_Calibration">姿勢・表情を補正</sys:String>    
@@ -195,6 +207,7 @@
     <!-- Face : Eye -->
     <sys:String x:Key="Motion_Eye">目・視線</sys:String>
     <sys:String x:Key="Motion_Eye_LookAtPoint">視線の動き</sys:String>
+    <sys:String x:Key="Motion_Eye_LookAtPoint_Streaming">視線:</sys:String>
     <sys:String x:Key="Motion_Eye_LookAtPoint_None">固定</sys:String>
     <sys:String x:Key="Motion_Eye_LookAtPoint_MousePointer">マウス</sys:String>
     <sys:String x:Key="Motion_Eye_LookAtPoint_MainCamera">ユーザー</sys:String>
@@ -202,12 +215,6 @@
     <sys:String x:Key="Motion_Eye_ApproxRotRangePrefix">(参考)目ボーンのおおよその可動範囲: </sys:String>
     <sys:String x:Key="Motion_Eye_ApproxRotRangeSuffix"> [deg]</sys:String>
     
-    <!-- Face : Mouth -->
-    <sys:String x:Key="Motion_Mouth">口・リップシンク</sys:String>
-    <sys:String x:Key="Motion_Mouth_EnableLipSync">リップシンク</sys:String>
-    <sys:String x:Key="Motion_Mouth_MicrophoneName">マイク</sys:String>    
-    <sys:String x:Key="Motion_Mouth_Microphone_Sensitivity">マイク感度 [dB]</sys:String>
-    <sys:String x:Key="Motion_Mouth_Microphone_Visualize">音量をチェック</sys:String>
     
     <!-- Face : BlendShape -->
     <sys:String x:Key="Motion_Face_BlendShape">ブレンドシェイプ</sys:String>
@@ -232,7 +239,6 @@
 - 中クリック + ドラッグ: 並行移動
 - マウスホイール: 前後に移動</sys:String>    
     <sys:String x:Key="Layout_EnableFreeCameraMode">フリーカメラモード</sys:String>
-    <sys:String x:Key="Layout_CurrentCameraPosition">カメラの位置(x, y, z, rx, ry, rz)</sys:String>
     <sys:String x:Key="Layout_Camera_ResetPosition">位置をリセット</sys:String>
     <sys:String x:Key="Layout_Camera_Fov">視野角 [deg]</sys:String>
     <sys:String x:Key="Layout_Camera_QuickSave">クイックセーブ</sys:String>
@@ -261,10 +267,7 @@
 
     <!-- Devices -->
     <sys:String x:Key="Devices_Header">デバイス接続</sys:String>
-    
-    <!-- Devices: Keyboard and mouse -->
-    <sys:String x:Key="Devices_Keyboard_Mouse_Header">キーボード・マウス</sys:String>
-    
+        
     <!-- Devices: MIDI -->
     <sys:String x:Key="Devices_Midi_Header">MIDI</sys:String>
     <sys:String x:Key="Devices_Midi_ReadEnable">MIDIコントローラ入力をVMagicMirrorで取得する</sys:String>
@@ -372,4 +375,115 @@
     <sys:String x:Key="WordToMotion_MidiAssign_After">変更後のノート</sys:String>
     <sys:String x:Key="WordToMotion_MidiAssign_Clear">クリア</sys:String>
    
+    <sys:String x:Key="WordToMotion_DeviceItem_None">なし</sys:String>
+    <sys:String x:Key="WordToMotion_DeviceItem_KeyboardWord">キーボード (単語入力)</sys:String>
+    <sys:String x:Key="WordToMotion_DeviceItem_Gamepad">ゲームパッド</sys:String>
+    <sys:String x:Key="WordToMotion_DeviceItem_KeyboardTenKey">キーボード (数字の0-8)</sys:String>
+    <sys:String x:Key="WordToMotion_DeviceItem_MidiController">MIDIコントローラ</sys:String>
+
+    <!-- Save/Load -->
+    <sys:String x:Key="SettingFile_Header">設定ファイルの操作</sys:String>
+    <sys:String x:Key="SettingFile_SaveAndLoad">セーブ・ロード</sys:String>
+    <sys:String x:Key="SettingFile_Save">セーブ</sys:String>
+    <sys:String x:Key="SettingFile_Load">ロード</sys:String>
+    <sys:String x:Key="SettingFile_Save_Instruction">保存先を選択して下さい。</sys:String>
+    <sys:String x:Key="SettingFile_Load_Instruction">ロードするデータを選択して下さい。</sys:String>
+    <sys:String x:Key="SettingFile_LoadCharacter">キャラをロード</sys:String>
+    <sys:String x:Key="SettingFile_LoadNonCharacter">キャラ以外の情報をロード</sys:String>
+    <sys:String x:Key="SettingFile_Export">エクスポート</sys:String>
+    <sys:String x:Key="SettingFile_Import">インポート</sys:String>
+    
+    <sys:String x:Key="SettingFile_Automation">オートメーション</sys:String>
+    <sys:String x:Key="SettingFile_Instruction" xml:space="preserve">注意:
+この機能を使うとGUIを操作せずにキャラクターを切り替えられます。
+ライセンスを十分確認したモデルでのみ、この機能を使用して下さい。
+
+また、本機能ではVRoid Hubモデルへの自動切り替えはできません。</sys:String>
+    <sys:String x:Key="SettingFile_Enable">オートメーションを有効化</sys:String>
+    <sys:String x:Key="SettingFile_Disable">オートメーションを無効化</sys:String>
+    <sys:String x:Key="SettingFile_PortNumber">ポート番号:</sys:String>
+    <sys:String x:Key="SettingFile_PortNumber_Warning">ポート番号が不適切です。0以上、65535以下の数値を指定して下さい。</sys:String>
+    <sys:String x:Key="SettingFile_ApplyPortNumber">適用</sys:String>
+    <sys:String x:Key="SettingFile_SeeMore">使い方をチェック (Webページへ移動)</sys:String>
+
+    <!-- NOTE: used from ViewModel code. -->
+    <sys:String x:Key="SettingFile_SaveCompleted">設定を No.{0} に保存しました。</sys:String>
+    <sys:String x:Key="SettingFile_LoadCompleted">設定 No.{0} をロードしました。</sys:String>
+    <sys:String x:Key="SettingFile_SaveCompleted_ExportedFile">設定をファイルに保存しました。</sys:String>
+    <sys:String x:Key="SettingFile_LoadCompleted_ExportedFile">設定をファイルからロードしました。</sys:String>
+   
+    <!-- Dialog Messages -->
+    <sys:String x:Key="DialogTitle_LoadLocalVrm">VRMの読み込み</sys:String>
+    <sys:String x:Key="DialogMessage_LoadLocalVrm">ビューアー画面のライセンスを確認してください。読み込みますか？</sys:String>
+    <sys:String x:Key="DialogTitle_ResetAllSetting">設定のリセット</sys:String>
+    <sys:String x:Key="DialogMessage_ResetAllSetting" xml:space="preserve">リセットを行うと現在の設定が初期状態に戻ります。
+オートセーブの内容をバックアップする場合、事前にセーブを行ってください。
+
+リセットしますか？</sys:String>
+    <sys:String x:Key="DialogTitle_ResetCategorySetting">設定のリセット</sys:String>
+    <sys:String x:Key="DialogMessage_ResetCategorySetting">選択したカテゴリの設定をリセットしますか？</sys:String>
+    <sys:String x:Key="DialogTitle_LoadSettingFileError">ロード失敗</sys:String>
+    <sys:String x:Key="DialogMessage_LoadSettingFileError">設定ファイルのロードに失敗しました。エラー: </sys:String>
+    <sys:String x:Key="DialogTitle_DeleteWtMItem">モーションの削除</sys:String>
+    <sys:String x:Key="DialogMessage_DeleteWtmItem">このモーション'{0}'を削除しますか？</sys:String>
+    <sys:String x:Key="DialogTitle_ForgetBlendShapeInfo">ブレンドシェイプ情報のクリア</sys:String>
+    <sys:String x:Key="DialogMessage_ForgetBlendShapeInfo">このブレンドシェイプ'{0}'の設定を削除しますか？</sys:String>
+    <sys:String x:Key="DialogTitle_InvalidIpAddress">無効なIPアドレス</sys:String>
+    <sys:String x:Key="DialogMessage_InvalidIpAddress">無効なIPアドレスが指定されています。入力を確認して下さい。</sys:String>
+    <sys:String x:Key="DialogTitle_ShowVRoidSdkUi">VRoid Hubに接続中</sys:String>
+    <sys:String x:Key="DialogMessage_ShowVRoidSdkUi">キャラクターウィンドウ上でモデルを選択するか、またはキャンセルしてください。</sys:String>
+    <sys:String x:Key="DialogTitle_LoadPreviousVRoidModel">VRoid Hubに接続中</sys:String>
+    <sys:String x:Key="DialogMessage_LoadPreviousVRoidModel">前回使用したモデルのロードを試みています。モデルをロードするか、またはキャンセルしてください。</sys:String>
+    <sys:String x:Key="DialogTitle_LoadSavedVRoidModel">VRoid Hubに接続中</sys:String>
+    <sys:String x:Key="DialogMessage_LoadSavedVRoidModel">設定ファイルで指定されたモデルのロードを試みています。モデルをロードするか、またはキャンセルしてください。</sys:String>
+    <sys:String x:Key="DialogTitle_ExTrackerMissingBlendShape">未定義のBlendShapeClipがあります</sys:String>
+    <sys:String x:Key="DialogMessage_ExTrackerMissingBlendShape" xml:space="preserve">パーフェクトシンクに必要なBlendShapeClipの一部が未定義です。
+
+モデルの見た目が正常であれば、この警告を無視して構いません。
+モデルの見た目がおかしい場合はこのダイアログを閉じてから
+「パーフェクトシンクとは？」をクリックし、
+モデルのセットアップ手順を確認して下さい。
+
+---
+定義されていないBlendShapeClipの名称:
+</sys:String>
+    <sys:String x:Key="DialogTitle_ExTrackerCheckTurnOff">外部トラッキング機能をオフ</sys:String>
+    <sys:String x:Key="DialogMessage_ExTrackerCheckTurnOff" xml:space="preserve">外部トラッキング機能をオフにしますか？
+webカメラでの顔トラッキングを有効にする場合は
+'OK'を選択し、iPhone/iPadとの連携を終了してください。
+</sys:String>
+
+    <sys:String x:Key="DialogTitle_ConfirmSettingFileSave">設定を保存</sys:String>
+    <sys:String x:Key="DialogMessage_ConfirmSettingFileSave" xml:space="preserve">現在の設定を No.{0} に保存しますか？
+        
+現在保存済みの設定がある場合、上書きされます。</sys:String>
+    
+    <sys:String x:Key="DialogTitle_ConfirmSettingFileLoad">設定をロード</sys:String>
+    <sys:String x:Key="DialogMessage_ConfirmSettingFileLoad" xml:space="preserve">設定 No.{0} をロードしますか？
+        
+キャラ以外の設定をロードすると、現在の設定が上書きされます。</sys:String>
+
+    <sys:String x:Key="DialogTitle_GuardSettingWindowDuringSaveLoad">セーブ/ロード操作中</sys:String>
+    <sys:String x:Key="DialogMessage_GuardSettingWindowDuringSaveLoad">設定ファイルのセーブ/ロード中は設定ウィンドウは操作できません。</sys:String>
+    
+    <sys:String x:Key="DialogTitle_EnableAutomation">オートメーションの有効化</sys:String>
+    <sys:String x:Key="DialogMessage_EnableAutomation" xml:space="preserve">オートメーションを有効化しますか？
+
+オートメーション機能ではGUIを操作せずにキャラクター、設定を切り替えられます。
+ライセンスを十分よく確認したモデルに対してのみ、この機能を使用して下さい。
+</sys:String>
+
+    <sys:String x:Key="DialogTitle_DisableAutomation">オートメーションの無効化</sys:String>
+    <sys:String x:Key="DialogMessage_DisableAutomation">オートメーションを無効化しますか？</sys:String>
+    <!-- Other: Not on Dialog, but used from code -->
+    <sys:String x:Key="CommonUi_DoNothing">(何もしない)</sys:String>
+    <sys:String x:Key="CommonUi_None">(なし)</sys:String>
+
+    <!-- Localize dependent URLs -->
+    <sys:String x:Key="URL_help_top">https://malaybaku.github.io/VMagicMirror</sys:String>
+    <sys:String x:Key="URL_docs_ex_tracker">https://malaybaku.github.io/VMagicMirror/docs/external_tracker</sys:String>
+    <sys:String x:Key="URL_docs_setting_files">https://malaybaku.github.io/VMagicMirror/docs/setting_files</sys:String>
+    <sys:String x:Key="URL_tips_perfect_sync">https://malaybaku.github.io/VMagicMirror/tips/perfect_sync</sys:String>
+    <sys:String x:Key="URL_ifacialmocap_troubleshoot">https://malaybaku.github.io/VMagicMirror/docs/external_tracker_ifacialmocap#troubleshoot</sys:String>
+    
 </ResourceDictionary>

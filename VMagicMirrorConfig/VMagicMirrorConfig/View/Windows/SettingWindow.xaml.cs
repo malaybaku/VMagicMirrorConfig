@@ -21,7 +21,7 @@ namespace Baku.VMagicMirrorConfig
                     WindowStartupLocation = WindowStartupLocation.CenterOwner,
                     DataContext = dataContext,
                 };
-                
+
                 CurrentWindow.Closed += OnSettingWindowClosed;
                 CurrentWindow.Show();
             }

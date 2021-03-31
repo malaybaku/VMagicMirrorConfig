@@ -7,7 +7,7 @@
     xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:vmm="clr-namespace:Baku.VMagicMirrorConfig"
     mc:Ignorable="d"
-    d:DataContext="{x:Type vmm:WordToMotionItemViewModel}"
+    d:DataContext="{d:DesignInstance vmm:WordToMotionItemViewModel}"
     Title="VMagicMirror - Word To Motion" 
     Height="600" Width="750"
     MinHeight="600" MinWidth="750"
@@ -123,7 +123,7 @@
                     <TextBlock Text="{DynamicResource WordToMotion_Motion_Custom_Label}" />
                     <ComboBox ItemsSource="{Binding AvailableCustomMotionClipNames}"
                               SelectedItem="{Binding CustomMotionClipName}"
-                              IsEnabled="{Binding IsMotionTypeCustomClip}"
+                              IsEnabled="{Binding IsMotionTypeCustom}"
                               Margin="10,0"
                               md:HintAssist.Hint="{DynamicResource WordToMotion_Motion_Custom_Hint}"
                               />
@@ -309,7 +309,7 @@
         
         <CheckBox Grid.Row="2" Grid.Column="0"
                   Content="{DynamicResource WordToMotion_EnablePreview}"
-                  IsChecked="{Binding EnablePreview}"
+                  IsChecked="{Binding EnablePreview.Value}"
                   />
 
         <StackPanel Grid.Row="2" Grid.Column="1"

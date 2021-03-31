@@ -8,7 +8,7 @@
              mc:Ignorable="d"
              d:DesignHeight="1350"
              d:DesignWidth="350"
-             d:DataContext="{x:Type vmm:WindowSettingViewModel}"
+             d:DataContext="{d:DesignInstance Type={x:Type vmm:LightSettingViewModel}}"
              >
     <UserControl.Resources>
         <vmm:WhiteSpaceStringToNullConverter x:Key="WhiteSpaceStringToNullConverter"/>
@@ -58,7 +58,7 @@
                         <ComboBox Grid.Column="1"
                                   Margin="5,0"
                                   ItemsSource="{Binding ImageQualityNames}"
-                                  SelectedItem="{Binding ImageQuality, Converter={StaticResource WhiteSpaceStringToNullConverter}}"
+                                  SelectedItem="{Binding ImageQuality.Value, Converter={StaticResource WhiteSpaceStringToNullConverter}}"
                                   md:HintAssist.Hint="Quality"
                                   />
                     </Grid>
@@ -126,7 +126,7 @@
                                            Text="R"/>
                                 <Slider Grid.Row="0" Grid.Column="1"
                                         x:Name="sliderLightR"
-                                        Value="{Binding LightR, Mode=TwoWay}"
+                                        Value="{Binding LightR.Value, Mode=TwoWay}"
                                         />
                                 <TextBox Grid.Row="0" Grid.Column="2"
                                          Text="{Binding Value, ElementName=sliderLightR}"
@@ -136,7 +136,7 @@
                                            Text="G"/>
                                 <Slider Grid.Row="1" Grid.Column="1"
                                         x:Name="sliderLightG"
-                                        Value="{Binding LightG, Mode=TwoWay}"
+                                        Value="{Binding LightG.Value, Mode=TwoWay}"
                                         />
                                 <TextBox Grid.Row="1" Grid.Column="2"
                                          Text="{Binding Value, ElementName=sliderLightG}"
@@ -146,7 +146,7 @@
                                            Text="B"/>
                                 <Slider Grid.Row="2" Grid.Column="1"
                                         x:Name="sliderLightB"
-                                        Value="{Binding LightB, Mode=TwoWay}"
+                                        Value="{Binding LightB.Value, Mode=TwoWay}"
                                         />
                                 <TextBox Grid.Row="2" Grid.Column="2"
                                          Text="{Binding Value, ElementName=sliderLightB}"
@@ -186,7 +186,7 @@
                                 x:Name="sliderLightIntensity"
                                 Minimum="0"
                                 Maximum="500"
-                                Value="{Binding LightIntensity, Mode=TwoWay}"
+                                Value="{Binding LightIntensity.Value, Mode=TwoWay}"
                                 />
                         <TextBox Grid.Row="0" Grid.Column="2"
                                  Text="{Binding Value, ElementName=sliderLightIntensity}"
@@ -198,7 +198,7 @@
                                 x:Name="sliderLightYaw"
                                 Minimum="-180"
                                 Maximum="180"
-                                Value="{Binding LightYaw, Mode=TwoWay}"
+                                Value="{Binding LightYaw.Value, Mode=TwoWay}"
                                 />
                         <TextBox Grid.Row="1" Grid.Column="2"
                                  Text="{Binding Value, ElementName=sliderLightYaw}"
@@ -210,7 +210,7 @@
                                 x:Name="sliderLightPitch"
                                 Minimum="-90"
                                 Maximum="90"
-                                Value="{Binding LightPitch, Mode=TwoWay}"
+                                Value="{Binding LightPitch.Value, Mode=TwoWay}"
                                 />
                         <TextBox Grid.Row="2" Grid.Column="2"
                                  Text="{Binding Value, ElementName=sliderLightPitch}"
@@ -242,11 +242,11 @@
 
                     <CheckBox Margin="10,5,10,15"
                               Content="{DynamicResource Shadow_Enable}"
-                              IsChecked="{Binding EnableShadow}"
+                              IsChecked="{Binding EnableShadow.Value}"
                               />
 
                     <Grid Margin="5"
-                          IsEnabled="{Binding EnableShadow}"
+                          IsEnabled="{Binding EnableShadow.Value}"
                           >
                         <Grid.Resources>
                             <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
@@ -271,7 +271,7 @@
                                 x:Name="sliderShadowIntensity"
                                 Minimum="0"
                                 Maximum="100"
-                                Value="{Binding ShadowIntensity, Mode=TwoWay}"
+                                Value="{Binding ShadowIntensity.Value, Mode=TwoWay}"
                                 />
                         <TextBox Grid.Row="0" Grid.Column="2"
                                  Text="{Binding Value, ElementName=sliderShadowIntensity}"
@@ -283,7 +283,7 @@
                                 x:Name="sliderShadowYaw"
                                 Minimum="-180"
                                 Maximum="180"
-                                Value="{Binding ShadowYaw, Mode=TwoWay}"
+                                Value="{Binding ShadowYaw.Value, Mode=TwoWay}"
                                 />
                         <TextBox Grid.Row="1" Grid.Column="2"
                                  Text="{Binding Value, ElementName=sliderShadowYaw}"
@@ -295,7 +295,7 @@
                                 x:Name="sliderShadowPitch"
                                 Minimum="-90"
                                 Maximum="90"
-                                Value="{Binding ShadowPitch, Mode=TwoWay}"
+                                Value="{Binding ShadowPitch.Value, Mode=TwoWay}"
                                 />
                         <TextBox Grid.Row="2" Grid.Column="2"
                                  Text="{Binding Value, ElementName=sliderShadowPitch}"
@@ -307,7 +307,7 @@
                                 x:Name="sliderShadowDepthOffset"
                                 Minimum="1"
                                 Maximum="150"
-                                Value="{Binding ShadowDepthOffset, Mode=TwoWay}"
+                                Value="{Binding ShadowDepthOffset.Value, Mode=TwoWay}"
                                 />
                         <TextBox Grid.Row="3" Grid.Column="2"
                                  Text="{Binding Value, ElementName=sliderShadowDepthOffset}"
@@ -376,7 +376,7 @@
                                            Text="R"/>
                                 <Slider Grid.Row="0" Grid.Column="1"
                                         x:Name="sliderBloomR"
-                                        Value="{Binding BloomR, Mode=TwoWay}"
+                                        Value="{Binding BloomR.Value, Mode=TwoWay}"
                                         />
                                 <TextBox Grid.Row="0" Grid.Column="2"
                                          Text="{Binding Value, ElementName=sliderBloomR}"
@@ -386,7 +386,7 @@
                                            Text="G"/>
                                 <Slider Grid.Row="1" Grid.Column="1"
                                         x:Name="sliderBloomG"
-                                        Value="{Binding BloomG, Mode=TwoWay}"
+                                        Value="{Binding BloomG.Value, Mode=TwoWay}"
                                         />
                                 <TextBox Grid.Row="1" Grid.Column="2"
                                          Text="{Binding Value, ElementName=sliderBloomG}"
@@ -396,7 +396,7 @@
                                            Text="B"/>
                                 <Slider Grid.Row="2" Grid.Column="1"
                                         x:Name="sliderBloomB"
-                                        Value="{Binding BloomB, Mode=TwoWay}"
+                                        Value="{Binding BloomB.Value, Mode=TwoWay}"
                                         />
                                 <TextBox Grid.Row="2" Grid.Column="2"
                                          Text="{Binding Value, ElementName=sliderBloomB}"
@@ -433,7 +433,7 @@
                                 x:Name="sliderBloomIntensity"
                                 Minimum="0"
                                 Maximum="500"
-                                Value="{Binding BloomIntensity, Mode=TwoWay}"
+                                Value="{Binding BloomIntensity.Value, Mode=TwoWay}"
                                 />
                         <TextBox Grid.Row="0" Grid.Column="2"
                                  Text="{Binding Value, ElementName=sliderBloomIntensity}"
@@ -446,7 +446,7 @@
                                 x:Name="sliderBloomThreshold"
                                 Minimum="0"
                                 Maximum="500"
-                                Value="{Binding BloomThreshold, Mode=TwoWay}"
+                                Value="{Binding BloomThreshold.Value, Mode=TwoWay}"
                                 />
                         <TextBox Grid.Row="1" Grid.Column="2"
                                  Text="{Binding Value, ElementName=sliderBloomThreshold}"
@@ -477,11 +477,11 @@
 
                     <CheckBox Margin="10,5,10,15"
                               Content="{DynamicResource Wind_Enable}"
-                              IsChecked="{Binding EnableWind}"
+                              IsChecked="{Binding EnableWind.Value}"
                               />
 
                     <Grid Margin="5"
-                          IsEnabled="{Binding EnableWind}"
+                          IsEnabled="{Binding EnableWind.Value}"
                           >
                         <Grid.Resources>
                             <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
@@ -506,7 +506,7 @@
                                 x:Name="sliderWindStrength"
                                 Minimum="10"
                                 Maximum="1000"
-                                Value="{Binding WindStrength, Mode=TwoWay}"
+                                Value="{Binding WindStrength.Value, Mode=TwoWay}"
                                 />
                         <TextBox Grid.Row="0" Grid.Column="2"
                                  Text="{Binding Value, ElementName=sliderWindStrength}"
@@ -518,7 +518,7 @@
                                 x:Name="sliderWindInterval"
                                 Minimum="10"
                                 Maximum="500"
-                                Value="{Binding WindInterval, Mode=TwoWay}"
+                                Value="{Binding WindInterval.Value, Mode=TwoWay}"
                                 />
                         <TextBox Grid.Row="1" Grid.Column="2"
                                  Text="{Binding Value, ElementName=sliderWindInterval}"
@@ -530,7 +530,7 @@
                                 x:Name="sliderWindYaw"
                                 Minimum="-180"
                                 Maximum="180"
-                                Value="{Binding WindYaw, Mode=TwoWay}"
+                                Value="{Binding WindYaw.Value, Mode=TwoWay}"
                                 />
                         <TextBox Grid.Row="2" Grid.Column="2"
                                  Text="{Binding Value, ElementName=sliderWindYaw}"

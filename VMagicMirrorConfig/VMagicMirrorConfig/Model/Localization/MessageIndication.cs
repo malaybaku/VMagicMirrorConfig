@@ -1,4 +1,6 @@
-﻿namespace Baku.VMagicMirrorConfig
+﻿using System;
+
+namespace Baku.VMagicMirrorConfig
 {
     //メッセージボックスで表示するテキストの言語別対応。
     //リソースに書くほどでもないのでベタに書く
@@ -13,19 +15,17 @@
         public string Title { get; }
         public string Content { get; }
 
-        public static MessageIndication LoadVrmConfirmation(string languageName)
-            => LoadVrmConfirmation(LanguageSelector.StringToLanguage(languageName));
+        private static MessageIndication Load(string keySuffix) => new MessageIndication(
+            LocalizedString.GetString("DialogTitle_" + keySuffix),
+            LocalizedString.GetString("DialogMessage_" + keySuffix)
+            );
 
-        public static MessageIndication ResetSettingConfirmation(string languageName)
-            => ResetSettingConfirmation(LanguageSelector.StringToLanguage(languageName));
-
-        public static MessageIndication ResetSingleCategoryConfirmation(string languageName)
-            => ResetSingleCategoryConfirmation(LanguageSelector.StringToLanguage(languageName));
-        public static MessageIndication ShowVRoidSdkUi(string languageName)
-            => ShowVRoidSdkUi(LanguageSelector.StringToLanguage(languageName));
-
-        public static MessageIndication ShowLoadingPreviousVRoid(string languageName)
-            => ShowLoadingPreviousVRoid(LanguageSelector.StringToLanguage(languageName));
+        public static MessageIndication LoadVrmConfirmation() => Load("LoadLocalVrm");
+        public static MessageIndication ResetSettingConfirmation() => Load("ResetAllSetting");
+        public static MessageIndication ResetSingleCategoryConfirmation() => Load("ResetCategorySetting");
+        public static MessageIndication ShowVRoidSdkUi() => Load("ShowVRoidSdkUi");
+        public static MessageIndication ShowLoadingPreviousVRoid() => Load("LoadPreviousVRoidModel");
+        public static MessageIndication ShowLoadingSavedVRoidModel() => Load("LoadSavedVRoidModel");
 
         /// <summary>
         /// NOTE: Contentのほうがフォーマット文字列なのでstring.Formatで消すアイテムの名前を指定して完成させること！
@@ -34,8 +34,7 @@
         /// </summary>
         /// <param name="languageName"></param>
         /// <returns></returns>
-        public static MessageIndication ErrorLoadSetting(string languageName)
-            => ErrorLoadSetting(LanguageSelector.StringToLanguage(languageName));
+        public static MessageIndication ErrorLoadSetting() => Load("LoadSettingFileError");
 
         /// <summary>
         /// NOTE: Contentのほうがフォーマット文字列なのでstring.Formatで消すアイテムの名前を指定して完成させること！
@@ -43,8 +42,7 @@
         /// </summary>
         /// <param name="languageName"></param>
         /// <returns></returns>
-        public static MessageIndication DeleteWordToMotionItem(string languageName)
-            => DeleteWordToMotionItem(LanguageSelector.StringToLanguage(languageName));
+        public static MessageIndication DeleteWordToMotionItem() => Load("DeleteWtmItem");
 
         /// <summary>
         /// NOTE: Contentがフォーマット文字列なため、削除予定のブレンドシェイプ名を指定して完成させること
@@ -52,176 +50,58 @@
         /// </summary>
         /// <param name="languageName"></param>
         /// <returns></returns>
-        public static MessageIndication ForgetBlendShapeClip(string languageName)
-            => ForgetBlendShapeClip(LanguageSelector.StringToLanguage(languageName));
+        public static MessageIndication ForgetBlendShapeClip() => Load("ForgetBlendShapeInfo");
 
         /// <summary>
         /// 無効なIPアドレスを指定したときに怒る文言です。
         /// </summary>
         /// <param name="languageName"></param>
         /// <returns></returns>
-        public static MessageIndication InvalidIpAddress(string languageName)
-            => InvalidIpAddress(LanguageSelector.StringToLanguage(languageName));
+        public static MessageIndication InvalidIpAddress() => Load("InvalidIpAddress");
 
         /// <summary>
         /// モデルでExTrackerのパーフェクトシンクに必要なブレンドシェイプクリップが未定義だったときのエラーのヘッダー部
         /// </summary>
         /// <param name="languageName"></param>
         /// <returns></returns>
-        public static MessageIndication ExTrackerMissingBlendShapeNames(string languageName)
-            => ExTrackerMissingBlendShapeNames(LanguageSelector.StringToLanguage(languageName));
+        public static MessageIndication ExTrackerMissingBlendShapeNames() => Load("ExTrackerMissingBlendShape");
 
         /// <summary>
         /// webカメラのトラッキングを使うために外部トラッキングを切ろうとしてる人向けの確認ダイアログ
         /// </summary>
         /// <param name="languageName"></param>
         /// <returns></returns>
-        public static MessageIndication ExTrackerCheckTurnOff(string languageName)
-            => ExTrackerCheckTurnOff(LanguageSelector.StringToLanguage(languageName));
+        public static MessageIndication ExTrackerCheckTurnOff() => Load("ExTrackerCheckTurnOff");
 
-        public static MessageIndication LoadVrmConfirmation(Languages lang) => lang switch
-        {
-            Languages.Japanese => new MessageIndication(
-                "VRMの読み込み",
-                "ビューアー画面のライセンスを確認してください。読み込みますか？"
-                ),
-            _ => new MessageIndication(
-                "Load VRM",
-                "Please confirm the license in viewer window. Do you load the character?"
-                ),
-        };
+        /// <summary>
+        /// 設定ファイルをのスロットに保存するときの確認。Content側は番号入れるぶんの{0}のプレースホルダーがあるので注意。
+        /// </summary>
+        /// <returns></returns>
+        public static MessageIndication ConfirmSettingFileSave() => Load("ConfirmSettingFileSave");
 
-        public static MessageIndication ResetSettingConfirmation(Languages lang) => lang switch
-        {
-            Languages.Japanese => new MessageIndication(
-                "設定のリセット",
-                "リセットを実行すると全ての設定が初期状態に戻ります。リセットしますか？"
-                ),
-            _ => new MessageIndication(
-                "Reset Setting",
-                "Are you sure you want to reset all settings in VMagicMirror?"
-                ),
-        };
+        /// <summary>
+        /// 設定ファイルをスロットからロードするときの確認。Content側は番号入れるぶんの{0}のプレースホルダーがあるので注意。
+        /// </summary>
+        /// <returns></returns>
+        public static MessageIndication ConfirmSettingFileLoad() => Load("ConfirmSettingFileLoad");
 
-        public static MessageIndication ResetSingleCategoryConfirmation(Languages lang) => lang switch
-        {
-            Languages.Japanese => new MessageIndication(
-                "設定のリセット",
-                "選択したカテゴリの設定をリセットしますか？"
-                ),
-            _ => new MessageIndication(
-                "Reset Setting",
-                "Are you sure you want to reset selected category setting?"
-                ),
-        };
+        /// <summary>
+        /// セーブ/ロード中に詳細設定ウィンドウを開いてたらガードするための文言
+        /// </summary>
+        /// <returns></returns>
+        public static MessageIndication GuardSettingWindowDuringSaveLoad() => Load("GuardSettingWindowDuringSaveLoad");
 
-        public static MessageIndication ErrorLoadSetting(Languages lang) => lang switch
-        {
-            Languages.Japanese => new MessageIndication(
-                "ロード失敗",
-                "設定ファイルのロードに失敗しました。エラー: "
-                ),
-            _ => new MessageIndication(
-                "Load failed",
-                "Failed to load setting file. Error: "
-                ),
-        };
+        /// <summary>
+        /// オートメーション機能を有効にしたい人向けの確認ダイアログ
+        /// </summary>
+        /// <returns></returns>
+        public static MessageIndication EnableAutomation() => Load("EnableAutomation");
 
-        public static MessageIndication DeleteWordToMotionItem(Languages lang) => lang switch
-        {
-            Languages.Japanese => new MessageIndication(
-                "モーションの削除",
-                "このモーション'{0}'を削除しますか？"
-                ),
-            _ => new MessageIndication(
-                "Delete Item",
-                "Are you sure to delete this item '{0}'?"
-                ),
-        };
+        /// <summary>
+        /// オートメーション機能を無効にしたい人向けの確認ダイアログ
+        /// </summary>
+        /// <returns></returns>
+        public static MessageIndication DisableAutomation() => Load("DisableAutomation");
 
-        public static MessageIndication ForgetBlendShapeClip(Languages lang) => lang switch
-        {
-            Languages.Japanese => new MessageIndication(
-                "ブレンドシェイプ情報のクリア",
-                "このブレンドシェイプ'{0}'の設定を削除しますか？"
-                ),
-            _ => new MessageIndication(
-                "Clear Blend Shape Setting",
-                "Are you sure to clear the blend shape setting of '{0}'?"
-                ),
-        };
-
-        public static MessageIndication InvalidIpAddress(Languages lang) => lang switch
-        {
-            Languages.Japanese => new MessageIndication(
-                "無効なIPアドレス",
-                "無効なIPアドレスが指定されています。入力を確認して下さい。"
-                ),
-            _ => new MessageIndication(
-                "Invalid IP Address",
-                "Invalid IP Address is set, please check the input."
-                ),
-        };
-
-        public static MessageIndication ShowVRoidSdkUi(Languages lang) => lang switch
-        {
-            Languages.Japanese => new MessageIndication(
-                "VRoid Hubに接続中",
-                "キャラクターウィンドウ上でモデルを選択するか、またはキャンセルしてください。"),
-            _ => new MessageIndication(
-                "Connecting to VRoid Hub",
-                "Select model to load, or cancel operation."),
-        };
-
-        public static MessageIndication ShowLoadingPreviousVRoid(Languages lang) => lang switch
-        {
-            Languages.Japanese => new MessageIndication(
-                "VRoid Hubに接続中",
-                "前回使用したモデルのロードを試みています。モデルをロードするか、またはキャンセルしてください。"),
-            _ => new MessageIndication(
-                "Connecting to VRoid Hub",
-                "Trying to load avatar used in previous time. Select model or cancel operation."),
-        };
-
-        public static MessageIndication ExTrackerMissingBlendShapeNames(Languages lang) => lang switch
-        {
-            Languages.Japanese => new MessageIndication(
-                "未定義のBlendShapeClipがあります",
-                @"パーフェクトシンクに必要なBlendShapeClipの一部が未定義です。
-
-モデルの見た目が正常であれば、この警告を無視して構いません。
-モデルの見た目がおかしい場合はこのダイアログを閉じてから
-「パーフェクトシンクとは？」をクリックし、
-モデルのセットアップ手順を確認して下さい。
-
----
-定義されていないBlendShapeClipの名称: 
-"),
-            _ => new MessageIndication(
-                "Missing BlendShapeClip",
-                @"Detect missing BlendShapeClips for perfect sync.
-
-If your avatar looks normal, ignore this message. 
-Otherwise, close this dialog and see 'About Perfect Sync'
-to check how to setup the model.
-
----
-Undefined BlendShaepClip names:
-"),
-        };
-
-        public static MessageIndication ExTrackerCheckTurnOff(Languages lang) => lang switch
-        {
-            Languages.Japanese => new MessageIndication(
-                "外部トラッキング機能をオフ",
-                @"外部トラッキング機能をオフにしますか？
-webカメラでの顔トラッキングを有効にする場合は
-'OK'を選択し、iPhone/iPadとの連携を終了してください。"),
-            _ => new MessageIndication(
-                "Turn Off External Tracker",
-                @"Do you want to turn off external tracker?.
-
-Choose 'OK' to enable webcam based tracking."),
-        };
     }
 }

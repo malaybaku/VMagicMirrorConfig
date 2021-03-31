@@ -1,7 +1,7 @@
-﻿using System.IO;
+﻿using Microsoft.Xaml.Behaviors;
+using System.IO;
 using System.Windows;
 using System.Windows.Input;
-using Microsoft.Xaml.Behaviors;
 
 namespace Baku.VMagicMirrorConfig
 {
@@ -28,7 +28,7 @@ namespace Baku.VMagicMirrorConfig
                 LogOutput.Instance.Write($"Set DragDrop InstrcutionVisibility, value = {value}");
                 SetValue(InstructionVisibilityProperty, value);
             }
-        }       
+        }
 
         /// <summary>
         /// <see cref="DropCommand"/>の依存関係プロパティです。
@@ -67,8 +67,8 @@ namespace Baku.VMagicMirrorConfig
         private void OnDragEnter(object sender, DragEventArgs e)
         {
             e.Effects =
-                (e.Data.GetData(DataFormats.FileDrop) is string[] fileNames && 
-                    fileNames.Length == 1 && 
+                (e.Data.GetData(DataFormats.FileDrop) is string[] fileNames &&
+                    fileNames.Length == 1 &&
                     Path.GetExtension(fileNames[0]) == ".vrm")
                 ? DragDropEffects.Copy
                 : DragDropEffects.None;
@@ -81,7 +81,7 @@ namespace Baku.VMagicMirrorConfig
         private void OnDrop(object sender, DragEventArgs e)
         {
             var command = DropCommand;
-            if (command != null && 
+            if (command != null &&
                 command.CanExecute(null))
             {
                 command.Execute(

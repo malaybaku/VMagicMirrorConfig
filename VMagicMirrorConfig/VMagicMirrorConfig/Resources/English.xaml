@@ -3,6 +3,9 @@
                     xmlns:sys="clr-namespace:System;assembly=mscorlib"
                     xml:space="preserve"
                     >
+    <!-- Common -->
+    <sys:String x:Key="Common_Cancel">Cancel</sys:String>
+    <sys:String x:Key="Common_Close">Close</sys:String>
 
     <!-- Window Title Bar -->
     <sys:String x:Key="TitleBar_Help">Help</sys:String>
@@ -22,6 +25,7 @@
     <sys:String x:Key="TopBar_Setting_Layout">Layout</sys:String>
     <sys:String x:Key="TopBar_Setting_Devices">Devices</sys:String>
     <sys:String x:Key="TopBar_Setting_Effects">Effects</sys:String>
+    <sys:String x:Key="TopBar_Setting_FileIo">Files</sys:String>
         
     <!-- Home -->
     <sys:String x:Key="Home_LoadVrm">Load VRM</sys:String>
@@ -39,18 +43,13 @@
 
     <sys:String x:Key="Home_SettingFileIo">Setting</sys:String>    
     <sys:String x:Key="Home_OpenSetting">Open Setting Window</sys:String>
-    <sys:String x:Key="Home_LoadSettingFile">Load</sys:String>
-    <sys:String x:Key="Home_SaveSettingFile">Save</sys:String>
 
-    <sys:String x:Key="Home_SettingManagement">Setting Management</sys:String>
-    <sys:String x:Key="Home_Reset">Reset</sys:String>
+    <sys:String x:Key="Home_SettingManagement">Setting Files</sys:String>
+    <sys:String x:Key="Home_Reset">Reset Settings</sys:String>
     <sys:String x:Key="Home_LoadPrevSetting">Load from Prev ver.</sys:String>
-
-    <sys:String x:Key="Home_OssLicense">OSS License</sys:String>
     
     <sys:String x:Key="Home_OtherSettings_Header">Other Preferences</sys:String>
     <sys:String x:Key="Home_ActivateOnStartupHeader">Start on Windows startup</sys:String>
-    <sys:String x:Key="Home_ActivateOnStartup_OtherVerRegistered">*Other version VMagicMirror is already registered. If you check it, setting will be overwritten to start this version.</sys:String>
     
     <!-- Streaming -->
     <sys:String x:Key="Streaming_Window">Window</sys:String>
@@ -58,10 +57,11 @@
     <sys:String x:Key="Streaming_Motion">Motion</sys:String>       
     <sys:String x:Key="Streaming_WordToMotion">Word to Motion</sys:String>
     <sys:String x:Key="Streaming_View">View</sys:String>
+    
     <sys:String x:Key="Streaming_DeviceLayout">Device Layout</sys:String>
     <sys:String x:Key="Streaming_DeviceLayout_Reset">Reset</sys:String>
+
     <sys:String x:Key="Streaming_Screenshot">Screenshot</sys:String>
-    <sys:String x:Key="Streaming_Screenshot_Take">Take</sys:String>
     <sys:String x:Key="Streaming_Screenshot_OpenSaveFolder">Saved Folder...</sys:String>
     
      <!-- Ex.Tracker -->
@@ -87,7 +87,6 @@ During this mode, following features are disabled.
     <sys:String x:Key="ExTracker_Source_iFacialMocap">iFacialMocap</sys:String>
     <sys:String x:Key="ExTracker_iFM_IpHint">iPhone IP Address...</sys:String>
     <sys:String x:Key="ExTracker_Source_HowToCollaborate">*See how to connect (open web page)</sys:String>
-    <sys:String x:Key="ExTracker_Source_RefreshReceiverSetting">Check network setting again</sys:String>
 
     <sys:String x:Key="ExTracker_iFM_HasTrouble_Header">Please check connected app setting</sys:String>
     <sys:String x:Key="ExTracker_iFM_HasTrouble_OpenUrl">Open Troubleshoot web page</sys:String>    
@@ -96,6 +95,16 @@ During this mode, following features are disabled.
     <sys:String x:Key="ExTracker_FaceSwitch_Instruction" xml:space="preserve">Activates seleceted BlendShape by making specific face expression.
 Check "Keep LipSync" to make the lipsync continue.</sys:String>
     <sys:String x:Key="ExTracker_FaceSwitch_KeepLipSync">Keep LipSync</sys:String>
+
+    <!-- ExTracker FaceSwitch Trigger -->
+    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_mouthSmile">Mouth smile</sys:String>
+    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_eyeSquint">Eye squint</sys:String>
+    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_eyeWide">Eye wide</sys:String>
+    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_browUp">Brow up</sys:String>
+    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_browDown">Brow down</sys:String>
+    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_tongueOut">Cheek puff</sys:String>
+    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_cheekPuff">Tongue out</sys:String>
+    
     
     <!-- Settings General -->
     <sys:String x:Key="Setting_Color_Expander_Header">Edit Color (Click to Expand)</sys:String>
@@ -109,11 +118,9 @@ Check "Keep LipSync" to make the lipsync continue.</sys:String>
     <sys:String x:Key="Window_TopMost">(When Transparent) Always Foreground</sys:String>
     <sys:String x:Key="Window_ResetPosition">Reset Character Position</sys:String>
     
-    <sys:String x:Key="Window_EnableInitialPlacement">Move window to specific position on startup</sys:String>
-    <sys:String x:Key="Window_InitialPositionX">X(Left = 0)</sys:String>
-    <sys:String x:Key="Window_InitialPositionY">Y(Top = 0)</sys:String>
-    <sys:String x:Key="Window_FetchUnityWindowPos">Check current window position</sys:String>
-    <sys:String x:Key="Window_MoveWindow">Move to specified position</sys:String>
+    <sys:String x:Key="Window_BackgroundImage">BG Image:</sys:String>
+    <sys:String x:Key="Window_BackgroundImage_Load">Load...</sys:String>
+    <sys:String x:Key="Window_BackgroundImage_Clear">Clear</sys:String>
 
     <sys:String x:Key="Window_TransparencySupport">Character Transparency Support</sys:String>
     <sys:String x:Key="Window_TransparencySupport_Level">Transparency Level</sys:String>
@@ -146,14 +153,11 @@ Check "Keep LipSync" to make the lipsync continue.</sys:String>
     <sys:String x:Key="Motion_Arm_ElbowCloseStrength">Strength to keep upper arm to body [%]</sys:String>
     <sys:String x:Key="Motion_Arm_EnablePresenterMotion">Presentation-like hand</sys:String>
     <sys:String x:Key="Motion_Arm_ShowPresentationPointer">Show Pointer Support</sys:String>
-    <sys:String x:Key="Motion_Arm_PresenterArmMotionScale">Presentation-like motion scale [%]</sys:String>
     <sys:String x:Key="Motion_Arm_PresenterArmRadiusMin">Arm position radius min [cm]</sys:String>
 
     <!-- Motion : Hand -->
     <sys:String x:Key="Motion_Hand">Hand</sys:String>
-    <sys:String x:Key="Motion_Hand_CharacterHandMotion">Hand Motion</sys:String>
     <sys:String x:Key="Motion_Hand_WristToHandTip">Wrist-Hand tip length [cm]</sys:String>
-    <sys:String x:Key="Motion_Hand_WristToPalm">Wrist-Palm length [cm]</sys:String>
     <sys:String x:Key="Motion_Hand_HandYOffsetBasic">Hand height adjust [cm]</sys:String>
     <sys:String x:Key="Motion_Hand_HandYOffsetAfterKeyDown">(Press key)Hand height adjust [cm]</sys:String>
 
@@ -165,7 +169,16 @@ Check "Keep LipSync" to make the lipsync continue.</sys:String>
     
     <!-- Face -->
     <sys:String x:Key="Motion_Face">Face</sys:String>
+
+    <!-- Face : Basic -->
     <sys:String x:Key="Motion_Face_Basics">Basic Settings</sys:String>
+    
+    <sys:String x:Key="Motion_Mouth">Mouth</sys:String>
+    <sys:String x:Key="Motion_Mouth_EnableLipSync">LipSync</sys:String>
+    <sys:String x:Key="Motion_Mouth_MicrophoneName">Microphone</sys:String>    
+    <sys:String x:Key="Motion_Mouth_Microphone_Sensitivity">Sensitivity [dB]</sys:String>
+    <sys:String x:Key="Motion_Mouth_Microphone_Visualize">Show Volume</sys:String>
+    
     <sys:String x:Key="Motion_Face_EnableFaceTracking">Track Face</sys:String>
     <sys:String x:Key="Motion_Face_CameraName">Camera</sys:String>    
     <sys:String x:Key="Motion_Face_Calibration">Calibrate position</sys:String>    
@@ -193,6 +206,7 @@ If the face tracking works correctly, please ignore this warning.
     <!-- Face : Eye -->
     <sys:String x:Key="Motion_Eye">Eye</sys:String>
     <sys:String x:Key="Motion_Eye_LookAtPoint">Eye Look Target</sys:String>
+    <sys:String x:Key="Motion_Eye_LookAtPoint_Streaming">Look At:</sys:String>
     <sys:String x:Key="Motion_Eye_LookAtPoint_None">None</sys:String>
     <sys:String x:Key="Motion_Eye_LookAtPoint_MousePointer">Mouse</sys:String>
     <sys:String x:Key="Motion_Eye_LookAtPoint_MainCamera">User</sys:String>
@@ -200,13 +214,6 @@ If the face tracking works correctly, please ignore this warning.
     <sys:String x:Key="Motion_Eye_ApproxRotRangePrefix">(Eye bones will move about: </sys:String>
     <sys:String x:Key="Motion_Eye_ApproxRotRangeSuffix"> [deg])</sys:String>
     
-    <!-- Face : Mouth -->
-    <sys:String x:Key="Motion_Mouth">Mouth</sys:String>
-    <sys:String x:Key="Motion_Mouth_EnableLipSync">LipSync</sys:String>
-    <sys:String x:Key="Motion_Mouth_MicrophoneName">Microphone</sys:String>    
-    <sys:String x:Key="Motion_Mouth_Microphone_Sensitivity">Sensitivity [dB]</sys:String>
-    <sys:String x:Key="Motion_Mouth_Microphone_Visualize">Show Volume</sys:String>
-
     <!-- Face : BlendShape -->
     <sys:String x:Key="Motion_Face_BlendShape">BlendShape</sys:String>
     <sys:String x:Key="Motion_Face_NeutralClip">Default Face BlendShape</sys:String>    
@@ -230,7 +237,6 @@ camera movements following:
 - Mid click + drag: translate
 - Mouse wheel: forward/backward</sys:String>
     <sys:String x:Key="Layout_EnableFreeCameraMode">Free Camera Mode</sys:String>
-    <sys:String x:Key="Layout_CurrentCameraPosition">Camera Position (x, y, z, rx, ry, rz)</sys:String>
     <sys:String x:Key="Layout_Camera_ResetPosition">Reset Position</sys:String>
     <sys:String x:Key="Layout_Camera_Fov">FOV [deg]</sys:String>
     <sys:String x:Key="Layout_Camera_QuickSave">Quick Save</sys:String>
@@ -258,10 +264,7 @@ camera movements following:
     
     <!-- Devices -->
     <sys:String x:Key="Devices_Header">Devices</sys:String>
-    
-    <!-- Devices: Keyboard and mouse -->
-    <sys:String x:Key="Devices_Keyboard_Mouse_Header">Keyboard / Mouse</sys:String>
-    
+        
     <!-- Devices: MIDI -->
     <sys:String x:Key="Devices_Midi_Header">MIDI</sys:String>
     <sys:String x:Key="Devices_Midi_ReadEnable">Use MIDI Controller for VMagicMirror</sys:String>
@@ -368,6 +371,111 @@ Please test by typing "joy".</sys:String>
     <sys:String x:Key="WordToMotion_MidiAssign_After">Note to Change</sys:String>
     <sys:String x:Key="WordToMotion_MidiAssign_Clear">Clear</sys:String>
     
+    <sys:String x:Key="WordToMotion_DeviceItem_None">None</sys:String>
+    <sys:String x:Key="WordToMotion_DeviceItem_KeyboardWord">Keyboard (word)</sys:String>
+    <sys:String x:Key="WordToMotion_DeviceItem_Gamepad">Gamepad</sys:String>
+    <sys:String x:Key="WordToMotion_DeviceItem_KeyboardTenKey">Keyboard (num 0-8)</sys:String>
+    <sys:String x:Key="WordToMotion_DeviceItem_MidiController">MIDI Controller</sys:String>
+    
+    <!-- Save/Load -->
+    <sys:String x:Key="SettingFile_Header">Setting File Control</sys:String>
+    <sys:String x:Key="SettingFile_SaveAndLoad">Save / Load</sys:String>
+    <sys:String x:Key="SettingFile_Save">Save</sys:String>
+    <sys:String x:Key="SettingFile_Load">Load</sys:String>
+    <sys:String x:Key="SettingFile_Save_Instruction">Select target to save.</sys:String>
+    <sys:String x:Key="SettingFile_Load_Instruction">Select data to load.</sys:String>
+    <sys:String x:Key="SettingFile_LoadCharacter">Load Character</sys:String>
+    <sys:String x:Key="SettingFile_LoadNonCharacter">Load Non-Character Settings</sys:String>
+    <sys:String x:Key="SettingFile_Export">Export</sys:String>
+    <sys:String x:Key="SettingFile_Import">Import</sys:String>
 
+    <sys:String x:Key="SettingFile_Automation">Automation</sys:String>
+    <sys:String x:Key="SettingFile_Instruction" xml:space="preserve">WARNING:
+This feature enables to skip license check when loading local file VRM.
+You must confirm the models' license beforehand.
 
+VRoid Hub model is not supported in this feature.</sys:String>
+    <sys:String x:Key="SettingFile_Enable">Enable Automation Support</sys:String>
+    <sys:String x:Key="SettingFile_Disable">Disable Automation Support</sys:String>
+    <sys:String x:Key="SettingFile_PortNumber">Port Number:</sys:String>
+    <sys:String x:Key="SettingFile_PortNumber_Warning">Port Number is invalid. Input number between 0 - 65535.</sys:String>
+    <sys:String x:Key="SettingFile_ApplyPortNumber">Apply</sys:String>
+    <sys:String x:Key="SettingFile_SeeMore">See How to Use (Open Web Page)</sys:String>
+
+    <!-- NOTE: used from ViewModel code. -->
+    <sys:String x:Key="SettingFile_SaveCompleted">Saved Current Setting to No.{0}.</sys:String>
+    <sys:String x:Key="SettingFile_LoadCompleted">Loaded Setting No.{0}.</sys:String>
+    <sys:String x:Key="SettingFile_SaveCompleted_ExportedFile">Saved Current Setting to File.</sys:String>
+    <sys:String x:Key="SettingFile_LoadCompleted_ExportedFile">Loaded Setting from File.</sys:String>
+
+    <!-- Dialog Messages -->
+    <sys:String x:Key="DialogTitle_LoadLocalVrm">Load VRM</sys:String>
+    <sys:String x:Key="DialogMessage_LoadLocalVrm">Please confirm the license in viewer window. Do you load the character?</sys:String>
+    <sys:String x:Key="DialogTitle_ResetAllSetting">Reset Setting</sys:String>
+    <sys:String x:Key="DialogMessage_ResetAllSetting" xml:space="preserve">Are you sure you want to reset current settings?
+
+If you want to save current setting, cancel this dialog and save before reset.</sys:String>
+    <sys:String x:Key="DialogTitle_ResetCategorySetting">Reset Setting</sys:String>
+    <sys:String x:Key="DialogMessage_ResetCategorySetting">Are you sure you want to reset selected category setting?</sys:String>
+    <sys:String x:Key="DialogTitle_LoadSettingFileError">Load failed</sys:String>
+    <sys:String x:Key="DialogMessage_LoadSettingFileError">Failed to load setting file. Error: </sys:String>
+    <sys:String x:Key="DialogTitle_DeleteWtMItem">Delete Item</sys:String>
+    <sys:String x:Key="DialogMessage_DeleteWtmItem">Are you sure to delete this item '{0}'?</sys:String>
+    <sys:String x:Key="DialogTitle_ForgetBlendShapeInfo">Clear Blend Shape Setting</sys:String>
+    <sys:String x:Key="DialogMessage_ForgetBlendShapeInfo">Are you sure to clear the blend shape setting of '{0}'?</sys:String>
+    <sys:String x:Key="DialogTitle_InvalidIpAddress">Invalid IP Address</sys:String>
+    <sys:String x:Key="DialogMessage_InvalidIpAddress">Invalid IP Address is set, please check the input.</sys:String>
+    <sys:String x:Key="DialogTitle_ShowVRoidSdkUi">Connecting to VRoid Hub</sys:String>
+    <sys:String x:Key="DialogMessage_ShowVRoidSdkUi">Select model to load, or cancel operation.</sys:String>
+    <sys:String x:Key="DialogTitle_LoadPreviousVRoidModel">Connecting to VRoid Hub</sys:String>
+    <sys:String x:Key="DialogMessage_LoadPreviousVRoidModel">Trying to load avatar used in previous time. Select model or cancel operation.</sys:String>
+    <sys:String x:Key="DialogTitle_LoadSavedVRoidModel">Connecting to VRoid Hub</sys:String>
+    <sys:String x:Key="DialogMessage_LoadSavedVRoidModel">Trying to load avatar saved in setting file. Select model or cancel operation.</sys:String>
+    <sys:String x:Key="DialogTitle_ExTrackerMissingBlendShape">Missing BlendShapeClip</sys:String>
+    <sys:String x:Key="DialogMessage_ExTrackerMissingBlendShape" xml:space="preserve">Detect missing BlendShapeClips for perfect sync.
+
+If your avatar looks normal, ignore this message. 
+Otherwise, close this dialog and see 'About Perfect Sync'
+to check how to setup the model.
+
+---
+Undefined BlendShaepClip names:
+</sys:String>
+    <sys:String x:Key="DialogTitle_ExTrackerCheckTurnOff">Turn Off External Tracker</sys:String>
+    <sys:String x:Key="DialogMessage_ExTrackerCheckTurnOff" xml:space="preserve">Do you want to turn off external tracker?.
+
+Choose 'OK' to enable webcam based tracking.
+</sys:String>
+    
+    <sys:String x:Key="DialogTitle_ConfirmSettingFileSave">Setting File Save</sys:String>
+    <sys:String x:Key="DialogMessage_ConfirmSettingFileSave">Are you sure to save current setting to No.{0}? If the setting already exists, it will be overwritten.</sys:String>
+
+    <sys:String x:Key="DialogTitle_ConfirmSettingFileLoad">Setting File Load</sys:String>
+    <sys:String x:Key="DialogMessage_ConfirmSettingFileLoad" xml:space="preserve">Are you sure to load setting No.{0}?
+
+If you load with non-character option, most of the settings will be overwritten.</sys:String>    
+
+    <sys:String x:Key="DialogTitle_GuardSettingWindowDuringSaveLoad">Save / Load Process Running</sys:String>
+    <sys:String x:Key="DialogMessage_GuardSettingWindowDuringSaveLoad">Setting window is locked during save and load process.</sys:String>
+    
+    <sys:String x:Key="DialogTitle_EnableAutomation">Enable Automation</sys:String>
+    <sys:String x:Key="DialogMessage_EnableAutomation" xml:space="preserve">Are you sure to enable automation feature?
+
+This feature enable switch setting and change character without GUI operation.
+Use this only after checking the licenses of VRM you will use.
+</sys:String>    
+    <sys:String x:Key="DialogTitle_DisableAutomation">Disable Automation</sys:String>
+    <sys:String x:Key="DialogMessage_DisableAutomation">Are you sure to disable automation feature?</sys:String>
+    
+    <!-- Other: Not on Dialog, but used from code -->
+    <sys:String x:Key="CommonUi_DoNothing">(Do Nothing)</sys:String>
+    <sys:String x:Key="CommonUi_None">(None)</sys:String>
+    
+    <!-- Localize dependent URLs -->
+    <sys:String x:Key="URL_help_top">https://malaybaku.github.io/VMagicMirror/en</sys:String>
+    <sys:String x:Key="URL_docs_ex_tracker">https://malaybaku.github.io/VMagicMirror/en/docs/external_tracker</sys:String>
+    <sys:String x:Key="URL_docs_setting_files">https://malaybaku.github.io/VMagicMirror/en/docs/setting_files</sys:String>
+    <sys:String x:Key="URL_tips_perfect_sync">https://malaybaku.github.io/VMagicMirror/en/tips/perfect_sync</sys:String>
+    <sys:String x:Key="URL_ifacialmocap_troubleshoot">https://malaybaku.github.io/VMagicMirror/en/docs/external_tracker_ifacialmocap#troubleshoot</sys:String>
+    
 </ResourceDictionary>
