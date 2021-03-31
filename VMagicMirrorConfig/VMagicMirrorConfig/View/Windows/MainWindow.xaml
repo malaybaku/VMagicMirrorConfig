@@ -10,7 +10,7 @@
     xmlns:vmm="clr-namespace:Baku.VMagicMirrorConfig"
     mc:Ignorable="d"
     d:DataContext="{x:Type vmm:MainWindowViewModel}"
-    Title="VMagicMirror v1.6.1" 
+    Title="VMagicMirror v1.6.2" 
     ResizeMode="CanMinimize"
     TitleCharacterCasing="Normal"
     WindowTransitionsEnabled="False"
@@ -57,9 +57,13 @@
         </metro:WindowCommands>
     </metro:MetroWindow.RightWindowCommands>
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
         <dragablz:TabablzControl 
             x:Name="MainTabControl"             
-            FixedHeaderCount="5"
+            FixedHeaderCount="5" Grid.ColumnSpan="2"
             >
             <dragablz:TabablzControl.HeaderItemTemplate>
                 <DataTemplate>
@@ -108,6 +112,6 @@
                 <vmm:ExternalTrackerPanel Background="White" DataContext="{Binding ExternalTrackerSetting}" />
             </TabItem>
         </dragablz:TabablzControl>
-        <md:Snackbar MessageQueue="{x:Static vmm:SnackbarWrapper.SnackbarMessageQueue}"/>
+        <md:Snackbar MessageQueue="{x:Static vmm:SnackbarWrapper.SnackbarMessageQueue}" Grid.Column="1" HorizontalAlignment="Left" Margin="21,0,0,0"/>
     </Grid>
 </metro:MetroWindow>

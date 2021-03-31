@@ -69,10 +69,12 @@ namespace Baku.VMagicMirrorConfig
                 LocalizedString.GetString("SettingFile_LoadCompleted"), index
                 ));
 
+            //NOTE: ロードが先だとVRoidのロード時にダイアログがうまく閉じないため、先に閉じる
+            _actToClose();
+
             _model.LoadSetting(
                 index, LoadCharacterWhenSettingLoaded.Value, LoadNonCharacterWhenSettingLoaded.Value, false
                 );
-            _actToClose();
         }
 
         public async Task ExecuteSave(int index)
