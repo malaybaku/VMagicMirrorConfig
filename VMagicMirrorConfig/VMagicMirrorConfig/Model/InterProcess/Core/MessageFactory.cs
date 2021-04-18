@@ -84,6 +84,9 @@ namespace Baku.VMagicMirrorConfig
         public Message EnablePresenterMotion(bool enable) => WithArg($"{enable}");
         public Message PresentationArmRadiusMin(int radiusMinCentimeter) => WithArg($"{radiusMinCentimeter}");
 
+        public Message SetKeyboardAndMouseMotionMode(int modeIndex) => WithArg($"{modeIndex}");
+        public Message SetGamepadMotionMode(int modeIndex) => WithArg($"{modeIndex}");
+
         public Message EnableWaitMotion(bool enable) => WithArg($"{enable}");
         public Message WaitMotionScale(int scalePercent) => WithArg($"{scalePercent}");
         public Message WaitMotionPeriod(int periodSec) => WithArg($"{periodSec}");

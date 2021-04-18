@@ -155,6 +155,16 @@ Check "Keep LipSync" to make the lipsync continue.</sys:String>
     <sys:String x:Key="Motion_Arm_ShowPresentationPointer">Show Pointer Support</sys:String>
     <sys:String x:Key="Motion_Arm_PresenterArmRadiusMin">Arm position radius min [cm]</sys:String>
 
+    <sys:String x:Key="Motion_Arm_MouseAndKeyMode">Key/Mouse Motion</sys:String>
+    <sys:String x:Key="Motion_Arm_GamepadMode">Gamepad Motion</sys:String>
+    <!-- NOTE: used in ViewModel code -->
+    <sys:String x:Key="Motion_Arm_MouseAndKeyMode_Default">Default</sys:String>
+    <sys:String x:Key="Motion_Arm_MouseAndKeyMode_Presentation">Presentation</sys:String>
+    <sys:String x:Key="Motion_Arm_MouseAndKeyMode_PenTablet">Pen Tablet</sys:String>
+    <sys:String x:Key="Motion_Arm_GamepadMode_Default">Default</sys:String>
+    <sys:String x:Key="Motion_Arm_GamepadMode_ArcadeStick">Arcade Stick</sys:String>
+    <sys:String x:Key="Motion_Arm_GamepadMode_GunController">Gun Controller</sys:String>
+
     <!-- Motion : Hand -->
     <sys:String x:Key="Motion_Hand">Hand</sys:String>
     <sys:String x:Key="Motion_Hand_WristToHandTip">Wrist-Hand tip length [cm]</sys:String>

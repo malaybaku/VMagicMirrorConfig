@@ -101,7 +101,17 @@ namespace Baku.VMagicMirrorConfig
             EnableWaitMotion = new RProperty<bool>(setting.EnableWaitMotion, v => SendMessage(factory.EnableWaitMotion(v)));
             WaitMotionScale = new RProperty<int>(setting.WaitMotionScale, v => SendMessage(factory.WaitMotionScale(v)));
             WaitMotionPeriod = new RProperty<int>(setting.WaitMotionPeriod, v => SendMessage(factory.WaitMotionPeriod(v)));
+
+            KeyboardAndMouseMotionMode = new RProperty<int>(
+                setting.KeyboardAndMouseMotionMode, v => SendMessage(factory.SetKeyboardAndMouseMotionMode(v))
+                );
+            GamepadMotionMode = new RProperty<int>(
+                setting.GamepadMotionMode, v => SendMessage(factory.SetGamepadMotionMode(v))
+                );
         }
+
+        public RProperty<int> KeyboardAndMouseMotionMode { get; }
+        public RProperty<int> GamepadMotionMode { get; }
 
         #region Full Body 
 
@@ -237,6 +247,10 @@ namespace Baku.VMagicMirrorConfig
         public void ResetArmSetting()
         {
             var setting = MotionSetting.Default;
+
+            KeyboardAndMouseMotionMode.Value = setting.KeyboardAndMouseMotionMode;
+            GamepadMotionMode.Value = setting.GamepadMotionMode;
+
             EnableHidArmMotion.Value = setting.EnableHidArmMotion;
             EnableHidRandomTyping.Value = setting.EnableHidRandomTyping;
             EnableShoulderMotionModify.Value = setting.EnableShoulderMotionModify;

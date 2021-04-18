@@ -670,10 +670,28 @@
                                         />
                         </StackPanel>
 
-                        <CheckBox Margin="10,3,10,0" 
-                                  Content="{DynamicResource Motion_Arm_EnablePresenterMotion}"
-                                  IsChecked="{Binding MotionSetting.EnablePresenterMotion.Value}"
-                                  />
+                        <TextBlock Text="{DynamicResource Motion_Arm_MouseAndKeyMode}"/>
+                        <ComboBox Margin="10,3,10,0" 
+                                  ItemsSource="{Binding MotionSetting.KeyboardAndMouseMotions}"
+                                  SelectedItem="{Binding MotionSetting.KeyboardAndMouseMotionMode, Mode=TwoWay}"
+                                  >
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate DataType="{x:Type vmm:MotionModeSelectionViewModel}">
+                                    <TextBlock Text="{Binding Label.Value}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <TextBlock Text="{DynamicResource Motion_Arm_GamepadMode}"/>
+                        <ComboBox Margin="10,3,10,0" 
+                                  ItemsSource="{Binding MotionSetting.GamepadMotions}"
+                                  SelectedIndex="{Binding MotionSetting.GamepadMotionMode, Mode=TwoWay}"
+                                  >
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate DataType="{x:Type vmm:MotionModeSelectionViewModel}">
+                                    <TextBlock Text="{Binding Label.Value}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
 
                         <CheckBox Margin="10,0,10,3"
                                   IsChecked="{Binding MotionSetting.EnableNoHandTrackMode.Value}"                              >

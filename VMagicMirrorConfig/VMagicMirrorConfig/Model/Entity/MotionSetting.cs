@@ -68,6 +68,9 @@
 
         #region Arm
 
+        public int KeyboardAndMouseMotionMode { get; set; } = 0;
+        public int GamepadMotionMode { get; set; } = 0;
+
         public bool EnableHidArmMotion { get; set; } = true;
         public bool EnableHidRandomTyping { get; set; } = false;
         public bool EnableShoulderMotionModify { get; set; } = true;
@@ -136,6 +139,9 @@
 
         public void ResetArmSetting()
         {
+            KeyboardAndMouseMotionMode = 0;
+            GamepadMotionMode = 0;
+
             EnableHidArmMotion = true;
             EnableHidRandomTyping = false;
             EnableShoulderMotionModify = true;

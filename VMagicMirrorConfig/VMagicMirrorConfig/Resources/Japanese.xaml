@@ -155,6 +155,17 @@
     <sys:String x:Key="Motion_Arm_EnablePresenterMotion">プレゼン風に右手を動かす</sys:String>
     <sys:String x:Key="Motion_Arm_ShowPresentationPointer">補助ポインターを表示</sys:String>    
     <sys:String x:Key="Motion_Arm_PresenterArmRadiusMin">プレゼン動作の最小半径 [cm]</sys:String>    
+    
+    <sys:String x:Key="Motion_Arm_MouseAndKeyMode">キー/マウスでの動作</sys:String>
+    <sys:String x:Key="Motion_Arm_GamepadMode">ゲームパッドでの動作</sys:String>
+    
+    <!-- NOTE: used in ViewModel code -->
+    <sys:String x:Key="Motion_Arm_MouseAndKeyMode_Default">デフォルト</sys:String>
+    <sys:String x:Key="Motion_Arm_MouseAndKeyMode_Presentation">プレゼンテーション</sys:String>
+    <sys:String x:Key="Motion_Arm_MouseAndKeyMode_PenTablet">ペンタブレット</sys:String>
+    <sys:String x:Key="Motion_Arm_GamepadMode_Default">デフォルト</sys:String>
+    <sys:String x:Key="Motion_Arm_GamepadMode_ArcadeStick">アーケードスティック</sys:String>
+    <sys:String x:Key="Motion_Arm_GamepadMode_GunController">ガンコントローラ</sys:String>
 
     <!-- Motion : Hand -->
     <sys:String x:Key="Motion_Hand">手・指</sys:String>
