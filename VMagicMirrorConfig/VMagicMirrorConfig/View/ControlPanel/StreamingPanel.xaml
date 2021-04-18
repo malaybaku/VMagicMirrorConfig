@@ -684,7 +684,7 @@
                         <TextBlock Text="{DynamicResource Motion_Arm_GamepadMode}"/>
                         <ComboBox Margin="10,3,10,0" 
                                   ItemsSource="{Binding MotionSetting.GamepadMotions}"
-                                  SelectedIndex="{Binding MotionSetting.GamepadMotionMode, Mode=TwoWay}"
+                                  SelectedItem="{Binding MotionSetting.GamepadMotionMode, Mode=TwoWay}"
                                   >
                             <ComboBox.ItemTemplate>
                                 <DataTemplate DataType="{x:Type vmm:MotionModeSelectionViewModel}">
