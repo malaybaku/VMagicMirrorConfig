@@ -394,6 +394,16 @@
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
+
+                            <CheckBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                                      Margin="10,0"
+                                      IsChecked="{Binding MotionSetting.EnableNoHandTrackMode.Value}"
+                                      >
+                                <CheckBox.Content>
+                                    <TextBlock Text="{DynamicResource Motion_FullBody_NoHandTrackMode_Streaming}"/>
+                                </CheckBox.Content>
+                            </CheckBox>
+                            
                             <TextBlock Grid.Row="1" Grid.Column="0"
                                        Text="{DynamicResource Motion_Arm_MouseAndKeyMode}"/>
                             <ComboBox Grid.Row="1" Grid.Column="1"
@@ -431,15 +441,6 @@
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
-
-                            <CheckBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
-                                      Margin="10,0"
-                                      IsChecked="{Binding MotionSetting.EnableNoHandTrackMode.Value}"
-                                      >
-                                <CheckBox.Content>
-                                    <TextBlock Text="{DynamicResource Motion_FullBody_NoHandTrackMode_Streaming}"/>
-                                </CheckBox.Content>
-                            </CheckBox>
                         </Grid>
 
      
