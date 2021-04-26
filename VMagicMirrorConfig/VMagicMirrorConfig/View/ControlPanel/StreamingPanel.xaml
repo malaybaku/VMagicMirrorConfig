@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance Type={x:Type vmm:MainWindowViewModel}}"
              d:DesignWidth="520"
-             d:DesignHeight="590"             
+             d:DesignHeight="650"             
              >
     <UserControl.Resources>
         <vmm:BooleanReverseConverter x:Key="BooleanReverseConverter"/>
@@ -184,6 +184,7 @@
                                 <TextBox Grid.Column="2"
                                          Text="{Binding Value, ElementName=sliderMicrophoneSensitivity}"
                                          Margin="0"
+                                         Height="30"
                                          />
                             </Grid>
 
@@ -371,62 +372,81 @@
 
                 <Border Style="{StaticResource StreamingSectionBorder}">
                     <StackPanel>
-
                         <StackPanel Orientation="Horizontal">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <md:PackIcon Grid.Column="0"
-                                                Width="15" Height="15"
-                                                VerticalAlignment="Center"
-                                                Kind="ABC"/>
-                                <md:PackIcon Grid.Column="1"
-                                                Width="9" Height="9"
-                                                Margin="2,0,0,0"
-                                                VerticalAlignment="Center"                                 
-                                                Kind="ArrowRightBold"/>
-                                <md:PackIcon Grid.Column="2"
-                                                Width="13" Height="13"
-                                                Margin="-2,1,0,0"
-                                                VerticalAlignment="Center"
-                                                Kind="HumanHandsup">
-                                </md:PackIcon>
-                            </Grid>
 
+                            <md:PackIcon Style="{StaticResource HeaderPackIcon}"
+                                            Kind="HumanHandsup"
+                                            />
 
-                            <TextBlock Text="{DynamicResource Streaming_WordToMotion}"
+                            <TextBlock Text="{DynamicResource Streaming_Motion}"
                                         Margin="5"
                                         Style="{StaticResource HeaderText}"
                                         />
                         </StackPanel>
 
-                        <Grid Margin="5,3,5,20">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Margin="5,3"
-                                       Text="{DynamicResource WordToMotion_AssignDevice_Select_Header}"
-                                       />
-                            <ComboBox Grid.Column="1"
-                                      HorizontalAlignment="Stretch"
-                                      Margin="5,0"
-                                      ItemsSource="{Binding WordToMotionSetting.Devices}"
-                                      SelectedItem="{Binding WordToMotionSetting.SelectedDevice, Mode=TwoWay}"
-                                      md:HintAssist.Hint="Device"
+                            <TextBlock Grid.Row="1" Grid.Column="0"
+                                       Text="{DynamicResource Motion_Arm_MouseAndKeyMode}"/>
+                            <ComboBox Grid.Row="1" Grid.Column="1"
+                                      Margin="10,3" 
+                                      Height="30"
+                                      IsEnabled="{Binding MotionSetting.EnableNoHandTrackMode.Value}"
+                                      ItemsSource="{Binding MotionSetting.KeyboardAndMouseMotions}"
+                                      SelectedItem="{Binding MotionSetting.KeyboardAndMouseMotionMode, Mode=TwoWay}"
+                                      Padding="0"
                                       >
+                                <ComboBox.ItemContainerStyle>
+                                    <Style TargetType="ComboBoxItem" BasedOn="{StaticResource MaterialDesignComboBoxItemStyle}">
+                                        <Setter Property="Padding" Value="0"/>
+                                        <Setter Property="Margin" Value="0"/>
+                                    </Style>
+                                </ComboBox.ItemContainerStyle>
                                 <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding DisplayName}"/>
+                                    <DataTemplate DataType="{x:Type vmm:MotionModeSelectionViewModel}">
+                                        <TextBlock Text="{Binding Label.Value}"/>
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
+                            
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource Motion_Arm_GamepadMode}"/>
+                            <ComboBox Grid.Row="2" Grid.Column="1"
+                                      Margin="10,3" 
+                                      IsEnabled="{Binding MotionSetting.EnableNoHandTrackMode.Value}"
+                                      
+                                      ItemsSource="{Binding MotionSetting.GamepadMotions}"
+                                      SelectedItem="{Binding MotionSetting.GamepadMotionMode, Mode=TwoWay}"
+                                      >
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate DataType="{x:Type vmm:MotionModeSelectionViewModel}">
+                                        <TextBlock Text="{Binding Label.Value}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+
+                            <CheckBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                                      Margin="10,0"
+                                      IsChecked="{Binding MotionSetting.EnableNoHandTrackMode.Value}"
+                                      >
+                                <CheckBox.Content>
+                                    <TextBlock Text="{DynamicResource Motion_FullBody_NoHandTrackMode_Streaming}"/>
+                                </CheckBox.Content>
+                            </CheckBox>
                         </Grid>
+
+     
+
                     </StackPanel>
                 </Border>
+
             </StackPanel>
 
             <StackPanel Grid.Column="1">
@@ -658,50 +678,57 @@
 
                 <Border Style="{StaticResource StreamingSectionBorder}">
                     <StackPanel>
+
                         <StackPanel Orientation="Horizontal">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <md:PackIcon Grid.Column="0"
+                                                Width="15" Height="15"
+                                                VerticalAlignment="Center"
+                                                Kind="ABC"/>
+                                <md:PackIcon Grid.Column="1"
+                                                Width="9" Height="9"
+                                                Margin="2,0,0,0"
+                                                VerticalAlignment="Center"                                 
+                                                Kind="ArrowRightBold"/>
+                                <md:PackIcon Grid.Column="2"
+                                                Width="13" Height="13"
+                                                Margin="-2,1,0,0"
+                                                VerticalAlignment="Center"
+                                                Kind="HumanHandsup">
+                                </md:PackIcon>
+                            </Grid>
 
-                            <md:PackIcon Style="{StaticResource HeaderPackIcon}"
-                                            Kind="HumanHandsup"
-                                            />
 
-                            <TextBlock Text="{DynamicResource Streaming_Motion}"
+                            <TextBlock Text="{DynamicResource Streaming_WordToMotion}"
                                         Margin="5"
                                         Style="{StaticResource HeaderText}"
                                         />
                         </StackPanel>
 
-                        <TextBlock Text="{DynamicResource Motion_Arm_MouseAndKeyMode}"/>
-                        <ComboBox Margin="10,3,10,0" 
-                                  ItemsSource="{Binding MotionSetting.KeyboardAndMouseMotions}"
-                                  SelectedItem="{Binding MotionSetting.KeyboardAndMouseMotionMode, Mode=TwoWay}"
-                                  >
+                        <TextBlock Margin="5,3"
+                                    Text="{DynamicResource WordToMotion_AssignDevice_Select_Header}"
+                                    />
+                        <ComboBox Grid.Column="1"
+                                    HorizontalAlignment="Stretch"                                 
+                                    Margin="5,0,5,5"
+                                    ItemsSource="{Binding WordToMotionSetting.Devices}"
+                                    SelectedItem="{Binding WordToMotionSetting.SelectedDevice, Mode=TwoWay}"
+                                    md:HintAssist.Hint="Device"
+                                    >
                             <ComboBox.ItemTemplate>
-                                <DataTemplate DataType="{x:Type vmm:MotionModeSelectionViewModel}">
-                                    <TextBlock Text="{Binding Label.Value}"/>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding DisplayName}"/>
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>
-                        <TextBlock Text="{DynamicResource Motion_Arm_GamepadMode}"/>
-                        <ComboBox Margin="10,3,10,0" 
-                                  ItemsSource="{Binding MotionSetting.GamepadMotions}"
-                                  SelectedItem="{Binding MotionSetting.GamepadMotionMode, Mode=TwoWay}"
-                                  >
-                            <ComboBox.ItemTemplate>
-                                <DataTemplate DataType="{x:Type vmm:MotionModeSelectionViewModel}">
-                                    <TextBlock Text="{Binding Label.Value}"/>
-                                </DataTemplate>
-                            </ComboBox.ItemTemplate>
-                        </ComboBox>
-
-                        <CheckBox Margin="10,0,10,3"
-                                  IsChecked="{Binding MotionSetting.EnableNoHandTrackMode.Value}"                              >
-                            <CheckBox.Content>
-                                <TextBlock Text="{DynamicResource Motion_FullBody_NoHandTrackMode_Streaming}"/>
-                            </CheckBox.Content>
-                        </CheckBox>
-
                     </StackPanel>
                 </Border>
+
             </StackPanel>
         </Grid>
     </ScrollViewer>

@@ -146,6 +146,16 @@
                        
             <Style TargetType="{x:Type Expander}" BasedOn="{StaticResource MaterialDesignExpander}"/>
 
+            <Style x:Key="VmmComboBoxItemStyle" TargetType="ComboBoxItem" BasedOn="{StaticResource MaterialDesignComboBoxItemStyle}">
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="Margin" Value="2"/>
+            </Style>
+            <Style TargetType="ComboBox" BasedOn="{StaticResource MaterialDesignComboBox}">
+                <Setter Property="Height" Value="33"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="ItemContainerStyle" Value="{StaticResource VmmComboBoxItemStyle}"/>
+            </Style>
+
             <!-- Dragablz Material Design -->
             <Style TargetType="{x:Type dragablz:TabablzControl}" BasedOn="{StaticResource MaterialDesignAlternateTabablzControlStyle}">
                 <Setter Property="BorderBrush" Value="Transparent"/>
