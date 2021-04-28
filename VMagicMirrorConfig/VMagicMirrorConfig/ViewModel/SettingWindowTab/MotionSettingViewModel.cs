@@ -63,7 +63,7 @@ namespace Baku.VMagicMirrorConfig
                 _blendShapeNameStore.Refresh(_model.FaceNeutralClip.Value, _model.FaceOffsetClip.Value);
 
             //両方trueのときだけポインターを表示したいので、それのチェック
-            _model.EnablePresenterMotion.PropertyChanged += (_, __) => UpdatePointerVisibility();
+            _model.KeyboardAndMouseMotionMode.PropertyChanged += (_, __) => UpdatePointerVisibility();
             _model.ShowPresentationPointer.PropertyChanged += (_, __) => UpdatePointerVisibility();
             //通常発生しないが、VMの初期化時点でポインター表示が必要ならそうする
             UpdatePointerVisibility();
@@ -142,11 +142,11 @@ namespace Baku.VMagicMirrorConfig
         //モデル層から引っ張った方がよいかもしれないが、それは無理に頑張らないでもよいかも
         public MotionModeSelectionViewModel[] KeyboardAndMouseMotions { get; } = new[]
         {
-            new MotionModeSelectionViewModel(0, "Motion_Arm_MouseAndKeyMode_Default"),
-            new MotionModeSelectionViewModel(1, "Motion_Arm_MouseAndKeyMode_Presentation"),
-            new MotionModeSelectionViewModel(2, "Motion_Arm_MouseAndKeyMode_PenTablet"),
+            new MotionModeSelectionViewModel(MotionSetting.KeyboardMouseMotionDefault, "Motion_Arm_MouseAndKeyMode_Default"),
+            new MotionModeSelectionViewModel(MotionSetting.KeyboardMouseMotionPresentation, "Motion_Arm_MouseAndKeyMode_Presentation"),
+            new MotionModeSelectionViewModel(MotionSetting.KeyboardMouseMotionPenTablet, "Motion_Arm_MouseAndKeyMode_PenTablet"),
             //NOTE: 順番と値が違うのはわざと。
-            new MotionModeSelectionViewModel(-1, "Motion_Arm_MouseAndKeyMode_None"),
+            new MotionModeSelectionViewModel(MotionSetting.KeyboardMouseMotionNone, "Motion_Arm_MouseAndKeyMode_None"),
         };
 
         public MotionModeSelectionViewModel[] GamepadMotions { get; } = new[]

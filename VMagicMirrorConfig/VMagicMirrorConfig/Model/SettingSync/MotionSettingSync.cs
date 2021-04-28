@@ -175,12 +175,13 @@ namespace Baku.VMagicMirrorConfig
         public RProperty<int> WaistWidth { get; }
         public RProperty<int> ElbowCloseStrength { get; }
         public RProperty<bool> EnableFpsAssumedRightHand { get; }
-        public RProperty<bool> EnablePresenterMotion { get; }
 
         public RProperty<bool> ShowPresentationPointer { get; }
         public RProperty<int> PresentationArmRadiusMin { get; }
 
-        public bool PointerVisible => EnablePresenterMotion.Value && ShowPresentationPointer.Value;
+        public bool PointerVisible => 
+            KeyboardAndMouseMotionMode.Value == MotionSetting.KeyboardMouseMotionPresentation &&
+            ShowPresentationPointer.Value;
 
         #endregion
 

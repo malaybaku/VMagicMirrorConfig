@@ -2,6 +2,12 @@
 {
     public class MotionSetting : SettingEntityBase
     {
+        public const int KeyboardMouseMotionNone = -1;
+        public const int KeyboardMouseMotionDefault = 0;
+        public const int KeyboardMouseMotionPresentation = 1;
+        public const int KeyboardMouseMotionPenTablet = 2;
+
+
         /// <summary>
         /// NOTE: 規約としてこの値は書き換えません。
         /// デフォルト値を参照したい人が、プロパティ読み込みのみの為だけに使います。
