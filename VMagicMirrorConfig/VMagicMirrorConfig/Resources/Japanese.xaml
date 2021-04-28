@@ -146,23 +146,26 @@
     <sys:String x:Key="Motion_Arm_EnableHidMotion">タイピング / マウス動作を反映</sys:String>
     <sys:String x:Key="Motion_Arm_EnableRandomTyping">打鍵をランダム化して入力を隠す</sys:String>
     <sys:String x:Key="Motion_Arm_EnableShoulderModify">肩モーションの補正を有効化</sys:String>
-    <sys:String x:Key="Motion_Arm_EnableTypingAndMouseTimeout">(タイピング・マウス)入力がないとき手をおろす</sys:String>
+    <sys:String x:Key="Motion_Arm_EnableTypingAndMouseTimeout">入力がないとき手をおろす</sys:String>
     <sys:String x:Key="Motion_Arm_FpsAssumedRightHand">右手のマウス動作をFPS対策モードにする</sys:String>
     <sys:String x:Key="Motion_Arm_FpsAssumedRightHand_Tooltip">オンにするとPC用のFPSを遊ぶときのマウス動作が自然になりますが、ペンタブ作業や画面タッチへの反応が悪くなります。</sys:String>
     
     <sys:String x:Key="Motion_Arm_WaistWidth">脇をしめる幅 [cm]</sys:String>
     <sys:String x:Key="Motion_Arm_ElbowCloseStrength">脇をしめる強さ [%]</sys:String>
-    <sys:String x:Key="Motion_Arm_EnablePresenterMotion">プレゼン風に右手を動かす</sys:String>
     <sys:String x:Key="Motion_Arm_ShowPresentationPointer">補助ポインターを表示</sys:String>    
-    <sys:String x:Key="Motion_Arm_PresenterArmRadiusMin">プレゼン動作の最小半径 [cm]</sys:String>    
+    <sys:String x:Key="Motion_Arm_PresenterArmRadiusMin">手の食い込み防止半径 [cm]</sys:String>    
     
     <sys:String x:Key="Motion_Arm_MouseAndKeyMode">キー/マウスでの動作</sys:String>
     <sys:String x:Key="Motion_Arm_GamepadMode">ゲームパッドでの動作</sys:String>
-    
+    <sys:String x:Key="Motion_Arm_ModeSpecitic">特定の動作モード向けオプション</sys:String>
+    <sys:String x:Key="Motion_Arm_Typing_Section">キーボード + タッチパッド</sys:String>
+    <sys:String x:Key="Motion_Arm_Presentation_Section">プレゼンテーション</sys:String>
+
     <!-- NOTE: used in ViewModel code -->
     <sys:String x:Key="Motion_Arm_MouseAndKeyMode_Default">デフォルト</sys:String>
     <sys:String x:Key="Motion_Arm_MouseAndKeyMode_Presentation">プレゼンテーション</sys:String>
     <sys:String x:Key="Motion_Arm_MouseAndKeyMode_PenTablet">ペンタブレット</sys:String>
+    <sys:String x:Key="Motion_Arm_MouseAndKeyMode None">動作なし</sys:String>
     <sys:String x:Key="Motion_Arm_GamepadMode_Default">デフォルト</sys:String>
     <sys:String x:Key="Motion_Arm_GamepadMode_ArcadeStick">アーケードスティック</sys:String>
     <sys:String x:Key="Motion_Arm_GamepadMode_GunController">ガンコントローラ</sys:String>

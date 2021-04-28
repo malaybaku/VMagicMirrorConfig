@@ -73,7 +73,6 @@ namespace Baku.VMagicMirrorConfig
         public Message HandYOffsetBasic(int offsetCentimeter) => WithArg($"{offsetCentimeter}");
         public Message HandYOffsetAfterKeyDown(int offsetCentimeter) => WithArg($"{offsetCentimeter}");
 
-        public Message EnableHidArmMotion(bool enable) => WithArg($"{enable}");
         public Message EnableHidRandomTyping(bool enable) => WithArg($"{enable}");
         public Message EnableShoulderMotionModify(bool enable) => WithArg($"{enable}");
         public Message EnableTypingHandDownTimeout(bool enable) => WithArg($"{enable}");
@@ -81,7 +80,6 @@ namespace Baku.VMagicMirrorConfig
         public Message SetElbowCloseStrength(int strengthPercent) => WithArg($"{strengthPercent}");
 
         public Message EnableFpsAssumedRightHand(bool enable) => WithArg($"{enable}");
-        public Message EnablePresenterMotion(bool enable) => WithArg($"{enable}");
         public Message PresentationArmRadiusMin(int radiusMinCentimeter) => WithArg($"{radiusMinCentimeter}");
 
         public Message SetKeyboardAndMouseMotionMode(int modeIndex) => WithArg($"{modeIndex}");

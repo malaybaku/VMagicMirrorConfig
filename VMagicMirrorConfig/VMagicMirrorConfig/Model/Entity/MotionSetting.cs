@@ -71,7 +71,6 @@
         public int KeyboardAndMouseMotionMode { get; set; } = 0;
         public int GamepadMotionMode { get; set; } = 0;
 
-        public bool EnableHidArmMotion { get; set; } = true;
         public bool EnableHidRandomTyping { get; set; } = false;
         public bool EnableShoulderMotionModify { get; set; } = true;
         public bool EnableHandDownTimeout { get; set; } = true;
@@ -79,7 +78,6 @@
         public int WaistWidth { get; set; } = 30;
         public int ElbowCloseStrength { get; set; } = 30;
         public bool EnableFpsAssumedRightHand { get; set; } = false;
-        public bool EnablePresenterMotion { get; set; } = false;
 
         public bool ShowPresentationPointer { get; set; } = false;
         public int PresentationArmRadiusMin { get; set; } = 20;
@@ -142,14 +140,12 @@
             KeyboardAndMouseMotionMode = 0;
             GamepadMotionMode = 0;
 
-            EnableHidArmMotion = true;
             EnableHidRandomTyping = false;
             EnableShoulderMotionModify = true;
             EnableHandDownTimeout = true;
             WaistWidth = 30;
             ElbowCloseStrength = 30;
             EnableFpsAssumedRightHand = false;
-            EnablePresenterMotion = false;
             ShowPresentationPointer = false;
             PresentationArmRadiusMin = 20;
         }

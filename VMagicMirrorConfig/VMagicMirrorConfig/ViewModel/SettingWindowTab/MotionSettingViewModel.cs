@@ -145,13 +145,15 @@ namespace Baku.VMagicMirrorConfig
             new MotionModeSelectionViewModel(0, "Motion_Arm_MouseAndKeyMode_Default"),
             new MotionModeSelectionViewModel(1, "Motion_Arm_MouseAndKeyMode_Presentation"),
             new MotionModeSelectionViewModel(2, "Motion_Arm_MouseAndKeyMode_PenTablet"),
+            //NOTE: 順番と値が違うのはわざと。
+            new MotionModeSelectionViewModel(-1, "Motion_Arm_MouseAndKeyMode_None"),
         };
 
         public MotionModeSelectionViewModel[] GamepadMotions { get; } = new[]
         {
             new MotionModeSelectionViewModel(0, "Motion_Arm_GamepadMode_Default"),
             new MotionModeSelectionViewModel(1, "Motion_Arm_GamepadMode_ArcadeStick"),
-            new MotionModeSelectionViewModel(2, "Motion_Arm_GamepadMode_GunController"),
+            //NOTE: Gun ControllerとかCar Handleとかも想定していたが、Unity側の実装が間に合ってないので無し。
         };
 
         private MotionModeSelectionViewModel? _keyboardAndMouseMotionMode = null;
@@ -285,16 +287,14 @@ namespace Baku.VMagicMirrorConfig
 
         #region Arm
 
-        public RProperty<bool> EnableHidArmMotion => _model.EnableHidArmMotion;
         public RProperty<bool> EnableHidRandomTyping => _model.EnableHidRandomTyping;
         public RProperty<bool> EnableShoulderMotionModify => _model.EnableShoulderMotionModify;
         public RProperty<bool> EnableHandDownTimeout => _model.EnableHandDownTimeout;
         public RProperty<int> WaistWidth => _model.WaistWidth;
         public RProperty<int> ElbowCloseStrength => _model.ElbowCloseStrength;
-
         public RProperty<bool> EnableFpsAssumedRightHand => _model.EnableFpsAssumedRightHand;
 
-        public RProperty<bool> EnablePresenterMotion => _model.EnablePresenterMotion;
+
         public RProperty<bool> ShowPresentationPointer => _model.ShowPresentationPointer;
         public RProperty<int> PresentationArmRadiusMin => _model.PresentationArmRadiusMin;
 

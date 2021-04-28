@@ -145,22 +145,26 @@ Check "Keep LipSync" to make the lipsync continue.</sys:String>
     <sys:String x:Key="Motion_Arm_EnableHidMotion">Enable Typing / Mouse Motion</sys:String>
     <sys:String x:Key="Motion_Arm_EnableRandomTyping">Random typing to hide key input</sys:String>
     <sys:String x:Key="Motion_Arm_EnableShoulderModify">Modify shoulder motion</sys:String>
-    <sys:String x:Key="Motion_Arm_EnableTypingAndMouseTimeout">(Keyboard/Mouse)Down hand when no input</sys:String>
+    <sys:String x:Key="Motion_Arm_EnableTypingAndMouseTimeout">Down hand when no input</sys:String>
     <sys:String x:Key="Motion_Arm_FpsAssumedRightHand">Enable mouse motion to FPS assumed mode</sys:String>
     <sys:String x:Key="Motion_Arm_FpsAssumedRightHand_Tooltip">When checked right hand motion during playing FPS become more natural, but screen touch or pen tablet operation become become slow</sys:String>
     
     <sys:String x:Key="Motion_Arm_WaistWidth">Waist width [cm]</sys:String>
     <sys:String x:Key="Motion_Arm_ElbowCloseStrength">Strength to keep upper arm to body [%]</sys:String>
-    <sys:String x:Key="Motion_Arm_EnablePresenterMotion">Presentation-like hand</sys:String>
     <sys:String x:Key="Motion_Arm_ShowPresentationPointer">Show Pointer Support</sys:String>
-    <sys:String x:Key="Motion_Arm_PresenterArmRadiusMin">Arm position radius min [cm]</sys:String>
+    <sys:String x:Key="Motion_Arm_PresenterArmRadiusMin">Hand pos radius min [cm]</sys:String>
 
     <sys:String x:Key="Motion_Arm_MouseAndKeyMode">Key/Mouse Motion</sys:String>
     <sys:String x:Key="Motion_Arm_GamepadMode">Gamepad Motion</sys:String>
-    <!-- NOTE: used in ViewModel code -->
+    <sys:String x:Key="Motion_Arm_ModeSpecitic">Option for specific motion</sys:String>
+    <sys:String x:Key="Motion_Arm_Typing_Section">Keyboard + Touch Pad Motion</sys:String>
+    <sys:String x:Key="Motion_Arm_Presentation_Section">Presentation</sys:String>
+
+    <!-- NOTE: will be used in both View and ViewModel code -->
     <sys:String x:Key="Motion_Arm_MouseAndKeyMode_Default">Default</sys:String>
     <sys:String x:Key="Motion_Arm_MouseAndKeyMode_Presentation">Presentation</sys:String>
     <sys:String x:Key="Motion_Arm_MouseAndKeyMode_PenTablet">Pen Tablet</sys:String>
+    <sys:String x:Key="Motion_Arm_MouseAndKeyMode None">None</sys:String>
     <sys:String x:Key="Motion_Arm_GamepadMode_Default">Default</sys:String>
     <sys:String x:Key="Motion_Arm_GamepadMode_ArcadeStick">Arcade Stick</sys:String>
     <sys:String x:Key="Motion_Arm_GamepadMode_GunController">Gun Controller</sys:String>
