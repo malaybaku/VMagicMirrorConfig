@@ -409,7 +409,8 @@
                             <ComboBox Grid.Row="1" Grid.Column="1"
                                       Margin="10,3" 
                                       Height="30"
-                                      IsEnabled="{Binding MotionSetting.EnableNoHandTrackMode.Value}"
+                                      IsEnabled="{Binding MotionSetting.EnableNoHandTrackMode.Value, 
+                                                          Converter={StaticResource BooleanReverseConverter}}"
                                       ItemsSource="{Binding MotionSetting.KeyboardAndMouseMotions}"
                                       SelectedItem="{Binding MotionSetting.KeyboardAndMouseMotionMode, Mode=TwoWay}"
                                       Padding="0"
@@ -430,8 +431,8 @@
                             <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource Motion_Arm_GamepadMode}"/>
                             <ComboBox Grid.Row="2" Grid.Column="1"
                                       Margin="10,3" 
-                                      IsEnabled="{Binding MotionSetting.EnableNoHandTrackMode.Value}"
-                                      
+                                      IsEnabled="{Binding MotionSetting.EnableNoHandTrackMode.Value, 
+                                                          Converter={StaticResource BooleanReverseConverter}}"
                                       ItemsSource="{Binding MotionSetting.GamepadMotions}"
                                       SelectedItem="{Binding MotionSetting.GamepadMotionMode, Mode=TwoWay}"
                                       >

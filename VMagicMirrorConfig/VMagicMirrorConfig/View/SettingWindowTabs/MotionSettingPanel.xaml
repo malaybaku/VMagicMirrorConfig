@@ -11,6 +11,7 @@
              d:DesignHeight="1100"
              >
     <UserControl.Resources>
+        <vmm:BooleanReverseConverter x:Key="BooleanReverseConverter"/>
         <vmm:WhiteSpaceStringToNullConverter x:Key="WhiteSpaceStringToNullConverter"/>
         <vmm:Lv50Converter x:Key="Lv50Converter"/>
     </UserControl.Resources>
@@ -65,7 +66,8 @@
                         <ComboBox Grid.Row="1" Grid.Column="1"
                                   Margin="10,3" 
                                   Height="30"
-                                  IsEnabled="{Binding EnableNoHandTrackMode.Value}"
+                                  IsEnabled="{Binding EnableNoHandTrackMode.Value,
+                                                      Converter={StaticResource BooleanReverseConverter}}"
                                   ItemsSource="{Binding KeyboardAndMouseMotions}"
                                   SelectedItem="{Binding KeyboardAndMouseMotionMode, Mode=TwoWay}"
                                   Padding="0"
@@ -86,7 +88,8 @@
                         <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource Motion_Arm_GamepadMode}"/>
                         <ComboBox Grid.Row="2" Grid.Column="1"
                                   Margin="10,3" 
-                                  IsEnabled="{Binding EnableNoHandTrackMode.Value}"
+                                  IsEnabled="{Binding EnableNoHandTrackMode.Value,
+                                                      Converter={StaticResource BooleanReverseConverter}}"
                                   ItemsSource="{Binding GamepadMotions}"
                                   SelectedItem="{Binding GamepadMotionMode, Mode=TwoWay}"
                                   >
