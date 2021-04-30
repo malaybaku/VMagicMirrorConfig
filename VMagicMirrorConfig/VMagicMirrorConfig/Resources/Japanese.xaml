@@ -267,9 +267,10 @@
     <sys:String x:Key="Layout_HidVisible">キーボード・タッチパッド</sys:String>
     <sys:String x:Key="Layout_MidiVisible">MIDIコントローラ</sys:String>
     <sys:String x:Key="Layout_GamepadVisible">ゲームパッドを表示</sys:String>
-
-    <sys:String x:Key="Layout_Hid_Streaming">キーボード</sys:String>
-    <sys:String x:Key="Layout_Midi_Streaming">MIDIコン</sys:String>
+    <sys:String x:Key="Layout_Pen_Visibility">ペン (ペンタブ動作時のみ)</sys:String>
+   
+    <sys:String x:Key="Layout_Hid_Streaming">キーボード・パッド</sys:String>
+    <sys:String x:Key="Layout_Midi_Streaming">MIDIコントローラ</sys:String>
 
     <sys:String x:Key="Layout_Hid_TypingEffect_Header">タイピング時の演出</sys:String>
     <sys:String x:Key="Layout_Hid_TypingEffect_Header_Streaming">タイピング演出</sys:String>

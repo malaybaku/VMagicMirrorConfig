@@ -262,12 +262,13 @@ camera movements following:
 
     <!-- Layout : Keyboard / Mouse Pad -->
     <sys:String x:Key="Layout_Hid">Device Visibility</sys:String>
-    <sys:String x:Key="Layout_HidVisible">Keyboard and Touch Pad</sys:String>
+    <sys:String x:Key="Layout_HidVisible">Keyboard and Pad</sys:String>
     <sys:String x:Key="Layout_MidiVisible">MIDI Controller</sys:String>
     <sys:String x:Key="Layout_GamepadVisible">Gamepad</sys:String>    
-    <sys:String x:Key="Layout_Hid_Streaming">Keyboard</sys:String>
-    <sys:String x:Key="Layout_Midi_Streaming">MIDI</sys:String>
-        
+    <sys:String x:Key="Layout_Pen_Visibility">Pen (during pen tablet motion)</sys:String>
+    <sys:String x:Key="Layout_Hid_Streaming">Keyboard and Pad</sys:String>
+    <sys:String x:Key="Layout_Midi_Streaming">MIDI Controller</sys:String>
+   
     <sys:String x:Key="Layout_Hid_TypingEffect_Header">Typing Effect</sys:String>
     <sys:String x:Key="Layout_Hid_TypingEffect_Header_Streaming">Typing Effect</sys:String>
     <sys:String x:Key="Layout_Hid_TypingEffect_None">None</sys:String>

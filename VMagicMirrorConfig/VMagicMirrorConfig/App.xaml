@@ -147,8 +147,8 @@
             <Style TargetType="{x:Type Expander}" BasedOn="{StaticResource MaterialDesignExpander}"/>
 
             <Style x:Key="VmmComboBoxItemStyle" TargetType="ComboBoxItem" BasedOn="{StaticResource MaterialDesignComboBoxItemStyle}">
-                <Setter Property="Padding" Value="0"/>
-                <Setter Property="Margin" Value="2"/>
+                <Setter Property="Padding" Value="3"/>
+                <Setter Property="Margin" Value="3"/>
             </Style>
             <Style TargetType="ComboBox" BasedOn="{StaticResource MaterialDesignComboBox}">
                 <Setter Property="Height" Value="33"/>

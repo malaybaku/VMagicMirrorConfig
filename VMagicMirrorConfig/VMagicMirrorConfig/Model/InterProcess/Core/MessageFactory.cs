@@ -155,11 +155,9 @@ namespace Baku.VMagicMirrorConfig
 
         #region キーボード・マウスパッド
 
-        public Message HidHeight(int heightCentimeter) => WithArg($"{heightCentimeter}");
-
-        public Message HidHorizontalScale(int scalePercent) => WithArg($"{scalePercent}");
-
         public Message HidVisibility(bool visible) => WithArg($"{visible}");
+
+        public Message SetPenVisibility(bool visible) => WithArg($"{visible}");
 
         public Message MidiControllerVisibility(bool visible) => WithArg($"{visible}");
 

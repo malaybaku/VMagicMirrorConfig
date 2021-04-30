@@ -469,6 +469,10 @@
                                   Content="{DynamicResource Layout_Hid_Streaming}"
                                   />
                         <CheckBox Style="{StaticResource SmallMarginCheckBox}"
+                                  IsChecked="{Binding LayoutSetting.PenVisibility.Value}"
+                                  Content="{DynamicResource Layout_Pen_Visibility}"
+                                  />
+                        <CheckBox Style="{StaticResource SmallMarginCheckBox}"
                                   Content="{DynamicResource Layout_Gamepad}"
                                   IsChecked="{Binding LayoutSetting.GamepadVisibility.Value}"
                                   />

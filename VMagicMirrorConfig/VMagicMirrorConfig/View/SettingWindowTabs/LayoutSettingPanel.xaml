@@ -214,7 +214,13 @@
                         <TextBlock Text="{DynamicResource Layout_HidVisible}"/>
                     </CheckBox>
 
-                    <CheckBox Margin="20,2"
+                    <CheckBox Margin="20,0"
+                              VerticalContentAlignment="Center"
+                              IsChecked="{Binding PenVisibility.Value}">
+                        <TextBlock Text="{DynamicResource Layout_Pen_Visibility}"/>
+                    </CheckBox>
+
+                    <CheckBox Margin="20,0"
                               VerticalContentAlignment="Center"
                               IsChecked="{Binding GamepadVisibility.Value}">
                         <TextBlock Text="{DynamicResource Layout_GamepadVisible}"/>
@@ -226,7 +232,7 @@
                         <TextBlock Text="{DynamicResource Layout_MidiVisible}"/>
                     </CheckBox>
 
-                    <Grid Margin="17,5,0,0">
+                    <Grid Margin="17,5,5,5">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>
