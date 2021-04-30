@@ -29,10 +29,12 @@ namespace Baku.VMagicMirrorConfig
             QuickSave3 = new RProperty<string>(s.QuickSave3);
 
             HidVisibility = new RProperty<bool>(s.HidVisibility, b => SendMessage(factory.HidVisibility(b)));
+            PenVisibility = new RProperty<bool>(s.PenVisibility, b => SendMessage(factory.SetPenVisibility(b)));
             SelectedTypingEffectId = new RProperty<int>(s.SelectedTypingEffectId, i => SendMessage(factory.SetKeyboardTypingEffectType(i)));
 
             EnableFreeCameraMode = new RProperty<bool>(false, b => OnEnableFreeCameraModeChanged(b));
             EnableDeviceFreeLayout = new RProperty<bool>(false, v => SendMessage(factory.EnableDeviceFreeLayout(v)));
+
         }
 
         //NOTE: Gamepadはモデルクラス的には関連づけしないでおく: 代わりにSave/Loadの関数内で調整してもらう感じにする
@@ -50,6 +52,7 @@ namespace Baku.VMagicMirrorConfig
         public RProperty<string> QuickSave3 { get; }
 
         public RProperty<bool> HidVisibility { get; }
+        public RProperty<bool> PenVisibility { get; }
         public RProperty<int> SelectedTypingEffectId { get; }
 
         //NOTE: この2つの値はファイルには保存しない
@@ -168,6 +171,7 @@ namespace Baku.VMagicMirrorConfig
         {
             var setting = LayoutSetting.Default;
             HidVisibility.Value = setting.HidVisibility;
+            PenVisibility.Value = setting.PenVisibility;
             MidiControllerVisibility.Value = setting.MidiControllerVisibility;
             //NOTE: ここにGamepadのvisibilityも載ってたけど消した。必要なら書かないといけない
             SelectedTypingEffectId.Value = setting.SelectedTypingEffectId;

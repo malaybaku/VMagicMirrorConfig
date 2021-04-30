@@ -82,6 +82,7 @@ namespace Baku.VMagicMirrorConfig
 
         // デバイス類の表示/非表示
         public RProperty<bool> HidVisibility => _model.HidVisibility;
+        public RProperty<bool> PenVisibility => _model.PenVisibility;
         public RProperty<bool> MidiControllerVisibility => _model.MidiControllerVisibility;
         public RProperty<bool> GamepadVisibility => _gamepadModel.GamepadVisibility;
 

@@ -73,7 +73,6 @@ namespace Baku.VMagicMirrorConfig
         public Message HandYOffsetBasic(int offsetCentimeter) => WithArg($"{offsetCentimeter}");
         public Message HandYOffsetAfterKeyDown(int offsetCentimeter) => WithArg($"{offsetCentimeter}");
 
-        public Message EnableHidArmMotion(bool enable) => WithArg($"{enable}");
         public Message EnableHidRandomTyping(bool enable) => WithArg($"{enable}");
         public Message EnableShoulderMotionModify(bool enable) => WithArg($"{enable}");
         public Message EnableTypingHandDownTimeout(bool enable) => WithArg($"{enable}");
@@ -81,8 +80,10 @@ namespace Baku.VMagicMirrorConfig
         public Message SetElbowCloseStrength(int strengthPercent) => WithArg($"{strengthPercent}");
 
         public Message EnableFpsAssumedRightHand(bool enable) => WithArg($"{enable}");
-        public Message EnablePresenterMotion(bool enable) => WithArg($"{enable}");
         public Message PresentationArmRadiusMin(int radiusMinCentimeter) => WithArg($"{radiusMinCentimeter}");
+
+        public Message SetKeyboardAndMouseMotionMode(int modeIndex) => WithArg($"{modeIndex}");
+        public Message SetGamepadMotionMode(int modeIndex) => WithArg($"{modeIndex}");
 
         public Message EnableWaitMotion(bool enable) => WithArg($"{enable}");
         public Message WaitMotionScale(int scalePercent) => WithArg($"{scalePercent}");
@@ -154,11 +155,9 @@ namespace Baku.VMagicMirrorConfig
 
         #region キーボード・マウスパッド
 
-        public Message HidHeight(int heightCentimeter) => WithArg($"{heightCentimeter}");
-
-        public Message HidHorizontalScale(int scalePercent) => WithArg($"{scalePercent}");
-
         public Message HidVisibility(bool visible) => WithArg($"{visible}");
+
+        public Message SetPenVisibility(bool visible) => WithArg($"{visible}");
 
         public Message MidiControllerVisibility(bool visible) => WithArg($"{visible}");
 

@@ -39,6 +39,8 @@
 
         public bool HidVisibility { get; set; } = true;
 
+        public bool PenVisibility { get; set; } = true;
+
         //NOTE: v1.4.0まではboolを選択肢の数だけ保存していたが、スケールしないのでインデックス方式に切り替える。
         //後方互換性については意図的に捨ててます(配信タブで復帰でき、気を使う意義が薄そうなため)
         public int SelectedTypingEffectId { get; set; } = TypingEffectIndexNone;
