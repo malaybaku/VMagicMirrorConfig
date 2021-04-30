@@ -716,12 +716,12 @@
                                         />
                         </StackPanel>
 
-                        <TextBlock Margin="5,3"
+                        <TextBlock Margin="5,5"
                                     Text="{DynamicResource WordToMotion_AssignDevice_Select_Header}"
                                     />
                         <ComboBox Grid.Column="1"
                                     HorizontalAlignment="Stretch"                                 
-                                    Margin="5,0,5,5"
+                                    Margin="5,0,5,22.5"
                                     ItemsSource="{Binding WordToMotionSetting.Devices}"
                                     SelectedItem="{Binding WordToMotionSetting.SelectedDevice, Mode=TwoWay}"
                                     md:HintAssist.Hint="Device"
