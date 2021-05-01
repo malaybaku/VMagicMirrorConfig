@@ -10,6 +10,12 @@
         /// </summary>
         public static LightSetting Default { get; } = new LightSetting();
 
+        #region Image Quality
+
+        public bool HalfFpsMode { get; set; } = false;
+
+        #endregion
+
         #region Light
 
         public int LightIntensity { get; set; } = 100;
