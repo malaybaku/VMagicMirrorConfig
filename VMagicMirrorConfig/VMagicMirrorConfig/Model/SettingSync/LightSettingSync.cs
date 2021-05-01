@@ -19,6 +19,7 @@ namespace Baku.VMagicMirrorConfig
 
             ImageQualityNames = new ReadOnlyObservableCollection<string>(_imageQualityNames);
             ImageQuality = new RProperty<string>("", s => SendMessage(factory.SetImageQuality(s)));
+            HalfFpsMode = new RProperty<bool>(s.HalfFpsMode, v => SendMessage(factory.SetHalfFpsMode(v)));
 
             LightIntensity = new RProperty<int>(s.LightIntensity, i => SendMessage(factory.LightIntensity(i)));
             LightYaw = new RProperty<int>(s.LightYaw, i => SendMessage(factory.LightYaw(i)));
@@ -58,6 +59,7 @@ namespace Baku.VMagicMirrorConfig
 
         private readonly ObservableCollection<string> _imageQualityNames = new ObservableCollection<string>();
         public ReadOnlyObservableCollection<string> ImageQualityNames { get; }
+        public RProperty<bool> HalfFpsMode { get; }
 
         public async Task InitializeQualitySelectionsAsync()
         {
@@ -128,6 +130,7 @@ namespace Baku.VMagicMirrorConfig
         /// <returns></returns>
         public async Task ResetImageQualityAsync()
         {
+            HalfFpsMode.Value = false;
             var qualityName = await SendQueryAsync(MessageFactory.Instance.ApplyDefaultImageQuality());
             if (ImageQualityNames.Contains(qualityName))
             {

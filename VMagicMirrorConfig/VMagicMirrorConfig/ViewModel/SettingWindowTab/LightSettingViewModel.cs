@@ -51,6 +51,7 @@ namespace Baku.VMagicMirrorConfig
 
         public RProperty<string> ImageQuality => _model.ImageQuality;
         public ReadOnlyObservableCollection<string> ImageQualityNames => _model.ImageQualityNames;
+        public RProperty<bool> HalfFpsMode => _model.HalfFpsMode;
 
         #region Light
 

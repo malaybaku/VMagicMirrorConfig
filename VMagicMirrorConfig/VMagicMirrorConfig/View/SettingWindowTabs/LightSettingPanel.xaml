@@ -62,6 +62,11 @@
                                   md:HintAssist.Hint="Quality"
                                   />
                     </Grid>
+
+                    <CheckBox Margin="10,5,10,15"
+                              Content="{DynamicResource ImageQuality_HalfFpsMode}"
+                              IsChecked="{Binding HalfFpsMode.Value}"
+                              />
                 </StackPanel>
             </Border>
 
