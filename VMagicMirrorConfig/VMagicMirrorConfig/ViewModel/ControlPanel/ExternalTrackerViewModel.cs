@@ -112,7 +112,6 @@ namespace Baku.VMagicMirrorConfig
         public RProperty<bool> EnableExternalTracking => _model.EnableExternalTracking;
         public RProperty<bool> EnableExternalTrackerLipSync => _model.EnableExternalTrackerLipSync;
         public RProperty<bool> EnableExternalTrackerPerfectSync => _model.EnableExternalTrackerPerfectSync;
-        public RProperty<bool> UseVRoidDefaultForPerfectSync => _model.UseVRoidDefaultForPerfectSync;
 
         public ActionCommand OpenPerfectSyncTipsUrlCommand { get; }
 
