@@ -22,10 +22,6 @@ namespace Baku.VMagicMirrorConfig
                 setting.EnableExternalTrackerPerfectSync, b => SendMessage(factory.ExTrackerEnablePerfectSync(b))
                 );
 
-            UseVRoidDefaultForPerfectSync = new RProperty<bool>(
-                setting.UseVRoidDefaultForPerfectSync, b => SendMessage(factory.ExTrackerUseVRoidDefaultForPerfectSync(b))
-                );
-
             TrackSourceType = new RProperty<int>(setting.TrackSourceType, i => SendMessage(factory.ExTrackerSetSource(i)));
             //NOTE: このアドレスはコマンド実行時に使うため、書き換わってもメッセージは送らない
             IFacialMocapTargetIpAddress = new RProperty<string>(setting.IFacialMocapTargetIpAddress);
@@ -46,7 +42,6 @@ namespace Baku.VMagicMirrorConfig
         public RProperty<bool> EnableExternalTracking { get; }
         public RProperty<bool> EnableExternalTrackerLipSync { get; }
         public RProperty<bool> EnableExternalTrackerPerfectSync { get; }
-        public RProperty<bool> UseVRoidDefaultForPerfectSync { get; }
 
         // アプリ別設定
         public RProperty<int> TrackSourceType { get; }
@@ -114,6 +109,5 @@ namespace Baku.VMagicMirrorConfig
             FaceSwitchSetting = ExternalTrackerFaceSwitchSetting.LoadDefault();
             SaveFaceSwitchSetting();
         }
-
     }
 }
