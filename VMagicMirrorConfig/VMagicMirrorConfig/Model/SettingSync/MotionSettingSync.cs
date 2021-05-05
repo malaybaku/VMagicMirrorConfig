@@ -78,7 +78,6 @@ namespace Baku.VMagicMirrorConfig
             LipSyncMicrophoneDeviceName = new RProperty<string>(setting.LipSyncMicrophoneDeviceName, v => SendMessage(factory.SetMicrophoneDeviceName(v)));
             MicrophoneSensitivity = new RProperty<int>(setting.MicrophoneSensitivity, v => SendMessage(factory.SetMicrophoneSensitivity(v)));
 
-            EnableHidArmMotion = new RProperty<bool>(setting.EnableHidArmMotion, v => SendMessage(factory.EnableHidArmMotion(v)));
             EnableHidRandomTyping = new RProperty<bool>(setting.EnableHidRandomTyping, v => SendMessage(factory.EnableHidRandomTyping(v)));
             EnableShoulderMotionModify = new RProperty<bool>(setting.EnableShoulderMotionModify, v => SendMessage(factory.EnableShoulderMotionModify(v)));
             EnableHandDownTimeout = new RProperty<bool>(setting.EnableHandDownTimeout, v => SendMessage(factory.EnableTypingHandDownTimeout(v)));
@@ -87,10 +86,6 @@ namespace Baku.VMagicMirrorConfig
 
             EnableFpsAssumedRightHand = new RProperty<bool>(setting.EnableFpsAssumedRightHand, v => SendMessage(factory.EnableFpsAssumedRightHand(v)));
 
-            EnablePresenterMotion = new RProperty<bool>(setting.EnablePresenterMotion, v =>
-            {
-                SendMessage(factory.EnablePresenterMotion(v));
-            });
             ShowPresentationPointer = new RProperty<bool>(setting.ShowPresentationPointer);
             PresentationArmRadiusMin = new RProperty<int>(setting.PresentationArmRadiusMin, v => SendMessage(factory.PresentationArmRadiusMin(v)));
 
@@ -101,7 +96,17 @@ namespace Baku.VMagicMirrorConfig
             EnableWaitMotion = new RProperty<bool>(setting.EnableWaitMotion, v => SendMessage(factory.EnableWaitMotion(v)));
             WaitMotionScale = new RProperty<int>(setting.WaitMotionScale, v => SendMessage(factory.WaitMotionScale(v)));
             WaitMotionPeriod = new RProperty<int>(setting.WaitMotionPeriod, v => SendMessage(factory.WaitMotionPeriod(v)));
+
+            KeyboardAndMouseMotionMode = new RProperty<int>(
+                setting.KeyboardAndMouseMotionMode, v => SendMessage(factory.SetKeyboardAndMouseMotionMode(v))
+                );
+            GamepadMotionMode = new RProperty<int>(
+                setting.GamepadMotionMode, v => SendMessage(factory.SetGamepadMotionMode(v))
+                );
         }
+
+        public RProperty<int> KeyboardAndMouseMotionMode { get; }
+        public RProperty<int> GamepadMotionMode { get; }
 
         #region Full Body 
 
@@ -163,7 +168,6 @@ namespace Baku.VMagicMirrorConfig
 
         #region Arm
 
-        public RProperty<bool> EnableHidArmMotion { get; }
         public RProperty<bool> EnableHidRandomTyping { get; }
         public RProperty<bool> EnableShoulderMotionModify { get; }
         public RProperty<bool> EnableHandDownTimeout { get; }
@@ -171,12 +175,13 @@ namespace Baku.VMagicMirrorConfig
         public RProperty<int> WaistWidth { get; }
         public RProperty<int> ElbowCloseStrength { get; }
         public RProperty<bool> EnableFpsAssumedRightHand { get; }
-        public RProperty<bool> EnablePresenterMotion { get; }
 
         public RProperty<bool> ShowPresentationPointer { get; }
         public RProperty<int> PresentationArmRadiusMin { get; }
 
-        public bool PointerVisible => EnablePresenterMotion.Value && ShowPresentationPointer.Value;
+        public bool PointerVisible => 
+            KeyboardAndMouseMotionMode.Value == MotionSetting.KeyboardMouseMotionPresentation &&
+            ShowPresentationPointer.Value;
 
         #endregion
 
@@ -237,14 +242,16 @@ namespace Baku.VMagicMirrorConfig
         public void ResetArmSetting()
         {
             var setting = MotionSetting.Default;
-            EnableHidArmMotion.Value = setting.EnableHidArmMotion;
+
+            KeyboardAndMouseMotionMode.Value = setting.KeyboardAndMouseMotionMode;
+            GamepadMotionMode.Value = setting.GamepadMotionMode;
+
             EnableHidRandomTyping.Value = setting.EnableHidRandomTyping;
             EnableShoulderMotionModify.Value = setting.EnableShoulderMotionModify;
             EnableHandDownTimeout.Value = setting.EnableHandDownTimeout;
             WaistWidth.Value = setting.WaistWidth;
             ElbowCloseStrength.Value = setting.ElbowCloseStrength;
             EnableFpsAssumedRightHand.Value = setting.EnableFpsAssumedRightHand;
-            EnablePresenterMotion.Value = setting.EnablePresenterMotion;
             ShowPresentationPointer.Value = setting.ShowPresentationPointer;
             PresentationArmRadiusMin.Value = setting.PresentationArmRadiusMin;
         }

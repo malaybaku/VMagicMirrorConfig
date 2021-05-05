@@ -53,7 +53,6 @@
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition/>
                     </Grid.RowDefinitions>
                     <CheckBox Grid.Row="0" 
                                   Margin="0"
@@ -84,13 +83,6 @@
                                            />
                         </StackPanel>
                     </Button>
-                    <CheckBox Grid.Row="2"
-                                  Margin="20,0,0,0" 
-                                  VerticalContentAlignment="Center"
-                                  Content="{DynamicResource ExTracker_PerfectSync_UseVRoidDefault}" 
-                                  IsEnabled="{Binding EnableExternalTrackerPerfectSync.Value}"
-                                  IsChecked="{Binding UseVRoidDefaultForPerfectSync.Value}"
-                                  />
                     <Button Grid.Row="0" Style="{StaticResource MaterialDesignOutlinedButton}"
                                 Padding="0"
                                 VerticalAlignment="Top"

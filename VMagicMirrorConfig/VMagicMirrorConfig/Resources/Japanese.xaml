@@ -146,15 +146,29 @@
     <sys:String x:Key="Motion_Arm_EnableHidMotion">タイピング / マウス動作を反映</sys:String>
     <sys:String x:Key="Motion_Arm_EnableRandomTyping">打鍵をランダム化して入力を隠す</sys:String>
     <sys:String x:Key="Motion_Arm_EnableShoulderModify">肩モーションの補正を有効化</sys:String>
-    <sys:String x:Key="Motion_Arm_EnableTypingAndMouseTimeout">(タイピング・マウス)入力がないとき手をおろす</sys:String>
+    <sys:String x:Key="Motion_Arm_EnableTypingAndMouseTimeout">入力がないとき手をおろす</sys:String>
     <sys:String x:Key="Motion_Arm_FpsAssumedRightHand">右手のマウス動作をFPS対策モードにする</sys:String>
     <sys:String x:Key="Motion_Arm_FpsAssumedRightHand_Tooltip">オンにするとPC用のFPSを遊ぶときのマウス動作が自然になりますが、ペンタブ作業や画面タッチへの反応が悪くなります。</sys:String>
     
     <sys:String x:Key="Motion_Arm_WaistWidth">脇をしめる幅 [cm]</sys:String>
     <sys:String x:Key="Motion_Arm_ElbowCloseStrength">脇をしめる強さ [%]</sys:String>
-    <sys:String x:Key="Motion_Arm_EnablePresenterMotion">プレゼン風に右手を動かす</sys:String>
     <sys:String x:Key="Motion_Arm_ShowPresentationPointer">補助ポインターを表示</sys:String>    
-    <sys:String x:Key="Motion_Arm_PresenterArmRadiusMin">プレゼン動作の最小半径 [cm]</sys:String>    
+    <sys:String x:Key="Motion_Arm_PresenterArmRadiusMin">手の食い込み防止半径 [cm]</sys:String>    
+    
+    <sys:String x:Key="Motion_Arm_MouseAndKeyMode">キー/マウスでの動作</sys:String>
+    <sys:String x:Key="Motion_Arm_GamepadMode">ゲームパッドでの動作</sys:String>
+    <sys:String x:Key="Motion_Arm_ModeSpecitic">特定の動作モード向けオプション</sys:String>
+    <sys:String x:Key="Motion_Arm_Typing_Section">キーボード + タッチパッド</sys:String>
+    <sys:String x:Key="Motion_Arm_Presentation_Section">プレゼンテーション</sys:String>
+
+    <!-- NOTE: used in ViewModel code -->
+    <sys:String x:Key="Motion_Arm_MouseAndKeyMode_Default">デフォルト</sys:String>
+    <sys:String x:Key="Motion_Arm_MouseAndKeyMode_Presentation">プレゼンテーション</sys:String>
+    <sys:String x:Key="Motion_Arm_MouseAndKeyMode_PenTablet">ペンタブレット</sys:String>
+    <sys:String x:Key="Motion_Arm_MouseAndKeyMode_None">動作なし</sys:String>
+    <sys:String x:Key="Motion_Arm_GamepadMode_Default">デフォルト</sys:String>
+    <sys:String x:Key="Motion_Arm_GamepadMode_ArcadeStick">アーケードスティック</sys:String>
+    <sys:String x:Key="Motion_Arm_GamepadMode_GunController">ガンコントローラ</sys:String>
 
     <!-- Motion : Hand -->
     <sys:String x:Key="Motion_Hand">手・指</sys:String>
@@ -188,7 +202,7 @@
     <sys:String x:Key="Motion_Face_AutoBlinkDuringFaceTracking">顔トラッキング中も自動でまばたき</sys:String>
     <sys:String x:Key="Motion_Face_DisableFaceTrackingHorizontalFlip">左右反転をオフにする</sys:String>
     <sys:String x:Key="Motion_Face_EnableImageBasedHandTracking">顔とセットで手もトラッキング</sys:String>
-    <sys:String x:Key="Motion_Face_EnableWebCamHighPowerMode">高解像度モード(ベータ)</sys:String>
+    <sys:String x:Key="Motion_Face_EnableWebCamHighPowerMode">高解像度モード</sys:String>
     <sys:String x:Key="Motion_Face_FolderMaybeIncorrect_Header">※アプリフォルダの移動を検討してください！</sys:String>
     <sys:String x:Key="Motion_Face_FolderMaybeIncorrect_Tooltip" xml:space="preserve">アプリの配置フォルダパスに全角文字が含まれています。
 この状態では顔トラッキングが正常動作しないかもしれません。
@@ -253,9 +267,10 @@
     <sys:String x:Key="Layout_HidVisible">キーボード・タッチパッド</sys:String>
     <sys:String x:Key="Layout_MidiVisible">MIDIコントローラ</sys:String>
     <sys:String x:Key="Layout_GamepadVisible">ゲームパッドを表示</sys:String>
-
-    <sys:String x:Key="Layout_Hid_Streaming">キーボード</sys:String>
-    <sys:String x:Key="Layout_Midi_Streaming">MIDIコン</sys:String>
+    <sys:String x:Key="Layout_Pen_Visibility">ペン (ペンタブ動作時のみ)</sys:String>
+   
+    <sys:String x:Key="Layout_Hid_Streaming">キーボード・パッド</sys:String>
+    <sys:String x:Key="Layout_Midi_Streaming">MIDIコントローラ</sys:String>
 
     <sys:String x:Key="Layout_Hid_TypingEffect_Header">タイピング時の演出</sys:String>
     <sys:String x:Key="Layout_Hid_TypingEffect_Header_Streaming">タイピング演出</sys:String>
@@ -295,6 +310,7 @@
 
     <sys:String x:Key="ImageQuality">画質</sys:String>
     <sys:String x:Key="ImageQuality_CurrentQuality">現在の設定</sys:String>
+    <sys:String x:Key="ImageQuality_HalfFpsMode">FPSを半減 (Medium以上で有効)</sys:String>
     
     <sys:String x:Key="Light">ライト</sys:String>
     <sys:String x:Key="Light_Intensity">明るさ[%]</sys:String>

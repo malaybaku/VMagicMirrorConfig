@@ -2,6 +2,12 @@
 {
     public class MotionSetting : SettingEntityBase
     {
+        public const int KeyboardMouseMotionNone = -1;
+        public const int KeyboardMouseMotionDefault = 0;
+        public const int KeyboardMouseMotionPresentation = 1;
+        public const int KeyboardMouseMotionPenTablet = 2;
+
+
         /// <summary>
         /// NOTE: 規約としてこの値は書き換えません。
         /// デフォルト値を参照したい人が、プロパティ読み込みのみの為だけに使います。
@@ -68,7 +74,9 @@
 
         #region Arm
 
-        public bool EnableHidArmMotion { get; set; } = true;
+        public int KeyboardAndMouseMotionMode { get; set; } = 0;
+        public int GamepadMotionMode { get; set; } = 0;
+
         public bool EnableHidRandomTyping { get; set; } = false;
         public bool EnableShoulderMotionModify { get; set; } = true;
         public bool EnableHandDownTimeout { get; set; } = true;
@@ -76,7 +84,6 @@
         public int WaistWidth { get; set; } = 30;
         public int ElbowCloseStrength { get; set; } = 30;
         public bool EnableFpsAssumedRightHand { get; set; } = false;
-        public bool EnablePresenterMotion { get; set; } = false;
 
         public bool ShowPresentationPointer { get; set; } = false;
         public int PresentationArmRadiusMin { get; set; } = 20;
@@ -136,14 +143,15 @@
 
         public void ResetArmSetting()
         {
-            EnableHidArmMotion = true;
+            KeyboardAndMouseMotionMode = 0;
+            GamepadMotionMode = 0;
+
             EnableHidRandomTyping = false;
             EnableShoulderMotionModify = true;
             EnableHandDownTimeout = true;
             WaistWidth = 30;
             ElbowCloseStrength = 30;
             EnableFpsAssumedRightHand = false;
-            EnablePresenterMotion = false;
             ShowPresentationPointer = false;
             PresentationArmRadiusMin = 20;
         }
