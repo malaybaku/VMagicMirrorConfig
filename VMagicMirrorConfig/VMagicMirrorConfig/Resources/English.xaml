@@ -277,6 +277,9 @@ camera movements following:
 
     <sys:String x:Key="Layout_Gamepad">Gamepad</sys:String>    
     
+    <sys:String x:Key="Layout_Texture_Tips_Notice">NOTE: To change device's appearance, please see the tips below.</sys:String>
+    <sys:String x:Key="Layout_Texture_Tips_ButtonText">See Detail (Open Web)</sys:String>
+    
     <!-- Devices -->
     <sys:String x:Key="Devices_Header">Devices</sys:String>
         
@@ -492,6 +495,7 @@ Use this only after checking the licenses of VRM you will use.
     <sys:String x:Key="URL_docs_ex_tracker">https://malaybaku.github.io/VMagicMirror/en/docs/external_tracker</sys:String>
     <sys:String x:Key="URL_docs_setting_files">https://malaybaku.github.io/VMagicMirror/en/docs/setting_files</sys:String>
     <sys:String x:Key="URL_tips_perfect_sync">https://malaybaku.github.io/VMagicMirror/en/tips/perfect_sync</sys:String>
+    <sys:String x:Key="URL_tips_texture_replace">https://malaybaku.github.io/VMagicMirror/en/tips/change_textures</sys:String>
     <sys:String x:Key="URL_ifacialmocap_troubleshoot">https://malaybaku.github.io/VMagicMirror/en/docs/external_tracker_ifacialmocap#troubleshoot</sys:String>
     
 </ResourceDictionary>

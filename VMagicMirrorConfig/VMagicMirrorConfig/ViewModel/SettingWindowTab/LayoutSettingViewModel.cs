@@ -14,6 +14,11 @@ namespace Baku.VMagicMirrorConfig
 
             QuickSaveViewPointCommand = new ActionCommand<string>(async s => await _model.QuickSaveViewPoint(s));
             QuickLoadViewPointCommand = new ActionCommand<string>(_model.QuickLoadViewPoint);
+
+            OpenTextureReplaceTipsUrlCommand = new ActionCommand(
+                () => UrlNavigate.Open(LocalizedString.GetString("URL_tips_texture_replace"))
+                );
+
             ResetCameraPositionCommand = new ActionCommand(() => SendMessage(MessageFactory.Instance.ResetCameraPosition()));
 
             ResetCameraSettingCommand = new ActionCommand(
@@ -121,11 +126,13 @@ namespace Baku.VMagicMirrorConfig
 
         #endregion
 
+        public ActionCommand OpenTextureReplaceTipsUrlCommand { get; }
 
         public ActionCommand ResetDeviceLayoutCommand { get; }
         public ActionCommand ResetHidSettingCommand { get; }
         public ActionCommand ResetCameraSettingCommand { get; }
         public ActionCommand ResetMidiSettingCommand { get; }
+
 
         //TODO: Recordで書きたい…
         public class TypingEffectSelectionItem

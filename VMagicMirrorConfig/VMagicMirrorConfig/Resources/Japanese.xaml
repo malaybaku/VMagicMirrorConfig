@@ -280,6 +280,9 @@
     
     <sys:String x:Key="Layout_Gamepad">ゲームパッド</sys:String>    
 
+    <sys:String x:Key="Layout_Texture_Tips_Notice">※デバイスの色などを変更するには画像の差し替え必要です。</sys:String>
+    <sys:String x:Key="Layout_Texture_Tips_ButtonText">詳細を確認 (Webページを開きます)</sys:String>
+    
     <!-- Devices -->
     <sys:String x:Key="Devices_Header">デバイス接続</sys:String>
         
@@ -500,6 +503,7 @@ webカメラでの顔トラッキングを有効にする場合は
     <sys:String x:Key="URL_docs_ex_tracker">https://malaybaku.github.io/VMagicMirror/docs/external_tracker</sys:String>
     <sys:String x:Key="URL_docs_setting_files">https://malaybaku.github.io/VMagicMirror/docs/setting_files</sys:String>
     <sys:String x:Key="URL_tips_perfect_sync">https://malaybaku.github.io/VMagicMirror/tips/perfect_sync</sys:String>
+    <sys:String x:Key="URL_tips_texture_replace">https://malaybaku.github.io/VMagicMirror/tips/change_textures</sys:String>
     <sys:String x:Key="URL_ifacialmocap_troubleshoot">https://malaybaku.github.io/VMagicMirror/docs/external_tracker_ifacialmocap#troubleshoot</sys:String>
     
 </ResourceDictionary>
