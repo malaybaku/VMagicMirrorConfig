@@ -268,11 +268,11 @@
                         </ComboBox>
                     </Grid>
 
-                    <TextBlock Margin="10,15,10,5" Text="{DynamicResource Layout_Texture_Tips_Notice}"/>
+                    <TextBlock Margin="10,20,10,5" Text="{DynamicResource Layout_Texture_Tips_Notice}"/>
 
                     <Button Grid.Row="0" Style="{StaticResource MaterialDesignOutlinedButton}"
                             Padding="0"
-                            Margin="10,0,10,5"
+                            Margin="10,0,10,10"
                             HorizontalAlignment="Left"
                             Command="{Binding OpenTextureReplaceTipsUrlCommand}"
                             Content="{DynamicResource Layout_Texture_Tips_ButtonText}"

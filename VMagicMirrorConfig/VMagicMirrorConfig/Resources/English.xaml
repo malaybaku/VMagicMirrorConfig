@@ -277,7 +277,7 @@ camera movements following:
 
     <sys:String x:Key="Layout_Gamepad">Gamepad</sys:String>    
     
-    <sys:String x:Key="Layout_Texture_Tips_Notice">*To change device's appearance, please see tips on web.</sys:String>
+    <sys:String x:Key="Layout_Texture_Tips_Notice">NOTE: To change device's appearance, please see the tips below.</sys:String>
     <sys:String x:Key="Layout_Texture_Tips_ButtonText">See Detail (Open Web)</sys:String>
     
     <!-- Devices -->

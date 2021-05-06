@@ -280,7 +280,7 @@
     
     <sys:String x:Key="Layout_Gamepad">ゲームパッド</sys:String>    
 
-    <sys:String x:Key="Layout_Texture_Tips_Notice">※色などの切り替えには画像の差し替え操作が必要です</sys:String>
+    <sys:String x:Key="Layout_Texture_Tips_Notice">※デバイスの色などを変更するには画像の差し替え必要です。</sys:String>
     <sys:String x:Key="Layout_Texture_Tips_ButtonText">詳細を確認 (Webページを開きます)</sys:String>
     
     <!-- Devices -->
