@@ -5,18 +5,39 @@ using System.Windows;
 
 namespace Baku.VMagicMirrorConfig
 {
+    /// <summary>
+    /// セーブかロードを行う時のビューモデル
+    /// </summary>
     public class SaveLoadDataViewModel : ViewModelBase
     {
-        internal SaveLoadDataViewModel(SaveFileManager model, bool isLoadMode, Action actToClose)
+        //NOTE: セーブとロードで必要な素材が微妙に違うのでファクトリで作ります
+
+        internal static SaveLoadDataViewModel CreateForSave(SaveFileManager model, Action actToClose)
+            => new SaveLoadDataViewModel(null, model, false, actToClose);
+
+        internal static SaveLoadDataViewModel CreateForLoad(RootSettingSync rootModel, SaveFileManager model, Action actToClose) 
+            => new SaveLoadDataViewModel(rootModel, model, true, actToClose);
+
+
+        private SaveLoadDataViewModel(RootSettingSync? rootModel, SaveFileManager model, bool isLoadMode, Action actToClose)
         {
+            _rootModel = rootModel;
             _model = model;
             _actToClose = actToClose;
             Items = new ReadOnlyObservableCollection<SaveLoadFileItemViewModel>(_items);
             CancelCommand = new ActionCommand(CloseDialog);
+
+            //NOTE: SaveモードではUIも出ないし何も使わない値なのでfalseのまま放置しとけばOK、という値
+            LoadCharacterWhenSettingLoaded 
+                = new RProperty<bool>(_rootModel?.LoadCharacterWhenLoadInternalFile?.Value ?? false);
+            LoadNonCharacterWhenSettingLoaded 
+                = new RProperty<bool>(_rootModel?.LoadNonCharacterWhenLoadInternalFile?.Value ?? false);
+
             IsLoadMode = isLoadMode;
             Refresh();
         }
 
+        private readonly RootSettingSync? _rootModel;
         private readonly SaveFileManager _model;
         private readonly Action _actToClose;
 
@@ -29,8 +50,8 @@ namespace Baku.VMagicMirrorConfig
         public ActionCommand CancelCommand { get; }
 
         //デフォルトではキャラロードだけ有効にして、「同じモデルで服が違うのをパッと切り替えます」みたいなUXを重視しておく。
-        public RProperty<bool> LoadCharacterWhenSettingLoaded { get; } = new RProperty<bool>(true);
-        public RProperty<bool> LoadNonCharacterWhenSettingLoaded { get; } = new RProperty<bool>(false);
+        public RProperty<bool> LoadCharacterWhenSettingLoaded { get; }
+        public RProperty<bool> LoadNonCharacterWhenSettingLoaded { get; } 
 
         private void Refresh()
         {
@@ -75,6 +96,13 @@ namespace Baku.VMagicMirrorConfig
             _model.LoadSetting(
                 index, LoadCharacterWhenSettingLoaded.Value, LoadNonCharacterWhenSettingLoaded.Value, false
                 );
+
+            //NOTE: Loadでは必ず非nullのはず。ここで設定を覚えることで、次回以降もロード設定のチェックが残る
+            if (_rootModel != null)
+            {
+                _rootModel.LoadCharacterWhenLoadInternalFile.Value = LoadCharacterWhenSettingLoaded.Value;
+                _rootModel.LoadNonCharacterWhenLoadInternalFile.Value = LoadNonCharacterWhenSettingLoaded.Value;
+            }
         }
 
         public async Task ExecuteSave(int index)

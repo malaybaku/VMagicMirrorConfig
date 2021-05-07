@@ -7,7 +7,7 @@ namespace Baku.VMagicMirrorConfig
         public AutomationSettingSync(IMessageSender sender) : base(sender)
         {
             var setting = AutomationSetting.Default;
-            //TODO: この2つはプロパティ代わったらStartなりStopなりしないとダメですよね
+
             IsAutomationEnabled = new RProperty<bool>(setting.IsAutomationEnabled, v => 
             {
                 if (IsReadyToReceive())
