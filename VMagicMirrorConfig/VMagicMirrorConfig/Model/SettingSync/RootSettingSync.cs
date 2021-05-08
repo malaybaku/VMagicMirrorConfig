@@ -54,7 +54,10 @@ namespace Baku.VMagicMirrorConfig
 
         //NOTE: VRMのロード処理はUI依存の処理が多すぎるためViewModel実装のままにしている
 
+        //NOTE: この辺3つはオートセーブ以外からは絶対に読み込まないやつ
         public RProperty<string> LanguageName { get; }
+        public RProperty<bool> LoadCharacterWhenLoadInternalFile { get; } = new RProperty<bool>(true);
+        public RProperty<bool> LoadNonCharacterWhenLoadInternalFile { get; } = new RProperty<bool>(false);
 
         public WindowSettingSync Window { get; }
 

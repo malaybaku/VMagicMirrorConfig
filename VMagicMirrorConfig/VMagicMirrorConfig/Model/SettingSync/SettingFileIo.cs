@@ -128,6 +128,8 @@ namespace Baku.VMagicMirrorConfig
 
                 AutoLoadLastLoadedVrm = (mode == SettingFileReadWriteModes.AutoSave) ? autoLoadEnabled : false,
                 PreferredLanguageName = (mode == SettingFileReadWriteModes.AutoSave) ? _model.LanguageName.Value : "",
+                LoadCharacterWhenLoad = _model.LoadCharacterWhenLoadInternalFile.Value,
+                LoadNonCharacterWhenLoad = _model.LoadNonCharacterWhenLoadInternalFile.Value,
                 WindowSetting = _model.Window.Save(),
                 MotionSetting = _model.Motion.Save(),
                 LayoutSetting = _model.Layout.Save(),
@@ -172,6 +174,8 @@ namespace Baku.VMagicMirrorConfig
                         _model.AvailableLanguageNames.Contains(saveData.PreferredLanguageName ?? "") ?
                         (saveData.PreferredLanguageName ?? "") :
                         "";
+                    _model.LoadCharacterWhenLoadInternalFile.Value = saveData.LoadCharacterWhenLoad;
+                    _model.LoadNonCharacterWhenLoadInternalFile.Value = saveData.LoadNonCharacterWhenLoad;
                 }
                 else if (mode == SettingFileReadWriteModes.Internal &&
                     (content == SettingFileReadContent.Character || content == SettingFileReadContent.All)

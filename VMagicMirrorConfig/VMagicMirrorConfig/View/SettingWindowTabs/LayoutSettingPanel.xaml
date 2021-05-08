@@ -4,7 +4,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:sys="clr-namespace:System"
              xmlns:vmm="clr-namespace:Baku.VMagicMirrorConfig"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type={x:Type vmm:LayoutSettingViewModel}}"
@@ -268,6 +267,18 @@
                             </ComboBox.ItemTemplate>
                         </ComboBox>
                     </Grid>
+
+                    <TextBlock Margin="10,20,10,5" Text="{DynamicResource Layout_Texture_Tips_Notice}"/>
+
+                    <Button Grid.Row="0" Style="{StaticResource MaterialDesignOutlinedButton}"
+                            Padding="0"
+                            Margin="10,0,10,10"
+                            HorizontalAlignment="Left"
+                            Command="{Binding OpenTextureReplaceTipsUrlCommand}"
+                            Content="{DynamicResource Layout_Texture_Tips_ButtonText}"
+                            />
+
+
                 </StackPanel>
             </Border>
 

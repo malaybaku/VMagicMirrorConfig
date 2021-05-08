@@ -25,6 +25,9 @@
 
         public string? PreferredLanguageName { get; set; } = "";
 
+        public bool LoadCharacterWhenLoad { get; set; } = true;
+        public bool LoadNonCharacterWhenLoad { get; set; } = false;
+
         public WindowSetting? WindowSetting { get; set; }
 
         public MotionSetting? MotionSetting { get; set; }

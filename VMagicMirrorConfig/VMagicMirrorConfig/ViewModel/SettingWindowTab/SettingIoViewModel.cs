@@ -1,7 +1,6 @@
 ﻿using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using Microsoft.Win32;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -10,9 +9,10 @@ namespace Baku.VMagicMirrorConfig
     public class SettingIoViewModel : SettingViewModelBase
     {
         internal SettingIoViewModel(
-            AutomationSettingSync model, SaveFileManager saveFileManager, IMessageSender sender
+            RootSettingSync rootModel, AutomationSettingSync model, SaveFileManager saveFileManager, IMessageSender sender
             ) : base(sender)
         {
+            _rootModel = rootModel;
             _model = model;
             _saveFileManager = saveFileManager;
 
@@ -23,8 +23,6 @@ namespace Baku.VMagicMirrorConfig
 
             ShowSaveModalCommand = new ActionCommand(ShowSaveModal);
             ShowLoadModalCommand = new ActionCommand(ShowLoadModal);
-
-
 
             ExportSettingToFileCommand = new ActionCommand(SaveSettingToFile);
             ImportSettingFromFileCommand = new ActionCommand(LoadSettingFromFile);
@@ -42,6 +40,9 @@ namespace Baku.VMagicMirrorConfig
             };
         }
 
+        //NOTE: rootが必要なのは「ロード時にキャラ情報/非キャラ情報をどう扱うか」という値がRootに入っているため。
+        //コレ以外の目的で使うのは濫用に当たるので注意
+        private readonly RootSettingSync _rootModel;
         private readonly AutomationSettingSync _model;
         private readonly SaveFileManager _saveFileManager;
 
@@ -60,7 +61,7 @@ namespace Baku.VMagicMirrorConfig
             var progress = await GuardSettingWindowIfNeeded();
 
             var dialog = new SaveLoadMetroDialog();
-            var vm = new SaveLoadDataViewModel(_saveFileManager, false, async () =>
+            var vm = SaveLoadDataViewModel.CreateForSave(_saveFileManager, async () =>
             {
                 await window.HideMetroDialogAsync(dialog);
                 if (progress != null)
@@ -89,7 +90,7 @@ namespace Baku.VMagicMirrorConfig
             var progress = await GuardSettingWindowIfNeeded();
 
             var dialog = new SaveLoadMetroDialog();
-            var vm = new SaveLoadDataViewModel(_saveFileManager, true, async () =>
+            var vm = SaveLoadDataViewModel.CreateForLoad(_rootModel, _saveFileManager, async () =>
             {
                 await window.HideMetroDialogAsync(dialog);
                 if (progress != null)
