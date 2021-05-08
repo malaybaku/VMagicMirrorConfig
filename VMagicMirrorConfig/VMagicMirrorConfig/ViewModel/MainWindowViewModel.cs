@@ -47,7 +47,7 @@ namespace Baku.VMagicMirrorConfig
             LightSetting = new LightSettingViewModel(Model.Light, MessageSender);
             WordToMotionSetting = new WordToMotionSettingViewModel(Model.WordToMotion, MessageSender, MessageIo.Receiver);
             ExternalTrackerSetting = new ExternalTrackerViewModel(Model.ExternalTracker, MessageSender, MessageIo.Receiver);
-            SettingIo = new SettingIoViewModel(Model.Automation, SaveFileManager, MessageSender);
+            SettingIo = new SettingIoViewModel(Model, Model.Automation, SaveFileManager, MessageSender);
             //オートメーションの配線: 1つしかないのでザツにやる。OC<T>をいじる関係でUIスレッド必須なことに注意
             Model.Automation.LoadSettingFileRequested += v => 
                 Application.Current.Dispatcher.BeginInvoke(new Action(
