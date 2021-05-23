@@ -10,10 +10,17 @@ namespace Baku.VMagicMirrorConfig
             = new ExternalTrackerBlendShapeNameStore();
 
         private readonly ExternalTrackerSettingSync _model;
+        private readonly MotionSettingSync _motionModel;
 
-        internal ExternalTrackerViewModel(ExternalTrackerSettingSync model, IMessageSender sender, IMessageReceiver receiver) : base(sender)
+        internal ExternalTrackerViewModel(
+            ExternalTrackerSettingSync model,
+            MotionSettingSync motionModel,
+            IMessageSender sender, 
+            IMessageReceiver receiver
+            ) : base(sender)
         {
             _model = model;
+            _motionModel = motionModel;
 
             //この辺はModel/VMの接続とかコマンド周りの設定
             UpdateTrackSourceType();
@@ -111,6 +118,8 @@ namespace Baku.VMagicMirrorConfig
 
         public RProperty<bool> EnableExternalTracking => _model.EnableExternalTracking;
         public RProperty<bool> EnableExternalTrackerLipSync => _model.EnableExternalTrackerLipSync;
+        //NOTE: ここだけ外部トラッキングではなく、webカメラの顔トラと共通のフラグを触りに行ってることに注意
+        public RProperty<bool> DisableFaceTrackingHorizontalFlip => _motionModel.DisableFaceTrackingHorizontalFlip;
         public RProperty<bool> EnableExternalTrackerPerfectSync => _model.EnableExternalTrackerPerfectSync;
 
         public ActionCommand OpenPerfectSyncTipsUrlCommand { get; }
