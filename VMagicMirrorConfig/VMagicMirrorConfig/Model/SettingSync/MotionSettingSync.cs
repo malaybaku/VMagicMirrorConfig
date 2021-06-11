@@ -33,7 +33,17 @@ namespace Baku.VMagicMirrorConfig
             DisableFaceTrackingHorizontalFlip = new RProperty<bool>(setting.DisableFaceTrackingHorizontalFlip, v => SendMessage(factory.DisableFaceTrackingHorizontalFlip(v)));
 
             EnableWebCamHighPowerMode = new RProperty<bool>(setting.EnableWebCamHighPowerMode, v => SendMessage(factory.EnableWebCamHighPowerMode(v)));
-            EnableImageBasedHandTracking = new RProperty<bool>(setting.EnableImageBasedHandTracking, v => SendMessage(factory.EnableImageBasedHandTracking(v)));
+
+            EnableImageBasedHandTracking = new RProperty<bool>(
+                setting.EnableImageBasedHandTracking,
+                v => SendMessage(factory.EnableImageBasedHandTracking(v)));
+            ShowEffectDuringHandTracking = new RProperty<bool>(
+                setting.ShowEffectDuringHandTracking,
+                v => SendMessage(factory.ShowEffectDuringHandTracking(v)));
+            DisableHandTrackingHorizontalFlip = new RProperty<bool>(
+                setting.DisableHandTrackingHorizontalFlip,
+                v => SendMessage(factory.DisableHandTrackingHorizontalFlip(v)));
+
             CameraDeviceName = new RProperty<string>(setting.CameraDeviceName, v => SendMessage(factory.SetCameraDeviceName(v)));
             CalibrateFaceData = new RProperty<string>(setting.CalibrateFaceData, v => SendMessage(factory.SetCalibrateFaceData(v)));
 
@@ -130,6 +140,8 @@ namespace Baku.VMagicMirrorConfig
 
         public RProperty<bool> EnableWebCamHighPowerMode { get; }
         public RProperty<bool> EnableImageBasedHandTracking { get; }
+        public RProperty<bool> ShowEffectDuringHandTracking { get; }
+        public RProperty<bool> DisableHandTrackingHorizontalFlip { get; }
 
         public RProperty<string> CameraDeviceName { get; }
 

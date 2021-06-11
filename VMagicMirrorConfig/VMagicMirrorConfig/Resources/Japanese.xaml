@@ -17,6 +17,7 @@
     <sys:String x:Key="TopBar_Home">ホーム</sys:String>
     <sys:String x:Key="TopBar_Streaming">配信</sys:String>
     <sys:String x:Key="TopBar_ExternalFaceTrack">Ex.Tracker</sys:String>
+    <sys:String x:Key="TopBar_HandTrack">ハンドトラッキング</sys:String>
     
     <!-- Top Tab in Setting Window -->
     <sys:String x:Key="TopBar_Setting_Window">ウィンドウ</sys:String>
@@ -106,6 +107,17 @@
     <sys:String x:Key="ExTracker_FaceSwitch_Trigger_tongueOut">頬をふくらませると</sys:String>
     <sys:String x:Key="ExTracker_FaceSwitch_Trigger_cheekPuff">舌を出すと</sys:String>
 
+    <!-- HandTracking -->
+    <sys:String x:Key="HandTracking_Header">ハンドトラッキング</sys:String>
+    <sys:String x:Key="HandTracking_Instruction" xml:space="preserve">webカメラでのハンドトラッキングです。
+顔トラッキングにもwebカメラを使う場合、顔と手で共通のカメラを使用します。
+
+また、フルバージョン以外ではハンドトラッキング中にエフェクトが適用されます。
+詳しくは画面上部から「ヘルプ > ダウンロードページ」をご確認下さい。</sys:String>
+    <sys:String x:Key="HandTracking_Enable">ハンドトラッキングを有効化</sys:String>
+    <sys:String x:Key="HandTracking_ShowEffectDuringTracking">(フルバージョンのみ変更可)トラッキング中にエフェクトを適用</sys:String>
+    <sys:String x:Key="HandTracking_DisableHorizontalFlip">左右反転をオフ</sys:String> 
+    <sys:String x:Key="HandTracking_ShowAreaChecker">検出エリアを確認(※カメラ映像は表示されません)</sys:String> 
     
     <!-- Settings General -->
     <sys:String x:Key="Setting_Color_Expander_Header">色を編集 (クリックで展開)</sys:String>

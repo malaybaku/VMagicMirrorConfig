@@ -17,7 +17,8 @@
     <sys:String x:Key="TopBar_Home">Home</sys:String>
     <sys:String x:Key="TopBar_Streaming">Streaming</sys:String>
     <sys:String x:Key="TopBar_ExternalFaceTrack">Ex.Tracker</sys:String>
-
+    <sys:String x:Key="TopBar_HandTrack">Hand Tracking</sys:String>
+    
     <!-- Top Tab In Setting -->
     <sys:String x:Key="TopBar_Setting_Window">Window</sys:String>
     <sys:String x:Key="TopBar_Setting_FaceMotion">Face</sys:String>
@@ -104,6 +105,18 @@ Check "Keep LipSync" to make the lipsync continue.</sys:String>
     <sys:String x:Key="ExTracker_FaceSwitch_Trigger_browDown">Brow down</sys:String>
     <sys:String x:Key="ExTracker_FaceSwitch_Trigger_tongueOut">Cheek puff</sys:String>
     <sys:String x:Key="ExTracker_FaceSwitch_Trigger_cheekPuff">Tongue out</sys:String>
+    
+    
+    <!-- HandTracking -->
+    <sys:String x:Key="HandTracking_Header">Hand Tracking</sys:String>
+    <sys:String x:Key="HandTracking_Instruction" xml:space="preserve">The feature supports webcam based hand tracking.
+When using webcam face tracking, common camera is used.
+Also you need to get full version to disable effect during the feature enabled.
+Please see "Help > Download Page" for detail.</sys:String>
+    <sys:String x:Key="HandTracking_Enable">Enable Hand Tracking</sys:String>
+    <sys:String x:Key="HandTracking_ShowEffectDuringTracking">(Can edit in full ver.) Show Effect During Hand Tracking</sys:String>
+    <sys:String x:Key="HandTracking_DisableHorizontalFlip">Disable Horizontal Flip</sys:String>    
+    <sys:String x:Key="HandTracking_ShowAreaChecker">Show Detection Area (*webcam image does not appear)</sys:String>    
     
     
     <!-- Settings General -->

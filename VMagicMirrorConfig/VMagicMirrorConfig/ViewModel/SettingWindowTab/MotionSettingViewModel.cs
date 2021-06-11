@@ -220,7 +220,18 @@ namespace Baku.VMagicMirrorConfig
         public RProperty<bool> EnableVoiceBasedMotion => _model.EnableVoiceBasedMotion;
         public RProperty<bool> DisableFaceTrackingHorizontalFlip => _model.DisableFaceTrackingHorizontalFlip;
         public RProperty<bool> EnableWebCamHighPowerMode => _model.EnableWebCamHighPowerMode;
+
+        //Hand Tracking
         public RProperty<bool> EnableImageBasedHandTracking => _model.EnableImageBasedHandTracking;
+        private readonly RProperty<bool> _alwaysOn = new RProperty<bool>(true);
+        public RProperty<bool> ShowEffectDuringHandTracking => FeatureLocker.FeatureLocked
+            ? _alwaysOn
+            : _model.ShowEffectDuringHandTracking;
+        public bool CanChangeEffectDuringHandTracking => !FeatureLocker.FeatureLocked;
+        public RProperty<bool> DisableHandTrackingHorizontalFlip => _model.DisableHandTrackingHorizontalFlip;
+        //TODO: エリアチェッカーはそもそもWPF/Unityどっちに実装を置くかから要検討
+        public RProperty<bool> ShowHandAreaChecker { get; } = new RProperty<bool>(false);
+
 
         public RProperty<string> CameraDeviceName => _model.CameraDeviceName;
 
