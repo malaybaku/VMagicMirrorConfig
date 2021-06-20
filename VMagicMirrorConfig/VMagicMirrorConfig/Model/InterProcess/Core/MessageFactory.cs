@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
 namespace Baku.VMagicMirrorConfig
@@ -107,6 +106,7 @@ namespace Baku.VMagicMirrorConfig
         public Message ShowEffectDuringHandTracking(bool enable) => WithArg($"{enable}");
         //Faceと同じく、disableという言い回しに注意
         public Message DisableHandTrackingHorizontalFlip(bool disable) => WithArg($"{disable}");
+        public Message EnableSendHandTrackingResult(bool enable) => WithArg($"{enable}");
 
 
         public Message EnableWebCamHighPowerMode(bool enable) => WithArg($"{enable}");

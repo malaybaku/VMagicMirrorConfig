@@ -110,14 +110,18 @@ Check "Keep LipSync" to make the lipsync continue.</sys:String>
     <!-- HandTracking -->
     <sys:String x:Key="HandTracking_Header">Hand Tracking</sys:String>
     <sys:String x:Key="HandTracking_Instruction" xml:space="preserve">The feature supports webcam based hand tracking.
-When using webcam face tracking, common camera is used.
-Also you need to get full version to disable effect during the feature enabled.
-Please see "Help > Download Page" for detail.</sys:String>
+When using webcam face tracking, same camera is used.</sys:String>
+    <sys:String x:Key="HandTracking_EditionLimitationNote" xml:space="preserve">*Visual effect is applied during hand tracking.
+Get Full Edition to remove the effect.</sys:String>
+    <sys:String x:Key="HandTracking_GetFullEdition">Get Full Edition</sys:String>    
     <sys:String x:Key="HandTracking_Enable">Enable Hand Tracking</sys:String>
-    <sys:String x:Key="HandTracking_ShowEffectDuringTracking">(Can edit in full ver.) Show Effect During Hand Tracking</sys:String>
+    <sys:String x:Key="HandTracking_ShowEffectDuringTracking">Show Effect During Hand Tracking</sys:String>
     <sys:String x:Key="HandTracking_DisableHorizontalFlip">Disable Horizontal Flip</sys:String>    
-    <sys:String x:Key="HandTracking_ShowAreaChecker">Show Detection Area (*webcam image does not appear)</sys:String>    
-    
+    <sys:String x:Key="HandTracking_ShowAreaChecker">Show Detection Status (*raw image is not displayed)</sys:String>    
+    <sys:String x:Key="HandTracking_DetectionResult">Detection Status:</sys:String>
+    <sys:String x:Key="HandTracking_NotDetected">(Not Detected: Try raising hands next to the face)</sys:String>
+    <sys:String x:Key="HandTracking_DetectionResult_Notice">Tips: Put whole hand inside the camera view to stabilize tracking.</sys:String>
+
     
     <!-- Settings General -->
     <sys:String x:Key="Setting_Color_Expander_Header">Edit Color (Click to Expand)</sys:String>

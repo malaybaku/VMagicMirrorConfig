@@ -11,6 +11,9 @@
              >
     <UserControl.Resources>
         <vmm:StringNotEmptyToVisibilityConverter x:Key="StringNotEmptyToVisibilityConverter" />
+        <vmm:BooleanToOpacityConverter x:Key="BooleanToOpacityConverter"/>
+        <vmm:BooleanReverseToVisibilityConverter x:Key="BooleanReverseToVisibilityConverter"/>
+        <vmm:WhiteSpaceStringToNullConverter x:Key="WhiteSpaceStringToNullConverter"/>
         <Style TargetType="md:PackIcon" x:Key="HeaderPackIcon">
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Width" Value="20"/>
@@ -28,11 +31,46 @@
 
                     <TextBlock Margin="15,5" 
                                 Text="{DynamicResource HandTracking_Instruction}"/>
-                    <CheckBox Margin="15,10,15,0" 
-                                VerticalContentAlignment="Center"
+                    <Grid Margin="15,5,5,5" 
+                          Visibility="{Binding CanChangeEffectDuringHandTracking, 
+                                               Converter={StaticResource BooleanReverseToVisibilityConverter}}"
+                          >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0"
+                                   Text="{DynamicResource HandTracking_EditionLimitationNote}"
+                                   />
+                        <Button Grid.Column="1" 
+                                Style="{StaticResource MaterialDesignOutlinedButton}"
+                                Padding="0"
+                                VerticalAlignment="Center"
+                                Margin="5,0"
+                                Command="{Binding OpenFullEditionDownloadUrlCommand}"
+                                Content="{DynamicResource HandTracking_GetFullEdition}"
+                                />
+                    </Grid>
+
+
+                    <Grid Margin="15,10,15,0" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <CheckBox Grid.Column="0" Margin="0,0,5,0"
                                 Content="{DynamicResource HandTracking_Enable}" 
                                 IsChecked="{Binding EnableImageBasedHandTracking.Value}"
                                 />
+                        <ComboBox Grid.Column="1"
+                                  Margin="10,5"
+                                  IsEnabled="{Binding EnableImageBasedHandTracking.Value}"
+                                  ItemsSource="{Binding CameraDeviceNames}"
+                                  SelectedItem="{Binding CameraDeviceName.Value, Converter={StaticResource WhiteSpaceStringToNullConverter}}"
+                                  md:HintAssist.Hint="Camera"
+                                  />
+                    </Grid>
+
                     <CheckBox Margin="35,0,10,0" 
                                 VerticalContentAlignment="Center"
                                 Content="{DynamicResource HandTracking_ShowEffectDuringTracking}" 
@@ -49,11 +87,38 @@
                                 VerticalContentAlignment="Center"
                                 Content="{DynamicResource HandTracking_ShowAreaChecker}" 
                                 IsEnabled="{Binding EnableImageBasedHandTracking.Value}"
-                                IsChecked="{Binding ShowHandAreaChecker.Value}"
+                                IsChecked="{Binding EnableSendHandTrackingResult.Value}"
                                 />
+
+                    <TextBlock Margin="15,20,15,0" 
+                               Text="{DynamicResource HandTracking_DetectionResult}"
+                               Opacity="{Binding EnableSendHandTrackingResult.Value,
+                                                 Converter={StaticResource BooleanToOpacityConverter}}"
+                               />
+                    <TextBlock Margin="25,5,15,0" 
+                               Text="{DynamicResource HandTracking_DetectionResult_Notice}"
+                               Foreground="{StaticResource MaterialDesignBodyLight}"
+                               Opacity="{Binding EnableSendHandTrackingResult.Value,
+                                                 Converter={StaticResource BooleanToOpacityConverter}}"
+                               />
+                    <Border BorderBrush="Gray" BorderThickness=".5"
+                            Margin="15"
+                            Padding="15"
+                            HorizontalAlignment="Left"
+                            Opacity="{Binding EnableSendHandTrackingResult.Value,
+                                              Converter={StaticResource BooleanToOpacityConverter}}"
+                            >
+                        <Grid>
+                            <vmm:HandTrackingResultPanel 
+                                Width="320" Height="180" 
+                                DataContext="{Binding HandTrackingResult}"
+                                LeftPoints="{Binding LeftPoints}"
+                                RightPoints="{Binding RightPoints}"
+                                />
+                        </Grid>
+                    </Border>
                 </StackPanel>
             </Border>
-
         </StackPanel>
     </ScrollViewer>
 </UserControl>

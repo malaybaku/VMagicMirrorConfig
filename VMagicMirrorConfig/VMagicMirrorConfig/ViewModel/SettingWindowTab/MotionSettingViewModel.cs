@@ -33,6 +33,8 @@ namespace Baku.VMagicMirrorConfig
                 );
 
             CalibrateFaceCommand = new ActionCommand(() => SendMessage(MessageFactory.Instance.CalibrateFace()));
+            //TODO: リリースまでにFull Edition用のページを用意すること
+            OpenFullEditionDownloadUrlCommand = new ActionCommand(() => UrlNavigate.Open("https://baku-dreameater.booth.pm/items/1272298"));
 
             ShowMicrophoneVolume = new RProperty<bool>(false, b =>
             {
@@ -107,6 +109,9 @@ namespace Baku.VMagicMirrorConfig
                     {
                         LogOutput.Instance.Write(ex);
                     }
+                    break;
+                case ReceiveMessageNames.SetHandTrackingResult:
+                    HandTrackingResult.SetResult(HandTrackingResultBuilder.FromJson(e.Args));
                     break;
                 default:
                     break;
@@ -229,9 +234,9 @@ namespace Baku.VMagicMirrorConfig
             : _model.ShowEffectDuringHandTracking;
         public bool CanChangeEffectDuringHandTracking => !FeatureLocker.FeatureLocked;
         public RProperty<bool> DisableHandTrackingHorizontalFlip => _model.DisableHandTrackingHorizontalFlip;
-        //TODO: エリアチェッカーはそもそもWPF/Unityどっちに実装を置くかから要検討
-        public RProperty<bool> ShowHandAreaChecker { get; } = new RProperty<bool>(false);
-
+        public RProperty<bool> EnableSendHandTrackingResult => _model.EnableSendHandTrackingResult;
+        public HandTrackingResultViewModel HandTrackingResult { get; } = new HandTrackingResultViewModel();
+        public ActionCommand OpenFullEditionDownloadUrlCommand { get; }
 
         public RProperty<string> CameraDeviceName => _model.CameraDeviceName;
 
@@ -349,7 +354,6 @@ namespace Baku.VMagicMirrorConfig
         #endregion
     }
 
-
     /// <summary>
     /// ブレンドシェイプクリップ名を一覧保持するクラスです。
     /// ExTrackerとクラスが分かれてるのは、クリップ名の持ち方がちょっと違うためです。
@@ -372,11 +376,11 @@ namespace Baku.VMagicMirrorConfig
 
         //Unityで読み込まれたキャラクターのブレンドシェイプ名の一覧です。
         //NOTE: この値は標準ブレンドシェイプ名を含んでいてもいなくてもOK。ただし現行動作では標準ブレンドシェイプ名は含まない。
-        private string[] _avatarClipNames = new string[0];
+        private string[] _avatarClipNames = Array.Empty<string>();
 
         //設定ファイルから読み込んだ設定で使われていたブレンドシェイプ名の一覧。
         //NOTE: この値に標準ブレンドシェイプ名とそうでないのが混在することがあるが、それはOK
-        private string[] _settingUsedNames = new string[0];
+        private string[] _settingUsedNames = Array.Empty<string>();
 
         /// <summary>
         /// ロードされたVRMの標準以外のブレンドシェイプ名を指定して、名前一覧を更新します。
