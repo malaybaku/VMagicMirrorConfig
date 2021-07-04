@@ -41,13 +41,14 @@ SharpDX: https://github.com/sharpdx/SharpDX
 
 libfacedetection.train: https://github.com/ShiqiYu/libfacedetection.train
 
+OpenCV: https://opencv.org/
+
+Apache License 2.0 is applied to:         
+
 HandPoseBarracuda: https://github.com/keijiro/HandPoseBarracuda
 BlazePalmBarracuda: https://github.com/keijiro/BlazePalmBarracuda        
 HandLandmarkBarracuda: https://github.com/keijiro/HandLandmarkBarracuda        
-        
-OpenCV: https://opencv.org/
-
-        
+                
     </sys:String>
 
     <sys:String x:Key="OpenSourceLicenses" xml:space="preserve">
