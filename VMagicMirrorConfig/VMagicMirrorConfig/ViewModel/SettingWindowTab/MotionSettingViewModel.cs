@@ -123,8 +123,9 @@ namespace Baku.VMagicMirrorConfig
             string microphones = await SendQueryAsync(MessageFactory.Instance.MicrophoneDeviceNames());
             Application.Current.MainWindow.Dispatcher.Invoke(() =>
             {
+                var names = DeviceNames.FromJson(microphones, "Microphone").Names;
                 _writableMicrophoneDeviceNames.Clear();
-                foreach (var deviceName in microphones.Split('\t'))
+                foreach (var deviceName in names)
                 {
                     _writableMicrophoneDeviceNames.Add(deviceName);
                 }
@@ -133,8 +134,9 @@ namespace Baku.VMagicMirrorConfig
             string cameras = await SendQueryAsync(MessageFactory.Instance.CameraDeviceNames());
             Application.Current.MainWindow.Dispatcher.Invoke(() =>
             {
+                var names = DeviceNames.FromJson(cameras, "Camera").Names;
                 _writableCameraDeviceNames.Clear();
-                foreach (var deviceName in cameras.Split('\t'))
+                foreach (var deviceName in names)
                 {
                     _writableCameraDeviceNames.Add(deviceName);
                 }
