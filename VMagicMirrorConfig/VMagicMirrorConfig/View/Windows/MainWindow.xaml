@@ -10,7 +10,7 @@
     xmlns:vmm="clr-namespace:Baku.VMagicMirrorConfig"
     mc:Ignorable="d"
     d:DataContext="{x:Type vmm:MainWindowViewModel}"
-    Title="VMagicMirror v1.7.0b" 
+    Title="{x:Static vmm:AppLabels.AppFullName}" 
     ResizeMode="CanMinimize"
     TitleCharacterCasing="Normal"
     WindowTransitionsEnabled="False"
@@ -111,6 +111,23 @@
                 </TabItem.Header>
                 <vmm:ExternalTrackerPanel Background="White" DataContext="{Binding ExternalTrackerSetting}" />
             </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <vmm:TabHeaderIconText 
+                        Text="{DynamicResource TopBar_HandTrack}"                        
+                        IconKind="Hand"                        
+                        IconHeight="16"                        
+                        IconWidth="16"
+                        Foreground="{Binding SelectedIndex,
+                                                ElementName=MainTabControl,
+                                                Converter={StaticResource SelectionToForeground},
+                                                ConverterParameter=3}"                           
+                        />
+                </TabItem.Header>
+                <vmm:HandTrackingPanel Background="White" DataContext="{Binding MotionSetting}" />
+            </TabItem>
+
+
         </dragablz:TabablzControl>
         <md:Snackbar MessageQueue="{x:Static vmm:SnackbarWrapper.SnackbarMessageQueue}" Grid.Column="1" HorizontalAlignment="Left" Margin="21,0,0,0"/>
     </Grid>
