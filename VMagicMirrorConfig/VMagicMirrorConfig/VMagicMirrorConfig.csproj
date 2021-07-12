@@ -18,6 +18,9 @@
     <None Remove="Images\vmmc_logo.png" />
   </ItemGroup>
   <ItemGroup>
+    <Page Remove="Localizations\Chinese_Simplified.xaml" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Dragablz" Version="0.0.3.223" />
     <PackageReference Include="MahApps.Metro" Version="2.3.4" />
     <PackageReference Include="MaterialDesignColors" Version="1.2.7" />
@@ -29,4 +32,10 @@
     <Resource Include="Images\vmmc_logo.ico" />
     <Resource Include="Images\vmmc_logo.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Localizations\Chinese_Simplified.xaml" />
+  </ItemGroup>
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="mkdir $(ProjectDir)$(OutDir)Localization&#xD;&#xA;copy $(ProjectDir)Localizations\Chinese_Simplified.xaml $(ProjectDir)$(OutDir)Localization" />
+  </Target>
 </Project>
