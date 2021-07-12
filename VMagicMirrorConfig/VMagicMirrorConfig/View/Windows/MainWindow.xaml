@@ -45,8 +45,14 @@
                         <MenuItem Header="{DynamicResource TitleBar_Visit_OfficialPage}" 
                                   Command="{Binding OpenManualUrlCommand}"
                                   />
-                        <MenuItem Header="{DynamicResource TitleBar_Visit_DownloadPage}" 
-                                  Command="{Binding OpenDownloadUrlCommand}"
+                        <MenuItem Header="{DynamicResource TitleBar_Visit_DownloadPage_Standard}" 
+                                  Command="{Binding OpenStandardDownloadUrlCommand}"
+                                  />
+                        <MenuItem Header="{DynamicResource TitleBar_Visit_DownloadPage_Full}" 
+                                  Command="{Binding OpenFullDownloadUrlCommand}"
+                                  />
+                        <MenuItem Header="{DynamicResource TitleBar_Visit_Fanbox}" 
+                                  Command="{Binding OpenFanboxUrlCommand}"
                                   />
                         <MenuItem Header="{DynamicResource TitleBar_About}" 
                                   Command="{Binding ShowLicenseCommand}"

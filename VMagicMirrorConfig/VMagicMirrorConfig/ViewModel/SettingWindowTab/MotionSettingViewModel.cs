@@ -34,7 +34,7 @@ namespace Baku.VMagicMirrorConfig
 
             CalibrateFaceCommand = new ActionCommand(() => SendMessage(MessageFactory.Instance.CalibrateFace()));
             //TODO: リリースまでにFull Edition用のページを用意すること
-            OpenFullEditionDownloadUrlCommand = new ActionCommand(() => UrlNavigate.Open("https://baku-dreameater.booth.pm/items/1272298"));
+            OpenFullEditionDownloadUrlCommand = new ActionCommand(() => UrlNavigate.Open("https://baku-dreameater.booth.pm/items/3064040"));
 
             ShowMicrophoneVolume = new RProperty<bool>(false, b =>
             {
