@@ -9,14 +9,17 @@
 
     <!-- Window Title Bar -->
     <sys:String x:Key="TitleBar_Help">ヘルプ</sys:String>
-    <sys:String x:Key="TitleBar_Visit_OfficialPage">ウェブサイト</sys:String>
-    <sys:String x:Key="TitleBar_Visit_DownloadPage">ダウンロードページ(BOOTH)</sys:String>
+    <sys:String x:Key="TitleBar_Visit_OfficialPage">ウェブページ</sys:String>
+    <sys:String x:Key="TitleBar_Visit_DownloadPage_Standard">ダウンロード (基本エディション)</sys:String>
+    <sys:String x:Key="TitleBar_Visit_DownloadPage_Full">ダウンロード (フルエディション)</sys:String>
+    <sys:String x:Key="TitleBar_Visit_Fanbox">Fanbox</sys:String>
     <sys:String x:Key="TitleBar_About">VMagicMirrorについて</sys:String>
     
     <!-- Top Tab -->
     <sys:String x:Key="TopBar_Home">ホーム</sys:String>
     <sys:String x:Key="TopBar_Streaming">配信</sys:String>
     <sys:String x:Key="TopBar_ExternalFaceTrack">Ex.Tracker</sys:String>
+    <sys:String x:Key="TopBar_HandTrack">ハンドトラッキング</sys:String>
     
     <!-- Top Tab in Setting Window -->
     <sys:String x:Key="TopBar_Setting_Window">ウィンドウ</sys:String>
@@ -106,6 +109,21 @@
     <sys:String x:Key="ExTracker_FaceSwitch_Trigger_tongueOut">頬をふくらませると</sys:String>
     <sys:String x:Key="ExTracker_FaceSwitch_Trigger_cheekPuff">舌を出すと</sys:String>
 
+    <!-- HandTracking -->
+    <sys:String x:Key="HandTracking_Header">ハンドトラッキング</sys:String>
+    <sys:String x:Key="HandTracking_Instruction" xml:space="preserve">webカメラでのハンドトラッキングです。
+顔トラッキングにもwebカメラを使う場合、顔と手で共通のカメラを使用します。</sys:String>
+    <sys:String x:Key="HandTracking_EditionLimitationNote" xml:space="preserve">※基本エディションではハンドトラッキング中にエフェクトが適用されます。
+フルエディションではエフェクトを無効化できます。</sys:String>
+    <sys:String x:Key="HandTracking_GetFullEdition">フルエディションを入手</sys:String>
+    <sys:String x:Key="HandTracking_Enable">ハンドトラッキングを有効化</sys:String>
+    <sys:String x:Key="HandTracking_ShowEffectDuringTracking">トラッキング中にエフェクトを適用</sys:String>
+    <sys:String x:Key="HandTracking_DisableHorizontalFlip">左右反転をオフ</sys:String> 
+    <sys:String x:Key="HandTracking_ShowAreaChecker">手の検出状況を表示(※カメラ映像は表示されません)</sys:String> 
+    <sys:String x:Key="HandTracking_DetectionResult">手の検出状況:</sys:String>
+    <sys:String x:Key="HandTracking_DetectionResult_Notice">ヒント: 手の全体がカメラ視野に収まるようにするとトラッキングが安定します。</sys:String>
+    <sys:String x:Key="HandTracking_NotDetected">未検出: 顔の横に手を挙げてみて下さい</sys:String>
+    
     
     <!-- Settings General -->
     <sys:String x:Key="Setting_Color_Expander_Header">色を編集 (クリックで展開)</sys:String>

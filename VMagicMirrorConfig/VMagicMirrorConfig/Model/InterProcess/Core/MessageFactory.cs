@@ -99,10 +99,16 @@ namespace Baku.VMagicMirrorConfig
         public Message EnableLipSyncBasedBlinkAdjust(bool enable) => WithArg($"{enable}");
         public Message EnableHeadRotationBasedBlinkAdjust(bool enable) => WithArg($"{enable}");
         public Message EnableVoiceBasedMotion(bool enable) => WithArg($"{enable}");
-
         //NOTE: falseのほうが普通だよ、という状態にするため、disable云々というやや面倒な言い方になってる事に注意
         public Message DisableFaceTrackingHorizontalFlip(bool disable) => WithArg($"{disable}");
+
         public Message EnableImageBasedHandTracking(bool enable) => WithArg($"{enable}");
+        public Message ShowEffectDuringHandTracking(bool enable) => WithArg($"{enable}");
+        //Faceと同じく、disableという言い回しに注意
+        public Message DisableHandTrackingHorizontalFlip(bool disable) => WithArg($"{disable}");
+        public Message EnableSendHandTrackingResult(bool enable) => WithArg($"{enable}");
+
+
         public Message EnableWebCamHighPowerMode(bool enable) => WithArg($"{enable}");
 
         public Message FaceDefaultFun(int percentage) => WithArg($"{percentage}");

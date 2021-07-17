@@ -42,13 +42,18 @@
                                 Content="{DynamicResource ExTracker_Enable}" 
                                 IsChecked="{Binding EnableExternalTracking.Value}"
                                 />
-                    <CheckBox Margin="35,0,15,0" 
+                    <CheckBox Margin="35,0,10,0" 
                                 VerticalContentAlignment="Center"
                                 Content="{DynamicResource ExTracker_Enable_ImageLipSync}" 
                                 IsEnabled="{Binding EnableExternalTracking.Value}"
                                 IsChecked="{Binding EnableExternalTrackerLipSync.Value}"
                                 />
-                <Grid Margin="35,0,0,5"
+                    <CheckBox Margin="35,0,10,0"
+                              IsEnabled="{Binding EnableExternalTracking.Value}"
+                              IsChecked="{Binding DisableFaceTrackingHorizontalFlip.Value}"
+                              Content="{DynamicResource Motion_Face_DisableFaceTrackingHorizontalFlip}"
+                              />
+                    <Grid Margin="35,0,0,5"
                           IsEnabled="{Binding EnableExternalTracking.Value}">
                     <Grid.RowDefinitions>
                         <RowDefinition/>

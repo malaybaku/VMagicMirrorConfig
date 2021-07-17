@@ -20,6 +20,8 @@
         public const string ExTrackerSetPerfectSyncMissedClipNames = nameof(ExTrackerSetPerfectSyncMissedClipNames);
         public const string ExTrackerSetIFacialMocapTroubleMessage = nameof(ExTrackerSetIFacialMocapTroubleMessage);
 
+        public const string SetHandTrackingResult = nameof(SetHandTrackingResult);
+
         public const string VRoidModelLoadCompleted = nameof(VRoidModelLoadCompleted);
         public const string VRoidModelLoadCanceled = nameof(VRoidModelLoadCanceled);
     }

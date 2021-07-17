@@ -33,6 +33,8 @@ namespace Baku.VMagicMirrorConfig
                 );
 
             CalibrateFaceCommand = new ActionCommand(() => SendMessage(MessageFactory.Instance.CalibrateFace()));
+            //TODO: リリースまでにFull Edition用のページを用意すること
+            OpenFullEditionDownloadUrlCommand = new ActionCommand(() => UrlNavigate.Open("https://baku-dreameater.booth.pm/items/3064040"));
 
             ShowMicrophoneVolume = new RProperty<bool>(false, b =>
             {
@@ -108,6 +110,9 @@ namespace Baku.VMagicMirrorConfig
                         LogOutput.Instance.Write(ex);
                     }
                     break;
+                case ReceiveMessageNames.SetHandTrackingResult:
+                    HandTrackingResult.SetResult(HandTrackingResultBuilder.FromJson(e.Args));
+                    break;
                 default:
                     break;
             }
@@ -118,8 +123,9 @@ namespace Baku.VMagicMirrorConfig
             string microphones = await SendQueryAsync(MessageFactory.Instance.MicrophoneDeviceNames());
             Application.Current.MainWindow.Dispatcher.Invoke(() =>
             {
+                var names = DeviceNames.FromJson(microphones, "Microphone").Names;
                 _writableMicrophoneDeviceNames.Clear();
-                foreach (var deviceName in microphones.Split('\t'))
+                foreach (var deviceName in names)
                 {
                     _writableMicrophoneDeviceNames.Add(deviceName);
                 }
@@ -128,8 +134,9 @@ namespace Baku.VMagicMirrorConfig
             string cameras = await SendQueryAsync(MessageFactory.Instance.CameraDeviceNames());
             Application.Current.MainWindow.Dispatcher.Invoke(() =>
             {
+                var names = DeviceNames.FromJson(cameras, "Camera").Names;
                 _writableCameraDeviceNames.Clear();
-                foreach (var deviceName in cameras.Split('\t'))
+                foreach (var deviceName in names)
                 {
                     _writableCameraDeviceNames.Add(deviceName);
                 }
@@ -220,7 +227,18 @@ namespace Baku.VMagicMirrorConfig
         public RProperty<bool> EnableVoiceBasedMotion => _model.EnableVoiceBasedMotion;
         public RProperty<bool> DisableFaceTrackingHorizontalFlip => _model.DisableFaceTrackingHorizontalFlip;
         public RProperty<bool> EnableWebCamHighPowerMode => _model.EnableWebCamHighPowerMode;
+
+        //Hand Tracking
         public RProperty<bool> EnableImageBasedHandTracking => _model.EnableImageBasedHandTracking;
+        private readonly RProperty<bool> _alwaysOn = new RProperty<bool>(true);
+        public RProperty<bool> ShowEffectDuringHandTracking => FeatureLocker.FeatureLocked
+            ? _alwaysOn
+            : _model.ShowEffectDuringHandTracking;
+        public bool CanChangeEffectDuringHandTracking => !FeatureLocker.FeatureLocked;
+        public RProperty<bool> DisableHandTrackingHorizontalFlip => _model.DisableHandTrackingHorizontalFlip;
+        public RProperty<bool> EnableSendHandTrackingResult => _model.EnableSendHandTrackingResult;
+        public HandTrackingResultViewModel HandTrackingResult { get; } = new HandTrackingResultViewModel();
+        public ActionCommand OpenFullEditionDownloadUrlCommand { get; }
 
         public RProperty<string> CameraDeviceName => _model.CameraDeviceName;
 
@@ -338,7 +356,6 @@ namespace Baku.VMagicMirrorConfig
         #endregion
     }
 
-
     /// <summary>
     /// ブレンドシェイプクリップ名を一覧保持するクラスです。
     /// ExTrackerとクラスが分かれてるのは、クリップ名の持ち方がちょっと違うためです。
@@ -361,11 +378,11 @@ namespace Baku.VMagicMirrorConfig
 
         //Unityで読み込まれたキャラクターのブレンドシェイプ名の一覧です。
         //NOTE: この値は標準ブレンドシェイプ名を含んでいてもいなくてもOK。ただし現行動作では標準ブレンドシェイプ名は含まない。
-        private string[] _avatarClipNames = new string[0];
+        private string[] _avatarClipNames = Array.Empty<string>();
 
         //設定ファイルから読み込んだ設定で使われていたブレンドシェイプ名の一覧。
         //NOTE: この値に標準ブレンドシェイプ名とそうでないのが混在することがあるが、それはOK
-        private string[] _settingUsedNames = new string[0];
+        private string[] _settingUsedNames = Array.Empty<string>();
 
         /// <summary>
         /// ロードされたVRMの標準以外のブレンドシェイプ名を指定して、名前一覧を更新します。

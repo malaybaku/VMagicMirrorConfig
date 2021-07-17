@@ -36,6 +36,8 @@
 
         public bool EnableWebCamHighPowerMode { get; set; } = false;
         public bool EnableImageBasedHandTracking { get; set; } = false;
+        public bool ShowEffectDuringHandTracking { get; set; } = false;
+        public bool DisableHandTrackingHorizontalFlip { get; set; } = false;
 
         public string CameraDeviceName { get; set; } = "";
 
