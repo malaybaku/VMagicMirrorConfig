@@ -36,6 +36,6 @@
     <None Include="Localizations\Chinese_Simplified.xaml" />
   </ItemGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="mkdir $(ProjectDir)$(OutDir)Localization&#xD;&#xA;copy $(ProjectDir)Localizations\Chinese_Simplified.xaml $(ProjectDir)$(OutDir)Localization" />
+    <Exec Command="mkdir $(ProjectDir)$(OutDir)Localization &gt; NUL 2&gt;&amp;1&#xD;&#xA;copy $(ProjectDir)Localizations\Chinese_Simplified.xaml $(ProjectDir)$(OutDir)Localization" />
   </Target>
 </Project>

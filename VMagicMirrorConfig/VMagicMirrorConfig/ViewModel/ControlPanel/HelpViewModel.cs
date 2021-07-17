@@ -7,9 +7,17 @@
         public ActionCommand OpenManualUrlCommand
             => _openManualUrlCommand ??= new ActionCommand(OpenManualUrl);
 
-        private ActionCommand? _openDownloadUrlCommand;
-        public ActionCommand OpenDownloadUrlCommand
-            => _openDownloadUrlCommand ??= new ActionCommand(OpenDownloadUrl);
+        private ActionCommand? _openStandardDownloadUrlCommand;
+        public ActionCommand OpenStandardDownloadUrlCommand
+            => _openStandardDownloadUrlCommand ??= new ActionCommand(OpenStandardDownloadUrl);
+
+        private ActionCommand? _openFullDownloadUrlCommand;
+        public ActionCommand OpenFullDownloadUrlCommand
+            => _openFullDownloadUrlCommand ??= new ActionCommand(OpenFullDownloadUrl);
+
+        private ActionCommand? _openFanboxUrlCommand;
+        public ActionCommand OpenFanboxUrlCommand
+            => _openFanboxUrlCommand ??= new ActionCommand(OpenFanboxUrl);
 
         private ActionCommand? _showLicenseCommand;
         public ActionCommand ShowLicenseCommand
@@ -21,6 +29,8 @@
             UrlNavigate.Open(url);
         }
 
-        private void OpenDownloadUrl() => UrlNavigate.Open("https://baku-dreameater.booth.pm/items/1272298");
+        private void OpenStandardDownloadUrl() => UrlNavigate.Open("https://baku-dreameater.booth.pm/items/1272298");
+        private void OpenFullDownloadUrl() => UrlNavigate.Open("https://baku-dreameater.booth.pm/items/3064040");
+        private void OpenFanboxUrl() => UrlNavigate.Open("https://baku-dreameater.fanbox.cc/");
     }
 }
