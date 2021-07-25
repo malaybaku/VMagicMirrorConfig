@@ -271,6 +271,7 @@ namespace Baku.VMagicMirrorConfig
         //共通: 基本操作のオン/オフ + キャリブレーション
         public Message ExTrackerEnable(bool enable) => WithArg($"{enable}");
         public Message ExTrackerEnableLipSync(bool enable) => WithArg($"{enable}");
+        public Message ExTrackerEnableEmphasizeExpression(bool enable) => WithArg($"{enable}");
         public Message ExTrackerEnablePerfectSync(bool enable) => WithArg($"{enable}");
         public Message ExTrackerUseVRoidDefaultForPerfectSync(bool enable) => WithArg($"{enable}");
         public Message ExTrackerCalibrate() => NoArg();
