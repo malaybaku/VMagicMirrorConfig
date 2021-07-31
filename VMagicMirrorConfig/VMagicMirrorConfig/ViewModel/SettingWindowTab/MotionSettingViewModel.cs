@@ -33,8 +33,8 @@ namespace Baku.VMagicMirrorConfig
                 );
 
             CalibrateFaceCommand = new ActionCommand(() => SendMessage(MessageFactory.Instance.CalibrateFace()));
-            //TODO: リリースまでにFull Edition用のページを用意すること
             OpenFullEditionDownloadUrlCommand = new ActionCommand(() => UrlNavigate.Open("https://baku-dreameater.booth.pm/items/3064040"));
+            OpenHandTrackingPageUrlCommand = new ActionCommand(() => UrlNavigate.Open(LocalizedString.GetString("URL_docs_hand_tracking")));
 
             ShowMicrophoneVolume = new RProperty<bool>(false, b =>
             {
@@ -239,6 +239,7 @@ namespace Baku.VMagicMirrorConfig
         public RProperty<bool> EnableSendHandTrackingResult => _model.EnableSendHandTrackingResult;
         public HandTrackingResultViewModel HandTrackingResult { get; } = new HandTrackingResultViewModel();
         public ActionCommand OpenFullEditionDownloadUrlCommand { get; }
+        public ActionCommand OpenHandTrackingPageUrlCommand { get; }
 
         public RProperty<string> CameraDeviceName => _model.CameraDeviceName;
 

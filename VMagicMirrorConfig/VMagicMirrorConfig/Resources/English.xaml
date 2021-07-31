@@ -75,6 +75,7 @@ During this mode, following features are disabled.
 - Eye motion to see the mouse pointer</sys:String>
     <sys:String x:Key="ExTracker_Enable">Enable External Tracker</sys:String>
     <sys:String x:Key="ExTracker_Enable_ImageLipSync">Apply LipSync using External Tracker Data</sys:String>    
+    <sys:String x:Key="ExTracker_Enable_EmphasizeExpression">Emphasize Face Expressions</sys:String>
 
     <sys:String x:Key="ExTracker_Enable_PerfectSync">Use Perfect Sync</sys:String>
     <sys:String x:Key="ExTracker_PerfectSync_UseVRoidDefault">Perfect sync with VRoid's default setting</sys:String>
@@ -122,8 +123,10 @@ Get Full Edition to remove the effect.</sys:String>
     <sys:String x:Key="HandTracking_ShowAreaChecker">Show Detection Status (*raw image is not displayed)</sys:String>    
     <sys:String x:Key="HandTracking_DetectionResult">Detection Status:</sys:String>
     <sys:String x:Key="HandTracking_NotDetected">(Not Detected: Try raising hands next to the face)</sys:String>
-    <sys:String x:Key="HandTracking_DetectionResult_Notice">Tips: Put whole hand inside the camera view to stabilize tracking.</sys:String>
-
+    <sys:String x:Key="HandTracking_DetectionResult_Notice" xml:space="preserve">Tips:
+- Put whole hand inside the camera view to stabilize.
+- Put hands slight left or right, than the center.</sys:String>
+    <sys:String x:Key="HandTracking_LearnMore">More...</sys:String>    
     
     <!-- Settings General -->
     <sys:String x:Key="Setting_Color_Expander_Header">Edit Color (Click to Expand)</sys:String>
@@ -512,6 +515,7 @@ Use this only after checking the licenses of VRM you will use.
     <!-- Localize dependent URLs -->
     <sys:String x:Key="URL_help_top">https://malaybaku.github.io/VMagicMirror/en</sys:String>
     <sys:String x:Key="URL_docs_ex_tracker">https://malaybaku.github.io/VMagicMirror/en/docs/external_tracker</sys:String>
+    <sys:String x:Key="URL_docs_hand_tracking">https://malaybaku.github.io/VMagicMirror/en/docs/hand_tracking</sys:String>
     <sys:String x:Key="URL_docs_setting_files">https://malaybaku.github.io/VMagicMirror/en/docs/setting_files</sys:String>
     <sys:String x:Key="URL_tips_perfect_sync">https://malaybaku.github.io/VMagicMirror/en/tips/perfect_sync</sys:String>
     <sys:String x:Key="URL_tips_texture_replace">https://malaybaku.github.io/VMagicMirror/en/tips/change_textures</sys:String>

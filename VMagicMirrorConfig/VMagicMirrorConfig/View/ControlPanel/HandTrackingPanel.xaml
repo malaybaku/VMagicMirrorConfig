@@ -99,12 +99,25 @@
                                Opacity="{Binding EnableSendHandTrackingResult.Value,
                                                  Converter={StaticResource BooleanToOpacityConverter}}"
                                />
-                    <TextBlock Margin="25,5,15,0" 
+                    <Grid Margin="25,5,15,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" 
                                Text="{DynamicResource HandTracking_DetectionResult_Notice}"
                                Foreground="{StaticResource MaterialDesignBodyLight}"
                                Opacity="{Binding EnableSendHandTrackingResult.Value,
                                                  Converter={StaticResource BooleanToOpacityConverter}}"
                                />
+                        <Button Grid.Column="1" 
+                                Style="{StaticResource MaterialDesignOutlinedButton}"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Bottom"
+                                Content="{DynamicResource HandTracking_LearnMore}"
+                                Command="{Binding OpenHandTrackingPageUrlCommand}"
+                                />
+                    </Grid>
                     <Border BorderBrush="Gray" BorderThickness=".5"
                             Margin="15"
                             Padding="15"

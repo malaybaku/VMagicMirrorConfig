@@ -3,7 +3,7 @@
     //NOTE: このクラスで、メインウィンドウやライセンスに表示する名称を管理します。
     public static class AppLabels
     {
-        public static string AppName => "VMagicMirror v1.8.0";
+        public static string AppName => "VMagicMirror v1.8.1";
         public static string EditionName => FeatureLocker.FeatureLocked ? "Standard Edition" : "Full Edition";
         public static string AppFullName => AppName + " " + EditionName;
     }
