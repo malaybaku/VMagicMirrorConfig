@@ -126,7 +126,7 @@ Get Full Edition to remove the effect.</sys:String>
     <sys:String x:Key="HandTracking_DetectionResult_Notice" xml:space="preserve">Tips:
 - Put whole hand inside the camera view to stabilize.
 - Put hands slight left or right, than the center.</sys:String>
-    <sys:String x:Key="HandTracking_LearnMore">Learn More...</sys:String>    
+    <sys:String x:Key="HandTracking_LearnMore">More...</sys:String>    
     
     <!-- Settings General -->
     <sys:String x:Key="Setting_Color_Expander_Header">Edit Color (Click to Expand)</sys:String>

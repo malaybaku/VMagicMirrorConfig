@@ -126,7 +126,7 @@
 - 手の全体をカメラ視野に収めるとトラッキングが安定します。
 - カメラの中央を避け、やや左右の位置を使用して下さい。</sys:String>
     <sys:String x:Key="HandTracking_NotDetected">未検出: 顔の横に手を挙げてみて下さい</sys:String>
-    <sys:String x:Key="HandTracking_LearnMore">更に詳しく (Webページへ)</sys:String>    
+    <sys:String x:Key="HandTracking_LearnMore">詳細 (Web)</sys:String>    
     
     <!-- Settings General -->
     <sys:String x:Key="Setting_Color_Expander_Header">色を編集 (クリックで展開)</sys:String>
