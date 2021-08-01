@@ -354,6 +354,8 @@ namespace Baku.VMagicMirrorConfig
             _availableBuiltInClipNames.Add("Wave");
             _availableBuiltInClipNames.Add("Rokuro");
             _availableBuiltInClipNames.Add("Good");
+            _availableBuiltInClipNames.Add("Nod");
+            _availableBuiltInClipNames.Add("Shake");
         }
 
         private void InitializeBlendShapeItems(WordToMotionSettingViewModel parent)
