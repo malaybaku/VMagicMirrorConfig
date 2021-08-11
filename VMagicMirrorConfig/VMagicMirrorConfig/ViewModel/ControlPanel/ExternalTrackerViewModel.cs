@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net;
 
 namespace Baku.VMagicMirrorConfig
 {
@@ -275,6 +276,21 @@ namespace Baku.VMagicMirrorConfig
             if (result)
             {
                 EnableExternalTracking.Value = false;
+            }
+        }
+
+        public void RefreshConnectionIfPossible()
+        {
+            //NOTE: 今は選択肢がiFacialMocapのみのため、そこをピンポイントで見に行く
+            if (!EnableExternalTracking.Value || !IsTrackSourceIFacialMocap)
+            {
+                return;
+            }
+
+            var ipAddress = IFacialMocapTargetIpAddress.Value;
+            if (IPAddress.TryParse(ipAddress, out _))
+            {
+                NetworkEnvironmentUtils.SendIFacialMocapDataReceiveRequest(ipAddress);
             }
         }
 

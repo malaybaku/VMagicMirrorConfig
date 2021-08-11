@@ -341,6 +341,9 @@ namespace Baku.VMagicMirrorConfig
             {
                 LoadSavedVRoidModel(Model.LastLoadedVRoidModelId, true);
             }
+
+            //NOTE: この処理はココでしか呼ばない = 起動直後限定の処理にしたくて意図的にやってます
+            ExternalTrackerSetting.RefreshConnectionIfPossible();
         }
 
         public void Dispose()
