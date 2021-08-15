@@ -100,7 +100,7 @@
                               >
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <TextBox Height="30"
+                            <TextBox Height="35"
                                      Width="80"
                                      Text="{Binding NoteNumber}"/>
                         </DataTemplate>
