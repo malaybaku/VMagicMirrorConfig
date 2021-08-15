@@ -7,9 +7,13 @@ namespace Baku.VMagicMirrorConfig
 {
     public class WordToMotionSettingViewModel : SettingViewModelBase
     {
-        internal WordToMotionSettingViewModel(WordToMotionSettingSync model, IMessageSender sender, IMessageReceiver receiver) : base(sender)
+        internal WordToMotionSettingViewModel(
+            WordToMotionSettingSync model,
+            LayoutSettingSync layoutModel,
+            IMessageSender sender, IMessageReceiver receiver) : base(sender)
         {
             _model = model;
+            _layoutModel = layoutModel;
             Items = new ReadOnlyObservableCollection<WordToMotionItemViewModel>(_items);
             CustomMotionClipNames = new ReadOnlyObservableCollection<string>(_customMotionClipNames);
             Devices = WordToMotionDeviceItem.LoadAvailableItems();
@@ -60,6 +64,7 @@ namespace Baku.VMagicMirrorConfig
         }
 
         private readonly WordToMotionSettingSync _model;
+        private readonly LayoutSettingSync _layoutModel;
         private WordToMotionItemViewModel? _dialogItem;
 
         /// <summary>直近で読み込んだモデルに指定されている、VRM標準以外のブレンドシェイプ名の一覧を取得します。</summary>
@@ -248,12 +253,31 @@ namespace Baku.VMagicMirrorConfig
 
         public ActionCommand OpenKeyAssignmentEditorCommand { get; }
 
-        private void OpenKeyAssignmentEditor()
+        private async void OpenKeyAssignmentEditor()
         {
             //note: 今のところMIDIコン以外は割り当て固定です
             if (_model.SelectedDeviceType.Value != WordToMotionSetting.DeviceTypes.MidiController)
             {
                 return;
+            }
+
+            if (!_layoutModel.EnableMidiRead.Value)
+            {
+                //MIDIの読み取りが無効だと設定ウィンドウの意味がない(どうせMIDIに反応できない)の確認
+                bool enableMidi = await MessageBoxWrapper.Instance.ShowAsync(
+                    LocalizedString.GetString("WordToMotion_MidiAssign_MidiNotActive_Title"),
+                    LocalizedString.GetString("WordToMotion_MidiAssign_MidiNotActive_Message"),
+                    MessageBoxWrapper.MessageBoxStyle.OKCancel
+                    );
+                   
+                if (enableMidi)
+                {
+                    _layoutModel.EnableMidiRead.Value = true;
+                }
+                else
+                {
+                    return;
+                }
             }
 
             var vm = new MidiNoteToMotionEditorViewModel(MidiNoteMap, _model.MidiNoteReceiver);
