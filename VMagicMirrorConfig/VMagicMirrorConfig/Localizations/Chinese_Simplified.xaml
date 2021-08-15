@@ -365,7 +365,7 @@
     <sys:String x:Key="WordToMotion_EnablePreview">当前角色预览</sys:String>    
         
     <sys:String x:Key="WordToMotion_MidiAssign">MIDI的按键指定</sys:String>
-    <sys:String x:Key="WordToMotion_MidiAssign_Instruction" xml:space="preserve">最多对应9个MIDI键盘的按键给动作。
+    <sys:String x:Key="WordToMotion_MidiAssign_Instruction" xml:space="preserve">最多对应16个MIDI键盘的按键给动作。
 - 单击右侧的文本输入
 - 按MIDI控制器的键输入编号</sys:String>
     <sys:String x:Key="WordToMotion_MidiAssign_Current">现在的按键</sys:String>

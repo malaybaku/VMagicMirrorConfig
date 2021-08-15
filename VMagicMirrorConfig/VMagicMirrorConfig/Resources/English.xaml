@@ -405,7 +405,7 @@ Please test by typing "joy".</sys:String>
     <sys:String x:Key="WordToMotion_EnablePreview">Enable Preview</sys:String>
     
     <sys:String x:Key="WordToMotion_MidiAssign">MIDI note assign</sys:String>
-    <sys:String x:Key="WordToMotion_MidiAssign_Instruction" xml:space="preserve">Assign up to 9 notes for motion trigger.
+    <sys:String x:Key="WordToMotion_MidiAssign_Instruction" xml:space="preserve">Assign up to 16 notes for motion trigger.
 - Click text input on right side
 - Press MIDI key to input note number</sys:String>
     <sys:String x:Key="WordToMotion_MidiAssign_Current">Current Note</sys:String>
