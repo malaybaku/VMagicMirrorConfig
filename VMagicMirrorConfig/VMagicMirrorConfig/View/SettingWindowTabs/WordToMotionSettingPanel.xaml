@@ -224,9 +224,7 @@
                         <md:PackIcon Kind="Number6BoxOutline"/>
                         <md:PackIcon Kind="Number7BoxOutline"/>
                         <md:PackIcon Kind="Number8BoxOutline"/>
-                        <Grid>
-                            <TextBlock Text="-"/>
-                        </Grid>
+                        <md:PackIcon Kind="Number9BoxOutline"/>
                         <Grid>
                             <TextBlock Text="-"/>
                         </Grid>

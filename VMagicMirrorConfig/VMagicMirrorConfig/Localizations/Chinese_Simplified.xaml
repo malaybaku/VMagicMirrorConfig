@@ -329,7 +329,7 @@
     <sys:String x:Key="WordToMotion_AssignDevice">指定这个功能专用的设备</sys:String>
     <sys:String x:Key="WordToMotion_AssignDevice_None">无</sys:String>
     <sys:String x:Key="WordToMotion_AssignDevice_Gamepad">游戏手柄</sys:String>
-    <sys:String x:Key="WordToMotion_AssignDevice_Keyboard">键盘(数字的0-8)</sys:String>
+    <sys:String x:Key="WordToMotion_AssignDevice_Keyboard">键盘(数字的0-9)</sys:String>
     <sys:String x:Key="WordToMotion_AssignDevice_Keyboard_Short">键盘</sys:String>
 
     <sys:String x:Key="WordToMotion_AssignDevice_Select_Header">设备分配</sys:String>

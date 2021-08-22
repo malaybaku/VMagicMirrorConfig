@@ -372,7 +372,7 @@
     <sys:String x:Key="WordToMotion_AssignDevice">この機能専用にデバイスを割り当て</sys:String>
     <sys:String x:Key="WordToMotion_AssignDevice_None">なし</sys:String>
     <sys:String x:Key="WordToMotion_AssignDevice_Gamepad">ゲームパッド</sys:String>
-    <sys:String x:Key="WordToMotion_AssignDevice_Keyboard">キーボード(数字の0-8)</sys:String>
+    <sys:String x:Key="WordToMotion_AssignDevice_Keyboard">キーボード(数字の0-9)</sys:String>
     <sys:String x:Key="WordToMotion_AssignDevice_Keyboard_Short">キーボード</sys:String>
 
     <sys:String x:Key="WordToMotion_AssignDevice_Select_Header">デバイスの割り当て</sys:String>
@@ -421,7 +421,7 @@
     <sys:String x:Key="WordToMotion_DeviceItem_None">なし</sys:String>
     <sys:String x:Key="WordToMotion_DeviceItem_KeyboardWord">キーボード (単語入力)</sys:String>
     <sys:String x:Key="WordToMotion_DeviceItem_Gamepad">ゲームパッド</sys:String>
-    <sys:String x:Key="WordToMotion_DeviceItem_KeyboardTenKey">キーボード (数字の0-8)</sys:String>
+    <sys:String x:Key="WordToMotion_DeviceItem_KeyboardTenKey">キーボード (数字の0-9)</sys:String>
     <sys:String x:Key="WordToMotion_DeviceItem_MidiController">MIDIコントローラ</sys:String>
 
     <!-- Save/Load -->
