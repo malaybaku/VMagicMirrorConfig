@@ -161,6 +161,15 @@
                         <Grid>
                             <TextBlock Text="-"/>
                         </Grid>
+                        <Grid>
+                            <TextBlock Text="-"/>
+                        </Grid>
+                        <Grid>
+                            <TextBlock Text="-"/>
+                        </Grid>
+                        <Grid>
+                            <TextBlock Text="-"/>
+                        </Grid>
                     </StackPanel>
 
                     <!-- ゲームパッドをW2M専用に使うときのキー割り当て表示 -->
@@ -186,6 +195,11 @@
                         <md:PackIcon Kind="ArrowRightBox" />
                         <md:PackIcon Kind="ArrowDownBox" />
                         <md:PackIcon Kind="ArrowLeftBox" />
+                        <md:PackIcon Kind="AlphaRBoxOutline" />
+                        <md:PackIcon Kind="AlphaLBoxOutline" />
+                        <Grid>
+                            <TextBlock Text="[SELECT]" />
+                        </Grid>
                     </StackPanel>
 
                     <!-- キーボードをW2M専用に使うときのキー割り当て -->
@@ -210,6 +224,13 @@
                         <md:PackIcon Kind="Number6BoxOutline"/>
                         <md:PackIcon Kind="Number7BoxOutline"/>
                         <md:PackIcon Kind="Number8BoxOutline"/>
+                        <md:PackIcon Kind="Number9BoxOutline"/>
+                        <Grid>
+                            <TextBlock Text="-"/>
+                        </Grid>
+                        <Grid>
+                            <TextBlock Text="-"/>
+                        </Grid>
                     </StackPanel>
 
                     <!-- MIDIコントローラをW2M専用に使うときのノート割り当て -->
@@ -233,6 +254,7 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
 
+                    <!-- 単語入力の場合はここの表示名 = 入力条件になる -->
                     <ItemsControl Grid.Column="1"
                                       ItemsSource="{Binding Items}"
                                       IsEnabled="{Binding EnableWordToMotion.Value}"
@@ -334,7 +356,7 @@
                                     </StackPanel>
 
                                     <Button Grid.Column="2" Style="{StaticResource MaterialDesignFlatButton}"
-                                                Width="30" Height="30" Padding="0"
+                                                Width="35" Height="30" Padding="0"
                                                 Command="{Binding DeleteCommand}">
                                         <md:PackIcon Kind="Close"/>
                                     </Button>

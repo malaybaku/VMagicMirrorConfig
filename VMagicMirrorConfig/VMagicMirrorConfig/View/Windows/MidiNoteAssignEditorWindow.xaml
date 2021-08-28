@@ -8,8 +8,8 @@
         mc:Ignorable="d"
         d:DataContext="{x:Type vmm:MidiNoteToMotionEditorViewModel}"
         Title="VMagicMirror - MIDI Note Assign" 
-        Height="500" Width="300"
-        MinHeight="500" MinWidth="300"
+        Height="560" Width="300"
+        MinHeight="400" MinWidth="300"
         WindowStartupLocation="CenterOwner"
         >
     <Grid>
@@ -100,7 +100,7 @@
                               >
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <TextBox Height="30"
+                            <TextBox Height="35"
                                      Width="80"
                                      Text="{Binding NoteNumber}"/>
                         </DataTemplate>

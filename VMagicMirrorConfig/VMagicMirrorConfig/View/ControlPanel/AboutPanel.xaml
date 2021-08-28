@@ -27,11 +27,11 @@
         <TextBlock Style="{StaticResource NoteText}"
                    Text="VMagicMirror uses model data by Attribution 4.0 International (CC BY 4.0)"/>
         <TextBlock Style="{StaticResource NoteText}"
-                   Text="Model data is by : Criegrrunov"/>
+                   Text="Model data is by : Negyek"/>
         <TextBlock>
-                <Hyperlink Click="OnClickHyperLinkToModelData">Model URL (SketchFab)</Hyperlink>
+                <Hyperlink Click="OnClickHyperLinkToModelData">Source (Pull Request URL of the model)</Hyperlink>
         </TextBlock>
         <TextBlock Style="{StaticResource NoteText}"
-                   Text="In VMagicMirror, the materials are replaced for the visual consistency."/>
+                   Text="In VMagicMirror, the material is adjusted for the visual consistency, and texture replacement is allowed."/>
     </StackPanel>
 </UserControl>

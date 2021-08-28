@@ -11,6 +11,7 @@ namespace Baku.VMagicMirrorConfig
     /// </summary>
     public class MidiNoteToMotionMap
     {
+        private const int ItemCount = 16;
         internal static readonly int InvalidNoteNumber = -1;
 
         public List<MidiNoteToMotionItem> Items { get; set; }
@@ -46,16 +47,27 @@ namespace Baku.VMagicMirrorConfig
             var serializer = new JsonSerializer();
             using (var jsonReader = new JsonTextReader(reader))
             {
-                return
-                    serializer.Deserialize<MidiNoteToMotionMap>(jsonReader) ??
+                var result = serializer.Deserialize<MidiNoteToMotionMap>(jsonReader) ??
                     LoadDefault();
+
+                //NOTE: 旧バージョンのデータを読み込んだ場合に末尾側のデータが無いので、それを埋める
+                for (int i = result.Items.Count; i < ItemCount; i++)
+                {
+                    result.Items.Add(new MidiNoteToMotionItem()
+                    {
+                        ItemIndex = i,
+                        NoteNumber = InvalidNoteNumber,
+                    });
+                }
+
+                return result;
             }
         }
 
         public static MidiNoteToMotionMap LoadDefault()
         {
             var result = new MidiNoteToMotionMap();
-            for (int i = 0; i < 9; i++)
+            for (int i = 0; i < ItemCount; i++)
             {
                 result.Items.Add(new MidiNoteToMotionItem()
                 {
