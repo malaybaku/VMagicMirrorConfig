@@ -32,6 +32,6 @@
                 <Hyperlink Click="OnClickHyperLinkToModelData">Source (Pull Request URL of the model)</Hyperlink>
         </TextBlock>
         <TextBlock Style="{StaticResource NoteText}"
-                   Text="In VMagicMirror, the materials are replaced for the visual consistency."/>
+                   Text="In VMagicMirror, the material is adjusted for the visual consistency, and texture replacement is allowed."/>
     </StackPanel>
 </UserControl>
