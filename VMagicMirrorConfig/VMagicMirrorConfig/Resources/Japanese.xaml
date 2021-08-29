@@ -107,8 +107,8 @@
     <sys:String x:Key="ExTracker_FaceSwitch_Trigger_eyeWide">目を大きく見開くと</sys:String>
     <sys:String x:Key="ExTracker_FaceSwitch_Trigger_browUp">眉を上げると</sys:String>
     <sys:String x:Key="ExTracker_FaceSwitch_Trigger_browDown">眉を下げると</sys:String>
-    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_tongueOut">頬をふくらませると</sys:String>
-    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_cheekPuff">舌を出すと</sys:String>
+    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_tongueOut">舌を出すと</sys:String>
+    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_cheekPuff">頬をふくらませると</sys:String>
 
     <!-- HandTracking -->
     <sys:String x:Key="HandTracking_Header">ハンドトラッキング</sys:String>
