@@ -106,8 +106,8 @@ Check "Keep LipSync" to make the lipsync continue.</sys:String>
     <sys:String x:Key="ExTracker_FaceSwitch_Trigger_eyeWide">Eye wide</sys:String>
     <sys:String x:Key="ExTracker_FaceSwitch_Trigger_browUp">Brow up</sys:String>
     <sys:String x:Key="ExTracker_FaceSwitch_Trigger_browDown">Brow down</sys:String>
-    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_tongueOut">Cheek puff</sys:String>
-    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_cheekPuff">Tongue out</sys:String>
+    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_tongueOut">Tongue out</sys:String>
+    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_cheekPuff">Cheek puff</sys:String>
     
     
     <!-- HandTracking -->
