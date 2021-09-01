@@ -38,6 +38,7 @@ namespace Baku.VMagicMirrorConfig
             ResetMidiSettingCommand = new ActionCommand(
                 () => SettingResetUtils.ResetSingleCategoryAsync(_model.ResetMidiSetting)
                 );
+            ShowPenUnavaiableWarningCommand = new ActionCommand(ShowPenUnavailableWarning);
 
             _model.SelectedTypingEffectId.PropertyChanged += (_, __) =>
             {
@@ -60,6 +61,10 @@ namespace Baku.VMagicMirrorConfig
             {
                 //NOTE: Unity側から来た値なため、送り返さないでよいことに注意
                 _model.DeviceLayout.SilentSet(e.Args);
+            }
+            else if (e.Command == ReceiveMessageNames.SetModelDoesNotSupportPen)
+            {
+                _model.ModelDoesNotSupportPen.Value = bool.TryParse(e.Command, out var result) ? result : false;
             }
         }
 
@@ -90,6 +95,7 @@ namespace Baku.VMagicMirrorConfig
         public RProperty<bool> PenVisibility => _model.PenVisibility;
         public RProperty<bool> MidiControllerVisibility => _model.MidiControllerVisibility;
         public RProperty<bool> GamepadVisibility => _gamepadModel.GamepadVisibility;
+        public RProperty<bool> PenUnavailable => _model.ModelDoesNotSupportPen;
 
         public RProperty<bool> EnableDeviceFreeLayout => _model.EnableDeviceFreeLayout;
 
@@ -133,6 +139,13 @@ namespace Baku.VMagicMirrorConfig
         public ActionCommand ResetCameraSettingCommand { get; }
         public ActionCommand ResetMidiSettingCommand { get; }
 
+        public ActionCommand ShowPenUnavaiableWarningCommand { get; }
+
+        private async void ShowPenUnavailableWarning()
+        {
+            var indication = MessageIndication.WarnInfoAboutPenUnavaiable();
+            await MessageBoxWrapper.Instance.ShowAsync(indication.Title, indication.Content, MessageBoxWrapper.MessageBoxStyle.OK);
+        }
 
         //TODO: Recordで書きたい…
         public class TypingEffectSelectionItem

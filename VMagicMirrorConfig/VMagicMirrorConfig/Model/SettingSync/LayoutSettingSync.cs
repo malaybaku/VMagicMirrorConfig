@@ -55,9 +55,11 @@ namespace Baku.VMagicMirrorConfig
         public RProperty<bool> PenVisibility { get; }
         public RProperty<int> SelectedTypingEffectId { get; }
 
-        //NOTE: この2つの値はファイルには保存しない
+        //NOTE: この3つの値はファイルには保存しない
         public RProperty<bool> EnableFreeCameraMode { get; }
         public RProperty<bool> EnableDeviceFreeLayout { get; }
+        //受信するだけ
+        public RProperty<bool> ModelDoesNotSupportPen { get; } = new RProperty<bool>(false);
 
         #region API
 
