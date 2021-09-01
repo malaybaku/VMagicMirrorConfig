@@ -64,7 +64,7 @@ namespace Baku.VMagicMirrorConfig
             }
             else if (e.Command == ReceiveMessageNames.SetModelDoesNotSupportPen)
             {
-                _model.ModelDoesNotSupportPen.Value = bool.TryParse(e.Command, out var result) ? result : false;
+                _model.ModelDoesNotSupportPen.Value = bool.TryParse(e.Args, out var result) ? result : false;
             }
         }
 
