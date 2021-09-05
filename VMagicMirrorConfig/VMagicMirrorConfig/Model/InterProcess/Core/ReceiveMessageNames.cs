@@ -22,6 +22,8 @@
 
         public const string SetHandTrackingResult = nameof(SetHandTrackingResult);
 
+        public const string SetModelDoesNotSupportPen = nameof(SetModelDoesNotSupportPen);
+
         public const string VRoidModelLoadCompleted = nameof(VRoidModelLoadCompleted);
         public const string VRoidModelLoadCanceled = nameof(VRoidModelLoadCanceled);
     }

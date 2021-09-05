@@ -289,6 +289,7 @@
     <sys:String x:Key="Layout_MidiVisible">MIDIコントローラ</sys:String>
     <sys:String x:Key="Layout_GamepadVisible">ゲームパッドを表示</sys:String>
     <sys:String x:Key="Layout_Pen_Visibility">ペン (ペンタブ動作時のみ)</sys:String>
+    <sys:String x:Key="Layout_Pen_UnavaiableModel">ペン非対応のVRMです</sys:String>
    
     <sys:String x:Key="Layout_Hid_Streaming">キーボード・パッド</sys:String>
     <sys:String x:Key="Layout_Midi_Streaming">MIDIコントローラ</sys:String>
@@ -518,6 +519,10 @@ webカメラでの顔トラッキングを有効にする場合は
 
     <sys:String x:Key="DialogTitle_DisableAutomation">オートメーションの無効化</sys:String>
     <sys:String x:Key="DialogMessage_DisableAutomation">オートメーションを無効化しますか？</sys:String>
+    
+    <sys:String x:Key="DialogTitle_PenUnavailable">VRMがペン表示に未対応です</sys:String>
+    <sys:String x:Key="DialogMessage_PenUnavailable">ペンを表示するにはモデルに人差し指ボーンが必要です。モデルの設定を確認して下さい。</sys:String>    
+    
     <!-- Other: Not on Dialog, but used from code -->
     <sys:String x:Key="CommonUi_DoNothing">(何もしない)</sys:String>
     <sys:String x:Key="CommonUi_None">(なし)</sys:String>

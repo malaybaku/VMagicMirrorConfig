@@ -472,6 +472,18 @@
                                   IsChecked="{Binding LayoutSetting.PenVisibility.Value}"
                                   Content="{DynamicResource Layout_Pen_Visibility}"
                                   />
+                        <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                HorizontalAlignment="Right"
+                                
+                                Visibility="{Binding LayoutSetting.PenUnavailable.Value,
+                                                     Converter={StaticResource BooleanToVisibilityConverter},
+                                                     FallbackValue=Collapsed}"
+                                Command="{Binding LayoutSetting.ShowPenUnavaiableWarningCommand}">
+                            <StackPanel Orientation="Horizontal">
+                                <md:PackIcon Kind="WarningOutline" VerticalAlignment="Center"/>
+                                <TextBlock Text="{DynamicResource Layout_Pen_UnavaiableModel}"/>
+                            </StackPanel>
+                        </Button>
                         <CheckBox Style="{StaticResource SmallMarginCheckBox}"
                                   Content="{DynamicResource Layout_Gamepad}"
                                   IsChecked="{Binding LayoutSetting.GamepadVisibility.Value}"
