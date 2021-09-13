@@ -165,7 +165,7 @@
                             </Grid>
                         </Expander>
                     </md:Card>
-                    
+
                     <Grid Margin="5">
                         <Grid.Resources>
                             <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
@@ -182,9 +182,6 @@
                             <ColumnDefinition Width="3*" />
                             <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
-
- 
-
                         <TextBlock Grid.Row="0" Grid.Column="0"
                                    Text="{DynamicResource Light_Intensity}" />
                         <Slider Grid.Row="0" Grid.Column="1"
@@ -222,6 +219,12 @@
                                  />
 
                     </Grid>
+
+                    <CheckBox Content="{DynamicResource Light_BgAdjust}"
+                              Margin="15,5"
+                              IsChecked="{Binding UseDesktopLightAdjust.Value}"
+                              />
+
                 </StackPanel>
             </Border>
 

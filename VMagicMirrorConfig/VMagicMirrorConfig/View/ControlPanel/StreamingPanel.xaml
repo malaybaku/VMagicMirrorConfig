@@ -7,7 +7,7 @@
              xmlns:vmm="clr-namespace:Baku.VMagicMirrorConfig"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance Type={x:Type vmm:MainWindowViewModel}}"
-             d:DesignWidth="520"
+             d:DesignWidth="540"
              d:DesignHeight="650"             
              >
     <UserControl.Resources>
@@ -495,6 +495,10 @@
                         <CheckBox Style="{StaticResource SmallMarginCheckBox}"
                                   Content="{DynamicResource Wind_Enable_Streaming}"
                                   IsChecked="{Binding LightSetting.EnableWind.Value}"
+                                  />
+                        <CheckBox Style="{StaticResource SmallMarginCheckBox}"
+                                  Content="{DynamicResource Light_BgAdjust}"
+                                  IsChecked="{Binding LightSetting.UseDesktopLightAdjust.Value}"
                                   />
                         <Grid>
                             <Grid.ColumnDefinitions>

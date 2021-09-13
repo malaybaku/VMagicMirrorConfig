@@ -340,6 +340,7 @@ camera movements following:
     <sys:String x:Key="Light_Intensity">Intensity [%]</sys:String>
     <sys:String x:Key="Light_Yaw">Yaw Angle [deg]</sys:String>
     <sys:String x:Key="Light_Pitch">Pitch Angle [deg]</sys:String>
+    <sys:String x:Key="Light_BgAdjust">Desktop Color Based Lighting</sys:String>
 
     <sys:String x:Key="Shadow">Shadow</sys:String>
     <sys:String x:Key="Shadow_Enable">Enable Shadow</sys:String>

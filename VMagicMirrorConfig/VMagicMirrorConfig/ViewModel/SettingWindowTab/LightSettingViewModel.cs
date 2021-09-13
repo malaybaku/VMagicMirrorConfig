@@ -78,6 +78,8 @@ namespace Baku.VMagicMirrorConfig
             }
         }
 
+        public RProperty<bool> UseDesktopLightAdjust => _model.UseDesktopLightAdjust;
+
         //NOTE: 色が変わったら表示を追従させるだけでいいのがポイント。メッセージ送信自体はモデル側で行う
         private void UpdateLightColor()
             => LightColor = Color.FromRgb((byte)LightR.Value, (byte)LightG.Value, (byte)LightB.Value);

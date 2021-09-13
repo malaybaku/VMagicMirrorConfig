@@ -341,6 +341,7 @@
     <sys:String x:Key="Light_Intensity">明るさ[%]</sys:String>
     <sys:String x:Key="Light_Yaw">向き(横)[deg]</sys:String>
     <sys:String x:Key="Light_Pitch">向き(上下)[deg]</sys:String>
+    <sys:String x:Key="Light_BgAdjust">デスクトップの色調でライトを補正</sys:String>
 
     <sys:String x:Key="Shadow">影</sys:String>
     <sys:String x:Key="Shadow_Enable">影を有効化</sys:String>
