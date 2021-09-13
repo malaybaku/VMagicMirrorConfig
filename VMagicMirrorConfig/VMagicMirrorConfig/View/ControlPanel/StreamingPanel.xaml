@@ -7,7 +7,7 @@
              xmlns:vmm="clr-namespace:Baku.VMagicMirrorConfig"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance Type={x:Type vmm:MainWindowViewModel}}"
-             d:DesignWidth="520"
+             d:DesignWidth="540"
              d:DesignHeight="650"             
              >
     <UserControl.Resources>
