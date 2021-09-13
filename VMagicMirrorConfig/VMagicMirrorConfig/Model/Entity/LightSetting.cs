@@ -26,6 +26,8 @@
         public int LightG { get; set; } = 255;
         public int LightB { get; set; } = 255;
 
+        public bool UseDesktopLightAdjust { get; set; } = false;
+
         #endregion
 
         #region Shadow

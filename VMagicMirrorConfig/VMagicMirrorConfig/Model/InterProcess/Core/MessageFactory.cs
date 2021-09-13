@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
 namespace Baku.VMagicMirrorConfig
@@ -225,6 +226,7 @@ namespace Baku.VMagicMirrorConfig
         public Message LightIntensity(int intensityPercent) => WithArg($"{intensityPercent}");
         public Message LightYaw(int angleDeg) => WithArg($"{angleDeg}");
         public Message LightPitch(int angleDeg) => WithArg($"{angleDeg}");
+        public Message UseDesktopLightAdjust(bool use) => WithArg($"{use}");
 
         public Message ShadowEnable(bool enable) => WithArg($"{enable}");
         public Message ShadowIntensity(int intensityPercent) => WithArg($"{intensityPercent}");

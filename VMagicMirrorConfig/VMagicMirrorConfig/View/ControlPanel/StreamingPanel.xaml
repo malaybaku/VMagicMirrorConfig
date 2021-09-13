@@ -496,6 +496,10 @@
                                   Content="{DynamicResource Wind_Enable_Streaming}"
                                   IsChecked="{Binding LightSetting.EnableWind.Value}"
                                   />
+                        <CheckBox Style="{StaticResource SmallMarginCheckBox}"
+                                  Content="{DynamicResource Light_BgAdjust}"
+                                  IsChecked="{Binding LightSetting.UseDesktopLightAdjust.Value}"
+                                  />
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>

@@ -16,8 +16,8 @@
     WindowTransitionsEnabled="False"
     WindowTitleBrush="{StaticResource PrimaryHueMidBrush}"
     NonActiveWindowTitleBrush="{StaticResource PrimaryHueMidBrush}"
-    Height="700" Width="550"
-    MinHeight="700" MinWidth="550"
+    Height="730" Width="550"
+    MinHeight="600" MinWidth="550"
     ShowDialogsOverTitleBar="False"
     Background="{StaticResource TabAreaBackground}"
     >
