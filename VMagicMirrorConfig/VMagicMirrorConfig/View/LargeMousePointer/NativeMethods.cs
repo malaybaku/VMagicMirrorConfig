@@ -77,7 +77,7 @@ namespace Baku.VMagicMirrorConfig.LargePointer
 
         public static void SetWindowPosition(IntPtr hWnd, int x, int y) => SetWindowPos(
             hWnd, IntPtr.Zero, x, y, 0, 0, 
-            SetWindowPosFlags.IgnoreResize
+            SetWindowPosFlags.IgnoreResize | SetWindowPosFlags.DoNotActivate
             );
 
     }
