@@ -13,7 +13,7 @@ namespace Baku.VMagicMirrorConfig.LargePointer
     //NOTE: ウィンドウハンドルをゴリゴリ操作する + コレ以外のコードほぼないのでコードビハインド使う。
     public partial class LargeMousePointerWindow : Window
     {
-        private const int MouseTrackIntervalMillisec = 16;
+        private const int MouseTrackIntervalMillisec = 8;
         private const int MouseStopDisappearTimeMillisec = 6000;
         private const double OpacityChangeLerpFactor = 0.2;
 
@@ -66,7 +66,7 @@ namespace Baku.VMagicMirrorConfig.LargePointer
         private void SetClickThrough(IntPtr hWnd)
         {
             uint exStyle = GetWindowLong(hWnd, GWL_EXSTYLE);
-            SetWindowLong(hWnd, GWL_EXSTYLE, exStyle | WS_EX_TRANSPARENT | WS_EX_TOOLWINDOW);
+            SetWindowLong(hWnd, GWL_EXSTYLE, exStyle | WS_EX_TRANSPARENT);
         }
 
         private async Task LoopUpdateWindowPositionAsync(CancellationToken token)
