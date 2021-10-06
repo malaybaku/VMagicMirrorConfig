@@ -10,7 +10,6 @@ namespace Baku.VMagicMirrorConfig
         public const string AutoSaveSettingFileName = "_autosave";
         private const string LogTextName = "log_config.txt";
         private const string UnityAppFileName = "VMagicMirror.exe";
-
         private const string SaveSlotFileNamePrefix = "_save";
 
         //TODO: 「デバッグ実行時だけRootDirectoryを差し替えたい」という需要が考えられるが、良い手はあるか…？
@@ -33,11 +32,18 @@ namespace Baku.VMagicMirrorConfig
 
         static SpecialFilePath()
         {
-            RootDirectory = Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                "VMagicMirror"
-                );
+            //NOTE: 実際はnullになることはない(コーディングエラーでのみ発生する)
+            string exePath = Process.GetCurrentProcess().MainModule?.FileName ?? "";
+            string exeDir = Path.GetDirectoryName(exePath) ?? "";
+            string unityAppDir = Path.GetDirectoryName(exeDir) ?? "";
+            UnityAppPath = Path.Combine(unityAppDir, UnityAppFileName);
 
+            //エディタ実行時はデスクトップのVMagicMirrorフォルダを起点とする。
+            var isDebugRun = !CommandLineArgParser.TryLoadMmfFileName(out _);
+            var rootParent = isDebugRun
+                ? Environment.SpecialFolder.Desktop
+                : Environment.SpecialFolder.MyDocuments;
+            RootDirectory = Path.Combine(Environment.GetFolderPath(rootParent), "VMagicMirror_Files");
             SaveFileDir = Path.Combine(RootDirectory, "Saves");
             LogFileDir = Path.Combine(RootDirectory, "Logs");
             AutoSaveSettingFilePath = Path.Combine(SaveFileDir, AutoSaveSettingFileName);
@@ -46,13 +52,6 @@ namespace Baku.VMagicMirrorConfig
             Directory.CreateDirectory(RootDirectory);
             Directory.CreateDirectory(SaveFileDir);
             Directory.CreateDirectory(LogFileDir);
-
-
-            //NOTE: 実際はnullになることはない(コーディングエラーでのみ発生する)
-            string exePath = Process.GetCurrentProcess().MainModule?.FileName ?? "";
-            string exeDir = Path.GetDirectoryName(exePath) ?? "";
-            string unityAppDir = Path.GetDirectoryName(exeDir) ?? "";
-            UnityAppPath = Path.Combine(unityAppDir, UnityAppFileName);
         }
 
         /// <summary>
