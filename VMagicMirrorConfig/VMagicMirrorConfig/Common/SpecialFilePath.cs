@@ -38,12 +38,17 @@ namespace Baku.VMagicMirrorConfig
             string unityAppDir = Path.GetDirectoryName(exeDir) ?? "";
             UnityAppPath = Path.Combine(unityAppDir, UnityAppFileName);
 
-            //エディタ実行時はデスクトップのVMagicMirrorフォルダを起点とする。
+            //Unityからパイプが渡されてない = Unity側がエディタ実行であると考えられる時、
+            //デバッグ用の実行であると判断できる
             var isDebugRun = !CommandLineArgParser.TryLoadMmfFileName(out _);
-            var rootParent = isDebugRun
-                ? Environment.SpecialFolder.Desktop
-                : Environment.SpecialFolder.MyDocuments;
-            RootDirectory = Path.Combine(Environment.GetFolderPath(rootParent), "VMagicMirror_Files");
+#if DEV_ENV
+            //DEV_ENV フラグは、dev系のpublish profileでビルドすると定義される
+            isDebugRun = true;
+#endif
+            RootDirectory = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                isDebugRun ? "VMagicMirror_Dev_Files" : "VMagicMirror_Files"
+                );
             SaveFileDir = Path.Combine(RootDirectory, "Saves");
             LogFileDir = Path.Combine(RootDirectory, "Logs");
             AutoSaveSettingFilePath = Path.Combine(SaveFileDir, AutoSaveSettingFileName);
