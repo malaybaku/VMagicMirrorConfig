@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Baku.VMagicMirrorConfig.Model;
+using System;
 using System.Diagnostics;
 using System.IO;
 
@@ -38,13 +39,7 @@ namespace Baku.VMagicMirrorConfig
             string unityAppDir = Path.GetDirectoryName(exeDir) ?? "";
             UnityAppPath = Path.Combine(unityAppDir, UnityAppFileName);
 
-            //Unityからパイプが渡されてない = Unity側がエディタ実行であると考えられる時、
-            //デバッグ用の実行であると判断できる
-            var isDebugRun = !CommandLineArgParser.TryLoadMmfFileName(out _);
-#if DEV_ENV
-            //DEV_ENV フラグは、dev系のpublish profileでビルドすると定義される
-            isDebugRun = true;
-#endif
+            var isDebugRun = TargetEnvironmentChecker.CheckIsDebugEnv();
             RootDirectory = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
                 isDebugRun ? "VMagicMirror_Dev_Files" : "VMagicMirror_Files"
