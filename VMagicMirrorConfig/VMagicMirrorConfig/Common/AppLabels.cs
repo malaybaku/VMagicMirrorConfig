@@ -9,6 +9,6 @@ namespace Baku.VMagicMirrorConfig
         public static string EditionName => FeatureLocker.FeatureLocked ? "Standard Edition" : "Full Edition";
         public static string AppFullName => AppName + " " + EditionName;
         public static string AppFullNameWithEnvSuffix => 
-            AppFullName + (TargetEnvironmentChecker.CheckIsDebugEnv() ? "(Dev)" : "");
+            AppFullName + (TargetEnvironmentChecker.CheckDevEnvFlagEnabled() ? "(Dev)" : "");
     }
 }
