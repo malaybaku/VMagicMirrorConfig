@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿using Baku.VMagicMirrorConfig.Model;
+using System;
+using System.Diagnostics;
 using System.IO;
 
 namespace Baku.VMagicMirrorConfig
@@ -9,15 +11,16 @@ namespace Baku.VMagicMirrorConfig
         public const string AutoSaveSettingFileName = "_autosave";
         private const string LogTextName = "log_config.txt";
         private const string UnityAppFileName = "VMagicMirror.exe";
-
         private const string SaveSlotFileNamePrefix = "_save";
 
+        //TODO: 「デバッグ実行時だけRootDirectoryを差し替えたい」という需要が考えられるが、良い手はあるか…？
+        private static string RootDirectory { get; }
+
+        public static string SaveFileDir { get; }
         public static string LogFileDir { get; }
         public static string LogFilePath { get; }
         public static string UnityAppPath { get; }
         public static string AutoSaveSettingFilePath { get; }
-
-        private static string _exeDir;
 
         /// <summary>
         /// スロット番号を指定して保存ファイル名を指定します。0を指定した場合は特別にオートセーブファイルのパスを返します。
@@ -26,22 +29,29 @@ namespace Baku.VMagicMirrorConfig
         /// <returns></returns>
         public static string GetSaveFilePath(int index) => index == 0 
             ? AutoSaveSettingFilePath 
-            : Path.Combine(_exeDir, SaveSlotFileNamePrefix + index.ToString());
+            : Path.Combine(SaveFileDir, SaveSlotFileNamePrefix + index.ToString());
 
         static SpecialFilePath()
         {
             //NOTE: 実際はnullになることはない(コーディングエラーでのみ発生する)
             string exePath = Process.GetCurrentProcess().MainModule?.FileName ?? "";
             string exeDir = Path.GetDirectoryName(exePath) ?? "";
-            AutoSaveSettingFilePath = Path.Combine(exeDir, AutoSaveSettingFileName);
-            _exeDir = exeDir;
-
             string unityAppDir = Path.GetDirectoryName(exeDir) ?? "";
             UnityAppPath = Path.Combine(unityAppDir, UnityAppFileName);
-            LogFileDir = unityAppDir;
-            LogFilePath = File.Exists(UnityAppPath) ?
-                Path.Combine(unityAppDir, LogTextName) :
-                "";
+
+            var isDebugRun = TargetEnvironmentChecker.CheckIsDebugEnv();
+            RootDirectory = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                isDebugRun ? "VMagicMirror_Dev_Files" : "VMagicMirror_Files"
+                );
+            SaveFileDir = Path.Combine(RootDirectory, "Saves");
+            LogFileDir = Path.Combine(RootDirectory, "Logs");
+            AutoSaveSettingFilePath = Path.Combine(SaveFileDir, AutoSaveSettingFileName);
+            LogFilePath = Path.Combine(LogFileDir, LogTextName);
+
+            Directory.CreateDirectory(RootDirectory);
+            Directory.CreateDirectory(SaveFileDir);
+            Directory.CreateDirectory(LogFileDir);
         }
 
         /// <summary>
