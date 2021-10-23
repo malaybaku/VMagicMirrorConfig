@@ -106,8 +106,8 @@ Check "Keep LipSync" to make the lipsync continue.</sys:String>
     <sys:String x:Key="ExTracker_FaceSwitch_Trigger_eyeWide">Eye wide</sys:String>
     <sys:String x:Key="ExTracker_FaceSwitch_Trigger_browUp">Brow up</sys:String>
     <sys:String x:Key="ExTracker_FaceSwitch_Trigger_browDown">Brow down</sys:String>
-    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_tongueOut">Cheek puff</sys:String>
-    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_cheekPuff">Tongue out</sys:String>
+    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_tongueOut">Tongue out</sys:String>
+    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_cheekPuff">Cheek puff</sys:String>
     
     
     <!-- HandTracking -->
@@ -287,7 +287,9 @@ camera movements following:
     <sys:String x:Key="Layout_HidVisible">Keyboard and Pad</sys:String>
     <sys:String x:Key="Layout_MidiVisible">MIDI Controller</sys:String>
     <sys:String x:Key="Layout_GamepadVisible">Gamepad</sys:String>    
-    <sys:String x:Key="Layout_Pen_Visibility">Pen (during pen tablet motion)</sys:String>
+    <sys:String x:Key="Layout_Pen_Visibility">Pen (in pen tablet motion)</sys:String>
+    <sys:String x:Key="Layout_Pen_UnavaiableModel">Pen is Unavailable</sys:String>
+    
     <sys:String x:Key="Layout_Hid_Streaming">Keyboard and Pad</sys:String>
     <sys:String x:Key="Layout_Midi_Streaming">MIDI Controller</sys:String>
    
@@ -338,6 +340,7 @@ camera movements following:
     <sys:String x:Key="Light_Intensity">Intensity [%]</sys:String>
     <sys:String x:Key="Light_Yaw">Yaw Angle [deg]</sys:String>
     <sys:String x:Key="Light_Pitch">Pitch Angle [deg]</sys:String>
+    <sys:String x:Key="Light_BgAdjust">Desktop Color Based Lighting</sys:String>
 
     <sys:String x:Key="Shadow">Shadow</sys:String>
     <sys:String x:Key="Shadow_Enable">Enable Shadow</sys:String>
@@ -510,7 +513,10 @@ Use this only after checking the licenses of VRM you will use.
 </sys:String>    
     <sys:String x:Key="DialogTitle_DisableAutomation">Disable Automation</sys:String>
     <sys:String x:Key="DialogMessage_DisableAutomation">Are you sure to disable automation feature?</sys:String>
-    
+
+    <sys:String x:Key="DialogTitle_PenUnavailable">VRM is not ready for Pen</sys:String>
+    <sys:String x:Key="DialogMessage_PenUnavailable">Pen feature needs right index finger bones to show. Please check model's setup.</sys:String>
+
     <!-- Other: Not on Dialog, but used from code -->
     <sys:String x:Key="CommonUi_DoNothing">(Do Nothing)</sys:String>
     <sys:String x:Key="CommonUi_None">(None)</sys:String>

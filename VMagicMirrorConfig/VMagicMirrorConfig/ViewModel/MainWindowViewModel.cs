@@ -274,6 +274,7 @@ namespace Baku.VMagicMirrorConfig
 
             try
             {
+                //TODO: この位置にファイルがあるのはzipで配布された古いバージョンのみになる
                 string prevFilePath = Path.Combine(
                     Path.GetDirectoryName(dialog.FileName) ?? "",
                     "ConfigApp",

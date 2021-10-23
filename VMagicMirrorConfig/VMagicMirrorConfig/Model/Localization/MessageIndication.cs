@@ -103,5 +103,12 @@ namespace Baku.VMagicMirrorConfig
         /// <returns></returns>
         public static MessageIndication DisableAutomation() => Load("DisableAutomation");
 
+        /// <summary>
+        /// モデルのボーン設定がペンに対応していない、という情報を提供するダイアログ
+        /// ※snackbarに本文だけ出せるような内容でもあります
+        /// </summary>
+        /// <returns></returns>
+        public static MessageIndication WarnInfoAboutPenUnavaiable() => Load("PenUnavailable");
+
     }
 }

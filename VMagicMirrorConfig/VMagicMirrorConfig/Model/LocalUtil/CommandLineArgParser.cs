@@ -6,7 +6,7 @@ namespace Baku.VMagicMirrorConfig
     static class CommandLineArgParser
     {
         /// <summary> 
-        /// コマンドライン引数で、空ではなMemoryMappedFileが指定されていればそれを返します。
+        /// コマンドライン引数で、空ではないMemoryMappedFileが指定されていればそれを返します。
         /// </summary>
         /// <param name="result">結果のMemoryMappedFile名称。送受信に関わる"_receiver"とか"_sender"のsuffixはついてない状態です。</param>
         /// <returns></returns>

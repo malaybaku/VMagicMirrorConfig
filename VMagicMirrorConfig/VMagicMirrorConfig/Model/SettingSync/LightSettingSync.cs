@@ -30,6 +30,7 @@ namespace Baku.VMagicMirrorConfig
             LightR = new RProperty<int>(s.LightR, _ => sendLightColor());
             LightG = new RProperty<int>(s.LightG, _ => sendLightColor());
             LightB = new RProperty<int>(s.LightB, _ => sendLightColor());
+            UseDesktopLightAdjust = new RProperty<bool>(s.UseDesktopLightAdjust, b => SendMessage(factory.UseDesktopLightAdjust(b)));
 
             EnableShadow = new RProperty<bool>(s.EnableShadow, b => SendMessage(factory.ShadowEnable(b)));
             ShadowIntensity = new RProperty<int>(s.ShadowIntensity, i => SendMessage(factory.ShadowIntensity(i)));
@@ -89,6 +90,8 @@ namespace Baku.VMagicMirrorConfig
         public RProperty<int> LightR { get; }
         public RProperty<int> LightG { get; }
         public RProperty<int> LightB { get; }
+
+        public RProperty<bool> UseDesktopLightAdjust { get; }
 
         #endregion
 

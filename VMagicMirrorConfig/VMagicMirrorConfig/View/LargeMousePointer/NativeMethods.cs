@@ -32,11 +32,13 @@ namespace Baku.VMagicMirrorConfig.LargePointer
         public static extern uint GetWindowLong(IntPtr hWnd, int nIndex);
 
         public static int GWL_STYLE => -16;
-        public static uint WS_POPUP => 0x80000000;
-        public static uint WS_VISIBLE => 0x10000000;
+        public static uint WS_POPUP => 0x8000_0000;
+        public static uint WS_VISIBLE => 0x1000_0000;
         public static int GWL_EXSTYLE => -20;
-        public static uint WS_EX_TRANSPARENT => 0x00000020;
-        public static uint WS_EX_TOOLWINDOW => 0x00000080;
+        public static uint WS_EX_TRANSPARENT => 0x0000_0020;
+        public static uint WS_EX_TOOLWINDOW => 0x0000_0080;
+        public static uint WS_EX_LAYERED => 0x0080_0000;
+        public static uint WS_EX_NOACTIVATE => 0x0800_0000;
 
         [DllImport("user32.dll", SetLastError = true)]
         public static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, SetWindowPosFlags uFlags);
@@ -73,7 +75,10 @@ namespace Baku.VMagicMirrorConfig.LargePointer
             IgnoreMoveAndResize = IgnoreMove | IgnoreResize,
         }
 
-        public static void SetWindowPosition(IntPtr hWnd, int x, int y) => SetWindowPos(hWnd, IntPtr.Zero, x, y, 0, 0, SetWindowPosFlags.IgnoreResize);
+        public static void SetWindowPosition(IntPtr hWnd, int x, int y) => SetWindowPos(
+            hWnd, IntPtr.Zero, x, y, 0, 0, 
+            SetWindowPosFlags.IgnoreResize | SetWindowPosFlags.DoNotActivate
+            );
 
     }
 }

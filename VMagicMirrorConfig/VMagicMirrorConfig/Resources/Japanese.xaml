@@ -107,8 +107,8 @@
     <sys:String x:Key="ExTracker_FaceSwitch_Trigger_eyeWide">目を大きく見開くと</sys:String>
     <sys:String x:Key="ExTracker_FaceSwitch_Trigger_browUp">眉を上げると</sys:String>
     <sys:String x:Key="ExTracker_FaceSwitch_Trigger_browDown">眉を下げると</sys:String>
-    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_tongueOut">頬をふくらませると</sys:String>
-    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_cheekPuff">舌を出すと</sys:String>
+    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_tongueOut">舌を出すと</sys:String>
+    <sys:String x:Key="ExTracker_FaceSwitch_Trigger_cheekPuff">頬をふくらませると</sys:String>
 
     <!-- HandTracking -->
     <sys:String x:Key="HandTracking_Header">ハンドトラッキング</sys:String>
@@ -289,6 +289,7 @@
     <sys:String x:Key="Layout_MidiVisible">MIDIコントローラ</sys:String>
     <sys:String x:Key="Layout_GamepadVisible">ゲームパッドを表示</sys:String>
     <sys:String x:Key="Layout_Pen_Visibility">ペン (ペンタブ動作時のみ)</sys:String>
+    <sys:String x:Key="Layout_Pen_UnavaiableModel">ペン非対応のVRMです</sys:String>
    
     <sys:String x:Key="Layout_Hid_Streaming">キーボード・パッド</sys:String>
     <sys:String x:Key="Layout_Midi_Streaming">MIDIコントローラ</sys:String>
@@ -340,6 +341,7 @@
     <sys:String x:Key="Light_Intensity">明るさ[%]</sys:String>
     <sys:String x:Key="Light_Yaw">向き(横)[deg]</sys:String>
     <sys:String x:Key="Light_Pitch">向き(上下)[deg]</sys:String>
+    <sys:String x:Key="Light_BgAdjust">デスクトップの色調でライトを補正</sys:String>
 
     <sys:String x:Key="Shadow">影</sys:String>
     <sys:String x:Key="Shadow_Enable">影を有効化</sys:String>
@@ -518,6 +520,10 @@ webカメラでの顔トラッキングを有効にする場合は
 
     <sys:String x:Key="DialogTitle_DisableAutomation">オートメーションの無効化</sys:String>
     <sys:String x:Key="DialogMessage_DisableAutomation">オートメーションを無効化しますか？</sys:String>
+    
+    <sys:String x:Key="DialogTitle_PenUnavailable">VRMがペン表示に未対応です</sys:String>
+    <sys:String x:Key="DialogMessage_PenUnavailable">ペンを表示するにはモデルに人差し指ボーンが必要です。モデルの設定を確認して下さい。</sys:String>    
+    
     <!-- Other: Not on Dialog, but used from code -->
     <sys:String x:Key="CommonUi_DoNothing">(何もしない)</sys:String>
     <sys:String x:Key="CommonUi_None">(なし)</sys:String>

@@ -7,7 +7,7 @@
              xmlns:vmm="clr-namespace:Baku.VMagicMirrorConfig"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance Type={x:Type vmm:MainWindowViewModel}}"
-             d:DesignWidth="520"
+             d:DesignWidth="540"
              d:DesignHeight="650"             
              >
     <UserControl.Resources>
@@ -472,6 +472,18 @@
                                   IsChecked="{Binding LayoutSetting.PenVisibility.Value}"
                                   Content="{DynamicResource Layout_Pen_Visibility}"
                                   />
+                        <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                HorizontalAlignment="Right"
+                                
+                                Visibility="{Binding LayoutSetting.PenUnavailable.Value,
+                                                     Converter={StaticResource BooleanToVisibilityConverter},
+                                                     FallbackValue=Collapsed}"
+                                Command="{Binding LayoutSetting.ShowPenUnavaiableWarningCommand}">
+                            <StackPanel Orientation="Horizontal">
+                                <md:PackIcon Kind="WarningOutline" VerticalAlignment="Center"/>
+                                <TextBlock Text="{DynamicResource Layout_Pen_UnavaiableModel}"/>
+                            </StackPanel>
+                        </Button>
                         <CheckBox Style="{StaticResource SmallMarginCheckBox}"
                                   Content="{DynamicResource Layout_Gamepad}"
                                   IsChecked="{Binding LayoutSetting.GamepadVisibility.Value}"
@@ -483,6 +495,10 @@
                         <CheckBox Style="{StaticResource SmallMarginCheckBox}"
                                   Content="{DynamicResource Wind_Enable_Streaming}"
                                   IsChecked="{Binding LightSetting.EnableWind.Value}"
+                                  />
+                        <CheckBox Style="{StaticResource SmallMarginCheckBox}"
+                                  Content="{DynamicResource Light_BgAdjust}"
+                                  IsChecked="{Binding LightSetting.UseDesktopLightAdjust.Value}"
                                   />
                         <Grid>
                             <Grid.ColumnDefinitions>
