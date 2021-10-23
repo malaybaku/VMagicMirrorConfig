@@ -15,6 +15,8 @@
     <StackPanel HorizontalAlignment="Left"
                 Margin="10">
         <TextBlock Style="{StaticResource NoteText}"
+                        Text="{x:Static vmm:AppLabels.AppName}"/>
+        <TextBlock Style="{StaticResource NoteText}"
                         Text="Copyright (c) 2019-2021 獏星(ばくすたー)"/>
         <TextBlock Style="{StaticResource NoteText}"
                         ToolTip="https://github.com/malaybaku/VMagicMirror">
