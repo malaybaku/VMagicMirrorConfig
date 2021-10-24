@@ -5,69 +5,93 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vmm="clr-namespace:Baku.VMagicMirrorConfig"
         mc:Ignorable="d"        
-        Title="Update is Available!" 
+        Title="{DynamicResource UpdateDialog_Title}" 
         ResizeMode="NoResize"
         WindowStartupLocation="CenterOwner"
+        d:DataContext="{d:DesignInstance vmm:UpdateNotificationViewModel}"
         Height="350" Width="500"
         >
-    <ScrollViewer VerticalScrollBarVisibility="Auto"
-                  HorizontalScrollBarVisibility="Disabled">
-        <StackPanel Margin="10,0,10,10">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
-            <TextBlock 
-                Style="{StaticResource MaterialDesignHeadline5TextBlock}"
-                Text="アップデートが利用可能です！"
-                Margin="0,10,0,0"                    
-                />
+        <TextBlock Grid.Row="0"
+                    Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                    Text="{DynamicResource UpdateDialog_Header}" 
+                    Margin="10,10,10,0"                    
+                    />
 
+        <TextBlock Grid.Row="1" 
+                   Style="{StaticResource MaterialDesignBody2TextBlock}"
+                   Margin="20,10,10,5"
+                   >
+            <Run Text="{DynamicResource UpdateDialog_CurrentVersionHeader}"/>
+            <Run Text="{Binding CurrentVersion}"/>
+        </TextBlock>
 
-            <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}"
-                        Margin="15,10"
-                        Text="現在のバージョン: v1.2.3"
-                        />
-            <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}"
-                        Margin="15,0,5,0"
-                        Text="最新バージョン: v2.0.0"
-                        />
+        <TextBlock Grid.Row="2"
+                   Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                   Margin="20,0,10,5"
+                   >
+            <Run Text="{DynamicResource UpdateDialog_LatestVersionHeader}"/>
+            <Run Text="{Binding LatestVersion}"/>
+        </TextBlock>
 
-            <TextBlock Text="{Binding ReleaseNote}"
-                       TextWrapping="Wrap"
-                       Margin="10,20"
-                       />
+        <ScrollViewer Grid.Row="3"
+                      Margin="0,10"
+                      VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled">
+            <StackPanel>
+                <TextBlock Text="{Binding ReleaseNote}"
+                           TextWrapping="Wrap"
+                           Margin="10"
+                           />
+            </StackPanel>
+        </ScrollViewer>
 
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+        <Grid Grid.Row="4" Margin="10,5">
+            <Grid.RowDefinitions>
 
-                <Button Grid.Column="0"
-                        Width="NaN"
-                        Height="30"
-                        Margin="15,5"
-                        Command="{Binding LoadVrmCommand}"
-                        Content="BOOTHを開く"
-                        />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-                <Button Grid.Column="1"
-                        Width="NaN"
-                        Height="30"
-                        Margin="15,5"
-                        Command="{Binding LoadVrmCommand}"
-                        Content="後で通知"
-                        />
+            <Button Grid.Column="0"
+                    Width="NaN"
+                    Height="30"
+                    Margin="5,5"
+                    Command="{Binding GetLatestVersionCommand}"
+                    Content="{DynamicResource UpdateDialog_GetLatest}"
+                    />
 
-                <Button Grid.Column="2"
-                        Width="NaN"
-                        Height="30"
-                        Margin="15,5"
-                        Command="{Binding LoadVrmCommand}"
-                        Content="このバージョンはスキップ"
-                        />
+            <Button Grid.Column="1"
+                    Style="{StaticResource MaterialDesignOutlinedButton}"
+                    Width="NaN"
+                    Height="30"
+                    Margin="5,5"
+                    Padding="0"
+                    Command="{Binding AskMeLaterCommand}"
+                    Content="{DynamicResource UpdateDialog_AskMeLater}"
+                    />
 
-            </Grid>
+            <Button Grid.Column="2"
+                    Style="{StaticResource MaterialDesignOutlinedButton}"
+                    Width="NaN"
+                    Height="30"
+                    Margin="5,5"
+                    Padding="0"
+                    Command="{Binding SkipThisVersionCommand}"
+                    Content="{DynamicResource UpdateDialog_SkipThisVersion}"
+                    />
 
-        </StackPanel>
-    </ScrollViewer>
+        </Grid>
+    </Grid>
 </Window>

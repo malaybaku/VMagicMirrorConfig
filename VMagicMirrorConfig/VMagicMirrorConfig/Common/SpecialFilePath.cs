@@ -12,6 +12,7 @@ namespace Baku.VMagicMirrorConfig
         private const string LogTextName = "log_config.txt";
         private const string UnityAppFileName = "VMagicMirror.exe";
         private const string SaveSlotFileNamePrefix = "_save";
+        private const string UpdateCheckFileName = "UpdateCheck";
 
         //TODO: 「デバッグ実行時だけRootDirectoryを差し替えたい」という需要が考えられるが、良い手はあるか…？
         private static string RootDirectory { get; }
@@ -21,6 +22,7 @@ namespace Baku.VMagicMirrorConfig
         public static string LogFilePath { get; }
         public static string UnityAppPath { get; }
         public static string AutoSaveSettingFilePath { get; }
+        public static string UpdateCheckFilePath { get; }
 
         /// <summary>
         /// スロット番号を指定して保存ファイル名を指定します。0を指定した場合は特別にオートセーブファイルのパスを返します。
@@ -47,6 +49,7 @@ namespace Baku.VMagicMirrorConfig
             SaveFileDir = Path.Combine(RootDirectory, "Saves");
             LogFileDir = Path.Combine(RootDirectory, "Logs");
             AutoSaveSettingFilePath = Path.Combine(SaveFileDir, AutoSaveSettingFileName);
+            UpdateCheckFilePath = Path.Combine(SaveFileDir, UpdateCheckFileName);
             LogFilePath = Path.Combine(LogFileDir, LogTextName);
 
             Directory.CreateDirectory(RootDirectory);

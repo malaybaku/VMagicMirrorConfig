@@ -1,7 +1,9 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Net;
+using System.Linq;
 using System.Threading.Tasks;
+using System.Net.Http;
 
 namespace Baku.VMagicMirrorConfig
 {
@@ -87,6 +89,8 @@ namespace Baku.VMagicMirrorConfig
 
             return false;
         }
+
+        public override string ToString() => $"v{Major}.{Minor}.{Build}";
     }
 
     public record UpdateCheckResult(bool UpdateNeeded, VmmAppVersion Version, ReleaseNote ReleaseNote)
@@ -113,8 +117,30 @@ namespace Baku.VMagicMirrorConfig
                 return Empty;
             }
 
+            var lines = rawValue.Replace("\r\n", "\n").Split('\n');
 
+            var japaneseNote = string.Join(
+                "\n",
+                lines.SkipWhile(line => !line.StartsWith("Japanese:"))
+                    .Skip(1)
+                    .TakeWhile(line => !line.StartsWith("English:"))
+                );
 
+            var englishNote = string.Join(
+                "\n",
+                lines.SkipWhile(line => !line.StartsWith("English:"))
+                    .Skip(1)
+                    .TakeWhile(line => !line.StartsWith("Note:"))
+                );
+
+            if (string.IsNullOrEmpty(japaneseNote) || string.IsNullOrEmpty(englishNote))
+            {
+                return new ReleaseNote(rawValue, rawValue);
+            }
+            else
+            {
+                return new ReleaseNote(japaneseNote, englishNote);
+            }
         }
 
 
@@ -124,15 +150,19 @@ namespace Baku.VMagicMirrorConfig
 
     public class UpdateNotificationModel
     {
-        private readonly WebClient _webClient = new WebClient();
+        const string LatestReleaseApiEndPoint = "https://api.github.com/repos/malaybaku/VMagicMirror/releases/latest";
+        const double ApiTimeout = 3.0;
+
+        //NOTE: WebClientは使い回すと不幸になるはずなので…
+        private static readonly HttpClient _httpClient = new HttpClient();
 
         public async Task<UpdateCheckResult> CheckUpdateAvailable()
         {
             try
             {
-                var latestReleaseJson = await _webClient.DownloadStringTaskAsync("https://api.github.com/repos/malaybaku/VMagicMirror/releases/latest");
+                _httpClient.Timeout = TimeSpan.FromSeconds(ApiTimeout);
+                var latestReleaseJson = await _httpClient.GetStringAsync(LatestReleaseApiEndPoint);
                 var jobj = JObject.Parse(latestReleaseJson);
-
                 var releaseName = jobj["name"] is JValue jvName ? ((string?)jvName) : null;
                 if (!VmmAppVersion.TryParse(releaseName, out var version))
                 {
@@ -142,20 +172,17 @@ namespace Baku.VMagicMirrorConfig
                 var rawReleaseNote = jobj["body"] is JValue jvBody ? ((string?)jvBody) : null;
                 var releaseNote = ReleaseNote.FromRawString(rawReleaseNote);
 
-
                 return new UpdateCheckResult(
-                    version.IsNewerThan(                    AppConsts.AppVersion),
+                    version.IsNewerThan(AppConsts.AppVersion),
                     version,
-
-
-                    
-                    )
+                    releaseNote
+                    );
             }
             catch (Exception ex)
             {
                 LogOutput.Instance.Write(ex);
+                return UpdateCheckResult.NoUpdateNeeded();
             }
-
         }
     }
 }

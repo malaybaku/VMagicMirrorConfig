@@ -457,6 +457,15 @@
     <sys:String x:Key="SettingFile_SaveCompleted_ExportedFile">設定をファイルに保存しました。</sys:String>
     <sys:String x:Key="SettingFile_LoadCompleted_ExportedFile">設定をファイルからロードしました。</sys:String>
    
+    <!-- Update Window -->
+    <sys:String x:Key="UpdateDialog_Title">VMagicMirrorの更新</sys:String>
+    <sys:String x:Key="UpdateDialog_Header">アップデートが利用可能です</sys:String>
+    <sys:String x:Key="UpdateDialog_CurrentVersionHeader">現在のバージョン: </sys:String>
+    <sys:String x:Key="UpdateDialog_LatestVersionHeader">最新バージョン: </sys:String>
+    <sys:String x:Key="UpdateDialog_GetLatest">最新版を入手</sys:String>
+    <sys:String x:Key="UpdateDialog_AskMeLater">後で通知</sys:String>
+    <sys:String x:Key="UpdateDialog_SkipThisVersion">このバージョンはスキップ</sys:String>
+    
     <!-- Dialog Messages -->
     <sys:String x:Key="DialogTitle_LoadLocalVrm">VRMの読み込み</sys:String>
     <sys:String x:Key="DialogMessage_LoadLocalVrm">ビューアー画面のライセンスを確認してください。読み込みますか？</sys:String>
@@ -523,6 +532,9 @@ webカメラでの顔トラッキングを有効にする場合は
     
     <sys:String x:Key="DialogTitle_PenUnavailable">VRMがペン表示に未対応です</sys:String>
     <sys:String x:Key="DialogMessage_PenUnavailable">ペンを表示するにはモデルに人差し指ボーンが必要です。モデルの設定を確認して下さい。</sys:String>    
+
+    <sys:String x:Key="DialogTitle_AlreadyLatestVersion">最新バージョンです</sys:String>
+    <sys:String x:Key="DialogMessage_AlreadyLatestVersion">現在のバージョン({0})は最新です。</sys:String>    
     
     <!-- Other: Not on Dialog, but used from code -->
     <sys:String x:Key="CommonUi_DoNothing">(何もしない)</sys:String>
