@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
-using System.Net;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Net.Http;
@@ -153,7 +152,7 @@ namespace Baku.VMagicMirrorConfig
         const string LatestReleaseApiEndPoint = "https://api.github.com/repos/malaybaku/VMagicMirror/releases/latest";
         const double ApiTimeout = 3.0;
 
-        //NOTE: WebClientは使い回すと不幸になるはずなので…
+        //NOTE: 確かコレ系のClientは使い回すと不幸になるので、単一インスタンスにしておく
         private static readonly HttpClient _httpClient = new HttpClient();
 
         public async Task<UpdateCheckResult> CheckUpdateAvailable()

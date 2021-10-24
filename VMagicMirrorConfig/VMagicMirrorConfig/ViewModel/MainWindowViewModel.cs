@@ -147,7 +147,7 @@ namespace Baku.VMagicMirrorConfig
         public ActionCommand OpenSettingWindowCommand { get; }
 
         public ActionCommand ResetToDefaultCommand { get; }
-
+        
         public ActionCommand LoadPrevSettingCommand { get; }
 
         public ActionCommand TakeScreenshotCommand { get; }
@@ -239,9 +239,6 @@ namespace Baku.VMagicMirrorConfig
             _isVRoidHubUiActive = false;
             EndShowUiOnUnity();
         }
-
-
-     
 
         private async void ResetToDefault()
         {
@@ -343,8 +340,9 @@ namespace Baku.VMagicMirrorConfig
                 LoadSavedVRoidModel(Model.LastLoadedVRoidModelId, true);
             }
 
-            //NOTE: この処理はココでしか呼ばない = 起動直後限定の処理にしたくて意図的にやってます
+            //NOTE: このへんの処理は起動直後限定の処理にしたくて意図的にやってます
             ExternalTrackerSetting.RefreshConnectionIfPossible();
+            await new UpdateChecker().RunAsync(true);
         }
 
         public void Dispose()

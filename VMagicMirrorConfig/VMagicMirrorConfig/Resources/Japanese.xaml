@@ -13,6 +13,7 @@
     <sys:String x:Key="TitleBar_Visit_DownloadPage_Standard">ダウンロード (基本エディション)</sys:String>
     <sys:String x:Key="TitleBar_Visit_DownloadPage_Full">ダウンロード (フルエディション)</sys:String>
     <sys:String x:Key="TitleBar_Visit_Fanbox">Fanbox</sys:String>
+    <sys:String x:Key="TitleBar_Check_Update">更新を確認</sys:String>
     <sys:String x:Key="TitleBar_About">VMagicMirrorについて</sys:String>
     
     <!-- Top Tab -->

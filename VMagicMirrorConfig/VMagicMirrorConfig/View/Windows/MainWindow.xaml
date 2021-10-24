@@ -57,6 +57,9 @@
                         <MenuItem Header="{DynamicResource TitleBar_About}" 
                                   Command="{Binding ShowLicenseCommand}"
                                   />
+                        <MenuItem Header="{DynamicResource TitleBar_Check_Update}" 
+                                  Command="{Binding CheckUpdateCommand}"
+                                  />
                     </CompositeCollection>
                 </metro:DropDownButton.ItemsSource>
             </metro:DropDownButton>
