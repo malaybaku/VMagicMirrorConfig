@@ -10,7 +10,7 @@
     xmlns:vmm="clr-namespace:Baku.VMagicMirrorConfig"
     mc:Ignorable="d"
     d:DataContext="{x:Type vmm:MainWindowViewModel}"
-    Title="{x:Static vmm:AppLabels.AppFullNameWithEnvSuffix}" 
+    Title="{x:Static vmm:AppConsts.AppFullNameWithEnvSuffix}" 
     ResizeMode="CanMinimize"
     TitleCharacterCasing="Normal"
     WindowTransitionsEnabled="False"
