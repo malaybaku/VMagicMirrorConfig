@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Baku.VMagicMirrorConfig
 {
@@ -15,11 +16,11 @@ namespace Baku.VMagicMirrorConfig
     /// </summary>
     class UpdateChecker
     {
-        private void OpenStandardDownloadUrl() => UrlNavigate.Open("https://baku-dreameater.booth.pm/items/1272298");
-        private void OpenFullDownloadUrl() => UrlNavigate.Open("https://baku-dreameater.booth.pm/items/3064040");
+        private const string StandardEditionUrl = "https://baku-dreameater.booth.pm/items/1272298";
+        private const string FullEditionUrl = "https://baku-dreameater.booth.pm/items/3064040";
 
-        //アップデート表示は5日おきに行う
-        private const double DialogAppearMinimumInterval = 5.0;
+        //「後で通知」が具体的にどのくらい後なのか、という値[day]
+        private const double DialogAppearMinimumIntervalDay = 5.0;
 
         /// <summary>
         /// アプリ起動時か、あるいはそれ以外で明示的に要求された場合に更新を確認します。
@@ -29,9 +30,28 @@ namespace Baku.VMagicMirrorConfig
         public async Task RunAsync(bool startupCheck)
         {
             var model = new UpdateNotificationModel();
+            var preference = UpdatePreferenceRepository.Load();
+
             var checkResult = await model.CheckUpdateAvailable();
             if (!checkResult.UpdateNeeded)
             {
+                //有効なバージョン情報が降ってきた場合、アップデートが不要だとしても保存はしておく
+                if (checkResult.Version.IsValid)
+                {
+                    UpdatePreferenceRepository.Save(new UpdatePreference()
+                    {
+                        LastDialogShownTime = DateTime.Now,
+                        LastShownVersion = checkResult.Version.ToString(),
+                        //現時点で最新版がないので、このフラグはどっちになっていても挙動に影響しない
+                        SkipLastShownVersion = false,
+                    });
+                    LogOutput.Instance.Write("Update is not needed: this version seems latest.");
+                }
+                else
+                {
+                    LogOutput.Instance.Write("Update check seems failed...");
+                }
+
                 if (!startupCheck)
                 {
                     var indication = MessageIndication.AlreadyLatestVersion();
@@ -41,10 +61,10 @@ namespace Baku.VMagicMirrorConfig
                         MessageBoxWrapper.MessageBoxStyle.OK
                         );
                 }
+
                 return;
             }
 
-            var preference = UpdatePreferenceRepository.Load();
             var lastShownVersion = VmmAppVersion.TryParse(preference.LastShownVersion, out var version)
                 ? version
                 : VmmAppVersion.LoadInvalid();
@@ -57,18 +77,18 @@ namespace Baku.VMagicMirrorConfig
                 checkResult.Version.IsNewerThan(lastShownVersion) ||
                 !startupCheck ||
                 (!preference.SkipLastShownVersion &&
-                    (DateTime.Now - preference.LastDialogShownTime).TotalDays > DialogAppearMinimumInterval);
+                    (DateTime.Now - preference.LastDialogShownTime).TotalDays > DialogAppearMinimumIntervalDay);
 
             if (!shouldShowDialog)
             {
                 return;
             }
 
-
             var vm = new UpdateNotificationViewModel(checkResult);
             var dialog = new UpdateNotificationWindow()
             {
                 DataContext = vm,
+                Owner = Application.Current.MainWindow,
             };
             dialog.ShowDialog();
 
@@ -87,29 +107,16 @@ namespace Baku.VMagicMirrorConfig
                     break;
             }
 
-            var newPreference = new UpdatePreference()
+            UpdatePreferenceRepository.Save(new UpdatePreference()
             {
                 LastDialogShownTime = DateTime.Now,
                 LastShownVersion = checkResult.Version.ToString(),
                 SkipLastShownVersion = skipLastShownVersion,
-            };
-            UpdatePreferenceRepository.Save(newPreference);
+            });
 
             if (openStorePage)
             {
-                OpenStorePage();
-            }
-        }
-
-        private void OpenStorePage()
-        {
-            if (FeatureLocker.FeatureLocked)
-            {
-                OpenStandardDownloadUrl();
-            }
-            else
-            {
-                OpenFullDownloadUrl();
+                UrlNavigate.Open(FeatureLocker.FeatureLocked ? StandardEditionUrl : FullEditionUrl);
             }
         }
     }

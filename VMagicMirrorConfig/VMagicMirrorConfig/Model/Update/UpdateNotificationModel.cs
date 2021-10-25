@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Net.Http;
+using System.Text.RegularExpressions;
 
 namespace Baku.VMagicMirrorConfig
 {
@@ -89,6 +90,9 @@ namespace Baku.VMagicMirrorConfig
             return false;
         }
 
+        //NOTE: 「1.-2.3みたいなのは良いのか」みたいな話もあるけど、そんな事しないでしょ…という事で良識に期待します。
+        public bool IsValid => Major > 0 || Minor > 0 || Build > 0;
+        
         public override string ToString() => $"v{Major}.{Minor}.{Build}";
     }
 
@@ -98,7 +102,7 @@ namespace Baku.VMagicMirrorConfig
             => new UpdateCheckResult(false, VmmAppVersion.LoadInvalid(), ReleaseNote.Empty);
     }
 
-    public record ReleaseNote(string JapaneseNote, string EnglishNote)
+    public record ReleaseNote(string JapaneseNote, string EnglishNote, string DateString)
     {
         /// <summary>
         /// 日英のリリースノートが混在しているはずのテキストをパースし、
@@ -107,7 +111,7 @@ namespace Baku.VMagicMirrorConfig
         /// <param name="rawValue"></param>
         /// <returns></returns>
         /// <remarks>
-        /// 分割に失敗した場合は情報の欠落を防ぐため、元のテキスト全体をJapanese, Englishの双方に適用します。
+        /// 分割に失敗した場合は情報の欠落を防ぐため、元のテキスト全体をJapanese, Englishの双方に適用しつつ、リリース日は不明とします。
         /// </remarks>
         public static ReleaseNote FromRawString(string? rawValue)
         {
@@ -117,12 +121,18 @@ namespace Baku.VMagicMirrorConfig
             }
 
             var lines = rawValue.Replace("\r\n", "\n").Split('\n');
+            //冒頭行がリリース年月日のみからなる("1234/5/6"など)ことを期待したパース処理。
+            //アメリカの月日年形式には対応したくないので、単に年月日が入ったものを横流しする。
+            var dateString = (lines.Length > 0 && Regex.IsMatch(lines[0], "[0-9]+/[0-9]+/[0-9]+"))
+                ? lines[0]
+                : "";
 
             var japaneseNote = string.Join(
                 "\n",
                 lines.SkipWhile(line => !line.StartsWith("Japanese:"))
                     .Skip(1)
                     .TakeWhile(line => !line.StartsWith("English:"))
+                    .Where(line => !string.IsNullOrEmpty(line))
                 );
 
             var englishNote = string.Join(
@@ -130,20 +140,21 @@ namespace Baku.VMagicMirrorConfig
                 lines.SkipWhile(line => !line.StartsWith("English:"))
                     .Skip(1)
                     .TakeWhile(line => !line.StartsWith("Note:"))
+                    .Where(line => !string.IsNullOrEmpty(line))
                 );
 
             if (string.IsNullOrEmpty(japaneseNote) || string.IsNullOrEmpty(englishNote))
             {
-                return new ReleaseNote(rawValue, rawValue);
+                return new ReleaseNote(rawValue, rawValue, "");
             }
             else
             {
-                return new ReleaseNote(japaneseNote, englishNote);
+                return new ReleaseNote(japaneseNote, englishNote, dateString);
             }
         }
 
 
-        public static ReleaseNote Empty => new ReleaseNote("", "");
+        public static ReleaseNote Empty => new ReleaseNote("", "", "");
     }
 
 
@@ -154,14 +165,23 @@ namespace Baku.VMagicMirrorConfig
 
         //NOTE: 確かコレ系のClientは使い回すと不幸になるので、単一インスタンスにしておく
         private static readonly HttpClient _httpClient = new HttpClient();
+      
+        static UpdateNotificationModel()
+        {
+            _httpClient.Timeout = TimeSpan.FromSeconds(ApiTimeout);
+            //GitHub君がUser-Agentを欲しているのでEdgeであるということにします
+            _httpClient.DefaultRequestHeaders.Add("User-Agent", "Microsoft Edge");
+        }
 
         public async Task<UpdateCheckResult> CheckUpdateAvailable()
         {
             try
-            {
-                _httpClient.Timeout = TimeSpan.FromSeconds(ApiTimeout);
-                var latestReleaseJson = await _httpClient.GetStringAsync(LatestReleaseApiEndPoint);
-                var jobj = JObject.Parse(latestReleaseJson);
+            {                
+                var responseJson = await _httpClient.GetStringAsync(LatestReleaseApiEndPoint);
+                //todo: 量が多いので消したい
+                //LogOutput.Instance.Write("latest ver api result:" + responseJson);
+
+                var jobj = JObject.Parse(responseJson);
                 var releaseName = jobj["name"] is JValue jvName ? ((string?)jvName) : null;
                 if (!VmmAppVersion.TryParse(releaseName, out var version))
                 {

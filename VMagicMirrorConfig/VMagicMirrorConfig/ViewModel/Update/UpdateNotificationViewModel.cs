@@ -8,7 +8,10 @@
 
             CurrentVersion = AppConsts.AppVersion.ToString();
             LatestVersion = modelData.Version.ToString();
-
+            ReleaseDate = string.IsNullOrEmpty(modelData.ReleaseNote.DateString) 
+                ? ""
+                : " (" + modelData.ReleaseNote.DateString + ")";
+            
             GetLatestVersionCommand = new ActionCommand(() => SetResult(UpdateDialogResult.GetLatestVersion));
             AskMeLaterCommand = new ActionCommand(() => SetResult(UpdateDialogResult.AskMeLater));
             SkipThisVersionCommand = new ActionCommand(() => SetResult(UpdateDialogResult.SkipThisVersion));
@@ -20,6 +23,7 @@
 
         public string CurrentVersion { get; }
         public string LatestVersion { get; }
+        public string ReleaseDate { get; }
 
         public string ReleaseNote => (LanguageSelector.Instance.LanguageName == LanguageSelector.LangNameJapanese)
             ? _modelData.ReleaseNote.JapaneseNote

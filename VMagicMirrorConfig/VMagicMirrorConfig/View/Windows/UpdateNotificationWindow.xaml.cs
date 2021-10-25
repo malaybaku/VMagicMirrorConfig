@@ -1,8 +1,8 @@
-﻿using System.Windows;
+﻿using MahApps.Metro.Controls;
 
 namespace Baku.VMagicMirrorConfig
 {
-    public partial class UpdateNotificationWindow : Window
+    public partial class UpdateNotificationWindow : MetroWindow
     {
         public UpdateNotificationWindow() => InitializeComponent();
     }

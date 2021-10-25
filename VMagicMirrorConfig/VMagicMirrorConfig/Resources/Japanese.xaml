@@ -459,10 +459,8 @@
     <sys:String x:Key="SettingFile_LoadCompleted_ExportedFile">設定をファイルからロードしました。</sys:String>
    
     <!-- Update Window -->
-    <sys:String x:Key="UpdateDialog_Title">VMagicMirrorの更新</sys:String>
-    <sys:String x:Key="UpdateDialog_Header">アップデートが利用可能です</sys:String>
-    <sys:String x:Key="UpdateDialog_CurrentVersionHeader">現在のバージョン: </sys:String>
-    <sys:String x:Key="UpdateDialog_LatestVersionHeader">最新バージョン: </sys:String>
+    <sys:String x:Key="UpdateDialog_Title">VMagicMirror - 更新が利用可能です</sys:String>
+    <sys:String x:Key="UpdateDialog_ReleaseNoteHeader">リリースノート</sys:String>
     <sys:String x:Key="UpdateDialog_GetLatest">最新版を入手</sys:String>
     <sys:String x:Key="UpdateDialog_AskMeLater">後で通知</sys:String>
     <sys:String x:Key="UpdateDialog_SkipThisVersion">このバージョンはスキップ</sys:String>

@@ -457,11 +457,9 @@ VRoid Hub model is not supported in this feature.</sys:String>
     <sys:String x:Key="SettingFile_LoadCompleted_ExportedFile">Loaded Setting from File.</sys:String>
 
     <!-- Update Window -->
-    <sys:String x:Key="UpdateDialog_Title">Update</sys:String>
-    <sys:String x:Key="UpdateDialog_Header">Update is Available</sys:String>
-    <sys:String x:Key="UpdateDialog_CurrentVersionHeader">Current Version: </sys:String>
-    <sys:String x:Key="UpdateDialog_LatestVersionHeader">Latest Version: </sys:String>
-    <sys:String x:Key="UpdateDialog_GetLatest">Get Latest</sys:String>
+    <sys:String x:Key="UpdateDialog_Title">VMagicMirror - Update is Available</sys:String>
+    <sys:String x:Key="UpdateDialog_ReleaseNoteHeader">Release Note</sys:String>
+    <sys:String x:Key="UpdateDialog_GetLatest">Get Latest Version</sys:String>
     <sys:String x:Key="UpdateDialog_AskMeLater">Ask me Later</sys:String>
     <sys:String x:Key="UpdateDialog_SkipThisVersion">Skip this Version</sys:String>    
     
