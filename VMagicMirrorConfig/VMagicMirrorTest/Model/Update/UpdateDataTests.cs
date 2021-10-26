@@ -4,76 +4,49 @@ namespace Baku.VMagicMirrorConfig.Test
 {
     public class UpdateDataTests
     {
+        [TestCase("v1.2.3")]
+        [TestCase("1.2.3", Description = "冒頭のvは無くてもいい")]
         [Test]
-        public void Test_バージョン値パース_正常系()
+        public void Test_バージョン値パース_正常系(string raw)
         {
-            var success = VmmAppVersion.TryParse("v1.2.3", out var result);
+            var success = VmmAppVersion.TryParse(raw, out var result);
             Assert.IsTrue(success);
             Assert.AreEqual(1, result.Major);
             Assert.AreEqual(2, result.Minor);
             Assert.AreEqual(3, result.Build);
         }
 
+        [TestCase("4.6.9.3")]
+        [TestCase("4.6.9.abc", Description = "4桁目以降は数値じゃなくても通る")]
         [Test]
-        public void Test_バージョン値パース_正常系_冒頭のvは無くてもいい()
+        public void Test_バージョン値パース_正常系_4桁表記すると手前の3桁を使う(string raw)
         {
-            var success = VmmAppVersion.TryParse("4.0.2", out var result);
-            Assert.IsTrue(success);
-            Assert.AreEqual(4, result.Major);
-            Assert.AreEqual(0, result.Minor);
-            Assert.AreEqual(2, result.Build);
-        }
-
-        [Test]
-        public void Test_バージョン値パース_正常系_4桁表記すると手前の3桁を使う()
-        {
-            var success = VmmAppVersion.TryParse("4.6.9.3", out var result);
+            var success = VmmAppVersion.TryParse(raw, out var result);
             Assert.IsTrue(success);
             Assert.AreEqual(4, result.Major);
             Assert.AreEqual(6, result.Minor);
             Assert.AreEqual(9, result.Build);
         }
 
+        [TestCase("")]
+        [TestCase(null)]
         [Test]
-        public void Test_バージョン値パース_異常系_空文字とnull()
+        public void Test_バージョン値パース_異常系_空文字とnull(string raw)
         {
-            var success = VmmAppVersion.TryParse("", out var result);
-            Assert.IsFalse(success);
-            Assert.AreEqual(0, result.Major);
-            Assert.AreEqual(0, result.Minor);
-            Assert.AreEqual(0, result.Build);
-
-            success = VmmAppVersion.TryParse(null, out result);
-            Assert.IsFalse(success);
-            Assert.AreEqual(0, result.Major);
-            Assert.AreEqual(0, result.Minor);
-            Assert.AreEqual(0, result.Build);
-        }
-
-        [Test]
-        public void Test_バージョン値パース_異常系_prefixはv以外はダメ()
-        {
-            var success = VmmAppVersion.TryParse("a1.2.3", out var result);
+            var success = VmmAppVersion.TryParse(raw, out var result);
             Assert.IsFalse(success);
             Assert.AreEqual(0, result.Major);
             Assert.AreEqual(0, result.Minor);
             Assert.AreEqual(0, result.Build);
         }
 
+        [TestCase("a1.2.3", Description = "prefixはv以外ダメ")]
+        [TestCase("1.2.3a", Description = "suffixがあるのはダメ")]
+        [TestCase("1.xxx.2", Description = "途中に変な値があるとダメ")]
         [Test]
-        public void Test_バージョン値パース_異常系_suffixがあってはいけない()
+        public void Test_バージョン値パース_異常系_書式が悪い(string raw)
         {
-            var success = VmmAppVersion.TryParse("1.2.3a", out var result);
-            Assert.IsFalse(success);
-            Assert.AreEqual(0, result.Major);
-            Assert.AreEqual(0, result.Minor);
-            Assert.AreEqual(0, result.Build);
-        }
-
-        [Test]
-        public void Test_バージョン値パース_異常系_途中におかしい値があるとダメ()
-        {
-            var success = VmmAppVersion.TryParse("1.xxx.2", out var result);
+            var success = VmmAppVersion.TryParse(raw, out var result);
             Assert.IsFalse(success);
             Assert.AreEqual(0, result.Major);
             Assert.AreEqual(0, result.Minor);
@@ -141,26 +114,18 @@ Note:
             Assert.AreEqual("- Add: Foo\n- Fix: Bar", note.EnglishNote);
         }
 
+        [TestCase("")]
+        [TestCase(null)]
         [Test]
-        public void Test_リリースノート異常系_空文字とかnull()
+        public void Test_リリースノート異常系_空文字とかnull(string rawNote)
         {
-            var note = ReleaseNote.FromRawString("");
-            Assert.AreEqual("", note.DateString);
-            Assert.AreEqual("", note.JapaneseNote);
-            Assert.AreEqual("", note.EnglishNote);
-
-            note = ReleaseNote.FromRawString(null);
+            var note = ReleaseNote.FromRawString(rawNote);
             Assert.AreEqual("", note.DateString);
             Assert.AreEqual("", note.JapaneseNote);
             Assert.AreEqual("", note.EnglishNote);
         }
 
-
-        [Test]
-        public void Test_リリースノート異常系_日付は書き忘れると空になる()
-        {
-            var note = ReleaseNote.FromRawString(
-@"
+        [TestCase(@"
 Japanese:
 
 - 追加: hoge.
@@ -174,18 +139,8 @@ English:
 Note:
 
 - This is note area which should be ignored in parse process.
-");
-
-            Assert.AreEqual("", note.DateString);
-            Assert.AreEqual("- 追加: hoge.\n- 修正: fuga.", note.JapaneseNote);
-            Assert.AreEqual("- Add: Foo\n- Fix: Bar", note.EnglishNote);
-        }
-
-        [Test]
-        public void Test_リリースノート異常系_日付に見えるが書式がおかしいと空()
-        {
-            var note = ReleaseNote.FromRawString(
-@"2048/May/11
+")]
+        [TestCase(@"2048/May/11
 
 Japanese:
 
@@ -200,18 +155,17 @@ English:
 Note:
 
 - This is note area which should be ignored in parse process.
-");
-
+")]
+        [Test]
+        public void Test_リリースノート異常系_日付がないか書式異常の場合は空(string rawNote)
+        {
+            var note = ReleaseNote.FromRawString(rawNote);
             Assert.AreEqual("", note.DateString);
             Assert.AreEqual("- 追加: hoge.\n- 修正: fuga.", note.JapaneseNote);
             Assert.AreEqual("- Add: Foo\n- Fix: Bar", note.EnglishNote);
         }
 
-        [Test]
-        public void Test_リリースノート異常系_区切りが汚いとJPもENも全文入る()
-        {
-            var raw = 
-@"2021/10/24
+        [TestCase(@"2021/10/24
 
 Japanese
 
@@ -226,20 +180,8 @@ English
 Note:
 
 - This is note area which should be ignored in parse process.
-";
-            var note = ReleaseNote.FromRawString(raw);
-
-            //文中に日付がある場合は全文のほうに入ってればいいので、DateString側が空になってるのが正、というのがポイント
-            Assert.AreEqual("", note.DateString);
-            Assert.AreEqual(raw, note.JapaneseNote);
-            Assert.AreEqual(raw, note.EnglishNote);
-        }
-
-        [Test]
-        public void Test_リリースノート異常系_1言語だけ無効な場合も両方に全文が入る()
-        {
-            var raw =
-@"2021/10/24
+")]
+        [TestCase(@"2021/10/24
 
 Japanese
 
@@ -254,13 +196,16 @@ English:
 Note:
 
 - This is note area which should be ignored in parse process.
-";
-            var note = ReleaseNote.FromRawString(raw);
+")]
+        [Test]
+        public void Test_リリースノート異常系_区切りが汚いとJPもENも全文入る(string rawReleaseNote)
+        {
+            var note = ReleaseNote.FromRawString(rawReleaseNote);
 
             //文中に日付がある場合は全文のほうに入ってればいいので、DateString側が空になってるのが正、というのがポイント
             Assert.AreEqual("", note.DateString);
-            Assert.AreEqual(raw, note.JapaneseNote);
-            Assert.AreEqual(raw, note.EnglishNote);
+            Assert.AreEqual(rawReleaseNote, note.JapaneseNote);
+            Assert.AreEqual(rawReleaseNote, note.EnglishNote);
         }
     }
 }
