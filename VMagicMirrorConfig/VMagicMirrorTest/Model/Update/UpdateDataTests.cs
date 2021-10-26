@@ -35,6 +35,22 @@ namespace Baku.VMagicMirrorConfig.Test
         }
 
         [Test]
+        public void Test_バージョン値パース_異常系_空文字とnull()
+        {
+            var success = VmmAppVersion.TryParse("", out var result);
+            Assert.IsFalse(success);
+            Assert.AreEqual(0, result.Major);
+            Assert.AreEqual(0, result.Minor);
+            Assert.AreEqual(0, result.Build);
+
+            success = VmmAppVersion.TryParse(null, out result);
+            Assert.IsFalse(success);
+            Assert.AreEqual(0, result.Major);
+            Assert.AreEqual(0, result.Minor);
+            Assert.AreEqual(0, result.Build);
+        }
+
+        [Test]
         public void Test_バージョン値パース_異常系_prefixはv以外はダメ()
         {
             var success = VmmAppVersion.TryParse("a1.2.3", out var result);
@@ -126,6 +142,21 @@ Note:
         }
 
         [Test]
+        public void Test_リリースノート異常系_空文字とかnull()
+        {
+            var note = ReleaseNote.FromRawString("");
+            Assert.AreEqual("", note.DateString);
+            Assert.AreEqual("", note.JapaneseNote);
+            Assert.AreEqual("", note.EnglishNote);
+
+            note = ReleaseNote.FromRawString(null);
+            Assert.AreEqual("", note.DateString);
+            Assert.AreEqual("", note.JapaneseNote);
+            Assert.AreEqual("", note.EnglishNote);
+        }
+
+
+        [Test]
         public void Test_リリースノート異常系_日付は書き忘れると空になる()
         {
             var note = ReleaseNote.FromRawString(
@@ -188,6 +219,34 @@ Japanese
 - 修正: fuga.
 
 English
+
+- Add: Foo
+- Fix: Bar
+
+Note:
+
+- This is note area which should be ignored in parse process.
+";
+            var note = ReleaseNote.FromRawString(raw);
+
+            //文中に日付がある場合は全文のほうに入ってればいいので、DateString側が空になってるのが正、というのがポイント
+            Assert.AreEqual("", note.DateString);
+            Assert.AreEqual(raw, note.JapaneseNote);
+            Assert.AreEqual(raw, note.EnglishNote);
+        }
+
+        [Test]
+        public void Test_リリースノート異常系_1言語だけ無効な場合も両方に全文が入る()
+        {
+            var raw =
+@"2021/10/24
+
+Japanese
+
+- 追加: hoge.
+- 修正: fuga.
+
+English:
 
 - Add: Foo
 - Fix: Bar
