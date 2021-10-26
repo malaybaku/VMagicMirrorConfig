@@ -39,19 +39,26 @@ namespace Baku.VMagicMirrorConfig
             int minor = 0;
             int build = 0;
 
+            var success = true;
             if (numbers.Length > 0)
             {
-                int.TryParse(numbers[0], out major);
+                success = success && int.TryParse(numbers[0], out major);
             }
 
             if (numbers.Length > 1)
             {
-                int.TryParse(numbers[1], out minor);
+                success = success && int.TryParse(numbers[1], out minor);
             }
 
             if (numbers.Length > 2)
             {
-                int.TryParse(numbers[2], out build);
+                success = success && int.TryParse(numbers[2], out build);
+            }
+
+            if (!success)
+            {
+                result = LoadInvalid();
+                return false;
             }
 
             result = new VmmAppVersion(major, minor, build);
