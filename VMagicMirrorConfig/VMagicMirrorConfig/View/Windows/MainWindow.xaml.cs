@@ -18,6 +18,5 @@ namespace Baku.VMagicMirrorConfig
             base.OnClosed(e);
             (DataContext as IDisposable)?.Dispose();
         }
-
     }
 }

@@ -28,6 +28,14 @@ namespace Baku.VMagicMirrorConfig
         public static MessageIndication ShowLoadingSavedVRoidModel() => Load("LoadSavedVRoidModel");
 
         /// <summary>
+        /// NOTE: Contentのほうがフォーマット文字列なのでstring.Formatで現在のバージョン値を指定すること
+        /// e.g. string.Format(res.Content, appVersion.ToString())
+        /// </summary>
+        /// <param name="languageName"></param>
+        /// <returns></returns>
+        public static MessageIndication AlreadyLatestVersion() => Load("AlreadyLatestVersion");
+
+        /// <summary>
         /// NOTE: Contentのほうがフォーマット文字列なのでstring.Formatで消すアイテムの名前を指定して完成させること！
         /// string.Format(res.Content, "itemName")
         /// みたいな。

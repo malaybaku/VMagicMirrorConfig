@@ -13,6 +13,7 @@
     <sys:String x:Key="TitleBar_Visit_DownloadPage_Standard">Download (Standard Edition)</sys:String>
     <sys:String x:Key="TitleBar_Visit_DownloadPage_Full">Download (Full Edition)</sys:String>
     <sys:String x:Key="TitleBar_Visit_Fanbox">Fanbox</sys:String>
+    <sys:String x:Key="TitleBar_Check_Update">Check Update</sys:String>
     <sys:String x:Key="TitleBar_About">About VMagicMirror</sys:String>
 
     <!-- Top Tab -->
@@ -455,6 +456,13 @@ VRoid Hub model is not supported in this feature.</sys:String>
     <sys:String x:Key="SettingFile_SaveCompleted_ExportedFile">Saved Current Setting to File.</sys:String>
     <sys:String x:Key="SettingFile_LoadCompleted_ExportedFile">Loaded Setting from File.</sys:String>
 
+    <!-- Update Window -->
+    <sys:String x:Key="UpdateDialog_Title">VMagicMirror - Update is Available</sys:String>
+    <sys:String x:Key="UpdateDialog_ReleaseNoteHeader">Release Note</sys:String>
+    <sys:String x:Key="UpdateDialog_GetLatest">Get Latest Version</sys:String>
+    <sys:String x:Key="UpdateDialog_AskMeLater">Ask me Later</sys:String>
+    <sys:String x:Key="UpdateDialog_SkipThisVersion">Skip this Version</sys:String>    
+    
     <!-- Dialog Messages -->
     <sys:String x:Key="DialogTitle_LoadLocalVrm">Load VRM</sys:String>
     <sys:String x:Key="DialogMessage_LoadLocalVrm">Please confirm the license in viewer window. Do you load the character?</sys:String>
@@ -517,6 +525,9 @@ Use this only after checking the licenses of VRM you will use.
     <sys:String x:Key="DialogTitle_PenUnavailable">VRM is not ready for Pen</sys:String>
     <sys:String x:Key="DialogMessage_PenUnavailable">Pen feature needs right index finger bones to show. Please check model's setup.</sys:String>
 
+    <sys:String x:Key="DialogTitle_AlreadyLatestVersion">Latest Version</sys:String>
+    <sys:String x:Key="DialogMessage_AlreadyLatestVersion">Current app version ({0}) is the latest.</sys:String>        
+    
     <!-- Other: Not on Dialog, but used from code -->
     <sys:String x:Key="CommonUi_DoNothing">(Do Nothing)</sys:String>
     <sys:String x:Key="CommonUi_None">(None)</sys:String>
